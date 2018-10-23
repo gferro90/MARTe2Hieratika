@@ -64,39 +64,66 @@ public:
 	MARTe2HieratikaInterface();
 	virtual ~MARTe2HieratikaInterface();
 
-	bool LoginFunction(HttpClient &test, StreamString &response);
+	void SetServerAddress(const char8 *ipAddress);
 
-	virtual bool GetUsers(HttpClient &test, StreamString &token,
-			StreamString &response);
+	void SetServerPort(uint32 port);
 
-	virtual bool GetTransformationInfo(HttpClient &test, StreamString &token,
-			StreamString &response);
+	void SettHttpExchangeTimeout(TimeoutType &timeoutIn);
 
-	virtual bool GetPage(HttpClient &test, StreamString &response);
+	bool LoginFunction(const char8* userName, const char8* passw,
+			BufferedStreamI &response);
 
-	virtual bool GetVariablesInfo(HttpClient &test, StreamString &token,
-			StreamString &response, StreamString &variables);
-	virtual bool GetScheduleFolders(HttpClient &test, StreamString &token,
-			StreamString &response);
+	virtual bool GetUsers(const char8 *token, BufferedStreamI &response);
 
-	virtual bool GetSchedules(HttpClient &test, StreamString &token,
-			StreamString &response);
+	virtual bool GetTransformationInfo(const char8 *pageName,
+			const char8 *token, BufferedStreamI &response);
 
-	virtual bool GetSchedulesVariablesValue(HttpClient &test, StreamString &token,
-			StreamString scheduleUID, StreamString &response);
+	virtual bool GetPages(const char8 *token, BufferedStreamI &response);
 
-	virtual bool UpdateSchedule(HttpClient &test, StreamString &token,
-			StreamString scheduleUID, StreamString &response);
+	virtual bool GetPage(const char8 *pageName, BufferedStreamI &response);
 
-	virtual bool Commit(HttpClient &test, StreamString &token, StreamString scheduleUID,
-			StreamString &response);
+	virtual bool ExtractAllVariablesFromPage(BufferedStreamI &page,
+			BufferedStreamI &variables);
 
-	virtual bool NewSchedule(HttpClient &test, StreamString &token,
-			StreamString scheduleUID, StreamString &response);
+	virtual bool GetVariablesInfo(const char8 *pageName, const char8 *variables,
+			const char8 *token, BufferedStreamI &response);
 
-	virtual bool LoadPlant(HttpClient &test, StreamString &token,
-			StreamString scheduleUID, StreamString &response);
+	virtual bool GetScheduleFolders(const char8 *pageName,
+			const char8* userName, const char8 *token,
+			BufferedStreamI &response);
 
+	virtual bool GetSchedules(const char8 *pageName, const char8 *userName,
+			const char8 *token, BufferedStreamI &response);
+
+	virtual bool GetSchedulesVariablesValue(const char8 *token,
+			const char8 *scheduleUID, BufferedStreamI &response);
+
+	virtual bool UpdateSchedule(const char8 *userName, const char8* variables,
+			const char8 *token, const char8 *scheduleUID,
+			BufferedStreamI &response);
+
+	virtual bool Commit(const char8 *userName, const char8 *variables,
+			const char8 *token, const char8 *scheduleUID,
+			BufferedStreamI &response);
+
+	virtual bool NewSchedule(const char8 *scheduleName,
+			const char8 * description, const char8 *pageName,
+			const char8 *userName, const char8 *token, const char8 *scheduleUID,
+			BufferedStreamI &response);
+
+	virtual bool LoadPlant(const char8 *scheduleName, const char8 *userName,
+			const char8 *description, const char8 *pageNames,
+			const char8 *token, const char8 *scheduleUID,
+			BufferedStreamI &response);
+
+private:
+
+	bool SetHeader();
+
+protected:
+	HttpClient client;
+	HttpProtocol *protocol;
+	TimeoutType timeout;
 };
 
 }

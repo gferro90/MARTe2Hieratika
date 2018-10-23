@@ -67,21 +67,23 @@
 
 using namespace MARTe;
 
-
-
 int main(int argc, char **argv) {
 
-	HttpClient test;
+//	HttpClient test;
 
 	MARTe2HieratikaInterface m2HierInterface;
-
+#if 0
 	test.SetServerAddress("127.0.0.1");
 	test.SetServerPort(8080);
 	test.SetServerUri("/login");
+#endif
 	StreamString readOut;
 
 	//Step 1: login
-	m2HierInterface.LoginFunction(test, readOut);
+	if (!m2HierInterface.LoginFunction("codac-dev-1", "", readOut)) {
+		return -1;
+	}
+
 	printf("login response=%s\n", readOut.Buffer());
 
 	StreamString reply = "\"reply\": ";
@@ -98,31 +100,50 @@ int main(int argc, char **argv) {
 	printf("token=%s\n", token.Buffer());
 
 	//step 2: get users (really needed?)
-	test.SetServerUri("/getusers");
+	//test.SetServerUri("/getusers");
 	readOut.SetSize(0);
 
-	m2HierInterface.GetUsers(test, token, readOut);
+	if (!m2HierInterface.GetUsers(token.Buffer(), readOut)) {
+		return -1;
+	}
 
 	printf("getusers response=%s\n", readOut.Buffer());
 
 	//step 3 stream??
 
 	//step 4 gettransformationinfo
-	test.SetServerUri("/gettransformationsinfo");
+	//test.SetServerUri("/gettransformationsinfo");
 
 	readOut.SetSize(0);
-	m2HierInterface.GetTransformationInfo(test, token, readOut);
+
+	if (!m2HierInterface.GetTransformationInfo("FALCON", token.Buffer(),
+			readOut)) {
+		return -1;
+	}
 	printf("GetTransformationInfo response=%s\n", readOut.Buffer());
 
-	//step 5 get the page
-	test.SetServerUri("/pages/FALCON.html?1539601761805");
+	//step 4b getpages
 
 	readOut.SetSize(0);
-	m2HierInterface.GetPage(test, readOut);
+	if (!m2HierInterface.GetPages(token.Buffer(), readOut)) {
+		return -1;
+	}
+	printf("GetPages response=%s\n", readOut.Buffer());
+
+	//step 5 get the page
+	//test.SetServerUri("/pages/FALCON.html?1539601761805");
+
+	readOut.SetSize(0);
+	if (!m2HierInterface.GetPage("FALCON", readOut)) {
+		return -1;
+	}
 	printf("GetPage response=%s\n", readOut.Buffer());
 
 	//step 6 get variable info
-	StreamString varList;
+	//StreamString varList;
+	StreamString variables;
+
+#if 0
 	StreamString variables = "[";
 
 	const char8* buff = readOut.Buffer();
@@ -158,30 +179,45 @@ int main(int argc, char **argv) {
 		}
 	}
 	variables += "]";
-	printf("var=%s\n", variables.Buffer());
+#endif
 
-	test.SetServerUri("/getvariablesinfo");
+	readOut.Seek(0);
+	if (!m2HierInterface.ExtractAllVariablesFromPage(readOut, variables)) {
+		return -1;
+	}
+	//test.SetServerUri("/getvariablesinfo");
 
+	printf("%s\n", variables.Buffer());
 	readOut.SetSize(0);
-	m2HierInterface.GetVariablesInfo(test, token, readOut, variables);
+	if (!m2HierInterface.GetVariablesInfo("FALCON", variables.Buffer(),
+			token.Buffer(), readOut)) {
+		return -1;
+	}
 
 	printf("GetVariablesInfo response=%s\n", readOut.Buffer());
 
 	//step 7 get schedulefolders
-	test.SetServerUri("/getschedulefolders");
+	//test.SetServerUri("/getschedulefolders");
 
 	readOut.SetSize(0);
-	m2HierInterface.GetScheduleFolders(test, token, readOut);
+	if (!m2HierInterface.GetScheduleFolders("FALCON", "codac-dev-1",
+			token.Buffer(), readOut)) {
+		return -1;
+	}
 
 	printf("GetScheduleFolders response=%s\n", readOut.Buffer());
 
 	//step 8 get schedules
-	test.SetServerUri("/getschedules");
+	//test.SetServerUri("/getschedules");
 
 	readOut.SetSize(0);
-	m2HierInterface.GetSchedules(test, token, readOut);
+	if (!m2HierInterface.GetSchedules("FALCON", "codac-dev-1", token.Buffer(),
+			readOut)) {
+		return -1;
+	}
 
 	printf("GetSchedules response=%s\n", readOut.Buffer());
+
 	StreamString scheduleUID;
 
 	const char8*beg = StringHelper::SearchString(readOut.Buffer(), "pageName");
@@ -201,45 +237,64 @@ int main(int argc, char **argv) {
 		printf("%s\n", scheduleUID.Buffer());
 	}
 	//step 10 get schedule variables
-	test.SetServerUri("/getschedulevariablesvalues");
+	//test.SetServerUri("/getschedulevariablesvalues");
 
 	readOut.SetSize(0);
-	m2HierInterface.GetSchedulesVariablesValue(test, token, scheduleUID, readOut);
+	if (!m2HierInterface.GetSchedulesVariablesValue(token.Buffer(),
+			scheduleUID.Buffer(), readOut)) {
+		return -1;
+	}
 
 	printf("GetSchedulesVariableValues response=%s\n", readOut.Buffer());
 
 	//step 9 post an update
-	test.SetServerUri("/updateschedule");
+	//test.SetServerUri("/updateschedule");
 
 	readOut.SetSize(0);
-	m2HierInterface.UpdateSchedule(test, token, scheduleUID, readOut);
+	const char8 *vars =
+			"{\"FALCON@FALCON\":[[1,1,3,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0],[0,0,0]]}";
+	if (!m2HierInterface.UpdateSchedule("codac-dev-1", vars, token.Buffer(),
+			scheduleUID.Buffer(), readOut)) {
+		return -1;
+	}
 
 	printf("UpdateSchedule response=%s\n", readOut.Buffer());
 
 	//step 10 commit
-	test.SetServerUri("/commitschedule");
+	//test.SetServerUri("/commitschedule");
 
-	readOut.SetSize(0);
-	m2HierInterface.Commit(test, token, scheduleUID, readOut);
+	readOut.SetSize(0ULL);
+	if (!m2HierInterface.Commit("codac-dev-1", vars, token.Buffer(),
+			scheduleUID.Buffer(), readOut)) {
+		return -1;
+	}
 
 	printf("CommitSchedule response=%s\n", readOut.Buffer());
 
 	//step 11 create a new schedule
-	test.SetServerUri("/createschedule");
+	//test.SetServerUri("/createschedule");
 
 	readOut.SetSize(0);
-	m2HierInterface.NewSchedule(test, token, scheduleUID, readOut);
+	if (!m2HierInterface.NewSchedule("pippopluto", "pippopluto commit",
+			"FALCON", "codac-dev-1", token.Buffer(), scheduleUID.Buffer(),
+			readOut)) {
+		return -1;
+	}
 
 	printf("CreateSchedule response=%s\n", readOut.Buffer());
-
 	//step 12 Load into plant
-	test.SetServerUri("/loadintoplant");
+	//test.SetServerUri("/loadintoplant");
 
 	readOut.SetSize(0);
-	m2HierInterface.LoadPlant(test, token, scheduleUID, readOut);
+
+	if (!m2HierInterface.LoadPlant("pippopluto", "codac-dev-1",
+			"pippopluto commit", "[\"FALCON\"]", token.Buffer(),
+			scheduleUID.Buffer(), readOut)) {
+		return -1;
+	}
 
 	printf("LoadPlant response=%s\n", readOut.Buffer());
-
+	printf("EVERYTHING OK!!\n");
 	return 1;
 }
 
