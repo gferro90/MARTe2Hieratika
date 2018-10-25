@@ -68,7 +68,7 @@ public:
 
 	void SetServerPort(uint32 port);
 
-	void SettHttpExchangeTimeout(TimeoutType &timeoutIn);
+	void SetHttpExchangeTimeout(const TimeoutType &timeoutIn);
 
 	bool LoginFunction(const char8* userName, const char8* passw,
 			BufferedStreamI &response);

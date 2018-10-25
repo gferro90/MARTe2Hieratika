@@ -23,7 +23,7 @@
 # $Id: Makefile.inc 3 2012-01-15 16:26:07Z aneto $
 #
 #############################################################
-OBJSX=MARTe2HieratikaInterface.x
+OBJSX=MARTe2HieratikaMessageDispatcherTest.x MARTe2HieratikaMessageDispatcherGTest.x
 
 PACKAGE=Components/Interfaces
 
@@ -48,11 +48,14 @@ INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L1Portability
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L3Services
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L4Messages
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L4StateMachine
+INCLUDES += -I../MARTe2Hieratika
+INCLUDES += -I../../../../Source/Components/Interfaces/MARTe2Hieratika
+INCLUDES += -I../../../../Source/Components/Interfaces/MARTe2HieratikaMessageDispatcher
 
 
 all: $(OBJS) $(SUBPROJ) \
-	$(BUILD_DIR)/MARTe2HieratikaInterface$(LIBEXT) \
-	$(BUILD_DIR)/MARTe2HieratikaInterface$(DLLEXT)
+	$(BUILD_DIR)/MARTe2HieratikaMessageDispatcherTest$(LIBEXT) \
+	$(BUILD_DIR)/MARTe2HieratikaMessageDispatcherTest$(DLLEXT)
 	    echo  $(OBJS)
 
 include $(MAKEDEFAULTDIR)/MakeStdLibRules.$(TARGET)
