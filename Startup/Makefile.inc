@@ -26,7 +26,7 @@ OBJSX=
 SPB =
 
 PACKAGE=
-ROOT_DIR=../..
+ROOT_DIR=..
 MAKEDEFAULTDIR=$(MARTe2_DIR)/MakeDefaults
 
 include $(MAKEDEFAULTDIR)/MakeStdLibDefs.$(TARGET)
@@ -45,11 +45,9 @@ INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L1Portability
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L3Services
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L4Messages
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L4StateMachine
-INCLUDES += -I../../Source/Components/Interfaces/MARTe2HieratikaInterface
 
 all: $(OBJS) $(SUBPROJ)   \
-        $(BUILD_DIR)/MainGTest$(EXEEXT)\
-        $(BUILD_DIR)/Test1$(EXEEXT)
+        $(BUILD_DIR)/Main$(EXEEXT)
 	echo  $(OBJS)
 
 

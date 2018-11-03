@@ -74,7 +74,7 @@ bool MARTe2HieratikaInterface::SetHeader() {
     StreamString param;
     StreamString ipAddress;
     client.GetServerAddress(ipAddress);
-    bool ret = param.Printf("%s:%d", ipAddress, client.GetServerPort());
+    bool ret = param.Printf("%s:%d", ipAddress.Buffer(), client.GetServerPort());
     if (ret) {
         ret = protocol->Write("Host", param.Buffer());
     }
@@ -150,6 +150,49 @@ bool MARTe2HieratikaInterface::GetUsers(const char8 *token,
     }
     return ret;
 
+}
+
+bool MARTe2HieratikaInterface::GetTid(const char8 *token,
+                                      BufferedStreamI &response) {
+    StreamString uri = "/stream?token=";
+    uri += token;
+    client.SetServerUri(uri.Buffer());
+    bool ret = true;
+    if (!protocol->MoveAbsolute("OutputOptions")) {
+        ret = protocol->CreateAbsolute("OutputOptions");
+    }
+    if (ret) {
+        StreamString param;
+        StreamString ipAddress;
+        client.GetServerAddress(ipAddress);
+        ret = param.Printf("%s:%d", ipAddress, client.GetServerPort());
+        if (ret) {
+            ret = protocol->Write("Host", param.Buffer());
+        }
+        if (ret) {
+            param = "keep-alive";
+            ret = protocol->Write("Connection", param.Buffer());
+        }
+        if (ret) {
+            param = "gzip, deflate, br";
+            ret = protocol->Write("Accept-Encoding", param.Buffer());
+        }
+        if (ret) {
+            param = "no-cache";
+            ret = protocol->Write("Cache-Control", param.Buffer());
+        }
+        if (ret) {
+            param = "text/event-stream";
+            ret = protocol->Write("Accept", param.Buffer());
+        }
+        if (ret) {
+            ret = protocol->MoveToRoot();
+        }
+        if (ret) {
+            ret = client.HttpExchange(response, HttpDefinition::HSHCGet, NULL, timeout);
+        }
+    }
+    return ret;
 }
 
 bool MARTe2HieratikaInterface::GetTransformationInfo(const char8 *pageName,
@@ -359,7 +402,8 @@ bool MARTe2HieratikaInterface::GetVariablesInfo(const char8 *pageName,
         StreamString varEncoded;
         if (ret) {
             body += token;
-            body += "&pageName=FALCON";
+            body += "&pageName=";
+            body += pageName;
             body += "&variables=";
             ret = HttpDefinition::HttpEncode(varEncoded, variables);
         }
@@ -483,6 +527,7 @@ bool MARTe2HieratikaInterface::GetSchedulesVariablesValue(const char8 *token,
 bool MARTe2HieratikaInterface::UpdateSchedule(const char8 *userName,
                                               const char8* variables,
                                               const char8 *token,
+                                              const char8 *tid,
                                               const char8 * scheduleUID,
                                               BufferedStreamI &response) {
     client.SetServerUri("/updateschedule");
@@ -498,7 +543,8 @@ bool MARTe2HieratikaInterface::UpdateSchedule(const char8 *userName,
         StreamString body = "token=";
         if (ret) {
             body += token;
-            body += "&tid=11290_139686796103072";
+            body += "&tid=";
+            body += tid;
             body += "&username=";
             body += userName;
             body += "&scheduleUID=";
@@ -530,6 +576,7 @@ bool MARTe2HieratikaInterface::UpdateSchedule(const char8 *userName,
 bool MARTe2HieratikaInterface::Commit(const char8 *userName,
                                       const char8 *variables,
                                       const char8 *token,
+                                      const char8 *tid,
                                       const char8 *scheduleUID,
                                       BufferedStreamI &response) {
 
@@ -545,7 +592,8 @@ bool MARTe2HieratikaInterface::Commit(const char8 *userName,
         StreamString body = "token=";
         if (ret) {
             body += token;
-            body += "&tid=11290_139686796103072";
+            body += "&tid=";
+            body+=tid;
             body += "&username=";
             body += userName;
             body += "&scheduleUID=";
@@ -578,7 +626,6 @@ bool MARTe2HieratikaInterface::NewSchedule(const char8 *scheduleName,
                                            const char8 *pageName,
                                            const char8 *userName,
                                            const char8 *token,
-                                           const char8 *scheduleUID,
                                            BufferedStreamI &response) {
 
     client.SetServerUri("/createschedule");
@@ -613,12 +660,83 @@ bool MARTe2HieratikaInterface::NewSchedule(const char8 *scheduleName,
     return ret;
 }
 
+bool MARTe2HieratikaInterface::DeleteSchedule(const char8 *scheduleUID,
+                                              const char8 *token,
+                                              BufferedStreamI &response) {
+
+    client.SetServerUri("/deleteschedule");
+
+    bool ret = true;
+    if (!protocol->MoveAbsolute("OutputOptions")) {
+        ret = protocol->CreateAbsolute("OutputOptions");
+    }
+    if (ret) {
+        StreamString body = "token=";
+        if (ret) {
+            body += token;
+            body += "&scheduleUID=";
+            StreamString varEncoded;
+            HttpDefinition::HttpEncode(varEncoded, scheduleUID);
+            body += varEncoded;
+            ret = body.Seek(0ULL);
+        }
+        if (ret) {
+            ret = protocol->MoveToRoot();
+        }
+        if (ret) {
+            ret = client.HttpExchange(response, HttpDefinition::HSHCPost, &body, timeout);
+        }
+    }
+    return ret;
+}
+
+bool MARTe2HieratikaInterface::UpdatePlant(const char8 *pageName,
+                                           const char8* variables,
+                                           const char8 *token,
+                                           const char8* tid,
+                                           BufferedStreamI &response) {
+    client.SetServerUri("/updateplant");
+
+    bool ret = true;
+    if (!protocol->MoveAbsolute("OutputOptions")) {
+        protocol->CreateAbsolute("OutputOptions");
+    }
+
+    if (ret) {
+        ret = SetHeader();
+
+        StreamString body = "token=";
+        if (ret) {
+            body += token;
+            body += "&tid=";
+            body += tid;
+            body += "&pageName=";
+            body += pageName;
+            body += "&variables=";
+
+            StreamString varEncoded;
+            ret = HttpDefinition::HttpEncode(varEncoded, variables);
+            if (ret) {
+                //body += varEncoded.Buffer();
+                body += varEncoded;
+                ret = body.Seek(0);
+            }
+        }
+
+        if (ret) {
+            ret = protocol->MoveToRoot();
+        }
+        if (ret) {
+            client.HttpExchange(response, HttpDefinition::HSHCPost, &body, timeout);
+        }
+    }
+    return ret;
+}
+
 bool MARTe2HieratikaInterface::LoadPlant(const char8 *scheduleName,
-                                         const char8 *userName,
                                          const char8 *description,
                                          const char8 *pageNames,
                                          const char8 *token,
-                                         const char8 *scheduleUID,
                                          BufferedStreamI &response) {
 
     client.SetServerUri("/loadintoplant");

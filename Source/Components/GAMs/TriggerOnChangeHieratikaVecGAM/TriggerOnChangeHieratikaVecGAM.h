@@ -1,7 +1,7 @@
 /**
- * @file MARTe2HieratikaMessageDispatcher.h
- * @brief Header file for class MARTe2HieratikaMessageDispatcher
- * @date 24 ott 2018
+ * @file TriggerOnChangeHieratikaVecGAM.h
+ * @brief Header file for class TriggerOnChangeHieratikaVecGAM
+ * @date 01 nov 2018
  * @author pc
  *
  * @copyright Copyright 2015 F4E | European Joint Undertaking for ITER and
@@ -16,13 +16,13 @@
  * basis, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the Licence permissions and limitations under the Licence.
 
- * @details This header file contains the declaration of the class MARTe2HieratikaMessageDispatcher
+ * @details This header file contains the declaration of the class TriggerOnChangeHieratikaVecGAM
  * with all of its public, protected and private members. It may also include
  * definitions for inline methods which need to be visible to the compiler.
  */
 
-#ifndef MARTE2HIERATIKAMESSAGEDISPATCHER_H_
-#define MARTE2HIERATIKAMESSAGEDISPATCHER_H_
+#ifndef TRIGGERONCHANGEHIERATIKAVECGAM_H_
+#define TRIGGERONCHANGEHIERATIKAVECGAM_H_
 
 /*---------------------------------------------------------------------------*/
 /*                        Standard header includes                           */
@@ -31,62 +31,34 @@
 /*---------------------------------------------------------------------------*/
 /*                        Project header includes                            */
 /*---------------------------------------------------------------------------*/
-#include "../MARTe2HieratikaInterface/MARTe2HieratikaInterface.h"
-#include "MessageI.h"
-#include "EmbeddedServiceMethodBinderI.h"
-#include "QueueingMessageFilter.h"
-#include "SingleThreadService.h"
+#include "TriggerOnChangeHieratikaGAM.h"
 /*---------------------------------------------------------------------------*/
 /*                           Class declaration                               */
 /*---------------------------------------------------------------------------*/
 
-namespace MARTe {
+namespace MARTe{
 
-class MARTe2HieratikaMessageDispatcher: public Object, public MessageI, public MARTe2HieratikaInterface, public EmbeddedServiceMethodBinderI {
+class TriggerOnChangeHieratikaVecGAM: public TriggerOnChangeHieratikaGAM {
 public:
     CLASS_REGISTER_DECLARATION()
 
-    MARTe2HieratikaMessageDispatcher();
-    virtual ~MARTe2HieratikaMessageDispatcher();
+    TriggerOnChangeHieratikaVecGAM();
 
-    virtual bool Initialise(StructuredDataI &data);
+    virtual ~TriggerOnChangeHieratikaVecGAM();
 
-    virtual ErrorManagement::ErrorType Execute(ExecutionInfo & info);
+    virtual bool Initialise(StructuredDataI & data);
 
-    void GetResponse(BufferedStreamI &output);
+    virtual bool Setup();
 
-
-    virtual void Purge(ReferenceContainer &purgeList);
+    virtual bool Execute();
 
 protected:
 
-    bool SendReply(ReferenceT<BufferedStreamI> &stream,
-                   ReferenceT<EventSem> &semaphore,
-                   ReferenceT<Message> &message,
-                   ReferenceT<ConfigurationDatabase> &payload);
+    StreamString varName;
 
-    void SetResponseStream(ReferenceT<BufferedStreamI> &stream,
-                           ReferenceT<EventSem> &semaphore,
-                           ReferenceT<Message> &message,
-                           ReferenceT<ConfigurationDatabase> &payload);
+    StreamString varValue;
 
-    ReferenceT<QueueingMessageFilter> filter;
-
-    TimeoutType messageTimeout;
-
-    BufferedStreamI *response;
-
-    StreamString internalResponse;
-    /**
-     * The internal thread executor.
-     */
-    SingleThreadService executor;
-
-    /**
-     * The affinity of the SingleThreadService.
-     */
-    ProcessorType cpuMask;
-
+    StreamString *splitted;
 };
 
 }
@@ -94,5 +66,5 @@ protected:
 /*                        Inline method definitions                          */
 /*---------------------------------------------------------------------------*/
 
-#endif /* MARTE2HIERATIKAMESSAGEDISPATCHER_H_ */
+#endif /* SOURCE_COMPONENTS_GAMS_TRIGGERONCHANGEHIERATIKAVECGAM_TRIGGERONCHANGEHIERATIKAVECGAM_H_ */
 

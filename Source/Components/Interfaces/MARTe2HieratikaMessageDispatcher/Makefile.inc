@@ -48,7 +48,7 @@ INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L1Portability
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L3Services
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L4Messages
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L4StateMachine
-INCLUDES += -I../MARTe2Hieratika
+INCLUDES += -I../MARTe2HieratikaInterface
 
 
 all: $(OBJS) $(SUBPROJ) \

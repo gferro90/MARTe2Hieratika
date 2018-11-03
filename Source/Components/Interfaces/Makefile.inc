@@ -22,7 +22,7 @@
 #
 #############################################################
 
-SPB=MARTe2Hieratika.x MARTe2HieratikaMessageDispatcher.x
+SPB=MARTe2HieratikaInterface.x MARTe2HieratikaMessageDispatcher.x
 
 PACKAGE=Components
 ROOT_DIR=../../..
@@ -31,7 +31,7 @@ MAKEDEFAULTDIR=$(MARTe2_DIR)/MakeDefaults
 include $(MAKEDEFAULTDIR)/MakeStdLibDefs.$(TARGET)
 
 
-LIBRARIES_STATIC=$(BUILD_DIR)/MARTe2Hieratika/MARTe2HieratikaInterface$(LIBEXT)
+LIBRARIES_STATIC=$(BUILD_DIR)/MARTe2HieratikaInterface/MARTe2HieratikaInterface$(LIBEXT)
 LIBRARIES_STATIC+=$(BUILD_DIR)/MARTe2HieratikaMessageDispatcher/MARTe2HieratikaMessageDispatcher$(LIBEXT)
 
 all: $(OBJS)  $(SUBPROJ)  \

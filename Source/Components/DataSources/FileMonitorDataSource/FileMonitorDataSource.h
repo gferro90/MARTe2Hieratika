@@ -1,7 +1,7 @@
 /**
- * @file MARTe2HieratikaMessageDispatcher.h
- * @brief Header file for class MARTe2HieratikaMessageDispatcher
- * @date 24 ott 2018
+ * @file FileMonitorDataSource.h
+ * @brief Header file for class FileMonitorDataSource
+ * @date 01 nov 2018
  * @author pc
  *
  * @copyright Copyright 2015 F4E | European Joint Undertaking for ITER and
@@ -16,13 +16,13 @@
  * basis, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the Licence permissions and limitations under the Licence.
 
- * @details This header file contains the declaration of the class MARTe2HieratikaMessageDispatcher
+ * @details This header file contains the declaration of the class FileMonitorDataSource
  * with all of its public, protected and private members. It may also include
  * definitions for inline methods which need to be visible to the compiler.
  */
 
-#ifndef MARTE2HIERATIKAMESSAGEDISPATCHER_H_
-#define MARTE2HIERATIKAMESSAGEDISPATCHER_H_
+#ifndef FILEMONITORDATASOURCE_H_
+#define FILEMONITORDATASOURCE_H_
 
 /*---------------------------------------------------------------------------*/
 /*                        Standard header includes                           */
@@ -31,62 +31,47 @@
 /*---------------------------------------------------------------------------*/
 /*                        Project header includes                            */
 /*---------------------------------------------------------------------------*/
-#include "../MARTe2HieratikaInterface/MARTe2HieratikaInterface.h"
-#include "MessageI.h"
-#include "EmbeddedServiceMethodBinderI.h"
-#include "QueueingMessageFilter.h"
-#include "SingleThreadService.h"
+#include "MemoryDataSourceI.h"
+#include "TimeStamp.h"
+#include "Directory.h"
 /*---------------------------------------------------------------------------*/
 /*                           Class declaration                               */
 /*---------------------------------------------------------------------------*/
 
 namespace MARTe {
 
-class MARTe2HieratikaMessageDispatcher: public Object, public MessageI, public MARTe2HieratikaInterface, public EmbeddedServiceMethodBinderI {
+class FileMonitorDataSource: public MemoryDataSourceI {
 public:
     CLASS_REGISTER_DECLARATION()
 
-    MARTe2HieratikaMessageDispatcher();
-    virtual ~MARTe2HieratikaMessageDispatcher();
 
-    virtual bool Initialise(StructuredDataI &data);
+    FileMonitorDataSource();
 
-    virtual ErrorManagement::ErrorType Execute(ExecutionInfo & info);
+    virtual ~FileMonitorDataSource();
 
-    void GetResponse(BufferedStreamI &output);
+    virtual bool Initialise(StructuredDataI & data);
 
+    virtual bool Synchronise();
 
-    virtual void Purge(ReferenceContainer &purgeList);
+    virtual bool SetConfiguredDatabase(StructuredDataI & data);
+
+    virtual void PrepareInputOffsets();
+
+    virtual bool GetInputOffset(const uint32 signalIdx, const uint32 numberOfSamples, uint32 &offset);
+
+    virtual bool PrepareNextState(const char8 * const currentStateName,
+                                  const char8 * const nextStateName);
 
 protected:
 
-    bool SendReply(ReferenceT<BufferedStreamI> &stream,
-                   ReferenceT<EventSem> &semaphore,
-                   ReferenceT<Message> &message,
-                   ReferenceT<ConfigurationDatabase> &payload);
+    StreamString filePath;
 
-    void SetResponseStream(ReferenceT<BufferedStreamI> &stream,
-                           ReferenceT<EventSem> &semaphore,
-                           ReferenceT<Message> &message,
-                           ReferenceT<ConfigurationDatabase> &payload);
+    uint32 *lineNumber;
+    uint32 *signalIndex;
+    uint32 *signalNameLen;
 
-    ReferenceT<QueueingMessageFilter> filter;
-
-    TimeoutType messageTimeout;
-
-    BufferedStreamI *response;
-
-    StreamString internalResponse;
-    /**
-     * The internal thread executor.
-     */
-    SingleThreadService executor;
-
-    /**
-     * The affinity of the SingleThreadService.
-     */
-    ProcessorType cpuMask;
-
+    Directory fileMonitor;
+    TimeStamp lastTimeStamp;
 };
 
 }
@@ -94,5 +79,5 @@ protected:
 /*                        Inline method definitions                          */
 /*---------------------------------------------------------------------------*/
 
-#endif /* MARTE2HIERATIKAMESSAGEDISPATCHER_H_ */
+#endif /* FILEMONITORDATASOURCE_H_ */
 

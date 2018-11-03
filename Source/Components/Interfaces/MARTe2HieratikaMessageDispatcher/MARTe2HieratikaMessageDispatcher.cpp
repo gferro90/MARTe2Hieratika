@@ -29,7 +29,9 @@
 /*                         Project header includes                           */
 /*---------------------------------------------------------------------------*/
 
+#include "AdvancedErrorManagement.h"
 #include "MARTe2HieratikaMessageDispatcher.h"
+#include "TimeStamp.h"
 
 /*---------------------------------------------------------------------------*/
 /*                           Static definitions                              */
@@ -68,16 +70,16 @@ bool MARTe2HieratikaMessageDispatcher::Initialise(StructuredDataI &data) {
             SetServerPort(serverPort);
         }
         else {
-            REPORT_ERROR(ErrorManagement::InitialisationError, "ServerPort not defined")
+            REPORT_ERROR(ErrorManagement::InitialisationError, "ServerPort not defined");
         }
 
         if (ret) {
             uint32 timeoutT;
             if (data.Read("ReceiveMessageTimeout", timeoutT)) {
-                timeout = timeoutT;
+                messageTimeout = timeoutT;
             }
             else {
-                timeout = 1000u;
+                messageTimeout = 1000u;
             }
         }
 
@@ -92,7 +94,7 @@ bool MARTe2HieratikaMessageDispatcher::Initialise(StructuredDataI &data) {
         }
     }
     else {
-        REPORT_ERROR(ErrorManagement::InitialisationError, "ServerIpAddress not defined")
+        REPORT_ERROR(ErrorManagement::InitialisationError, "ServerIpAddress not defined");
     }
 
     if (ret) {
@@ -123,298 +125,409 @@ ErrorManagement::ErrorType MARTe2HieratikaMessageDispatcher::Execute(ExecutionIn
 
         //pull from the queue
         ReferenceT < Message > message;
-        ErrorManagement::ErrorType err = filter->GetMessage(message, timeout);
+        ErrorManagement::ErrorType err = filter->GetMessage(message, messageTimeout);
         if (err.ErrorsCleared()) {
             //switch case
-            StreamString functionName = (const char8 *) (message->GetFunction());
-
             //the payload must be a ConfigurationDatabase for parameters
-            ReferenceT < ConfigurationDatabase > payload = message->Get(0u);
+            ReferenceT < ConfigurationDatabase > payload = message->Find("Payload");
             bool ret = payload.IsValid();
-
-            if (functionName == "LoginFunction") {
-                StreamString userName;
-                StreamString passw;
-                ret = payload->Read("UserName", userName);
+            if (ret) {
+                StreamString functionName;
+                ret = payload->Read("HieratikaCommand", functionName);
                 if (ret) {
-                    ret = payload->Read("Password", passw);
-                }
-                if (ret) {
-                    ReferenceT < BufferedStreamI > stream;
-                    SetResponseStream(stream, message, payload);
 
-                    ret = LoginFunction(userName.Buffer(), passw.Buffer(), *response);
-                    if (ret) {
-                        ret = SendReply(stream, message, payload);
+                    if (functionName == "Login") {
+                        REPORT_ERROR(ErrorManagement::Information, "Hereee Login received");
+
+                        StreamString userName;
+                        StreamString passw;
+                        ret = payload->Read("UserName", userName);
+                        if (ret) {
+                            ret = payload->Read("Password", passw);
+                        }
+                        if (ret) {
+
+                            ReferenceT < BufferedStreamI > stream;
+                            ReferenceT < EventSem > semaphore;
+
+                            SetResponseStream(stream, semaphore, message, payload);
+
+                            ret = LoginFunction(userName.Buffer(), passw.Buffer(), *response);
+
+                            if (ret) {
+                                ret = SendReply(stream, semaphore, message, payload);
+                            }
+                        }
+
                     }
-                }
+                    else if (functionName == "GetUsers") {
+                        StreamString token;
+                        ret = payload->Read("Token", token);
+                        if (ret) {
+                            ReferenceT < BufferedStreamI > stream;
+                            ReferenceT < EventSem > semaphore;
 
-            }
-            else if (functionName == "GetUsers") {
-                StreamString token;
-                ret = payload->Read("Token", token);
-                if (ret) {
-                    ReferenceT < BufferedStreamI > stream;
-                    SetResponseStream(stream, message, payload);
+                            SetResponseStream(stream, semaphore, message, payload);
 
-                    ret = GetUsers(token.Buffer(), *response);
-                    if (ret) {
-                        ret = SendReply(stream, message, payload);
+                            ret = GetUsers(token.Buffer(), *response);
+                            if (ret) {
+                                ret = SendReply(stream, semaphore, message, payload);
+                            }
+                        }
                     }
-                }
-            }
-            else if (functionName == "GetTransformationInfo") {
-                StreamString pageName;
-                StreamString token;
-                ret = payload->Read("PageName", pageName);
-                if (ret) {
-                    ret = payload->Read("Token", token);
-                }
-                if (ret) {
-                    ReferenceT < BufferedStreamI > stream;
-                    SetResponseStream(stream, message, payload);
+                    else if (functionName == "GetTid") {
+                        StreamString token;
+                        ret = payload->Read("Token", token);
+                        if (ret) {
+                            ReferenceT < BufferedStreamI > stream;
+                            ReferenceT < EventSem > semaphore;
 
-                    ret = GetTransformationInfo(pageName.Buffer(), token.Buffer(), *response);
-                    if (ret) {
-                        ret = SendReply(stream, message, payload);
+                            SetResponseStream(stream, semaphore, message, payload);
+
+                            ret = GetTid(token.Buffer(), *response);
+                            if (ret) {
+                                ret = SendReply(stream, semaphore, message, payload);
+                            }
+                        }
                     }
-                }
+                    else if (functionName == "GetTransformationInfo") {
+                        StreamString pageName;
+                        StreamString token;
+                        ret = payload->Read("PageName", pageName);
+                        if (ret) {
+                            ret = payload->Read("Token", token);
+                        }
+                        if (ret) {
+                            ReferenceT < BufferedStreamI > stream;
+                            ReferenceT < EventSem > semaphore;
 
-            }
-            else if (functionName == "GetPages") {
-                StreamString token;
-                StreamString streamId;
-                ret = payload->Read("Token", token);
-                if (ret) {
-                    ReferenceT < BufferedStreamI > stream;
-                    SetResponseStream(stream, message, payload);
+                            SetResponseStream(stream, semaphore, message, payload);
 
-                    ret = GetPages(token.Buffer(), *response);
-                    if (ret) {
-                        ret = SendReply(stream, message, payload);
+                            ret = GetTransformationInfo(pageName.Buffer(), token.Buffer(), *response);
+                            if (ret) {
+                                ret = SendReply(stream, semaphore, message, payload);
+                            }
+                        }
+
                     }
-                }
-            }
-            else if (functionName == "GetPage") {
-                StreamString pageName;
-                StreamString stream;
-                ret = payload->Read("PageName", pageName);
-                if (ret) {
-                    ReferenceT < BufferedStreamI > stream;
-                    SetResponseStream(stream, message, payload);
+                    else if (functionName == "GetPages") {
+                        StreamString token;
+                        StreamString streamId;
+                        ret = payload->Read("Token", token);
+                        if (ret) {
+                            ReferenceT < BufferedStreamI > stream;
+                            ReferenceT < EventSem > semaphore;
 
-                    ret = GetPage(pageName.Buffer(), *response);
-                    if (ret) {
-                        ret = SendReply(stream, message, payload);
+                            SetResponseStream(stream, semaphore, message, payload);
+
+                            ret = GetPages(token.Buffer(), *response);
+                            if (ret) {
+                                ret = SendReply(stream, semaphore, message, payload);
+                            }
+                        }
                     }
-                }
+                    else if (functionName == "GetPage") {
+                        StreamString pageName;
+                        StreamString stream;
+                        REPORT_ERROR(ErrorManagement::Information, "Hereee GetPage received");
 
-            }
-            else if (functionName == "GetVariablesInfo") {
-                StreamString pageName;
-                StreamString variables;
-                StreamString token;
-                ret = payload->Read("PageName", pageName);
-                if (ret) {
-                    ret = payload->Read("Variables", variables);
-                }
-                if (ret) {
-                    ret = payload->Read("Token", token);
-                }
-                if (ret) {
-                    ReferenceT < BufferedStreamI > stream;
-                    SetResponseStream(stream, message, payload);
+                        ret = payload->Read("PageName", pageName);
+                        if (ret) {
+                            ReferenceT < BufferedStreamI > stream;
+                            ReferenceT < EventSem > semaphore;
 
-                    ret = GetVariablesInfo(pageName.Buffer(), variables.Buffer(), token.Buffer(), *response);
-                    if (ret) {
-                        ret = SendReply(stream, message, payload);
+                            SetResponseStream(stream, semaphore, message, payload);
+
+                            ret = GetPage(pageName.Buffer(), *response);
+                            if (ret) {
+                                ret = SendReply(stream, semaphore, message, payload);
+                            }
+                        }
+
                     }
-                }
-            }
-            else if (functionName == "GetScheduleFolders") {
-                StreamString pageName;
-                StreamString userName;
-                StreamString token;
-                ret = payload->Read("PageName", pageName);
-                if (ret) {
-                    ret = payload->Read("UserName", userName);
-                }
-                if (ret) {
-                    ret = payload->Read("Token", token);
-                }
-                if (ret) {
-                    ReferenceT < BufferedStreamI > stream;
-                    SetResponseStream(stream, message, payload);
+                    else if (functionName == "GetVariablesInfo") {
+                        StreamString pageName;
+                        StreamString variables;
+                        StreamString token;
+                        ret = payload->Read("PageName", pageName);
+                        if (ret) {
+                            ret = payload->Read("Variables", variables);
+                        }
+                        if (ret) {
+                            ret = payload->Read("Token", token);
+                        }
+                        if (ret) {
+                            ReferenceT < BufferedStreamI > stream;
+                            ReferenceT < EventSem > semaphore;
 
-                    ret = GetScheduleFolders(pageName.Buffer(), userName.Buffer(), token.Buffer(), *response);
-                    if (ret) {
-                        ret = SendReply(stream, message, payload);
+                            SetResponseStream(stream, semaphore, message, payload);
+
+                            ret = GetVariablesInfo(pageName.Buffer(), variables.Buffer(), token.Buffer(), *response);
+                            if (ret) {
+                                ret = SendReply(stream, semaphore, message, payload);
+                            }
+                        }
                     }
-                }
-            }
-            else if (functionName == "GetSchedules") {
-                StreamString pageName;
-                StreamString userName;
-                StreamString token;
-                ret = payload->Read("PageName", pageName);
-                if (ret) {
-                    ret = payload->Read("UserName", userName);
-                }
-                if (ret) {
-                    ret = payload->Read("Token", token);
-                }
-                if (ret) {
-                    ReferenceT < BufferedStreamI > stream;
-                    SetResponseStream(stream, message, payload);
+                    else if (functionName == "GetScheduleFolders") {
+                        StreamString pageName;
+                        StreamString userName;
+                        StreamString token;
+                        ret = payload->Read("PageName", pageName);
+                        if (ret) {
+                            ret = payload->Read("UserName", userName);
+                        }
+                        if (ret) {
+                            ret = payload->Read("Token", token);
+                        }
+                        if (ret) {
+                            ReferenceT < BufferedStreamI > stream;
+                            ReferenceT < EventSem > semaphore;
 
-                    ret = GetSchedules(pageName.Buffer(), userName.Buffer(), token.Buffer(), *response);
-                    if (ret) {
-                        ret = SendReply(stream, message, payload);
+                            SetResponseStream(stream, semaphore, message, payload);
+
+                            ret = GetScheduleFolders(pageName.Buffer(), userName.Buffer(), token.Buffer(), *response);
+                            if (ret) {
+                                ret = SendReply(stream, semaphore, message, payload);
+                            }
+                        }
                     }
-                }
-            }
-            else if (functionName == "GetSchedulesVariablesValue") {
-                StreamString pageName;
-                StreamString userName;
-                StreamString token;
-                ret = payload->Read("PageName", pageName);
-                if (ret) {
-                    ret = payload->Read("UserName", userName);
-                }
-                if (ret) {
-                    ret = payload->Read("Token", token);
-                }
-                if (ret) {
-                    ReferenceT < BufferedStreamI > stream;
-                    SetResponseStream(stream, message, payload);
+                    else if (functionName == "GetSchedules") {
+                        StreamString pageName;
+                        StreamString userName;
+                        StreamString token;
+                        ret = payload->Read("PageName", pageName);
+                        if (ret) {
+                            ret = payload->Read("UserName", userName);
+                        }
+                        if (ret) {
+                            ret = payload->Read("Token", token);
+                        }
+                        if (ret) {
+                            ReferenceT < BufferedStreamI > stream;
+                            ReferenceT < EventSem > semaphore;
 
-                    ret = GetSchedules(pageName.Buffer(), userName.Buffer(), token.Buffer(), *response);
-                    if (ret) {
-                        ret = SendReply(stream, message, payload);
+                            SetResponseStream(stream, semaphore, message, payload);
+
+                            ret = GetSchedules(pageName.Buffer(), userName.Buffer(), token.Buffer(), *response);
+                            if (ret) {
+                                ret = SendReply(stream, semaphore, message, payload);
+                            }
+                        }
                     }
-                }
-            }
-            else if (functionName == "UpdateSchedule") {
-                StreamString userName;
-                StreamString variables;
-                StreamString token;
-                StreamString scheduleUID;
-                ret = payload->Read("UserName", userName);
-                if (ret) {
-                    ret = payload->Read("Variables", variables);
-                }
-                if (ret) {
-                    ret = payload->Read("Token", token);
-                }
-                if (ret) {
-                    ret = payload->Read("ScheduleID", scheduleUID);
-                }
-                if (ret) {
-                    ReferenceT < BufferedStreamI > stream;
-                    SetResponseStream(stream, message, payload);
+                    else if (functionName == "GetSchedulesVariablesValue") {
+                        StreamString pageName;
+                        StreamString userName;
+                        StreamString token;
+                        ret = payload->Read("PageName", pageName);
+                        if (ret) {
+                            ret = payload->Read("UserName", userName);
+                        }
+                        if (ret) {
+                            ret = payload->Read("Token", token);
+                        }
+                        if (ret) {
+                            ReferenceT < BufferedStreamI > stream;
+                            ReferenceT < EventSem > semaphore;
 
-                    ret = UpdateSchedule(userName.Buffer(), variables.Buffer(), token.Buffer(), scheduleUID.Buffer(), *response);
-                    if (ret) {
-                        ret = SendReply(stream, message, payload);
+                            SetResponseStream(stream, semaphore, message, payload);
+
+                            ret = GetSchedules(pageName.Buffer(), userName.Buffer(), token.Buffer(), *response);
+                            if (ret) {
+                                ret = SendReply(stream, semaphore, message, payload);
+                            }
+                        }
                     }
-                }
+                    else if (functionName == "UpdateSchedule") {
+                        StreamString userName;
+                        StreamString variables;
+                        StreamString token;
+                        StreamString scheduleUID;
+                        StreamString tid;
+                        ret = payload->Read("UserName", userName);
+                        if (ret) {
+                            ret = payload->Read("Variables", variables);
+                        }
+                        if (ret) {
+                            ret = payload->Read("Token", token);
+                        }
+                        if (ret) {
+                            ret = payload->Read("ScheduleID", scheduleUID);
+                        }
+                        if (ret) {
+                            ret = payload->Read("Tid", tid);
+                        }
+                        if (ret) {
+                            ReferenceT < BufferedStreamI > stream;
+                            ReferenceT < EventSem > semaphore;
 
-            }
-            else if (functionName == "Commit") {
-                StreamString userName;
-                StreamString variables;
-                StreamString token;
-                StreamString scheduleUID;
-                ret = payload->Read("UserName", userName);
-                if (ret) {
-                    ret = payload->Read("Variables", variables);
-                }
-                if (ret) {
-                    ret = payload->Read("Token", token);
-                }
-                if (ret) {
-                    ret = payload->Read("ScheduleID", scheduleUID);
-                }
-                if (ret) {
-                    ReferenceT < BufferedStreamI > stream;
-                    SetResponseStream(stream, message, payload);
+                            SetResponseStream(stream, semaphore, message, payload);
 
-                    ret = Commit(userName.Buffer(), variables.Buffer(), token.Buffer(), scheduleUID.Buffer(), *response);
-                    if (ret) {
-                        ret = SendReply(stream, message, payload);
+                            ret = UpdateSchedule(userName.Buffer(), variables.Buffer(), token.Buffer(), scheduleUID.Buffer(), tid.Buffer(), *response);
+                            if (ret) {
+                                ret = SendReply(stream, semaphore, message, payload);
+                            }
+                        }
+
                     }
-                }
-            }
-            else if (functionName == "NewSchedule") {
-                StreamString scheduleName;
-                StreamString description;
-                StreamString pageName;
-                StreamString userName;
-                StreamString token;
-                StreamString scheduleUID;
-                ret = payload->Read("ScheduleName", scheduleName);
-                if (ret) {
-                    ret = payload->Read("Description", description);
-                }
-                if (ret) {
-                    ret = payload->Read("PageName", pageName);
-                }
-                if (ret) {
-                    ret = payload->Read("UserName", userName);
-                }
-                if (ret) {
-                    ret = payload->Read("Token", token);
-                }
-                if (ret) {
-                    ret = payload->Read("ScheduleID", scheduleUID);
-                }
-                if (ret) {
-                    ReferenceT < BufferedStreamI > stream;
-                    SetResponseStream(stream, message, payload);
+                    else if (functionName == "Commit") {
+                        StreamString userName;
+                        StreamString variables;
+                        StreamString token;
+                        StreamString scheduleUID;
+                        StreamString tid;
+                        ret = payload->Read("UserName", userName);
+                        if (ret) {
+                            ret = payload->Read("Variables", variables);
+                        }
+                        if (ret) {
+                            ret = payload->Read("Token", token);
+                        }
+                        if (ret) {
+                            ret = payload->Read("ScheduleID", scheduleUID);
+                        }
+                        if (ret) {
+                            ret = payload->Read("Tid", tid);
+                        }
+                        if (ret) {
+                            ReferenceT < BufferedStreamI > stream;
+                            ReferenceT < EventSem > semaphore;
 
-                    ret = NewSchedule(scheduleName.Buffer(), description.Buffer(), pageName.Buffer(), userName.Buffer(), token.Buffer(), scheduleUID.Buffer(),
-                                      *response);
-                    if (ret) {
-                        ret = SendReply(stream, message, payload);
+                            SetResponseStream(stream, semaphore, message, payload);
+
+                            ret = Commit(userName.Buffer(), variables.Buffer(), token.Buffer(), scheduleUID.Buffer(), tid.Buffer(), *response);
+                            if (ret) {
+                                ret = SendReply(stream, semaphore, message, payload);
+                            }
+                        }
                     }
-                }
-            }
-            else if (functionName == "LoadPlant") {
-                StreamString scheduleName;
-                StreamString userName;
-                StreamString description;
-                StreamString pageNames;
-                StreamString token;
-                StreamString scheduleUID;
-                ret = payload->Read("ScheduleName", scheduleName);
-                if (ret) {
-                    ret = payload->Read("UserName", userName);
-                }
-                if (ret) {
-                    ret = payload->Read("Description", description);
-                }
-                if (ret) {
-                    ret = payload->Read("PageNames", pageNames);
-                }
-                if (ret) {
-                    ret = payload->Read("Token", token);
-                }
-                if (ret) {
-                    ret = payload->Read("ScheduleID", scheduleUID);
-                }
-                if (ret) {
-                    ReferenceT < BufferedStreamI > stream;
-                    SetResponseStream(stream, message, payload);
+                    else if (functionName == "NewSchedule") {
+                        StreamString scheduleName;
+                        StreamString description;
+                        StreamString pageName;
+                        StreamString userName;
+                        StreamString token;
+                        ret = payload->Read("ScheduleName", scheduleName);
+                        if (ret) {
+                            //if empty schedule name then timestamp
+                            if (scheduleName == "") {
+                                TimeStamp date;
+                                HighResolutionTimer::GetTimeStamp(date);
+                                uint32 usec = date.GetMicroseconds();
+                                uint32 sec = date.GetSeconds();
+                                uint32 min = date.GetMinutes();
+                                uint32 hour = date.GetHour();
+                                uint32 day = date.GetDay();
+                                uint32 month = date.GetMonth();
+                                uint32 year = date.GetYear();
+                                scheduleName.Printf("%d-%d-%d_%d:%d_%d:%d", year, month, day, hour, min, sec, usec);
+                            }
+                            ret = payload->Read("Description", description);
+                        }
+                        if (ret) {
+                            ret = payload->Read("PageName", pageName);
+                        }
+                        if (ret) {
+                            ret = payload->Read("UserName", userName);
+                        }
+                        if (ret) {
+                            ret = payload->Read("Token", token);
+                        }
+                        if (ret) {
+                            ReferenceT < BufferedStreamI > stream;
+                            ReferenceT < EventSem > semaphore;
 
-                    ret = LoadPlant(scheduleName.Buffer(), userName.Buffer(), description.Buffer(), pageNames.Buffer(), token.Buffer(), scheduleUID.Buffer(),
-                                    *response);
-                    if (ret) {
-                        ret = SendReply(stream, message, payload);
+                            SetResponseStream(stream, semaphore, message, payload);
+
+                            ret = NewSchedule(scheduleName.Buffer(), description.Buffer(), pageName.Buffer(), userName.Buffer(), token.Buffer(), *response);
+                            if (ret) {
+                                ret = SendReply(stream, semaphore, message, payload);
+                            }
+                        }
+                    }
+                    else if (functionName == "DeleteSchedule") {
+                        StreamString scheduleUID;
+                        StreamString token;
+                        ret = payload->Read("ScheduleID", scheduleUID);
+                        if (ret) {
+                            ret = payload->Read("Token", token);
+                        }
+                        if (ret) {
+                            ReferenceT < BufferedStreamI > stream;
+                            ReferenceT < EventSem > semaphore;
+
+                            SetResponseStream(stream, semaphore, message, payload);
+
+                            ret = DeleteSchedule(scheduleUID.Buffer(), token.Buffer(), *response);
+                            if (ret) {
+                                ret = SendReply(stream, semaphore, message, payload);
+                            }
+                        }
+
+                    }
+
+                    else if (functionName == "UpdatePlant") {
+                        StreamString pageName;
+                        StreamString variables;
+                        StreamString token;
+                        StreamString tid;
+                        ret = payload->Read("PageName", pageName);
+                        if (ret) {
+                            ret = payload->Read("Variables", variables);
+                        }
+                        if (ret) {
+                            ret = payload->Read("Token", token);
+                        }
+                        if (ret) {
+                            ret = payload->Read("Tid", tid);
+                        }
+                        if (ret) {
+                            ReferenceT < BufferedStreamI > stream;
+                            ReferenceT < EventSem > semaphore;
+
+                            SetResponseStream(stream, semaphore, message, payload);
+
+                            ret = UpdatePlant(pageName.Buffer(), variables.Buffer(), token.Buffer(), tid.Buffer(), *response);
+                            if (ret) {
+                                ret = SendReply(stream, semaphore, message, payload);
+                            }
+                        }
+                    }
+                    else if (functionName == "LoadPlant") {
+                        StreamString scheduleName;
+                        StreamString description;
+                        StreamString pageNames;
+                        StreamString token;
+                        ret = payload->Read("ScheduleName", scheduleName);
+                        if (ret) {
+                            ret = payload->Read("Description", description);
+                        }
+                        if (ret) {
+                            ret = payload->Read("PageNames", pageNames);
+                        }
+                        if (ret) {
+                            ret = payload->Read("Token", token);
+                        }
+
+                        if (ret) {
+                            ReferenceT < BufferedStreamI > stream;
+                            ReferenceT < EventSem > semaphore;
+
+                            SetResponseStream(stream, semaphore, message, payload);
+
+                            ret = LoadPlant(scheduleName.Buffer(), description.Buffer(), pageNames.Buffer(), token.Buffer(), *response);
+                            if (ret) {
+                                ret = SendReply(stream, semaphore, message, payload);
+                            }
+                        }
+                    }
+                    else {
+                        //error
+                        REPORT_ERROR(ErrorManagement::FatalError, "Unrecognised hieratika command %s", functionName.Buffer());
                     }
                 }
             }
             else {
-                //todo error
+                REPORT_ERROR(ErrorManagement::FatalError, "Please Define HieratikaCommand parameter inside Payload");
             }
         }
     }
@@ -425,10 +538,16 @@ ErrorManagement::ErrorType MARTe2HieratikaMessageDispatcher::Execute(ExecutionIn
 }
 
 bool MARTe2HieratikaMessageDispatcher::SendReply(ReferenceT<BufferedStreamI> &stream,
+                                                 ReferenceT<EventSem> &semaphore,
                                                  ReferenceT<Message> &message,
                                                  ReferenceT<ConfigurationDatabase> &payload) {
 
     bool ret = true;
+
+    if (semaphore.IsValid()) {
+        semaphore->Post();
+    }
+
     if (message->ExpectsIndirectReply()) {
         if (stream.IsValid()) {
             uint32 size = internalResponse.Size();
@@ -449,11 +568,16 @@ bool MARTe2HieratikaMessageDispatcher::SendReply(ReferenceT<BufferedStreamI> &st
 }
 
 void MARTe2HieratikaMessageDispatcher::SetResponseStream(ReferenceT<BufferedStreamI> &stream,
+                                                         ReferenceT<EventSem> &semaphore,
                                                          ReferenceT<Message> &message,
                                                          ReferenceT<ConfigurationDatabase> &payload) {
     StreamString streamId;
     if (payload->Read("Stream", streamId)) {
         stream = ObjectRegistryDatabase::Instance()->Find(streamId.Buffer());
+    }
+    StreamString semaphoreId;
+    if (payload->Read("Semaphore", semaphoreId)) {
+        semaphore = ObjectRegistryDatabase::Instance()->Find(semaphoreId.Buffer());
     }
     if (message->ExpectsIndirectReply()) {
         internalResponse.SetSize(0ULL);
@@ -465,6 +589,15 @@ void MARTe2HieratikaMessageDispatcher::SetResponseStream(ReferenceT<BufferedStre
         }
     }
 
+}
+
+void MARTe2HieratikaMessageDispatcher::Purge(ReferenceContainer &purgeList) {
+    if (!executor.Stop()) {
+        if (!executor.Stop()) {
+            REPORT_ERROR(ErrorManagement::FatalError, "Could not stop SingleThreadService.");
+        }
+    }
+    Object::Purge(purgeList);
 }
 
 CLASS_REGISTER(MARTe2HieratikaMessageDispatcher, "1.0")
