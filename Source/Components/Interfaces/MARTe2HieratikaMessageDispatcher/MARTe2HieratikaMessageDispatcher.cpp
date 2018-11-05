@@ -160,6 +160,25 @@ ErrorManagement::ErrorType MARTe2HieratikaMessageDispatcher::Execute(ExecutionIn
                         }
 
                     }
+                    else if (functionName == "Logout") {
+                        StreamString token;
+                        StreamString passw;
+                        ret = payload->Read("Token", token);
+                        if (ret) {
+
+                            ReferenceT < BufferedStreamI > stream;
+                            ReferenceT < EventSem > semaphore;
+
+                            SetResponseStream(stream, semaphore, message, payload);
+
+                            ret = LogoutFunction(token.Buffer(), *response);
+
+                            if (ret) {
+                                ret = SendReply(stream, semaphore, message, payload);
+                            }
+                        }
+
+                    }
                     else if (functionName == "GetUsers") {
                         StreamString token;
                         ret = payload->Read("Token", token);

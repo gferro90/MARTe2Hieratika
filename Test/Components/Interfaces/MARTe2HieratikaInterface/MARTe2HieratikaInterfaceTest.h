@@ -31,15 +31,65 @@
 /*---------------------------------------------------------------------------*/
 /*                        Project header includes                            */
 /*---------------------------------------------------------------------------*/
-
+#include "MARTe2HieratikaInterface.h"
 /*---------------------------------------------------------------------------*/
 /*                           Class declaration                               */
 /*---------------------------------------------------------------------------*/
 
+using namespace MARTe;
+
 class MARTe2HieratikaInterfaceTest {
 public:
-	MARTe2HieratikaInterfaceTest();
-	virtual ~MARTe2HieratikaInterfaceTest();
+    MARTe2HieratikaInterfaceTest();
+    ~MARTe2HieratikaInterfaceTest();
+
+    bool TestConstructor();
+
+    bool TestSetServerAddress();
+
+    bool TestSetServerPort();
+
+    bool TestSetHttpExchangeTimeout();
+
+    bool TestGetServerAddress();
+
+    bool TestGetServerPort();
+
+    bool TestGetHttpExchangeTimeout();
+
+    bool TestLoginFunction();
+
+    bool TestLogoutFunction();
+
+    bool TestGetUsers();
+
+    bool TestGetTid();
+
+    bool TestGetTransformationInfo();
+
+    bool TestGetPages();
+
+    bool TestGetPage();
+
+    bool TestGetVariablesInfo();
+
+    bool TestGetScheduleFolders();
+
+    bool TestGetSchedules();
+
+    bool TestGetSchedulesVariablesValue();
+
+    bool TestUpdateSchedule();
+
+    bool TestCommit();
+
+    bool TestNewSchedule();
+
+    bool TestDeleteSchedule();
+
+    bool TestUpdatePlant();
+
+    bool TestLoadPlant();
 
 };
 

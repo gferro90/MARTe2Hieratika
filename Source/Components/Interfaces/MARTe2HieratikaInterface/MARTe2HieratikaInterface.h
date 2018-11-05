@@ -70,9 +70,21 @@ public:
 
     void SetHttpExchangeTimeout(const TimeoutType &timeoutIn);
 
+    void GetServerAddress(StreamString &serverAddr) const;
+
+    uint32 GetServerPort() const;
+
+    uint32 GetHttpExchangeTimeout() const;
+
+
     bool LoginFunction(const char8* userName,
                        const char8* passw,
                        BufferedStreamI &response);
+
+    bool LogoutFunction(const char8* token,
+                       BufferedStreamI &response);
+
+
 
     virtual bool GetUsers(const char8 *token,
                           BufferedStreamI &response);
@@ -91,8 +103,10 @@ public:
     virtual bool GetPage(const char8 *pageName,
                          BufferedStreamI &response);
 
+#if 0
     virtual bool ExtractAllVariablesFromPage(BufferedStreamI &page,
                                              BufferedStreamI &variables);
+#endif
 
     virtual bool GetVariablesInfo(const char8 *pageName,
                                   const char8 *variables,

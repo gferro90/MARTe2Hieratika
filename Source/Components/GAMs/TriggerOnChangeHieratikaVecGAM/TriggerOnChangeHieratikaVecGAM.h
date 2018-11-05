@@ -59,6 +59,8 @@ protected:
     StreamString varValue;
 
     StreamString *splitted;
+
+    uint32 *signalIndex;
 };
 
 }

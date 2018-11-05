@@ -52,6 +52,10 @@ TriggerOnChangeHieratikaVecGAM::~TriggerOnChangeHieratikaVecGAM() {
     if (splitted != NULL) {
         delete[] splitted;
     }
+
+    if (signalIndex != NULL) {
+        delete[] signalIndex;
+    }
 }
 
 bool TriggerOnChangeHieratikaVecGAM::Initialise(StructuredDataI & data) {
@@ -103,6 +107,7 @@ bool TriggerOnChangeHieratikaVecGAM::Setup() {
                 varValue.Seek(0ull);
 
                 splitted = new StreamString[numberOfFields + 1u];
+                signalIndex = new uint32[numberOfFields];
 
                 varValue.GetToken(splitted[0], "[", term, "");
                 splitted[0] += "[";
@@ -132,6 +137,7 @@ bool TriggerOnChangeHieratikaVecGAM::Setup() {
                         GetSignalName(InputSignals, i, signalName);
                         found = (token == signalName);
                         if (found) {
+                            signalIndex[cnt] = i;
                             printf("split[%d]=%s\n", cnt, splitted[cnt].Buffer());
                             cnt++;
                             if (cnt == numberOfFields) {
@@ -172,11 +178,11 @@ bool TriggerOnChangeHieratikaVecGAM::Execute() {
 
         for (uint32 i = 0u; (i < numberOfFields) && (ret); i++) {
             variables += "\"";
-            variables.Printf("%!", signalValues[i]);
+            variables.Printf("%!", signalValues[signalIndex[i]]);
             variables += "\\r\"";
             splitted[i + 1u].Seek(0ull);
-            if(splitted[i + 1u]!="]]"){
-                variables +=",";
+            if (splitted[i + 1u] != "]]") {
+                variables += ",";
             }
             variables += splitted[i + 1u];
         }

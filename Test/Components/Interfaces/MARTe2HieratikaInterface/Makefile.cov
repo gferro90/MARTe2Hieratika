@@ -22,23 +22,8 @@
 #
 #############################################################
 
-SPB=MARTe2HieratikaInterface.x MARTe2HieratikaMessageDispatcher.x
+TARGET=cov
 
-PACKAGE=Components
-ROOT_DIR=../../..
-MAKEDEFAULTDIR=$(MARTe2_DIR)/MakeDefaults
+include Makefile.inc
 
-include $(MAKEDEFAULTDIR)/MakeStdLibDefs.$(TARGET)
-
-
-LIBRARIES_STATIC=$(BUILD_DIR)/MARTe2HieratikaInterface/MARTe2HieratikaInterfaceTest$(LIBEXT)
-LIBRARIES_STATIC+=$(BUILD_DIR)/MARTe2HieratikaMessageDispatcher/MARTe2HieratikaMessageDispatcherTest$(LIBEXT)
-
-all: $(OBJS)  $(SUBPROJ)  \
-    $(BUILD_DIR)/InterfacesTest$(LIBEXT) \
-    $(BUILD_DIR)/InterfacesTest$(DLLEXT)
-	echo  $(OBJS)
-
-include $(MAKEDEFAULTDIR)/MakeStdLibRules.$(TARGET)
-
-
+LIBRARIES += -L$(EFDA_MARTe_DIR)/BaseLib2/linux -lBaseLib2 -L$(EFDA_MARTe_DIR)/Interfaces/BaseLib2Adapter/linux -lBaseLib2Adapter

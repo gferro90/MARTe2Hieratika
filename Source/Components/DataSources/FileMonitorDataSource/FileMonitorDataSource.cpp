@@ -115,7 +115,8 @@ bool FileMonitorDataSource::SetConfiguredDatabase(StructuredDataI & data) {
                                 lineNumber[cnt] = lineCnt;
                                 signalIndex[cnt] = i;
                             }
-                            REPORT_ERROR(ErrorManagement::Information,"Found %s",signalName.Buffer());
+                            uint32 x=signalIndex[cnt];
+                            REPORT_ERROR(ErrorManagement::Information,"Found %s %d",signalName.Buffer(), x);
                             cnt++;
                         }
                     }

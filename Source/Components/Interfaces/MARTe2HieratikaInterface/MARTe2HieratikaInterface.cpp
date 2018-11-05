@@ -69,6 +69,18 @@ void MARTe2HieratikaInterface::SetHttpExchangeTimeout(const TimeoutType &timeout
     timeout = timeoutIn;
 }
 
+void MARTe2HieratikaInterface::GetServerAddress(StreamString &serverAddr) const {
+    client.GetServerAddress(serverAddr);
+}
+
+uint32 MARTe2HieratikaInterface::GetServerPort() const {
+    return client.GetServerPort();
+}
+
+uint32 MARTe2HieratikaInterface::GetHttpExchangeTimeout() const {
+    return timeout.GetTimeoutMSec();
+}
+
 bool MARTe2HieratikaInterface::SetHeader() {
 
     StreamString param;
@@ -124,6 +136,33 @@ bool MARTe2HieratikaInterface::LoginFunction(const char8 *userName,
         }
     }
     return ret;
+}
+
+bool MARTe2HieratikaInterface::LogoutFunction(const char8* token,
+                                              BufferedStreamI &response) {
+    client.SetServerUri("/logout");
+
+    bool ret = true;
+    if (!protocol->MoveAbsolute("OutputOptions")) {
+        ret = protocol->CreateAbsolute("OutputOptions");
+    }
+
+    if (ret) {
+        ret = SetHeader();
+        StreamString body = "token=";
+        if (ret) {
+            body += token;
+            ret = body.Seek(0ULL);
+        }
+        if (ret) {
+            ret = protocol->MoveToRoot();
+        }
+        if (ret) {
+            ret = client.HttpExchange(response, HttpDefinition::HSHCPost, &body, timeout);
+        }
+    }
+    return ret;
+
 }
 
 bool MARTe2HieratikaInterface::GetUsers(const char8 *token,
@@ -293,7 +332,7 @@ bool MARTe2HieratikaInterface::GetPage(const char8 *pageName,
     }
     return ret;
 }
-
+#if 0
 bool MARTe2HieratikaInterface::ExtractAllVariablesFromPage(BufferedStreamI &page,
                                                            BufferedStreamI &variables) {
 
@@ -385,7 +424,7 @@ bool MARTe2HieratikaInterface::ExtractAllVariablesFromPage(BufferedStreamI &page
     return ret;
 
 }
-
+#endif
 bool MARTe2HieratikaInterface::GetVariablesInfo(const char8 *pageName,
                                                 const char8 *variables,
                                                 const char8 *token,
@@ -593,7 +632,7 @@ bool MARTe2HieratikaInterface::Commit(const char8 *userName,
         if (ret) {
             body += token;
             body += "&tid=";
-            body+=tid;
+            body += tid;
             body += "&username=";
             body += userName;
             body += "&scheduleUID=";
