@@ -22,7 +22,7 @@
 #
 #############################################################
 
-SPB=FileMonitorDataSource.x
+SPB=FileMonitorDataSource.x HttpDiodeDataSource.x HttpDiodeReceiver.x
 
 PACKAGE=Components
 ROOT_DIR=../../..
@@ -32,6 +32,7 @@ include $(MAKEDEFAULTDIR)/MakeStdLibDefs.$(TARGET)
 
 
 LIBRARIES_STATIC=$(BUILD_DIR)/FileMonitorDataSource/FileMonitorDataSource$(LIBEXT)
+LIBRARIES_STATIC=$(BUILD_DIR)/HttpDiodeDataSource/HttpDiodeDataSource$(LIBEXT)
 
 all: $(OBJS)  $(SUBPROJ)  \
     $(BUILD_DIR)/DataSources$(LIBEXT) \

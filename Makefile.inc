@@ -29,6 +29,8 @@ SPB += Test/Components/Interfaces.x
 
 SPB += Test/GTest.x
 
+SPB += Startup.x
+
 
 MAKEDEFAULTDIR=$(MARTe2_DIR)/MakeDefaults
 

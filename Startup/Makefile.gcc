@@ -40,3 +40,6 @@ LIBRARIES   += $(MARTe2_DIR)/Lib/gtest-1.7.0/libgtest.a $(MARTe2_DIR)/Lib/gtest-
 ifdef MDSPLUS_DIR
 LIBRARIES += -L$(MDSPLUS_DIR)/lib64 -L$(MDSPLUS_DIR)/lib -lMdsObjectsCppShr
 endif
+ifdef EPICS_BASE
+LIBRARIES += -L$(EPICS_BASE)/lib/$(EPICS_HOST_ARCH)/ -lca -lCom -lcas -ldbCore -ldbRecStd -lgdd 
+endif

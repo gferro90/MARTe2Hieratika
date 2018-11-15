@@ -22,7 +22,7 @@
 #
 #############################################################
 
-SPB=TriggerOnChangeHieratikaGAM.x TriggerOnChangeHieratikaVecGAM.x
+SPB=TriggerOnChangeHieratikaGAM.x TriggerOnChangeHieratikaVecGAM.x PriorityGAM.x
 
 PACKAGE=Components
 ROOT_DIR=../../..
@@ -32,6 +32,8 @@ include $(MAKEDEFAULTDIR)/MakeStdLibDefs.$(TARGET)
 
 
 LIBRARIES_STATIC=$(BUILD_DIR)/TriggerOnChangeHieratikaGAM/TriggerOnChangeHieratikaGAM$(LIBEXT)
+LIBRARIES_STATIC+=$(BUILD_DIR)/TriggerOnChangeHieratikaVecGAM/TriggerOnChangeHieratikaVecGAM$(LIBEXT)
+LIBRARIES_STATIC=$(BUILD_DIR)/PriorityGAM/PriorityGAM$(LIBEXT)
 
 all: $(OBJS)  $(SUBPROJ)  \
     $(BUILD_DIR)/GAMs$(LIBEXT) \

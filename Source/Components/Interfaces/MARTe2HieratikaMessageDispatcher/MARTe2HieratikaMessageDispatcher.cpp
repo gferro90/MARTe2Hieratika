@@ -512,17 +512,9 @@ ErrorManagement::ErrorType MARTe2HieratikaMessageDispatcher::Execute(ExecutionIn
                         }
                     }
                     else if (functionName == "LoadPlant") {
-                        StreamString scheduleName;
-                        StreamString description;
                         StreamString pageNames;
                         StreamString token;
-                        ret = payload->Read("ScheduleName", scheduleName);
-                        if (ret) {
-                            ret = payload->Read("Description", description);
-                        }
-                        if (ret) {
-                            ret = payload->Read("PageNames", pageNames);
-                        }
+                        ret = payload->Read("PageNames", pageNames);
                         if (ret) {
                             ret = payload->Read("Token", token);
                         }
@@ -533,7 +525,7 @@ ErrorManagement::ErrorType MARTe2HieratikaMessageDispatcher::Execute(ExecutionIn
 
                             SetResponseStream(stream, semaphore, message, payload);
 
-                            ret = LoadPlant(scheduleName.Buffer(), description.Buffer(), pageNames.Buffer(), token.Buffer(), *response);
+                            ret = LoadPlant(pageNames.Buffer(), token.Buffer(), *response);
                             if (ret) {
                                 ret = SendReply(stream, semaphore, message, payload);
                             }

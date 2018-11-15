@@ -46,10 +46,18 @@ INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L3Services
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L4Messages
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L4StateMachine
 INCLUDES += -I../../Source/Components/Interfaces/MARTe2HieratikaInterface
+INCLUDES += -I/home/pc/EPICS/base-3.15.6/include/
+INCLUDES += -I/home/pc/EPICS/base-3.15.6/include/os/Linux/
+INCLUDES += -I/home/pc/EPICS/base-3.15.6/include/compiler/gcc/
+INCLUDES += -I/home/pc/EPICS/base-3.15.6/src/ca/client/tools/
+
+CPPFLAGS+= -fpermissive
 
 all: $(OBJS) $(SUBPROJ)   \
         $(BUILD_DIR)/MainGTest$(EXEEXT)\
-        $(BUILD_DIR)/Test1$(EXEEXT)
+        $(BUILD_DIR)/Test1$(EXEEXT)\
+        $(BUILD_DIR)/Test2$(EXEEXT)\
+        $(BUILD_DIR)/EpicsSignalGenTool$(EXEEXT)
 	echo  $(OBJS)
 
 

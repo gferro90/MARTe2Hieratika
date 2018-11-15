@@ -772,9 +772,7 @@ bool MARTe2HieratikaInterface::UpdatePlant(const char8 *pageName,
     return ret;
 }
 
-bool MARTe2HieratikaInterface::LoadPlant(const char8 *scheduleName,
-                                         const char8 *description,
-                                         const char8 *pageNames,
+bool MARTe2HieratikaInterface::LoadPlant(const char8 *pageNames,
                                          const char8 *token,
                                          BufferedStreamI &response) {
 
@@ -790,11 +788,6 @@ bool MARTe2HieratikaInterface::LoadPlant(const char8 *scheduleName,
         StreamString body = "token=";
         if (ret) {
             body += token;
-            body += "&name=";
-            body += scheduleName;
-            body += "&description=";
-            body += description;
-            body += "&parentFolders=%5B%5D";
             body += "&pageNames=";
             StreamString varEncoded;
             ret = HttpDefinition::HttpEncode(varEncoded, pageNames);

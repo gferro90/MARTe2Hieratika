@@ -45,5 +45,5 @@ endif
 
 
 ifdef EPICS_BASE
-LIBRARIES += -L$(EPICS_BASE)/lib/$(EPICS_HOST_ARCH)/ -lca
+LIBRARIES += -L$(EPICS_BASE)/lib/$(EPICS_HOST_ARCH)/ -lca -lCom -lcas -ldbCore -ldbRecStd -lgdd 
 endif

@@ -289,7 +289,6 @@ bool MARTe2HieratikaInterfaceTest::TestGetPages() {
         }
     }
 
-
     if (ret) {
         ret = Logout(test, token);
     }
@@ -316,8 +315,6 @@ bool MARTe2HieratikaInterfaceTest::TestGetPage() {
             ret &= StringHelper::SearchString(response.Buffer(), "body") != NULL;
         }
     }
-
-
 
     if (ret) {
         ret = Logout(test, token);
@@ -421,8 +418,8 @@ bool MARTe2HieratikaInterfaceTest::TestGetSchedulesVariablesValue() {
         printf("GetSchedules: %s\n", response.Buffer());
         //at least one schedule
         if (ret) {
-            const char8 *pattern="\"uid\": ";
-            StreamString schedNamePtr= StringHelper::SearchString(response.Buffer(), pattern)+StringHelper::Length(pattern);
+            const char8 *pattern = "\"uid\": ";
+            StreamString schedNamePtr = StringHelper::SearchString(response.Buffer(), pattern) + StringHelper::Length(pattern);
             char8 term;
             schedNamePtr.Seek(0ull);
             schedNamePtr.GetToken(scheduleUid, "\"", term);
@@ -432,7 +429,7 @@ bool MARTe2HieratikaInterfaceTest::TestGetSchedulesVariablesValue() {
     response.SetSize(0ull);
     if (ret) {
 
-        ret = test.GetSchedulesVariablesValue( token.Buffer(), scheduleUid.Buffer(),  response);
+        ret = test.GetSchedulesVariablesValue(token.Buffer(), scheduleUid.Buffer(), response);
         printf("GetSchedulesVariablesValue: %s\n", response.Buffer());
         //at least one schedule
         if (ret) {
@@ -441,7 +438,6 @@ bool MARTe2HieratikaInterfaceTest::TestGetSchedulesVariablesValue() {
 
         }
     }
-
 
     if (ret) {
         ret = Logout(test, token);
@@ -464,8 +460,8 @@ bool MARTe2HieratikaInterfaceTest::TestUpdateSchedule() {
         printf("GetTid: %s\n", response.Buffer());
         if (ret) {
             //do some checks
-            const char8 *pattern="\"tid\": ";
-            StreamString tidPtr= StringHelper::SearchString(response.Buffer(), pattern)+StringHelper::Length(pattern);
+            const char8 *pattern = "\"tid\": ";
+            StreamString tidPtr = StringHelper::SearchString(response.Buffer(), pattern) + StringHelper::Length(pattern);
             char8 term;
             tidPtr.Seek(0ull);
             tidPtr.GetToken(tid, "\"", term);
@@ -480,8 +476,8 @@ bool MARTe2HieratikaInterfaceTest::TestUpdateSchedule() {
         printf("GetSchedules: %s\n", response.Buffer());
         //at least one schedule
         if (ret) {
-            const char8 *pattern="\"uid\": ";
-            StreamString schedNamePtr= StringHelper::SearchString(response.Buffer(), pattern)+StringHelper::Length(pattern);
+            const char8 *pattern = "\"uid\": ";
+            StreamString schedNamePtr = StringHelper::SearchString(response.Buffer(), pattern) + StringHelper::Length(pattern);
             char8 term;
             schedNamePtr.Seek(0ull);
             schedNamePtr.GetToken(scheduleUid, "\"", term);
@@ -491,7 +487,7 @@ bool MARTe2HieratikaInterfaceTest::TestUpdateSchedule() {
     response.SetSize(0ull);
     if (ret) {
 
-        ret = test.UpdateSchedule("codac-dev-1",  "{\"DT@BT@DBLA\":  [1, 2, 3, 4, 5, 6]}", token.Buffer(), tid.Buffer(), scheduleUid.Buffer(),  response);
+        ret = test.UpdateSchedule("codac-dev-1", "{\"DT@BT@DBLA\":  [1, 2, 3, 4, 5, 6]}", token.Buffer(), tid.Buffer(), scheduleUid.Buffer(), response);
         printf("GetSchedulesVariablesValue: %s\n", response.Buffer());
         //at least one schedule
         if (ret) {
@@ -499,7 +495,6 @@ bool MARTe2HieratikaInterfaceTest::TestUpdateSchedule() {
             ret = StringHelper::Compare(response.Buffer(), "ok") == 0;
         }
     }
-
 
     if (ret) {
         ret = Logout(test, token);
@@ -509,22 +504,193 @@ bool MARTe2HieratikaInterfaceTest::TestUpdateSchedule() {
 }
 
 bool MARTe2HieratikaInterfaceTest::TestCommit() {
-    return true;
+
+    MARTe2HieratikaInterface test;
+
+    StreamString token;
+    bool ret = Login(test, token);
+
+    StreamString response;
+
+    StreamString tid;
+    if (ret) {
+        ret = test.GetTid(token.Buffer(), response);
+        printf("GetTid: %s\n", response.Buffer());
+        if (ret) {
+            //do some checks
+            const char8 *pattern = "\"tid\": ";
+            StreamString tidPtr = StringHelper::SearchString(response.Buffer(), pattern) + StringHelper::Length(pattern);
+            char8 term;
+            tidPtr.Seek(0ull);
+            tidPtr.GetToken(tid, "\"", term);
+        }
+    }
+
+    response.SetSize(0ull);
+
+    StreamString scheduleUid;
+    if (ret) {
+        ret = test.GetSchedules("DemoTypes", "codac-dev-1", token.Buffer(), response);
+        printf("GetSchedules: %s\n", response.Buffer());
+        //at least one schedule
+        if (ret) {
+            const char8 *pattern = "\"uid\": ";
+            StreamString schedNamePtr = StringHelper::SearchString(response.Buffer(), pattern) + StringHelper::Length(pattern);
+            char8 term;
+            schedNamePtr.Seek(0ull);
+            schedNamePtr.GetToken(scheduleUid, "\"", term);
+        }
+    }
+
+    response.SetSize(0ull);
+    if (ret) {
+
+        ret = test.Commit("codac-dev-1", "{\"DT@BT@DBLA\":  [2, 3, 4, 5, 6, 7]}", token.Buffer(), tid.Buffer(), scheduleUid.Buffer(), response);
+        printf("Commit: %s\n", response.Buffer());
+        //at least one schedule
+        if (ret) {
+            //do some checks
+            ret = StringHelper::Compare(response.Buffer(), "ok") == 0;
+        }
+    }
+
+    if (ret) {
+        ret = Logout(test, token);
+    }
+
+    return ret;
 }
 
 bool MARTe2HieratikaInterfaceTest::TestNewSchedule() {
-    return true;
+
+    MARTe2HieratikaInterface test;
+
+    StreamString token;
+    bool ret = Login(test, token);
+
+    StreamString response;
+
+    if (ret) {
+
+        ret = test.NewSchedule("new_schedule", "a new test schedule", "DemoTypes", "codac-dev-1", token.Buffer(), response);
+        printf("NewSchedule: %s\n", response.Buffer());
+        //at least one schedule
+        if (ret) {
+            //do some checks
+            ret = StringHelper::SearchString(response.Buffer(), "new_schedule") != NULL;
+        }
+    }
+    response.SetSize(0ull);
+    StreamString scheduleUid;
+    if (ret) {
+        ret = test.GetSchedules("DemoTypes", "codac-dev-1", token.Buffer(), response);
+        printf("GetSchedules: %s\n", response.Buffer());
+        //at least one schedule
+        if (ret) {
+
+            const char8 *beginPoint= StringHelper::SearchString(response.Buffer(), "new_schedule");
+
+
+            const char8 *pattern = "\"uid\": ";
+            StreamString schedNamePtr = StringHelper::SearchString(beginPoint, pattern) + StringHelper::Length(pattern);
+            char8 term;
+            schedNamePtr.Seek(0ull);
+            schedNamePtr.GetToken(scheduleUid, "\"", term);
+        }
+    }
+    response.SetSize(0ull);
+    if (ret) {
+        scheduleUid.Seek(0ull);
+        ret = test.DeleteSchedule(scheduleUid.Buffer(), token.Buffer(), response);
+        printf("DeleteSchedule: %s\n", response.Buffer());
+        //at least one schedule
+        if (ret) {
+            //do some checks
+            ret = StringHelper::Compare(response.Buffer(), "ok") == 0;
+        }
+    }
+
+    if (ret) {
+        ret = Logout(test, token);
+    }
+
+    return ret;
 }
 
 bool MARTe2HieratikaInterfaceTest::TestDeleteSchedule() {
-    return true;
+    return TestNewSchedule();
 }
 
 bool MARTe2HieratikaInterfaceTest::TestUpdatePlant() {
-    return true;
+    MARTe2HieratikaInterface test;
+
+    StreamString token;
+    bool ret = Login(test, token);
+
+    StreamString response;
+
+    StreamString tid;
+    if (ret) {
+        ret = test.GetTid(token.Buffer(), response);
+        printf("GetTid: %s\n", response.Buffer());
+        if (ret) {
+            //do some checks
+            const char8 *pattern = "\"tid\": ";
+            StreamString tidPtr = StringHelper::SearchString(response.Buffer(), pattern) + StringHelper::Length(pattern);
+            char8 term;
+            tidPtr.Seek(0ull);
+            tidPtr.GetToken(tid, "\"", term);
+        }
+    }
+
+
+    response.SetSize(0ull);
+    if (ret) {
+
+        ret = test.UpdatePlant("DemoTypes", "{\"DT@BT@DBLA\":  [2, 3, 4, 5, 6, 7]}", token.Buffer(), tid.Buffer(), response);
+        printf("UpdatePlant: %s\n", response.Buffer());
+        //at least one schedule
+        if (ret) {
+            //do some checks
+            ret = StringHelper::Compare(response.Buffer(), "ok") == 0;
+        }
+    }
+
+
+
+    if (ret) {
+        ret = Logout(test, token);
+    }
+
+    return ret;
+
 }
 
 bool MARTe2HieratikaInterfaceTest::TestLoadPlant() {
-    return true;
+    MARTe2HieratikaInterface test;
+
+    StreamString token;
+    bool ret = Login(test, token);
+
+    StreamString response;
+
+    if (ret) {
+
+           ret = test.LoadPlant("[\"DemoTypes\"]", token.Buffer(), response);
+           printf("LoadPlant: %s\n", response.Buffer());
+           //at least one schedule
+           if (ret) {
+               //do some checks
+               ret = StringHelper::Compare(response.Buffer(), "ok") == 0;
+           }
+       }
+
+
+    if (ret) {
+        ret = Logout(test, token);
+    }
+
+    return ret;
+
 }
 

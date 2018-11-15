@@ -158,9 +158,7 @@ public:
                              const char8* tid,
                              BufferedStreamI &response);
 
-    virtual bool LoadPlant(const char8 *scheduleName,
-                           const char8 *description,
-                           const char8 *pageNames,
+    virtual bool LoadPlant(const char8 *pageNames,
                            const char8 *token,
                            BufferedStreamI &response);
 
