@@ -57,7 +57,9 @@ all: $(OBJS) $(SUBPROJ)   \
         $(BUILD_DIR)/MainGTest$(EXEEXT)\
         $(BUILD_DIR)/Test1$(EXEEXT)\
         $(BUILD_DIR)/Test2$(EXEEXT)\
-        $(BUILD_DIR)/EpicsSignalGenTool$(EXEEXT)
+        $(BUILD_DIR)/EpicsSignalGenTool$(EXEEXT)\
+        $(BUILD_DIR)/EpicsSignalGenTool2$(EXEEXT)\
+        $(BUILD_DIR)/EpicsSignalGenTool3$(EXEEXT)
 	echo  $(OBJS)
 
 

@@ -230,8 +230,8 @@ int main(int argc,
         printf("OutputFilePath not specified in configuration\n");
         return -1;
     }
-    uint32 toSentPerThread;
-    if (!localCdb.Read("HttpToSendPerThread", toSentPerThread)) {
+    uint32 toReceivePerThread;
+    if (!localCdb.Read("HttpToReceivePerThread", toReceivePerThread)) {
         printf("HttpToSendPerThread not specified in configuration\n");
         return -1;
     }
@@ -255,36 +255,30 @@ int main(int argc,
         return -1;
     }
 
-    StreamString serverAddress;
-    if (!localCdb.Read("ServerAddress", serverAddress)) {
-        printf("ServerAddress not specified in configuration\n");
-        return -1;
-    }
-
     uint32 serverInitialPort;
     if (!localCdb.Read("ServerInitialPort", serverInitialPort)) {
         printf("ServerInitialPort not specified in configuration\n");
         return -1;
     }
 
-    uint32 cycleStep;
-    if (!localCdb.Read("PrioCycleStep", cycleStep)) {
-        cycleStep = 10u;
+    uint32 httpInputCpus;
+    if (!localCdb.Read("HttpInputCpuMask", httpInputCpus)) {
+        httpInputCpus = 0x4;
     }
 
-    uint32 changeStep;
-    if (!localCdb.Read("PrioChangeStep", changeStep)) {
-        changeStep = 5u;
+    uint32 epicsOutputCpus;
+    if (!localCdb.Read("EpicsOutputCpusMask", epicsOutputCpus)) {
+        epicsOutputCpus = 0x8;
     }
 
-    uint32 epicsInputCpus;
-    if (!localCdb.Read("EpicsInputCpusMask", epicsInputCpus)) {
-        epicsInputCpus = 0x8;
+    uint32 epicsOutputStackSize;
+    if (!localCdb.Read("EpicsOutputStackSize", epicsOutputStackSize)) {
+        epicsOutputStackSize = 10000000;
     }
 
-    uint32 epicsInputStack;
-    if (!localCdb.Read("EpicsInputStack", epicsInputStack)) {
-        epicsInputStack = 10000000;
+    uint32 epicsOutputNBuffers;
+    if (!localCdb.Read("EpicsOutputNumberOfBuffers", epicsOutputNBuffers)) {
+        epicsOutputNBuffers = 100;
     }
 
     StreamStructuredData < StandardPrinter > cdb;
@@ -364,74 +358,20 @@ int main(int argc,
         cdb.MoveToAncestor(3u);
 
         //create the N prio gams
-        StreamString prioGamName = "+PrioGAM";
+        StreamString prioGamName = "+CopyGAM";
         prioGamName.Printf("%d", i);
         cdb.CreateRelative(prioGamName.Buffer());
-        cdb.Write("Class", "PriorityGAM");
-        cdb.Write("CycleStep", cycleStep);
-        cdb.Write("ChangeStep", changeStep);
+        cdb.Write("Class", "IOGAM");
         cdb.CreateRelative("InputSignals");
 
         StreamString variable;
         bool start = false;
         xmlFile.Seek(0ull);
         uint32 counter = 0u;
-        StreamString diodeDs = "EpicsDiodeInput";
-        diodeDs.Printf("%d", i);
-        while (GetVariable(xmlFile, variable)) {
-
-            printf("variable=%s\n", variable.Buffer());
-            if (variable == "Comment") {
-                start = true;
-                variable.SetSize(0ull);
-                continue;
-            }
-            if (start) {
-                if (counter > (nVarsPerThread * i)) {
-                    if (counter >= (nVarsPerThread * (i + 1u))) {
-                        break;
-                    }
-                    /*
-                     cdb.CreateRelative(variable.Buffer());
-                     //TODO cainfo here!!
-                     //todo divide per N threads
-                     cdb.Write("Type", "uint32");
-                     cdb.Write("DataSource", "EpicsDiodeDataSource0");
-                     cdb.MoveToAncestor(1u);
-                     */
-                    StreamString type = "float64";
-                    uint32 numberOfElements = 1u;
-                    pv pvs;
-                    pvs.name = variable.Buffer();
-                    result = connect_pvs(&pvs, 1);
-                    if (!result) {
-                        result = cainfo(pvs, type, numberOfElements);
-                    }
-
-                    newCfg.Printf("\n%s = {\n", variable.Buffer());
-                    newCfg.Printf("Type = %s\n", type.Buffer());
-                    newCfg.Printf("DataSource = %d\n", diodeDs.Buffer());
-                    if (numberOfElements > 1u) {
-                        newCfg.Printf("%s\n", "NumberOfDimensions = 1");
-                        newCfg.Printf("NumberOfElements = %d\n", numberOfElements);
-                    }
-                    newCfg.Printf("%s\n", "}");
-                }
-                counter++;
-
-            }
-            variable.SetSize(0ull);
-        }
-        printf("done IS\n");
-        cdb.MoveToAncestor(1u);
-        cdb.CreateRelative("OutputSignals");
-
-        xmlFile.Seek(0ull);
-        start = false;
-        counter = 0u;
-        StreamString HttpDs = "HttpDiodeOutput";
+        StreamString HttpDs = "HttpDiodeInput";
         HttpDs.Printf("%d", i);
         while (GetVariable(xmlFile, variable)) {
+
             printf("variable=%s\n", variable.Buffer());
             if (variable == "Comment") {
                 start = true;
@@ -464,6 +404,61 @@ int main(int argc,
                         newCfg.Printf("NumberOfElements = %d\n", numberOfElements);
                     }
                     newCfg.Printf("%s\n", "}");
+                }
+                counter++;
+
+            }
+            variable.SetSize(0ull);
+        }
+
+        StreamString indexesSignal = "ReceivedIndexes";
+        indexesSignal.Printf("%d", i);
+        newCfg.Printf("\n%s = {\n", indexesSignal.Buffer());
+        newCfg.Printf("%s\n", "NumberOfDimensions = 1");
+        newCfg.Printf("NumberOfElements = %d\n", toReceivePerThread);
+        newCfg.Printf("%s\n", "Type = uint32");
+        newCfg.Printf("DataSource = %s\n", HttpDs.Buffer());
+        newCfg.Printf("%s\n", "}");
+
+        printf("done IS\n");
+        cdb.MoveToAncestor(1u);
+        cdb.CreateRelative("OutputSignals");
+
+        xmlFile.Seek(0ull);
+        start = false;
+        counter = 0u;
+        StreamString diodeDs = "EpicsDiodeOutput";
+        diodeDs.Printf("%d", i);
+        while (GetVariable(xmlFile, variable)) {
+            printf("variable=%s\n", variable.Buffer());
+            if (variable == "Comment") {
+                start = true;
+                variable.SetSize(0ull);
+                continue;
+            }
+            if (start) {
+                if (counter > (nVarsPerThread * i)) {
+                    if (counter >= (nVarsPerThread * (i + 1u))) {
+                        break;
+                    }
+
+                    StreamString type = "float64";
+                    uint32 numberOfElements = 1u;
+                    pv pvs;
+                    pvs.name = variable.Buffer();
+                    result = connect_pvs(&pvs, 1);
+                    if (!result) {
+                        result = cainfo(pvs, type, numberOfElements);
+                    }
+
+                    newCfg.Printf("\n%s = {\n", variable.Buffer());
+                    newCfg.Printf("Type = %s\n", type.Buffer());
+                    newCfg.Printf("DataSource = %d\n", diodeDs.Buffer());
+                    if (numberOfElements > 1u) {
+                        newCfg.Printf("%s\n", "NumberOfDimensions = 1");
+                        newCfg.Printf("NumberOfElements = %d\n", numberOfElements);
+                    }
+                    newCfg.Printf("%s\n", "}");
 
                 }
                 counter++;
@@ -471,13 +466,13 @@ int main(int argc,
             variable.SetSize(0ull);
         }
 
-        StreamString indexesSignal = "ToBeSent";
+        indexesSignal = "ReceivedIndexesDDB";
         indexesSignal.Printf("%d", i);
         newCfg.Printf("\n%s = {\n", indexesSignal.Buffer());
         newCfg.Printf("%s\n", "NumberOfDimensions = 1");
-        newCfg.Printf("NumberOfElements = %d\n", toSentPerThread);
+        newCfg.Printf("NumberOfElements = %d\n", toReceivePerThread);
         newCfg.Printf("%s\n", "Type = uint32");
-        newCfg.Printf("DataSource = %s\n", HttpDs.Buffer());
+        newCfg.Printf("%s\n", "DataSource = DDB1");
         newCfg.Printf("%s\n", "}");
 
         printf("done OS\n");
@@ -500,12 +495,14 @@ int main(int argc,
     //for each thread create a EpicsDiodeDataSource and a HttpDiodeDataSource
     uint32 port = serverInitialPort;
     for (uint32 i = 0u; i < numberOfThreads; i++) {
-        StreamString epicsDsName = "+EpicsDiodeInput";
+        StreamString epicsDsName = "+EpicsDiodeOutput";
         epicsDsName.Printf("%d", i);
         cdb.CreateRelative(epicsDsName.Buffer());
-        cdb.Write("Class", "EPICSCA::EPICSCAInput");
-        cdb.Write("CPUs", epicsInputCpus);
-        cdb.Write("StackSize", epicsInputStack);
+        cdb.Write("Class", "EPICSCA::EPICSCAOutput");
+        cdb.Write("CPUs", epicsOutputCpus);
+        cdb.Write("StackSize", epicsOutputStackSize);
+        cdb.Write("NumberOfBuffers",epicsOutputNBuffers);
+
         cdb.CreateRelative("Signals");
 
         StreamString variable;
@@ -535,12 +532,12 @@ int main(int argc,
         }
 
         cdb.MoveToAncestor(2u);
-        StreamString httpDsName = "+HttpDiodeOutput";
+        StreamString httpDsName = "+HttpDiodeInput";
         httpDsName.Printf("%d", i);
         cdb.CreateRelative(httpDsName.Buffer());
-        cdb.Write("Class", "HttpDiodeDataSource");
-        cdb.Write("ServerIpAddress", serverAddress.Buffer());
+        cdb.Write("Class", "HttpDiodeReceiver");
         cdb.Write("ServerPort", port);
+        cdb.Write("CPUMask", httpInputCpus);
         port++;
 
         cdb.CreateRelative("Signals");
@@ -571,11 +568,11 @@ int main(int argc,
             variable.SetSize(0ull);
         }
         //add the last signal
-        StreamString indexesSignal = "ToBeSent";
+        StreamString indexesSignal = "ReceivedIndexes";
         indexesSignal.Printf("%d", i);
         newCfg.Printf("\n%s = {\n", indexesSignal.Buffer());
         newCfg.Printf("%s\n", "NumberOfDimensions = 1");
-        newCfg.Printf("NumberOfElements = %d\n", toSentPerThread);
+        newCfg.Printf("NumberOfElements = %d\n", toReceivePerThread);
         newCfg.Printf("%s\n", "Type = uint32");
         newCfg.Printf("%s\n", "}");
 
@@ -612,7 +609,7 @@ int main(int argc,
         functions[0] = "SyncGAM";
         functions[0].Printf("%d", i);
         functions[0].Seek(0ull);
-        functions[1] = "PrioGAM";
+        functions[1] = "CopyGAM";
         functions[1].Printf("%d", i);
         functions[1].Seek(0ull);
         cdb.Write("Functions", functions);

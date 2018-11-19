@@ -71,11 +71,17 @@ bool HttpDiodeReceiver::Initialise(StructuredDataI &data) {
             REPORT_ERROR(ErrorManagement::InitialisationError, "Please specify the ServerPort parameter");
         }
         else {
+            uint32 cpuMask;
+            if (data.Read("CPUMask", cpuMask)) {
+                cpuMask = 0xffu;
+            }
+            //executor.SetCPUMask(cpuMask);
             acceptTimeout = TTInfiniteWait;
             uint32 acceptTimeoutMSec;
             if (data.Read("AcceptTimeout", acceptTimeoutMSec)) {
                 acceptTimeout = acceptTimeoutMSec;
             }
+
         }
 
     }
@@ -133,7 +139,6 @@ uint32 HttpDiodeReceiver::GetCurrentStateBuffer() {
 void HttpDiodeReceiver::PrepareInputOffsets() {
     //
     if (mutex.FastLock()) {
-        REPORT_ERROR(ErrorManagement::Information, "HERE PrepareInputOffsets");
 
         uint8 otherBuffer = (bufferIdx + 1u);
         otherBuffer &= 0x1;
@@ -215,7 +220,7 @@ ErrorManagement::ErrorType HttpDiodeReceiver::Execute(ExecutionInfo & info) {
             while (chunkSize > 0u);
             client.GetLine(line, false);
 
-            printf("%s\n", payload.Buffer());
+            //printf("%s\n", payload.Buffer());
         }
         else {
             REPORT_ERROR(ErrorManagement::Information, "Error in ReadHeader");
@@ -235,30 +240,30 @@ ErrorManagement::ErrorType HttpDiodeReceiver::Execute(ExecutionInfo & info) {
         //update the signals value
         if (err.ErrorsCleared()) {
             //uint32 numberOfChildren = cdb.GetNumberOfChildren();
-            if (mutex.FastLock()) {
-                for (uint32 i = 0u; i < nSignalsToReceive; i++) {
-                    StreamString signalName = cdb.GetChildName(i);
-                    cdb.MoveToChild(i);
-                    uint32 signalIdx;
-                    GetSignalIndex(signalIdx, signalName.Buffer());
-                    signalIndices[i] = signalIdx;
-                    void* signalAddress = NULL;
-                    GetSignalMemoryBuffer(signalIdx, bufferIdx, signalAddress);
-                    TypeDescriptor td = GetSignalType(signalIdx);
-                    AnyType at = cdb.GetType("Value");
-                    AnyType newAt(td, 0u, signalAddress);
-                    newAt.SetNumberOfDimensions(at.GetNumberOfDimensions());
-                    for (uint32 j = 0u; j < 3u; j++) {
-                        newAt.SetNumberOfElements(j, at.GetNumberOfElements(j));
-                    }
-                    StreamString val;
-                    cdb.Read("Value", newAt);
-                    cdb.Read("Value", val);
-                    REPORT_ERROR(ErrorManagement::Information, "HERE val=%s", val.Buffer());
-                    cdb.MoveToAncestor(1u);
 
+            for (uint32 i = 0u; i < nSignalsToReceive; i++) {
+                StreamString signalName = cdb.GetChildName(i);
+                cdb.MoveToChild(i);
+                uint32 signalIdx;
+                GetSignalIndex(signalIdx, signalName.Buffer());
+                signalIndices[i] = signalIdx;
+                TypeDescriptor td = GetSignalType(signalIdx);
+                AnyType at = cdb.GetType("Value");
+                void* signalAddress = NULL;
+                AnyType newAt(td, 0u, signalAddress);
+                newAt.SetNumberOfDimensions(at.GetNumberOfDimensions());
+                for (uint32 j = 0u; j < 3u; j++) {
+                    newAt.SetNumberOfElements(j, at.GetNumberOfElements(j));
                 }
-                mutex.FastUnLock();
+
+                if (mutex.FastLock()) {
+                    GetSignalMemoryBuffer(signalIdx, bufferIdx, signalAddress);
+                    newAt.SetDataPointer(signalAddress);
+                    cdb.Read("Value", newAt);
+                    mutex.FastUnLock();
+                }
+                cdb.MoveToAncestor(1u);
+
             }
         }
     }

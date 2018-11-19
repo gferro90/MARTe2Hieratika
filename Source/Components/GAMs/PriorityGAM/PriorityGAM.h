@@ -52,8 +52,6 @@ public:
 
     virtual ~PriorityGAM();
 
-    virtual bool Initialise(StructuredDataI & data);
-
     virtual bool Setup();
 
     virtual bool Execute();
@@ -66,17 +64,9 @@ protected:
 
     uint8 *prevSignalMem;
 
-    uint32 *byteSize;
-
-    uint32 *offset;
-
     uint32 *sortedIndices;
 
     uint32 numberOfSignalToBeSent;
-
-    uint32 *priorityList;
-
-    uint32 *priorityListBuffer;
 
     uint32 totalSize;
 
