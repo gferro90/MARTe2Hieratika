@@ -24,6 +24,12 @@
 /*---------------------------------------------------------------------------*/
 /*                         Standard header includes                          */
 /*---------------------------------------------------------------------------*/
+#include <stdio.h>
+#include <epicsStdlib.h>
+#include <string.h>
+
+#include <cadef.h>
+#include <epicsGetopt.h>
 
 /*---------------------------------------------------------------------------*/
 /*                         Project header includes                           */
@@ -38,7 +44,14 @@
 /*---------------------------------------------------------------------------*/
 /*                           Static definitions                              */
 /*---------------------------------------------------------------------------*/
+namespace MARTe {
 
+static void GetTimeoutCallback(evargs args) {
+    char8 *myargs = (char8 *) (args.usr);
+    epicsTimeStamp *ptsNewS = &((struct dbr_time_string *) (args.dbr))->stamp;
+    epicsTimeToStrftime(myargs, 128, "%Y-%m-%d %H:%M:%S.%06f", ptsNewS);
+}
+}
 /*---------------------------------------------------------------------------*/
 /*                           Method definitions                              */
 /*---------------------------------------------------------------------------*/
@@ -57,11 +70,27 @@ HttpDiodeDataSource::HttpDiodeDataSource() :
     client.SetBufferSize(32u, 32u);
     serverPort = 0u;
     firstTime = 0u;
+    timeStamps = NULL;
+    chids = NULL;
 }
 
 HttpDiodeDataSource::~HttpDiodeDataSource() {
     // Auto-generated destructor stub for HttpDiodeDataSource
     // TODO Verify if manual additions are needed
+    (void) client.Close();
+    if (timeStamps != NULL) {
+        uint32 nVars = (numberOfSignals - 1u);
+        for (uint32 i = 0u; i < nVars; i++) {
+            delete[] timeStamps[i];
+        }
+        delete[] timeStamps;
+    }
+
+    if (chids != NULL) {
+        delete[] chids;
+    }
+    ca_context_destroy();
+
 }
 
 bool HttpDiodeDataSource::Initialise(StructuredDataI &data) {
@@ -84,7 +113,6 @@ bool HttpDiodeDataSource::Initialise(StructuredDataI &data) {
             if (data.Read("ConnectionTimeout", connectionTimeoutMSec)) {
                 connectionTimeout = connectionTimeoutMSec;
             }
-
         }
     }
     return ret;
@@ -93,19 +121,46 @@ bool HttpDiodeDataSource::Initialise(StructuredDataI &data) {
 bool HttpDiodeDataSource::SetConfiguredDatabase(StructuredDataI & data) {
     bool ret = MemoryDataSourceI::SetConfiguredDatabase(data);
     if (ret) {
-        GetSignalNumberOfElements(numberOfSignals - 1u, signalToSent);
-        REPORT_ERROR(ErrorManagement::Information, "Here %d %d", numberOfSignals, signalToSent);
+        uint32 numberOfVariables = (numberOfSignals - 1u);
+        GetSignalNumberOfElements(numberOfVariables, signalToSent);
+        timeStamps = new char8*[numberOfVariables];
+        chids = new chanId[numberOfVariables];
+        ca_context_create (ca_enable_preemptive_callback);
+
+        for (uint32 i = 0u; i < numberOfVariables; i++) {
+            timeStamps[i] = NULL;
+            timeStamps[i] = new char8[128];
+            MemoryOperationsHelper::Set(timeStamps[i], '\0', 128);
+            StreamString signalName;
+            GetSignalName(i, signalName);
+            uint32 nameSize = signalName.Size();
+            signalName.SetSize(nameSize - 5u);
+
+            ca_create_channel(signalName.Buffer(), NULL, NULL, 20u, &chids[i]);
+
+            uint32 numberOfElements;
+            GetSignalNumberOfElements(i, numberOfElements);
+
+            ca_create_subscription(DBR_TIME_STRING, numberOfElements, chids[i], DBE_VALUE, GetTimeoutCallback, (void*) timeStamps[i], NULL);
+        }
+
     }
     if (ret) {
         //connect the client
         (void) client.Close();
-        bool ret = client.Open();
+        ret = client.Open();
         if (ret) {
             ret = client.SetBlocking(true);
             client.SetCalibWriteParam(0u);
         }
         if (ret) {
             ret = client.Connect(serverIpAddress.Buffer(), serverPort, connectionTimeout);
+        }
+    }
+    if (ret) {
+        ret = (GetNumberOfFunctions() == 1u);
+        if (!ret) {
+            REPORT_ERROR(ErrorManagement::ParametersError, "Only one GAM can interact with this DataSourceI");
         }
     }
     return ret;
@@ -118,18 +173,15 @@ bool HttpDiodeDataSource::Synchronise() {
 bool HttpDiodeDataSource::PrepareNextState(const char8 * const currentStateName,
                                            const char8 * const nextStateName) {
     GetSignalMemoryBuffer(numberOfSignals - 1u, 0u, (void*&) signalIndexList);
-
     return true;
 }
 
 void HttpDiodeDataSource::PrepareOutputOffsets() {
-    //TODO send the header here
+    //send the header here
     if (firstTime > 0u) {
-
-        firstTime=2u;
+        firstTime = 2u;
         client.SetChunkMode(false);
         HttpProtocol hprotocol(client);
-
         if (!hprotocol.MoveAbsolute("OutputOptions")) {
             hprotocol.CreateAbsolute("OutputOptions");
         }
@@ -146,11 +198,11 @@ void HttpDiodeDataSource::PrepareOutputOffsets() {
         hprotocol.Write("Content-Type", "text/html");
 
         StreamString hstream;
-        hprotocol.WriteHeader(false, HttpDefinition::HSHCPut, &hstream, "/diode");
+        hprotocol.WriteHeader(false, HttpDefinition::HSHCPut, &hstream, "/archiver");
         client.Flush();
         client.SetChunkMode(true);
     }
-    else{
+    else {
         firstTime++;
     }
 
@@ -168,13 +220,11 @@ bool HttpDiodeDataSource::TerminateOutputCopy(const uint32 signalIdx,
 
     if (firstTime > 1u) {
 
-
         StreamStructuredData < JsonPrinter > sdata;
         sdata.SetStream(client);
 
         for (uint32 i = 0u; i < signalToSent; i++) {
 
-            //REPORT_ERROR(ErrorManagement::Information, "Comparing %d,%d", signalIdx, signalIndexList[i]);
             if (signalIdx == signalIndexList[i]) {
 
                 if (signalsSentCounter == 0u) {
@@ -195,19 +245,33 @@ bool HttpDiodeDataSource::TerminateOutputCopy(const uint32 signalIdx,
                     signalAt.SetNumberOfElements(0u, numberOfElements);
                 }
 
-                StreamString x;
-                x.Printf("%J!", signalAt);
+                //StreamString x;
+                //x.Printf("%J!", signalAt);
                 //REPORT_ERROR(ErrorManagement::Information, "Print %s", x.Buffer());
                 sdata.CreateRelative(signalName.Buffer());
                 sdata.Write("Value", signalAt);
-                sdata.Write("Type", TypeDescriptor::GetTypeNameFromTypeDescriptor(td));
+                REPORT_ERROR(ErrorManagement::Information, "Here 0");
+
+                //ca_pend_event(0.01);
+                REPORT_ERROR(ErrorManagement::Information, "Here 1");
+                printf("%d %d\n", signalIdx, numberOfSignals);
+
+                printf("%s\n", timeStamps[signalIdx]);
+                REPORT_ERROR(ErrorManagement::Information, "Here 2");
+
+                StreamString ts = "\"";
+                ts+=timeStamps[signalIdx];
+                ts += "\"";
+                if (ts.Size() == 0ull) {
+                    ts = "\"Undefined\"";
+                }
+                sdata.Write("TimeStamp", ts.Buffer());
                 sdata.MoveToRoot();
 
                 signalsSentCounter++;
                 if (signalsSentCounter < signalToSent) {
                     client.Printf("%s", ",");
                 }
-                //REPORT_ERROR(ErrorManagement::Information, "Sent %s %d", signalName.Buffer(), signalsSentCounter);
 
                 break;
             }
@@ -222,7 +286,6 @@ bool HttpDiodeDataSource::TerminateOutputCopy(const uint32 signalIdx,
             signalsSentCounter = 0u;
         }
     }
-
 
     return true;
 }

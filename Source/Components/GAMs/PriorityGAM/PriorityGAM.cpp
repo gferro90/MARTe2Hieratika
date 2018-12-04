@@ -44,24 +44,35 @@ namespace MARTe {
 
 PriorityGAM::PriorityGAM() :
         GAM() {
-    cycleTax = 0u;
-    changeTax = 0u;
     prevSignalMem = NULL;
     sortedIndices = NULL;
     numberOfSignalToBeSent = 0u;
     totalSize = 0u;
-    firstTime = 0u;
+    chunckCounter = 0u;
+    indexList = NULL;
+    currentIdx = 0u;
+    currentChangePos = 0u;
+    numberOfChunks = 0u;
 }
 
 PriorityGAM::~PriorityGAM() {
     if (prevSignalMem != NULL) {
         delete[] prevSignalMem;
     }
+
+    if (indexList != NULL) {
+        delete[] indexList;
+    }
 }
 
 bool PriorityGAM::Setup() {
-    bool ret = true;
+    bool ret = (numberOfOutputSignals == (numberOfInputSignals + 1u));
+    if(!ret){
+        REPORT_ERROR(ErrorManagement::InitialisationError, "The number of output signals must be one more than the number of the input signals");
+    }
+
     totalSize = 0u;
+    StreamString dataSourceName;
 
     for (uint32 i = 0u; (i < numberOfInputSignals) && (ret); i++) {
         uint32 byteSize;
@@ -69,68 +80,119 @@ bool PriorityGAM::Setup() {
         if (ret) {
             totalSize += byteSize;
         }
+        if (ret) {
+            uint32 outByteSize;
+            ret = GetSignalByteSize(OutputSignals, i, outByteSize);
+            if (ret) {
+                ret = (outByteSize == byteSize);
+                if (!ret) {
+                    REPORT_ERROR(ErrorManagement::InitialisationError, "The signal (%d) has a different size than its specular output", i);
+                }
+            }
+        }
+        if(ret){
+            StreamString dsName;
+            ret = GetSignalDataSourceName(OutputSignals, i, dsName);
+            if (ret) {
+                if (i == 0u) {
+                    dataSourceName = dsName;
+                }
+                else {
+                    ret = (dsName == dataSourceName);
+                    if (!ret) {
+                        REPORT_ERROR(ErrorManagement::InitialisationError,
+                                     "The data source of the first signal (%s) differs from the one of the signal %d (%s)", dataSourceName.Buffer(), i,
+                                     dsName.Buffer());
+                    }
+                }
+            }
+
+        }
     }
+
 
     if (ret) {
         prevSignalMem = new uint8[totalSize];
+        indexList = new uint32[numberOfInputSignals];
+
+        for (uint32 i = 0u; i < numberOfInputSignals; i++) {
+            indexList[i] = i;
+        }
         //save the last output signal that must contain
         //the N indices of the signals to be sent
         sortedIndices = (uint32*) GetOutputSignalMemory(numberOfOutputSignals - 1u);
 
         ret = GetSignalNumberOfElements(OutputSignals, numberOfOutputSignals - 1u, numberOfSignalToBeSent);
     }
+    if (ret) {
+        numberOfChunks = (numberOfInputSignals / numberOfSignalToBeSent);
+        if ((numberOfInputSignals % numberOfSignalToBeSent) > 0u) {
+            numberOfChunks++;
+        }
+    }
     return ret;
 }
 
 bool PriorityGAM::Execute() {
-    if (firstTime > 0u) {
-        MemoryOperationsHelper::Copy(GetOutputSignalsMemory(), GetInputSignalsMemory(), totalSize);
 
-        //Maintain an ordered list of the indexes
-        //of the signals to be sent by priority
+    MemoryOperationsHelper::Copy(GetOutputSignalsMemory(), GetInputSignalsMemory(), totalSize);
 
-        for (uint32 i = 0u; i < numberOfSignalToBeSent; i++) {
-            sortedIndices[i] += numberOfSignalToBeSent;
-            sortedIndices[i] %= numberOfInputSignals;
-            //REPORT_ERROR(ErrorManagement::Information, "sortedIndices[%d]=%d", i, sortedIndices[i]);
 
-        }
-        uint32 nChunks = (numberOfInputSignals / numberOfSignalToBeSent) + 1u;
-        if (firstTime >= (nChunks)) {
-            uint32 currentPos = 1u;
-            for (uint32 i = 0u; i < numberOfInputSignals; i++) {
-                uint32 signalIdx;
-                if (i < numberOfSignalToBeSent) {
-                    signalIdx = sortedIndices[i];
+    if (chunckCounter >= (numberOfChunks)) {
+        //insertion sort if changed
+        for (uint32 i = 0u; i < numberOfInputSignals; i++) {
+            uint32 signalIdx;
+            uint32 index = (currentIdx + i) % numberOfInputSignals;
+            signalIdx = indexList[index];
+            //if a variable changes
+            uint32 byteSize;
+            GetSignalByteSize(InputSignals, signalIdx, byteSize);
+            uint32 offset = ((uintp) inputSignalsMemoryIndexer[signalIdx] - (uintp) GetInputSignalsMemory());
+            if (MemoryOperationsHelper::Compare(inputSignalsMemoryIndexer[signalIdx], prevSignalMem + offset, byteSize) != 0) {
+                for (uint32 j = i; j > currentChangePos; j--) {
+                    uint32 jIndex = (currentIdx + j) % numberOfInputSignals;
+                    uint32 prevJIndex = (jIndex == 0u) ? (numberOfInputSignals - 1u) : (jIndex - 1u);
+                    uint32 temp = indexList[prevJIndex];
+                    indexList[prevJIndex] = indexList[jIndex];
+                    indexList[jIndex] = temp;
                 }
-                else {
-                    signalIdx = (sortedIndices[i % numberOfSignalToBeSent] + numberOfSignalToBeSent) % numberOfInputSignals;
-                }
-                //if a variable changes
-                uint32 byteSize;
-                GetSignalByteSize(InputSignals, signalIdx, byteSize);
-                uint32 offset = ((uint64) inputSignalsMemoryIndexer[signalIdx] - (uint64) GetInputSignalsMemory());
-                if (MemoryOperationsHelper::Compare(inputSignalsMemoryIndexer[signalIdx], prevSignalMem + offset, byteSize) != 0) {
-                    for (uint32 j = i; j >= currentPos; j--) {
-                        uint32 temp = sortedIndices[j - 1u];
-                        sortedIndices[j - 1u] = sortedIndices[j];
-                        sortedIndices[j] = temp;
-                    }
-                    currentPos++;
-                }
+                currentChangePos++;
             }
         }
-        else {
-            firstTime++;
-        }
-
     }
     else {
-        for (uint32 i = 0u; (i < numberOfSignalToBeSent); i++) {
-            sortedIndices[i] = i;
-        }
-        firstTime++;
+        chunckCounter++;
     }
+
+    uint32 sizeToCopy = numberOfSignalToBeSent;
+    bool needTwoCopies = false;
+    if ((currentIdx + sizeToCopy) > numberOfInputSignals) {
+        sizeToCopy = (numberOfInputSignals - currentIdx);
+        needTwoCopies = true;
+    }
+    MemoryOperationsHelper::Copy(sortedIndices, &indexList[currentIdx], sizeToCopy * sizeof(uint32));
+    if (needTwoCopies) {
+        uint32 sortedIdx = sizeToCopy;
+        sizeToCopy = (currentIdx + sizeToCopy) - numberOfInputSignals;
+        MemoryOperationsHelper::Copy(&sortedIndices[sortedIdx], indexList, sizeToCopy * sizeof(uint32));
+    }
+
+
+    currentIdx += numberOfSignalToBeSent;
+    currentIdx %= numberOfInputSignals;
+    if (currentChangePos > numberOfSignalToBeSent) {
+        currentChangePos -= numberOfSignalToBeSent;
+    }
+    else {
+        currentChangePos = 0u;
+    }
+
+    if (currentChangePos > (numberOfInputSignals - numberOfSignalToBeSent)) {
+        //if almost all the signal are changing do a cycle of FIFO again
+        currentChangePos = 0u;
+        chunckCounter = 0u;
+    }
+
     MemoryOperationsHelper::Copy(prevSignalMem, GetInputSignalsMemory(), totalSize);
 
     return true;

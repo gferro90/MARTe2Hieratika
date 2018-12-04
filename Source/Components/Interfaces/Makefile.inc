@@ -22,7 +22,7 @@
 #
 #############################################################
 
-SPB=MARTe2HieratikaInterface.x MARTe2HieratikaMessageDispatcher.x
+SPB=MARTe2HieratikaInterface.x MARTe2HieratikaMessageDispatcher.x EpicsParserAndSubscriber.x PrioritySender.x DiodeReceiver.x
 
 PACKAGE=Components
 ROOT_DIR=../../..
@@ -33,6 +33,10 @@ include $(MAKEDEFAULTDIR)/MakeStdLibDefs.$(TARGET)
 
 LIBRARIES_STATIC=$(BUILD_DIR)/MARTe2HieratikaInterface/MARTe2HieratikaInterface$(LIBEXT)
 LIBRARIES_STATIC+=$(BUILD_DIR)/MARTe2HieratikaMessageDispatcher/MARTe2HieratikaMessageDispatcher$(LIBEXT)
+LIBRARIES_STATIC+=$(BUILD_DIR)/EpicsParserAndSubscriber/EpicsParserAndSubscriber$(LIBEXT)
+LIBRARIES_STATIC+=$(BUILD_DIR)/PrioritySender/PrioritySender$(LIBEXT)
+LIBRARIES_STATIC+=$(BUILD_DIR)/DiodeReceiver/DiodeReceiver$(LIBEXT)
+
 
 all: $(OBJS)  $(SUBPROJ)  \
     $(BUILD_DIR)/Interfaces$(LIBEXT) \

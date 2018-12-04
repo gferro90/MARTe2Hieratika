@@ -46,6 +46,9 @@ INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L3Services
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L4Messages
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L4StateMachine
 INCLUDES += -I../../Source/Components/Interfaces/MARTe2HieratikaInterface
+INCLUDES += -I../../Source/Components/Interfaces/EpicsParserAndSubscriber
+INCLUDES += -I../../Source/Components/Interfaces/PrioritySender
+INCLUDES += -I../../Source/Components/Interfaces/DiodeReceiver
 INCLUDES += -I/home/pc/EPICS/base-3.15.6/include/
 INCLUDES += -I/home/pc/EPICS/base-3.15.6/include/os/Linux/
 INCLUDES += -I/home/pc/EPICS/base-3.15.6/include/compiler/gcc/
@@ -57,9 +60,13 @@ all: $(OBJS) $(SUBPROJ)   \
         $(BUILD_DIR)/MainGTest$(EXEEXT)\
         $(BUILD_DIR)/Test1$(EXEEXT)\
         $(BUILD_DIR)/Test2$(EXEEXT)\
-        $(BUILD_DIR)/EpicsSignalGenTool$(EXEEXT)\
-        $(BUILD_DIR)/EpicsSignalGenTool2$(EXEEXT)\
-        $(BUILD_DIR)/EpicsSignalGenTool3$(EXEEXT)
+        $(BUILD_DIR)/EpicsSignalGenToolSender$(EXEEXT)\
+        $(BUILD_DIR)/EpicsSignalGenToolReceiver$(EXEEXT)\
+        $(BUILD_DIR)/EpicsSignalGenTool3$(EXEEXT)\
+        $(BUILD_DIR)/TestEPICS$(EXEEXT)\
+        $(BUILD_DIR)/ConfiguredDatabaseGenerator$(EXEEXT)\
+        $(BUILD_DIR)/DiodeStandaloneApp$(EXEEXT)\
+        $(BUILD_DIR)/DiodeStandaloneRec$(EXEEXT)
 	echo  $(OBJS)
 
 

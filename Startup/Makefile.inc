@@ -47,7 +47,8 @@ INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L4Messages
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L4StateMachine
 
 all: $(OBJS) $(SUBPROJ)   \
-        $(BUILD_DIR)/Main$(EXEEXT)
+        $(BUILD_DIR)/Main$(EXEEXT)\
+        $(BUILD_DIR)/Main1$(EXEEXT)
 	echo  $(OBJS)
 
 

@@ -26,6 +26,7 @@
 include Makefile.inc
 INCLUDES += -I$(MARTe2_DIR)/Lib/gtest-1.7.0/include
 LIBRARIES   += ../../Build/$(TARGET)/Components/GAMs/GAMs$(LIBEXT)
+LIBRARIES   += ../../Build/$(TARGET)/Components/GAMs/GAMsTest$(LIBEXT)
 LIBRARIES   += ../../Build/$(TARGET)/Components/DataSources/DataSources$(LIBEXT)
 LIBRARIES   += ../../Build/$(TARGET)/Components/Interfaces/Interfaces$(LIBEXT)
 LIBRARIES   += ../../Build/$(TARGET)/Components/Interfaces/InterfacesTest$(LIBEXT)

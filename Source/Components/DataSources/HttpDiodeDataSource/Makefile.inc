@@ -48,8 +48,10 @@ INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L1Portability
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L3Services
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L4Messages
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L4StateMachine
-
-
+INCLUDES += -I$(EPICS_BASE)/include/
+INCLUDES += -I$(EPICS_BASE)/include/os/Linux/
+INCLUDES += -I$(EPICS_BASE)/include/compiler/gcc/
+INCLUDES += -I$(EPICS_BASE)/src/ca/client/tools/
 all: $(OBJS) $(SUBPROJ) \
 	$(BUILD_DIR)/HttpDiodeDataSource$(LIBEXT) \
 	$(BUILD_DIR)/HttpDiodeDataSource$(DLLEXT)

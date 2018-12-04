@@ -38,39 +38,106 @@
 
 namespace MARTe{
 /**
- * Decides the N signals to be sent every cycle on the base of a priority
+ * @brief Selects the N signals to be sent every cycle on the base of a priority
  * mechanism.
- * Each cycle the N previous sent signal will be reset and to all the signals
- * a fix cycle amount is added to the priority. If the signal changed its value
- * another amount is added increasing its priority.
- * The N signals with the highest priorities will be sent.
+ *
+ * @details This GAM acts similarly to the IOGAM, copying the values of the input signals to the output signals.
+ * The difference is that the last signal is a vector containing the selected signal indexes that have a greater priority
+ * because they have changed in the last cycles. Note that this information is meaningful only if all the output signals
+ * of this GAM are mapped in the same order to one single data source. Thus, follow the restrictions for the use of this GAM:\n
+ *   - InputSize == (OutputSize - LastSignalSize)\n
+ *   - All output signals mapped on the same DataSource
+ * @Warning If in the data source that collects the output signals the signals are declared in a different order by configuration,
+ * the selected indexes vector will be wrong because it refers to the order of the signals in the GAM. This error is not caught.
+ *
+ * @details The use case for this GAM is that the output signals must be sent (from the data source connected in output)
+ * in chunks of size N (specified by the length of the vector of the last output signal), following the policy that if the signal has
+ * changed, so it has to be sent first.
+ * On the first cycles the GAM selects the signals only by a FIFO mechanism, until all the signals are covered, to send the initial value
+ * of all the signals. On the following cycles, by default always a FIFO mechanism is employed, but the signals that changes are pushed to
+ * the first positions of the queue.
  */
 class PriorityGAM: public GAM {
 public:
     CLASS_REGISTER_DECLARATION()
+
+    /**
+     * @brief Constructor
+     */
     PriorityGAM();
 
+    /**
+     * @brief Destructor
+     */
     virtual ~PriorityGAM();
 
+    /**
+     * @see GAM::Setup
+     * @details Initialises the indexes queue of the signals to be sent and checks that
+     *   - InputSize == (OutputSize - LastSignalSize)
+     *   - All output signals mapped on the same DataSource
+     *   - LastSignalNumberOfElements <= NumberOfInputSignals
+     */
     virtual bool Setup();
 
+    /**
+     * @see GAM::Execute
+     * @details Copies the input signals memory to the outputs signals memory and updates the last signal with the vector of the
+     * N indexes of the signals that must be sent. This indexes are selected on the base of a FIFO mechanism, but if the signal
+     * has changed, it will be pushed to the first positions of the queue.
+     */
     virtual bool Execute();
 
 protected:
 
-    uint32 cycleTax;
-
-    uint32 changeTax;
-
+    /**
+     * Stores the previous values of the input signals.
+     */
     uint8 *prevSignalMem;
 
+    /**
+     * A pointer to the last signal that contains the indexes
+     * of the N signals to be sent
+     */
     uint32 *sortedIndices;
 
+    /**
+     * Stores the number of signals to be sent.
+     */
     uint32 numberOfSignalToBeSent;
 
+    /**
+     * The total size of the input signals memory
+     */
     uint32 totalSize;
 
-    uint8 firstTime;
+    /**
+     * A counter used to send all the initial values
+     * of the signals before starting the priority
+     * policy.
+     */
+    uint8 chunckCounter;
+
+    /**
+     * The sorted queue that stores the indexes to be sent
+     * at each cycle
+     */
+    uint32 *indexList;
+
+    /**
+     * The current index in the sorted queue
+     */
+    uint32 currentIdx;
+
+    /**
+     * The minimum position in the queue where to put the changed
+     * signals. It can be different than zero if some changed signals
+     * are not sent in the previous cycles.
+     */
+    uint32 currentChangePos;
+
+
+    uint32 numberOfChunks;
 };
 
 }

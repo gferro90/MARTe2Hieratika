@@ -50,15 +50,18 @@ HttpDiodeReceiver::HttpDiodeReceiver() :
         executor(*this) {
     serverPort = 0u;
     acceptTimeout = TTInfiniteWait;
-    bufferIdx = 0u;
     signalIndices = NULL;
     nSignalsToReceive = 0u;
+    isIndependentThread = 1u;
+    firstTime = 1u;
 }
 
 HttpDiodeReceiver::~HttpDiodeReceiver() {
-    if (!executor.Stop()) {
+    if (isIndependentThread > 0u) {
         if (!executor.Stop()) {
-            REPORT_ERROR(ErrorManagement::FatalError, "Could not stop SingleThreadService.");
+            if (!executor.Stop()) {
+                REPORT_ERROR(ErrorManagement::FatalError, "Could not stop SingleThreadService.");
+            }
         }
     }
 }
@@ -71,19 +74,22 @@ bool HttpDiodeReceiver::Initialise(StructuredDataI &data) {
             REPORT_ERROR(ErrorManagement::InitialisationError, "Please specify the ServerPort parameter");
         }
         else {
-            uint32 cpuMask;
-            if (data.Read("CPUMask", cpuMask)) {
-                cpuMask = 0xffu;
+            if (data.Read("IsIndependentThread", isIndependentThread)) {
+                isIndependentThread = 1u;
             }
-            //executor.SetCPUMask(cpuMask);
-            acceptTimeout = TTInfiniteWait;
-            uint32 acceptTimeoutMSec;
-            if (data.Read("AcceptTimeout", acceptTimeoutMSec)) {
-                acceptTimeout = acceptTimeoutMSec;
+            if (isIndependentThread > 0u) {
+                uint32 cpuMask;
+                if (data.Read("CPUMask", cpuMask)) {
+                    cpuMask = 0xffu;
+                }
+                //executor.SetCPUMask(cpuMask);
+                acceptTimeout = TTInfiniteWait;
+                uint32 acceptTimeoutMSec;
+                if (data.Read("AcceptTimeout", acceptTimeoutMSec)) {
+                    acceptTimeout = acceptTimeoutMSec;
+                }
             }
-
         }
-
     }
     return ret;
 }
@@ -102,7 +108,6 @@ bool HttpDiodeReceiver::SetConfiguredDatabase(StructuredDataI & data) {
         }
         //manage only one connection per port
         if (ret) {
-            ret = server.WaitConnection(acceptTimeout, &client);
             client.SetBlocking(true);
             //always use the buffer
             client.SetCalibReadParam(0u);
@@ -114,13 +119,15 @@ bool HttpDiodeReceiver::SetConfiguredDatabase(StructuredDataI & data) {
 bool HttpDiodeReceiver::PrepareNextState(const char8 * const currentStateName,
                                          const char8 * const nextStateName) {
     bool ok = true;
-    if (executor.GetStatus() == EmbeddedThreadI::OffState) {
-        ok = executor.Start();
+    if (isIndependentThread > 0u) {
+        if (executor.GetStatus() == EmbeddedThreadI::OffState) {
+            ok = executor.Start();
+        }
     }
+
     if (ok) {
         GetSignalMemoryBuffer(numberOfSignals - 1u, 0u, (void*&) signalIndices);
         GetSignalNumberOfElements(numberOfSignals - 1u, nSignalsToReceive);
-
     }
 
     return ok;
@@ -131,57 +138,59 @@ uint32 HttpDiodeReceiver::GetNumberOfStatefulMemoryBuffers() {
 }
 
 uint32 HttpDiodeReceiver::GetCurrentStateBuffer() {
-    uint8 otherBuffer = (bufferIdx + 1u);
-    otherBuffer &= 0x1;
-    return otherBuffer;
-}
-
-void HttpDiodeReceiver::PrepareInputOffsets() {
-    //
-    if (mutex.FastLock()) {
-
-        uint8 otherBuffer = (bufferIdx + 1u);
-        otherBuffer &= 0x1;
-        void *signalAddr1 = NULL;
-        GetSignalMemoryBuffer(0u, otherBuffer, signalAddr1);
-        void *signalAddr2 = NULL;
-        GetSignalMemoryBuffer(0u, bufferIdx, signalAddr2);
-        MemoryOperationsHelper::Copy(signalAddr1, signalAddr2, stateMemorySize);
-        bufferIdx++;
-        bufferIdx &= 0x1;
-        mutex.FastUnLock();
+    ErrorManagement::ErrorType err;
+    if (isIndependentThread == 0u) {
+        if (firstTime > 0u) {
+            REPORT_ERROR(ErrorManagement::Information, "Waiting for new connection");
+            server.WaitConnection(acceptTimeout, &client);
+            firstTime = 0u;
+        }
+        ExecutionInfo info;
+        info.SetStage(ExecutionInfo::MainStage);
+        err = Execute(info);
+        if (!err.ErrorsCleared()) {
+            //wait for a new connection here and executes in the next cycle
+            client.Close();
+            server.WaitConnection(acceptTimeout, &client);
+        }
     }
-
-}
-
-bool HttpDiodeReceiver::GetInputOffset(const uint32 signalIdx,
-                                       const uint32 numberOfSamples,
-                                       uint32 &offset) {
-    return true;
-}
-
-bool HttpDiodeReceiver::TerminateOutputCopy(const uint32 signalIdx,
-                                            const uint32 offset,
-                                            const uint32 numberOfSamples) {
-    return true;
+    if (err.ErrorsCleared()) {
+        if (mutex.FastLock()) {
+            void *signalAddr1 = NULL;
+            GetSignalMemoryBuffer(0u, 0u, signalAddr1);
+            void *signalAddr2 = NULL;
+            GetSignalMemoryBuffer(0u, 1u, signalAddr2);
+            MemoryOperationsHelper::Copy(signalAddr1, signalAddr2, stateMemorySize);
+            mutex.FastUnLock();
+        }
+    }
+    return 0u;
 }
 
 ErrorManagement::ErrorType HttpDiodeReceiver::Execute(ExecutionInfo & info) {
     ErrorManagement::ErrorType err;
 
-    if (info.GetStage() == ExecutionInfo::BadTerminationStage) {
-        Sleep::Sec(1.0);
+    if (info.GetStage() == ExecutionInfo::StartupStage) {
+        //client.Close();
+        REPORT_ERROR(ErrorManagement::Information, "Waiting for new connection");
+        client.Close();
+        server.WaitConnection(acceptTimeout, &client);
+        REPORT_ERROR(ErrorManagement::Information, "Accepted new connection");
+
     }
-    else {
+    else if (info.GetStage() == ExecutionInfo::MainStage) {
         //get the full message
         HttpProtocol protocol(client);
+        REPORT_ERROR(ErrorManagement::Information, "Reading header");
 
+        //discard the header
         err = !(protocol.ReadHeader());
         StreamString line;
 
         char8 buff[1024];
 
-        StreamString payload = "\"Payload\": ";
+        //read the chunked payload
+        StreamString payload = "\"Payload\": {";
         if (err.ErrorsCleared()) {
 
             uint32 chunkSize = 0u;
@@ -205,6 +214,7 @@ ErrorManagement::ErrorType HttpDiodeReceiver::Execute(ExecutionInfo & info) {
                             sizeToRead = 1023;
                         }
                         client.Read(buff, sizeToRead);
+                        //printf("%s\n", buff);
 
                         payload += buff;
                         sizeRead += sizeToRead;
@@ -213,14 +223,18 @@ ErrorManagement::ErrorType HttpDiodeReceiver::Execute(ExecutionInfo & info) {
                     if (chunkSize != 0) {
                         uint32 size = 2;
                         client.Read(buff, size);
+                        //printf("%s\n", buff);
+
                     }
 
                 }
             }
             while (chunkSize > 0u);
             client.GetLine(line, false);
+            //printf("%s\n", line.Buffer());
 
-            //printf("%s\n", payload.Buffer());
+            payload+="}";
+            printf("%s\n", payload.Buffer());
         }
         else {
             REPORT_ERROR(ErrorManagement::Information, "Error in ReadHeader");
@@ -246,7 +260,6 @@ ErrorManagement::ErrorType HttpDiodeReceiver::Execute(ExecutionInfo & info) {
                 cdb.MoveToChild(i);
                 uint32 signalIdx;
                 GetSignalIndex(signalIdx, signalName.Buffer());
-                signalIndices[i] = signalIdx;
                 TypeDescriptor td = GetSignalType(signalIdx);
                 AnyType at = cdb.GetType("Value");
                 void* signalAddress = NULL;
@@ -255,9 +268,13 @@ ErrorManagement::ErrorType HttpDiodeReceiver::Execute(ExecutionInfo & info) {
                 for (uint32 j = 0u; j < 3u; j++) {
                     newAt.SetNumberOfElements(j, at.GetNumberOfElements(j));
                 }
+                StreamString timeStamp;
+                cdb.Read("TimeStamp", timeStamp);
+                //REPORT_ERROR(ErrorManagement::Information, "TS %s:%s", signalName.Buffer(), timeStamp.Buffer());
 
                 if (mutex.FastLock()) {
-                    GetSignalMemoryBuffer(signalIdx, bufferIdx, signalAddress);
+                    signalIndices[i] = signalIdx;
+                    GetSignalMemoryBuffer(signalIdx, 1u, signalAddress);
                     newAt.SetDataPointer(signalAddress);
                     cdb.Read("Value", newAt);
                     mutex.FastUnLock();
@@ -266,9 +283,21 @@ ErrorManagement::ErrorType HttpDiodeReceiver::Execute(ExecutionInfo & info) {
 
             }
         }
+        else {
+            REPORT_ERROR(ErrorManagement::Information, "Error in Parse");
+        }
     }
 
     return err;
+}
+
+const char8 *HttpDiodeReceiver::GetBrokerName(StructuredDataI &data,
+                                              const SignalDirection direction) {
+    const char8* brokerName = "";
+    if (direction == InputSignals) {
+        brokerName = "MemoryMapInputBroker";
+    }
+    return brokerName;
 }
 
 CLASS_REGISTER(HttpDiodeReceiver, "1.0")
