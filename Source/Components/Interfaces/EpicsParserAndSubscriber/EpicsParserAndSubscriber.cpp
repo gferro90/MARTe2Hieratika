@@ -50,15 +50,11 @@ static void GetValueCallback(evargs args) {
 static void GetTimeoutCallback(evargs args) {
     PvDescriptor *mypv = static_cast<PvDescriptor *>(args.usr);
     if ((mypv->syncMutex)->FastLock()) {
-        //pv *ppv = (pv*) ca_puser (mypv->pvChid);
-
         epicsTimeStamp *ptsNewS = &((struct dbr_time_string *) (args.dbr))->stamp;
-        //(void) MemoryOperationsHelper::Copy(mypv->memory, ppv->value, mypv->memorySize * mypv->numberOfElements);
         (void) MemoryOperationsHelper::Copy(mypv->timeStamp, ptsNewS, sizeof(epicsTimeStamp));
         mypv->changedFlag[mypv->index] = 1;
         (mypv->syncMutex)->FastUnLock();
     }
-    //epicsTimeToStrftime(myargs, 128, "%Y-%m-%d %H:%M:%S.%06f", ptsNewS);
 }
 
 static bool GetVariable(File &xmlFile,
@@ -75,84 +71,62 @@ static bool GetVariable(File &xmlFile,
         token.SetSize(0ull);
         ret &= xmlFile.GetToken(variable, "<", term, " \n");
     }
-
     ret &= xmlFile.GetToken(token, ">", term, "");
 
     return ret;
 }
 
 static int cainfo(chid &pvChid,
+                  char8 *pvName,
                   chtype &type,
                   uint32 &numberOfElements,
                   uint32 &memorySize) {
-    long dbfType;
-    long dbrType;
-    unsigned long nElems;
+    int32 dbfType;
+    int32 dbrType;
+    uint32 nElems;
     enum channel_state state;
-    char *stateStrings[] = { "never connected", "previously connected", "connected", "closed" };
-    char *boolStrings[] = { "no ", "" };
-
-    /* Print the status data */
-    /* --------------------- */
+    const char8 *stateStrings[] = { "never connected", "previously connected", "connected", "closed" };
 
     state = ca_state(pvChid);
     nElems = ca_element_count(pvChid);
     dbfType = ca_field_type(pvChid);
-
     dbrType = dbf_type_to_DBR(dbfType);
-    /*
-     printf("%s\n"
-     "    State:            %s\n"
-     "    Host:             %s\n"
-     "    Access:           %sread, %swrite\n"
-     "    Native data type: %s\n"
-     "    Request type:     %s\n"
-     "    Element count:    %lu\n",
-     pvs.name, stateStrings[state], ca_host_name(pvChid), boolStrings[ca_read_access(pvChid)], boolStrings[ca_write_access(pvChid)],
-     dbf_type_to_text(dbfType), dbr_type_to_text(dbrType), nElems);
-     */
-    numberOfElements = nElems;
 
+    if (state != 2) {
+        printf("The variable %s is not connected, state=%s\n", pvName, stateStrings[state]);
+    }
+
+    numberOfElements = nElems;
+    type = dbfType;
     const char8* epicsTypeName = dbf_type_to_text(dbfType);
     type = DBF_DOUBLE;
-    if (StringHelper::Compare(epicsTypeName, "D//BF_DOUBLE") == 0u) {
-        type = DBF_DOUBLE;
+    if (StringHelper::Compare(epicsTypeName, "DBF_DOUBLE") == 0u) {
         memorySize = 8u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_FLOAT") == 0u) {
-        type = DBF_FLOAT;
         memorySize = 4u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_LONG") == 0u) {
-        type = DBF_LONG;
         memorySize = 4u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_ULONG") == 0u) {
-        type = DBF_LONG;
         memorySize = 4u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_SHORT") == 0u) {
-        type = DBF_SHORT;
         memorySize = 2u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_USHORT") == 0u) {
-        type = DBF_SHORT;
         memorySize = 2u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_CHAR") == 0u) {
-        type = DBF_CHAR;
         memorySize = 1u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_UCHAR") == 0u) {
-        type = DBF_CHAR;
         memorySize = 1u;
     }
     else {
-        type = DBF_DOUBLE;
         memorySize = 8u;
     }
-
-    printf("NumberOfElements=%d, MemorySize=%d\n", numberOfElements, memorySize);
 
     return 0;
 }
@@ -172,6 +146,7 @@ EpicsParserAndSubscriber::EpicsParserAndSubscriber() :
     changedFlagMem = NULL;
     fmutex.Create();
     initialisationDone = 0u;
+    cpuMask = 0xFF;
 }
 
 EpicsParserAndSubscriber::~EpicsParserAndSubscriber() {
@@ -205,6 +180,13 @@ bool EpicsParserAndSubscriber::Initialise(StructuredDataI &data) {
                 REPORT_ERROR(ErrorManagement::FatalError, "Please specify FirstVariableName");
             }
         }
+        if (ret) {
+            if (!data.Read("CpuMask", cpuMask)) {
+                cpuMask = 0xFF;
+            }
+
+        }
+
         else {
             REPORT_ERROR(ErrorManagement::FatalError, "Please specify XmlFilePath");
         }
@@ -293,7 +275,7 @@ ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info
             ca_create_channel(&pvDescriptor[i].pvName[0], NULL, NULL, 20u, &pvDescriptor[i].pvChid);
             ca_pend_io(0.1);
 
-            cainfo(pvDescriptor[i].pvChid, pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].memorySize);
+            cainfo(pvDescriptor[i].pvChid, pvDescriptor[i].pvName, pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].memorySize);
             totalMemorySize += (pvDescriptor[i].numberOfElements * pvDescriptor[i].memorySize) + sizeof(epicsTimeStamp);
 
         }
@@ -362,7 +344,7 @@ uint64 EpicsParserAndSubscriber::GetTotalMemorySize() {
 }
 
 bool EpicsParserAndSubscriber::InitialisationDone() {
-    return initialisationDone>0u;
+    return initialisationDone > 0u;
 }
 
 CLASS_REGISTER(EpicsParserAndSubscriber, "1.0")

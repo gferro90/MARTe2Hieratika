@@ -27,6 +27,12 @@
 /*---------------------------------------------------------------------------*/
 /*                        Standard header includes                           */
 /*---------------------------------------------------------------------------*/
+#include <stdio.h>
+#include <epicsStdlib.h>
+#include <cadef.h>
+#include <epicsGetopt.h>
+#include "tool_lib.h"
+#include <string.h>
 
 /*---------------------------------------------------------------------------*/
 /*                        Project header includes                            */
@@ -40,6 +46,41 @@
 /*---------------------------------------------------------------------------*/
 
 namespace MARTe{
+
+
+const uint32 PV_NAME_MAX_SIZE_REC = 64u;
+
+/**
+ * Contains all the PV data
+ */
+struct PvRecDescriptor {
+    /**
+     * The channel identifier
+     */
+    chid pvChid;
+    /**
+     * The PV type
+     */
+    chtype pvType;
+    /**
+     * The number of elements > 0
+     */
+    uint32 numberOfElements;
+
+    /**
+     * The PV name
+     */
+    char8 pvName[PV_NAME_MAX_SIZE_REC];
+
+    AnyType at;
+
+
+    void *prevBuff;
+
+    uint32 byteSize;
+};
+
+
 
 class DiodeReceiver: public MultiThreadService {
 public:
@@ -55,7 +96,8 @@ public:
 protected:
     EmbeddedServiceMethodBinderT<DiodeReceiver> embeddedMethod;
 
-    StreamString serverIp;
+    uint32 serverInitialPort;
+
     uint32 serverPort;
 
     TimeoutType acceptTimeout;
@@ -64,6 +106,10 @@ protected:
     TCPSocket **openedFile;
 
     FastPollingMutexSem syncSem;
+
+    PvRecDescriptor *pvs;
+    uint32 numberOfVariables;
+    uint8 test;
 };
 
 }

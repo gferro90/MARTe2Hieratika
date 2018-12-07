@@ -32,15 +32,57 @@
 #include "DiodeReceiver.h"
 #include "AdvancedErrorManagement.h"
 #include "HttpProtocol.h"
+#include "JsonParser.h"
 /*---------------------------------------------------------------------------*/
 /*                           Static definitions                              */
 /*---------------------------------------------------------------------------*/
+namespace MARTe {
+
+static bool GetVariable(File &xmlFile,
+                        StreamString &variable) {
+    StreamString token;
+    char8 term;
+    bool ret = xmlFile.GetToken(token, "<", term, " \n");
+
+    token.SetSize(0ull);
+    while (variable == "" && (ret)) {
+        token.SetSize(0ull);
+        ret = xmlFile.GetToken(token, ">", term, " \n");
+        //printf("token2=%s\n", token.Buffer());
+        token.SetSize(0ull);
+        ret &= xmlFile.GetToken(variable, "<", term, " \n");
+    }
+    ret &= xmlFile.GetToken(token, ">", term, "");
+
+    return ret;
+}
+
+static int cainfo(chid &pvChid,
+                  char8 *pvName,
+                  chtype &type,
+                  uint32 &numberOfElements) {
+    int32 dbfType;
+    int32 dbrType;
+    uint32 nElems;
+    enum channel_state state;
+    const char8 *stateStrings[] = { "never connected", "previously connected", "connected", "closed" };
+
+    state = ca_state(pvChid);
+    nElems = ca_element_count(pvChid);
+    type = ca_field_type(pvChid);
+
+    if (state != 2) {
+        printf("The variable %s is not connected, state=%s\n", pvName, stateStrings[state]);
+    }
+
+    numberOfElements = nElems;
+
+    return 0;
+}
 
 /*---------------------------------------------------------------------------*/
 /*                           Method definitions                              */
 /*---------------------------------------------------------------------------*/
-
-namespace MARTe {
 
 DiodeReceiver::DiodeReceiver() :
         MultiThreadService(embeddedMethod),
@@ -51,8 +93,11 @@ DiodeReceiver::DiodeReceiver() :
     acceptTimeout = TTInfiniteWait;
     outputFile = NULL;
     openedFile = NULL;
-
+    serverInitialPort = 0u;
     syncSem.Create();
+    pvs = NULL;
+    numberOfVariables = 0u;
+    test = 0u;
 }
 
 DiodeReceiver::~DiodeReceiver() {
@@ -64,42 +109,220 @@ DiodeReceiver::~DiodeReceiver() {
         }
         delete[] outputFile;
     }
+
     if (openedFile != NULL) {
         delete[] openedFile;
     }
 
+    if (pvs != NULL) {
+        for (uint32 n = 0u; (n < numberOfVariables); n++) {
+            if (pvs[n].at.GetDataPointer() != NULL) {
+                void* ptr = pvs[n].at.GetDataPointer();
+                HeapManager::Free((void*&) ptr);
+            }
+            if (pvs[n].prevBuff != NULL) {
+                HeapManager::Free((void*&) pvs[n].prevBuff);
+            }
+        }
+        delete[] pvs;
+    }
 }
 
 bool DiodeReceiver::Initialise(StructuredDataI &data) {
     bool ret = MultiThreadService::Initialise(data);
     if (ret) {
-        ret = data.Read("ServerIpAddress", serverIp);
+
+        ret = data.Read("ServerInitialPort", serverInitialPort);
         if (!ret) {
-            REPORT_ERROR(ErrorManagement::InitialisationError, "Please define ServerIpAddress");
+            REPORT_ERROR(ErrorManagement::InitialisationError, "Please define ServerInitialPort");
+        }
+        if (ret) {
+            serverPort = serverInitialPort;
+
+            if (!data.Read("IsTest", test)) {
+                test = 0u;
+            }
+
+            if (test > 0u) {
+                StreamString outputFilePath;
+                ret = data.Read("OutputFilePath", outputFilePath);
+                if (!ret) {
+                    REPORT_ERROR(ErrorManagement::InitialisationError, "Please define OutputFilePath");
+                }
+                outputFile = new File[numberOfPoolThreads];
+                openedFile = new TCPSocket*[numberOfPoolThreads];
+
+                for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
+                    openedFile[i] = NULL;
+                    StreamString fileName = outputFilePath;
+                    fileName.Printf("_%d", i);
+                    outputFile[i].Open(fileName.Buffer(), BasicFile::ACCESS_MODE_W | BasicFile::FLAG_CREAT | BasicFile::FLAG_TRUNC);
+                }
+            }
+            else {
+                StreamString xmlFilePath;
+                ret = data.Read("InputFilePath", xmlFilePath);
+                StreamString firstVariableName;
+
+                if (ret) {
+                    ret = data.Read("FirstVariableName", firstVariableName);
+                    if (!ret) {
+                        REPORT_ERROR(ErrorManagement::InitialisationError, "Please define FirstVariableName");
+                    }
+                }
+                else {
+                    REPORT_ERROR(ErrorManagement::InitialisationError, "Please define InputFilePath");
+                }
+
+                if (ret) {
+                    //open the xml file
+                    File xmlFile;
+                    if (!xmlFile.Open(xmlFilePath.Buffer(), File::ACCESS_MODE_R)) {
+                        printf("Failed opening file %s\n", xmlFilePath.Buffer());
+                        return false;
+                    }
+
+                    xmlFile.Seek(0ull);
+
+                    StreamString variable;
+                    bool start = false;
+                    //get the number of variables
+                    numberOfVariables = 0u;
+                    xmlFile.Seek(0ull);
+                    while (GetVariable(xmlFile, variable)) {
+
+                        if (variable == firstVariableName) {
+                            start = true;
+                        }
+                        if (start) {
+                            printf("variable=%s\n", variable.Buffer());
+                            numberOfVariables++;
+                        }
+                        variable.SetSize(0ull);
+                    }
+
+                    //create the pv descriptors
+                    pvs = new PvRecDescriptor[numberOfVariables];
+                    variable.SetSize(0ull);
+
+                    xmlFile.Seek(0ull);
+                    uint32 counter = 0u;
+                    variable.SetSize(0ull);
+                    start = false;
+                    while (GetVariable(xmlFile, variable)) {
+
+                        if (!start) {
+                            if (variable == firstVariableName) {
+                                start = true;
+                            }
+                        }
+                        if (start) {
+                            pvs[counter].pvType = DBF_DOUBLE;
+                            pvs[counter].prevBuff = NULL;
+                            pvs[counter].at = voidAnyType;
+                            StringHelper::Copy(pvs[counter].pvName, variable.Buffer());
+                            counter++;
+                        }
+
+                        variable.SetSize(0ull);
+                    }
+                    xmlFile.Close();
+
+                    //i need the initialisation also here
+                    /*lint -e{9130} -e{835} -e{845} -e{747} Several false positives. lint is getting confused here for some reason.*/
+                    ret = (ca_context_create(ca_enable_preemptive_callback) == ECA_NORMAL);
+                    if (!ret) {
+                        REPORT_ERROR(ErrorManagement::FatalError, "ca_enable_preemptive_callback failed");
+                    }
+                    else {
+                        for (uint32 n = 0u; (n < numberOfVariables); n++) {
+                            /*lint -e{9130} -e{835} -e{845} -e{747} Several false positives. lint is getting confused here for some reason.*/
+                            ret = (ca_create_channel(&pvs[n].pvName[0], NULL, NULL, 20u, &pvs[n].pvChid) == ECA_NORMAL);
+                            ca_pend_io(0.1);
+                            if (!ret) {
+                                REPORT_ERROR(ErrorManagement::FatalError, "ca_create_channel failed for PV with name %s", pvs[n].pvName);
+                            }
+                            else {
+                                cainfo(pvs[n].pvChid, pvs[n].pvName, pvs[n].pvType, pvs[n].numberOfElements);
+                                ca_pend_io(0.1);
+
+                                const char8* epicsTypeName = dbf_type_to_text(pvs[n].pvType);
+                                printf("%s: nElems=%d, type=%s\n", pvs[n].pvName, pvs[n].numberOfElements, epicsTypeName);
+                                if (StringHelper::Compare(epicsTypeName, "DBF_DOUBLE") == 0u) {
+                                    pvs[n].byteSize = (sizeof(float64)) * pvs[n].numberOfElements;
+                                    void *signalAddress = HeapManager::Malloc(pvs[n].byteSize);
+                                    pvs[n].at = AnyType(Float64Bit, 0u, signalAddress);
+                                }
+                                else if (StringHelper::Compare(epicsTypeName, "DBF_FLOAT") == 0u) {
+                                    pvs[n].byteSize = (sizeof(float32)) * pvs[n].numberOfElements;
+                                    void *signalAddress = HeapManager::Malloc(pvs[n].byteSize);
+
+                                    pvs[n].at = AnyType(Float32Bit, 0u, signalAddress);
+                                }
+                                else if (StringHelper::Compare(epicsTypeName, "DBF_LONG") == 0u) {
+                                    pvs[n].byteSize = (sizeof(int32)) * pvs[n].numberOfElements;
+                                    void *signalAddress = HeapManager::Malloc(pvs[n].byteSize);
+
+                                    pvs[n].at = AnyType(SignedInteger32Bit, 0u, signalAddress);
+                                }
+                                else if (StringHelper::Compare(epicsTypeName, "DBF_ULONG") == 0u) {
+                                    pvs[n].byteSize = (sizeof(uint32)) * pvs[n].numberOfElements;
+                                    void *signalAddress = HeapManager::Malloc(pvs[n].byteSize);
+
+                                    pvs[n].at = AnyType(UnsignedInteger32Bit, 0u, signalAddress);
+                                }
+                                else if (StringHelper::Compare(epicsTypeName, "DBF_SHORT") == 0u) {
+                                    pvs[n].byteSize = (sizeof(int16)) * pvs[n].numberOfElements;
+                                    void *signalAddress = HeapManager::Malloc(pvs[n].byteSize);
+
+                                    pvs[n].at = AnyType(SignedInteger16Bit, 0u, signalAddress);
+                                }
+                                else if (StringHelper::Compare(epicsTypeName, "DBF_USHORT") == 0u) {
+                                    pvs[n].byteSize = (sizeof(uint16)) * pvs[n].numberOfElements;
+                                    void *signalAddress = HeapManager::Malloc(pvs[n].byteSize);
+
+                                    pvs[n].at = AnyType(UnsignedInteger16Bit, 0u, signalAddress);
+                                }
+                                else if (StringHelper::Compare(epicsTypeName, "DBF_CHAR") == 0u) {
+                                    pvs[n].byteSize = (sizeof(int8)) * pvs[n].numberOfElements;
+                                    void *signalAddress = HeapManager::Malloc(pvs[n].byteSize);
+
+                                    pvs[n].at = AnyType(SignedInteger8Bit, 0u, signalAddress);
+                                }
+                                else if (StringHelper::Compare(epicsTypeName, "DBF_UCHAR") == 0u) {
+                                    pvs[n].byteSize = (sizeof(uint8)) * pvs[n].numberOfElements;
+                                    void *signalAddress = HeapManager::Malloc(pvs[n].byteSize);
+
+                                    pvs[n].at = AnyType(UnsignedInteger8Bit, 0u, signalAddress);
+                                }
+                                else {
+                                    pvs[n].byteSize = (sizeof(float64)) * pvs[n].numberOfElements;
+                                    void *signalAddress = HeapManager::Malloc(pvs[n].byteSize);
+
+                                    pvs[n].at = AnyType(Float64Bit, 0u, signalAddress);
+                                }
+                                pvs[n].prevBuff = HeapManager::Malloc(pvs[n].byteSize);
+                                MemoryOperationsHelper::Set(pvs[n].at.GetDataPointer(), 0, pvs[n].byteSize);
+                                MemoryOperationsHelper::Set(pvs[n].prevBuff, 0, pvs[n].byteSize);
+
+                                if (pvs[n].numberOfElements > 1u) {
+                                    pvs[n].at.SetNumberOfDimensions(1u);
+                                    pvs[n].at.SetNumberOfElements(0u, pvs[n].numberOfElements);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         if (ret) {
-            ret = data.Read("ServerInitialPort", serverPort);
-            if (!ret) {
-                REPORT_ERROR(ErrorManagement::InitialisationError, "Please define ServerInitialPort");
-            }
-        }
-        if (ret) {
-            StreamString outputFilePath;
-            ret = data.Read("OutputFilePath", outputFilePath);
-            if (!ret) {
-                REPORT_ERROR(ErrorManagement::InitialisationError, "Please define OutputFilePath");
-            }
-            outputFile = new File[numberOfPoolThreads];
-            openedFile = new TCPSocket*[numberOfPoolThreads];
-
-            for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
-                openedFile[i] = NULL;
-                StreamString fileName = outputFilePath;
-                fileName.Printf("_%d", i);
-                outputFile[i].Open(fileName.Buffer(), BasicFile::ACCESS_MODE_W | BasicFile::FLAG_CREAT | BasicFile::FLAG_TRUNC);
+            for (uint32 n = 0u; (n < numberOfVariables); n++) {
+                (void) ca_clear_channel(pvs[n].pvChid);
             }
 
+            ca_detach_context();
+            ca_context_destroy();
         }
 
         if (ret) {
@@ -108,6 +331,7 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
                 acceptTimeout = acceptTimeoutTmp;
             }
         }
+
     }
     return ret;
 }
@@ -128,7 +352,7 @@ ErrorManagement::ErrorType DiodeReceiver::ThreadCycle(ExecutionInfo & info) {
             syncSem.FastUnLock();
         }
         REPORT_ERROR(ErrorManagement::Information, "Waiting new connection");
-        while(!server->WaitConnection(acceptTimeout, client)){
+        while (!server->WaitConnection(acceptTimeout, client)) {
             //REPORT_ERROR(ErrorManagement::Information, "Waiting new connection");
             Sleep::MSec(100);
         }
@@ -138,16 +362,21 @@ ErrorManagement::ErrorType DiodeReceiver::ThreadCycle(ExecutionInfo & info) {
         client->SetBlocking(true);
         //always use the buffer
         client->SetCalibReadParam(0u);
+        if (test > 0u) {
+            if (syncSem.FastLock()) {
 
-        if (syncSem.FastLock()) {
-            for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
-                if (openedFile[i] == NULL) {
-                    openedFile[i] = client;
-                    syncSem.FastUnLock();
-                    break;
+                for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
+                    if (openedFile[i] == NULL) {
+                        openedFile[i] = client;
+                        syncSem.FastUnLock();
+                        break;
+                    }
                 }
+                syncSem.FastUnLock();
             }
-            syncSem.FastUnLock();
+        }
+        else{
+            ca_context_create(ca_enable_preemptive_callback);
         }
 
         info.SetThreadSpecificContext(client);
@@ -155,19 +384,20 @@ ErrorManagement::ErrorType DiodeReceiver::ThreadCycle(ExecutionInfo & info) {
     }
     else if (info.GetStage() == MARTe::ExecutionInfo::MainStage) {
         TCPSocket *client = reinterpret_cast<TCPSocket *>(info.GetThreadSpecificContext());
-
         uint32 fileIdx = 0u;
-        for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
-            if (openedFile[i] == client) {
-                fileIdx = i;
-                break;
+        if (test > 0u) {
+
+            for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
+                if (openedFile[i] == client) {
+                    fileIdx = i;
+                    break;
+                }
             }
         }
 
         //do the work
         //get the full message
         HttpProtocol protocol(*client);
-        REPORT_ERROR(ErrorManagement::Information, "Reading header");
 
         //discard the header
         err = !(protocol.ReadHeader());
@@ -209,20 +439,63 @@ ErrorManagement::ErrorType DiodeReceiver::ThreadCycle(ExecutionInfo & info) {
                     if (chunkSize != 0) {
                         uint32 size = 2;
                         client->Read(buff, size);
-                        //printf("%s\n", buff);
-
                     }
-
                 }
             }
             while (chunkSize > 0u);
             client->GetLine(line, false);
-            //printf("%s\n", line.Buffer());
 
             payload += "}";
-            //printf("%s\n", payload.Buffer());
-            outputFile[fileIdx].Printf("%s\n", payload.Buffer());
-            outputFile[fileIdx].Flush();
+            if (test > 0u) {
+                outputFile[fileIdx].Printf("%s\n", payload.Buffer());
+                outputFile[fileIdx].Flush();
+            }
+            else {
+                printf("%s\n", payload.Buffer());
+                ConfigurationDatabase cdb;
+                //parse the json content
+                if (err.ErrorsCleared()) {
+                    payload.Seek(0ull);
+                    JsonParser parser(payload, cdb);
+                    err = !(parser.Parse());
+                    cdb.MoveAbsolute("Payload");
+                }
+                if (err.ErrorsCleared()) {
+                    uint32 numberOfRecvars = cdb.GetNumberOfChildren();
+                    for (uint32 n = 0u; (n < numberOfRecvars); n++) {
+                        StreamString signalName = cdb.GetChildName(n);
+                        for (uint32 m = 0u; (m < numberOfVariables); m++) {
+                            if (StringHelper::Compare(pvs[n].pvName, signalName.Buffer()) == 0) {
+                                ca_create_channel(&pvs[n].pvName[0], NULL, NULL, 20u, &pvs[n].pvChid);
+                                (void) ca_pend_io(0.1);
+                                cdb.MoveToChild(n);
+                                err = !cdb.Read("Value", pvs[n].at);
+                                if (!err.ErrorsCleared()) {
+                                    REPORT_ERROR(ErrorManagement::FatalError, "Fail to read the %s Value", signalName.Buffer());
+                                }
+                                else {
+                                    if (MemoryOperationsHelper::Compare(pvs[n].prevBuff, pvs[n].at.GetDataPointer(), pvs[n].byteSize) != 0) {
+                                        MemoryOperationsHelper::Copy(pvs[n].prevBuff, pvs[n].at.GetDataPointer(), pvs[n].byteSize);
+                                        printf("caput %s", pvs[n].pvName);
+                                        err = !(ca_array_put(pvs[n].pvType, pvs[n].numberOfElements, pvs[n].pvChid, pvs[n].at.GetDataPointer()) == ECA_NORMAL);
+                                        (void) ca_pend_io(0.1);
+                                        if (!err.ErrorsCleared()) {
+                                            REPORT_ERROR(ErrorManagement::FatalError, "ca_put failed for PV: %s", pvs[n].pvName);
+                                        }
+                                    }
+                                }
+                                (void) ca_clear_channel(pvs[n].pvChid);
+                                cdb.MoveToAncestor(1u);
+                                break;
+                            }
+                        }
+                    }
+                }
+                else {
+                    REPORT_ERROR(ErrorManagement::FatalError, "Failed Parse!");
+                }
+
+            }
         }
         else {
             REPORT_ERROR(ErrorManagement::Information, "Error in ReadHeader");
@@ -237,6 +510,13 @@ ErrorManagement::ErrorType DiodeReceiver::ThreadCycle(ExecutionInfo & info) {
             info.SetThreadSpecificContext(NULL);
         }
 
+        if(test==0){
+            ca_detach_context();
+            ca_context_destroy();
+
+        }
+
+        serverPort = serverInitialPort;
     }
     return err;
 

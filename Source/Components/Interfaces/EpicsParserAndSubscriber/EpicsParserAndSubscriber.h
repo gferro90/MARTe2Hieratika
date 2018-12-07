@@ -29,15 +29,10 @@
 /*---------------------------------------------------------------------------*/
 #include <stdio.h>
 #include <epicsStdlib.h>
-
 #include <cadef.h>
 #include <epicsGetopt.h>
-
 #include "tool_lib.h"
-
 #include <string.h>
-
-
 
 /*---------------------------------------------------------------------------*/
 /*                        Project header includes                            */
@@ -50,12 +45,13 @@
 /*                           Class declaration                               */
 /*---------------------------------------------------------------------------*/
 
-namespace MARTe{
+namespace MARTe {
 
 const uint32 PV_NAME_MAX_SIZE = 64u;
 
+
 /**
- * Wraps a PV
+ * Contains all the PV data
  */
 struct PvDescriptor {
     /**
@@ -87,61 +83,184 @@ struct PvDescriptor {
      */
     char8 pvName[PV_NAME_MAX_SIZE];
 
-
+    /**
+     * The index in the array
+     */
     uint32 index;
 
+    /**
+     * Pointer to the memory that asserts if this
+     * pv has changed
+     */
     uint8 *changedFlag;
 
+    /**
+     * The pv timestamp
+     */
     epicsTimeStamp *timeStamp;
 
+    /**
+     * A pointer to the shared mutex
+     */
     FastPollingMutexSem *syncMutex;
 
+    /**
+     * The offset in the allocated memory
+     */
     uint64 offset;
+
+
 
 };
 
 
+/**
+ * @brief Stores the value and the time-stamp of the EPICS variables, whose names are contained
+ * in a XML file to be given in input.
+ *
+ * @details Parses an XML file containing the name of the EPICS PVs. Then calls cainfo
+ * to get the type and the number of elements of each variables and allocates the memory
+ * to store the PV values and time-stamp. After that a subscription for each PV will be created
+ * and when a PV value changes, the callback will store its value and timestamp in the memory.
+ *
+ * @details The Synchronise function can be used to get the current memory containing the PVs values and
+ * time-stamps and the changed flags memory containing a flag for each variable asserting if the variable has
+ * changed from the last call.
+ */
 class EpicsParserAndSubscriber: public Object, public EmbeddedServiceMethodBinderI {
 public:
 
     CLASS_REGISTER_DECLARATION()
+
+    /**
+     * @brief Constructor
+     */
     EpicsParserAndSubscriber();
 
-    virtual bool Initialise(StructuredDataI &data);
-
-
+    /**
+     * @brief Destructor
+     */
     virtual ~EpicsParserAndSubscriber();
 
-    //initialisation:
-    //parses the excel variables and creates subscriptions
-    //for value and timestamp
+    /**
+     * @see Object::Initialise
+     * @details The user must specify the following parameters:\n
+     *   XmlFilePath: the path of the input file containing the names of the PV variables\n
+     *   FirstVariableName: the name of the first PV in the XML file in order to start reading
+     */
+    virtual bool Initialise(StructuredDataI &data);
+
+    /**
+     * @brief Parses the XML file to get the PV names
+     * @details Reads the PV names from the XML file specified in the configuration,
+     * creates the array of PvDescriptor and starts filling the structure for each variable.
+     * Then, starts the internal thread to register the subscribe callback for each PV (see Execute)
+     */
     virtual bool ParseAndSubscribe();
 
-    //to be called by the prioriy executor
-    virtual bool Synchronise(uint8 *memoryOut, uint8 *changedFlags);
+    /**
+     * @brief Allows another component to get the current PV values and time-stamps.
+     * @param[out] memoryOut where the memory containing PV values and time-stamps must be copied on.
+     * @param[out] changedFlags where the memory containing the changed flags must be copied on.
+     * @post The internal changed flags will be reset to zero after the copy.
+     */
+    virtual bool Synchronise(uint8 *memoryOut,
+                             uint8 *changedFlags);
 
-
+    /**
+     * @brief Returns the number of PVs
+     * @return the number of PVs
+     */
     uint32 GetNumberOfVariables();
 
+    /**
+     * @brief Returns the array of the PVs descriptors.
+     * @return the array of the PVs descriptors.
+     */
     PvDescriptor *GetPvDescriptors();
 
+    /**
+     * @brief Returns the allocated memory size
+     * @return the allocated memory size
+     */
     uint64 GetTotalMemorySize();
 
+    /**
+     * @brief The thread routine that registers the subscription callback for each PV
+     * to get its value and timestamp
+     */
     ErrorManagement::ErrorType Execute(ExecutionInfo& info);
 
+    /**
+     * @brief Returns true if the thread has terminated the initialisation.
+     * @return true if the thread has terminated the initialisation.
+     */
     bool InitialisationDone();
 
 private:
+
+    /**
+     * The first variable name
+     */
     StreamString firstVariableName;
+
+    /**
+     * The input XML file
+     * containing the name of all
+     * the PVs
+     */
     StreamString xmlFilePath;
+
+    /**
+     * An array of descriptors, one
+     * for each pv
+     */
     PvDescriptor *pvDescriptor;
+
+    /**
+     * The number of PVs
+     */
     uint32 numberOfVariables;
+
+    /**
+     * The size of the memory allocated for
+     * the PVs value and timestamp
+     */
     uint64 totalMemorySize;
+
+    /**
+     * The allocated memory for the PVs
+     */
     uint8 *memory;
+
+    /**
+     * The memory allocated for the
+     * changed flags to check if a PV
+     * has changed or not
+     */
     uint8 *changedFlagMem;
+
+    /**
+     * The mutex used to synchronise
+     * the subscriptions with the main thread
+     */
     FastPollingMutexSem fmutex;
+
+    /**
+     * The thread executor
+     */
     SingleThreadService executor;
+
+    /**
+     * Asserts that the initialisation
+     * terminates
+     */
     uint8 initialisationDone;
+
+    /**
+     * The thread cpu mask
+     */
+    uint32 cpuMask;
 };
 }
 
