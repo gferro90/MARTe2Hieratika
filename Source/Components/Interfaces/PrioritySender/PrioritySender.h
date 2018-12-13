@@ -109,7 +109,7 @@ public:
      * and the changed flags. Then it sorts the queue and post the semaphore such that the other
      * threads in the pool can send the first variables.
      */
-    friend void CycleLoop(PrioritySender &arg);
+    friend void PrioritySenderCycleLoop(PrioritySender &arg);
 
     /**
      * @see MultiThreadService::Start

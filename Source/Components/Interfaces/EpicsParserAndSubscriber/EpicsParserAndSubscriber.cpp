@@ -38,8 +38,8 @@
 namespace MARTe {
 
 static void GetValueCallback(evargs args) {
-
     PvDescriptor *pv = static_cast<PvDescriptor *>(args.usr);
+
     if ((pv->syncMutex)->FastLock()) {
         (void) MemoryOperationsHelper::Copy(pv->memory, args.dbr, pv->memorySize * pv->numberOfElements);
         pv->changedFlag[pv->index] = 1;
@@ -52,7 +52,6 @@ static void GetTimeoutCallback(evargs args) {
     if ((mypv->syncMutex)->FastLock()) {
         epicsTimeStamp *ptsNewS = &((struct dbr_time_string *) (args.dbr))->stamp;
         (void) MemoryOperationsHelper::Copy(mypv->timeStamp, ptsNewS, sizeof(epicsTimeStamp));
-        mypv->changedFlag[mypv->index] = 1;
         (mypv->syncMutex)->FastUnLock();
     }
 }
@@ -99,7 +98,6 @@ static int cainfo(chid &pvChid,
     numberOfElements = nElems;
     type = dbfType;
     const char8* epicsTypeName = dbf_type_to_text(dbfType);
-    type = DBF_DOUBLE;
     if (StringHelper::Compare(epicsTypeName, "DBF_DOUBLE") == 0u) {
         memorySize = 8u;
     }
@@ -253,6 +251,7 @@ bool EpicsParserAndSubscriber::ParseAndSubscribe() {
 
     xmlFile.Close();
 
+    executor.SetCPUMask(cpuMask);
     executor.Start();
 
     return true;
@@ -288,13 +287,20 @@ ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info
             pvDescriptor[counter].timeStamp = (epicsTimeStamp*) (memory + memoryOffset
                     + (pvDescriptor[counter].numberOfElements * pvDescriptor[counter].memorySize));
             memoryOffset += (pvDescriptor[counter].numberOfElements * pvDescriptor[counter].memorySize) + sizeof(epicsTimeStamp);
-            printf("create subscription=%s\n", pvDescriptor[counter].pvName);
+            //printf("creating subscription=%s\n", pvDescriptor[counter].pvName);
+            if (pvDescriptor[counter].numberOfElements > 0) {
+                if (ca_create_subscription(pvDescriptor[counter].pvType, pvDescriptor[counter].numberOfElements, pvDescriptor[counter].pvChid, DBE_VALUE,
+                                           &GetValueCallback, &pvDescriptor[counter], &pvDescriptor[counter].pvEvid) != ECA_NORMAL) {
+                    printf("FAILED create subscription %s\n", pvDescriptor[counter].pvName);
+                }
+                (void) ca_pend_io(0.1);
 
-            ca_create_subscription(pvDescriptor[counter].pvType, pvDescriptor[counter].numberOfElements, pvDescriptor[counter].pvChid, DBE_VALUE,
-                                   &GetValueCallback, &pvDescriptor[counter], &pvDescriptor[counter].pvEvid);
-
-            ca_create_subscription(DBR_TIME_STRING, pvDescriptor[counter].numberOfElements, pvDescriptor[counter].pvChid, DBE_VALUE, &GetTimeoutCallback,
-                                   &pvDescriptor[counter], &pvDescriptor[counter].pvEvid);
+                if (ca_create_subscription(DBR_TIME_STRING, pvDescriptor[counter].numberOfElements, pvDescriptor[counter].pvChid, DBE_VALUE,
+                                           &GetTimeoutCallback, &pvDescriptor[counter], &pvDescriptor[counter].pvEvid) != ECA_NORMAL) {
+                    printf("FAILED create subscription %s\n", pvDescriptor[counter].pvName);
+                }
+                (void) ca_pend_io(0.1);
+            }
 
         }
         initialisationDone = 1u;

@@ -91,3 +91,393 @@ record( waveform, "MARTe2::EPICSCAInput::Test::Float64Arr")
    field(NELM, 10)
    field(FTVL, "DOUBLE")
 }
+
+record( ai, "MARTe2::EPICSCAInput17::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+
+record( ai, "MARTe2::EPICSCAInput18::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+
+record( ai, "MARTe2::EPICSCAInput19::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+
+record( ai, "MARTe2::EPICSCAInput20::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+
+record( ai, "MARTe2::EPICSCAInput21::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput22::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput23::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput24::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput25::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput26::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput27::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput28::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput29::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput30::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput31::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput32::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput33::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput34::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput35::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput36::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput37::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput38::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput39::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput40::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput41::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput42::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput43::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput44::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput45::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput46::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput47::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput48::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput49::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput50::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput51::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput52::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput53::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput54::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput55::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput56::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput57::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput58::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput59::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput60::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput61::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput62::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput63::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput64::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput65::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput66::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput67::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput68::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput69::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput70::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput71::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput72::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput73::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput74::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput75::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput76::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput77::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput78::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput79::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput80::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput81::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput82::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput83::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput84::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput85::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput86::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput87::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput88::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput89::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput90::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput91::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput92::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput93::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput94::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput95::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput96::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput97::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput98::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput99::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput100::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+
+record( ai, "MARTe2::EPICSCAInput101::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput102::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput103::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput104::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput105::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput106::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput107::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput108::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput109::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+record( ai, "MARTe2::EPICSCAInput110::Test::Int16")
+{
+   field(DTYP, "Soft Channel")
+}
+
+
+
+
+
+
+
+

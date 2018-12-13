@@ -78,6 +78,10 @@ struct PvRecDescriptor {
     void *prevBuff;
 
     uint32 byteSize;
+
+    uint32 offset;
+
+    uint32 key;
 };
 
 
@@ -93,6 +97,13 @@ public:
 
     virtual ErrorManagement::ErrorType ThreadCycle(ExecutionInfo & info);
 
+
+    virtual ErrorManagement::ErrorType Start();
+
+    virtual ErrorManagement::ErrorType Stop();
+
+    friend void DiodeReceiverCycleLoop(DiodeReceiver &arg);
+
 protected:
     EmbeddedServiceMethodBinderT<DiodeReceiver> embeddedMethod;
 
@@ -102,14 +113,24 @@ protected:
 
     TimeoutType acceptTimeout;
 
-    File *outputFile;
-    TCPSocket **openedFile;
 
     FastPollingMutexSem syncSem;
 
     PvRecDescriptor *pvs;
     uint32 numberOfVariables;
-    uint8 test;
+
+    uint32 mainCpuMask;
+
+    uint8 *memory[2];
+    uint8 *memoryPrec;
+    uint8 threadSetContext;
+    uint32 msecPeriod;
+
+    uint8 *changeFlag[2];
+    uint64 lastCounter;
+
+    uint8 quit;
+    uint32 totalMemorySize;
 };
 
 }

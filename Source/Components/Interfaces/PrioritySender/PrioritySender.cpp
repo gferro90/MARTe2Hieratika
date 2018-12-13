@@ -41,7 +41,7 @@
 
 namespace MARTe {
 
-static void CycleLoop(PrioritySender &arg) {
+void PrioritySenderCycleLoop(PrioritySender &arg) {
     while (arg.quit == 0u) {
         uint32 nThreadsFinishedTmp;
         if (arg.syncSem.FastLock()) {
@@ -77,6 +77,8 @@ static void CycleLoop(PrioritySender &arg) {
             else {
                 arg.chunckCounter++;
             }
+            printf("current changes %d %d\n", arg.currentChangePos, arg.currentIdx);
+
             //update the first position for the new cycle, in order to send the ones that
             //cannot be sent in this cycle
             if (arg.currentChangePos > (arg.numberOfSignalToBeSent * arg.numberOfPoolThreads)) {
@@ -221,8 +223,8 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
         for (uint32 i = 0u; i < numberOfVariables; i++) {
             indexList[i] = i;
         }
-        numberOfChunks = (numberOfVariables / numberOfSignalToBeSent);
-        if ((numberOfVariables % numberOfSignalToBeSent) > 0u) {
+        numberOfChunks = (numberOfVariables / sentPerCycle);
+        if ((numberOfVariables % sentPerCycle) > 0u) {
             numberOfChunks++;
         }
         nThreadsFinished = 0u;
@@ -237,7 +239,7 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
 ErrorManagement::ErrorType PrioritySender::Start() {
     lastTickCounter = HighResolutionTimer::Counter();
     ErrorManagement::ErrorType err = MultiThreadService::Start();
-    Threads::BeginThread((ThreadFunctionType) CycleLoop, this, THREADS_DEFAULT_STACKSIZE, NULL, ExceptionHandler::NotHandled, mainCpuMask);
+    Threads::BeginThread((ThreadFunctionType) PrioritySenderCycleLoop, this, THREADS_DEFAULT_STACKSIZE, NULL, ExceptionHandler::NotHandled, mainCpuMask);
 
     return err;
 }
@@ -309,79 +311,79 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
 
                 StreamStructuredData < JsonPrinter > sdata;
                 sdata.SetStream(*client);
-
+                uint32 sentCounter = 0u;
                 for (uint32 i = 0u; i < numberOfSignalToBeSent; i++) {
                     PvDescriptor *pvDes = dataSource->GetPvDescriptors();
                     uint32 signalIndex = indexList[listIndex];
+                    if (pvDes[signalIndex].numberOfElements > 0) {
 
-                    uint64 offset = (pvDes[signalIndex]).offset;
+                        sentCounter++;
+                        uint64 offset = (pvDes[signalIndex]).offset;
 
-                    StreamString signalName = pvDes[signalIndex].pvName;
+                        StreamString signalName = pvDes[signalIndex].pvName;
 
-                    void*signalPtr = &memory[offset];
+                        void*signalPtr = &memory[offset];
 
-                    TypeDescriptor td;
-                    StreamString typeStr = dbf_type_to_text(pvDes[signalIndex].pvType);
+                        TypeDescriptor td;
+                        StreamString typeStr = dbf_type_to_text(pvDes[signalIndex].pvType);
+                        //printf("%s %s \n", signalName.Buffer(), typeStr.Buffer());
+                        if (typeStr == "DBF_DOUBLE") {
+                            td = Float64Bit;
+                        }
+                        else if (typeStr == "DBF_FLOAT") {
+                            td = Float32Bit;
+                        }
+                        else if (typeStr == "DBF_CHAR") {
+                            td = SignedInteger8Bit;
+                        }
+                        else if (typeStr == "DBF_UCHAR") {
+                            td = UnsignedInteger8Bit;
+                        }
+                        else if (typeStr == "DBF_SHORT") {
+                            td = SignedInteger16Bit;
+                        }
+                        else if (typeStr == "DBF_USHORT") {
+                            td = UnsignedInteger16Bit;
+                        }
+                        else if (typeStr == "DBF_LONG") {
+                            td = SignedInteger32Bit;
+                        }
+                        else if (typeStr == "DBF_LONG") {
+                            td = UnsignedInteger32Bit;
+                        }
+                        else {
+                            td = Float64Bit;
+                        }
 
-                    if (typeStr == "DBF_DOUBLE") {
-                        td = Float64Bit;
-                    }
-                    else if (typeStr == "DBF_FLOAT") {
-                        td = Float32Bit;
-                    }
-                    else if (typeStr == "DBF_CHAR") {
-                        td = SignedInteger8Bit;
-                    }
-                    else if (typeStr == "DBF_UCHAR") {
-                        td = UnsignedInteger8Bit;
-                    }
-                    else if (typeStr == "DBF_SHORT") {
-                        td = SignedInteger16Bit;
-                    }
-                    else if (typeStr == "DBF_USHORT") {
-                        td = UnsignedInteger16Bit;
-                    }
-                    else if (typeStr == "DBF_LONG") {
-                        td = SignedInteger32Bit;
-                    }
-                    else if (typeStr == "DBF_LONG") {
-                        td = UnsignedInteger32Bit;
-                    }
-                    else {
-                        td = Float64Bit;
-                    }
+                        AnyType signalAt(td, 0u, signalPtr);
+                        if (pvDes[signalIndex].numberOfElements > 1u) {
+                            signalAt.SetNumberOfDimensions(1u);
+                            signalAt.SetNumberOfElements(0u, pvDes[signalIndex].numberOfElements);
+                        }
 
-                    AnyType signalAt(td, 0u, signalPtr);
-                    if (pvDes[signalIndex].numberOfElements > 1u) {
-                        signalAt.SetNumberOfDimensions(1u);
-                        signalAt.SetNumberOfElements(0u, pvDes[signalIndex].numberOfElements);
+                        sdata.CreateRelative(signalName.Buffer());
+                        sdata.Write("Value", signalAt);
+
+                        //ca_pend_event(0.01);
+
+                        char8 timestamp[128];
+                        MemoryOperationsHelper::Set(timestamp, 0, 128);
+                        epicsTimeToStrftime(timestamp, 128, "%Y-%m-%d %H:%M:%S.%06f",
+                                            (epicsTimeStamp *) (&memory[offset + pvDes[signalIndex].numberOfElements * pvDes[signalIndex].memorySize]));
+
+                        StreamString ts;
+                        ts += timestamp;
+                        if (ts.Size() == 0ull) {
+                            ts = "\"Undefined\"";
+                        }
+                        sdata.Write("TimeStamp", ts.Buffer());
+                        sdata.MoveToRoot();
                     }
-
-                    sdata.CreateRelative(signalName.Buffer());
-                    sdata.Write("Value", signalAt);
-
-                    //ca_pend_event(0.01);
-
-                    char8 timestamp[128];
-                    MemoryOperationsHelper::Set(timestamp, 0, 128);
-                    epicsTimeToStrftime(timestamp, 128, "%Y-%m-%d %H:%M:%S.%06f",
-                                        (epicsTimeStamp *) (&memory[offset + pvDes[signalIndex].numberOfElements * pvDes[signalIndex].memorySize]));
-
-                    StreamString ts;
-                    ts += timestamp;
-                    if (ts.Size() == 0ull) {
-                        ts = "\"Undefined\"";
-                    }
-                    sdata.Write("TimeStamp", ts.Buffer());
-                    sdata.MoveToRoot();
                     listIndex++;
                     listIndex %= numberOfVariables;
                 }
-                if (syncSem.FastLock()) {
-                    client->Flush();
-                    client->FinalChunk();
-                    syncSem.FastUnLock();
-                }
+                client->Flush();
+                client->FinalChunk();
             }
         }
     }
