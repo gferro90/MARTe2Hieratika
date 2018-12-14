@@ -214,11 +214,11 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
     totalMemorySize = dataSource->GetTotalMemorySize();
     memory = (uint8*) HeapManager::Malloc(totalMemorySize);
     numberOfVariables = dataSource->GetNumberOfVariables();
-    changeFlag = HeapManager::Malloc(numberOfVariables);
+    changeFlag = (uint8*)HeapManager::Malloc(numberOfVariables);
     uint32 sentPerCycle = (numberOfPoolThreads * numberOfSignalToBeSent);
     bool ret = (numberOfVariables >= sentPerCycle);
     if (ret) {
-        indexList = HeapManager::Malloc(numberOfVariables * sizeof(uint32));
+        indexList = (uint32*)HeapManager::Malloc(numberOfVariables * sizeof(uint32));
         MemoryOperationsHelper::Set(memory, 0, totalMemorySize);
         for (uint32 i = 0u; i < numberOfVariables; i++) {
             indexList[i] = i;
@@ -252,7 +252,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
         newClient->Open();
         if (syncSem.FastLock()) {
             while (!(newClient->Connect(serverIpAddress.Buffer(), serverPort, connectionTimeout)) && (quit == 0u)) {
-                Sleep::MSec(100);
+                Sleep::Sec(1);
             }
             serverPort++;
             syncSem.FastUnLock();
@@ -305,85 +305,68 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
                 hprotocol.Write("Content-Type", "text/html");
 
                 StreamString hstream;
-                hprotocol.WriteHeader(false, HttpDefinition::HSHCPut, &hstream, "/archiver");
-                client->Flush();
-                client->SetChunkMode(true);
-
-                StreamStructuredData < JsonPrinter > sdata;
-                sdata.SetStream(*client);
-                uint32 sentCounter = 0u;
-                for (uint32 i = 0u; i < numberOfSignalToBeSent; i++) {
-                    PvDescriptor *pvDes = dataSource->GetPvDescriptors();
-                    uint32 signalIndex = indexList[listIndex];
-                    if (pvDes[signalIndex].numberOfElements > 0) {
-
-                        sentCounter++;
-                        uint64 offset = (pvDes[signalIndex]).offset;
-
-                        StreamString signalName = pvDes[signalIndex].pvName;
-
-                        void*signalPtr = &memory[offset];
-
-                        TypeDescriptor td;
-                        StreamString typeStr = dbf_type_to_text(pvDes[signalIndex].pvType);
-                        //printf("%s %s \n", signalName.Buffer(), typeStr.Buffer());
-                        if (typeStr == "DBF_DOUBLE") {
-                            td = Float64Bit;
-                        }
-                        else if (typeStr == "DBF_FLOAT") {
-                            td = Float32Bit;
-                        }
-                        else if (typeStr == "DBF_CHAR") {
-                            td = SignedInteger8Bit;
-                        }
-                        else if (typeStr == "DBF_UCHAR") {
-                            td = UnsignedInteger8Bit;
-                        }
-                        else if (typeStr == "DBF_SHORT") {
-                            td = SignedInteger16Bit;
-                        }
-                        else if (typeStr == "DBF_USHORT") {
-                            td = UnsignedInteger16Bit;
-                        }
-                        else if (typeStr == "DBF_LONG") {
-                            td = SignedInteger32Bit;
-                        }
-                        else if (typeStr == "DBF_LONG") {
-                            td = UnsignedInteger32Bit;
-                        }
-                        else {
-                            td = Float64Bit;
-                        }
-
-                        AnyType signalAt(td, 0u, signalPtr);
-                        if (pvDes[signalIndex].numberOfElements > 1u) {
-                            signalAt.SetNumberOfDimensions(1u);
-                            signalAt.SetNumberOfElements(0u, pvDes[signalIndex].numberOfElements);
-                        }
-
-                        sdata.CreateRelative(signalName.Buffer());
-                        sdata.Write("Value", signalAt);
-
-                        //ca_pend_event(0.01);
-
-                        char8 timestamp[128];
-                        MemoryOperationsHelper::Set(timestamp, 0, 128);
-                        epicsTimeToStrftime(timestamp, 128, "%Y-%m-%d %H:%M:%S.%06f",
-                                            (epicsTimeStamp *) (&memory[offset + pvDes[signalIndex].numberOfElements * pvDes[signalIndex].memorySize]));
-
-                        StreamString ts;
-                        ts += timestamp;
-                        if (ts.Size() == 0ull) {
-                            ts = "\"Undefined\"";
-                        }
-                        sdata.Write("TimeStamp", ts.Buffer());
-                        sdata.MoveToRoot();
-                    }
-                    listIndex++;
-                    listIndex %= numberOfVariables;
+                err = !hprotocol.WriteHeader(false, HttpDefinition::HSHCPut, &hstream, "/archiver");
+                if (err.ErrorsCleared()) {
+                    client->Flush();
                 }
-                client->Flush();
-                client->FinalChunk();
+                if (err.ErrorsCleared()) {
+
+                    client->SetChunkMode(true);
+
+                    StreamStructuredData < JsonPrinter > sdata;
+                    sdata.SetStream(*client);
+                    uint32 sentCounter = 0u;
+                    for (uint32 i = 0u; (i < numberOfSignalToBeSent) && (err.ErrorsCleared()); i++) {
+                        PvDescriptor *pvDes = dataSource->GetPvDescriptors();
+                        uint32 signalIndex = indexList[listIndex];
+                        if (pvDes[signalIndex].numberOfElements > 0) {
+
+                            sentCounter++;
+                            uint64 offset = (pvDes[signalIndex]).offset;
+
+                            StreamString signalName = pvDes[signalIndex].pvName;
+
+                            void*signalPtr = &memory[offset];
+
+                            AnyType signalAt(pvDes[signalIndex].td, 0u, signalPtr);
+                            if (pvDes[signalIndex].numberOfElements > 1u) {
+                                signalAt.SetNumberOfDimensions(1u);
+                                signalAt.SetNumberOfElements(0u, pvDes[signalIndex].numberOfElements);
+                            }
+
+                            err = !(sdata.CreateRelative(signalName.Buffer()));
+                            if (err.ErrorsCleared()) {
+                                err=!(sdata.Write("Value", signalAt));
+                            }
+                            if (err.ErrorsCleared()) {
+                                //ca_pend_event(0.01);
+
+                                char8 timestamp[128];
+                                MemoryOperationsHelper::Set(timestamp, 0, 128);
+                                epicsTimeToStrftime(timestamp, 128, "%Y-%m-%d %H:%M:%S.%06f",
+                                                    (epicsTimeStamp *) (&memory[offset + pvDes[signalIndex].numberOfElements * pvDes[signalIndex].memorySize]));
+
+                                StreamString ts;
+                                ts += timestamp;
+                                if (ts.Size() == 0ull) {
+                                    ts = "\"Undefined\"";
+                                }
+                                err = !(sdata.Write("TimeStamp", ts.Buffer()));
+                            }
+                            if (err.ErrorsCleared()) {
+                                err=!(sdata.MoveToRoot());
+                            }
+                        }
+                        listIndex++;
+                        listIndex %= numberOfVariables;
+                    }
+                    if (err.ErrorsCleared()) {
+                        client->Flush();
+                    }
+                    if (err.ErrorsCleared()) {
+                        client->FinalChunk();
+                    }
+                }
             }
         }
     }

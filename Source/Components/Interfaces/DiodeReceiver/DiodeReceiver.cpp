@@ -102,8 +102,6 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
                         printf("ca_put failed for PV: %s\n", arg.pvs[n].pvName);
                     }
                     (void) ca_pend_io(0.1);
-//                    (void) ca_clear_channel(arg.pvs[n].pvChid);
-
                 }
             }
             uint32 elapsed = (uint32)(((HighResolutionTimer::Counter() - arg.lastCounter) * 1000) * HighResolutionTimer::Period());
@@ -264,6 +262,9 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
                                 StringHelper::Copy(pvs[j - 1].pvName, pvs[j].pvName);
                                 StringHelper::Copy(pvs[j].pvName, pvName);
                             }
+                            else {
+                                break;
+                            }
                         }
                         counter++;
                     }
@@ -326,6 +327,10 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
                                 pvs[n].byteSize = (sizeof(uint8)) * pvs[n].numberOfElements;
                                 pvs[n].at = AnyType(UnsignedInteger8Bit, 0u, (void*) NULL);
                             }
+                            else if(StringHelper::Compare(epicsTypeName, "DBF_STRING")==0){
+                                pvs[n].byteSize = 0;
+                                pvs[n].numberOfElements = 0;
+                            }
                             else {
                                 pvs[n].byteSize = (sizeof(float64)) * pvs[n].numberOfElements;
                                 pvs[n].at = AnyType(Float64Bit, 0u, (void*) NULL);
@@ -384,7 +389,7 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
 ErrorManagement::ErrorType DiodeReceiver::Start() {
     lastCounter = HighResolutionTimer::Counter();
     Threads::BeginThread((ThreadFunctionType) DiodeReceiverCycleLoop, this, THREADS_DEFAULT_STACKSIZE, NULL, ExceptionHandler::NotHandled, mainCpuMask);
-    while(threadSetContext==0){
+    while (threadSetContext == 0) {
         Sleep::Sec(1);
     }
     ErrorManagement::ErrorType err = MultiThreadService::Start();
@@ -417,9 +422,10 @@ ErrorManagement::ErrorType DiodeReceiver::ThreadCycle(ExecutionInfo & info) {
         REPORT_ERROR(ErrorManagement::Information, "Waiting new connection");
         while (!server->WaitConnection(acceptTimeout, client)) {
             //REPORT_ERROR(ErrorManagement::Information, "Waiting new connection");
-            Sleep::MSec(100);
+            Sleep::Sec(1);
         }
         REPORT_ERROR(ErrorManagement::Information, "Connection Accepted");
+        server->Close();
         delete server;
         //manage only one connection per port
         client->SetBlocking(true);
@@ -561,31 +567,30 @@ ErrorManagement::ErrorType DiodeReceiver::ThreadCycle(ExecutionInfo & info) {
                                         readVariables++;
                                         bool ok = true;
                                         ConfigurationDatabase cdb;
-                                        if (pvs[index].at.GetNumberOfDimensions() > 0u) {
-                                            localcfg = "\"Value\": ";
-                                            localcfg += varValue.Buffer();
-                                            localcfg.Seek(0);
-                                            JsonParser parser(localcfg, cdb);
-                                            ok = parser.Parse();
-                                            if (!ok) {
-                                                REPORT_ERROR(ErrorManagement::FatalError, "Failed parse");
-                                            }
-                                            else {
-                                                cdb.MoveToRoot();
-                                            }
-                                        }
-                                        if (ok) {
-                                            if (syncSem.FastLock()) {
-
-                                                if (pvs[index].at.GetNumberOfDimensions() > 0u) {
-                                                    cdb.MoveToRoot();
-                                                    ok = cdb.Read("Value", pvs[index].at);
+                                        if (pvs[index].numberOfElements > 0) {
+                                            if (pvs[index].at.GetNumberOfDimensions() > 0u) {
+                                                localcfg = "\"Value\": ";
+                                                localcfg += varValue.Buffer();
+                                                localcfg.Seek(0);
+                                                JsonParser parser(localcfg, cdb);
+                                                ok = parser.Parse();
+                                                if (!ok) {
+                                                    REPORT_ERROR(ErrorManagement::FatalError, "Failed parse");
                                                 }
                                                 else {
-                                                    ok = TypeConvert(pvs[index].at, varValue.Buffer());
+                                                    cdb.MoveToRoot();
                                                 }
-                                                if (ok) {
-                                                    if (pvs[index].numberOfElements > 0) {
+                                            }
+                                            if (ok) {
+                                                if (syncSem.FastLock()) {
+                                                    if (pvs[index].at.GetNumberOfDimensions() > 0u) {
+                                                        cdb.MoveToRoot();
+                                                        ok = cdb.Read("Value", pvs[index].at);
+                                                    }
+                                                    else {
+                                                        ok = TypeConvert(pvs[index].at, varValue.Buffer());
+                                                    }
+                                                    if (ok) {
                                                         if (MemoryOperationsHelper::Compare(memory[0] + pvs[index].offset, memoryPrec + pvs[index].offset,
                                                                                             pvs[index].byteSize) != 0) {
                                                             (changeFlag[0])[index] = 1;
@@ -594,12 +599,13 @@ ErrorManagement::ErrorType DiodeReceiver::ThreadCycle(ExecutionInfo & info) {
 
                                                         }
                                                     }
+                                                    syncSem.FastUnLock();
                                                 }
-                                                syncSem.FastUnLock();
-                                            }
-                                            if (!ok) {
-                                               /* REPORT_ERROR(ErrorManagement::FatalError, "Fail to read the %s Value %d", varName.Buffer(),
-                                                             pvs[index].at.GetNumberOfElements(0));*/
+                                                if (!ok) {
+                                                    StreamString err;
+                                                    err.Printf("Fail to read the %s Value %s", varName.Buffer(), varValue.Buffer());
+                                                    printf("%s\n", err.Buffer());
+                                                }
                                             }
                                         }
                                         break;
@@ -616,7 +622,6 @@ ErrorManagement::ErrorType DiodeReceiver::ThreadCycle(ExecutionInfo & info) {
                                     else if (res == 1) {
                                         //this means that they are equal
                                         uint32 rem_1 = range_1 % 2;
-                                        uint32 rem = range % 2;
                                         range_1 = range;
                                         if (rem_1 == 0) {
                                             range_1--;
@@ -656,7 +661,7 @@ ErrorManagement::ErrorType DiodeReceiver::ThreadCycle(ExecutionInfo & info) {
             REPORT_ERROR(ErrorManagement::Information, "Error in ReadHeader");
         }
         /*uint32 elapsed=(uint32)(((HighResolutionTimer::Counter()-tic)*1000)*HighResolutionTimer::Period());
-        printf("elapsed %d\n", elapsed);*/
+         printf("elapsed %d\n", elapsed);*/
         Sleep::MSec(5);
     }
     else {

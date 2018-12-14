@@ -109,8 +109,10 @@ struct PvDescriptor {
      */
     uint64 offset;
 
-
-
+    /**
+     * The type descriptor
+     */
+    TypeDescriptor td;
 };
 
 

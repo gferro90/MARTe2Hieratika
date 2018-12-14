@@ -39,7 +39,6 @@ namespace MARTe {
 
 static void GetValueCallback(evargs args) {
     PvDescriptor *pv = static_cast<PvDescriptor *>(args.usr);
-
     if ((pv->syncMutex)->FastLock()) {
         (void) MemoryOperationsHelper::Copy(pv->memory, args.dbr, pv->memorySize * pv->numberOfElements);
         pv->changedFlag[pv->index] = 1;
@@ -79,9 +78,9 @@ static int cainfo(chid &pvChid,
                   char8 *pvName,
                   chtype &type,
                   uint32 &numberOfElements,
-                  uint32 &memorySize) {
+                  uint32 &memorySize,
+                  TypeDescriptor &td) {
     int32 dbfType;
-    int32 dbrType;
     uint32 nElems;
     enum channel_state state;
     const char8 *stateStrings[] = { "never connected", "previously connected", "connected", "closed" };
@@ -89,7 +88,6 @@ static int cainfo(chid &pvChid,
     state = ca_state(pvChid);
     nElems = ca_element_count(pvChid);
     dbfType = ca_field_type(pvChid);
-    dbrType = dbf_type_to_DBR(dbfType);
 
     if (state != 2) {
         printf("The variable %s is not connected, state=%s\n", pvName, stateStrings[state]);
@@ -98,29 +96,42 @@ static int cainfo(chid &pvChid,
     numberOfElements = nElems;
     type = dbfType;
     const char8* epicsTypeName = dbf_type_to_text(dbfType);
+
     if (StringHelper::Compare(epicsTypeName, "DBF_DOUBLE") == 0u) {
         memorySize = 8u;
+        td = Float64Bit;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_FLOAT") == 0u) {
         memorySize = 4u;
+        td = Float32Bit;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_LONG") == 0u) {
         memorySize = 4u;
+        td = SignedInteger32Bit;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_ULONG") == 0u) {
         memorySize = 4u;
+        td = UnsignedInteger32Bit;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_SHORT") == 0u) {
         memorySize = 2u;
+        td = SignedInteger16Bit;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_USHORT") == 0u) {
         memorySize = 2u;
+        td = UnsignedInteger16Bit;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_CHAR") == 0u) {
         memorySize = 1u;
+        td = SignedInteger8Bit;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_UCHAR") == 0u) {
         memorySize = 1u;
+        td = UnsignedInteger8Bit;
+    }
+    else if (StringHelper::Compare(epicsTypeName, "DBF_STRING") == 0) {
+        memorySize = 0u;
+        numberOfElements = 0u;
     }
     else {
         memorySize = 8u;
@@ -274,7 +285,8 @@ ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info
             ca_create_channel(&pvDescriptor[i].pvName[0], NULL, NULL, 20u, &pvDescriptor[i].pvChid);
             ca_pend_io(0.1);
 
-            cainfo(pvDescriptor[i].pvChid, pvDescriptor[i].pvName, pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].memorySize);
+            cainfo(pvDescriptor[i].pvChid, pvDescriptor[i].pvName, pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].memorySize,
+                   pvDescriptor[i].td);
             totalMemorySize += (pvDescriptor[i].numberOfElements * pvDescriptor[i].memorySize) + sizeof(epicsTimeStamp);
 
         }
