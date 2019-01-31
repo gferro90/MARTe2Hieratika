@@ -23,7 +23,7 @@
 # $Id: Makefile.inc 3 2012-01-15 16:26:07Z aneto $
 #
 #############################################################
-OBJSX=DiodeReceiver.x
+OBJSX=DiodeReceiver.x DiodeReceiver2.x
 
 PACKAGE=Components/Interfaces
 

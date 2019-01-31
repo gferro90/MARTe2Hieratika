@@ -48,7 +48,7 @@
 #include "StreamString.h"
 #include "StandardParser.h"
 #include "EpicsParserAndSubscriber.h"
-#include "PrioritySender.h"
+#include "PrioritySender2.h"
 
 /*---------------------------------------------------------------------------*/
 /*                           Static definitions                              */
@@ -61,7 +61,7 @@ void MainErrorProcessFunction(const MARTe::ErrorManagement::ErrorInformation &er
 }
 static bool keepRunning = true;
 static bool killApp = false;
-ReferenceT < PrioritySender > sender;
+ReferenceT < PrioritySender2 > sender;
 
 static void StopApp(int sig) {
     //Second time this is called? Kill the application.
