@@ -24,7 +24,7 @@
 /*---------------------------------------------------------------------------*/
 /*                         Standard header includes                          */
 /*---------------------------------------------------------------------------*/
-
+#include <stdio.h>
 /*---------------------------------------------------------------------------*/
 /*                         Project header includes                           */
 /*---------------------------------------------------------------------------*/
@@ -130,11 +130,15 @@ static int cainfo(chid &pvChid,
         td = UnsignedInteger8Bit;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_STRING") == 0) {
-        memorySize = 0u;
-        numberOfElements = 0u;
+        memorySize = MAX_STRING_SIZE;
+        td = ConstCharString;
     }
     else {
-        memorySize = 8u;
+        memorySize = MAX_STRING_SIZE;
+        td.numberOfBits = MAX_STRING_SIZE * 8u;
+        td.isStructuredData = false;
+        td.type = CArray;
+        td.isConstant = false;
     }
 
     return 0;
@@ -291,6 +295,7 @@ ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info
 
         }
         memory = (uint8*) HeapManager::Malloc(totalMemorySize);
+        MemoryOperationsHelper::Set(memory, 0, totalMemorySize);
 
         uint32 memoryOffset = 0u;
         for (uint32 counter = 0u; counter < numberOfVariables; counter++) {

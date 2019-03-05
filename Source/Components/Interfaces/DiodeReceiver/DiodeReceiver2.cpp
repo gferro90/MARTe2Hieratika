@@ -326,8 +326,15 @@ bool DiodeReceiver2::Initialise(StructuredDataI &data) {
                                 pvs[n].at = AnyType(UnsignedInteger8Bit, 0u, (void*) NULL);
                             }
                             else if (StringHelper::Compare(epicsTypeName, "DBF_STRING") == 0) {
-                                pvs[n].byteSize = 0;
-                                pvs[n].numberOfElements = 0;
+
+                                TypeDescriptor td;
+                                td.numberOfBits = MAX_STRING_SIZE * 8u;
+                                td.isStructuredData = false;
+                                td.type = CArray;
+                                td.isConstant = false;
+
+                                pvs[n].byteSize = (sizeof(char8)) * MAX_STRING_SIZE * pvs[n].numberOfElements;
+                                pvs[n].at = AnyType(td, 0u, (void*) NULL);
                             }
                             else {
                                 pvs[n].byteSize = (sizeof(float64)) * pvs[n].numberOfElements;
@@ -391,7 +398,8 @@ ErrorManagement::ErrorType DiodeReceiver2::Start() {
         Sleep::Sec(1);
     }
 
-    ErrorManagement::ErrorType err = !(server.Open());
+    ErrorManagement::ErrorType err;
+    server.Open();
 
     if (err.ErrorsCleared()) {
         err = !(server.Listen(serverPort, 255));
@@ -644,7 +652,9 @@ ErrorManagement::ErrorType DiodeReceiver2::ClientService(TCPSocket * const commC
 
 ErrorManagement::ErrorType DiodeReceiver2::ServerCycle(MARTe::ExecutionInfo &information) {
     ErrorManagement::ErrorType err;
+
     if (information.GetStage() == MARTe::ExecutionInfo::StartupStage) {
+
     }
     if (information.GetStage() == MARTe::ExecutionInfo::MainStage) {
 
@@ -653,6 +663,7 @@ ErrorManagement::ErrorType DiodeReceiver2::ServerCycle(MARTe::ExecutionInfo &inf
             /*lint -e{429} the newClient pointer will be freed within the thread*/
             TCPSocket *newClient = new TCPSocket();
             if (err.ErrorsCleared()) {
+                REPORT_ERROR(ErrorManagement::Information, "Waiting new connection");
                 if (server.WaitConnection(acceptTimeout, newClient) == NULL) {
                     err = MARTe::ErrorManagement::Timeout;
                     delete newClient;
