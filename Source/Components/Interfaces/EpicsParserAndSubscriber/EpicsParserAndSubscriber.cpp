@@ -133,14 +133,19 @@ static int cainfo(chid &pvChid,
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_STRING") == 0) {
         memorySize = MAX_STRING_SIZE;
-        td = ConstCharString;
-    }
-    else {
-        memorySize = MAX_STRING_SIZE;
         td.numberOfBits = MAX_STRING_SIZE * 8u;
         td.isStructuredData = false;
         td.type = CArray;
         td.isConstant = false;
+    }
+    else {
+        /*memorySize = MAX_STRING_SIZE;
+        td.numberOfBits = MAX_STRING_SIZE * 8u;
+        td.isStructuredData = false;
+        td.type = CArray;
+        td.isConstant = false;*/
+        memorySize = 8u;
+        td = Float64Bit;
     }
 
     return 0;
