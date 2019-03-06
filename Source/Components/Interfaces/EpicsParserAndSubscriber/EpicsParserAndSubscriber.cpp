@@ -144,6 +144,7 @@ static int cainfo(chid &pvChid,
         td.isStructuredData = false;
         td.type = CArray;
         td.isConstant = false;*/
+        type=DBF_DOUBLE;
         memorySize = 8u;
         td = Float64Bit;
     }

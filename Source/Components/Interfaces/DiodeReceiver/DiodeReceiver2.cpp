@@ -347,6 +347,7 @@ bool DiodeReceiver2::Initialise(StructuredDataI &data) {
                                     pvs[n].at = AnyType(td, 0u, (void*) NULL);
                                 }
                                 else {
+                                    epicsTypeName = DBF_DOUBLE;
                                     pvs[n].byteSize = (sizeof(float64)) * pvs[n].numberOfElements;
                                     pvs[n].at = AnyType(Float64Bit, 0u, (void*) NULL);
                                 }
