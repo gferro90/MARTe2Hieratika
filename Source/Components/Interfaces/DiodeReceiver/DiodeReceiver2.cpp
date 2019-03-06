@@ -355,7 +355,7 @@ bool DiodeReceiver2::Initialise(StructuredDataI &data) {
 
                                     pvs[n].byteSize = (sizeof(char8)) * MAX_STRING_SIZE * pvs[n].numberOfElements;
                                     pvs[n].at = AnyType(td, 0u, (void*) NULL);
-                                    epicsTypeName = DBF_STRING;
+                                    pvs[n].pvType = DBF_STRING;
 /*
                                     epicsTypeName = DBF_DOUBLE;
                                     pvs[n].byteSize = (sizeof(float64)) * pvs[n].numberOfElements;
