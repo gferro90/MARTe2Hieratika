@@ -37,6 +37,7 @@
 /*                           Static definitions                              */
 /*---------------------------------------------------------------------------*/
 namespace MARTe {
+#define MAX_ARR_LEN 100
 
 static bool GetVariable(File &xmlFile,
                         StreamString &variable) {
@@ -239,6 +240,8 @@ bool DiodeReceiver2::Initialise(StructuredDataI &data) {
 
                 xmlFile.Seek(0ull);
                 uint32 counter = 0u;
+#define MAX_ARR_LEN 100
+
                 variable.SetSize(0ull);
                 start = false;
                 while (GetVariable(xmlFile, variable)) {
@@ -290,62 +293,70 @@ bool DiodeReceiver2::Initialise(StructuredDataI &data) {
                             cainfo(pvs[n].pvChid, pvs[n].pvName, pvs[n].pvType, pvs[n].numberOfElements);
                             ca_pend_io(0.1);
 
-                            const char8* epicsTypeName = dbf_type_to_text(pvs[n].pvType);
-                            //printf("%s: nElems=%d, type=%s\n", pvs[n].pvName, pvs[n].numberOfElements, epicsTypeName);
-                            if (StringHelper::Compare(epicsTypeName, "DBF_DOUBLE") == 0u) {
-                                pvs[n].byteSize = (sizeof(float64)) * pvs[n].numberOfElements;
-                                pvs[n].at = AnyType(Float64Bit, 0u, (void*) NULL);
-                            }
-                            else if (StringHelper::Compare(epicsTypeName, "DBF_FLOAT") == 0u) {
-                                pvs[n].byteSize = (sizeof(float32)) * pvs[n].numberOfElements;
-                                pvs[n].at = AnyType(Float32Bit, 0u, (void*) NULL);
-                            }
-                            else if (StringHelper::Compare(epicsTypeName, "DBF_LONG") == 0u) {
-                                pvs[n].byteSize = (sizeof(int32)) * pvs[n].numberOfElements;
-                                pvs[n].at = AnyType(SignedInteger32Bit, 0u, (void*) NULL);
-                            }
-                            else if (StringHelper::Compare(epicsTypeName, "DBF_ULONG") == 0u) {
-                                pvs[n].byteSize = (sizeof(uint32)) * pvs[n].numberOfElements;
-                                pvs[n].at = AnyType(UnsignedInteger32Bit, 0u, (void*) NULL);
-                            }
-                            else if (StringHelper::Compare(epicsTypeName, "DBF_SHORT") == 0u) {
-                                pvs[n].byteSize = (sizeof(int16)) * pvs[n].numberOfElements;
+                            pvs[n].byteSize = 0;
+                            pvs[n].at = voidAnyType;
 
-                                pvs[n].at = AnyType(SignedInteger16Bit, 0u, (void*) NULL);
+                            if (pvs[n].numberOfElements > MAX_ARR_LEN) {
+                                pvs[n].numberOfElements = 0u;
                             }
-                            else if (StringHelper::Compare(epicsTypeName, "DBF_USHORT") == 0u) {
-                                pvs[n].byteSize = (sizeof(uint16)) * pvs[n].numberOfElements;
-                                pvs[n].at = AnyType(UnsignedInteger16Bit, 0u, (void*) NULL);
-                            }
-                            else if (StringHelper::Compare(epicsTypeName, "DBF_CHAR") == 0u) {
-                                pvs[n].byteSize = (sizeof(int8)) * pvs[n].numberOfElements;
-                                pvs[n].at = AnyType(SignedInteger8Bit, 0u, (void*) NULL);
-                            }
-                            else if (StringHelper::Compare(epicsTypeName, "DBF_UCHAR") == 0u) {
-                                pvs[n].byteSize = (sizeof(uint8)) * pvs[n].numberOfElements;
-                                pvs[n].at = AnyType(UnsignedInteger8Bit, 0u, (void*) NULL);
-                            }
-                            else if (StringHelper::Compare(epicsTypeName, "DBF_STRING") == 0) {
+                            if (pvs[n].numberOfElements > 0u) {
+                                const char8* epicsTypeName = dbf_type_to_text(pvs[n].pvType);
+                                //printf("%s: nElems=%d, type=%s\n", pvs[n].pvName, pvs[n].numberOfElements, epicsTypeName);
+                                if (StringHelper::Compare(epicsTypeName, "DBF_DOUBLE") == 0u) {
+                                    pvs[n].byteSize = (sizeof(float64)) * pvs[n].numberOfElements;
+                                    pvs[n].at = AnyType(Float64Bit, 0u, (void*) NULL);
+                                }
+                                else if (StringHelper::Compare(epicsTypeName, "DBF_FLOAT") == 0u) {
+                                    pvs[n].byteSize = (sizeof(float32)) * pvs[n].numberOfElements;
+                                    pvs[n].at = AnyType(Float32Bit, 0u, (void*) NULL);
+                                }
+                                else if (StringHelper::Compare(epicsTypeName, "DBF_LONG") == 0u) {
+                                    pvs[n].byteSize = (sizeof(int32)) * pvs[n].numberOfElements;
+                                    pvs[n].at = AnyType(SignedInteger32Bit, 0u, (void*) NULL);
+                                }
+                                else if (StringHelper::Compare(epicsTypeName, "DBF_ULONG") == 0u) {
+                                    pvs[n].byteSize = (sizeof(uint32)) * pvs[n].numberOfElements;
+                                    pvs[n].at = AnyType(UnsignedInteger32Bit, 0u, (void*) NULL);
+                                }
+                                else if (StringHelper::Compare(epicsTypeName, "DBF_SHORT") == 0u) {
+                                    pvs[n].byteSize = (sizeof(int16)) * pvs[n].numberOfElements;
 
-                                TypeDescriptor td;
-                                td.numberOfBits = MAX_STRING_SIZE * 8u;
-                                td.isStructuredData = false;
-                                td.type = CArray;
-                                td.isConstant = false;
+                                    pvs[n].at = AnyType(SignedInteger16Bit, 0u, (void*) NULL);
+                                }
+                                else if (StringHelper::Compare(epicsTypeName, "DBF_USHORT") == 0u) {
+                                    pvs[n].byteSize = (sizeof(uint16)) * pvs[n].numberOfElements;
+                                    pvs[n].at = AnyType(UnsignedInteger16Bit, 0u, (void*) NULL);
+                                }
+                                else if (StringHelper::Compare(epicsTypeName, "DBF_CHAR") == 0u) {
+                                    pvs[n].byteSize = (sizeof(int8)) * pvs[n].numberOfElements;
+                                    pvs[n].at = AnyType(SignedInteger8Bit, 0u, (void*) NULL);
+                                }
+                                else if (StringHelper::Compare(epicsTypeName, "DBF_UCHAR") == 0u) {
+                                    pvs[n].byteSize = (sizeof(uint8)) * pvs[n].numberOfElements;
+                                    pvs[n].at = AnyType(UnsignedInteger8Bit, 0u, (void*) NULL);
+                                }
+                                else if (StringHelper::Compare(epicsTypeName, "DBF_STRING") == 0) {
 
-                                pvs[n].byteSize = (sizeof(char8)) * MAX_STRING_SIZE * pvs[n].numberOfElements;
-                                pvs[n].at = AnyType(td, 0u, (void*) NULL);
-                            }
-                            else {
-                                pvs[n].byteSize = (sizeof(float64)) * pvs[n].numberOfElements;
-                                pvs[n].at = AnyType(Float64Bit, 0u, (void*) NULL);
-                            }
-                            pvs[n].offset = totalMemorySize;
-                            totalMemorySize += pvs[n].byteSize;
+                                    TypeDescriptor td;
+                                    td.numberOfBits = MAX_STRING_SIZE * 8u;
+                                    td.isStructuredData = false;
+                                    td.type = CArray;
+                                    td.isConstant = false;
 
-                            if (pvs[n].numberOfElements > 1u) {
-                                pvs[n].at.SetNumberOfDimensions(1u);
-                                pvs[n].at.SetNumberOfElements(0u, pvs[n].numberOfElements);
+                                    pvs[n].byteSize = (sizeof(char8)) * MAX_STRING_SIZE * pvs[n].numberOfElements;
+                                    pvs[n].at = AnyType(td, 0u, (void*) NULL);
+                                }
+                                else {
+                                    pvs[n].byteSize = (sizeof(float64)) * pvs[n].numberOfElements;
+                                    pvs[n].at = AnyType(Float64Bit, 0u, (void*) NULL);
+                                }
+                                pvs[n].offset = totalMemorySize;
+                                totalMemorySize += pvs[n].byteSize;
+
+                                if (pvs[n].numberOfElements > 1u) {
+                                    pvs[n].at.SetNumberOfDimensions(1u);
+                                    pvs[n].at.SetNumberOfElements(0u, pvs[n].numberOfElements);
+                                }
                             }
                         }
                     }

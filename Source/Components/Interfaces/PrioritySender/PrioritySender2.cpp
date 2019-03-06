@@ -333,7 +333,7 @@ ErrorManagement::ErrorType PrioritySender2::ThreadCycle(ExecutionInfo & info) {
                             err = !(sdata.CreateRelative(signalName.Buffer()));
                             if (err.ErrorsCleared()) {
                                 err = !(sdata.Write("Value", signalAt));
-                                REPORT_ERROR(ErrorManagement::Information, "%s=%!", signalName.Buffer(), signalAt);
+                                //REPORT_ERROR(ErrorManagement::Information, "%s=%!", signalName.Buffer(), signalAt);
                             }
                             if (err.ErrorsCleared()) {
                                 //ca_pend_event(0.01);
