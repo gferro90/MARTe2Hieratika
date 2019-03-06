@@ -37,6 +37,8 @@
 /*---------------------------------------------------------------------------*/
 namespace MARTe {
 
+#define MAX_ARR_LEN 100
+
 static void GetValueCallback(evargs args) {
     PvDescriptor *pv = static_cast<PvDescriptor *>(args.usr);
     if ((pv->syncMutex)->FastLock()) {
@@ -291,7 +293,12 @@ ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info
 
             cainfo(pvDescriptor[i].pvChid, pvDescriptor[i].pvName, pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].memorySize,
                    pvDescriptor[i].td);
-            totalMemorySize += (pvDescriptor[i].numberOfElements * pvDescriptor[i].memorySize) + sizeof(epicsTimeStamp);
+            if (pvDescriptor[i].numberOfElements > MAX_ARR_LEN) {
+                pvDescriptor[i].numberOfElements = 0u;
+            }
+            else {
+                totalMemorySize += (pvDescriptor[i].numberOfElements * pvDescriptor[i].memorySize) + sizeof(epicsTimeStamp);
+            }
 
         }
         memory = (uint8*) HeapManager::Malloc(totalMemorySize);
