@@ -356,10 +356,10 @@ bool DiodeReceiver2::Initialise(StructuredDataI &data) {
                                     pvs[n].byteSize = (sizeof(char8)) * MAX_STRING_SIZE * pvs[n].numberOfElements;
                                     pvs[n].at = AnyType(td, 0u, (void*) NULL);
                                     pvs[n].pvType = DBF_STRING;
-/*
-                                    epicsTypeName = DBF_DOUBLE;
-                                    pvs[n].byteSize = (sizeof(float64)) * pvs[n].numberOfElements;
-                                    pvs[n].at = AnyType(Float64Bit, 0u, (void*) NULL);*/
+                                    /*
+                                     epicsTypeName = DBF_DOUBLE;
+                                     pvs[n].byteSize = (sizeof(float64)) * pvs[n].numberOfElements;
+                                     pvs[n].at = AnyType(Float64Bit, 0u, (void*) NULL);*/
                                 }
                                 pvs[n].offset = totalMemorySize;
                                 totalMemorySize += pvs[n].byteSize;
@@ -599,6 +599,17 @@ ErrorManagement::ErrorType DiodeReceiver2::ClientService(TCPSocket * const commC
                                                     ok = TypeConvert(pvs[index].at, varValue.Buffer());
                                                 }
                                                 if (ok) {
+                                                    if (pvs[index].pvType == DBF_STRING) {
+
+                                                        char8 *str = (char8 *)(pvs[index].at.GetDataPointer());
+                                                        if (*str == '\"') {
+                                                            uint32 length = StringHelper::Length(str);
+                                                            str[length - 1u] = '\0';
+                                                            pvs[index].at.SetDataPointer(str + 1u);
+                                                        }
+                                                    }
+                                                    //REPORT_ERROR(ErrorManagement::Information, "%s=%!", varName.Buffer(), pvs[index].at);
+
                                                     if (MemoryOperationsHelper::Compare(memory[0] + pvs[index].offset, memoryPrec + pvs[index].offset,
                                                                                         pvs[index].byteSize) != 0) {
                                                         (changeFlag[0])[index] = 1;
@@ -658,6 +669,8 @@ ErrorManagement::ErrorType DiodeReceiver2::ClientService(TCPSocket * const commC
                             }
                         }
                     }
+                    //printf("payload\n %s\n", payload.Buffer());
+
                 }
             }
         }
