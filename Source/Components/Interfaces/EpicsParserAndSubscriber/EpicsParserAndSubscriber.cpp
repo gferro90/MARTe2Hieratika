@@ -139,14 +139,15 @@ static int cainfo(chid &pvChid,
         td.isConstant = false;
     }
     else {
-        /*memorySize = MAX_STRING_SIZE;
+        memorySize = MAX_STRING_SIZE;
         td.numberOfBits = MAX_STRING_SIZE * 8u;
         td.isStructuredData = false;
         td.type = CArray;
-        td.isConstant = false;*/
-        type=DBF_DOUBLE;
-        memorySize = 8u;
-        td = Float64Bit;
+        td.isConstant = false;
+        type = DBF_STRING;
+        /*type=DBF_DOUBLE;
+         memorySize = 8u;
+         td = Float64Bit;*/
     }
 
     return 0;
@@ -320,10 +321,10 @@ ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info
             if (pvDescriptor[counter].numberOfElements > 0) {
                 memoryOffset += (pvDescriptor[counter].numberOfElements * pvDescriptor[counter].memorySize) + sizeof(epicsTimeStamp);
 
-                if(!ca_array_get(pvDescriptor[counter].pvType,pvDescriptor[counter].numberOfElements,pvDescriptor[counter].pvChid,pvDescriptor[counter].memory)){
+                if (!ca_array_get(pvDescriptor[counter].pvType, pvDescriptor[counter].numberOfElements, pvDescriptor[counter].pvChid,
+                                  pvDescriptor[counter].memory)) {
                     printf("FAILED ca_get for %s\n", pvDescriptor[counter].pvName);
                 }
-
 
                 if (ca_create_subscription(pvDescriptor[counter].pvType, pvDescriptor[counter].numberOfElements, pvDescriptor[counter].pvChid, DBE_VALUE,
                                            &GetValueCallback, &pvDescriptor[counter], &pvDescriptor[counter].pvEvid) != ECA_NORMAL) {

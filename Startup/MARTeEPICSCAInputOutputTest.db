@@ -63,10 +63,10 @@ record( waveform, "MARTe2::EPICSCAInput::Test::Float32Arr")
    field(FTVL, "FLOAT")
 }
 
-record( waveform, "MARTe2::EPICSCAInput::Test::Float64Arr")
-{
-   field(DTYP, "Soft Channel")
-   field(NELM, 10)
-   field(FTVL, "DOUBLE")
+record(bi, "MARTe2::EPICSCAInput::Test::Float64Arr") {
+field (DESC, "MPS908: All Interceptives Fault")
+field (SCAN, "I/O Intr")
+field (ONAM, "Beam permit")
+field (ZNAM, "Beam stop")
+field (ZSV, "MAJOR")
 }
-

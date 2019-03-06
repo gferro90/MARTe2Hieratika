@@ -347,9 +347,19 @@ bool DiodeReceiver2::Initialise(StructuredDataI &data) {
                                     pvs[n].at = AnyType(td, 0u, (void*) NULL);
                                 }
                                 else {
+                                    TypeDescriptor td;
+                                    td.numberOfBits = MAX_STRING_SIZE * 8u;
+                                    td.isStructuredData = false;
+                                    td.type = CArray;
+                                    td.isConstant = false;
+
+                                    pvs[n].byteSize = (sizeof(char8)) * MAX_STRING_SIZE * pvs[n].numberOfElements;
+                                    pvs[n].at = AnyType(td, 0u, (void*) NULL);
+                                    epicsTypeName = DBF_STRING;
+/*
                                     epicsTypeName = DBF_DOUBLE;
                                     pvs[n].byteSize = (sizeof(float64)) * pvs[n].numberOfElements;
-                                    pvs[n].at = AnyType(Float64Bit, 0u, (void*) NULL);
+                                    pvs[n].at = AnyType(Float64Bit, 0u, (void*) NULL);*/
                                 }
                                 pvs[n].offset = totalMemorySize;
                                 totalMemorySize += pvs[n].byteSize;
