@@ -310,9 +310,15 @@ ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info
             pvDescriptor[counter].offset = memoryOffset;
             pvDescriptor[counter].timeStamp = (epicsTimeStamp*) (memory + memoryOffset
                     + (pvDescriptor[counter].numberOfElements * pvDescriptor[counter].memorySize));
-            memoryOffset += (pvDescriptor[counter].numberOfElements * pvDescriptor[counter].memorySize) + sizeof(epicsTimeStamp);
             //printf("creating subscription=%s\n", pvDescriptor[counter].pvName);
             if (pvDescriptor[counter].numberOfElements > 0) {
+                memoryOffset += (pvDescriptor[counter].numberOfElements * pvDescriptor[counter].memorySize) + sizeof(epicsTimeStamp);
+
+                if(!ca_array_get(pvDescriptor[counter].pvType,pvDescriptor[counter].numberOfElements,pvDescriptor[counter].pvChid,pvDescriptor[counter].memory)){
+                    printf("FAILED ca_get for %s\n", pvDescriptor[counter].pvName);
+                }
+
+
                 if (ca_create_subscription(pvDescriptor[counter].pvType, pvDescriptor[counter].numberOfElements, pvDescriptor[counter].pvChid, DBE_VALUE,
                                            &GetValueCallback, &pvDescriptor[counter], &pvDescriptor[counter].pvEvid) != ECA_NORMAL) {
                     printf("FAILED create subscription %s\n", pvDescriptor[counter].pvName);
