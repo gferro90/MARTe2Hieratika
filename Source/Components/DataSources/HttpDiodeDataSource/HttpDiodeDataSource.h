@@ -132,6 +132,9 @@ public:
                                      const uint32 offset,
                                      const uint32 numberOfSamples);
 
+
+    virtual const char8 *GetBrokerName(StructuredDataI &data, const SignalDirection direction);
+
 protected:
 
     /**

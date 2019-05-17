@@ -48,7 +48,7 @@
 #include "StreamString.h"
 #include "StandardParser.h"
 #include "EpicsParserAndSubscriber.h"
-#include "PrioritySender2.h"
+#include "PrioritySender.h"
 
 /*---------------------------------------------------------------------------*/
 /*                           Static definitions                              */
@@ -61,7 +61,8 @@ void MainErrorProcessFunction(const MARTe::ErrorManagement::ErrorInformation &er
 }
 static bool keepRunning = true;
 static bool killApp = false;
-ReferenceT < PrioritySender2 > sender;
+ReferenceT < PrioritySender > sender;
+ReferenceT < EpicsParserAndSubscriber > subscriber;
 
 static void StopApp(int sig) {
     //Second time this is called? Kill the application.
@@ -73,8 +74,9 @@ static void StopApp(int sig) {
         _exit(0);
     }
     printf("Stopping application.\n");
-    if (sender.IsValid()) {
-        sender->Quit();
+    if (sender.IsValid() && subscriber.IsValid()) {
+        sender->Stop();
+        subscriber->Stop();
     }
     MARTe::ObjectRegistryDatabase::Instance()->Purge();
     printf("Application successfully stopped.\n");
@@ -104,7 +106,7 @@ int main(int argc,
     ObjectRegistryDatabase *god = ObjectRegistryDatabase::Instance();
     god->Initialise(localCdb);
 
-    ReferenceT < EpicsParserAndSubscriber > subscriber = god->Find("Subscriber");
+    subscriber = god->Find("Subscriber");
     sender = god->Find("Sender");
 
     if (subscriber.IsValid() && sender.IsValid()) {

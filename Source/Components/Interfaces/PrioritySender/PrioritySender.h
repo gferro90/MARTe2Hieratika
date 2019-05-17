@@ -98,10 +98,6 @@ public:
      */
     virtual ErrorManagement::ErrorType ThreadCycle(ExecutionInfo & info);
 
-    /**
-     * @brief Triggers the termination of the execution.
-     */
-    void Quit();
 
     /**
      * @brief The main thread cycle loop.
@@ -116,6 +112,10 @@ public:
      * @brief Starts the main thread and the threads in the pool.
      */
     virtual ErrorManagement::ErrorType Start();
+
+
+    virtual ErrorManagement::ErrorType Stop();
+
 
 private:
 
@@ -233,7 +233,7 @@ private:
     /**
      * Used to trigger the stop of the threads
      */
-    uint8 quit;
+    volatile int32 quit;
 
     /**
      * Stores the last tick counter
@@ -245,6 +245,7 @@ private:
      * The period of the main thread in milliseconds
      */
     uint32 msecPeriod;
+
 };
 
 }

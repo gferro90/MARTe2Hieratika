@@ -23,8 +23,7 @@
 # $Id: Makefile.inc 3 2012-01-15 16:26:07Z aneto $
 #
 #############################################################
-OBJSX=DiodeReceiver.x DiodeReceiver2.x
-
+OBJSX=DiodeReceiver.x
 PACKAGE=Components/Interfaces
 
 ROOT_DIR=../../../../
@@ -52,7 +51,8 @@ INCLUDES += -I$(EPICS_BASE)/include/
 INCLUDES += -I$(EPICS_BASE)/include/os/Linux/
 INCLUDES += -I$(EPICS_BASE)/include/compiler/gcc/
 INCLUDES += -I$(EPICS_BASE)/src/ca/client/tools/
-CPPFLAGS+= -fpermissive
+INCLUDES += -I$(EPICS_BASE)/src/base-3.15.5/ca/client/tools/
+CPPFLAGS+= -fpermissive -Wno-error
 
 
 all: $(OBJS) $(SUBPROJ) \

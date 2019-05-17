@@ -50,6 +50,7 @@ INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L4Messages
 INCLUDES += -I$(MARTe2_DIR)/Source/Core/Scheduler/L4StateMachine
 INCLUDES += -I../../../../Source/Components/GAMs/PriorityGAM
 
+CPPFLAGS+= -fpermissive -Wno-error
 
 all: $(OBJS) $(SUBPROJ) \
 	$(BUILD_DIR)/PriorityGAMTest$(LIBEXT) \

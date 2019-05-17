@@ -40,7 +40,8 @@
 #include "Object.h"
 #include "StreamString.h"
 #include "EmbeddedServiceMethodBinderI.h"
-#include "SingleThreadService.h"
+#include "MultiThreadService.h"
+#include "EventSem.h"
 /*---------------------------------------------------------------------------*/
 /*                           Class declaration                               */
 /*---------------------------------------------------------------------------*/
@@ -129,7 +130,7 @@ struct PvDescriptor {
  * time-stamps and the changed flags memory containing a flag for each variable asserting if the variable has
  * changed from the last call.
  */
-class EpicsParserAndSubscriber: public Object, public EmbeddedServiceMethodBinderI {
+class EpicsParserAndSubscriber: public MultiThreadService, public EmbeddedServiceMethodBinderI {
 public:
 
     CLASS_REGISTER_DECLARATION()
@@ -199,6 +200,8 @@ public:
      */
     bool InitialisationDone();
 
+    virtual ErrorManagement::ErrorType Stop();
+
 private:
 
     /**
@@ -233,7 +236,7 @@ private:
     /**
      * The allocated memory for the PVs
      */
-    uint8 *memory;
+    uint8 **memory;
 
     /**
      * The memory allocated for the
@@ -249,11 +252,6 @@ private:
     FastPollingMutexSem fmutex;
 
     /**
-     * The thread executor
-     */
-    SingleThreadService executor;
-
-    /**
      * Asserts that the initialisation
      * terminates
      */
@@ -263,6 +261,14 @@ private:
      * The thread cpu mask
      */
     uint32 cpuMask;
+
+    uint32 threatCnt;
+
+    uint32 nVarsPerChunk;
+
+    uint64 *memorySize;
+
+    EventSem eventSem;
 };
 }
 

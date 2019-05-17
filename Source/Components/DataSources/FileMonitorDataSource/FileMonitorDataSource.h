@@ -62,6 +62,8 @@ public:
     virtual bool PrepareNextState(const char8 * const currentStateName,
                                   const char8 * const nextStateName);
 
+    virtual const char8 *GetBrokerName(StructuredDataI &data, const SignalDirection direction);
+
 protected:
 
     StreamString filePath;

@@ -37,10 +37,11 @@
 /*---------------------------------------------------------------------------*/
 /*                        Project header includes                            */
 /*---------------------------------------------------------------------------*/
-#include "MultiThreadService.h"
+#include "MultiClientService.h"
 #include "File.h"
 #include "TCPSocket.h"
 #include "EmbeddedServiceMethodBinderT.h"
+#include "EventSem.h"
 /*---------------------------------------------------------------------------*/
 /*                           Class declaration                               */
 /*---------------------------------------------------------------------------*/
@@ -86,7 +87,7 @@ struct PvRecDescriptor {
 
 
 
-class DiodeReceiver: public MultiThreadService {
+class DiodeReceiver: public MultiClientService {
 public:
     CLASS_REGISTER_DECLARATION()
     DiodeReceiver();
@@ -94,20 +95,32 @@ public:
 
     virtual bool Initialise(StructuredDataI &data);
 
-
-    virtual ErrorManagement::ErrorType ThreadCycle(ExecutionInfo & info);
-
-
     virtual ErrorManagement::ErrorType Start();
+
+    ErrorManagement::ErrorType ServerCycle(MARTe::ExecutionInfo &information);
+
+    ErrorManagement::ErrorType ClientService(TCPSocket * const commClient);
 
     virtual ErrorManagement::ErrorType Stop();
 
+    virtual bool Synchronise(uint8 *memoryOut,
+                             uint8 *changedFlags);
+
+
+    uint32 GetNumberOfVariables();
+
+    PvRecDescriptor *GetPvDescriptors();
+
+    uint64 GetTotalMemorySize();
+
+    bool InitialisationDone();
     friend void DiodeReceiverCycleLoop(DiodeReceiver &arg);
 
 protected:
-    EmbeddedServiceMethodBinderT<DiodeReceiver> embeddedMethod;
 
-    uint32 serverInitialPort;
+    TCPSocket server;
+
+    EmbeddedServiceMethodBinderT<DiodeReceiver> embeddedMethod;
 
     uint32 serverPort;
 
@@ -121,16 +134,24 @@ protected:
 
     uint32 mainCpuMask;
 
-    uint8 *memory[2];
+    uint8 *memory;
     uint8 *memoryPrec;
-    uint8 threadSetContext;
-    uint32 msecPeriod;
 
-    uint8 *changeFlag[2];
+    uint32 *pvMapping;
+
+    volatile int32 threadSetContext;
+
+    uint8 *changeFlag;
     uint64 lastCounter;
 
-    uint8 quit;
+    volatile int32 quit;
     uint32 totalMemorySize;
+
+    EventSem eventSem;
+
+    uint32 numberOfInitThreads;
+    uint32 threadCnt;
+
 };
 
 }

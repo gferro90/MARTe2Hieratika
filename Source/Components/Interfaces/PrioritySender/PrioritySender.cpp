@@ -17,7 +17,7 @@
  * or implied. See the Licence permissions and limitations under the Licence.
 
  * @details This source file contains the definition of all the methods for
- * the class PrioritySender (public, protected, and private). Be aware that some 
+ * the class PrioritySender (public, protected, and private). Be aware that some
  * methods, such as those inline could be defined on the header file, instead.
  */
 
@@ -42,7 +42,8 @@
 namespace MARTe {
 
 void PrioritySenderCycleLoop(PrioritySender &arg) {
-    while (arg.quit == 0u) {
+    arg.eventSem.Post();
+    while (arg.quit == 0) {
         uint32 nThreadsFinishedTmp;
         if (arg.syncSem.FastLock()) {
             nThreadsFinishedTmp = arg.nThreadsFinished;
@@ -96,22 +97,21 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             }
 
             arg.eventSem.Post();
+            //wait the cycle time
+            uint32 elapsed = (uint32)((float32)((HighResolutionTimer::Counter() - arg.lastTickCounter) * 1000u * HighResolutionTimer::Period()));
 
+            if (elapsed < arg.msecPeriod) {
+                Sleep::MSec(arg.msecPeriod - elapsed);
+            }
+            arg.lastTickCounter = HighResolutionTimer::Counter();
         }
-        //wait the cycle time
-        uint32 elapsed = (uint32)((float32)((HighResolutionTimer::Counter() - arg.lastTickCounter) * 1000u * HighResolutionTimer::Period()));
-
-        if (elapsed < arg.msecPeriod) {
-            Sleep::MSec(arg.msecPeriod - elapsed);
-        }
-        arg.lastTickCounter = HighResolutionTimer::Counter();
 
     }
+
     while (arg.nThreadsFinished != arg.numberOfPoolThreads) {
         Sleep::Sec(1u);
     }
     arg.eventSem.Post();
-    arg.quit = 2u;
 }
 /*---------------------------------------------------------------------------*/
 /*                           Method definitions                              */
@@ -141,7 +141,7 @@ PrioritySender::PrioritySender() :
     serverInitialPort = 0u;
     connectionTimeout = TTInfiniteWait;
     mainCpuMask = 0xffu;
-    quit = 0u;
+    quit = 0;
     lastTickCounter = 0u;
     msecPeriod = 0u;
 }
@@ -207,31 +207,34 @@ bool PrioritySender::Initialise(StructuredDataI &data) {
 
 bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
 
+    bool ret = false;
     dataSource = &dataSourceIn;
-    while (!dataSource->InitialisationDone()) {
-        Sleep::Sec(1u);
-    }
-    totalMemorySize = dataSource->GetTotalMemorySize();
-    memory = (uint8*) HeapManager::Malloc(totalMemorySize);
-    numberOfVariables = dataSource->GetNumberOfVariables();
-    changeFlag = (uint8*)HeapManager::Malloc(numberOfVariables);
-    uint32 sentPerCycle = (numberOfPoolThreads * numberOfSignalToBeSent);
-    bool ret = (numberOfVariables >= sentPerCycle);
-    if (ret) {
-        indexList = (uint32*)HeapManager::Malloc(numberOfVariables * sizeof(uint32));
-        MemoryOperationsHelper::Set(memory, 0, totalMemorySize);
-        for (uint32 i = 0u; i < numberOfVariables; i++) {
-            indexList[i] = i;
+    if (dataSource != NULL) {
+        while (!dataSource->InitialisationDone()) {
+            Sleep::Sec(1u);
         }
-        numberOfChunks = (numberOfVariables / sentPerCycle);
-        if ((numberOfVariables % sentPerCycle) > 0u) {
-            numberOfChunks++;
+        totalMemorySize = dataSource->GetTotalMemorySize();
+        memory = (uint8*) HeapManager::Malloc(totalMemorySize);
+        numberOfVariables = dataSource->GetNumberOfVariables();
+        changeFlag = (uint8*) HeapManager::Malloc(numberOfVariables);
+        uint32 sentPerCycle = (numberOfPoolThreads * numberOfSignalToBeSent);
+        ret = (numberOfVariables >= sentPerCycle);
+        if (ret) {
+            indexList = (uint32*) HeapManager::Malloc(numberOfVariables * sizeof(uint32));
+            MemoryOperationsHelper::Set(memory, 0, totalMemorySize);
+            for (uint32 i = 0u; i < numberOfVariables; i++) {
+                indexList[i] = i;
+            }
+            numberOfChunks = (numberOfVariables / sentPerCycle);
+            if ((numberOfVariables % sentPerCycle) > 0u) {
+                numberOfChunks++;
+            }
+            nThreadsFinished = 0u;
         }
-        nThreadsFinished = 0u;
-    }
-    else {
-        REPORT_ERROR(ErrorManagement::InitialisationError, "The number of variables (%d) must be > than the variables sent per cycle (%d)", numberOfVariables,
-                     sentPerCycle);
+        else {
+            REPORT_ERROR(ErrorManagement::InitialisationError, "The number of variables (%d) must be > than the variables sent per cycle (%d)",
+                         numberOfVariables, sentPerCycle);
+        }
     }
     return ret;
 }
@@ -248,25 +251,37 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
     ErrorManagement::ErrorType err;
 
     if (info.GetStage() == MARTe::ExecutionInfo::StartupStage) {
+        //be sure the main thread started
+        eventSem.Wait(TTInfiniteWait);
+
         HttpChunkedStream *newClient = new HttpChunkedStream();
         newClient->Open();
-        if (syncSem.FastLock()) {
-            while (!(newClient->Connect(serverIpAddress.Buffer(), serverPort, connectionTimeout)) && (quit == 0u)) {
-                Sleep::Sec(1);
-            }
-            serverPort++;
-            syncSem.FastUnLock();
+        while (!(newClient->Connect(serverIpAddress.Buffer(), serverPort, connectionTimeout)) && (quit == 0)) {
+            Sleep::Sec(1);
         }
-        if (err.ErrorsCleared()) {
-            newClient->SetBlocking(true);
-            //always use the buffer
-            newClient->SetCalibReadParam(0u);
+        if (quit == 0) {
 
-            info.SetThreadSpecificContext(reinterpret_cast<void*>(newClient));
+            if (err.ErrorsCleared()) {
+                newClient->SetBlocking(true);
+                //always use the buffer
+                newClient->SetCalibReadParam(0u);
+
+                info.SetThreadSpecificContext(reinterpret_cast<void*>(newClient));
+            }
         }
+        else {
+            HttpChunkedStream *client = reinterpret_cast<HttpChunkedStream *>(info.GetThreadSpecificContext());
+            if (client != NULL) {
+                client->Close();
+                delete client;
+                info.SetThreadSpecificContext(NULL);
+            }
+            nThreadsFinished = numberOfPoolThreads;
+        }
+
     }
     else if (info.GetStage() == MARTe::ExecutionInfo::MainStage) {
-        if (quit == 0u) {
+        if (quit == 0) {
             if (syncSem.FastLock()) {
                 eventSem.Reset();
                 nThreadsFinished++;
@@ -316,55 +331,73 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
                     StreamStructuredData < JsonPrinter > sdata;
                     sdata.SetStream(*client);
                     uint32 sentCounter = 0u;
-                    for (uint32 i = 0u; (i < numberOfSignalToBeSent) && (err.ErrorsCleared()); i++) {
-                        PvDescriptor *pvDes = dataSource->GetPvDescriptors();
-                        uint32 signalIndex = indexList[listIndex];
-                        if (pvDes[signalIndex].numberOfElements > 0) {
+                    PvDescriptor *pvDes = dataSource->GetPvDescriptors();
+                    if (pvDes != NULL) {
+                        for (uint32 i = 0u; (i < numberOfSignalToBeSent) && (err.ErrorsCleared()); i++) {
+                            uint32 signalIndex = indexList[listIndex];
+                            if (pvDes[signalIndex].numberOfElements > 0) {
 
-                            sentCounter++;
-                            uint64 offset = (pvDes[signalIndex]).offset;
+                                sentCounter++;
+                                uint64 offset = (pvDes[signalIndex]).offset;
 
-                            StreamString signalName = pvDes[signalIndex].pvName;
+                                StreamString signalName = pvDes[signalIndex].pvName;
 
-                            void*signalPtr = &memory[offset];
+                                void*signalPtr = &memory[offset];
 
-                            AnyType signalAt(pvDes[signalIndex].td, 0u, signalPtr);
-                            if (pvDes[signalIndex].numberOfElements > 1u) {
-                                signalAt.SetNumberOfDimensions(1u);
-                                signalAt.SetNumberOfElements(0u, pvDes[signalIndex].numberOfElements);
-                            }
-
-                            err = !(sdata.CreateRelative(signalName.Buffer()));
-                            if (err.ErrorsCleared()) {
-                                err=!(sdata.Write("Value", signalAt));
-                            }
-                            if (err.ErrorsCleared()) {
-                                //ca_pend_event(0.01);
-
-                                char8 timestamp[128];
-                                MemoryOperationsHelper::Set(timestamp, 0, 128);
-                                epicsTimeToStrftime(timestamp, 128, "%Y-%m-%d %H:%M:%S.%06f",
-                                                    (epicsTimeStamp *) (&memory[offset + pvDes[signalIndex].numberOfElements * pvDes[signalIndex].memorySize]));
-
-                                StreamString ts;
-                                ts += timestamp;
-                                if (ts.Size() == 0ull) {
-                                    ts = "\"Undefined\"";
+                                AnyType signalAt(pvDes[signalIndex].td, 0u, signalPtr);
+                                if (pvDes[signalIndex].numberOfElements > 1u) {
+                                    signalAt.SetNumberOfDimensions(1u);
+                                    signalAt.SetNumberOfElements(0u, pvDes[signalIndex].numberOfElements);
                                 }
-                                err = !(sdata.Write("TimeStamp", ts.Buffer()));
+
+                                err = !(sdata.CreateRelative(signalName.Buffer()));
+                                if (err.ErrorsCleared()) {
+                                    err = !(sdata.Write("Value", signalAt));
+                                }
+                                if (err.ErrorsCleared()) {
+
+                                    char8 timestamp[128];
+                                    MemoryOperationsHelper::Set(timestamp, 0, 128);
+                                    epicsTimeToStrftime(
+                                            timestamp, 128, "%Y-%m-%d %H:%M:%S.%06f",
+                                            (epicsTimeStamp *) (&memory[offset + pvDes[signalIndex].numberOfElements * pvDes[signalIndex].memorySize]));
+
+                                    StreamString ts;
+                                    ts += timestamp;
+                                    if (ts.Size() == 0ull) {
+                                        ts = "\"Undefined\"";
+                                    }
+                                    err = !(sdata.Write("TimeStamp", ts.Buffer()));
+                                }
+
+                                if (err.ErrorsCleared()) {
+                                    err = !(sdata.Write("Index", signalIndex));
+                                }
+                                if (err.ErrorsCleared()) {
+                                    err = !(sdata.MoveToRoot());
+                                }
+
                             }
-                            if (err.ErrorsCleared()) {
-                                err=!(sdata.MoveToRoot());
-                            }
+                            listIndex++;
+                            listIndex %= numberOfVariables;
                         }
-                        listIndex++;
-                        listIndex %= numberOfVariables;
                     }
                     if (err.ErrorsCleared()) {
                         client->Flush();
                     }
                     if (err.ErrorsCleared()) {
                         client->FinalChunk();
+                    }
+                    if (err.ErrorsCleared()) {
+                        err = !hprotocol.ReadHeader();
+                    }
+                    if (err.ErrorsCleared()) {
+                        err = (hprotocol.GetHttpCommand() != HttpDefinition::HSHCReplyOK);
+                    }
+                    if (err.ErrorsCleared()) {
+                        if (!hprotocol.KeepAlive()) {
+                            err = ErrorManagement::Completed;
+                        }
                     }
                 }
             }
@@ -375,6 +408,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
         if (client != NULL) {
             client->Close();
             delete client;
+            client = NULL;
             info.SetThreadSpecificContext(NULL);
         }
         serverPort = serverInitialPort;
@@ -382,13 +416,10 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
     return err;
 }
 
-void PrioritySender::Quit() {
-    quit = 1u;
-    while (quit != 2u) {
-        Sleep::Sec(1u);
-
-    }
-    Stop();
+ErrorManagement::ErrorType PrioritySender::Stop() {
+    Atomic::Increment(&quit);
+    eventSem.Wait(TTInfiniteWait);
+    return MultiThreadService::Stop();
 }
 
 CLASS_REGISTER(PrioritySender, "1.0")

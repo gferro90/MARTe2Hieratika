@@ -153,26 +153,8 @@ static bool GetVariable(File &xmlFile,
         token.SetSize(0ull);
         ret &= xmlFile.GetToken(variable, "<", term, " \n");
     }
-
     ret &= xmlFile.GetToken(token, ">", term, "");
-    /*
-     while ((StringHelper::Compare(variable.Buffer(), "") == 0) && (ret)) {
-     char8 term;
-     ret = xmlFile.GetToken(token, "<", term, "");
-     //printf("token1=%s\n", token.Buffer());
 
-     token.SetSize(0ull);
-     ret &= xmlFile.GetToken(token, ">", term, "");
-     //printf("token2=%s\n", token.Buffer());
-
-     token.SetSize(0ull);
-     ret &= xmlFile.GetToken(variable, "<", term, "");
-     ret &= xmlFile.GetToken(token, ">", term, "");
-     //printf("token3=%s\n", token.Buffer());
-
-     token.Seek(0ull);
-     }
-     */
     return ret;
 }
 
@@ -211,7 +193,7 @@ int main(int argc,
     while (GetVariable(xmlFile, variable)) {
 
         printf("variable=%s\n", variable.Buffer());
-        if (variable == "Comment") {
+        if (variable == argv[3]) {
             start = true;
             variable.SetSize(0ull);
             continue;
@@ -220,13 +202,14 @@ int main(int argc,
 
             StreamString type = "DOUBLE";
             uint32 numberOfElements = 1u;
+/*
             pv pvs;
             pvs.name = variable.Buffer();
             result = connect_pvs(&pvs, 1);
             if (!result) {
                 result = cainfo(pvs, type, numberOfElements);
             }
-
+*/
             //dbpr(variable.Buffer(),-20);
 
             if (numberOfElements < 2u) {

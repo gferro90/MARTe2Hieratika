@@ -187,6 +187,14 @@ bool FileMonitorDataSource::GetInputOffset(const uint32 signalIdx, const uint32 
     return true;
 }
 
+const char8 *FileMonitorDataSource::GetBrokerName(StructuredDataI &data, const SignalDirection direction){
+    const char8* ret=NULL;
+    if(direction==InputSignals){
+        ret="MemoryMapMultiBufferInputBroker";
+    }
+    return ret;
+}
+
 
 CLASS_REGISTER(FileMonitorDataSource, "1.0")
 

@@ -49,24 +49,20 @@ INCLUDES += -I../../Source/Components/Interfaces/MARTe2HieratikaInterface
 INCLUDES += -I../../Source/Components/Interfaces/EpicsParserAndSubscriber
 INCLUDES += -I../../Source/Components/Interfaces/PrioritySender
 INCLUDES += -I../../Source/Components/Interfaces/DiodeReceiver
-INCLUDES += -I/home/pc/EPICS/base-3.15.6/include/
-INCLUDES += -I/home/pc/EPICS/base-3.15.6/include/os/Linux/
-INCLUDES += -I/home/pc/EPICS/base-3.15.6/include/compiler/gcc/
-INCLUDES += -I/home/pc/EPICS/base-3.15.6/src/ca/client/tools/
+INCLUDES += -I../../Source/Components/Interfaces/EpicsDiodePublisher
+INCLUDES += -I$(EPICS_BASE)/include/
+INCLUDES += -I$(EPICS_BASE)/include/os/Linux/
+INCLUDES += -I$(EPICS_BASE)/include/compiler/gcc/
+INCLUDES += -I$(EPICS_BASE)/src/ca/client/tools/
+INCLUDES += -I$(EPICS_BASE)/src/base-3.15.5/ca/client/tools/
 
-CPPFLAGS+= -fpermissive
+CPPFLAGS+= -fpermissive -Wno-error
 
 all: $(OBJS) $(SUBPROJ)   \
-        $(BUILD_DIR)/MainGTest$(EXEEXT)\
-        $(BUILD_DIR)/Test1$(EXEEXT)\
-        $(BUILD_DIR)/Test2$(EXEEXT)\
-        $(BUILD_DIR)/EpicsSignalGenToolSender$(EXEEXT)\
-        $(BUILD_DIR)/EpicsSignalGenToolReceiver$(EXEEXT)\
         $(BUILD_DIR)/EpicsSignalGenTool3$(EXEEXT)\
-        $(BUILD_DIR)/TestEPICS$(EXEEXT)\
-        $(BUILD_DIR)/ConfiguredDatabaseGenerator$(EXEEXT)\
         $(BUILD_DIR)/DiodeStandaloneApp$(EXEEXT)\
-        $(BUILD_DIR)/DiodeStandaloneRec$(EXEEXT)
+        $(BUILD_DIR)/DiodeStandaloneRec$(EXEEXT)\
+        $(BUILD_DIR)/TestEpicsWriter$(EXEEXT)
 	echo  $(OBJS)
 
 

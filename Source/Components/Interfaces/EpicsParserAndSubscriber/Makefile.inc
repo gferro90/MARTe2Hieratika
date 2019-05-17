@@ -52,7 +52,9 @@ INCLUDES += -I$(EPICS_BASE)/include/
 INCLUDES += -I$(EPICS_BASE)/include/os/Linux/
 INCLUDES += -I$(EPICS_BASE)/include/compiler/gcc/
 INCLUDES += -I$(EPICS_BASE)/src/ca/client/tools/
-CPPFLAGS+= -fpermissive
+INCLUDES += -I$(EPICS_BASE)/src/base-3.15.5/ca/client/tools/
+
+CPPFLAGS+= -fpermissive -Wno-error
 
 
 all: $(OBJS) $(SUBPROJ) \

@@ -158,9 +158,8 @@ static int cainfo(chid &pvChid,
 /*---------------------------------------------------------------------------*/
 
 EpicsParserAndSubscriber::EpicsParserAndSubscriber() :
-        Object(),
         EmbeddedServiceMethodBinderI(),
-        executor(*this) {
+        MultiThreadService((EmbeddedServiceMethodBinderI&) (*this)) {
     pvDescriptor = NULL;
     numberOfVariables = 0u;
     totalMemorySize = 0u;
@@ -169,31 +168,44 @@ EpicsParserAndSubscriber::EpicsParserAndSubscriber() :
     fmutex.Create();
     initialisationDone = 0u;
     cpuMask = 0xFF;
+    threatCnt = 0u;
+    nVarsPerChunk = 0u;
+    memorySize = NULL;
+    eventSem.Create();
+    eventSem.Reset();
 }
 
 EpicsParserAndSubscriber::~EpicsParserAndSubscriber() {
 
-    if (!executor.Stop()) {
-        if (!executor.Stop()) {
+    if (!Stop()) {
+        if (!Stop()) {
             REPORT_ERROR(ErrorManagement::FatalError, "Could not stop SingleThreadService.");
         }
-    }
-    if (pvDescriptor != NULL) {
-        delete[] pvDescriptor;
     }
 
     if (changedFlagMem != NULL) {
         HeapManager::Free((void*&) changedFlagMem);
     }
 
+    if (memorySize != NULL) {
+        delete[] memorySize;
+    }
+    if (pvDescriptor != NULL) {
+
+        delete[] pvDescriptor;
+    }
+
     if (memory != NULL) {
-        HeapManager::Free((void*&) memory);
+        for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
+            delete[] memory[i];
+        }
+        delete[] memory;
     }
 
 }
 
 bool EpicsParserAndSubscriber::Initialise(StructuredDataI &data) {
-    bool ret = Object::Initialise(data);
+    bool ret = MultiThreadService::Initialise(data);
     if (ret) {
         ret = data.Read("XmlFilePath", xmlFilePath);
         if (ret) {
@@ -208,7 +220,6 @@ bool EpicsParserAndSubscriber::Initialise(StructuredDataI &data) {
             }
 
         }
-
         else {
             REPORT_ERROR(ErrorManagement::FatalError, "Please specify XmlFilePath");
         }
@@ -249,6 +260,12 @@ bool EpicsParserAndSubscriber::ParseAndSubscribe() {
     variable.SetSize(0ull);
     changedFlagMem = (uint8*) HeapManager::Malloc(numberOfVariables);
 
+    uint32 nThreads = numberOfPoolThreads;
+    if (numberOfVariables % numberOfPoolThreads > 0) {
+        nThreads--;
+    }
+    nVarsPerChunk = numberOfVariables / (nThreads);
+
     xmlFile.Seek(0ull);
     uint32 counter = 0u;
     variable.SetSize(0ull);
@@ -274,9 +291,13 @@ bool EpicsParserAndSubscriber::ParseAndSubscribe() {
     }
 
     xmlFile.Close();
-
-    executor.SetCPUMask(cpuMask);
-    executor.Start();
+    memory = new uint8*[numberOfPoolThreads];
+    memorySize = new uint64[numberOfPoolThreads];
+    for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
+        memory[i] = NULL;
+        memorySize[i] = 0u;
+    }
+    Start();
 
     return true;
 }
@@ -284,6 +305,12 @@ bool EpicsParserAndSubscriber::ParseAndSubscribe() {
 ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info) {
     ErrorManagement::ErrorType err = ErrorManagement::NoError;
     if (info.GetStage() == ExecutionInfo::StartupStage) {
+        uint32 threadId = 0u;
+        if (fmutex.FastLock()) {
+            threadId = threatCnt;
+            threatCnt++;
+            fmutex.FastUnLock();
+        }
 
         //initialise the context
         int32 result = ca_context_create(ca_enable_preemptive_callback);
@@ -293,9 +320,18 @@ ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info
                     ca_message(result));
         }
 
-        for (uint32 i = 0u; i < numberOfVariables; i++) {
+        uint32 beg = (threadId) * nVarsPerChunk;
+        uint32 end = (threadId + 1u) * nVarsPerChunk;
 
-            ca_create_channel(&pvDescriptor[i].pvName[0], NULL, NULL, 20u, &pvDescriptor[i].pvChid);
+        printf("Starting Thread from %d to %d", beg, end);
+
+        if (end > numberOfVariables) {
+            end = numberOfVariables;
+        }
+
+        for (uint32 i = beg; i < end; i++) {
+
+            ca_create_channel(pvDescriptor[i].pvName, NULL, NULL, 20u, &pvDescriptor[i].pvChid);
             ca_pend_io(0.1);
 
             cainfo(pvDescriptor[i].pvChid, pvDescriptor[i].pvName, pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].memorySize,
@@ -304,59 +340,104 @@ ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info
                 pvDescriptor[i].numberOfElements = 0u;
             }
             else {
-                totalMemorySize += (pvDescriptor[i].numberOfElements * pvDescriptor[i].memorySize) + sizeof(epicsTimeStamp);
+                memorySize[threadId] += (pvDescriptor[i].numberOfElements * pvDescriptor[i].memorySize) + sizeof(epicsTimeStamp);
             }
 
         }
-        memory = (uint8*) HeapManager::Malloc(totalMemorySize);
-        MemoryOperationsHelper::Set(memory, 0, totalMemorySize);
+        memory[threadId] = new uint8[memorySize[threadId]];
+        MemoryOperationsHelper::Set(memory[threadId], 0, memorySize[threadId]);
 
         uint32 memoryOffset = 0u;
-        for (uint32 counter = 0u; counter < numberOfVariables; counter++) {
-            pvDescriptor[counter].memory = memory + memoryOffset;
-            pvDescriptor[counter].offset = memoryOffset;
-            pvDescriptor[counter].timeStamp = (epicsTimeStamp*) (memory + memoryOffset
-                    + (pvDescriptor[counter].numberOfElements * pvDescriptor[counter].memorySize));
+        for (uint32 i = beg; i < end; i++) {
+            pvDescriptor[i].memory = memory[threadId] + memoryOffset;
+            pvDescriptor[i].offset = memoryOffset;
+            pvDescriptor[i].timeStamp = (epicsTimeStamp*) (memory[threadId] + memoryOffset + (pvDescriptor[i].numberOfElements * pvDescriptor[i].memorySize));
             //printf("creating subscription=%s\n", pvDescriptor[counter].pvName);
-            if (pvDescriptor[counter].numberOfElements > 0) {
-                memoryOffset += (pvDescriptor[counter].numberOfElements * pvDescriptor[counter].memorySize) + sizeof(epicsTimeStamp);
+            if (pvDescriptor[i].numberOfElements > 0) {
+                memoryOffset += (pvDescriptor[i].numberOfElements * pvDescriptor[i].memorySize) + sizeof(epicsTimeStamp);
+            }
+        }
 
-                if (!ca_array_get(pvDescriptor[counter].pvType, pvDescriptor[counter].numberOfElements, pvDescriptor[counter].pvChid,
-                                  pvDescriptor[counter].memory)) {
-                    printf("FAILED ca_get for %s\n", pvDescriptor[counter].pvName);
+        for (uint32 i = beg; i < end; i++) {
+
+            //printf("creating subscription=%s\n", pvDescriptor[counter].pvName);
+            if (pvDescriptor[i].numberOfElements > 0) {
+
+                if (!ca_array_get(pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].pvChid, pvDescriptor[i].memory)) {
+                    printf("FAILED ca_get for %s\n", pvDescriptor[i].pvName);
                 }
 
-                if (ca_create_subscription(pvDescriptor[counter].pvType, pvDescriptor[counter].numberOfElements, pvDescriptor[counter].pvChid, DBE_VALUE,
-                                           &GetValueCallback, &pvDescriptor[counter], &pvDescriptor[counter].pvEvid) != ECA_NORMAL) {
-                    printf("FAILED create subscription %s\n", pvDescriptor[counter].pvName);
+                if (ca_create_subscription(pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].pvChid, DBE_VALUE, &GetValueCallback,
+                                           &pvDescriptor[i], &pvDescriptor[i].pvEvid) != ECA_NORMAL) {
+                    printf("FAILED create subscription %s\n", pvDescriptor[i].pvName);
                 }
                 (void) ca_pend_io(0.1);
 
-                if (ca_create_subscription(DBR_TIME_STRING, pvDescriptor[counter].numberOfElements, pvDescriptor[counter].pvChid, DBE_VALUE,
-                                           &GetTimeoutCallback, &pvDescriptor[counter], &pvDescriptor[counter].pvEvid) != ECA_NORMAL) {
-                    printf("FAILED create subscription %s\n", pvDescriptor[counter].pvName);
+                if (ca_create_subscription(DBR_TIME_STRING, pvDescriptor[i].numberOfElements, pvDescriptor[i].pvChid, DBE_VALUE, &GetTimeoutCallback,
+                                           &pvDescriptor[i], &pvDescriptor[i].pvEvid) != ECA_NORMAL) {
+                    printf("FAILED create subscription %s\n", pvDescriptor[i].pvName);
                 }
-                (void) ca_pend_io(0.1);
+                (void) ca_pend_io(0.01);
             }
 
         }
-        initialisationDone = 1u;
+        if (fmutex.FastLock()) {
+            totalMemorySize += memory[threadId];
+            //im the last one
+            //remap the offsets
+            if (initialisationDone >= (numberOfPoolThreads - 1u)) {
+                uint32 j = 0u;
+                uint32 memCnt = 0u;
+                for (uint32 i = 0u; i < numberOfVariables; i++) {
+                    if (j < nVarsPerChunk) {
+                        j++;
+                    }
+                    else {
+                        j = 0u;
+                        memCnt++;
+                    }
+                    for (uint32 k = 0u; k < memCnt; k++) {
+                        pvDescriptor[i].offset += memorySize[k];
+                    }
+                }
+            }
+            initialisationDone++;
+            fmutex.FastUnLock();
+        }
 
     }
     else if (info.GetStage() != ExecutionInfo::BadTerminationStage) {
-        Sleep::Sec(1.0);
+        eventSem.Wait(TTInfiniteWait);
+        if (fmutex.FastLock()) {
+            if (pvDescriptor != NULL) {
+                for (uint32 n = 0u; (n < numberOfVariables); n++) {
+                    (void) ca_clear_subscription(pvDescriptor[n].pvEvid);
+                    (void) ca_clear_event(pvDescriptor[n].pvEvid);
+                    (void) ca_clear_channel(pvDescriptor[n].pvChid);
+                }
+                ca_detach_context();
+                ca_context_destroy();
+                delete[] pvDescriptor;
+                pvDescriptor = NULL;
+            }
+            fmutex.FastUnLock();
+        }
+
     }
     else {
-        uint32 n;
-        if (pvDescriptor != NULL) {
-            for (n = 0u; (n < numberOfVariables); n++) {
-                (void) ca_clear_subscription(pvDescriptor[n].pvEvid);
-                (void) ca_clear_event(pvDescriptor[n].pvEvid);
-                (void) ca_clear_channel(pvDescriptor[n].pvChid);
+        if (fmutex.FastLock()) {
+            if (pvDescriptor != NULL) {
+                for (uint32 n = 0u; (n < numberOfVariables); n++) {
+                    (void) ca_clear_subscription(pvDescriptor[n].pvEvid);
+                    (void) ca_clear_event(pvDescriptor[n].pvEvid);
+                    (void) ca_clear_channel(pvDescriptor[n].pvChid);
+                }
+                ca_detach_context();
+                ca_context_destroy();
+                pvDescriptor = NULL;
             }
+            fmutex.FastUnLock();
         }
-        ca_detach_context();
-        ca_context_destroy();
     }
 
     return err;
@@ -366,7 +447,11 @@ bool EpicsParserAndSubscriber::Synchronise(uint8 *memoryOut,
                                            uint8 *changedFlags) {
     //copy and reset the flags
     if (fmutex.FastLock()) {
-        MemoryOperationsHelper::Copy(memoryOut, memory, totalMemorySize);
+        uint32 offset = 0u;
+        for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
+            MemoryOperationsHelper::Copy(memoryOut + offset, memory[i], memorySize[i]);
+            offset += memorySize[i];
+        }
         MemoryOperationsHelper::Copy(changedFlags, changedFlagMem, numberOfVariables);
         MemoryOperationsHelper::Set(changedFlagMem, '\0', numberOfVariables);
         fmutex.FastUnLock();
@@ -387,7 +472,14 @@ uint64 EpicsParserAndSubscriber::GetTotalMemorySize() {
 }
 
 bool EpicsParserAndSubscriber::InitialisationDone() {
-    return initialisationDone > 0u;
+    return (initialisationDone >= numberOfPoolThreads);
+}
+
+ErrorManagement::ErrorType EpicsParserAndSubscriber::Stop() {
+    eventSem.Post();
+    ErrorManagement::ErrorType err;
+    MultiThreadService::Stop();
+    return err;
 }
 
 CLASS_REGISTER(EpicsParserAndSubscriber, "1.0")

@@ -290,5 +290,15 @@ bool HttpDiodeDataSource::TerminateOutputCopy(const uint32 signalIdx,
     return true;
 }
 
+const char8 *HttpDiodeDataSource::GetBrokerName(StructuredDataI &data, const SignalDirection direction){
+    const char8* ret=NULL;
+    if(direction==OutputSignals){
+        ret="MemoryMapMultiBufferOutputBroker";
+    }
+    return ret;
+}
+
+
+
 CLASS_REGISTER(HttpDiodeDataSource, "1.0")
 }
