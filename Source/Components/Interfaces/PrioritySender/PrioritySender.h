@@ -36,6 +36,8 @@
 #include "EpicsParserAndSubscriber.h"
 #include "EventSem.h"
 #include "FastPollingMutexSem.h"
+#include "HttpChunkedStream.h"
+
 /*---------------------------------------------------------------------------*/
 /*                           Class declaration                               */
 /*---------------------------------------------------------------------------*/
@@ -118,6 +120,11 @@ public:
 
 
 private:
+
+    ErrorManagement::ErrorType SendVariables(HttpChunkedStream &client);
+
+
+    ErrorManagement::ErrorType SendCloseConnectionMessage(HttpChunkedStream &client);
 
     /**
      * Wraps the callback of the threads in the pool
@@ -245,6 +252,8 @@ private:
      * The period of the main thread in milliseconds
      */
     uint32 msecPeriod;
+
+    bool initialised;
 
 };
 

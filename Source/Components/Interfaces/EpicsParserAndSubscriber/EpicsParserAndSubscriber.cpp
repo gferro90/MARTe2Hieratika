@@ -261,9 +261,6 @@ bool EpicsParserAndSubscriber::ParseAndSubscribe() {
     changedFlagMem = (uint8*) HeapManager::Malloc(numberOfVariables);
 
     uint32 nThreads = numberOfPoolThreads;
-    if (numberOfVariables % numberOfPoolThreads > 0) {
-        nThreads--;
-    }
     nVarsPerChunk = numberOfVariables / (nThreads);
 
     xmlFile.Seek(0ull);
@@ -323,9 +320,9 @@ ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info
         uint32 beg = (threadId) * nVarsPerChunk;
         uint32 end = (threadId + 1u) * nVarsPerChunk;
 
-        printf("Starting Thread from %d to %d", beg, end);
+        printf("Starting Thread from %d to %d\n", beg, end);
 
-        if (end > numberOfVariables) {
+        if ((numberOfVariables-end) < numberOfPoolThreads) {
             end = numberOfVariables;
         }
 

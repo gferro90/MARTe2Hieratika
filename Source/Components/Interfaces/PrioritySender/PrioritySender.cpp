@@ -30,7 +30,6 @@
 /*---------------------------------------------------------------------------*/
 
 #include "PrioritySender.h"
-#include "HttpChunkedStream.h"
 #include "StreamStructuredData.h"
 #include "JsonPrinter.h"
 #include "AdvancedErrorManagement.h"
@@ -52,6 +51,7 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
 
         //all the threads sent the variables
         if (nThreadsFinishedTmp == arg.numberOfPoolThreads) {
+
             arg.nThreadsFinished = 0u;
             arg.dataSource->Synchronise(arg.memory, arg.changeFlag);
             //if not, just send using FIFO mechanism
@@ -105,6 +105,9 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             }
             arg.lastTickCounter = HighResolutionTimer::Counter();
         }
+        else {
+            Sleep::MSec(10);
+        }
 
     }
 
@@ -144,6 +147,7 @@ PrioritySender::PrioritySender() :
     quit = 0;
     lastTickCounter = 0u;
     msecPeriod = 0u;
+    initialised = false;
 }
 
 PrioritySender::~PrioritySender() {
@@ -251,16 +255,22 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
     ErrorManagement::ErrorType err;
 
     if (info.GetStage() == MARTe::ExecutionInfo::StartupStage) {
+
         //be sure the main thread started
-        eventSem.Wait(TTInfiniteWait);
+        if (!initialised) {
+            eventSem.Wait(TTInfiniteWait);
+            initialised = true;
+        }
 
         HttpChunkedStream *newClient = new HttpChunkedStream();
         newClient->Open();
+        REPORT_ERROR(ErrorManagement::Information, "Client connecting...");
         while (!(newClient->Connect(serverIpAddress.Buffer(), serverPort, connectionTimeout)) && (quit == 0)) {
             Sleep::Sec(1);
         }
-        if (quit == 0) {
+        REPORT_ERROR(ErrorManagement::Information, "Connection established!");
 
+        if (quit == 0) {
             if (err.ErrorsCleared()) {
                 newClient->SetBlocking(true);
                 //always use the buffer
@@ -289,128 +299,36 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
             }
             //lock on the index list
             eventSem.Wait(TTInfiniteWait);
-
             HttpChunkedStream *client = reinterpret_cast<HttpChunkedStream *>(info.GetThreadSpecificContext());
 
             if (client != NULL) {
 
-                uint32 listIndex;
-                if (syncSem.FastLock()) {
-                    listIndex = currentIdx;
-                    currentIdx += numberOfSignalToBeSent;
-                    currentIdx %= numberOfVariables;
-                    syncSem.FastUnLock();
-                }
-
                 client->SetChunkMode(false);
-                HttpProtocol hprotocol(*client);
-                if (!hprotocol.MoveAbsolute("OutputOptions")) {
-                    hprotocol.CreateAbsolute("OutputOptions");
-                }
+                err = SendVariables(*client);
 
-                StreamString param;
-                param.Printf("%s:%d", serverIpAddress.Buffer(), serverPort);
-                hprotocol.Write("Host", param.Buffer());
-                hprotocol.Write("Connection", "keep-alive");
-                hprotocol.Write("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                hprotocol.Write("Accept-Encoding", "gzip, deflate, br");
-                hprotocol.Write("Cache-Control", "no-cache");
-
-                hprotocol.Write("Transfer-Encoding", "chunked");
-                hprotocol.Write("Content-Type", "text/html");
-
-                StreamString hstream;
-                err = !hprotocol.WriteHeader(false, HttpDefinition::HSHCPut, &hstream, "/archiver");
-                if (err.ErrorsCleared()) {
-                    client->Flush();
-                }
-                if (err.ErrorsCleared()) {
-
-                    client->SetChunkMode(true);
-
-                    StreamStructuredData < JsonPrinter > sdata;
-                    sdata.SetStream(*client);
-                    uint32 sentCounter = 0u;
-                    PvDescriptor *pvDes = dataSource->GetPvDescriptors();
-                    if (pvDes != NULL) {
-                        for (uint32 i = 0u; (i < numberOfSignalToBeSent) && (err.ErrorsCleared()); i++) {
-                            uint32 signalIndex = indexList[listIndex];
-                            if (pvDes[signalIndex].numberOfElements > 0) {
-
-                                sentCounter++;
-                                uint64 offset = (pvDes[signalIndex]).offset;
-
-                                StreamString signalName = pvDes[signalIndex].pvName;
-
-                                void*signalPtr = &memory[offset];
-
-                                AnyType signalAt(pvDes[signalIndex].td, 0u, signalPtr);
-                                if (pvDes[signalIndex].numberOfElements > 1u) {
-                                    signalAt.SetNumberOfDimensions(1u);
-                                    signalAt.SetNumberOfElements(0u, pvDes[signalIndex].numberOfElements);
-                                }
-
-                                err = !(sdata.CreateRelative(signalName.Buffer()));
-                                if (err.ErrorsCleared()) {
-                                    err = !(sdata.Write("Value", signalAt));
-                                }
-                                if (err.ErrorsCleared()) {
-
-                                    char8 timestamp[128];
-                                    MemoryOperationsHelper::Set(timestamp, 0, 128);
-                                    epicsTimeToStrftime(
-                                            timestamp, 128, "%Y-%m-%d %H:%M:%S.%06f",
-                                            (epicsTimeStamp *) (&memory[offset + pvDes[signalIndex].numberOfElements * pvDes[signalIndex].memorySize]));
-
-                                    StreamString ts;
-                                    ts += timestamp;
-                                    if (ts.Size() == 0ull) {
-                                        ts = "\"Undefined\"";
-                                    }
-                                    err = !(sdata.Write("TimeStamp", ts.Buffer()));
-                                }
-
-                                if (err.ErrorsCleared()) {
-                                    err = !(sdata.Write("Index", signalIndex));
-                                }
-                                if (err.ErrorsCleared()) {
-                                    err = !(sdata.MoveToRoot());
-                                }
-
-                            }
-                            listIndex++;
-                            listIndex %= numberOfVariables;
-                        }
-                    }
-                    if (err.ErrorsCleared()) {
-                        client->Flush();
-                    }
-                    if (err.ErrorsCleared()) {
-                        client->FinalChunk();
-                    }
-                    if (err.ErrorsCleared()) {
-                        err = !hprotocol.ReadHeader();
-                    }
-                    if (err.ErrorsCleared()) {
-                        err = (hprotocol.GetHttpCommand() != HttpDefinition::HSHCReplyOK);
-                    }
-                    if (err.ErrorsCleared()) {
-                        if (!hprotocol.KeepAlive()) {
-                            err = ErrorManagement::Completed;
-                        }
-                    }
-                }
             }
         }
+
     }
     else {
+        REPORT_ERROR(ErrorManagement::FatalError, "Error: close the connection");
         HttpChunkedStream *client = reinterpret_cast<HttpChunkedStream *>(info.GetThreadSpecificContext());
+        if (info.GetStage() == MARTe::ExecutionInfo::BadTerminationStage) {
+            REPORT_ERROR(ErrorManagement::FatalError, "Send final message");
+
+            //send a connection-close message
+            if (client != NULL) {
+                SendCloseConnectionMessage(*client);
+            }
+        }
+
         if (client != NULL) {
             client->Close();
             delete client;
             client = NULL;
             info.SetThreadSpecificContext(NULL);
         }
+
         serverPort = serverInitialPort;
     }
     return err;
@@ -420,6 +338,142 @@ ErrorManagement::ErrorType PrioritySender::Stop() {
     Atomic::Increment(&quit);
     eventSem.Wait(TTInfiniteWait);
     return MultiThreadService::Stop();
+}
+
+ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &client) {
+    ErrorManagement::ErrorType err;
+    HttpProtocol hprotocol(client);
+    if (!hprotocol.MoveAbsolute("OutputOptions")) {
+        hprotocol.CreateAbsolute("OutputOptions");
+    }
+
+    StreamString param;
+    param.Printf("%s:%d", serverIpAddress.Buffer(), serverPort);
+    hprotocol.Write("Host", param.Buffer());
+    hprotocol.Write("Connection", "keep-alive");
+    hprotocol.Write("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+    hprotocol.Write("Accept-Encoding", "gzip, deflate, br");
+    hprotocol.Write("Cache-Control", "no-cache");
+
+    hprotocol.Write("Transfer-Encoding", "chunked");
+    hprotocol.Write("Content-Type", "text/html");
+
+    StreamString hstream;
+    err = !hprotocol.WriteHeader(false, HttpDefinition::HSHCPut, &hstream, "/");
+    if (err.ErrorsCleared()) {
+        client.Flush();
+    }
+    if (err.ErrorsCleared()) {
+
+        uint32 listIndex;
+        if (syncSem.FastLock()) {
+            listIndex = currentIdx;
+            currentIdx += numberOfSignalToBeSent;
+            currentIdx %= numberOfVariables;
+            syncSem.FastUnLock();
+        }
+
+        client.SetChunkMode(true);
+        uint32 sentCounter = 0u;
+        PvDescriptor *pvDes = dataSource->GetPvDescriptors();
+        if (pvDes != NULL) {
+            for (uint32 i = 0u; (i < numberOfSignalToBeSent) && (err.ErrorsCleared()); i++) {
+                uint32 signalIndex = indexList[listIndex];
+                if (pvDes[signalIndex].numberOfElements > 0) {
+
+                    sentCounter++;
+                    uint64 offset = (pvDes[signalIndex]).offset;
+
+                    StreamString signalName = pvDes[signalIndex].pvName;
+
+                    void*signalPtr = &memory[offset];
+
+                    AnyType signalAt(pvDes[signalIndex].td, 0u, signalPtr);
+                    if (pvDes[signalIndex].numberOfElements > 1u) {
+                        signalAt.SetNumberOfDimensions(1u);
+                        signalAt.SetNumberOfElements(0u, pvDes[signalIndex].numberOfElements);
+                    }
+
+                    // err = !(sdata.CreateRelative(signalName.Buffer()));
+                    StreamString var = "\"";
+                    var += signalName.Buffer();
+                    var += "\": ";
+                    uint32 varSize = var.Size();
+                    client.Write(var.Buffer(), varSize);
+                    uint32 indexSize = sizeof(uint32);
+                    client.Write((uint8*) (&signalIndex), indexSize);
+                    uint32 totalSize = pvDes[signalIndex].memorySize * pvDes[signalIndex].numberOfElements;
+                    client.Write((uint8*) signalPtr, totalSize);
+                    uint32 timestampSize = sizeof(uint64);
+                    uint32 tsIndex = (pvDes[signalIndex].numberOfElements * pvDes[signalIndex].memorySize);
+                    uint8* timeStampPtr = (uint8*) (&memory[offset + tsIndex]);
+                    client.Write((uint8*) timeStampPtr, timestampSize);
+                    uint32 termSize = 2u;
+                    client.Write("\n\r", termSize);
+                }
+                listIndex++;
+                listIndex %= numberOfVariables;
+            }
+        }
+        if (err.ErrorsCleared()) {
+            err = !client.Flush();
+        }
+        if (err.ErrorsCleared()) {
+            err = !client.FinalChunk();
+        }
+        if (err.ErrorsCleared()) {
+            err = !hprotocol.ReadHeader();
+        }
+        if (err.ErrorsCleared()) {
+            StreamString hstream;
+            hprotocol.CompleteReadOperation(&hstream, 10000u);
+        }
+        if (err.ErrorsCleared()) {
+            if (!hprotocol.KeepAlive()) {
+                REPORT_ERROR(ErrorManagement::FatalError, "Connection complete!");
+                err = ErrorManagement::Completed;
+            }
+        }
+    }
+    return err;
+}
+
+ErrorManagement::ErrorType PrioritySender::SendCloseConnectionMessage(HttpChunkedStream &client) {
+
+    ErrorManagement::ErrorType err;
+    uint32 listIndex;
+    if (syncSem.FastLock()) {
+        listIndex = currentIdx;
+        currentIdx += numberOfSignalToBeSent;
+        currentIdx %= numberOfVariables;
+        syncSem.FastUnLock();
+    }
+
+    client.SetChunkMode(false);
+    HttpProtocol hprotocol(client);
+    if (!hprotocol.MoveAbsolute("OutputOptions")) {
+        hprotocol.CreateAbsolute("OutputOptions");
+    }
+    StreamString param;
+    param.Printf("%s:%d", serverIpAddress.Buffer(), serverPort);
+    hprotocol.Write("Host", param.Buffer());
+    hprotocol.Write("Connection", "close");
+    hprotocol.Write("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+    hprotocol.Write("Accept-Encoding", "gzip, deflate, br");
+    hprotocol.Write("Cache-Control", "no-cache");
+    hprotocol.Write("Transfer-Encoding", "chunked");
+    hprotocol.Write("Content-Type", "text/html");
+    hprotocol.SetKeepAlive(false);
+    StreamString hstream;
+    err = !hprotocol.WriteHeader(false, HttpDefinition::HSHCPut, &hstream, "/");
+    if (err.ErrorsCleared()) {
+        client.Flush();
+    }
+    if (err.ErrorsCleared()) {
+        client.SetChunkMode(true);
+        err = !client.FinalChunk();
+    }
+    return err;
 }
 
 CLASS_REGISTER(PrioritySender, "1.0")

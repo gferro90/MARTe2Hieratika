@@ -55,7 +55,7 @@ INCLUDES += -I$(EPICS_BASE)/include/compiler/gcc/
 INCLUDES += -I$(EPICS_BASE)/src/ca/client/tools/
 INCLUDES += -I$(EPICS_BASE)/src/base-3.15.5/ca/client/tools/
 CPPFLAGS+= -fpermissive -Wno-error
-
+CFLAGSPEC += -Ddb_accessHFORdb_accessC
 
 all: $(OBJS) $(SUBPROJ) \
 	$(BUILD_DIR)/PrioritySender$(LIBEXT) \

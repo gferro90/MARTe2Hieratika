@@ -83,6 +83,7 @@ struct PvRecDescriptor {
     uint32 offset;
 
     uint32 key;
+
 };
 
 
@@ -115,6 +116,10 @@ public:
 
     bool InitialisationDone();
     friend void DiodeReceiverCycleLoop(DiodeReceiver &arg);
+
+
+    bool GetLocalVariableIndex(const char8 *varName, uint32 receivedIndex, uint32 &index);
+
 
 protected:
 

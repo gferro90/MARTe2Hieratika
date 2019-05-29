@@ -102,14 +102,11 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
     else {
         arg.totalMemorySize = 0u;
         uint32 nThreads = arg.numberOfInitThreads;
-        if (arg.numberOfVariables % nThreads > 0u) {
-            nThreads--;
-        }
         uint32 numberOfVarsPerThread = (arg.numberOfVariables / nThreads);
 
         uint32 beg = threadId * numberOfVarsPerThread;
         uint32 end = (threadId + 1) * numberOfVarsPerThread;
-        if (end > arg.numberOfVariables) {
+        if ((arg.numberOfVariables - end) < nThreads) {
             end = arg.numberOfVariables;
         }
         for (uint32 n = beg; (n < end); n++) {
@@ -386,14 +383,14 @@ ErrorManagement::ErrorType DiodeReceiver::Start() {
 
     for (uint32 n = 0u; n < numberOfVariables; n++) {
         pvs[n].offset = totalMemorySize;
-        totalMemorySize += pvs[n].byteSize;
+        totalMemorySize += (pvs[n].byteSize + sizeof(uint64));
     }
 
     memory = (uint8*) HeapManager::Malloc(totalMemorySize);
     memoryPrec = (uint8*) HeapManager::Malloc(totalMemorySize);
     changeFlag = (uint8*) HeapManager::Malloc(numberOfVariables);
     pvMapping = new uint32[numberOfVariables];
-    for(uint32 i=0u; i<numberOfVariables; i++){
+    for (uint32 i = 0u; i < numberOfVariables; i++) {
         pvMapping[i] = 0xFFFFFFFF;
     }
     MemoryOperationsHelper::Set(memory, 0, totalMemorySize);
@@ -444,222 +441,137 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
         StreamString varValue;
         StreamString varTs;
         StreamString varIndex;
-        StreamString localcfg;
+
         uint32 readVariables = 0u;
         uint32 receivedIndex = 0u;
+        const char8 *pattern = "\": ";
+        uint32 patternSize = StringHelper::Length(pattern);
+
+        bool isChunked = true;
+        uint32 contentLength = 0u;
+
+        if (err.ErrorsCleared()) {
+            if (protocol.MoveAbsolute("InputOptions")) {
+                if (protocol.Read("Content-Length", contentLength)) {
+                    isChunked = false;
+                    if(contentLength==0u){
+                        protocol.SetKeepAlive(false);
+                    }
+                }
+                protocol.MoveToAncestor(1u);
+            }
+        }
+
         if (err.ErrorsCleared()) {
 
-            uint32 chunkSize = 0u;
+            uint32 chunkSize = (isChunked) ? (0u) : (32u);
             do {
-                commClient->GetLine(line, false);
-                line.SetSize(line.Size() - 1);
-                StreamString toConv = "0x";
-                toConv += line;
-                TypeConvert(chunkSize, toConv);
-                line.SetSize(0ull);
+                if (isChunked) {
+                    //get the line
+                    err = !(commClient->GetLine(line, false));
+                    //remove the \r
+                    line.SetSize(line.Size() - 1);
+                    //get the chunk size
+                    StreamString toConv = "0x";
+                    toConv += line;
+                    TypeConvert(chunkSize, toConv);
+                    line.SetSize(0ull);
+                }
+                else {
+                    if (contentLength < chunkSize) {
+                        chunkSize = contentLength;
+                    }
+                    contentLength -= chunkSize;
+                }
+
                 if (err.ErrorsCleared()) {
                     uint32 sizeRead = 0u;
-
-                    while (sizeRead < chunkSize) {
+                    //append to payload the chunk
+                    payload.Seek(payload.Size());
+                    while ((sizeRead < chunkSize) && (err.ErrorsCleared())) {
                         MemoryOperationsHelper::Set(buff, '\0', 1024);
                         uint32 sizeToRead = chunkSize - sizeRead;
                         if (sizeToRead > 1023) {
                             sizeToRead = 1023;
                         }
-                        commClient->Read(buff, sizeToRead);
+                        err = !commClient->Read(buff, sizeToRead);
 
-                        payload += buff;
-                        sizeRead += sizeToRead;
-
+                        if (err.ErrorsCleared()) {
+                            payload.Write(buff, sizeToRead);
+                            sizeRead += sizeToRead;
+                        }
                     }
+                }
+
+                if (err.ErrorsCleared()) {
                     if (chunkSize > 0) {
-                        uint32 size = 2;
-                        commClient->Read(buff, size);
+                        if (isChunked) {
+                            //read the \r\n
+                            uint32 size = 2;
+                            err = !(commClient->Read(buff, size));
+                        }
+                        bool ok = err.ErrorsCleared();
+                        while (ok) {
 
-                        while (1) {
+                            payload.Seek(0);
+                            varName.SetSize(0);
 
-                            payload.Seek(0u);
+                            const char8 *dataPtr = StringHelper::SearchString(payload.Buffer(), pattern);
 
-                            char8 terminator;
+                            ok = (dataPtr != NULL);
+                            uint32 nameSize = 0u;
+                            uint32 processedSize = 0u;
 
-                            if (state == 0) {
-                                varName.SetSize(0);
-                                payload.GetToken(varName, "\n", terminator, "\r\n");
+                            if (ok) {
+                                // skip the "
+                                varName = payload.Buffer() + 1;
+                                nameSize = (uint32)(dataPtr - payload.Buffer() - 1u);
+                                varName.SetSize(nameSize);
+                                uint32 indexSize = sizeof(uint32);
+                                dataPtr += patternSize;
 
-                                if (terminator == '\n') {
-                                    uint32 varNameSize = varName.Size();
-                                    varName.SetSize(varNameSize - 4u);
-                                    varName = varName.Buffer() + 1;
-                                    payload = payload.Buffer() + payload.Position();
-                                    payload.Seek(0ull);
+                                processedSize += (nameSize + patternSize);
 
-                                    state = 1;
-                                }
-                                else {
-                                    break;
-                                }
-                            }
-                            if (state == 1) {
-                                varValue.SetSize(0);
-                                payload.GetToken(varValue, "\n", terminator, "\r\n");
-                                if (terminator == '\n') {
-                                    uint32 varValueSize = varValue.Size();
-                                    varValue.SetSize(varValueSize - 1u);
-                                    varValue = varValue.Buffer() + StringHelper::Length("\"Value\": ");
-                                    payload = payload.Buffer() + payload.Position();
-                                    payload.Seek(0ull);
-                                    state = 2;
-                                }
-                                else {
-                                    break;
-                                }
-                            }
-                            if (state == 2) {
-                                varTs.SetSize(0);
-                                payload.GetToken(varTs, "\n", terminator, "\r\n");
-                                if (terminator == '\n') {
-                                    //remove = {
-                                    uint32 varTsSize = varTs.Size();
-                                    varTs.SetSize(varTsSize - 1u);
-                                    varTs = varTs.Buffer() + StringHelper::Length("\"Timestamp\": ");
-                                    payload = payload.Buffer() + payload.Position();
-                                    payload.Seek(0ull);
-                                    state = 3;
-                                }
-                                else {
-                                    break;
+                                ok = ((payload.Size() - processedSize) >= indexSize);
+                                if (ok) {
+                                    MemoryOperationsHelper::Copy(&receivedIndex, dataPtr, indexSize);
                                 }
                             }
 
-                            if (state == 3) {
-                                varIndex.SetSize(0);
-                                payload.GetToken(varIndex, "\n", terminator, "\r\n");
-                                if (terminator == '\n') {
-                                    varIndex = varIndex.Buffer() + StringHelper::Length("\"Index\": ");
-
-                                    payload = payload.Buffer() + payload.Position();
-                                    payload.Seek(0ull);
-
-                                    TypeConvert(receivedIndex, varIndex.Buffer());
-                                    if (pvMapping[receivedIndex] == 0xFFFFFFFF) {
-                                        state = 4;
+                            if (ok) {
+                                if (pvMapping[receivedIndex] == 0xFFFFFFFF) {
+                                    uint32 index=0u;
+                                    ok=GetLocalVariableIndex(varName.Buffer(), receivedIndex, index);
+                                    if(ok){
+                                        pvMapping[receivedIndex]=index;
                                     }
-                                    else {
-                                        state = 5;
-                                    }
-                                }
-                                else {
-                                    break;
                                 }
                             }
-                            if (state == 4) {
 
-                                uint32 range_1 = numberOfVariables;
-                                uint32 range = (numberOfVariables / 2);
-                                uint32 index = range;
-                                //bool done = false;
-                                while (range_1 > 0) {
-                                    int32 res = StringHelper::Compare(pvs[index].pvName, varName.Buffer());
-                                    if (res == 0) {
-                                        pvMapping[receivedIndex] = index;
-                                        readVariables++;
-                                        break;
-                                    }
-                                    else if (res == 2) {
-                                        uint32 rem = range % 2;
-                                        range_1 = range;
-                                        if (rem == 1) {
-                                            index--;
-                                        }
-                                        range = range_1 / 2;
-                                        index -= range;
-                                    }
-                                    else if (res == 1) {
-                                        //this means that they are equal
-                                        uint32 rem_1 = range_1 % 2;
-                                        range_1 = range;
-                                        if (rem_1 == 0) {
-                                            range_1--;
-                                            //one less
-                                        }
-                                        range = range_1 / 2;
-                                        index += (range + 1);
-                                    }
-                                }
-                                state = 5;
-
-                            }
-                            if (state == 5) {
-                                bool ok = true;
-                                ConfigurationDatabase cdb;
+                            if (ok) {
                                 uint32 index = pvMapping[receivedIndex];
-                                if (pvs[index].numberOfElements > 0) {
-                                    if (pvs[index].at.GetNumberOfDimensions() > 0u) {
-                                        localcfg = "\"Value\": ";
-                                        localcfg += varValue.Buffer();
-                                        localcfg.Seek(0);
-                                        JsonParser parser(localcfg, cdb);
-                                        ok = parser.Parse();
-                                        if (!ok) {
-                                            REPORT_ERROR(ErrorManagement::FatalError, "Failed parse");
+                                processedSize += (sizeof(uint32) + pvs[index].byteSize + sizeof(uint64) + 3u);
+
+                                ok = (payload.Size() >= processedSize);
+                                if (ok) {
+                                    dataPtr += sizeof(uint32);
+                                    if (syncSem.FastLock()) {
+
+                                        void *ptr = (void*) (memory + pvs[index].offset);
+                                        void *ptr_1 = (void*) (memoryPrec + pvs[index].offset);
+                                        MemoryOperationsHelper::Copy(ptr, dataPtr, (pvs[index].byteSize + sizeof(uint64)));
+                                        if (MemoryOperationsHelper::Compare(ptr, ptr_1, pvs[index].byteSize) != 0) {
+                                            (changeFlag)[index] = 1;
+                                            MemoryOperationsHelper::Copy(ptr_1, ptr, pvs[index].byteSize);
                                         }
-                                        else {
-                                            cdb.MoveToRoot();
-                                        }
+                                        syncSem.FastUnLock();
                                     }
-                                    if (ok) {
-                                        if (syncSem.FastLock()) {
-                                            if (pvs[index].at.GetNumberOfDimensions() > 0u) {
-                                                cdb.MoveToRoot();
-                                                ok = cdb.Read("Value", pvs[index].at);
-                                            }
-                                            else {
-                                                ok = TypeConvert(pvs[index].at, varValue.Buffer());
-                                            }
-                                            if (ok) {
-                                                if (pvs[index].pvType == DBF_STRING) {
-
-                                                    char8 *str = (char8 *) (pvs[index].at.GetDataPointer());
-                                                    if (*str == '\"') {
-                                                        uint32 length = StringHelper::Length(str);
-                                                        str[length - 1u] = '\0';
-                                                        pvs[index].at.SetDataPointer(str + 1u);
-                                                    }
-                                                }
-
-                                                if (MemoryOperationsHelper::Compare(memory + pvs[index].offset, memoryPrec + pvs[index].offset,
-                                                                                    pvs[index].byteSize) != 0) {
-
-                                                    (changeFlag)[index] = 1;
-                                                    MemoryOperationsHelper::Copy(memoryPrec + pvs[index].offset, memory + pvs[index].offset,
-                                                                                 pvs[index].byteSize);
-
-                                                }
-                                            }
-                                            syncSem.FastUnLock();
-                                        }
-                                        if (!ok) {
-                                            StreamString errStr;
-                                            errStr.Printf("Fail to read the %s Value %s", varName.Buffer(), varValue.Buffer());
-                                            printf("%s\n", errStr.Buffer());
-                                        }
+                                    uint32 currentSize = (payload.Size() - processedSize);
+                                    payload.Seek(0);
+                                    if (currentSize > 0u) {
+                                        MemoryOperationsHelper::Copy(payload.Buffer(), payload.Buffer() + processedSize, currentSize);
                                     }
-                                }
-                                state = 6;
-                            }
-
-                            if (state == 6) {
-                                StreamString endBlock;
-                                payload.GetToken(endBlock, "\n", terminator, "\r\n");
-
-                                if (terminator == '\n') {
-                                    payload = payload.Buffer() + payload.Position();
-                                    payload.Seek(0ull);
-
-                                    state = 0;
-                                }
-                                else {
-                                    break;
+                                    payload.SetSize(currentSize);
                                 }
                             }
                         }
@@ -667,14 +579,25 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
                 }
             }
             while (chunkSize > 0u);
-            commClient->GetLine(line, false);
+            if (isChunked) {
+                err = !(commClient->GetLine(line, false));
+            }
         }
 
         if (err.ErrorsCleared()) {
-            StreamString hstream;
-            protocol.WriteHeader(false, HttpDefinition::HSHCReplyOK, &hstream, NULL);
+            protocol.CompleteReadOperation(NULL, 0u);
+            StreamString hstream = "<html>"
+                    "<body>"
+                    "<h1>OK!</h1>"
+                    "</body>"
+                    "</html>";
+            hstream.Seek(0);
+            protocol.CreateAbsolute("OutputOptions");
+            protocol.Write("Content-Length", hstream.Size());
+            protocol.Write("Content-Type", "text/html");
+            protocol.WriteHeader(true, HttpDefinition::HSHCReplyOK, &hstream, NULL);
             if (!protocol.KeepAlive()) {
-                REPORT_ERROR(ErrorManagement::Information, "Connection closed");
+                REPORT_ERROR(ErrorManagement::Information, "KA close: close the connection");
                 err = !(commClient->Close());
                 if (err.ErrorsCleared()) {
                     err = ErrorManagement::Completed;
@@ -683,14 +606,25 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
             }
         }
         else {
-            REPORT_ERROR(ErrorManagement::Information, "Error in ReadHeader");
-            StreamString s;
+            protocol.CompleteReadOperation(NULL, 0u);
+            REPORT_ERROR(ErrorManagement::Information, "Error: close the connection");
+            StreamString hstream = "<html>"
+                    "<body>"
+                    "<h1>ERROR!</h1>"
+                    "</body>"
+                    "</html>";
+            hstream.Seek(0);
+            protocol.CreateAbsolute("OutputOptions");
+            protocol.Write("Content-Length", hstream.Size());
+            protocol.Write("Content-Type", "text/html");
             protocol.SetKeepAlive(false);
-            protocol.WriteHeader(false, HttpDefinition::HSHCReplyBadRequest, &s, NULL);
-
+            protocol.WriteHeader(true, HttpDefinition::HSHCReplyBadRequest, &hstream, NULL);
+            commClient->Close();
+            delete commClient;
         }
 
     }
+
     return err;
 
 }
@@ -703,9 +637,7 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
     }
     if (information.GetStage() == MARTe::ExecutionInfo::MainStage) {
 
-        /*lint -e{593} -e{429} the newClient pointer will be freed within the thread*/
         if (information.GetStageSpecific() == MARTe::ExecutionInfo::WaitRequestStageSpecific) {
-            /*lint -e{429} the newClient pointer will be freed within the thread*/
             TCPSocket *newClient = new TCPSocket();
             if (err.ErrorsCleared()) {
                 REPORT_ERROR(ErrorManagement::Information, "Waiting new connection");
@@ -714,6 +646,7 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
                     delete newClient;
                 }
                 else {
+                    REPORT_ERROR(ErrorManagement::Information, "Connection established!");
                     information.SetThreadSpecificContext(reinterpret_cast<void*>(newClient));
                     err = MARTe::ErrorManagement::NoError;
                 }
@@ -755,6 +688,43 @@ uint64 DiodeReceiver::GetTotalMemorySize() {
 bool DiodeReceiver::InitialisationDone() {
     return (threadSetContext >= numberOfInitThreads);
 }
+
+bool DiodeReceiver::GetLocalVariableIndex(const char8 *varName, uint32 receivedIndex, uint32 &index){
+    uint32 range_1 = numberOfVariables;
+    uint32 range = (numberOfVariables / 2);
+    index = range;
+    //bool done = false;
+    bool ok = false;
+    while ((range_1 > 0) && (!ok)) {
+        int32 res = StringHelper::Compare(pvs[index].pvName, varName);
+        if (res == 0) {
+            pvMapping[receivedIndex] = index;
+            ok = true;
+        }
+        else if (res == 2) {
+            uint32 rem = range % 2;
+            range_1 = range;
+            if (rem == 1) {
+                index--;
+            }
+            range = (range_1 / 2);
+            index -= range;
+        }
+        else if (res == 1) {
+            //this means that they are equal
+            uint32 rem_1 = range_1 % 2;
+            range_1 = range;
+            if (rem_1 == 0) {
+                range_1--;
+                //one less
+            }
+            range = (range_1 / 2);
+            index += (range + 1);
+        }
+    }
+    return ok;
+}
+
 
 CLASS_REGISTER(DiodeReceiver, "1.0")
 }

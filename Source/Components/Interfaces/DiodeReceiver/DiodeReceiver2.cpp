@@ -1,6 +1,6 @@
 /**
- * @file DiodeReceiver2.cpp
- * @brief Source file for class DiodeReceiver2
+ * @file DiodeReceiver.cpp
+ * @brief Source file for class DiodeReceiver
  * @date 04 dic 2018
  * @author pc
  *
@@ -17,7 +17,7 @@
  * or implied. See the Licence permissions and limitations under the Licence.
 
  * @details This source file contains the definition of all the methods for
- * the class DiodeReceiver2 (public, protected, and private). Be aware that some
+ * the class DiodeReceiver (public, protected, and private). Be aware that some
  * methods, such as those inline could be defined on the header file, instead.
  */
 
@@ -29,7 +29,7 @@
 /*                         Project header includes                           */
 /*---------------------------------------------------------------------------*/
 
-#include "DiodeReceiver2.h"
+#include "DiodeReceiver.h"
 #include "AdvancedErrorManagement.h"
 #include "HttpProtocol.h"
 #include "JsonParser.h"
@@ -79,58 +79,149 @@ static int cainfo(chid &pvChid,
     return 0;
 }
 
-void DiodeReceiver2CycleLoop(DiodeReceiver2 &arg) {
-    while (arg.quit == 0) {
-        if (arg.threadSetContext == 0) {
-            ca_context_create (ca_enable_preemptive_callback);
-            for (uint32 n = 0u; (n < arg.numberOfVariables); n++) {
-                ca_create_channel(&arg.pvs[n].pvName[0], NULL, NULL, 20u, &arg.pvs[n].pvChid);
-                (void) ca_pend_io(0.1);
-            }
-            arg.threadSetContext = 1;
+void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
+
+    uint32 threadId;
+    if (arg.syncSem.FastLock()) {
+        threadId = arg.threadCnt;
+        arg.threadCnt++;
+        arg.syncSem.FastUnLock();
+    }
+    bool ret = true;
+    if (threadId == 0u) {
+        ret = (ca_context_create(ca_enable_preemptive_callback) == ECA_NORMAL);
+        arg.eventSem.Post();
+    }
+    else {
+        arg.eventSem.Wait();
+    }
+
+    if (!ret) {
+        //REPORT_ERROR(ErrorManagement::FatalError, "ca_enable_preemptive_callback failed");
+    }
+    else {
+        arg.totalMemorySize = 0u;
+        uint32 nThreads = arg.numberOfInitThreads;
+        if (arg.numberOfVariables % nThreads > 0u) {
+            nThreads--;
         }
-        else {
-            //printf("\nSync!!\n");
-            if (arg.syncSem.FastLock()) {
-                MemoryOperationsHelper::Copy(arg.memory[1], arg.memory[0], arg.totalMemorySize);
-                MemoryOperationsHelper::Copy(arg.changeFlag[1], arg.changeFlag[0], arg.numberOfVariables);
-                MemoryOperationsHelper::Set(arg.changeFlag[0], 0, arg.numberOfVariables);
-                arg.syncSem.FastUnLock();
+        uint32 numberOfVarsPerThread = (arg.numberOfVariables / nThreads);
+
+        uint32 beg = threadId * numberOfVarsPerThread;
+        uint32 end = (threadId + 1) * numberOfVarsPerThread;
+        if (end > arg.numberOfVariables) {
+            end = arg.numberOfVariables;
+        }
+        for (uint32 n = beg; (n < end); n++) {
+            /*lint -e{9130} -e{835} -e{845} -e{747} Several false positives. lint is getting confused here for some reason.*/
+            ret = (ca_create_channel(arg.pvs[n].pvName, NULL, NULL, 20u, &arg.pvs[n].pvChid) == ECA_NORMAL);
+            ca_pend_io(0.1);
+            if (!ret) {
+                //REPORT_ERROR_STATIC(ErrorManagement::FatalError, "ca_create_channel failed for PV with name %s", arg.pvs[n].pvName);
             }
-            for (uint32 n = 0u; (n < arg.numberOfVariables); n++) {
-                if ((arg.changeFlag[1])[n] == 1) {
-                    if (ca_array_put(arg.pvs[n].pvType, arg.pvs[n].numberOfElements, arg.pvs[n].pvChid, arg.memory[1] + arg.pvs[n].offset) != ECA_NORMAL) {
-                        printf("ca_put failed for PV: %s\n", arg.pvs[n].pvName);
+            else {
+                cainfo(arg.pvs[n].pvChid, arg.pvs[n].pvName, arg.pvs[n].pvType, arg.pvs[n].numberOfElements);
+                ca_pend_io(0.1);
+
+                arg.pvs[n].byteSize = 0;
+                arg.pvs[n].at = voidAnyType;
+
+                if (arg.pvs[n].numberOfElements > MAX_ARR_LEN) {
+                    arg.pvs[n].numberOfElements = 0u;
+                }
+                if (arg.pvs[n].numberOfElements > 0u) {
+                    const char8* epicsTypeName = dbf_type_to_text(arg.pvs[n].pvType);
+                    //printf("%s: nElems=%d, type=%s\n", pvs[n].pvName, pvs[n].numberOfElements, epicsTypeName);
+                    if (StringHelper::Compare(epicsTypeName, "DBF_DOUBLE") == 0u) {
+                        arg.pvs[n].byteSize = (sizeof(float64)) * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].at = AnyType(Float64Bit, 0u, (void*) NULL);
                     }
-                    (void) ca_pend_io(0.1);
+                    else if (StringHelper::Compare(epicsTypeName, "DBF_FLOAT") == 0u) {
+                        arg.pvs[n].byteSize = (sizeof(float32)) * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].at = AnyType(Float32Bit, 0u, (void*) NULL);
+                    }
+                    else if (StringHelper::Compare(epicsTypeName, "DBF_LONG") == 0u) {
+                        arg.pvs[n].byteSize = (sizeof(int32)) * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].at = AnyType(SignedInteger32Bit, 0u, (void*) NULL);
+                    }
+                    else if (StringHelper::Compare(epicsTypeName, "DBF_ULONG") == 0u) {
+                        arg.pvs[n].byteSize = (sizeof(uint32)) * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].at = AnyType(UnsignedInteger32Bit, 0u, (void*) NULL);
+                    }
+                    else if (StringHelper::Compare(epicsTypeName, "DBF_SHORT") == 0u) {
+                        arg.pvs[n].byteSize = (sizeof(int16)) * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].at = AnyType(SignedInteger16Bit, 0u, (void*) NULL);
+                    }
+                    else if (StringHelper::Compare(epicsTypeName, "DBF_USHORT") == 0u) {
+                        arg.pvs[n].byteSize = (sizeof(uint16)) * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].at = AnyType(UnsignedInteger16Bit, 0u, (void*) NULL);
+                    }
+                    else if (StringHelper::Compare(epicsTypeName, "DBF_CHAR") == 0u) {
+                        arg.pvs[n].byteSize = (sizeof(int8)) * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].at = AnyType(SignedInteger8Bit, 0u, (void*) NULL);
+                    }
+                    else if (StringHelper::Compare(epicsTypeName, "DBF_UCHAR") == 0u) {
+                        arg.pvs[n].byteSize = (sizeof(uint8)) * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].at = AnyType(UnsignedInteger8Bit, 0u, (void*) NULL);
+                    }
+                    else if (StringHelper::Compare(epicsTypeName, "DBF_STRING") == 0) {
+
+                        TypeDescriptor td;
+                        td.numberOfBits = MAX_STRING_SIZE * 8u;
+                        td.isStructuredData = false;
+                        td.type = CArray;
+                        td.isConstant = false;
+
+                        arg.pvs[n].byteSize = (sizeof(char8)) * MAX_STRING_SIZE * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].at = AnyType(td, 0u, (void*) NULL);
+                    }
+                    else {
+                        TypeDescriptor td;
+                        td.numberOfBits = MAX_STRING_SIZE * 8u;
+                        td.isStructuredData = false;
+                        td.type = CArray;
+                        td.isConstant = false;
+
+                        arg.pvs[n].byteSize = (sizeof(char8)) * MAX_STRING_SIZE * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].at = AnyType(td, 0u, (void*) NULL);
+                        arg.pvs[n].pvType = DBF_STRING;
+                        /*
+                         epicsTypeName = DBF_DOUBLE;
+                         pvs[n].byteSize = (sizeof(float64)) * pvs[n].numberOfElements;
+                         pvs[n].at = AnyType(Float64Bit, 0u, (void*) NULL);*/
+                    }
+                    if (arg.pvs[n].numberOfElements > 1u) {
+                        arg.pvs[n].at.SetNumberOfDimensions(1u);
+                        arg.pvs[n].at.SetNumberOfElements(0u, arg.pvs[n].numberOfElements);
+                    }
                 }
             }
-            uint32 elapsed = (uint32)(((HighResolutionTimer::Counter() - arg.lastCounter) * 1000) * HighResolutionTimer::Period());
-            if (elapsed < arg.msecPeriod) {
-                Sleep::MSec(arg.msecPeriod - elapsed);
-            }
-            arg.lastCounter = HighResolutionTimer::Counter();
         }
+
     }
 
-    for (uint32 n = 0u; (n < arg.numberOfVariables); n++) {
-        (void) ca_clear_channel(arg.pvs[n].pvChid);
+    Atomic::Increment(&arg.threadSetContext);
+    arg.eventSem.ResetWait(TTInfiniteWait);
+
+    if (threadId == 0u) {
+        for (uint32 n = 0u; (n < arg.numberOfVariables); n++) {
+            (void) ca_clear_channel(arg.pvs[n].pvChid);
+        }
+
+        ca_detach_context();
+        ca_context_destroy();
     }
 
-    ca_detach_context();
-    ca_context_destroy();
-
-    arg.quit = 2;
 }
 
 /*---------------------------------------------------------------------------*/
 /*                           Method definitions                              */
 /*---------------------------------------------------------------------------*/
 
-DiodeReceiver2::DiodeReceiver2() :
+DiodeReceiver::DiodeReceiver() :
         MultiClientService(embeddedMethod),
-        embeddedMethod(*this, &DiodeReceiver2::ServerCycle) {
-    // Auto-generated constructor stub for DiodeReceiver2
+        embeddedMethod(*this, &DiodeReceiver::ServerCycle) {
+    // Auto-generated constructor stub for DiodeReceiver
     // TODO Verify if manual additions are needed
     serverPort = 0u;
     acceptTimeout = TTInfiniteWait;
@@ -138,44 +229,44 @@ DiodeReceiver2::DiodeReceiver2() :
     pvs = NULL;
     numberOfVariables = 0u;
     mainCpuMask = 0x1u;
-    memory[0] = NULL;
-    memory[1] = NULL;
+    memory = NULL;
     memoryPrec = NULL;
     threadSetContext = 0u;
-    msecPeriod = 1000;
-    changeFlag[0] = NULL;
-    changeFlag[1] = NULL;
+    changeFlag = NULL;
     lastCounter = 0ull;
-    quit = 0u;
+    quit = 0;
     totalMemorySize = 0u;
-
+    eventSem.Create();
+    eventSem.Reset();
+    threadCnt = 0u;
+    pvMapping = NULL;
 }
 
-DiodeReceiver2::~DiodeReceiver2() {
-    // Auto-generated destructor stub for DiodeReceiver2
+DiodeReceiver::~DiodeReceiver() {
+    // Auto-generated destructor stub for DiodeReceiver
     // TODO Verify if manual additions are needed
 
     if (pvs != NULL) {
         delete[] pvs;
     }
-    if (memory[0] != NULL) {
-        HeapManager::Free((void*&) memory[0]);
-    }
-    if (memory[1] != NULL) {
-        HeapManager::Free((void*&) memory[1]);
+    if (memory != NULL) {
+        HeapManager::Free((void*&) memory);
     }
     if (memoryPrec != NULL) {
-        HeapManager::Free((void*&) memoryPrec);
+        HeapManager::Free((void*&) memory);
     }
-    if (changeFlag[0] != NULL) {
-        HeapManager::Free((void*&) changeFlag[0]);
+
+    if (changeFlag != NULL) {
+        HeapManager::Free((void*&) changeFlag);
     }
-    if (changeFlag[1] != NULL) {
-        HeapManager::Free((void*&) changeFlag[1]);
+
+    if (pvMapping != NULL) {
+        delete[] pvMapping;
     }
+
 }
 
-bool DiodeReceiver2::Initialise(StructuredDataI &data) {
+bool DiodeReceiver::Initialise(StructuredDataI &data) {
     bool ret = MultiClientService::Initialise(data);
     if (ret) {
 
@@ -198,14 +289,11 @@ bool DiodeReceiver2::Initialise(StructuredDataI &data) {
                 REPORT_ERROR(ErrorManagement::InitialisationError, "Please define InputFilePath");
             }
             if (ret) {
-                ret = data.Read("MsecPeriod", msecPeriod);
-                if (!ret) {
-                    REPORT_ERROR(ErrorManagement::InitialisationError, "Please define MsecPeriod");
-                }
-            }
-            if (ret) {
                 if (!data.Read("MainCpuMask", mainCpuMask)) {
-                    mainCpuMask = 0x1;
+                    mainCpuMask = 0xFF;
+                }
+                if (!data.Read("NumberOfInitThreads", numberOfInitThreads)) {
+                    numberOfInitThreads = 1u;
                 }
 
                 //open the xml file
@@ -240,7 +328,6 @@ bool DiodeReceiver2::Initialise(StructuredDataI &data) {
 
                 xmlFile.Seek(0ull);
                 uint32 counter = 0u;
-#define MAX_ARR_LEN 100
 
                 variable.SetSize(0ull);
                 start = false;
@@ -274,132 +361,7 @@ bool DiodeReceiver2::Initialise(StructuredDataI &data) {
                 }
                 xmlFile.Close();
 
-                //i need the initialisation also here
-                /*lint -e{9130} -e{835} -e{845} -e{747} Several false positives. lint is getting confused here for some reason.*/
-                ret = (ca_context_create(ca_enable_preemptive_callback) == ECA_NORMAL);
-                if (!ret) {
-                    REPORT_ERROR(ErrorManagement::FatalError, "ca_enable_preemptive_callback failed");
-                }
-                else {
-                    totalMemorySize = 0u;
-                    for (uint32 n = 0u; (n < numberOfVariables); n++) {
-                        /*lint -e{9130} -e{835} -e{845} -e{747} Several false positives. lint is getting confused here for some reason.*/
-                        ret = (ca_create_channel(&pvs[n].pvName[0], NULL, NULL, 20u, &pvs[n].pvChid) == ECA_NORMAL);
-                        ca_pend_io(0.1);
-                        if (!ret) {
-                            REPORT_ERROR(ErrorManagement::FatalError, "ca_create_channel failed for PV with name %s", pvs[n].pvName);
-                        }
-                        else {
-                            cainfo(pvs[n].pvChid, pvs[n].pvName, pvs[n].pvType, pvs[n].numberOfElements);
-                            ca_pend_io(0.1);
-
-                            pvs[n].byteSize = 0;
-                            pvs[n].at = voidAnyType;
-
-                            if (pvs[n].numberOfElements > MAX_ARR_LEN) {
-                                pvs[n].numberOfElements = 0u;
-                            }
-                            if (pvs[n].numberOfElements > 0u) {
-                                const char8* epicsTypeName = dbf_type_to_text(pvs[n].pvType);
-                                //printf("%s: nElems=%d, type=%s\n", pvs[n].pvName, pvs[n].numberOfElements, epicsTypeName);
-                                if (StringHelper::Compare(epicsTypeName, "DBF_DOUBLE") == 0u) {
-                                    pvs[n].byteSize = (sizeof(float64)) * pvs[n].numberOfElements;
-                                    pvs[n].at = AnyType(Float64Bit, 0u, (void*) NULL);
-                                }
-                                else if (StringHelper::Compare(epicsTypeName, "DBF_FLOAT") == 0u) {
-                                    pvs[n].byteSize = (sizeof(float32)) * pvs[n].numberOfElements;
-                                    pvs[n].at = AnyType(Float32Bit, 0u, (void*) NULL);
-                                }
-                                else if (StringHelper::Compare(epicsTypeName, "DBF_LONG") == 0u) {
-                                    pvs[n].byteSize = (sizeof(int32)) * pvs[n].numberOfElements;
-                                    pvs[n].at = AnyType(SignedInteger32Bit, 0u, (void*) NULL);
-                                }
-                                else if (StringHelper::Compare(epicsTypeName, "DBF_ULONG") == 0u) {
-                                    pvs[n].byteSize = (sizeof(uint32)) * pvs[n].numberOfElements;
-                                    pvs[n].at = AnyType(UnsignedInteger32Bit, 0u, (void*) NULL);
-                                }
-                                else if (StringHelper::Compare(epicsTypeName, "DBF_SHORT") == 0u) {
-                                    pvs[n].byteSize = (sizeof(int16)) * pvs[n].numberOfElements;
-
-                                    pvs[n].at = AnyType(SignedInteger16Bit, 0u, (void*) NULL);
-                                }
-                                else if (StringHelper::Compare(epicsTypeName, "DBF_USHORT") == 0u) {
-                                    pvs[n].byteSize = (sizeof(uint16)) * pvs[n].numberOfElements;
-                                    pvs[n].at = AnyType(UnsignedInteger16Bit, 0u, (void*) NULL);
-                                }
-                                else if (StringHelper::Compare(epicsTypeName, "DBF_CHAR") == 0u) {
-                                    pvs[n].byteSize = (sizeof(int8)) * pvs[n].numberOfElements;
-                                    pvs[n].at = AnyType(SignedInteger8Bit, 0u, (void*) NULL);
-                                }
-                                else if (StringHelper::Compare(epicsTypeName, "DBF_UCHAR") == 0u) {
-                                    pvs[n].byteSize = (sizeof(uint8)) * pvs[n].numberOfElements;
-                                    pvs[n].at = AnyType(UnsignedInteger8Bit, 0u, (void*) NULL);
-                                }
-                                else if (StringHelper::Compare(epicsTypeName, "DBF_STRING") == 0) {
-
-                                    TypeDescriptor td;
-                                    td.numberOfBits = MAX_STRING_SIZE * 8u;
-                                    td.isStructuredData = false;
-                                    td.type = CArray;
-                                    td.isConstant = false;
-
-                                    pvs[n].byteSize = (sizeof(char8)) * MAX_STRING_SIZE * pvs[n].numberOfElements;
-                                    pvs[n].at = AnyType(td, 0u, (void*) NULL);
-                                }
-                                else {
-                                    TypeDescriptor td;
-                                    td.numberOfBits = MAX_STRING_SIZE * 8u;
-                                    td.isStructuredData = false;
-                                    td.type = CArray;
-                                    td.isConstant = false;
-
-                                    pvs[n].byteSize = (sizeof(char8)) * MAX_STRING_SIZE * pvs[n].numberOfElements;
-                                    pvs[n].at = AnyType(td, 0u, (void*) NULL);
-                                    pvs[n].pvType = DBF_STRING;
-                                    /*
-                                     epicsTypeName = DBF_DOUBLE;
-                                     pvs[n].byteSize = (sizeof(float64)) * pvs[n].numberOfElements;
-                                     pvs[n].at = AnyType(Float64Bit, 0u, (void*) NULL);*/
-                                }
-                                pvs[n].offset = totalMemorySize;
-                                totalMemorySize += pvs[n].byteSize;
-
-                                if (pvs[n].numberOfElements > 1u) {
-                                    pvs[n].at.SetNumberOfDimensions(1u);
-                                    pvs[n].at.SetNumberOfElements(0u, pvs[n].numberOfElements);
-                                }
-                            }
-                        }
-                    }
-
-                    memory[0] = (uint8*) HeapManager::Malloc(totalMemorySize);
-                    memory[1] = (uint8*) HeapManager::Malloc(totalMemorySize);
-
-                    memoryPrec = (uint8*) HeapManager::Malloc(totalMemorySize);
-                    changeFlag[0] = (uint8*) HeapManager::Malloc(numberOfVariables);
-                    changeFlag[1] = (uint8*) HeapManager::Malloc(numberOfVariables);
-
-                    MemoryOperationsHelper::Set(memory[0], 0, totalMemorySize);
-                    MemoryOperationsHelper::Set(memory[1], 0, totalMemorySize);
-
-                    MemoryOperationsHelper::Set(memoryPrec, 0, totalMemorySize);
-                    MemoryOperationsHelper::Set(changeFlag[0], 0, numberOfVariables);
-                    MemoryOperationsHelper::Set(changeFlag[1], 0, numberOfVariables);
-
-                    for (uint32 n = 0u; (n < numberOfVariables); n++) {
-                        pvs[n].at.SetDataPointer(memory[0] + pvs[n].offset);
-                    }
-                }
             }
-        }
-
-        if (ret) {
-            for (uint32 n = 0u; (n < numberOfVariables); n++) {
-                (void) ca_clear_channel(pvs[n].pvChid);
-            }
-
-            ca_detach_context();
-            ca_context_destroy();
         }
 
         if (ret) {
@@ -413,11 +375,32 @@ bool DiodeReceiver2::Initialise(StructuredDataI &data) {
     return ret;
 }
 
-ErrorManagement::ErrorType DiodeReceiver2::Start() {
+ErrorManagement::ErrorType DiodeReceiver::Start() {
     lastCounter = HighResolutionTimer::Counter();
-    Threads::BeginThread((ThreadFunctionType) DiodeReceiver2CycleLoop, this, THREADS_DEFAULT_STACKSIZE, NULL, ExceptionHandler::NotHandled, mainCpuMask);
-    while (threadSetContext == 0) {
+    for (uint32 i = 0u; i < numberOfInitThreads; i++) {
+        Threads::BeginThread((ThreadFunctionType) DiodeReceiverCycleLoop, this, THREADS_DEFAULT_STACKSIZE, NULL, ExceptionHandler::NotHandled, mainCpuMask);
+    }
+    while (threadSetContext < numberOfInitThreads) {
         Sleep::Sec(1);
+    }
+
+    for (uint32 n = 0u; n < numberOfVariables; n++) {
+        pvs[n].offset = totalMemorySize;
+        totalMemorySize += pvs[n].byteSize;
+    }
+
+    memory = (uint8*) HeapManager::Malloc(totalMemorySize);
+    memoryPrec = (uint8*) HeapManager::Malloc(totalMemorySize);
+    changeFlag = (uint8*) HeapManager::Malloc(numberOfVariables);
+    pvMapping = new uint32[numberOfVariables];
+    for (uint32 i = 0u; i < numberOfVariables; i++) {
+        pvMapping[i] = 0xFFFFFFFF;
+    }
+    MemoryOperationsHelper::Set(memory, 0, totalMemorySize);
+    MemoryOperationsHelper::Set(memoryPrec, 0, totalMemorySize);
+    MemoryOperationsHelper::Set(changeFlag, 0, numberOfVariables);
+    for (uint32 n = 0u; (n < numberOfVariables); n++) {
+        pvs[n].at.SetDataPointer(memory + pvs[n].offset);
     }
 
     ErrorManagement::ErrorType err;
@@ -434,258 +417,195 @@ ErrorManagement::ErrorType DiodeReceiver2::Start() {
     return err;
 }
 
-ErrorManagement::ErrorType DiodeReceiver2::Stop() {
-    quit = 1;
-    while (quit == 1) {
-        Sleep::Sec(1);
-    }
+ErrorManagement::ErrorType DiodeReceiver::Stop() {
+    Atomic::Increment(&quit);
+    eventSem.Post();
     return MultiClientService::Stop();
 }
 
-ErrorManagement::ErrorType DiodeReceiver2::ClientService(TCPSocket * const commClient) {
+ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commClient) {
 
     ErrorManagement::ErrorType err;
+    if (quit == 0) {
+        //do the work
+        //get the full message
+        HttpProtocol protocol(*commClient);
 
-    //do the work
-    //get the full message
-    HttpProtocol protocol(*commClient);
+        //discard the header
+        err = !(protocol.ReadHeader());
 
-    //discard the header
-    err = !(protocol.ReadHeader());
+        StreamString line;
 
-    //uint64 tic=HighResolutionTimer::Counter();
+        char8 buff[1024];
+        uint32 state = 0;
 
-    StreamString line;
+        StreamString payload;
+        StreamString varName;
+        StreamString varValue;
+        StreamString varTs;
+        StreamString varIndex;
+        StreamString localcfg;
+        uint32 readVariables = 0u;
+        uint32 receivedIndex = 0u;
+        const char8 *pattern = "\": ";
+        uint32 patternSize = StringHelper::Length(pattern);
 
-    char8 buff[1024];
-    uint32 state = 0;
+        if (err.ErrorsCleared()) {
 
-    StreamString payload;
-    StreamString varName;
-    StreamString varValue;
-    StreamString varTs;
-    StreamString localcfg;
-    uint32 readVariables = 0u;
+            uint32 chunkSize = 0u;
+            do {
+                commClient->GetLine(line, false);
+                line.SetSize(line.Size() - 1);
+                StreamString toConv = "0x";
+                toConv += line;
+                TypeConvert(chunkSize, toConv);
+                line.SetSize(0ull);
+                if (err.ErrorsCleared()) {
+                    uint32 sizeRead = 0u;
+                    payload.Seek(payload.Size());
+                    while (sizeRead < chunkSize) {
 
-    if (err.ErrorsCleared()) {
+                        MemoryOperationsHelper::Set(buff, '\0', 1024);
+                        uint32 sizeToRead = chunkSize - sizeRead;
+                        if (sizeToRead > 1023) {
+                            sizeToRead = 1023;
+                        }
+                        commClient->Read(buff, sizeToRead);
 
-        uint32 chunkSize = 0u;
-        do {
-            commClient->GetLine(line, false);
-            line.SetSize(line.Size() - 1);
-            //REPORT_ERROR(ErrorManagement::Information, "received=%s", line.Buffer());
-            StreamString toConv = "0x";
-            toConv += line;
-            TypeConvert(chunkSize, toConv);
-            //REPORT_ERROR(ErrorManagement::Information, "chunkSize=%d", chunkSize);
-            line.SetSize(0ull);
-            if (err.ErrorsCleared()) {
-                uint32 sizeRead = 0u;
+                        payload.Write(buff, sizeToRead);
+                        sizeRead += sizeToRead;
 
-                while (sizeRead < chunkSize) {
-                    MemoryOperationsHelper::Set(buff, '\0', 1024);
-                    uint32 sizeToRead = chunkSize - sizeRead;
-                    if (sizeToRead > 1023) {
-                        sizeToRead = 1023;
                     }
-                    commClient->Read(buff, sizeToRead);
-                    //printf("%s\n", buff);
+                    if (chunkSize > 0) {
+                        uint32 size = 2;
+                        commClient->Read(buff, size);
+                        bool ok=true;
+                        while (ok) {
 
-                    payload += buff;
-                    sizeRead += sizeToRead;
-
-                }
-                if (chunkSize > 0) {
-                    uint32 size = 2;
-                    commClient->Read(buff, size);
-
-                    while (1) {
-
-                        payload.Seek(0u);
-                        //REPORT_ERROR(ErrorManagement::Information, "initPayload=%s", payload.Buffer());
-
-                        char8 terminator;
-
-                        if (state == 0) {
+                            payload.Seek(0);
                             varName.SetSize(0);
-                            payload.GetToken(varName, "\n", terminator, "\r\n");
 
-                            if (terminator == '\n') {
-                                uint32 varNameSize = varName.Size();
-                                //remove = {
-                                varName.SetSize(varNameSize - 4u);
-                                varName = varName.Buffer() + 1;
-                                //REPORT_ERROR(ErrorManagement::Information, "%d %s", state, varName.Buffer());
-                                payload = payload.Buffer() + payload.Position();
-                                payload.Seek(0ull);
-                                //REPORT_ERROR(ErrorManagement::Information, "newPayload=%s", payload.Buffer());
+                            const char8 *dataPtr = StringHelper::SearchString(payload.Buffer(), pattern);
 
-                                state = 1;
-                            }
-                            else {
-                                break;
-                            }
-                        }
-                        if (state == 1) {
-                            varValue.SetSize(0);
-                            payload.GetToken(varValue, "\n", terminator, "\r\n");
-                            if (terminator == '\n') {
-                                uint32 varValueSize = varValue.Size();
-                                //remove = {
-                                varValue.SetSize(varValueSize - 1u);
-                                varValue = varValue.Buffer() + StringHelper::Length("\"Value\": ");
-                                //REPORT_ERROR(ErrorManagement::Information, "%d %s", state, varValue.Buffer());
-                                payload = payload.Buffer() + payload.Position();
-                                payload.Seek(0ull);
-                                //REPORT_ERROR(ErrorManagement::Information, "newPayload=%s", payload.Buffer());
-                                state = 2;
-                            }
-                            else {
-                                //payload = varValue;
-                                break;
-                            }
-                        }
-                        if (state == 2) {
-                            varTs.SetSize(0);
-                            payload.GetToken(varTs, "\n", terminator, "\r\n");
-                            if (terminator == '\n') {
-                                //remove = {
-                                varTs = varTs.Buffer() + StringHelper::Length("\"Timestamp\": ");
-                                //REPORT_ERROR(ErrorManagement::Information, "%d %s", state, varTs.Buffer());
-                                payload = payload.Buffer() + payload.Position();
-                                payload.Seek(0ull);
-                                //REPORT_ERROR(ErrorManagement::Information, "newPayload=%s", payload.Buffer());
-                                state = 3;
-                            }
-                            else {
-                                //payload = varTs;
-                                break;
-                            }
-                        }
-                        if (state == 3) {
+                            ok = (dataPtr != NULL);
+                            uint32 nameSize = 0u;
+                            uint32 processedSize=0u;
 
-                            //REPORT_ERROR(ErrorManagement::Information, "%s, %s, %s", varName.Buffer(), varValue.Buffer(), varTs.Buffer());
-                            uint32 range_1 = numberOfVariables;
-                            uint32 range = numberOfVariables / 2;
-                            uint32 index = range;
-                            //bool done = false;
-                            while (range_1 > 0) {
-                                int32 res = StringHelper::Compare(pvs[index].pvName, varName.Buffer());
-                                if (res == 0) {
-                                    readVariables++;
-                                    bool ok = true;
-                                    ConfigurationDatabase cdb;
-                                    if (pvs[index].numberOfElements > 0) {
-                                        if (pvs[index].at.GetNumberOfDimensions() > 0u) {
-                                            localcfg = "\"Value\": ";
-                                            localcfg += varValue.Buffer();
-                                            localcfg.Seek(0);
-                                            JsonParser parser(localcfg, cdb);
-                                            ok = parser.Parse();
-                                            if (!ok) {
-                                                REPORT_ERROR(ErrorManagement::FatalError, "Failed parse");
-                                            }
-                                            else {
-                                                cdb.MoveToRoot();
-                                            }
+                            if (ok) {
+                                // skip the "
+                                varName = payload.Buffer() + 1;
+                                nameSize = (uint32)(dataPtr - payload.Buffer() - 1u);
+                                varName.SetSize(nameSize);
+                                uint32 indexSize = sizeof(uint32);
+                                dataPtr += patternSize;
+
+                                processedSize += (nameSize + patternSize);
+
+                                ok = ((payload.Size() - processedSize) >= indexSize);
+                                if (ok) {
+                                    MemoryOperationsHelper::Copy(&receivedIndex, dataPtr, indexSize);
+                                }
+
+                            }
+
+                            if (ok) {
+                                if (pvMapping[receivedIndex] == 0xFFFFFFFF) {
+                                    uint32 range_1 = numberOfVariables;
+                                    uint32 range = (numberOfVariables / 2);
+                                    uint32 index = range;
+                                    //bool done = false;
+                                    while (range_1 > 0) {
+                                        int32 res = StringHelper::Compare(pvs[index].pvName, varName.Buffer());
+                                        if (res == 0) {
+                                            pvMapping[receivedIndex] = index;
+                                            readVariables++;
+                                            break;
                                         }
-                                        if (ok) {
-                                            if (syncSem.FastLock()) {
-                                                if (pvs[index].at.GetNumberOfDimensions() > 0u) {
-                                                    cdb.MoveToRoot();
-                                                    ok = cdb.Read("Value", pvs[index].at);
-                                                }
-                                                else {
-                                                    ok = TypeConvert(pvs[index].at, varValue.Buffer());
-                                                }
-                                                if (ok) {
-                                                    if (pvs[index].pvType == DBF_STRING) {
-
-                                                        char8 *str = (char8 *)(pvs[index].at.GetDataPointer());
-                                                        if (*str == '\"') {
-                                                            uint32 length = StringHelper::Length(str);
-                                                            str[length - 1u] = '\0';
-                                                            pvs[index].at.SetDataPointer(str + 1u);
-                                                        }
-                                                    }
-                                                    //REPORT_ERROR(ErrorManagement::Information, "%s=%!", varName.Buffer(), pvs[index].at);
-
-                                                    if (MemoryOperationsHelper::Compare(memory[0] + pvs[index].offset, memoryPrec + pvs[index].offset,
-                                                                                        pvs[index].byteSize) != 0) {
-                                                        (changeFlag[0])[index] = 1;
-                                                        MemoryOperationsHelper::Copy(memoryPrec + pvs[index].offset, memory[0] + pvs[index].offset,
-                                                                                     pvs[index].byteSize);
-
-                                                    }
-                                                }
-                                                syncSem.FastUnLock();
+                                        else if (res == 2) {
+                                            uint32 rem = range % 2;
+                                            range_1 = range;
+                                            if (rem == 1) {
+                                                index--;
                                             }
-                                            if (!ok) {
-                                                StreamString errStr;
-                                                errStr.Printf("Fail to read the %s Value %s", varName.Buffer(), varValue.Buffer());
-                                                printf("%s\n", errStr.Buffer());
+                                            range = (range_1 / 2);
+                                            index -= range;
+                                        }
+                                        else if (res == 1) {
+                                            //this means that they are equal
+                                            uint32 rem_1 = range_1 % 2;
+                                            range_1 = range;
+                                            if (rem_1 == 0) {
+                                                range_1--;
+                                                //one less
                                             }
+                                            range = (range_1 / 2);
+                                            index += (range + 1);
                                         }
                                     }
-                                    break;
-                                }
-                                else if (res == 2) {
-                                    uint32 rem = range % 2;
-                                    range_1 = range;
-                                    if (rem == 1) {
-                                        index--;
-                                    }
-                                    range = range_1 / 2;
-                                    index -= range;
-                                }
-                                else if (res == 1) {
-                                    //this means that they are equal
-                                    uint32 rem_1 = range_1 % 2;
-                                    range_1 = range;
-                                    if (rem_1 == 0) {
-                                        range_1--;
-                                        //one less
-                                    }
-                                    range = range_1 / 2;
-                                    index += (range + 1);
                                 }
                             }
-                            state = 4;
 
-                        }
-                        if (state == 4) {
-                            StreamString endBlock;
-                            payload.GetToken(endBlock, "\n", terminator, "\r\n");
-                            //printf("payload\n %s\nterminator=%c\n", payload.Buffer(), terminator);
+                            if (ok) {
+                                uint32 index = pvMapping[receivedIndex];
+                                processedSize +=(sizeof(uint32) + pvs[index].byteSize + sizeof(uint64) + 3u);
 
-                            if (terminator == '\n') {
-                                payload = payload.Buffer() + payload.Position();
-                                payload.Seek(0ull);
+                                ok = (payload.Size() >= processedSize);
+                                if (ok) {
+                                    dataPtr+=sizeof(uint32);
+                                    void *ptr=(void*)(memory + pvs[index].offset);
+                                    void *ptr_1=(void*)(memoryPrec + pvs[index].offset);
+                                    MemoryOperationsHelper::Copy(ptr, dataPtr, pvs[index].byteSize);
+                                    if (MemoryOperationsHelper::Compare(ptr, ptr_1,
+                                                                         pvs[index].byteSize) != 0) {
+                                         (changeFlag)[index] = 1;
+                                         MemoryOperationsHelper::Copy(ptr_1, ptr,
+                                                                      pvs[index].byteSize);
+                                     }
 
-                                state = 0;
-                            }
-                            else {
-                                break;
+                                    //todo the timestamp
+                                    uint32 currentSize = (payload.Size() - processedSize);
+                                    payload.Seek(0);
+                                    MemoryOperationsHelper::Copy(payload.Buffer(), payload.Buffer() + processedSize, currentSize);
+                                    payload.SetSize(currentSize);
+                                }
                             }
                         }
                     }
-                    //printf("payload\n %s\n", payload.Buffer());
-
                 }
             }
+            while (chunkSize > 0u);
+            commClient->GetLine(line, false);
         }
-        while (chunkSize > 0u);
-        commClient->GetLine(line, false);
+
+
+
+        if (err.ErrorsCleared()) {
+            StreamString hstream;
+            protocol.WriteHeader(false, HttpDefinition::HSHCReplyOK, &hstream, NULL);
+            if (!protocol.KeepAlive()) {
+                REPORT_ERROR(ErrorManagement::Information, "Connection closed");
+                err = !(commClient->Close());
+                if (err.ErrorsCleared()) {
+                    err = ErrorManagement::Completed;
+                }
+                delete commClient;
+            }
+        }
+        else {
+            REPORT_ERROR(ErrorManagement::Information, "Error in ReadHeader");
+            StreamString s;
+            protocol.SetKeepAlive(false);
+            protocol.WriteHeader(false, HttpDefinition::HSHCReplyBadRequest, &s, NULL);
+
+        }
 
     }
-    else {
-        REPORT_ERROR(ErrorManagement::Information, "Error in ReadHeader");
-    }
+
     return err;
 
 }
 
-ErrorManagement::ErrorType DiodeReceiver2::ServerCycle(MARTe::ExecutionInfo &information) {
+ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & information) {
     ErrorManagement::ErrorType err;
 
     if (information.GetStage() == MARTe::ExecutionInfo::StartupStage) {
@@ -718,6 +638,34 @@ ErrorManagement::ErrorType DiodeReceiver2::ServerCycle(MARTe::ExecutionInfo &inf
     return err;
 }
 
-CLASS_REGISTER(DiodeReceiver2, "1.0")
+bool DiodeReceiver::Synchronise(uint8 *memoryOut,
+                                uint8 *changedFlags) {
+    if (syncSem.FastLock()) {
+        MemoryOperationsHelper::Copy(memoryOut, memory, totalMemorySize);
+        MemoryOperationsHelper::Copy(changedFlags, changeFlag, numberOfVariables);
+        MemoryOperationsHelper::Set(changeFlag, 0, numberOfVariables);
+        syncSem.FastUnLock();
+    }
+    return true;
+
+}
+
+uint32 DiodeReceiver::GetNumberOfVariables() {
+    return numberOfVariables;
+}
+
+PvRecDescriptor * DiodeReceiver::GetPvDescriptors() {
+    return pvs;
+}
+
+uint64 DiodeReceiver::GetTotalMemorySize() {
+    return totalMemorySize;
+}
+
+bool DiodeReceiver::InitialisationDone() {
+    return (threadSetContext >= numberOfInitThreads);
+}
+
+CLASS_REGISTER(DiodeReceiver, "1.0")
 }
 
