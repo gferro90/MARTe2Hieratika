@@ -186,6 +186,9 @@ ErrorManagement::ErrorType EpicsDiodePublisher::Execute(ExecutionInfo& info) {
                             if (ca_array_put((pvs[n].pvType)|(0x8000u), pvs[n].numberOfElements, pvs[n].pvChid, memory + pvs[n].offset) != ECA_NORMAL) {
                                 printf("ca_put failed for PV: %s\n", pvs[n].pvName);
                             }
+                            /*else{
+                                printf("ca_put ok for PV: %s\n", pvs[n].pvName);
+                            }*/
                             (void) ca_pend_io(0.1);
 
                         }

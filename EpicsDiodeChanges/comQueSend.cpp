@@ -290,10 +290,14 @@ void comQueSend::insertRequestHeader (
             this->pushComBuf ( *pComBuf );
         }
 
+
+
+#ifdef FERRO_TS_PATCH
  	if((dataType&(0x8000u))!=0){
 	    payloadSize+=8;
-            dataType&=~(0x8000u);
 	}
+#endif
+        dataType&=~(0x8000u);
         pComBuf->push ( request ); 
         pComBuf->push ( static_cast < ca_uint16_t > ( payloadSize ) ); 
         pComBuf->push ( dataType ); 
@@ -345,29 +349,18 @@ void comQueSend::insertRequestWithPayLoad (
                 throw cacChannel::outOfBounds();
             }
             payloadSize = CA_MESSAGE_ALIGN ( size );
- 	    /*if((dataTypeOrig&(0x8000u))!=0){
-		payloadSize+=8;
-		size+=8;
-	    }*/
             this->insertRequestHeader ( request, payloadSize, 
                 static_cast <ca_uint16_t> ( dataTypeOrig ), 
                 nElem, cid, requestDependent, v49Ok );
-		this->copy_dbr_char ( pStr, payloadSize );
-
              this->pushString ( pStr, size ); 
 
         }
         else {
             size = dbr_size[dataType];
             payloadSize = CA_MESSAGE_ALIGN ( size );
- 	    /*if((dataTypeOrig&(0x8000u))!=0){
-		payloadSize+=8;
-		size+=8;
-	    }*/
            this->insertRequestHeader ( request, payloadSize, 
                 static_cast <ca_uint16_t> ( dataTypeOrig ), 
                 nElem, cid, requestDependent, v49Ok );
-		//this->copy_dbr_char ( pPayload, payloadSize );
                 ( this->*dbrCopyScalar [dataType] ) ( pPayload );
         }
     }	    
@@ -390,10 +383,6 @@ void comQueSend::insertRequestWithPayLoad (
         size = static_cast < ca_uint32_t > 
             ( dbr_size_n ( dataType, nElem ) );
         payloadSize = CA_MESSAGE_ALIGN ( size );
- 	    /*if((dataTypeOrig&(0x8000u))!=0){
-		payloadSize+=8;
-		size+=8;
-	    }*/
         this->insertRequestHeader ( request, payloadSize, 
             static_cast <ca_uint16_t> ( dataTypeOrig ), 
             static_cast < ca_uint32_t > ( nElem ), 
@@ -403,14 +392,20 @@ void comQueSend::insertRequestWithPayLoad (
         ( this->*dbrCopyVector [dataType] ) ( pPayload, nElem );
     }
     // set pad bytes to nill
+
+
+
+#ifdef FERRO_TS_PATCH
     if((dataTypeOrig&(0x8000u))!=0){
         this->copy_dbr_char ( pPayload+payloadSize, 8 );
+	payloadSize+=8;
+	size+=8;
     }
-    /*
+#endif
     unsigned padSize = payloadSize - size;
     if ( padSize ) {
         this->pushString ( cacNillBytes, payloadSize - size );
-    }*/
+    }
 
 }
 

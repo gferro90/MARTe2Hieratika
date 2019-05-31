@@ -83,7 +83,7 @@ static int cainfo(chid &pvChid,
                   uint32 &memorySize,
                   TypeDescriptor &td) {
     int32 dbfType;
-    uint32 nElems;
+    uint32 nElems = 0u;
     enum channel_state state;
     const char8 *stateStrings[] = { "never connected", "previously connected", "connected", "closed" };
 
@@ -92,6 +92,7 @@ static int cainfo(chid &pvChid,
     dbfType = ca_field_type(pvChid);
 
     if (state != 2) {
+        nElems = 0u;
         printf("The variable %s is not connected, state=%s\n", pvName, stateStrings[state]);
     }
 
@@ -322,7 +323,7 @@ ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info
 
         printf("Starting Thread from %d to %d\n", beg, end);
 
-        if ((numberOfVariables-end) < numberOfPoolThreads) {
+        if ((numberOfVariables - end) < numberOfPoolThreads) {
             end = numberOfVariables;
         }
 
@@ -333,6 +334,7 @@ ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info
 
             cainfo(pvDescriptor[i].pvChid, pvDescriptor[i].pvName, pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].memorySize,
                    pvDescriptor[i].td);
+            ca_pend_io(1);
             if (pvDescriptor[i].numberOfElements > MAX_ARR_LEN) {
                 pvDescriptor[i].numberOfElements = 0u;
             }

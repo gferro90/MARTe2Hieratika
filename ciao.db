@@ -1,0 +1,1280 @@
+record( ai,RFAMP:CIRC1A:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CIRC1A:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CIRC1B:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CIRC1B:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CIRC2A:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CIRC2A:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CIRC2B:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CIRC2B:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CIRC3A:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CIRC3A:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CIRC3B:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CIRC3B:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CIRC4A:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CIRC4A:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CIRC4B:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CIRC4B:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CPLT1:WaterP)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CPLT1:WaterRes)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CPLT1:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CPLT2:WaterP)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CPLT2:WaterRes)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CPLT2:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CPLT3:WaterP)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CPLT3:WaterRes)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CPLT3:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CPLT4:WaterP)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CPLT4:WaterRes)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:CPLT4:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1A_ACS:AirPIn)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1A_ACS:AirPOut)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1A_ANOD:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1A_ANOD:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1A_ANPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1A_ANPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1A_ANPS:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1A_ANPS:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1A_CGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1A_CGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1A_FPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1A_FPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1A_SGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1A_SGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1B_ACS:AirPIn)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1B_ACS:AirPOut)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1B_ANOD:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1B_ANOD:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1B_ANPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1B_ANPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1B_ANPS:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1B_ANPS:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1B_CGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1B_CGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1B_FPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1B_FPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1B_SGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP1B_SGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2A_ACS:AirPIn)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2A_ACS:AirPOut)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2A_ANOD:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2A_ANOD:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2A_ANPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2A_ANPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2A_ANPS:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2A_ANPS:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2A_CGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2A_CGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2A_FPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2A_FPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2A_SGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2A_SGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2B_ACS:AirPIn)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2B_ACS:AirPOut)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2B_ANOD:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2B_ANOD:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2B_ANPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2B_ANPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2B_ANPS:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2B_ANPS:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2B_CGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2B_CGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2B_FPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2B_FPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2B_SGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP2B_SGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3A_ACS:AirPIn)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3A_ACS:AirPOut)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3A_ANOD:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3A_ANOD:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3A_ANPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3A_ANPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3A_ANPS:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3A_ANPS:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3A_CGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3A_CGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3A_FPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3A_FPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3A_SGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3A_SGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3B_ACS:AirPIn)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3B_ACS:AirPOut)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3B_ANOD:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3B_ANOD:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3B_ANPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3B_ANPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3B_ANPS:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3B_ANPS:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3B_CGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3B_CGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3B_FPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3B_FPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3B_SGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP3B_SGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4A_ACS:AirPIn)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4A_ACS:AirPOut)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4A_ANOD:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4A_ANOD:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4A_ANPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4A_ANPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4A_ANPS:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4A_ANPS:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4A_CGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4A_CGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4A_FPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4A_FPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4A_SGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4A_SGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4B_ACS:AirPIn)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4B_ACS:AirPOut)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4B_ANOD:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4B_ANOD:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4B_ANPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4B_ANPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4B_ANPS:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4B_ANPS:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4B_CGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4B_CGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4B_FPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4B_FPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4B_SGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:DAMP4B_SGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1A_ANOD:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1A_ANOD:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1A_ANPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1A_ANPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1A_CGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1A_CGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1A_FPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1A_FPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1A_SCRE:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1A_SCRE:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1A_SGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1A_SGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1B_ANOD:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1B_ANOD:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1B_ANPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1B_ANPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1B_CGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1B_CGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1B_FPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1B_FPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1B_SCRE:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1B_SCRE:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1B_SGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP1B_SGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2A_ANOD:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2A_ANOD:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2A_ANPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2A_ANPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2A_CGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2A_CGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2A_FPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2A_FPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2A_SCRE:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2A_SCRE:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2A_SGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2A_SGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2B_ANOD:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2B_ANOD:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2B_ANPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2B_ANPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2B_CGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2B_CGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2B_FPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2B_FPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2B_SCRE:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2B_SCRE:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2B_SGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP2B_SGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3A_ANOD:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3A_ANOD:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3A_ANPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3A_ANPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3A_CGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3A_CGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3A_FPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3A_FPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3A_SCRE:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3A_SCRE:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3A_SGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3A_SGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3B_ANOD:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3B_ANOD:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3B_ANPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3B_ANPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3B_CGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3B_CGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3B_FPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3B_FPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3B_SCRE:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3B_SCRE:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3B_SGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP3B_SGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4A_ANOD:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4A_ANOD:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4A_ANPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4A_ANPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4A_CGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4A_CGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4A_FPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4A_FPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4A_SCRE:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4A_SCRE:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4A_SGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4A_SGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4B_ANOD:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4B_ANOD:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4B_ANPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4B_ANPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4B_CGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4B_CGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4B_FPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4B_FPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4B_SCRE:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4B_SCRE:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4B_SGPS:IRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:FAMP4B_SGPS:VRdbk)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:LOAD1A:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:LOAD1A:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:LOAD1B:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:LOAD1B:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:LOAD2A:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:LOAD2A:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:LOAD2B:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:LOAD2B:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:LOAD3A:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:LOAD3A:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:LOAD3B:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:LOAD3B:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:LOAD4A:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:LOAD4A:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:LOAD4B:WaterFlow)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:LOAD4B:WaterT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:MPLT1:AirT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:MPLT2:AirT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:MPLT3:AirT)
+{
+field(DTYP, "Soft Channel")
+}
+
+record( ai,RFAMP:MPLT4:AirT)
+{
+field(DTYP, "Soft Channel")
+}
+

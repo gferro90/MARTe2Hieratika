@@ -62,7 +62,7 @@ static int cainfo(chid &pvChid,
                   char8 *pvName,
                   chtype &type,
                   uint32 &numberOfElements) {
-    uint32 nElems;
+    uint32 nElems = 0u;
     enum channel_state state;
     const char8 *stateStrings[] = { "never connected", "previously connected", "connected", "closed" };
 
@@ -71,6 +71,7 @@ static int cainfo(chid &pvChid,
     type = ca_field_type(pvChid);
 
     if (state != 2) {
+        nElems = 0u;
         printf("The variable %s is not connected, state=%s\n", pvName, stateStrings[state]);
     }
 
@@ -117,12 +118,12 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
                 //REPORT_ERROR_STATIC(ErrorManagement::FatalError, "ca_create_channel failed for PV with name %s", arg.pvs[n].pvName);
             }
             else {
+                arg.pvs[n].numberOfElements = 0u;
                 cainfo(arg.pvs[n].pvChid, arg.pvs[n].pvName, arg.pvs[n].pvType, arg.pvs[n].numberOfElements);
                 ca_pend_io(0.1);
 
                 arg.pvs[n].byteSize = 0;
                 arg.pvs[n].at = voidAnyType;
-
                 if (arg.pvs[n].numberOfElements > MAX_ARR_LEN) {
                     arg.pvs[n].numberOfElements = 0u;
                 }
@@ -390,13 +391,12 @@ ErrorManagement::ErrorType DiodeReceiver::Start() {
     memoryPrec = (uint8*) HeapManager::Malloc(totalMemorySize);
     changeFlag = (uint8*) HeapManager::Malloc(numberOfVariables);
     pvMapping = new uint32[numberOfVariables];
-    for (uint32 i = 0u; i < numberOfVariables; i++) {
-        pvMapping[i] = 0xFFFFFFFF;
-    }
+
     MemoryOperationsHelper::Set(memory, 0, totalMemorySize);
     MemoryOperationsHelper::Set(memoryPrec, 0, totalMemorySize);
     MemoryOperationsHelper::Set(changeFlag, 0, numberOfVariables);
     for (uint32 n = 0u; (n < numberOfVariables); n++) {
+        pvMapping[n] = 0xFFFFFFFF;
         pvs[n].at.SetDataPointer(memory + pvs[n].offset);
     }
 
@@ -454,7 +454,7 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
             if (protocol.MoveAbsolute("InputOptions")) {
                 if (protocol.Read("Content-Length", contentLength)) {
                     isChunked = false;
-                    if(contentLength==0u){
+                    if (contentLength == 0u) {
                         protocol.SetKeepAlive(false);
                     }
                 }
@@ -540,20 +540,45 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
 
                             if (ok) {
                                 if (pvMapping[receivedIndex] == 0xFFFFFFFF) {
-                                    uint32 index=0u;
-                                    ok=GetLocalVariableIndex(varName.Buffer(), receivedIndex, index);
-                                    if(ok){
-                                        pvMapping[receivedIndex]=index;
+                                    uint32 index = 0u;
+                                    ok = GetLocalVariableIndex(varName.Buffer(), receivedIndex, index);
+                                    if (ok) {
+                                        if (pvs[index].byteSize>0u) {
+                                            processedSize += (sizeof(uint32) + pvs[index].byteSize + sizeof(uint64) + 3u);
+                                            ok = (payload.Size() >= processedSize);
+                                        }
+                                        else{
+                                            pvMapping[receivedIndex] = 0xFFFFFFFFu;
+                                        }
+                                    }
+                                    if (pvMapping[receivedIndex] == 0xFFFFFFFFu) {
+                                        //if not found skip and continue
+                                        char8 terminator = '\0';
+                                        ok = true;
+                                        uint32 skipSize = 0u;
+                                        while (ok) {
+                                            uint32 size = 1u;
+                                            ok = payload.Read(&terminator, size);
+                                            if (ok) {
+                                                ok = (size == 1u);
+                                            }
+                                            if (terminator == '\n') {
+                                                break;
+                                            }
+                                            skipSize += size;
+                                        }
+                                        if (ok) {
+                                            processedSize += sizeof(uint32) + skipSize + 3u;
+                                            ok = (payload.Size() >= processedSize);
+                                        }
+                                        REPORT_ERROR(ErrorManagement::Information, "variable %s not found", varName.Buffer());
                                     }
                                 }
                             }
 
                             if (ok) {
                                 uint32 index = pvMapping[receivedIndex];
-                                processedSize += (sizeof(uint32) + pvs[index].byteSize + sizeof(uint64) + 3u);
-
-                                ok = (payload.Size() >= processedSize);
-                                if (ok) {
+                                if (index != 0xFFFFFFFFu) {
                                     dataPtr += sizeof(uint32);
                                     if (syncSem.FastLock()) {
 
@@ -566,13 +591,13 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
                                         }
                                         syncSem.FastUnLock();
                                     }
-                                    uint32 currentSize = (payload.Size() - processedSize);
-                                    payload.Seek(0);
-                                    if (currentSize > 0u) {
-                                        MemoryOperationsHelper::Copy(payload.Buffer(), payload.Buffer() + processedSize, currentSize);
-                                    }
-                                    payload.SetSize(currentSize);
                                 }
+                                uint32 currentSize = (payload.Size() - processedSize);
+                                payload.Seek(0);
+                                if (currentSize > 0u) {
+                                    MemoryOperationsHelper::Copy(payload.Buffer(), payload.Buffer() + processedSize, currentSize);
+                                }
+                                payload.SetSize(currentSize);
                             }
                         }
                     }
@@ -689,7 +714,9 @@ bool DiodeReceiver::InitialisationDone() {
     return (threadSetContext >= numberOfInitThreads);
 }
 
-bool DiodeReceiver::GetLocalVariableIndex(const char8 *varName, uint32 receivedIndex, uint32 &index){
+bool DiodeReceiver::GetLocalVariableIndex(const char8 *varName,
+                                          uint32 receivedIndex,
+                                          uint32 &index) {
     uint32 range_1 = numberOfVariables;
     uint32 range = (numberOfVariables / 2);
     index = range;
@@ -724,7 +751,6 @@ bool DiodeReceiver::GetLocalVariableIndex(const char8 *varName, uint32 receivedI
     }
     return ok;
 }
-
 
 CLASS_REGISTER(DiodeReceiver, "1.0")
 }

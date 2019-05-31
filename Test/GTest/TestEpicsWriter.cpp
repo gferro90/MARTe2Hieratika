@@ -184,19 +184,55 @@ static bool GetVariable(File &xmlFile,
 void WriterCycleLoop(uint32 &quit) {
     while (quit == 0u) {
         for (uint32 n = 0u; n < numberOfVariables; n++) {
-            uint32 temp;
             AnyType source(pvDescriptor[n].td, 0, pvDescriptor[n].memory);
-            if (TypeConvert(temp, source)) {
-                temp++;
-                TypeConvert(source, temp);
-                if(n==0u){
-                    printf("temp=%d\n", temp);
+            const char8* epicsTypeName = dbf_type_to_text(pvDescriptor[n].pvType);
+            bool ok = (StringHelper::Compare(epicsTypeName,"DBF_UCHAR")==0);
+            ok |= (StringHelper::Compare(epicsTypeName,"DBF_CHAR")==0);
+            ok |= (StringHelper::Compare(epicsTypeName,"DBF_USHORT")==0);
+            ok |= (StringHelper::Compare(epicsTypeName,"DBF_SHORT")==0);
+            ok |= (StringHelper::Compare(epicsTypeName,"DBF_ULONG")==0);
+            ok |= (StringHelper::Compare(epicsTypeName,"DBF_LONG")==0);
+            ok |= (StringHelper::Compare(epicsTypeName,"DBF_FLOAT")==0);
+            ok |= (StringHelper::Compare(epicsTypeName,"DBF_DOUBLE")==0);
+
+            if (ok) {
+
+                if (pvDescriptor[n].numberOfElements > 1u) {
+                    source.SetNumberOfDimensions(1u);
+                    source.SetNumberOfElements(0u, pvDescriptor[n].numberOfElements);
+                    Vector < float64 > temp2(pvDescriptor[n].numberOfElements);
+
+                    if (TypeConvert(temp2, source)) {
+                        for (uint32 i = 0u; i < pvDescriptor[n].numberOfElements; i++) {
+                            //consider the binaries
+                            temp2[i] += 1;
+                            temp2[i] = ((int32) temp2[i]) % 2;
+                        }
+                        if (TypeConvert(source, temp2)) {
+                            if (n == 0u) {
+                                printf("temp=%f\n", temp2[0]);
+                            }
+                        }
+                    }
+                }
+                else if (pvDescriptor[n].numberOfElements > 0u){
+
+                    float64 temp2;
+                    if (TypeConvert(temp2, source)) {
+                        temp2 += 1;
+                        temp2 = ((int32) temp2) % 2;
+                        if (TypeConvert(source, temp2)) {
+                            if (n == 0u) {
+                                printf("temp=%f\n", temp2);
+                            }
+                        }
+                    }
                 }
                 ca_array_put(pvDescriptor[n].pvType, pvDescriptor[n].numberOfElements, pvDescriptor[n].pvChid, pvDescriptor[n].memory);
                 (void) ca_pend_io(0.1);
             }
         }
-        Sleep::Sec(1);
+        Sleep::MSec(100);
     }
     Atomic::Increment(&quit);
 }
@@ -207,7 +243,7 @@ int main(int argc,
     signal(SIGTERM, StopApp);
     signal(SIGINT, StopApp);
 
-    //open the XML file
+//open the XML file
     File xmlFile;
     if (!xmlFile.Open(argv[1], File::ACCESS_MODE_R)) {
         printf("Failed opening file %s\n", argv[1]);
@@ -230,7 +266,7 @@ int main(int argc,
         variable.SetSize(0ull);
     }
 
-    //create the pv descriptors
+//create the pv descriptors
     pvDescriptor = new PvDescriptor[numberOfVariables];
     variable.SetSize(0ull);
 
@@ -259,7 +295,7 @@ int main(int argc,
 
     xmlFile.Close();
 
-    //initialise the context
+//initialise the context
     int32 result = ca_context_create(ca_disable_preemptive_callback);
     if (result != ECA_NORMAL) {
         fprintf(stderr, "CA error %s occurred while trying "
@@ -297,8 +333,8 @@ int main(int argc,
         }
     }
 
-    //begin the thread
-
+//begin the thread
+    printf("Begin the thread\n");
     Threads::BeginThread((ThreadFunctionType) WriterCycleLoop, &quit, THREADS_DEFAULT_STACKSIZE, NULL, ExceptionHandler::NotHandled);
 
     while (quit < 2) {

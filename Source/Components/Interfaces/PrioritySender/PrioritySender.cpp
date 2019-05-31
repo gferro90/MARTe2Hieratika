@@ -379,7 +379,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
         if (pvDes != NULL) {
             for (uint32 i = 0u; (i < numberOfSignalToBeSent) && (err.ErrorsCleared()); i++) {
                 uint32 signalIndex = indexList[listIndex];
-                if (pvDes[signalIndex].numberOfElements > 0) {
+                if ((pvDes[signalIndex].numberOfElements > 0u) && (pvDes[signalIndex].memorySize > 0u)) {
 
                     sentCounter++;
                     uint64 offset = (pvDes[signalIndex]).offset;
