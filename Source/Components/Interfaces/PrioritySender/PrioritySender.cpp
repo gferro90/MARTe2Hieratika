@@ -34,6 +34,7 @@
 #include "JsonPrinter.h"
 #include "AdvancedErrorManagement.h"
 #include "HttpProtocol.h"
+
 /*---------------------------------------------------------------------------*/
 /*                           Static definitions                              */
 /*---------------------------------------------------------------------------*/
@@ -55,6 +56,7 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             arg.nThreadsFinished = 0u;
             arg.dataSource->Synchronise(arg.memory, arg.changeFlag);
             //if not, just send using FIFO mechanism
+            uint32 nVariables=0u;
             if (arg.chunckCounter >= (arg.numberOfChunks)) {
                 //insertion sort if changed
                 for (uint32 i = 0u; i < arg.numberOfVariables; i++) {
@@ -71,6 +73,7 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
                             arg.indexList[prevJIndex] = arg.indexList[jIndex];
                             arg.indexList[jIndex] = temp;
                         }
+                        nVariables++;
                         arg.currentChangePos++;
                     }
                 }
@@ -78,7 +81,7 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             else {
                 arg.chunckCounter++;
             }
-            printf("current changes %d %d\n", arg.currentChangePos, arg.currentIdx);
+            //printf("current changes %d %d\n", arg.currentChangePos, arg.currentIdx);
 
             //update the first position for the new cycle, in order to send the ones that
             //cannot be sent in this cycle
@@ -143,11 +146,10 @@ PrioritySender::PrioritySender() :
     serverPort = 0u;
     serverInitialPort = 0u;
     connectionTimeout = TTInfiniteWait;
-    mainCpuMask = 0xffu;
+    numberOfCpus = 0x4u;
     quit = 0;
     lastTickCounter = 0u;
     msecPeriod = 0u;
-    initialised = false;
 }
 
 PrioritySender::~PrioritySender() {
@@ -179,18 +181,18 @@ bool PrioritySender::Initialise(StructuredDataI &data) {
             }
         }
         if (ret) {
-            ret = data.Read("ServerInitialPort", serverInitialPort);
+            ret = data.Read("ServerPort", serverInitialPort);
             if (!ret) {
-                REPORT_ERROR(ErrorManagement::InitialisationError, "Please define ServerInitialPort");
+                REPORT_ERROR(ErrorManagement::InitialisationError, "Please define ServerPort");
             }
             else {
                 serverPort = serverInitialPort;
             }
         }
         if (ret) {
-            ret = data.Read("MainCpuMask", mainCpuMask);
+            ret = data.Read("NumberOfCpus", numberOfCpus);
             if (!ret) {
-                REPORT_ERROR(ErrorManagement::InitialisationError, "Please define MainCpuMask");
+                REPORT_ERROR(ErrorManagement::InitialisationError, "Please define NumberOfCpus");
             }
         }
         if (ret) {
@@ -244,9 +246,18 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
 }
 
 ErrorManagement::ErrorType PrioritySender::Start() {
+    uint32 currentCpuMask=1u;
+    for(uint32 i=0u; i<numberOfPoolThreads; i++){
+        if(currentCpuMask==(1u<<numberOfCpus)){
+            currentCpuMask=1u;
+        }
+        MultiThreadService::SetCPUMaskThreadPool(currentCpuMask, i);
+        currentCpuMask<<=1u;
+    }
+
     lastTickCounter = HighResolutionTimer::Counter();
     ErrorManagement::ErrorType err = MultiThreadService::Start();
-    Threads::BeginThread((ThreadFunctionType) PrioritySenderCycleLoop, this, THREADS_DEFAULT_STACKSIZE, NULL, ExceptionHandler::NotHandled, mainCpuMask);
+    Threads::BeginThread((ThreadFunctionType) PrioritySenderCycleLoop, this, THREADS_DEFAULT_STACKSIZE, NULL, ExceptionHandler::NotHandled, 1u);
 
     return err;
 }
@@ -257,10 +268,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
     if (info.GetStage() == MARTe::ExecutionInfo::StartupStage) {
 
         //be sure the main thread started
-        if (!initialised) {
             eventSem.Wait(TTInfiniteWait);
-            initialised = true;
-        }
 
         HttpChunkedStream *newClient = new HttpChunkedStream();
         newClient->Open();
@@ -401,13 +409,14 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                     uint32 varSize = var.Size();
                     client.Write(var.Buffer(), varSize);
                     uint32 indexSize = sizeof(uint32);
-                    client.Write((uint8*) (&signalIndex), indexSize);
-                    uint32 totalSize = pvDes[signalIndex].memorySize * pvDes[signalIndex].numberOfElements;
-                    client.Write((uint8*) signalPtr, totalSize);
+                    client.Write((const char8*) (&signalIndex), indexSize);
+                    uint32 totalSize = (pvDes[signalIndex].memorySize * pvDes[signalIndex].numberOfElements);
+                    client.Write((const char8*)(&totalSize), indexSize);
+                    client.Write((const char8*) signalPtr, totalSize);
                     uint32 timestampSize = sizeof(uint64);
                     uint32 tsIndex = (pvDes[signalIndex].numberOfElements * pvDes[signalIndex].memorySize);
                     uint8* timeStampPtr = (uint8*) (&memory[offset + tsIndex]);
-                    client.Write((uint8*) timeStampPtr, timestampSize);
+                    client.Write((const char8*) timeStampPtr, timestampSize);
                     uint32 termSize = 2u;
                     client.Write("\n\r", termSize);
                 }
@@ -441,13 +450,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
 ErrorManagement::ErrorType PrioritySender::SendCloseConnectionMessage(HttpChunkedStream &client) {
 
     ErrorManagement::ErrorType err;
-    uint32 listIndex;
-    if (syncSem.FastLock()) {
-        listIndex = currentIdx;
-        currentIdx += numberOfSignalToBeSent;
-        currentIdx %= numberOfVariables;
-        syncSem.FastUnLock();
-    }
+
 
     client.SetChunkMode(false);
     HttpProtocol hprotocol(client);

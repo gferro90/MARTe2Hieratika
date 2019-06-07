@@ -183,6 +183,7 @@ static bool GetVariable(File &xmlFile,
 
 void WriterCycleLoop(uint32 &quit) {
     while (quit == 0u) {
+        uint32 nVariables=0u;
         for (uint32 n = 0u; n < numberOfVariables; n++) {
             AnyType source(pvDescriptor[n].td, 0, pvDescriptor[n].memory);
             const char8* epicsTypeName = dbf_type_to_text(pvDescriptor[n].pvType);
@@ -196,7 +197,7 @@ void WriterCycleLoop(uint32 &quit) {
             ok |= (StringHelper::Compare(epicsTypeName,"DBF_DOUBLE")==0);
 
             if (ok) {
-
+                nVariables++;
                 if (pvDescriptor[n].numberOfElements > 1u) {
                     source.SetNumberOfDimensions(1u);
                     source.SetNumberOfElements(0u, pvDescriptor[n].numberOfElements);
@@ -206,7 +207,7 @@ void WriterCycleLoop(uint32 &quit) {
                         for (uint32 i = 0u; i < pvDescriptor[n].numberOfElements; i++) {
                             //consider the binaries
                             temp2[i] += 1;
-                            temp2[i] = ((int32) temp2[i]) % 2;
+                            //temp2[i] = ((int32) temp2[i]) % 2;
                         }
                         if (TypeConvert(source, temp2)) {
                             if (n == 0u) {
@@ -220,7 +221,7 @@ void WriterCycleLoop(uint32 &quit) {
                     float64 temp2;
                     if (TypeConvert(temp2, source)) {
                         temp2 += 1;
-                        temp2 = ((int32) temp2) % 2;
+                        //temp2 = ((int32) temp2) % 2;
                         if (TypeConvert(source, temp2)) {
                             if (n == 0u) {
                                 printf("temp=%f\n", temp2);
@@ -230,9 +231,13 @@ void WriterCycleLoop(uint32 &quit) {
                 }
                 ca_array_put(pvDescriptor[n].pvType, pvDescriptor[n].numberOfElements, pvDescriptor[n].pvChid, pvDescriptor[n].memory);
                 (void) ca_pend_io(0.1);
+                /*if(n%100==0){
+                    Sleep::MSec(100);
+                }*/
             }
         }
-        Sleep::MSec(100);
+        printf("nVariables=%d\n", nVariables);
+        Sleep::MSec(1);
     }
     Atomic::Increment(&quit);
 }

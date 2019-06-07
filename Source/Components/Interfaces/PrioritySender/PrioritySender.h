@@ -57,6 +57,20 @@ namespace MARTe{
  * should be sent to different ports of the same server using HTTP protocol, where N (the number of
  * PVs to be sent by each thread per cycle) is defined by the user. If the threads are not capable to
  * send all the variables during the cycle time, the main thread will jump a cycle.
+ *
+ * @details Follows an example of the configuration:
+ * <pre>
+ * +Sender = {
+ *     Class = PrioritySender
+ *     NumberOfPoolThreads = 20 //how many open connections
+ *     NumberOfSignalPerThread = 200 //how many signals per thread per cycle
+ *     ServerIp = "127.0.0.1" //the remote IP address
+ *     ServerInitialPort = 4444 //the remote port
+ *     NumberOfCpus = 8 //the number of the CPUs (default: 4)
+ *     Timeout = 0xFFFFFFFF //the timeout
+ *     MsecPeriod=500 //the cycle time period
+ * }
+ * </pre>
  */
 class PrioritySender: public MultiThreadService {
 public:
@@ -116,14 +130,25 @@ public:
     virtual ErrorManagement::ErrorType Start();
 
 
+    /**
+     * @see MultiThreadService::Start
+     * @brief Stops all the threads.
+     */
     virtual ErrorManagement::ErrorType Stop();
 
 
 private:
 
+    /**
+     * @brief Help function to send the variables to the receiver
+     */
     ErrorManagement::ErrorType SendVariables(HttpChunkedStream &client);
 
 
+    /**
+     * @brief Help function to send the close connection HTTP message in case
+     * of error
+     */
     ErrorManagement::ErrorType SendCloseConnectionMessage(HttpChunkedStream &client);
 
     /**
@@ -235,7 +260,7 @@ private:
     /**
      * The cpu mask of the main thread
      */
-    uint32 mainCpuMask;
+    uint32 numberOfCpus;
 
     /**
      * Used to trigger the stop of the threads
@@ -253,7 +278,6 @@ private:
      */
     uint32 msecPeriod;
 
-    bool initialised;
 
 };
 

@@ -50,7 +50,6 @@ namespace MARTe {
 
 const uint32 PV_NAME_MAX_SIZE = 64u;
 
-
 /**
  * Contains all the PV data
  */
@@ -115,7 +114,6 @@ struct PvDescriptor {
      */
     TypeDescriptor td;
 };
-
 
 /**
  * @brief Stores the value and the time-stamp of the EPICS variables, whose names are contained
@@ -200,9 +198,38 @@ public:
      */
     bool InitialisationDone();
 
+    /**
+     * @brief Stops the execution
+     */
     virtual ErrorManagement::ErrorType Stop();
 
 private:
+
+    /**
+     * @brief Help function to get the EPICS variable information such as type and memory size
+     * to create the memory buffer where to write the values on subscription.
+     * @param[in] beg the start index.
+     * @param[in] end the end index.
+     * @param[in] threadId the thread identifier.
+     */
+    bool FillMemorySizes(uint32 beg,
+                         uint32 end,
+                         uint32 threadId);
+
+    /**
+     * @brief Help function to create the EPICS variable subscriptions
+     * @param[in] beg the start index.
+     * @param[in] end the end index.
+     */
+    void CreateSubscriptions(uint32 beg,
+                             uint32 end);
+
+    /**
+     * @brief Help function to detach and destroy the EPICS context when finished or in case
+     * of errors.
+     * @param[in] threadId the thread identifier.
+     */
+    void CleanContext(uint32 threadId);
 
     /**
      * The first variable name
@@ -228,12 +255,6 @@ private:
     uint32 numberOfVariables;
 
     /**
-     * The size of the memory allocated for
-     * the PVs value and timestamp
-     */
-    uint64 totalMemorySize;
-
-    /**
      * The allocated memory for the PVs
      */
     uint8 **memory;
@@ -255,20 +276,35 @@ private:
      * Asserts that the initialisation
      * terminates
      */
-    uint8 initialisationDone;
+    uint32 initialisationDone;
 
     /**
-     * The thread cpu mask
+     * A thread counter
      */
-    uint32 cpuMask;
-
     uint32 threatCnt;
 
+    /**
+     * The number of variables managed by each thread
+     */
     uint32 nVarsPerChunk;
 
+    /**
+     * A vector containing the memory sizes for each thread
+     */
     uint64 *memorySize;
 
+    /**
+     * An event semaphore to trigger the stop of
+     * the execution
+     */
     EventSem eventSem;
+
+    /**
+     * The maximum number of variables
+     */
+    uint32 maxNumberOfVariables;
+
+
 };
 }
 

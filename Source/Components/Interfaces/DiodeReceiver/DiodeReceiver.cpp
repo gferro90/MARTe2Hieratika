@@ -31,13 +31,15 @@
 
 #include "DiodeReceiver.h"
 #include "AdvancedErrorManagement.h"
-#include "HttpProtocol.h"
 #include "JsonParser.h"
+#include "MultiClientEmbeddedThread.h"
 /*---------------------------------------------------------------------------*/
 /*                           Static definitions                              */
 /*---------------------------------------------------------------------------*/
 namespace MARTe {
 #define MAX_ARR_LEN 100
+#define INDEX_INIT_ID 0xFFFFFFFFu
+#define INDEX_NOT_FOUND_ID 0xFFFFFFFEu
 
 static bool GetVariable(File &xmlFile,
                         StreamString &variable) {
@@ -83,46 +85,40 @@ static int cainfo(chid &pvChid,
 void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
 
     uint32 threadId;
+    uint32 beg = 0u;
+    uint32 end = arg.numberOfVariables;
+    bool ret = true;
+
     if (arg.syncSem.FastLock()) {
         threadId = arg.threadCnt;
         arg.threadCnt++;
         arg.syncSem.FastUnLock();
     }
-    bool ret = true;
-    if (threadId == 0u) {
-        ret = (ca_context_create(ca_enable_preemptive_callback) == ECA_NORMAL);
-        arg.eventSem.Post();
-    }
-    else {
-        arg.eventSem.Wait();
-    }
+    ret = (ca_context_create(ca_enable_preemptive_callback) == ECA_NORMAL);
 
-    if (!ret) {
-        //REPORT_ERROR(ErrorManagement::FatalError, "ca_enable_preemptive_callback failed");
-    }
-    else {
+    if (ret) {
         arg.totalMemorySize = 0u;
         uint32 nThreads = arg.numberOfInitThreads;
         uint32 numberOfVarsPerThread = (arg.numberOfVariables / nThreads);
 
-        uint32 beg = threadId * numberOfVarsPerThread;
-        uint32 end = (threadId + 1) * numberOfVarsPerThread;
+        beg = threadId * numberOfVarsPerThread;
+        end = (threadId + 1) * numberOfVarsPerThread;
+
         if ((arg.numberOfVariables - end) < nThreads) {
             end = arg.numberOfVariables;
         }
+        printf("Starting Thread from %d to %d\n", beg, end);
+
         for (uint32 n = beg; (n < end); n++) {
             /*lint -e{9130} -e{835} -e{845} -e{747} Several false positives. lint is getting confused here for some reason.*/
             ret = (ca_create_channel(arg.pvs[n].pvName, NULL, NULL, 20u, &arg.pvs[n].pvChid) == ECA_NORMAL);
             ca_pend_io(0.1);
-            if (!ret) {
-                //REPORT_ERROR_STATIC(ErrorManagement::FatalError, "ca_create_channel failed for PV with name %s", arg.pvs[n].pvName);
-            }
-            else {
+            if (ret) {
                 arg.pvs[n].numberOfElements = 0u;
                 cainfo(arg.pvs[n].pvChid, arg.pvs[n].pvName, arg.pvs[n].pvType, arg.pvs[n].numberOfElements);
                 ca_pend_io(0.1);
 
-                arg.pvs[n].byteSize = 0;
+                arg.pvs[n].totalSize = 0;
                 arg.pvs[n].at = voidAnyType;
                 if (arg.pvs[n].numberOfElements > MAX_ARR_LEN) {
                     arg.pvs[n].numberOfElements = 0u;
@@ -131,35 +127,35 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
                     const char8* epicsTypeName = dbf_type_to_text(arg.pvs[n].pvType);
                     //printf("%s: nElems=%d, type=%s\n", pvs[n].pvName, pvs[n].numberOfElements, epicsTypeName);
                     if (StringHelper::Compare(epicsTypeName, "DBF_DOUBLE") == 0u) {
-                        arg.pvs[n].byteSize = (sizeof(float64)) * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].totalSize = (sizeof(float64)) * arg.pvs[n].numberOfElements;
                         arg.pvs[n].at = AnyType(Float64Bit, 0u, (void*) NULL);
                     }
                     else if (StringHelper::Compare(epicsTypeName, "DBF_FLOAT") == 0u) {
-                        arg.pvs[n].byteSize = (sizeof(float32)) * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].totalSize = (sizeof(float32)) * arg.pvs[n].numberOfElements;
                         arg.pvs[n].at = AnyType(Float32Bit, 0u, (void*) NULL);
                     }
                     else if (StringHelper::Compare(epicsTypeName, "DBF_LONG") == 0u) {
-                        arg.pvs[n].byteSize = (sizeof(int32)) * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].totalSize = (sizeof(int32)) * arg.pvs[n].numberOfElements;
                         arg.pvs[n].at = AnyType(SignedInteger32Bit, 0u, (void*) NULL);
                     }
                     else if (StringHelper::Compare(epicsTypeName, "DBF_ULONG") == 0u) {
-                        arg.pvs[n].byteSize = (sizeof(uint32)) * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].totalSize = (sizeof(uint32)) * arg.pvs[n].numberOfElements;
                         arg.pvs[n].at = AnyType(UnsignedInteger32Bit, 0u, (void*) NULL);
                     }
                     else if (StringHelper::Compare(epicsTypeName, "DBF_SHORT") == 0u) {
-                        arg.pvs[n].byteSize = (sizeof(int16)) * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].totalSize = (sizeof(int16)) * arg.pvs[n].numberOfElements;
                         arg.pvs[n].at = AnyType(SignedInteger16Bit, 0u, (void*) NULL);
                     }
                     else if (StringHelper::Compare(epicsTypeName, "DBF_USHORT") == 0u) {
-                        arg.pvs[n].byteSize = (sizeof(uint16)) * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].totalSize = (sizeof(uint16)) * arg.pvs[n].numberOfElements;
                         arg.pvs[n].at = AnyType(UnsignedInteger16Bit, 0u, (void*) NULL);
                     }
                     else if (StringHelper::Compare(epicsTypeName, "DBF_CHAR") == 0u) {
-                        arg.pvs[n].byteSize = (sizeof(int8)) * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].totalSize = (sizeof(int8)) * arg.pvs[n].numberOfElements;
                         arg.pvs[n].at = AnyType(SignedInteger8Bit, 0u, (void*) NULL);
                     }
                     else if (StringHelper::Compare(epicsTypeName, "DBF_UCHAR") == 0u) {
-                        arg.pvs[n].byteSize = (sizeof(uint8)) * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].totalSize = (sizeof(uint8)) * arg.pvs[n].numberOfElements;
                         arg.pvs[n].at = AnyType(UnsignedInteger8Bit, 0u, (void*) NULL);
                     }
                     else if (StringHelper::Compare(epicsTypeName, "DBF_STRING") == 0) {
@@ -170,7 +166,7 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
                         td.type = CArray;
                         td.isConstant = false;
 
-                        arg.pvs[n].byteSize = (sizeof(char8)) * MAX_STRING_SIZE * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].totalSize = (sizeof(char8)) * MAX_STRING_SIZE * arg.pvs[n].numberOfElements;
                         arg.pvs[n].at = AnyType(td, 0u, (void*) NULL);
                     }
                     else {
@@ -180,35 +176,58 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
                         td.type = CArray;
                         td.isConstant = false;
 
-                        arg.pvs[n].byteSize = (sizeof(char8)) * MAX_STRING_SIZE * arg.pvs[n].numberOfElements;
+                        arg.pvs[n].totalSize = (sizeof(char8)) * MAX_STRING_SIZE * arg.pvs[n].numberOfElements;
                         arg.pvs[n].at = AnyType(td, 0u, (void*) NULL);
                         arg.pvs[n].pvType = DBF_STRING;
-                        /*
-                         epicsTypeName = DBF_DOUBLE;
-                         pvs[n].byteSize = (sizeof(float64)) * pvs[n].numberOfElements;
-                         pvs[n].at = AnyType(Float64Bit, 0u, (void*) NULL);*/
+
                     }
                     if (arg.pvs[n].numberOfElements > 1u) {
                         arg.pvs[n].at.SetNumberOfDimensions(1u);
                         arg.pvs[n].at.SetNumberOfElements(0u, arg.pvs[n].numberOfElements);
                     }
+
                 }
             }
         }
 
     }
-
+    else {
+        printf("ca_enable_preemptive_callback failed\n");
+    }
+    arg.eventSem.Reset();
     Atomic::Increment(&arg.threadSetContext);
-    arg.eventSem.ResetWait(TTInfiniteWait);
+    arg.eventSem.Wait(TTInfiniteWait);
 
-    if (threadId == 0u) {
-        for (uint32 n = 0u; (n < arg.numberOfVariables); n++) {
-            (void) ca_clear_channel(arg.pvs[n].pvChid);
+    while (arg.quit == 0) {
+        //sync here
+        if (threadId == 0u) {
+            arg.Synchronise(arg.memory2, arg.changeFlag2);
+        }
+        for (uint32 index = beg; index < end; index++) {
+            if (arg.changeFlag2[index] == 1) {
+                if (ca_array_put((arg.pvs[index].pvType), arg.pvs[index].numberOfElements, arg.pvs[index].pvChid, arg.memory2 + arg.pvs[index].offset)
+                        != ECA_NORMAL) {
+                    printf("ca_put failed for PV: %s\n", arg.pvs[index].pvName);
+                }
+                (void) ca_pend_io(0.1);
+            }
         }
 
-        ca_detach_context();
-        ca_context_destroy();
+        //wait the cycle time
+        uint32 elapsed = (uint32)(((float32)(HighResolutionTimer::Counter() - arg.lastTickCounter[threadId]) * 1000u * HighResolutionTimer::Period()));
+
+        if (elapsed < arg.msecPeriod) {
+            Sleep::MSec(arg.msecPeriod - elapsed);
+        }
+        arg.lastTickCounter[threadId] = HighResolutionTimer::Counter();
     }
+
+    for (uint32 n = beg; (n < end); n++) {
+        (void) ca_clear_channel(arg.pvs[n].pvChid);
+    }
+
+    ca_detach_context();
+    ca_context_destroy();
 
 }
 
@@ -219,18 +238,20 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
 DiodeReceiver::DiodeReceiver() :
         MultiClientService(embeddedMethod),
         embeddedMethod(*this, &DiodeReceiver::ServerCycle) {
-    // Auto-generated constructor stub for DiodeReceiver
-    // TODO Verify if manual additions are needed
+// Auto-generated constructor stub for DiodeReceiver
+// TODO Verify if manual additions are needed
     serverPort = 0u;
     acceptTimeout = TTInfiniteWait;
     syncSem.Create();
     pvs = NULL;
     numberOfVariables = 0u;
-    mainCpuMask = 0x1u;
+    numberOfCpus = 4u;
     memory = NULL;
+    memory2 = NULL;
     memoryPrec = NULL;
     threadSetContext = 0u;
     changeFlag = NULL;
+    changeFlag2 = NULL;
     lastCounter = 0ull;
     quit = 0;
     totalMemorySize = 0u;
@@ -238,17 +259,24 @@ DiodeReceiver::DiodeReceiver() :
     eventSem.Reset();
     threadCnt = 0u;
     pvMapping = NULL;
+    maxNumberOfVariables = 0xFFFFFFFFu;
+    lastTickCounter = NULL;
+    msecPeriod = 0u;
+    currentCpuMask = 1u;
 }
 
 DiodeReceiver::~DiodeReceiver() {
-    // Auto-generated destructor stub for DiodeReceiver
-    // TODO Verify if manual additions are needed
+// Auto-generated destructor stub for DiodeReceiver
+// TODO Verify if manual additions are needed
 
     if (pvs != NULL) {
         delete[] pvs;
     }
     if (memory != NULL) {
         HeapManager::Free((void*&) memory);
+    }
+    if (memory2 != NULL) {
+        HeapManager::Free((void*&) memory2);
     }
     if (memoryPrec != NULL) {
         HeapManager::Free((void*&) memory);
@@ -257,20 +285,24 @@ DiodeReceiver::~DiodeReceiver() {
     if (changeFlag != NULL) {
         HeapManager::Free((void*&) changeFlag);
     }
-
+    if (changeFlag2 != NULL) {
+        HeapManager::Free((void*&) changeFlag2);
+    }
     if (pvMapping != NULL) {
         delete[] pvMapping;
     }
-
+    if (lastTickCounter != NULL) {
+        delete[] lastTickCounter;
+    }
 }
 
 bool DiodeReceiver::Initialise(StructuredDataI &data) {
     bool ret = MultiClientService::Initialise(data);
     if (ret) {
 
-        ret = data.Read("ServerInitialPort", serverPort);
+        ret = data.Read("ServerPort", serverPort);
         if (!ret) {
-            REPORT_ERROR(ErrorManagement::InitialisationError, "Please define ServerInitialPort");
+            REPORT_ERROR(ErrorManagement::InitialisationError, "Please define ServerPort");
         }
         if (ret) {
             StreamString xmlFilePath;
@@ -287,13 +319,18 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
                 REPORT_ERROR(ErrorManagement::InitialisationError, "Please define InputFilePath");
             }
             if (ret) {
-                if (!data.Read("MainCpuMask", mainCpuMask)) {
-                    mainCpuMask = 0xFF;
+                if (!data.Read("NumberOfCpus", numberOfCpus)) {
+                    numberOfCpus = 4u;
                 }
                 if (!data.Read("NumberOfInitThreads", numberOfInitThreads)) {
                     numberOfInitThreads = 1u;
                 }
-
+                if (!data.Read("MaxNumberOfVariables", maxNumberOfVariables)) {
+                    maxNumberOfVariables = 0xFFFFFFFFu;
+                }
+                if (!data.Read("MsecPeriod", msecPeriod)) {
+                    msecPeriod = 1000u;
+                }
                 //open the xml file
                 File xmlFile;
                 if (!xmlFile.Open(xmlFilePath.Buffer(), File::ACCESS_MODE_R)) {
@@ -316,6 +353,9 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
                     if (start) {
                         printf("variable=%s\n", variable.Buffer());
                         numberOfVariables++;
+                        if (numberOfVariables >= maxNumberOfVariables) {
+                            break;
+                        }
                     }
                     variable.SetSize(0ull);
                 }
@@ -337,8 +377,6 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
                         }
                     }
                     if (start) {
-                        pvs[counter].pvType = DBF_DOUBLE;
-                        pvs[counter].prevBuff = NULL;
                         pvs[counter].at = voidAnyType;
                         StringHelper::Copy(pvs[counter].pvName, variable.Buffer());
                         for (uint32 j = counter; j > 0u; j--) {
@@ -353,6 +391,9 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
                             }
                         }
                         counter++;
+                        if (counter >= maxNumberOfVariables) {
+                            break;
+                        }
                     }
 
                     variable.SetSize(0ull);
@@ -376,28 +417,38 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
 ErrorManagement::ErrorType DiodeReceiver::Start() {
     lastCounter = HighResolutionTimer::Counter();
     for (uint32 i = 0u; i < numberOfInitThreads; i++) {
-        Threads::BeginThread((ThreadFunctionType) DiodeReceiverCycleLoop, this, THREADS_DEFAULT_STACKSIZE, NULL, ExceptionHandler::NotHandled, mainCpuMask);
+        uint32 cpuMask = (1 << (i % numberOfCpus));
+        ThreadIdentifier tid = Threads::BeginThread((ThreadFunctionType) DiodeReceiverCycleLoop, this, THREADS_DEFAULT_STACKSIZE, NULL,
+                                                    ExceptionHandler::NotHandled, cpuMask);
+        Threads::SetPriority(tid, Threads::RealTimePriorityClass, 15);
     }
-    while (threadSetContext < numberOfInitThreads) {
+    while ((uint32)threadSetContext < numberOfInitThreads) {
         Sleep::Sec(1);
     }
 
+    totalMemorySize = 0u;
     for (uint32 n = 0u; n < numberOfVariables; n++) {
         pvs[n].offset = totalMemorySize;
-        totalMemorySize += (pvs[n].byteSize + sizeof(uint64));
+        totalMemorySize += (pvs[n].totalSize + sizeof(uint64));
+
     }
 
     memory = (uint8*) HeapManager::Malloc(totalMemorySize);
+    memory2 = (uint8*) HeapManager::Malloc(totalMemorySize);
     memoryPrec = (uint8*) HeapManager::Malloc(totalMemorySize);
     changeFlag = (uint8*) HeapManager::Malloc(numberOfVariables);
+    changeFlag2 = (uint8*) HeapManager::Malloc(numberOfVariables);
     pvMapping = new uint32[numberOfVariables];
 
     MemoryOperationsHelper::Set(memory, 0, totalMemorySize);
+    MemoryOperationsHelper::Set(memory2, 0, totalMemorySize);
     MemoryOperationsHelper::Set(memoryPrec, 0, totalMemorySize);
     MemoryOperationsHelper::Set(changeFlag, 0, numberOfVariables);
+    MemoryOperationsHelper::Set(changeFlag2, 0, numberOfVariables);
     for (uint32 n = 0u; (n < numberOfVariables); n++) {
-        pvMapping[n] = 0xFFFFFFFF;
+        pvMapping[n] = INDEX_INIT_ID;
         pvs[n].at.SetDataPointer(memory + pvs[n].offset);
+
     }
 
     ErrorManagement::ErrorType err;
@@ -410,14 +461,48 @@ ErrorManagement::ErrorType DiodeReceiver::Start() {
             err = MultiClientService::Start();
         }
     }
-
+    if (err.ErrorsCleared()) {
+        lastTickCounter = new uint64[numberOfInitThreads];
+        for (uint32 i = 0u; i < numberOfInitThreads; i++) {
+            lastTickCounter[i] = HighResolutionTimer::Counter();
+        }
+        eventSem.Post();
+    }
     return err;
 }
 
 ErrorManagement::ErrorType DiodeReceiver::Stop() {
     Atomic::Increment(&quit);
-    eventSem.Post();
     return MultiClientService::Stop();
+}
+
+ErrorManagement::ErrorType DiodeReceiver::AddThread() {
+    ErrorManagement::ErrorType err;
+    err.illegalOperation = (threadPool.Size() >= maxNumberOfThreads);
+    if (err.ErrorsCleared()) {
+        ReferenceT < MultiClientEmbeddedThread > thread(new (NULL) MultiClientEmbeddedThread(method, *this));
+        err.fatalError = !thread.IsValid();
+        if (err.ErrorsCleared()) {
+            thread->SetPriorityClass(GetPriorityClass());
+            thread->SetPriorityLevel(GetPriorityLevel());
+            currentCpuMask <<= 1u;
+            if (currentCpuMask == (1u << numberOfCpus)) {
+                currentCpuMask = 1u;
+            }
+            thread->SetCPUMask(currentCpuMask);
+            thread->SetTimeout(GetTimeout());
+            StreamString tname;
+            (void) tname.Printf("%s_%d", GetName(), HighResolutionTimer::Counter32());
+            thread->SetName(tname.Buffer());
+            err = thread->Start();
+        }
+
+        if (err.ErrorsCleared()) {
+            err.fatalError = !threadPool.Insert(thread);
+        }
+
+    }
+    return err;
 }
 
 ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commClient) {
@@ -431,21 +516,15 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
         //discard the header
         err = !(protocol.ReadHeader());
 
-        StreamString line;
-
-        char8 buff[1024];
-        uint32 state = 0;
-
         StreamString payload;
         StreamString varName;
         StreamString varValue;
         StreamString varTs;
         StreamString varIndex;
 
-        uint32 readVariables = 0u;
         uint32 receivedIndex = 0u;
-        const char8 *pattern = "\": ";
-        uint32 patternSize = StringHelper::Length(pattern);
+        uint32 receivedSize = 0u;
+        uint32 index = INDEX_INIT_ID;
 
         bool isChunked = true;
         uint32 contentLength = 0u;
@@ -466,138 +545,32 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
 
             uint32 chunkSize = (isChunked) ? (0u) : (32u);
             do {
-                if (isChunked) {
-                    //get the line
-                    err = !(commClient->GetLine(line, false));
-                    //remove the \r
-                    line.SetSize(line.Size() - 1);
-                    //get the chunk size
-                    StreamString toConv = "0x";
-                    toConv += line;
-                    TypeConvert(chunkSize, toConv);
-                    line.SetSize(0ull);
-                }
-                else {
-                    if (contentLength < chunkSize) {
-                        chunkSize = contentLength;
-                    }
-                    contentLength -= chunkSize;
-                }
-
-                if (err.ErrorsCleared()) {
-                    uint32 sizeRead = 0u;
-                    //append to payload the chunk
-                    payload.Seek(payload.Size());
-                    while ((sizeRead < chunkSize) && (err.ErrorsCleared())) {
-                        MemoryOperationsHelper::Set(buff, '\0', 1024);
-                        uint32 sizeToRead = chunkSize - sizeRead;
-                        if (sizeToRead > 1023) {
-                            sizeToRead = 1023;
-                        }
-                        err = !commClient->Read(buff, sizeToRead);
-
-                        if (err.ErrorsCleared()) {
-                            payload.Write(buff, sizeToRead);
-                            sizeRead += sizeToRead;
-                        }
-                    }
-                }
+                err = ReadNewChunk(commClient, payload, isChunked, chunkSize, contentLength);
 
                 if (err.ErrorsCleared()) {
                     if (chunkSize > 0) {
                         if (isChunked) {
                             //read the \r\n
                             uint32 size = 2;
+                            char8 buff[2];
                             err = !(commClient->Read(buff, size));
                         }
                         bool ok = err.ErrorsCleared();
-                        while (ok) {
 
+                        //consume all the complete variables in this payload
+                        while (ok) {
                             payload.Seek(0);
                             varName.SetSize(0);
-
-                            const char8 *dataPtr = StringHelper::SearchString(payload.Buffer(), pattern);
-
-                            ok = (dataPtr != NULL);
-                            uint32 nameSize = 0u;
                             uint32 processedSize = 0u;
+                            const char8 *dataPtr = NULL;
+                            ok = ReadVarNameAndIndex(payload, varName, receivedIndex, receivedSize, processedSize, dataPtr);
 
                             if (ok) {
-                                // skip the "
-                                varName = payload.Buffer() + 1;
-                                nameSize = (uint32)(dataPtr - payload.Buffer() - 1u);
-                                varName.SetSize(nameSize);
-                                uint32 indexSize = sizeof(uint32);
-                                dataPtr += patternSize;
-
-                                processedSize += (nameSize + patternSize);
-
-                                ok = ((payload.Size() - processedSize) >= indexSize);
-                                if (ok) {
-                                    MemoryOperationsHelper::Copy(&receivedIndex, dataPtr, indexSize);
-                                }
+                                ok = GetLocalIndex(payload, varName, receivedIndex, receivedSize, index, processedSize);
                             }
 
                             if (ok) {
-                                if (pvMapping[receivedIndex] == 0xFFFFFFFF) {
-                                    uint32 index = 0u;
-                                    ok = GetLocalVariableIndex(varName.Buffer(), receivedIndex, index);
-                                    if (ok) {
-                                        if (pvs[index].byteSize>0u) {
-                                            processedSize += (sizeof(uint32) + pvs[index].byteSize + sizeof(uint64) + 3u);
-                                            ok = (payload.Size() >= processedSize);
-                                        }
-                                        else{
-                                            pvMapping[receivedIndex] = 0xFFFFFFFFu;
-                                        }
-                                    }
-                                    if (pvMapping[receivedIndex] == 0xFFFFFFFFu) {
-                                        //if not found skip and continue
-                                        char8 terminator = '\0';
-                                        ok = true;
-                                        uint32 skipSize = 0u;
-                                        while (ok) {
-                                            uint32 size = 1u;
-                                            ok = payload.Read(&terminator, size);
-                                            if (ok) {
-                                                ok = (size == 1u);
-                                            }
-                                            if (terminator == '\n') {
-                                                break;
-                                            }
-                                            skipSize += size;
-                                        }
-                                        if (ok) {
-                                            processedSize += sizeof(uint32) + skipSize + 3u;
-                                            ok = (payload.Size() >= processedSize);
-                                        }
-                                        REPORT_ERROR(ErrorManagement::Information, "variable %s not found", varName.Buffer());
-                                    }
-                                }
-                            }
-
-                            if (ok) {
-                                uint32 index = pvMapping[receivedIndex];
-                                if (index != 0xFFFFFFFFu) {
-                                    dataPtr += sizeof(uint32);
-                                    if (syncSem.FastLock()) {
-
-                                        void *ptr = (void*) (memory + pvs[index].offset);
-                                        void *ptr_1 = (void*) (memoryPrec + pvs[index].offset);
-                                        MemoryOperationsHelper::Copy(ptr, dataPtr, (pvs[index].byteSize + sizeof(uint64)));
-                                        if (MemoryOperationsHelper::Compare(ptr, ptr_1, pvs[index].byteSize) != 0) {
-                                            (changeFlag)[index] = 1;
-                                            MemoryOperationsHelper::Copy(ptr_1, ptr, pvs[index].byteSize);
-                                        }
-                                        syncSem.FastUnLock();
-                                    }
-                                }
-                                uint32 currentSize = (payload.Size() - processedSize);
-                                payload.Seek(0);
-                                if (currentSize > 0u) {
-                                    MemoryOperationsHelper::Copy(payload.Buffer(), payload.Buffer() + processedSize, currentSize);
-                                }
-                                payload.SetSize(currentSize);
+                                ReadVarValueAndSkip(payload, dataPtr, index, processedSize);
                             }
                         }
                     }
@@ -605,49 +578,18 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
             }
             while (chunkSize > 0u);
             if (isChunked) {
+                StreamString line;
                 err = !(commClient->GetLine(line, false));
             }
+
         }
 
         if (err.ErrorsCleared()) {
-            protocol.CompleteReadOperation(NULL, 0u);
-            StreamString hstream = "<html>"
-                    "<body>"
-                    "<h1>OK!</h1>"
-                    "</body>"
-                    "</html>";
-            hstream.Seek(0);
-            protocol.CreateAbsolute("OutputOptions");
-            protocol.Write("Content-Length", hstream.Size());
-            protocol.Write("Content-Type", "text/html");
-            protocol.WriteHeader(true, HttpDefinition::HSHCReplyOK, &hstream, NULL);
-            if (!protocol.KeepAlive()) {
-                REPORT_ERROR(ErrorManagement::Information, "KA close: close the connection");
-                err = !(commClient->Close());
-                if (err.ErrorsCleared()) {
-                    err = ErrorManagement::Completed;
-                }
-                delete commClient;
-            }
+            err = SendOkReplyMessage(protocol, commClient);
         }
         else {
-            protocol.CompleteReadOperation(NULL, 0u);
-            REPORT_ERROR(ErrorManagement::Information, "Error: close the connection");
-            StreamString hstream = "<html>"
-                    "<body>"
-                    "<h1>ERROR!</h1>"
-                    "</body>"
-                    "</html>";
-            hstream.Seek(0);
-            protocol.CreateAbsolute("OutputOptions");
-            protocol.Write("Content-Length", hstream.Size());
-            protocol.Write("Content-Type", "text/html");
-            protocol.SetKeepAlive(false);
-            protocol.WriteHeader(true, HttpDefinition::HSHCReplyBadRequest, &hstream, NULL);
-            commClient->Close();
-            delete commClient;
+            SendErrorReplyMessage(protocol, commClient);
         }
-
     }
 
     return err;
@@ -711,21 +653,20 @@ uint64 DiodeReceiver::GetTotalMemorySize() {
 }
 
 bool DiodeReceiver::InitialisationDone() {
-    return (threadSetContext >= numberOfInitThreads);
+    return ((uint32)threadSetContext >= numberOfInitThreads);
 }
 
 bool DiodeReceiver::GetLocalVariableIndex(const char8 *varName,
-                                          uint32 receivedIndex,
                                           uint32 &index) {
+
     uint32 range_1 = numberOfVariables;
     uint32 range = (numberOfVariables / 2);
     index = range;
-    //bool done = false;
+//bool done = false;
     bool ok = false;
     while ((range_1 > 0) && (!ok)) {
         int32 res = StringHelper::Compare(pvs[index].pvName, varName);
         if (res == 0) {
-            pvMapping[receivedIndex] = index;
             ok = true;
         }
         else if (res == 2) {
@@ -750,6 +691,213 @@ bool DiodeReceiver::GetLocalVariableIndex(const char8 *varName,
         }
     }
     return ok;
+}
+
+ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commClient,
+                                                       StreamString &payload,
+                                                       bool isChunked,
+                                                       uint32 &chunkSize,
+                                                       uint32 &contentLength) {
+    char8 buff[1024];
+    StreamString line;
+    ErrorManagement::ErrorType err;
+    if (isChunked) {
+        //get the line
+        err = !(commClient->GetLine(line, false));
+        //remove the \r
+        line.SetSize(line.Size() - 1);
+        //get the chunk size
+        StreamString toConv = "0x";
+        toConv += line;
+        TypeConvert(chunkSize, toConv);
+        line.SetSize(0ull);
+    }
+    else {
+        if (contentLength < chunkSize) {
+            chunkSize = contentLength;
+        }
+        contentLength -= chunkSize;
+    }
+
+    if (err.ErrorsCleared()) {
+        uint32 sizeRead = 0u;
+        //append to payload the chunk
+        payload.Seek(payload.Size());
+        while ((sizeRead < chunkSize) && (err.ErrorsCleared())) {
+            MemoryOperationsHelper::Set(buff, '\0', 1024);
+            uint32 sizeToRead = chunkSize - sizeRead;
+            if (sizeToRead > 1023) {
+                sizeToRead = 1023;
+            }
+            err = !commClient->Read(buff, sizeToRead);
+
+            if (err.ErrorsCleared()) {
+                payload.Write(buff, sizeToRead);
+                sizeRead += sizeToRead;
+            }
+
+        }
+    }
+    return err;
+
+}
+
+bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
+                                        StreamString &varName,
+                                        uint32 &receivedIndex,
+                                        uint32 &receivedSize,
+                                        uint32 &processedSize,
+                                        const char8 * &dataPtr) {
+
+    const char8 *pattern = "\": ";
+    uint32 patternSize = StringHelper::Length(pattern);
+
+    dataPtr = StringHelper::SearchString(payload.Buffer(), pattern);
+
+    bool ok = (dataPtr != NULL);
+    uint32 nameSize = 0u;
+    processedSize = 0u;
+
+    if (ok) {
+
+        // skip the "
+        varName = payload.Buffer() + 1;
+        nameSize = (uint32)(dataPtr - payload.Buffer() - 1u);
+        varName.SetSize(nameSize);
+        dataPtr += patternSize;
+        processedSize += (nameSize + patternSize);
+
+        ok = ((payload.Size() - processedSize) >= (2 * sizeof(uint32)));
+        if (ok) {
+            MemoryOperationsHelper::Copy(&receivedIndex, dataPtr, sizeof(uint32));
+            dataPtr += sizeof(uint32);
+            MemoryOperationsHelper::Copy(&receivedSize, dataPtr, sizeof(uint32));
+        }
+    }
+    return ok;
+}
+
+bool DiodeReceiver::GetLocalIndex(StreamString &payload,
+                                  StreamString &varName,
+                                  uint32 receivedIndex,
+                                  uint32 receivedSize,
+                                  uint32 &index,
+                                  uint32 &processedSize) {
+    bool ok = true;
+
+    if (syncSem.FastLock()) {
+        index = pvMapping[receivedIndex];
+        syncSem.FastUnLock();
+    }
+    if (index == INDEX_INIT_ID) {
+        if (GetLocalVariableIndex(varName.Buffer(), index)) {
+            if (syncSem.FastLock()) {
+                pvMapping[receivedIndex] = index;
+                syncSem.FastUnLock();
+            }
+        }
+        else {
+            index = INDEX_NOT_FOUND_ID;
+            REPORT_ERROR(ErrorManagement::Information, "variable %s not found", varName.Buffer());
+        }
+    }
+    if (index < numberOfVariables) {
+        bool controlOk = ((pvs[index].totalSize > 0u) && (pvs[index].totalSize == receivedSize));
+        if (controlOk) {
+            processedSize += (2 * (sizeof(uint32)) + pvs[index].totalSize + sizeof(uint64) + 3u);
+            ok = (payload.Size() >= processedSize);
+        }
+        else {
+            REPORT_ERROR(ErrorManagement::Information, "variable %s does not match, size=%d, receivedSize=%d", varName.Buffer(), pvs[index].totalSize,
+                         receivedSize);
+            if (syncSem.FastLock()) {
+                pvMapping[receivedIndex] = INDEX_NOT_FOUND_ID;
+                index = INDEX_NOT_FOUND_ID;
+                syncSem.FastUnLock();
+            }
+        }
+    }
+
+    if (index >= numberOfVariables) {
+        //if not found skip and continue
+        processedSize += (2 * sizeof(uint32)) + receivedSize + sizeof(uint64) + 3u;
+        ok = (payload.Size() >= processedSize);
+    }
+    return ok;
+}
+
+void DiodeReceiver::ReadVarValueAndSkip(StreamString &payload,
+                                        const char8 *dataPtr,
+                                        uint32 index,
+                                        uint32 processedSize) {
+
+    if (index < numberOfVariables) {
+        dataPtr += sizeof(uint32);
+        if (syncSem.FastLock()) {
+
+            void *ptr = (void*) (memory + pvs[index].offset);
+            void *ptr_1 = (void*) (memoryPrec + pvs[index].offset);
+            MemoryOperationsHelper::Copy(ptr, dataPtr, (pvs[index].totalSize + sizeof(uint64)));
+            if (MemoryOperationsHelper::Compare(ptr, ptr_1, pvs[index].totalSize) != 0) {
+                (changeFlag)[index] = 1;
+                MemoryOperationsHelper::Copy(ptr_1, ptr, pvs[index].totalSize);
+
+            }
+            syncSem.FastUnLock();
+        }
+    }
+    uint32 currentSize = (payload.Size() - processedSize);
+    payload.Seek(0);
+    if (currentSize > 0u) {
+        MemoryOperationsHelper::Copy((void*)payload.Buffer(), payload.Buffer() + processedSize, currentSize);
+    }
+    payload.SetSize(currentSize);
+
+}
+
+ErrorManagement::ErrorType DiodeReceiver::SendOkReplyMessage(HttpProtocol &protocol,
+                                                             TCPSocket * const commClient) {
+    ErrorManagement::ErrorType err;
+    protocol.CompleteReadOperation(NULL, 0u);
+    StreamString hstream = "<html>"
+            "<body>"
+            "<h1>OK!</h1>"
+            "</body>"
+            "</html>";
+    hstream.Seek(0);
+    protocol.CreateAbsolute("OutputOptions");
+    protocol.Write("Content-Length", hstream.Size());
+    protocol.Write("Content-Type", "text/html");
+    protocol.WriteHeader(true, HttpDefinition::HSHCReplyOK, &hstream, NULL);
+    if (!protocol.KeepAlive()) {
+        REPORT_ERROR(ErrorManagement::Information, "KA close: close the connection");
+        err = !(commClient->Close());
+        if (err.ErrorsCleared()) {
+            err = ErrorManagement::Completed;
+        }
+        delete commClient;
+    }
+    return err;
+}
+
+void DiodeReceiver::SendErrorReplyMessage(HttpProtocol &protocol,
+                                          TCPSocket * const commClient) {
+
+    protocol.CompleteReadOperation(NULL, 0u);
+    REPORT_ERROR(ErrorManagement::Information, "Error: close the connection");
+    StreamString hstream = "<html>"
+            "<body>"
+            "<h1>ERROR!</h1>"
+            "</body>"
+            "</html>";
+    hstream.Seek(0);
+    protocol.CreateAbsolute("OutputOptions");
+    protocol.Write("Content-Length", hstream.Size());
+    protocol.Write("Content-Type", "text/html");
+    protocol.SetKeepAlive(false);
+    protocol.WriteHeader(true, HttpDefinition::HSHCReplyBadRequest, &hstream, NULL);
+    commClient->Close();
+    delete commClient;
 }
 
 CLASS_REGISTER(DiodeReceiver, "1.0")

@@ -37,6 +37,7 @@
 /*---------------------------------------------------------------------------*/
 namespace MARTe {
 
+//The variable with more than 100 elements are not sent
 #define MAX_ARR_LEN 100
 
 static void GetValueCallback(evargs args) {
@@ -67,7 +68,6 @@ static bool GetVariable(File &xmlFile,
     while (variable == "" && (ret)) {
         token.SetSize(0ull);
         ret = xmlFile.GetToken(token, ">", term, " \n");
-        //printf("token2=%s\n", token.Buffer());
         token.SetSize(0ull);
         ret &= xmlFile.GetToken(variable, "<", term, " \n");
     }
@@ -146,9 +146,6 @@ static int cainfo(chid &pvChid,
         td.type = CArray;
         td.isConstant = false;
         type = DBF_STRING;
-        /*type=DBF_DOUBLE;
-         memorySize = 8u;
-         td = Float64Bit;*/
     }
 
     return 0;
@@ -163,17 +160,17 @@ EpicsParserAndSubscriber::EpicsParserAndSubscriber() :
         MultiThreadService((EmbeddedServiceMethodBinderI&) (*this)) {
     pvDescriptor = NULL;
     numberOfVariables = 0u;
-    totalMemorySize = 0u;
     memory = NULL;
     changedFlagMem = NULL;
     fmutex.Create();
     initialisationDone = 0u;
-    cpuMask = 0xFF;
     threatCnt = 0u;
     nVarsPerChunk = 0u;
     memorySize = NULL;
+    maxNumberOfVariables = 0xFFFFFFFFu;
     eventSem.Create();
     eventSem.Reset();
+
 }
 
 EpicsParserAndSubscriber::~EpicsParserAndSubscriber() {
@@ -198,7 +195,9 @@ EpicsParserAndSubscriber::~EpicsParserAndSubscriber() {
 
     if (memory != NULL) {
         for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
-            delete[] memory[i];
+            if (memory[i] != NULL) {
+                delete[] memory[i];
+            }
         }
         delete[] memory;
     }
@@ -216,8 +215,25 @@ bool EpicsParserAndSubscriber::Initialise(StructuredDataI &data) {
             }
         }
         if (ret) {
-            if (!data.Read("CpuMask", cpuMask)) {
-                cpuMask = 0xFF;
+
+            if (!data.Read("MaxNumberOfVariables", maxNumberOfVariables)) {
+                maxNumberOfVariables = 0xFFFFFFFFu;
+            }
+
+
+            uint32 numberOfCpus = 4u;
+            if (!data.Read("NumberOfCpus", numberOfCpus)) {
+                numberOfCpus = 4u;
+            }
+
+            //distribute equally the threads on the cpus
+            uint32 currentCpuMask = 1u;
+            for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
+                if (currentCpuMask == (1u << numberOfCpus)) {
+                    currentCpuMask = 1u;
+                }
+                MultiThreadService::SetCPUMaskThreadPool(currentCpuMask, i);
+                currentCpuMask <<= 1u;
             }
 
         }
@@ -232,214 +248,161 @@ bool EpicsParserAndSubscriber::Initialise(StructuredDataI &data) {
 bool EpicsParserAndSubscriber::ParseAndSubscribe() {
     //open the xml file
     File xmlFile;
-    if (!xmlFile.Open(xmlFilePath.Buffer(), File::ACCESS_MODE_R)) {
-        printf("Failed opening file %s\n", xmlFilePath.Buffer());
-        return false;
-    }
-
-    xmlFile.Seek(0ull);
-
+    bool ret = xmlFile.Open(xmlFilePath.Buffer(), File::ACCESS_MODE_R);
     StreamString variable;
     bool start = false;
-    //get the number of variables
-    numberOfVariables = 0u;
-    xmlFile.Seek(0ull);
-    while (GetVariable(xmlFile, variable)) {
 
-        if (variable == firstVariableName) {
-            start = true;
-        }
-        if (start) {
-            printf("variable=%s\n", variable.Buffer());
-            numberOfVariables++;
-        }
-        variable.SetSize(0ull);
-    }
-
-    //create the pv descriptors
-    pvDescriptor = new PvDescriptor[numberOfVariables];
-    variable.SetSize(0ull);
-    changedFlagMem = (uint8*) HeapManager::Malloc(numberOfVariables);
-
-    uint32 nThreads = numberOfPoolThreads;
-    nVarsPerChunk = numberOfVariables / (nThreads);
-
-    xmlFile.Seek(0ull);
-    uint32 counter = 0u;
-    variable.SetSize(0ull);
-    start = false;
-    while (GetVariable(xmlFile, variable)) {
-
-        if (!start) {
+    if (ret) {
+        xmlFile.Seek(0ull);
+        //get the number of variables
+        numberOfVariables = 0u;
+        xmlFile.Seek(0ull);
+        while (GetVariable(xmlFile, variable)) {
             if (variable == firstVariableName) {
                 start = true;
             }
+            if (start) {
+                printf("variable=%s\n", variable.Buffer());
+                numberOfVariables++;
+                if (numberOfVariables >= maxNumberOfVariables) {
+                    break;
+                }
+            }
+            variable.SetSize(0ull);
         }
-        if (start) {
 
-            pvDescriptor[counter].pvType = DBF_DOUBLE;
-            pvDescriptor[counter].index = counter;
-            pvDescriptor[counter].changedFlag = changedFlagMem;
-            pvDescriptor[counter].syncMutex = &fmutex;
-            StringHelper::Copy(pvDescriptor[counter].pvName, variable.Buffer());
-            counter++;
-        }
+        //create the pv descriptors
+        pvDescriptor = new PvDescriptor[numberOfVariables];
+        ret = (pvDescriptor != NULL);
+    }
+    else {
+        REPORT_ERROR(ErrorManagement::InitialisationError, "Failed opening file %s", xmlFilePath.Buffer());
+    }
 
+    if (ret) {
         variable.SetSize(0ull);
+        changedFlagMem = (uint8*) HeapManager::Malloc(numberOfVariables);
+        ret = (changedFlagMem != NULL);
+    }
+    else {
+        REPORT_ERROR(ErrorManagement::InitialisationError, "Failed allocating memory for pvDescriptor");
     }
 
-    xmlFile.Close();
-    memory = new uint8*[numberOfPoolThreads];
-    memorySize = new uint64[numberOfPoolThreads];
-    for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
-        memory[i] = NULL;
-        memorySize[i] = 0u;
-    }
-    Start();
+    if (ret) {
+        MemoryOperationsHelper::Set(changedFlagMem, '\0', numberOfVariables);
+        uint32 nThreads = numberOfPoolThreads;
+        nVarsPerChunk = numberOfVariables / (nThreads);
 
-    return true;
+        xmlFile.Seek(0ull);
+        uint32 counter = 0u;
+        variable.SetSize(0ull);
+        start = false;
+        //initialise some fields of the PV descriptors
+        while (GetVariable(xmlFile, variable)) {
+            if (!start) {
+                if (variable == firstVariableName) {
+                    start = true;
+                }
+            }
+            if (start) {
+                pvDescriptor[counter].index = counter;
+                pvDescriptor[counter].changedFlag = changedFlagMem;
+                pvDescriptor[counter].syncMutex = &fmutex;
+                StringHelper::Copy(pvDescriptor[counter].pvName, variable.Buffer());
+                counter++;
+                if (counter >= maxNumberOfVariables) {
+                    break;
+                }
+            }
+            variable.SetSize(0ull);
+        }
+
+        xmlFile.Close();
+        memory = new uint8*[numberOfPoolThreads];
+        memorySize = new uint64[numberOfPoolThreads];
+
+        ret = ((memory != NULL) && (memorySize != NULL));
+    }
+    else {
+        REPORT_ERROR(ErrorManagement::InitialisationError, "Failed allocating memory for changedFlagMem");
+    }
+
+    if (ret) {
+        for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
+            memory[i] = NULL;
+            memorySize[i] = 0u;
+        }
+
+        //start the threads
+        ret = Start();
+        if (!ret) {
+            REPORT_ERROR(ErrorManagement::InitialisationError, "Failed Start()");
+        }
+    }
+    else {
+        REPORT_ERROR(ErrorManagement::InitialisationError, "Failed allocating memory for memory and memorySize");
+    }
+
+    return ret;
+
 }
 
 ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info) {
     ErrorManagement::ErrorType err = ErrorManagement::NoError;
-    if (info.GetStage() == ExecutionInfo::StartupStage) {
-        uint32 threadId = 0u;
-        if (fmutex.FastLock()) {
-            threadId = threatCnt;
-            threatCnt++;
-            fmutex.FastUnLock();
-        }
+       if (info.GetStage() == ExecutionInfo::StartupStage) {
+           uint32 threadId = 0u;
+           if (fmutex.FastLock()) {
+               threadId = threatCnt;
+               threatCnt++;
+               fmutex.FastUnLock();
+           }
 
-        //initialise the context
-        int32 result = ca_context_create(ca_enable_preemptive_callback);
-        if (result != ECA_NORMAL) {
-            fprintf(stderr, "CA error %s occurred while trying "
-                    "to start channel access.\n",
-                    ca_message(result));
-        }
+           info.SetThreadSpecificContext(reinterpret_cast<void*>(&threadId));
+           //initialise the context
+           err = (ca_context_create(ca_enable_preemptive_callback) != ECA_NORMAL);
 
-        uint32 beg = (threadId) * nVarsPerChunk;
-        uint32 end = (threadId + 1u) * nVarsPerChunk;
+           uint32 beg = 0u;
+           uint32 end = 0u;
+           if (err.ErrorsCleared()) {
 
-        printf("Starting Thread from %d to %d\n", beg, end);
+               beg = (threadId) * nVarsPerChunk;
+               end = (threadId + 1u) * nVarsPerChunk;
 
-        if ((numberOfVariables - end) < numberOfPoolThreads) {
-            end = numberOfVariables;
-        }
+               REPORT_ERROR(ErrorManagement::Information, "Starting Thread from %d to %d", beg, end);
 
-        for (uint32 i = beg; i < end; i++) {
+               if ((numberOfVariables - end) < numberOfPoolThreads) {
+                   end = numberOfVariables;
+               }
 
-            ca_create_channel(pvDescriptor[i].pvName, NULL, NULL, 20u, &pvDescriptor[i].pvChid);
-            ca_pend_io(0.1);
+               err = !FillMemorySizes(beg, end, threadId);
+           }
+           else {
+               REPORT_ERROR(ErrorManagement::FatalError, "Failed creating CA context");
+           }
 
-            cainfo(pvDescriptor[i].pvChid, pvDescriptor[i].pvName, pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].memorySize,
-                   pvDescriptor[i].td);
-            ca_pend_io(1);
-            if (pvDescriptor[i].numberOfElements > MAX_ARR_LEN) {
-                pvDescriptor[i].numberOfElements = 0u;
-            }
-            else {
-                memorySize[threadId] += (pvDescriptor[i].numberOfElements * pvDescriptor[i].memorySize) + sizeof(epicsTimeStamp);
-            }
+           if (err.ErrorsCleared()) {
+               CreateSubscriptions(beg, end);
+           }
+           else {
+               REPORT_ERROR(ErrorManagement::FatalError, "Failed FillMemorySizes");
+           }
 
-        }
-        memory[threadId] = new uint8[memorySize[threadId]];
-        MemoryOperationsHelper::Set(memory[threadId], 0, memorySize[threadId]);
+       }
+       else if (info.GetStage() != ExecutionInfo::BadTerminationStage) {
+           uint32 *threadId = reinterpret_cast<uint32 *>(info.GetThreadSpecificContext());
+           if (threadId != NULL) {
+               eventSem.Wait(TTInfiniteWait);
+               CleanContext(*threadId);
+           }
+       }
+       else {
+           uint32 *threadId = reinterpret_cast<uint32 *>(info.GetThreadSpecificContext());
+           if (threadId != NULL) {
+               CleanContext(*threadId);
+           }
+       }
 
-        uint32 memoryOffset = 0u;
-        for (uint32 i = beg; i < end; i++) {
-            pvDescriptor[i].memory = memory[threadId] + memoryOffset;
-            pvDescriptor[i].offset = memoryOffset;
-            pvDescriptor[i].timeStamp = (epicsTimeStamp*) (memory[threadId] + memoryOffset + (pvDescriptor[i].numberOfElements * pvDescriptor[i].memorySize));
-            //printf("creating subscription=%s\n", pvDescriptor[counter].pvName);
-            if (pvDescriptor[i].numberOfElements > 0) {
-                memoryOffset += (pvDescriptor[i].numberOfElements * pvDescriptor[i].memorySize) + sizeof(epicsTimeStamp);
-            }
-        }
-
-        for (uint32 i = beg; i < end; i++) {
-
-            //printf("creating subscription=%s\n", pvDescriptor[counter].pvName);
-            if (pvDescriptor[i].numberOfElements > 0) {
-
-                if (!ca_array_get(pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].pvChid, pvDescriptor[i].memory)) {
-                    printf("FAILED ca_get for %s\n", pvDescriptor[i].pvName);
-                }
-
-                if (ca_create_subscription(pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].pvChid, DBE_VALUE, &GetValueCallback,
-                                           &pvDescriptor[i], &pvDescriptor[i].pvEvid) != ECA_NORMAL) {
-                    printf("FAILED create subscription %s\n", pvDescriptor[i].pvName);
-                }
-                (void) ca_pend_io(0.1);
-
-                if (ca_create_subscription(DBR_TIME_STRING, pvDescriptor[i].numberOfElements, pvDescriptor[i].pvChid, DBE_VALUE, &GetTimeoutCallback,
-                                           &pvDescriptor[i], &pvDescriptor[i].pvEvid) != ECA_NORMAL) {
-                    printf("FAILED create subscription %s\n", pvDescriptor[i].pvName);
-                }
-                (void) ca_pend_io(0.01);
-            }
-
-        }
-        if (fmutex.FastLock()) {
-            totalMemorySize += memory[threadId];
-            //im the last one
-            //remap the offsets
-            if (initialisationDone >= (numberOfPoolThreads - 1u)) {
-                uint32 j = 0u;
-                uint32 memCnt = 0u;
-                for (uint32 i = 0u; i < numberOfVariables; i++) {
-                    if (j < nVarsPerChunk) {
-                        j++;
-                    }
-                    else {
-                        j = 0u;
-                        memCnt++;
-                    }
-                    for (uint32 k = 0u; k < memCnt; k++) {
-                        pvDescriptor[i].offset += memorySize[k];
-                    }
-                }
-            }
-            initialisationDone++;
-            fmutex.FastUnLock();
-        }
-
-    }
-    else if (info.GetStage() != ExecutionInfo::BadTerminationStage) {
-        eventSem.Wait(TTInfiniteWait);
-        if (fmutex.FastLock()) {
-            if (pvDescriptor != NULL) {
-                for (uint32 n = 0u; (n < numberOfVariables); n++) {
-                    (void) ca_clear_subscription(pvDescriptor[n].pvEvid);
-                    (void) ca_clear_event(pvDescriptor[n].pvEvid);
-                    (void) ca_clear_channel(pvDescriptor[n].pvChid);
-                }
-                ca_detach_context();
-                ca_context_destroy();
-                delete[] pvDescriptor;
-                pvDescriptor = NULL;
-            }
-            fmutex.FastUnLock();
-        }
-
-    }
-    else {
-        if (fmutex.FastLock()) {
-            if (pvDescriptor != NULL) {
-                for (uint32 n = 0u; (n < numberOfVariables); n++) {
-                    (void) ca_clear_subscription(pvDescriptor[n].pvEvid);
-                    (void) ca_clear_event(pvDescriptor[n].pvEvid);
-                    (void) ca_clear_channel(pvDescriptor[n].pvChid);
-                }
-                ca_detach_context();
-                ca_context_destroy();
-                pvDescriptor = NULL;
-            }
-            fmutex.FastUnLock();
-        }
-    }
-
-    return err;
+       return err;
 }
 
 bool EpicsParserAndSubscriber::Synchronise(uint8 *memoryOut,
@@ -467,7 +430,11 @@ PvDescriptor *EpicsParserAndSubscriber::GetPvDescriptors() {
 }
 
 uint64 EpicsParserAndSubscriber::GetTotalMemorySize() {
-    return totalMemorySize;
+    uint64 totalMemoryize = 0u;
+    for (uint32 k = 0u; k < numberOfPoolThreads; k++) {
+        totalMemoryize += memorySize[k];
+    }
+    return totalMemoryize;
 }
 
 bool EpicsParserAndSubscriber::InitialisationDone() {
@@ -481,7 +448,114 @@ ErrorManagement::ErrorType EpicsParserAndSubscriber::Stop() {
     return err;
 }
 
+bool EpicsParserAndSubscriber::FillMemorySizes(uint32 beg,
+        uint32 end,
+        uint32 threadId) {
+
+    bool ret = true;
+    for (uint32 i = beg; (i < end); i++) {
+
+        ca_create_channel(pvDescriptor[i].pvName, NULL, NULL, 20u, &pvDescriptor[i].pvChid);
+        ca_pend_io(0.1);
+        cainfo(pvDescriptor[i].pvChid, pvDescriptor[i].pvName, pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].memorySize,
+                pvDescriptor[i].td);
+        ca_pend_io(1);
+        if (pvDescriptor[i].numberOfElements > MAX_ARR_LEN) {
+            pvDescriptor[i].numberOfElements = 0u;
+        }
+        else {
+            memorySize[threadId] += (pvDescriptor[i].numberOfElements * pvDescriptor[i].memorySize) + sizeof(epicsTimeStamp);
+        }
+
+    }
+    memory[threadId] = new uint8[memorySize[threadId]];
+    ret = (memory[threadId] != NULL);
+    if (ret) {
+        MemoryOperationsHelper::Set(memory[threadId], 0, memorySize[threadId]);
+        uint32 memoryOffset = 0u;
+        for (uint32 i = beg; i < end; i++) {
+            pvDescriptor[i].memory = memory[threadId] + memoryOffset;
+            pvDescriptor[i].offset = memoryOffset;
+            pvDescriptor[i].timeStamp = (epicsTimeStamp*) (memory[threadId] + memoryOffset + (pvDescriptor[i].numberOfElements * pvDescriptor[i].memorySize));
+            //printf("creating subscription=%s\n", pvDescriptor[counter].pvName);
+            if (pvDescriptor[i].numberOfElements > 0) {
+                memoryOffset += (pvDescriptor[i].numberOfElements * pvDescriptor[i].memorySize) + sizeof(epicsTimeStamp);
+            }
+        }
+    }
+    return ret;
+}
+
+void EpicsParserAndSubscriber::CreateSubscriptions(uint32 beg,
+        uint32 end) {
+
+    for (uint32 i = beg; i < end; i++) {
+
+        //printf("creating subscription=%s\n", pvDescriptor[counter].pvName);
+        if (pvDescriptor[i].numberOfElements > 0u) {
+
+            if (ca_create_subscription(pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].pvChid, DBE_VALUE, &GetValueCallback,
+                            &pvDescriptor[i], &pvDescriptor[i].pvEvid) != ECA_NORMAL) {
+                REPORT_ERROR(ErrorManagement::Warning, "FAILED create subscription %s", pvDescriptor[i].pvName);
+            }
+            ca_pend_io(0.1);
+
+            if (ca_create_subscription(DBR_TIME_STRING, pvDescriptor[i].numberOfElements, pvDescriptor[i].pvChid, DBE_VALUE, &GetTimeoutCallback,
+                            &pvDescriptor[i], &pvDescriptor[i].pvEvid) != ECA_NORMAL) {
+                REPORT_ERROR(ErrorManagement::Warning, "FAILED create subscription %s", pvDescriptor[i].pvName);
+            }
+            ca_pend_io(0.01);
+        }
+
+    }
+    if (fmutex.FastLock()) {
+        //im the last one
+        //remap the offsets
+        if (initialisationDone >= (numberOfPoolThreads - 1u)) {
+            uint32 memCnt = 0u;
+            for (uint32 i = 0u; i < numberOfVariables; i++) {
+                if (((i % nVarsPerChunk) == 0u) && (i > 0u)) {
+                    memCnt++;
+                }
+                for (uint32 k = 0u; k < memCnt; k++) {
+                    pvDescriptor[i].offset += memorySize[k];
+                }
+            }
+        }
+
+        initialisationDone++;
+        fmutex.FastUnLock();
+    }
+}
+
+void EpicsParserAndSubscriber::CleanContext(uint32 threadId) {
+
+    uint32 beg = (threadId) * nVarsPerChunk;
+    uint32 end = (threadId + 1u) * nVarsPerChunk;
+
+    REPORT_ERROR(ErrorManagement::Information, "Starting Thread from %d to %d", beg, end);
+
+    if ((numberOfVariables - end) < numberOfPoolThreads) {
+        end = numberOfVariables;
+    }
+
+    if (fmutex.FastLock()) {
+        if (pvDescriptor != NULL) {
+            for (uint32 n = beg; (n < end); n++) {
+                (void) ca_clear_subscription(pvDescriptor[n].pvEvid);
+                (void) ca_clear_event(pvDescriptor[n].pvEvid);
+                (void) ca_clear_channel(pvDescriptor[n].pvChid);
+            }
+            ca_detach_context();
+            ca_context_destroy();
+        }
+        fmutex.FastUnLock();
+    }
+
+}
+
 CLASS_REGISTER(EpicsParserAndSubscriber, "1.0")
 
 }
+
 

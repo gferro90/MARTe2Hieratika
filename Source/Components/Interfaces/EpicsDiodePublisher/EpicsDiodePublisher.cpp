@@ -109,7 +109,7 @@ EpicsDiodePublisher::~EpicsDiodePublisher() {
 bool EpicsDiodePublisher::Initialise(StructuredDataI &data) {
     bool ret = MultiThreadService::Initialise(data);
     if (ret) {
-        ret = data.Read("NumberOfSignalPerThread", numberOfSignalToBeSent);
+        ret = data.Read("NumberOfSignalsPerThread", numberOfSignalToBeSent);
         if (!ret) {
             REPORT_ERROR(ErrorManagement::InitialisationError, "Please specify NumberOfSignalPerThread");
         }
@@ -183,12 +183,12 @@ ErrorManagement::ErrorType EpicsDiodePublisher::Execute(ExecutionInfo& info) {
                         n %= numberOfVariables;
                         if (changeFlag[n] == 1) {
 
-                            if (ca_array_put((pvs[n].pvType)|(0x8000u), pvs[n].numberOfElements, pvs[n].pvChid, memory + pvs[n].offset) != ECA_NORMAL) {
+                            if (ca_array_put((pvs[n].pvType), pvs[n].numberOfElements, pvs[n].pvChid, memory + pvs[n].offset) != ECA_NORMAL) {
                                 printf("ca_put failed for PV: %s\n", pvs[n].pvName);
                             }
-                            /*else{
+                            else{
                                 printf("ca_put ok for PV: %s\n", pvs[n].pvName);
-                            }*/
+                            }
                             (void) ca_pend_io(0.1);
 
                         }

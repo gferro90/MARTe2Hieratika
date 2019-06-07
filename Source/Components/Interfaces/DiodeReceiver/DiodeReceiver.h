@@ -42,12 +42,13 @@
 #include "TCPSocket.h"
 #include "EmbeddedServiceMethodBinderT.h"
 #include "EventSem.h"
+#include "HttpProtocol.h"
+
 /*---------------------------------------------------------------------------*/
 /*                           Class declaration                               */
 /*---------------------------------------------------------------------------*/
 
-namespace MARTe{
-
+namespace MARTe {
 
 const uint32 PV_NAME_MAX_SIZE_REC = 64u;
 
@@ -73,21 +74,27 @@ struct PvRecDescriptor {
      */
     char8 pvName[PV_NAME_MAX_SIZE_REC];
 
+    /**
+     * The AnyType associated to this PV
+     */
     AnyType at;
 
+    /**
+     * The total size of the variable
+     */
+    uint32 totalSize;
 
-    void *prevBuff;
-
-    uint32 byteSize;
-
+    /**
+     * The offset of the variable in the memory buffer
+     */
     uint32 offset;
-
-    uint32 key;
 
 };
 
 
-
+/**
+ * @brief
+ */
 class DiodeReceiver: public MultiClientService {
 public:
     CLASS_REGISTER_DECLARATION()
@@ -107,7 +114,6 @@ public:
     virtual bool Synchronise(uint8 *memoryOut,
                              uint8 *changedFlags);
 
-
     uint32 GetNumberOfVariables();
 
     PvRecDescriptor *GetPvDescriptors();
@@ -117,11 +123,43 @@ public:
     bool InitialisationDone();
     friend void DiodeReceiverCycleLoop(DiodeReceiver &arg);
 
+    bool GetLocalVariableIndex(const char8 *varName,
+                               uint32 &index);
 
-    bool GetLocalVariableIndex(const char8 *varName, uint32 receivedIndex, uint32 &index);
-
+    virtual ErrorManagement::ErrorType AddThread();
 
 protected:
+
+    ErrorManagement::ErrorType ReadNewChunk(TCPSocket * const commClient,
+                                            StreamString &payload,
+                                            bool isChunked,
+                                            uint32 &chunkSize,
+                                            uint32 &contentLength);
+
+    bool ReadVarNameAndIndex(StreamString &payload,
+                             StreamString &varName,
+                             uint32 &receivedIndex,
+                             uint32 &receivedSize,
+                             uint32 &processedSize,
+                             const char8 * &dataPtr);
+
+    bool GetLocalIndex(StreamString &payload,
+                       StreamString &varName,
+                       uint32 receivedIndex,
+                       uint32 receivedSize,
+                       uint32 &index,
+                       uint32 &processedSize);
+
+    void ReadVarValueAndSkip(StreamString &payload,
+                             const char8 *dataPtr,
+                             uint32 index,
+                             uint32 processedSize);
+
+    ErrorManagement::ErrorType SendOkReplyMessage(HttpProtocol &protocol,
+                                                  TCPSocket * const commClient);
+
+    void SendErrorReplyMessage(HttpProtocol &protocol,
+                               TCPSocket * const commClient);
 
     TCPSocket server;
 
@@ -131,15 +169,15 @@ protected:
 
     TimeoutType acceptTimeout;
 
-
     FastPollingMutexSem syncSem;
 
     PvRecDescriptor *pvs;
     uint32 numberOfVariables;
 
-    uint32 mainCpuMask;
+    uint32 numberOfCpus;
 
     uint8 *memory;
+    uint8 *memory2;
     uint8 *memoryPrec;
 
     uint32 *pvMapping;
@@ -147,6 +185,7 @@ protected:
     volatile int32 threadSetContext;
 
     uint8 *changeFlag;
+    uint8 *changeFlag2;
     uint64 lastCounter;
 
     volatile int32 quit;
@@ -156,6 +195,10 @@ protected:
 
     uint32 numberOfInitThreads;
     uint32 threadCnt;
+    uint32 maxNumberOfVariables;
+    uint64 *lastTickCounter;
+    uint32 msecPeriod;
+    uint32 currentCpuMask;
 
 };
 

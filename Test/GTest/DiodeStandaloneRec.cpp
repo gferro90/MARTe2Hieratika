@@ -47,9 +47,7 @@
 #include "ReferenceT.h"
 #include "StreamString.h"
 #include "StandardParser.h"
-#include "EpicsParserAndSubscriber.h"
 #include "DiodeReceiver.h"
-#include "EpicsDiodePublisher.h"
 /*---------------------------------------------------------------------------*/
 /*                           Static definitions                              */
 /*---------------------------------------------------------------------------*/
@@ -62,7 +60,6 @@ void MainErrorProcessFunction(const MARTe::ErrorManagement::ErrorInformation &er
 static bool keepRunning = true;
 static bool killApp = false;
 ReferenceT < DiodeReceiver > receiver;
-ReferenceT < EpicsDiodePublisher > publisher;
 
 static void StopApp(int sig) {
     //Second time this is called? Kill the application.
@@ -75,7 +72,6 @@ static void StopApp(int sig) {
     }
     printf("Stopping application.\n");
     if (receiver.IsValid()) {
-        publisher->Stop();
         receiver->Stop();
     }
     MARTe::ObjectRegistryDatabase::Instance()->Purge();
@@ -107,13 +103,10 @@ int main(int argc,
     god->Initialise(localCdb);
 
     receiver = god->Find("Receiver");
-    publisher = god->Find("Publisher");
 
-    if (receiver.IsValid() && publisher.IsValid()) {
+    if (receiver.IsValid()) {
         receiver->Start();
         Sleep::Sec(1);
-        publisher->SetDataSource(*receiver.operator->());
-        publisher->Start();
         signal(SIGTERM, StopApp);
         signal(SIGINT, StopApp);
         while(1){

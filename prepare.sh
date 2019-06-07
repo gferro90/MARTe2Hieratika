@@ -11,5 +11,5 @@ export PATH=$PATH:$EPICS_BASE/bin/linux-x86_64
 export LD_LIBRARY_PATH=/home/pc/MARTe2Project/GIT/MARTe2/Build/x86-linux/Core/:$MARTe2_Components_DIR/Build/x86-linux/Components/DataSources:$MARTe2_Components_DIR/Build/x86-linux/Components/GAMs:$MARTe2_Components_DIR/Build/x86-linux/Components/Interfaces:$EPICS_BASE/lib/$EPICS_HOST_ARCH
 export OUTPUT_DIR=Build
 export TARGET=x86-linux
-#export EPICS_CA_SERVER_PORT=8888
-#export EPICS_CA_REPEATER_PORT=8889
+export EPICS_CA_SERVER_PORT=8888
+export EPICS_CA_REPEATER_PORT=8889
