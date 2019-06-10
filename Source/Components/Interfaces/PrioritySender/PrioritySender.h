@@ -55,8 +55,7 @@ namespace MARTe{
  * @details A pool of threads wait that the main thread sorts the queue and then they send the
  * variables in the first positions. During the cycle of the main thread, N*numberOfPoolThreads PVs
  * should be sent to different ports of the same server using HTTP protocol, where N (the number of
- * PVs to be sent by each thread per cycle) is defined by the user. If the threads are not capable to
- * send all the variables during the cycle time, the main thread will jump a cycle.
+ * PVs to be sent by each thread per cycle) is defined by the user.
  *
  * @details Follows an example of the configuration:
  * <pre>

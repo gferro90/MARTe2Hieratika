@@ -127,6 +127,20 @@ struct PvDescriptor {
  * @details The Synchronise function can be used to get the current memory containing the PVs values and
  * time-stamps and the changed flags memory containing a flag for each variable asserting if the variable has
  * changed from the last call.
+ *
+ * @details Follows an example of configuration:
+ * <pre>
+ * +Sender = {
+ *   Class = PrioritySender
+ *   NumberOfPoolThreads = 20 //the number of thread to initialise the EPICS environment
+ *   NumberOfSignalPerThread = 200 //the number of PVs sent by each thread
+ *   ServerIp = "127.0.0.1" //the server IP
+ *   ServerPort = 4444 //the server port
+ *   NumberOfCpus = 8 //the number of cpu
+ *   Timeout = 0xFFFFFFFF //the timeout (not to be changed)
+ *   MsecPeriod=500 //the cycle time period
+ * }
+ * </pre>
  */
 class EpicsParserAndSubscriber: public MultiThreadService, public EmbeddedServiceMethodBinderI {
 public:

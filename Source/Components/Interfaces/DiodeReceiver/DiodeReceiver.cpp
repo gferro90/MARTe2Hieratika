@@ -252,7 +252,6 @@ DiodeReceiver::DiodeReceiver() :
     threadSetContext = 0u;
     changeFlag = NULL;
     changeFlag2 = NULL;
-    lastCounter = 0ull;
     quit = 0;
     totalMemorySize = 0u;
     eventSem.Create();
@@ -415,7 +414,6 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
 }
 
 ErrorManagement::ErrorType DiodeReceiver::Start() {
-    lastCounter = HighResolutionTimer::Counter();
     for (uint32 i = 0u; i < numberOfInitThreads; i++) {
         uint32 cpuMask = (1 << (i % numberOfCpus));
         ThreadIdentifier tid = Threads::BeginThread((ThreadFunctionType) DiodeReceiverCycleLoop, this, THREADS_DEFAULT_STACKSIZE, NULL,
