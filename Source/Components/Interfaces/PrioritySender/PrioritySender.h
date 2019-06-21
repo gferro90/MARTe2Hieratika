@@ -141,14 +141,14 @@ private:
     /**
      * @brief Help function to send the variables to the receiver
      */
-    ErrorManagement::ErrorType SendVariables(HttpChunkedStream &client);
+    ErrorManagement::ErrorType SendVariables(HttpChunkedStream &client, uint32 threadId);
 
 
     /**
      * @brief Help function to send the close connection HTTP message in case
      * of error
      */
-    ErrorManagement::ErrorType SendCloseConnectionMessage(HttpChunkedStream &client);
+    ErrorManagement::ErrorType SendCloseConnectionMessage(HttpChunkedStream &client, const char8 *destination);
 
     /**
      * Wraps the callback of the threads in the pool
@@ -160,6 +160,8 @@ private:
      */
     uint32 *indexList;
 
+    uint32 *indexListThreads;
+
     /**
      * Link to the PVs provider
      */
@@ -170,6 +172,9 @@ private:
      * values and time-stamps
      */
     uint8 *memory;
+
+
+    uint8 *memoryThreads;
 
     /**
      * The memory containing the changed flags
@@ -198,6 +203,8 @@ private:
      * PVs queue
      */
     uint32 currentIdx;
+
+    uint32 currentIdxThreads;
 
     /**
      * Holds the number of changed PVs that
@@ -241,10 +248,6 @@ private:
      */
     StreamString serverIpAddress;
 
-    /**
-     * The server initial port
-     */
-    uint32 serverInitialPort;
 
     /**
      * The server initial port
@@ -278,6 +281,32 @@ private:
     uint32 msecPeriod;
 
 
+    /**
+     * The number of destinations
+     */
+    uint8 numberOfDestinations;
+
+
+    /**
+     * The destination mask
+     */
+    uint8 *destinationsMask;
+
+    /**
+     * Computes the number of cycles per connection timeout
+     */
+    uint32 numberOfCyclesPerTimeout;
+
+
+    /**
+     * Counters for reconnection counters
+     */
+    uint32 **reconnectionCycleCounter;
+
+    /**
+     * The thread index
+     */
+    uint32 threadIndex;
 };
 
 }

@@ -1,0 +1,14 @@
+[Unit]
+Description=Diode sender service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/bin/sh /home/diode/MARTe2Project/GIT/MARTe2Hieratika/StartDiodeSender.sh
+
+[Install]
+WantedBy=multi-user.target
+

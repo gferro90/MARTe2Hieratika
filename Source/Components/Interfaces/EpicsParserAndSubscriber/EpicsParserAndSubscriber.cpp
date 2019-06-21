@@ -38,7 +38,7 @@
 namespace MARTe {
 
 //The variable with more than 100 elements are not sent
-#define MAX_ARR_LEN 100
+#define MAX_ARR_LEN 20000
 
 static void GetValueCallback(evargs args) {
     PvDescriptor *pv = static_cast<PvDescriptor *>(args.usr);
@@ -207,7 +207,7 @@ EpicsParserAndSubscriber::~EpicsParserAndSubscriber() {
 bool EpicsParserAndSubscriber::Initialise(StructuredDataI &data) {
     bool ret = MultiThreadService::Initialise(data);
     if (ret) {
-        ret = data.Read("XmlFilePath", xmlFilePath);
+        ret = data.Read("InputFilePath", xmlFilePath);
         if (ret) {
             ret = data.Read("FirstVariableName", firstVariableName);
             if (!ret) {
@@ -238,7 +238,7 @@ bool EpicsParserAndSubscriber::Initialise(StructuredDataI &data) {
 
         }
         else {
-            REPORT_ERROR(ErrorManagement::FatalError, "Please specify XmlFilePath");
+            REPORT_ERROR(ErrorManagement::FatalError, "Please specify InputFilePath");
         }
 
     }
@@ -494,6 +494,11 @@ void EpicsParserAndSubscriber::CreateSubscriptions(uint32 beg,
         //printf("creating subscription=%s\n", pvDescriptor[counter].pvName);
         if (pvDescriptor[i].numberOfElements > 0u) {
 
+            if (!ca_array_get(pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].pvChid, pvDescriptor[i].memory)) {
+                REPORT_ERROR(ErrorManagement::Warning, "FAILED ca_get for %s\n", pvDescriptor[i].pvName);
+            }
+            ca_pend_io(0.1);
+
             if (ca_create_subscription(pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].pvChid, DBE_VALUE, &GetValueCallback,
                             &pvDescriptor[i], &pvDescriptor[i].pvEvid) != ECA_NORMAL) {
                 REPORT_ERROR(ErrorManagement::Warning, "FAILED create subscription %s", pvDescriptor[i].pvName);
@@ -516,6 +521,9 @@ void EpicsParserAndSubscriber::CreateSubscriptions(uint32 beg,
             for (uint32 i = 0u; i < numberOfVariables; i++) {
                 if (((i % nVarsPerChunk) == 0u) && (i > 0u)) {
                     memCnt++;
+                }
+                if(memCnt>(numberOfPoolThreads - 1u)){
+                    memCnt=(numberOfPoolThreads - 1u);
                 }
                 for (uint32 k = 0u; k < memCnt; k++) {
                     pvDescriptor[i].offset += memorySize[k];

@@ -1,0 +1,184 @@
+diff -r ./ca/client/comQueSend.cpp ../../base-3.15.6_orig/src/ca/client/comQueSend.cpp
+284c284
+<     ca_uint32_t requestDependent, bool v49Ok) 
+---
+>     ca_uint32_t requestDependent, bool v49Ok ) 
+286,292d285
+<  
+< #ifdef FERRO_TS_PATCH
+<     if((dataType&(0x8000u))!=0u){
+<         payloadSize+=8u;
+<     }
+<     dataType&=~(0x8000u);
+< #endif
+329c322
+<     const void * pPayload, bool v49Ok) 
+---
+>     const void * pPayload, bool v49Ok ) 
+331,332d323
+<     unsigned dataTypeOrig=dataType;
+<     dataType&=~(0x8000u);
+341d331
+< 
+351c341
+<                 static_cast <ca_uint16_t> ( dataTypeOrig ), 
+---
+>                 static_cast <ca_uint16_t> ( dataType ), 
+353,354c343
+<              this->pushString ( pStr, size ); 
+< 
+---
+>             this->pushString ( pStr, size );  
+359,360c348,349
+<            this->insertRequestHeader ( request, payloadSize, 
+<                 static_cast <ca_uint16_t> ( dataTypeOrig ), 
+---
+>             this->insertRequestHeader ( request, payloadSize, 
+>                 static_cast <ca_uint16_t> ( dataType ), 
+362c351
+<                 ( this->*dbrCopyScalar [dataType] ) ( pPayload );
+---
+>             ( this->*dbrCopyScalar [dataType] ) ( pPayload );
+364c353
+<     }	    
+---
+>     }
+385c374
+<             static_cast <ca_uint16_t> ( dataTypeOrig ), 
+---
+>             static_cast <ca_uint16_t> ( dataType ), 
+388,389d376
+< 
+< 	    //this->copy_dbr_char ( pPayload, payloadSize );
+393,402d379
+< 
+< 
+< 
+< #ifdef FERRO_TS_PATCH
+<     if((dataTypeOrig&(0x8000u))!=0){
+<         this->copy_dbr_char ( pPayload+payloadSize, 8 );
+< 	payloadSize+=8;
+< 	size+=8;
+<     }
+< #endif
+407d383
+< 
+diff -r ./ca/client/nciu.cpp ../../base-3.15.6_orig/src/ca/client/nciu.cpp
+346,348d345
+< 
+<     unsigned typeOrig=type;
+<     type&=~(0x8000u);
+365c362
+<         guard, *this, *this, typeOrig, countIn, pValue, notify);
+---
+>         guard, *this, *this, type, countIn, pValue, notify );
+
+diff -r ./ca/client/oldChannelNotify.cpp ../../base-3.15.6_orig/src/ca/client/oldChannelNotify.cpp
+174,176d173
+< 
+< 
+< 
+396c393
+<     catch ( cacChannel::msgBodyCacheTooSmall ) {
+---
+>     catch ( cacChannel::msgBodyCacheTooSmall & ) {
+484,485d480
+<     chtype origtype=type;
+<     type&=~(0x8000u);
+489c484
+<     unsigned tmpType = static_cast < unsigned > ( origtype );
+---
+>     unsigned tmpType = static_cast < unsigned > ( type );
+713d707
+
+diff -r ./ca/client/tcpiiu.cpp ../../base-3.15.6_orig/src/ca/client/tcpiiu.cpp
+1388,1390d1387
+< 
+<     unsigned typeOrig=type;
+<     type&=~(0x8000u);
+1397,1398c1394,1395
+<         typeOrig, nElem, chan.getSID(guard), chan.getCID(guard), pValue,
+<         CA_V49 ( this->minorProtocolVersion ));
+---
+>         type, nElem, chan.getSID(guard), chan.getCID(guard), pValue,
+>         CA_V49 ( this->minorProtocolVersion ) );
+
+diff -r ./ioc/db/recGbl.c ../../base-3.15.6_orig/src/ioc/db/recGbl.c
+20a21
+> #include "alarm.h"
+183a185,187
+>     if (new_sevr > INVALID_ALARM)
+>         new_sevr = INVALID_ALARM;
+> 
+255,256d258
+< 
+< #ifndef FERRO_TS_PATCH
+258d259
+< 
+262d262
+< 
+264d263
+< #endif
+
+diff -r ./ioc/O.linux-x86_64/recGbl.d ../../base-3.15.6_orig/src/ioc/O.linux-x86_64/recGbl.d
+1a2
+>  ../../../include/alarm.h ../../../include/shareLib.h \
+4c5
+<  ../../../include/shareLib.h ../../../include/compilerDependencies.h \
+---
+>  ../../../include/compilerDependencies.h \
+
+
+diff -r ./ioc/rsrv/camessage.c ../../base-3.15.6_orig/src/ioc/rsrv/camessage.c
+229c229
+<     localStatus = epicsVsnprintf ( pMsgString, maxDiagLen, pformat, args );
+---
+>     localStatus = epicsVsnprintf ( pMsgString, maxDiagLen - size, pformat, args );
+232c232
+<         if ( diagLen < maxDiagLen ) {
+---
+>         if ( diagLen < maxDiagLen - size ) {
+240c240
+<             size += maxDiagLen;
+---
+>             size = maxDiagLen;
+779a780,783
+>     if ( INVALID_DB_REQ(mp->m_dataType) ) {
+>         return RSRV_ERROR;
+>     }
+> 
+816d819
+<  
+818,826d820
+< #ifdef FERRO_TS_PATCH
+<     //detect timestamp
+<     int realSize= dbr_size_n(mp->m_dataType, mp->m_count);
+<     int addTimeStamp=0;
+<     if(realSize>=(mp->m_postsize-8u)){
+<         addTimeStamp=1;
+<         mp->m_postsize=realSize;
+<     }
+< #endif
+871,877d864
+< 
+< #ifdef FERRO_TS_PATCH
+<     if(addTimeStamp>0){
+< 	memcpy(&((((pciu->dbch)->addr).precord)->time),((char*)pPayload)+realSize, 8u);      
+<     }
+< #endif
+< 
+1908a1896,1899
+>     if ( INVALID_DB_REQ(mp->m_dataType) ) {
+>         return RSRV_ERROR;
+>     }
+> 
+2565d2555
+< 
+2586a2577
+>                 SEND_LOCK(client);
+2588a2580
+>                 SEND_UNLOCK(client);
+2603a2596
+>                     SEND_LOCK(client);
+2606a2600
+>                     SEND_UNLOCK(client);

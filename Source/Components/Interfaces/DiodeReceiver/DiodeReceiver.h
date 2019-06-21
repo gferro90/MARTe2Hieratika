@@ -31,7 +31,6 @@
 #include <epicsStdlib.h>
 #include <cadef.h>
 #include <epicsGetopt.h>
-#include "tool_lib.h"
 #include <string.h>
 
 /*---------------------------------------------------------------------------*/

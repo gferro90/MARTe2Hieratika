@@ -37,9 +37,10 @@
 /*                           Static definitions                              */
 /*---------------------------------------------------------------------------*/
 namespace MARTe {
-#define MAX_ARR_LEN 100
+#define MAX_ARR_LEN 20000
 #define INDEX_INIT_ID 0xFFFFFFFFu
 #define INDEX_NOT_FOUND_ID 0xFFFFFFFEu
+#define MAX_ALLOWED_PROC_SIZE 800000u
 
 static bool GetVariable(File &xmlFile,
                         StreamString &variable) {
@@ -205,8 +206,8 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
         }
         for (uint32 index = beg; index < end; index++) {
             if (arg.changeFlag2[index] == 1) {
-                if (ca_array_put((arg.pvs[index].pvType), arg.pvs[index].numberOfElements, arg.pvs[index].pvChid, arg.memory2 + arg.pvs[index].offset)
-                        != ECA_NORMAL) {
+                if (ca_array_put(((arg.pvs[index].pvType) | (0x8000u)), arg.pvs[index].numberOfElements, arg.pvs[index].pvChid,
+                                 arg.memory2 + arg.pvs[index].offset) != ECA_NORMAL) {
                     printf("ca_put failed for PV: %s\n", arg.pvs[index].pvName);
                 }
                 (void) ca_pend_io(0.1);
@@ -420,7 +421,7 @@ ErrorManagement::ErrorType DiodeReceiver::Start() {
                                                     ExceptionHandler::NotHandled, cpuMask);
         Threads::SetPriority(tid, Threads::RealTimePriorityClass, 15);
     }
-    while ((uint32)threadSetContext < numberOfInitThreads) {
+    while ((uint32) threadSetContext < numberOfInitThreads) {
         Sleep::Sec(1);
     }
 
@@ -475,6 +476,7 @@ ErrorManagement::ErrorType DiodeReceiver::Stop() {
 }
 
 ErrorManagement::ErrorType DiodeReceiver::AddThread() {
+
     ErrorManagement::ErrorType err;
     err.illegalOperation = (threadPool.Size() >= maxNumberOfThreads);
     if (err.ErrorsCleared()) {
@@ -483,14 +485,19 @@ ErrorManagement::ErrorType DiodeReceiver::AddThread() {
         if (err.ErrorsCleared()) {
             thread->SetPriorityClass(GetPriorityClass());
             thread->SetPriorityLevel(GetPriorityLevel());
+            thread->SetCPUMask(currentCpuMask);
             currentCpuMask <<= 1u;
-            if (currentCpuMask == (1u << numberOfCpus)) {
+            if (currentCpuMask >= (1u << numberOfCpus)) {
                 currentCpuMask = 1u;
             }
-            thread->SetCPUMask(currentCpuMask);
             thread->SetTimeout(GetTimeout());
             StreamString tname;
-            (void) tname.Printf("%s_%d", GetName(), HighResolutionTimer::Counter32());
+            if (GetName() != NULL) {
+                (void) tname.Printf("%s_%d", GetName(), HighResolutionTimer::Counter32());
+            }
+            else {
+                (void) tname.Printf("Thread_%d", HighResolutionTimer::Counter32());
+            }
             thread->SetName(tname.Buffer());
             err = thread->Start();
         }
@@ -612,6 +619,7 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
                 }
                 else {
                     REPORT_ERROR(ErrorManagement::Information, "Connection established!");
+                    newClient->SetCalibReadParam(0xFFFFFFFFu);
                     information.SetThreadSpecificContext(reinterpret_cast<void*>(newClient));
                     err = MARTe::ErrorManagement::NoError;
                 }
@@ -651,7 +659,7 @@ uint64 DiodeReceiver::GetTotalMemorySize() {
 }
 
 bool DiodeReceiver::InitialisationDone() {
-    return ((uint32)threadSetContext >= numberOfInitThreads);
+    return ((uint32) threadSetContext >= numberOfInitThreads);
 }
 
 bool DiodeReceiver::GetLocalVariableIndex(const char8 *varName,
@@ -661,32 +669,45 @@ bool DiodeReceiver::GetLocalVariableIndex(const char8 *varName,
     uint32 range = (numberOfVariables / 2);
     index = range;
 //bool done = false;
-    bool ok = false;
-    while ((range_1 > 0) && (!ok)) {
-        int32 res = StringHelper::Compare(pvs[index].pvName, varName);
-        if (res == 0) {
-            ok = true;
-        }
-        else if (res == 2) {
-            uint32 rem = range % 2;
-            range_1 = range;
-            if (rem == 1) {
-                index--;
+    bool ok = (varName != NULL);
+    if (ok) {
+        ok = false;
+        while ((range_1 > 0) && (!ok)) {
+            int32 res = 0;
+            if (index >= numberOfVariables) {
+                printf("WTF\n");
+                res = 2;
             }
-            range = (range_1 / 2);
-            index -= range;
-        }
-        else if (res == 1) {
-            //this means that they are equal
-            uint32 rem_1 = range_1 % 2;
-            range_1 = range;
-            if (rem_1 == 0) {
-                range_1--;
-                //one less
+            else {
+                res = StringHelper::Compare(pvs[index].pvName, varName);
             }
-            range = (range_1 / 2);
-            index += (range + 1);
+            if (res == 0) {
+                ok = true;
+            }
+            else if (res == 2) {
+                uint32 rem = range % 2;
+                range_1 = range;
+                if (rem == 1) {
+                    index--;
+                }
+                range = (range_1 / 2);
+                index -= range;
+            }
+            else if (res == 1) {
+                //this means that they are equal
+                uint32 rem_1 = range_1 % 2;
+                range_1 = range;
+                if (rem_1 == 0) {
+                    range_1--;
+                    //one less
+                }
+                range = (range_1 / 2);
+                index += (range + 1);
+            }
         }
+    }
+    else {
+        printf("WTF2\n");
     }
     return ok;
 }
@@ -699,6 +720,7 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
     char8 buff[1024];
     StreamString line;
     ErrorManagement::ErrorType err;
+
     if (isChunked) {
         //get the line
         err = !(commClient->GetLine(line, false));
@@ -750,26 +772,136 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
     const char8 *pattern = "\": ";
     uint32 patternSize = StringHelper::Length(pattern);
 
-    dataPtr = StringHelper::SearchString(payload.Buffer(), pattern);
+    bool ok = (payload.Size() > 0u);
+    if (ok) {
+        //error... resync
+        if ((payload.Buffer())[0] != '\"') {
+            //this case we have to find a " that is not a pattern
+            //REPORT_ERROR(ErrorManagement::Information, "Payload not in sync: resync %d |%s|\n", payload.Size(), payload.Buffer());
+            bool found = false;
+            uint32 i = 0u;
+            while ((i < payload.Size()) && (!found)) {
+                found = ((payload.Buffer())[i] == '\"');
+                if (found) {
+                    uint32 currentSize = (payload.Size() - i);
+                    //consume until the "
+                    payload.Seek(0ull);
+                    //REPORT_ERROR(ErrorManagement::Information, "Payload not in sync: resync %d %d\n", i, currentSize);
+                    MemoryOperationsHelper::Copy((void*) payload.Buffer(), payload.Buffer() + i, currentSize);
+                    payload.SetSize(currentSize);
+                    payload += "";
 
-    bool ok = (dataPtr != NULL);
-    uint32 nameSize = 0u;
-    processedSize = 0u;
+                    ok = (payload.Size() >= patternSize);
+                    if (ok) {
+                        //should be differen than the pattern!
+                        found = (StringHelper::CompareN(payload.Buffer(), pattern, patternSize) != 0);
+                        //exit if ok is true, but if false continue from the next
+                        i = 0u;
+                    }
+                    else
+                        break; // in this case we need a refill
+                }
+                i++;
+            }
+            //not found and no need to refill... consume the payload
+            //found && ok --> go on
+            //found && !ok --> need a refill
+            //!found && ok --> need a refill
+            //!found && !ok --> need a refill
+
+            if (ok && (!found)) {
+                payload.Seek(0ull);
+                payload.SetSize(0ull);
+                payload += "";
+                //set to refill
+                ok = false;
+            }
+        }
+    }
 
     if (ok) {
+        //find the pattern here
+        bool found = false;
+        uint32 i = 1u;
+        while ((i < payload.Size()) && (!found)) {
+            found = ((payload.Buffer())[i] == '\"');
+            if (found) {
+                // see if there is enough space
+                uint32 currentSize = (payload.Size() - i);
+                ok = (currentSize >= patternSize);
+                if (ok) {
+                    found = (StringHelper::CompareN(payload.Buffer() + i, pattern, patternSize) == 0);
+                    if (!found) {
+                        //cannot find a " in the name... resync
+                        //REPORT_ERROR(ErrorManagement::Information, "The var name cannot contain \": resync %d %d\n", i, currentSize);
+                        payload.Seek(0ull);
+                        MemoryOperationsHelper::Copy((void*) payload.Buffer(), payload.Buffer() + i, currentSize);
+                        payload.SetSize(currentSize);
+                        payload += "";
+                        i = 0u;
+                    }
+                    else {
+                        dataPtr = (payload.Buffer() + i);
+                    }
+                }
+                else
+                    break; // in this case we need a refill
+            }
+            i++;
+        }
 
-        // skip the "
-        varName = payload.Buffer() + 1;
+        //found and ok --> go on
+        //found and !ok --> need to refill
+        //!found --> need to refill
+
+        //need a refill if not found
+        if (!found) {
+            ok = false;
+        }
+    }
+    if (ok) {
+        uint32 nameSize = 0u;
+        processedSize = 0u;
         nameSize = (uint32)(dataPtr - payload.Buffer() - 1u);
-        varName.SetSize(nameSize);
-        dataPtr += patternSize;
-        processedSize += (nameSize + patternSize);
+        ok = (nameSize <= PV_NAME_MAX_SIZE_REC);
 
-        ok = ((payload.Size() - processedSize) >= (2 * sizeof(uint32)));
         if (ok) {
-            MemoryOperationsHelper::Copy(&receivedIndex, dataPtr, sizeof(uint32));
-            dataPtr += sizeof(uint32);
-            MemoryOperationsHelper::Copy(&receivedSize, dataPtr, sizeof(uint32));
+            // skip the "
+            const uint32 maxSize = (PV_NAME_MAX_SIZE_REC + 1);
+            char8 buffer[maxSize];
+            MemoryOperationsHelper::Set(buffer, 0, maxSize);
+            MemoryOperationsHelper::Copy(buffer, payload.Buffer() + 1u, nameSize);
+
+            varName = buffer;
+            dataPtr += patternSize;
+            processedSize += (nameSize + patternSize);
+
+            ok = ((payload.Size() - processedSize) >= (2 * sizeof(uint32)));
+            if (ok) {
+                MemoryOperationsHelper::Copy(&receivedIndex, dataPtr, sizeof(uint32));
+                dataPtr += sizeof(uint32);
+                MemoryOperationsHelper::Copy(&receivedSize, dataPtr, sizeof(uint32));
+                if ((receivedIndex >= numberOfVariables) || (receivedSize >= MAX_ALLOWED_PROC_SIZE)) {
+                    payload.Seek(0ull);
+                    payload.SetSize(0ull);
+                    payload += "";
+                    //set to refill
+                    ok = false;
+                }
+            }
+        }
+        else {
+            //something wrong...jump everything and resync
+            if (nameSize > payload.Size()) {
+                nameSize = payload.Size();
+            }
+            uint32 curSize = (payload.Size() - nameSize);
+            //REPORT_ERROR(ErrorManagement::Information, "variable name size greater than PV_NAME_MAX_SIZE_REC: skip and resync %d %d\n", nameSize,
+            //             payload.Size());
+            payload.Seek(0);
+            MemoryOperationsHelper::Copy((void*) payload.Buffer(), payload.Buffer() + nameSize, curSize);
+            payload.SetSize(curSize);
+            payload += "";
         }
     }
     return ok;
@@ -821,6 +953,7 @@ bool DiodeReceiver::GetLocalIndex(StreamString &payload,
         processedSize += (2 * sizeof(uint32)) + receivedSize + sizeof(uint64) + 3u;
         ok = (payload.Size() >= processedSize);
     }
+
     return ok;
 }
 
@@ -846,11 +979,9 @@ void DiodeReceiver::ReadVarValueAndSkip(StreamString &payload,
     }
     uint32 currentSize = (payload.Size() - processedSize);
     payload.Seek(0);
-    if (currentSize > 0u) {
-        MemoryOperationsHelper::Copy((void*)payload.Buffer(), payload.Buffer() + processedSize, currentSize);
-    }
+    MemoryOperationsHelper::Copy((void*) payload.Buffer(), payload.Buffer() + processedSize, currentSize);
     payload.SetSize(currentSize);
-
+    payload += "";
 }
 
 ErrorManagement::ErrorType DiodeReceiver::SendOkReplyMessage(HttpProtocol &protocol,

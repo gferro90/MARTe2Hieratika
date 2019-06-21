@@ -1,0 +1,13 @@
+[Unit]
+Description=Diode receiver service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/bin/sh /home/f4e/MARTe2Project/GIT/MARTe2Hieratika/StartDiodeReceiver.sh
+
+[Install]
+WantedBy=multi-user.target
