@@ -172,11 +172,6 @@ void oldChannelNotify::operator delete ( void * )
 }
 
 
-void *oldChannelNotify::GetIO(){
-    
-    return io.GetChannel();
-}
-
 
 /*
  * ca_get_host_name ()
@@ -715,8 +710,4 @@ int epicsShareAPI ca_v42_ok ( chid pChan )
     return pChan->io.ca_v42_ok ( guard );
 }
 
-
-void* epicsShareAPI ca_get_io ( chid pChan ){
-    return pChan->GetIO();
-}
 

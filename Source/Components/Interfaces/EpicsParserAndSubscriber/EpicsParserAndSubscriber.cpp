@@ -262,7 +262,7 @@ bool EpicsParserAndSubscriber::ParseAndSubscribe() {
                 start = true;
             }
             if (start) {
-                printf("variable=%s\n", variable.Buffer());
+                //printf("variable=%s\n", variable.Buffer());
                 numberOfVariables++;
                 if (numberOfVariables >= maxNumberOfVariables) {
                     break;
@@ -541,7 +541,6 @@ void EpicsParserAndSubscriber::CleanContext(uint32 threadId) {
     uint32 beg = (threadId) * nVarsPerChunk;
     uint32 end = (threadId + 1u) * nVarsPerChunk;
 
-    REPORT_ERROR(ErrorManagement::Information, "Starting Thread from %d to %d", beg, end);
 
     if ((numberOfVariables - end) < numberOfPoolThreads) {
         end = numberOfVariables;

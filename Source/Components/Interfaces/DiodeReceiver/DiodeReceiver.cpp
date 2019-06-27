@@ -113,11 +113,11 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
         for (uint32 n = beg; (n < end); n++) {
             /*lint -e{9130} -e{835} -e{845} -e{747} Several false positives. lint is getting confused here for some reason.*/
             ret = (ca_create_channel(arg.pvs[n].pvName, NULL, NULL, 20u, &arg.pvs[n].pvChid) == ECA_NORMAL);
-            ca_pend_io(0.1);
+            ca_pend_io(1);
             if (ret) {
                 arg.pvs[n].numberOfElements = 0u;
                 cainfo(arg.pvs[n].pvChid, arg.pvs[n].pvName, arg.pvs[n].pvType, arg.pvs[n].numberOfElements);
-                ca_pend_io(0.1);
+                ca_pend_io(1);
 
                 arg.pvs[n].totalSize = 0;
                 arg.pvs[n].at = voidAnyType;
@@ -205,6 +205,7 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
             arg.Synchronise(arg.memory2, arg.changeFlag2);
         }
         for (uint32 index = beg; index < end; index++) {
+
             if (arg.changeFlag2[index] == 1) {
                 if (ca_array_put(((arg.pvs[index].pvType) | (0x8000u)), arg.pvs[index].numberOfElements, arg.pvs[index].pvChid,
                                  arg.memory2 + arg.pvs[index].offset) != ECA_NORMAL) {
@@ -331,6 +332,11 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
                 if (!data.Read("MsecPeriod", msecPeriod)) {
                     msecPeriod = 1000u;
                 }
+                uint32 readTimeoutTmp = 10000;
+                if (!data.Read("ReadTimeout", readTimeoutTmp)) {
+                    readTimeoutTmp = 10000;
+                }
+                readTimeout = readTimeoutTmp;
                 //open the xml file
                 File xmlFile;
                 if (!xmlFile.Open(xmlFilePath.Buffer(), File::ACCESS_MODE_R)) {
@@ -351,7 +357,7 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
                         start = true;
                     }
                     if (start) {
-                        printf("variable=%s\n", variable.Buffer());
+                        //printf("variable=%s\n", variable.Buffer());
                         numberOfVariables++;
                         if (numberOfVariables >= maxNumberOfVariables) {
                             break;
@@ -415,11 +421,12 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
 }
 
 ErrorManagement::ErrorType DiodeReceiver::Start() {
+    uint32 cpuMask = ((1 << numberOfCpus) - 1u);
+
     for (uint32 i = 0u; i < numberOfInitThreads; i++) {
-        uint32 cpuMask = (1 << (i % numberOfCpus));
         ThreadIdentifier tid = Threads::BeginThread((ThreadFunctionType) DiodeReceiverCycleLoop, this, THREADS_DEFAULT_STACKSIZE, NULL,
                                                     ExceptionHandler::NotHandled, cpuMask);
-        Threads::SetPriority(tid, Threads::RealTimePriorityClass, 15);
+        //Threads::SetPriority(tid, Threads::RealTimePriorityClass, 15);
     }
     while ((uint32) threadSetContext < numberOfInitThreads) {
         Sleep::Sec(1);
@@ -581,12 +588,13 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
                     }
                 }
             }
-            while (chunkSize > 0u);
-            if (isChunked) {
-                StreamString line;
-                err = !(commClient->GetLine(line, false));
+            while ((chunkSize > 0u) && (err.ErrorsCleared()));
+            if (err.ErrorsCleared()) {
+                if (isChunked) {
+                    StreamString line;
+                    err = !(commClient->GetLine(line, false));
+                }
             }
-
         }
 
         if (err.ErrorsCleared()) {
@@ -595,6 +603,7 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
         else {
             SendErrorReplyMessage(protocol, commClient);
         }
+        Sleep::MSec(10);
     }
 
     return err;
@@ -607,7 +616,7 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
     if (information.GetStage() == MARTe::ExecutionInfo::StartupStage) {
 
     }
-    if (information.GetStage() == MARTe::ExecutionInfo::MainStage) {
+    else if (information.GetStage() == MARTe::ExecutionInfo::MainStage) {
 
         if (information.GetStageSpecific() == MARTe::ExecutionInfo::WaitRequestStageSpecific) {
             TCPSocket *newClient = new TCPSocket();
@@ -620,6 +629,7 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
                 else {
                     REPORT_ERROR(ErrorManagement::Information, "Connection established!");
                     newClient->SetCalibReadParam(0xFFFFFFFFu);
+                    newClient->SetTimeout(readTimeout);
                     information.SetThreadSpecificContext(reinterpret_cast<void*>(newClient));
                     err = MARTe::ErrorManagement::NoError;
                 }
@@ -628,7 +638,19 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
         if (information.GetStageSpecific() == MARTe::ExecutionInfo::ServiceRequestStageSpecific) {
             TCPSocket *newClient = reinterpret_cast<TCPSocket *>(information.GetThreadSpecificContext());
             err = ClientService(newClient);
+            if (!err.ErrorsCleared()) {
+                information.SetThreadSpecificContext(reinterpret_cast<void*>(NULL));
+            }
         }
+    }
+    else {
+        TCPSocket *newClient = reinterpret_cast<TCPSocket *>(information.GetThreadSpecificContext());
+        if (newClient != NULL) {
+            HttpProtocol protocol(*newClient);
+            protocol.SetKeepAlive(false);
+            err = SendOkReplyMessage(protocol, newClient);
+        }
+        err = ErrorManagement::Completed;
     }
 
     return err;
@@ -871,8 +893,16 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
             char8 buffer[maxSize];
             MemoryOperationsHelper::Set(buffer, 0, maxSize);
             MemoryOperationsHelper::Copy(buffer, payload.Buffer() + 1u, nameSize);
+            StreamString varNameTemp = buffer;
+            varNameTemp.Seek(0ull);
+            varName.SetSize(0ull);
+            char8 term;
+            varNameTemp.GetToken(varName, ".", term);
+            if (term != '.') {
+                varName = varNameTemp;
+            }
+            varNameTemp.Seek(0ull);
 
-            varName = buffer;
             dataPtr += patternSize;
             processedSize += (nameSize + patternSize);
 

@@ -396,6 +396,12 @@ protected:
      */
     uint32 currentCpuMask;
 
+
+   /**
+    * The read timeout
+    */
+    TimeoutType readTimeout;
+
 };
 
 }

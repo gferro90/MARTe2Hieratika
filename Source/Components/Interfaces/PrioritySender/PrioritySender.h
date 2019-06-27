@@ -307,6 +307,18 @@ private:
      * The thread index
      */
     uint32 threadIndex;
+
+
+    /**
+     * The number of changed PVs during the current cycle
+     */
+    uint32 numberOfChangedVariables;
+
+    /**
+     * The maximum number of bytes to be send per cycle
+     */
+    uint32 maxBytesPerCycle;
+
 };
 
 }

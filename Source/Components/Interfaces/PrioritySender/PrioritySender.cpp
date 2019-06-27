@@ -45,8 +45,7 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
     arg.eventSem.Post();
     bool changed = false;
     PvDescriptor *pvDes = arg.dataSource->GetPvDescriptors();
-
-    //uint32 sendSize = 0u;
+    uint32 nVariables = 0u;
     while (arg.quit == 0) {
         uint32 nThreadsFinishedTmp;
         uint32 chunkCounterRead = 0u;
@@ -60,8 +59,12 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
 
             arg.dataSource->Synchronise(arg.memory, arg.changeFlag);
             //if not, just send using FIFO mechanism
-            uint32 nVariables = 0u;
+
+            //check the max bandwidth
+            uint32 maxSignalPerThread = (arg.numberOfSignalToBeSent * arg.numberOfPoolThreads);
+            nVariables = maxSignalPerThread;
             if (chunkCounterRead >= (arg.numberOfChunks)) {
+                nVariables = arg.currentChangePos;
                 //insertion sort if changed
                 for (uint32 i = 0u; i < arg.numberOfVariables; i++) {
                     //the index in the indexList
@@ -71,29 +74,28 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
 
                     //swap to the first positions if the signal has changed
                     if (arg.changeFlag[signalIdx] == 1u) {
-                        for (uint32 j = i; j > arg.currentChangePos; j--) {
-                            uint32 jIndex = (arg.currentIdx + j) % arg.numberOfVariables;
-                            uint32 prevJIndex = (jIndex == 0u) ? (arg.numberOfVariables - 1u) : (jIndex - 1u);
-                            uint32 temp = arg.indexList[prevJIndex];
-                            arg.indexList[prevJIndex] = arg.indexList[jIndex];
-                            arg.indexList[jIndex] = temp;
-                        }
+                        uint32 nextIndex = (arg.currentIdx + i) % arg.numberOfVariables;
+                        uint32 pvSize = (pvDes[nextIndex].numberOfElements * pvDes[nextIndex].memorySize);
+                        uint32 prevIndex = (arg.currentIdx + arg.currentChangePos) % arg.numberOfVariables;
+                        uint32 temp = arg.indexList[prevIndex];
+                        arg.indexList[prevIndex] = arg.indexList[nextIndex];
+                        arg.indexList[nextIndex] = temp;
                         nVariables++;
-                        arg.currentChangePos++;
-                    }
-                    else {
                         //normally push forward the ones that have minor size to save bw
-                        for (uint32 j = i; j > arg.currentChangePos; j--) {
+                        for (uint32 j = arg.currentChangePos; j > 0; j--) {
                             uint32 jIndex = (arg.currentIdx + j) % arg.numberOfVariables;
                             uint32 prevJIndex = (jIndex == 0u) ? (arg.numberOfVariables - 1u) : (jIndex - 1u);
-                            uint32 pvSize = (pvDes[jIndex].numberOfElements * pvDes[jIndex].memorySize);
                             uint32 prevPvSize = (pvDes[prevJIndex].numberOfElements * pvDes[prevJIndex].memorySize);
                             if (prevPvSize > pvSize) {
                                 uint32 temp = arg.indexList[prevJIndex];
                                 arg.indexList[prevJIndex] = arg.indexList[jIndex];
                                 arg.indexList[jIndex] = temp;
                             }
+                            else {
+                                break;
+                            }
                         }
+                        arg.currentChangePos++;
                     }
 
                 }
@@ -104,20 +106,28 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
                     arg.syncSem.FastUnLock();
                 }
             }
-            /*
-            uint32 varSend = (arg.numberOfSignalToBeSent * arg.numberOfPoolThreads);
-            for (uint32 i = 0u; i < varSend; i++) {
-                uint32 listIndex = arg.indexList[(arg.currentIdx + i)%arg.numberOfVariables];
-                uint32 varSize = pvDes[listIndex].memorySize * pvDes[listIndex].numberOfElements;
-                sendSize += varSize;
-            }*/
-            //printf("current changes %d %d\n", arg.currentChangePos, arg.currentIdx);
-            //printf("current changes %d %d\n", nVariables, nThreadsFinishedTmp);
+            if (nVariables > maxSignalPerThread) {
+                nVariables = maxSignalPerThread;
+            }
 
-            //update the first position for the new cycle, in order to send the ones that
-            //cannot be sent in this cycle
-            if (arg.currentChangePos > (arg.numberOfSignalToBeSent * arg.numberOfPoolThreads)) {
-                arg.currentChangePos -= (arg.numberOfSignalToBeSent * arg.numberOfPoolThreads);
+            uint32 totalSize = 0u;
+
+            uint32 varsToCheck = nVariables;
+            nVariables = 0u;
+            for (nVariables = 0u; nVariables < varsToCheck; nVariables++) {
+                uint32 nextIndex = (arg.currentIdx + nVariables) % arg.numberOfVariables;
+                uint32 pvSize = (pvDes[nextIndex].numberOfElements * pvDes[nextIndex].memorySize);
+                totalSize += pvSize;
+                if (totalSize > arg.maxBytesPerCycle) {
+                    if (nVariables > 0u) {
+                        nVariables--;
+                    }
+                    break;
+                }
+            }
+
+            if (arg.currentChangePos > nVariables) {
+                arg.currentChangePos -= nVariables;
             }
             else {
                 arg.currentChangePos = 0u;
@@ -145,8 +155,10 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             MemoryOperationsHelper::Copy(arg.indexListThreads, arg.indexList, arg.numberOfVariables * sizeof(uint32));
             arg.currentIdxThreads = arg.currentIdx;
 
-            arg.currentIdx += (arg.numberOfSignalToBeSent * arg.numberOfPoolThreads);
+            arg.currentIdx += nVariables;
             arg.currentIdx %= arg.numberOfVariables;
+
+            arg.numberOfChangedVariables = nVariables;
 
             changed = false;
             arg.eventSem.Post();
@@ -157,8 +169,6 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             //wait the cycle time
             uint32 elapsed = (uint32)((float32)((HighResolutionTimer::Counter() - arg.lastTickCounter) * 1000u * HighResolutionTimer::Period()));
 
-            //printf("%d,%d\n",sendSize, elapsed);
-            //sendSize=0u;
             if (elapsed < arg.msecPeriod) {
                 Sleep::MSec(arg.msecPeriod - elapsed);
             }
@@ -170,9 +180,10 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
 
     }
 
-    while (arg.nThreadsFinished != arg.numberOfPoolThreads) {
+    while (arg.nThreadsFinished < arg.numberOfPoolThreads) {
         Sleep::Sec(1u);
     }
+    printf("Init thread terminated\n");
     arg.eventSem.Post();
 }
 /*---------------------------------------------------------------------------*/
@@ -213,6 +224,8 @@ PrioritySender::PrioritySender() :
     reconnectionCycleCounter = NULL;
     destinationsMask = NULL;
     threadIndex = 0u;
+    numberOfChangedVariables = 0u;
+    maxBytesPerCycle = 0xFFFFFFFFu;
 }
 
 PrioritySender::~PrioritySender() {
@@ -280,6 +293,11 @@ bool PrioritySender::Initialise(StructuredDataI &data) {
             ret = data.Read("MsecPeriod", msecPeriod);
             if (!ret) {
                 REPORT_ERROR(ErrorManagement::InitialisationError, "Please define MsecPeriod");
+            }
+        }
+        if (ret) {
+            if (!data.Read("MaxBytesPerCycle", maxBytesPerCycle)) {
+                maxBytesPerCycle = 0xFFFFFFFFu;
             }
         }
         if (ret) {
@@ -353,13 +371,9 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
 }
 
 ErrorManagement::ErrorType PrioritySender::Start() {
-    uint32 currentCpuMask = 1u;
+    uint32 cpuMask = (1u << numberOfCpus) - 1u;
     for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
-        if (currentCpuMask == (1u << numberOfCpus)) {
-            currentCpuMask = 1u;
-        }
-        MultiThreadService::SetCPUMaskThreadPool(currentCpuMask, i);
-        currentCpuMask <<= 1u;
+        MultiThreadService::SetCPUMaskThreadPool(cpuMask, i);
     }
 
     dataSource->Synchronise(memory, changeFlag);
@@ -382,7 +396,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
         newClient->Open();
         REPORT_ERROR(ErrorManagement::Information, "Client connecting...");
         while (!(newClient->Connect(serverIpAddress.Buffer(), serverPort, connectionTimeout)) && (quit == 0)) {
-            Sleep::Sec(connectionTimeout.GetTimeoutMSec());
+            Sleep::MSec(connectionTimeout.GetTimeoutMSec());
         }
         REPORT_ERROR(ErrorManagement::Information, "Connection established!");
 
@@ -392,6 +406,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
                 //never use the buffer
                 newClient->SetCalibReadParam(0xFFFFFFFFu);
 
+                newClient->SetTimeout(connectionTimeout);
                 info.SetThreadSpecificContext(reinterpret_cast<void*>(newClient));
                 if (syncSem.FastLock()) {
                     if (info.GetThreadNumber() == 0xFFFFu) {
@@ -409,37 +424,22 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
                 }
             }
         }
-        else {
-            HttpChunkedStream *client = reinterpret_cast<HttpChunkedStream *>(info.GetThreadSpecificContext());
-            if (client != NULL) {
-                client->Close();
-                delete client;
-                info.SetThreadSpecificContext(NULL);
-            }
-            if (syncSem.FastLock()) {
-                nThreadsFinished = numberOfPoolThreads;
-                syncSem.FastUnLock();
-            }
-        }
-
     }
     else if (info.GetStage() == MARTe::ExecutionInfo::MainStage) {
+        if (syncSem.FastLock()) {
+            eventSem.Reset();
+            nThreadsFinished++;
+            syncSem.FastUnLock();
+        }
         if (quit == 0) {
-            if (syncSem.FastLock()) {
-                eventSem.Reset();
-                nThreadsFinished++;
-                syncSem.FastUnLock();
-            }
             //lock on the index list
             eventSem.Wait(TTInfiniteWait);
 
             HttpChunkedStream *client = reinterpret_cast<HttpChunkedStream *>(info.GetThreadSpecificContext());
 
             if (client != NULL) {
-
                 uint32 threadId = info.GetThreadNumber();
                 err = SendVariables(*client, threadId);
-
             }
         }
 
@@ -449,10 +449,18 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
         HttpChunkedStream *client = reinterpret_cast<HttpChunkedStream *>(info.GetThreadSpecificContext());
 
         if (client != NULL) {
-            client->Close();
-            delete client;
-            client = NULL;
-            info.SetThreadSpecificContext(NULL);
+            uint32 threadId = info.GetThreadNumber();
+            REPORT_ERROR(ErrorManagement::Information, "Thread terminated\n", threadId);
+            REPORT_ERROR(ErrorManagement::FatalError, "Send final message");
+            //send a connection-close message
+            for (uint32 i = 0u; i < numberOfDestinations; i++) {
+                StreamString destinationName = "/receiver";
+                destinationName.Printf("%d", i);
+                //send a connection-close message
+                SendCloseConnectionMessage(*client, destinationName.Buffer());
+                client=NULL;
+                info.SetThreadSpecificContext(reinterpret_cast<void*>(NULL));
+            }
         }
 
         if (syncSem.FastLock()) {
@@ -467,7 +475,9 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
 ErrorManagement::ErrorType PrioritySender::Stop() {
     Atomic::Increment(&quit);
     eventSem.Wait(TTInfiniteWait);
-    return MultiThreadService::Stop();
+    ErrorManagement::ErrorType err = MultiThreadService::Stop();
+    Sleep::Sec(2);
+    return err;
 }
 
 ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &client,
@@ -475,9 +485,13 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
     ErrorManagement::ErrorType err;
 
     uint32 listIndex;
+    uint32 nVarsPerThread = (numberOfChangedVariables / numberOfPoolThreads);
+    if (threadId == (numberOfPoolThreads - 1u)) {
+        nVarsPerThread += (numberOfChangedVariables % numberOfPoolThreads);
+    }
     if (syncSem.FastLock()) {
         listIndex = currentIdxThreads;
-        currentIdxThreads += numberOfSignalToBeSent;
+        currentIdxThreads += nVarsPerThread;
         currentIdxThreads %= numberOfVariables;
         syncSem.FastUnLock();
     }
@@ -537,22 +551,35 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                             var += signalName.Buffer();
                             var += "\": ";
                             uint32 varSize = var.Size();
-                            client.Write(var.Buffer(), varSize);
+                            if (err.ErrorsCleared()) {
+                                err = !(client.Write(var.Buffer(), varSize));
+                            }
                             uint32 indexSize = sizeof(uint32);
-                            client.Write((const char8*) (&signalIndex), indexSize);
+                            if (err.ErrorsCleared()) {
+                                err = !(client.Write((const char8*) (&signalIndex), indexSize));
+                            }
                             uint32 totalSize = (pvDes[signalIndex].memorySize * pvDes[signalIndex].numberOfElements);
-                            client.Write((const char8*) (&totalSize), indexSize);
-                            client.Write((const char8*) signalPtr, totalSize);
+                            if (err.ErrorsCleared()) {
+                                err = !(client.Write((const char8*) (&totalSize), indexSize));
+                            }
+                            if (err.ErrorsCleared()) {
+                                err = !(client.Write((const char8*) signalPtr, totalSize));
+                            }
                             uint32 timestampSize = sizeof(uint64);
                             uint32 tsIndex = (pvDes[signalIndex].numberOfElements * pvDes[signalIndex].memorySize);
                             uint8* timeStampPtr = (uint8*) (&memoryThreads[offset + tsIndex]);
-                            client.Write((const char8*) timeStampPtr, timestampSize);
+                            if (err.ErrorsCleared()) {
+                                err = !(client.Write((const char8*) timeStampPtr, timestampSize));
+                            }
                             uint32 termSize = 2u;
-                            client.Write("\n\r", termSize);
+                            if (err.ErrorsCleared()) {
+                                err = !(client.Write("\n\r", termSize));
+                            }
                         }
                         listIndex++;
                         listIndex %= numberOfVariables;
                     }
+
                 }
                 if (err.ErrorsCleared()) {
                     err = !client.Flush();
@@ -590,6 +617,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                         REPORT_ERROR(ErrorManagement::FatalError, "Send final message");
                         //send a connection-close message
                         SendCloseConnectionMessage(client, destinationName.Buffer());
+                        Sleep::MSec(connectionTimeout.GetTimeoutMSec());
                     }
                 }
             }
