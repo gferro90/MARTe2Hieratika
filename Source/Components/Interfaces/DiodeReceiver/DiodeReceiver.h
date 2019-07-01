@@ -90,7 +90,6 @@ struct PvRecDescriptor {
 
 };
 
-
 /**
  * @brief The diode receiver.
  *
@@ -201,7 +200,6 @@ public:
      */
     friend void DiodeReceiverCycleLoop(DiodeReceiver &arg);
 
-
     /**
      * @see MultiClientService::AddThread
      * @details Assign the threads on different cpu to load the balance and execute it.
@@ -225,6 +223,7 @@ protected:
     bool ReadVarNameAndIndex(StreamString &payload,
                              StreamString &varName,
                              uint32 &receivedIndex,
+                             uint8 &receivedTypeId,
                              uint32 &receivedSize,
                              uint32 &processedSize,
                              const char8 * &dataPtr);
@@ -237,7 +236,8 @@ protected:
                        uint32 receivedIndex,
                        uint32 receivedSize,
                        uint32 &index,
-                       uint32 &processedSize);
+                       uint32 &processedSize,
+                       bool &controlOk);
 
     /**
      * @brief Help function to read the value of the received PV.
@@ -245,7 +245,9 @@ protected:
     void ReadVarValueAndSkip(StreamString &payload,
                              const char8 *dataPtr,
                              uint32 index,
-                             uint32 processedSize);
+                             uint32 processedSize,
+                             uint8 receivedTypeId,
+                             bool controlOk);
 
     /**
      * @brief Help funcion to send the OK reply message to the received HTTP
@@ -396,10 +398,9 @@ protected:
      */
     uint32 currentCpuMask;
 
-
-   /**
-    * The read timeout
-    */
+    /**
+     * The read timeout
+     */
     TimeoutType readTimeout;
 
 };

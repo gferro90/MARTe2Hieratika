@@ -81,7 +81,7 @@ static int cainfo(chid &pvChid,
                   chtype &type,
                   uint32 &numberOfElements,
                   uint32 &memorySize,
-                  TypeDescriptor &td) {
+                  TypeDescriptor &td, uint8 &typeId) {
     int32 dbfType;
     uint32 nElems = 0u;
     enum channel_state state;
@@ -103,34 +103,42 @@ static int cainfo(chid &pvChid,
     if (StringHelper::Compare(epicsTypeName, "DBF_DOUBLE") == 0u) {
         memorySize = 8u;
         td = Float64Bit;
+        typeId=9u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_FLOAT") == 0u) {
         memorySize = 4u;
         td = Float32Bit;
+        typeId=8u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_LONG") == 0u) {
         memorySize = 4u;
         td = SignedInteger32Bit;
+        typeId=4u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_ULONG") == 0u) {
         memorySize = 4u;
         td = UnsignedInteger32Bit;
+        typeId=5u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_SHORT") == 0u) {
         memorySize = 2u;
         td = SignedInteger16Bit;
+        typeId=2u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_USHORT") == 0u) {
         memorySize = 2u;
         td = UnsignedInteger16Bit;
+        typeId=3u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_CHAR") == 0u) {
         memorySize = 1u;
         td = SignedInteger8Bit;
+        typeId=0u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_UCHAR") == 0u) {
         memorySize = 1u;
         td = UnsignedInteger8Bit;
+        typeId=1u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_STRING") == 0) {
         memorySize = MAX_STRING_SIZE;
@@ -138,14 +146,22 @@ static int cainfo(chid &pvChid,
         td.isStructuredData = false;
         td.type = CArray;
         td.isConstant = false;
+        typeId=10u;
     }
     else {
-        memorySize = MAX_STRING_SIZE;
+        memorySize = 8u;
+        td = Float64Bit;
+        typeId=9u;
+        type = DBF_DOUBLE;
+
+/*        memorySize = MAX_STRING_SIZE;
         td.numberOfBits = MAX_STRING_SIZE * 8u;
         td.isStructuredData = false;
         td.type = CArray;
         td.isConstant = false;
         type = DBF_STRING;
+        typeId=10u;
+        */
     }
 
     return 0;
@@ -458,7 +474,7 @@ bool EpicsParserAndSubscriber::FillMemorySizes(uint32 beg,
         ca_create_channel(pvDescriptor[i].pvName, NULL, NULL, 20u, &pvDescriptor[i].pvChid);
         ca_pend_io(0.1);
         cainfo(pvDescriptor[i].pvChid, pvDescriptor[i].pvName, pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].memorySize,
-                pvDescriptor[i].td);
+                pvDescriptor[i].td, pvDescriptor[i].typeId);
         ca_pend_io(1);
         if (pvDescriptor[i].numberOfElements > MAX_ARR_LEN) {
             pvDescriptor[i].numberOfElements = 0u;

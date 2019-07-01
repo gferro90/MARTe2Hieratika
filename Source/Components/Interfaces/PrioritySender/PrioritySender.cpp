@@ -558,6 +558,10 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                             if (err.ErrorsCleared()) {
                                 err = !(client.Write((const char8*) (&signalIndex), indexSize));
                             }
+                            if (err.ErrorsCleared()) {
+                                uint32 typeIdSize=sizeof(uint8);
+                                err = !(client.Write((const char8*) (&pvDes[signalIndex].typeId), typeIdSize));
+                            }
                             uint32 totalSize = (pvDes[signalIndex].memorySize * pvDes[signalIndex].numberOfElements);
                             if (err.ErrorsCleared()) {
                                 err = !(client.Write((const char8*) (&totalSize), indexSize));

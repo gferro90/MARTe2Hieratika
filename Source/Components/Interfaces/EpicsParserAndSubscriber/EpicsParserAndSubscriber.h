@@ -113,6 +113,11 @@ struct PvDescriptor {
      * The type descriptor
      */
     TypeDescriptor td;
+
+    /**
+     * The type id
+     */
+    uint8 typeId;
 };
 
 /**
