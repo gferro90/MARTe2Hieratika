@@ -2,6 +2,12 @@ record( ai,RFAMP:CIRC1A:WaterFlow)
 {
 field(DTYP, "Soft Channel")
 }
+record( ai,RFAMP:CIRC1A:WaterFlow1)
+{
+field(DTYP, "Soft Channel")
+}
+
+
 
 record( ai,RFAMP:CIRC1A:WaterT)
 {

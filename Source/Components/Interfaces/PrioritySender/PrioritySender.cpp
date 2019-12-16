@@ -393,10 +393,14 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
         eventSem.Wait(TTInfiniteWait);
 
         HttpChunkedStream *newClient = new HttpChunkedStream();
-        newClient->Open();
+        while(!newClient->Open()){
+            Sleep::MSec(connectionTimeout.GetTimeoutMSec());
+            REPORT_ERROR(ErrorManagement::Information, "Failed socket Open ...");
+        }
         REPORT_ERROR(ErrorManagement::Information, "Client connecting...");
         while (!(newClient->Connect(serverIpAddress.Buffer(), serverPort, connectionTimeout)) && (quit == 0)) {
             Sleep::MSec(connectionTimeout.GetTimeoutMSec());
+            REPORT_ERROR(ErrorManagement::Information, "Failed socket Connect ...");
         }
         REPORT_ERROR(ErrorManagement::Information, "Connection established!");
 
@@ -458,6 +462,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
                 destinationName.Printf("%d", i);
                 //send a connection-close message
                 SendCloseConnectionMessage(*client, destinationName.Buffer());
+                delete client;
                 client=NULL;
                 info.SetThreadSpecificContext(reinterpret_cast<void*>(NULL));
             }

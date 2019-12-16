@@ -59,7 +59,6 @@ INCLUDES += -I$(EPICS_BASE)/src/base-3.15.5/ca/client/tools/
 CPPFLAGS+= -fpermissive -Wno-error
 
 all: $(OBJS) $(SUBPROJ)   \
-        $(BUILD_DIR)/EpicsSignalGenTool3$(EXEEXT)\
         $(BUILD_DIR)/DiodeStandaloneApp$(EXEEXT)\
         $(BUILD_DIR)/DiodeStandaloneRec$(EXEEXT)\
         $(BUILD_DIR)/TestEpicsWriter$(EXEEXT)

@@ -663,6 +663,7 @@ static void read_reply ( void *pArg, struct dbChannel *dbch,
  */
 static int read_action ( caHdrLargeArray *mp, void *pPayloadIn, struct client *pClient )
 {
+
     struct channel_in_use *pciu = MPTOPCIU ( mp );
     int readAccess;
     ca_uint32_t payloadSize;

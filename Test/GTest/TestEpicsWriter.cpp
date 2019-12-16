@@ -51,7 +51,7 @@
 /*---------------------------------------------------------------------------*/
 using namespace MARTe;
 const uint32 PV_NAME_MAX_SIZE = 64u;
-#define MAX_ARR_LEN 100
+#define MAX_ARR_LEN 10000000
 
 uint32 numberOfVariables = 0u;
 

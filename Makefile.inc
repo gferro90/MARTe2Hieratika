@@ -23,7 +23,8 @@
 # $Id: Makefile.inc 3 2012-01-15 16:26:07Z aneto $
 #
 #############################################################
-SPB    = Source/Components/Interfaces.x Source/Components/GAMs.x Source/Components/DataSources.x
+SPB    = Source/Components/Interfaces.x
+#Source/Components/GAMs.x Source/Components/DataSources.x
 
 #SPB += Test/Components/Interfaces.x Test/Components/GAMs.x
 
