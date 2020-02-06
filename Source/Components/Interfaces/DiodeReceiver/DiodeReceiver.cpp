@@ -422,7 +422,7 @@ ErrorManagement::ErrorType DiodeReceiver::Start() {
     uint32 cpuMask = ((1 << numberOfCpus) - 1u);
 
     for (uint32 i = 0u; i < numberOfInitThreads; i++) {
-        ThreadIdentifier tid = Threads::BeginThread((ThreadFunctionType) DiodeReceiverCycleLoop, this, THREADS_DEFAULT_STACKSIZE, NULL,
+        Threads::BeginThread((ThreadFunctionType) DiodeReceiverCycleLoop, this, THREADS_DEFAULT_STACKSIZE, NULL,
                                                     ExceptionHandler::NotHandled, cpuMask);
         //Threads::SetPriority(tid, Threads::RealTimePriorityClass, 15);
     }

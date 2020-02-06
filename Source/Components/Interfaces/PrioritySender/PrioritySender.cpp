@@ -444,6 +444,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
             if (client != NULL) {
                 uint32 threadId = info.GetThreadNumber();
                 err = SendVariables(*client, threadId);
+                Sleep::MSec(10);
             }
         }
 

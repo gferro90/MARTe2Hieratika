@@ -283,6 +283,16 @@ void comQueSend::insertRequestHeader (
     ca_uint16_t dataType, ca_uint32_t nElem, ca_uint32_t cid, 
     ca_uint32_t requestDependent, bool v49Ok) 
 {
+
+
+
+#ifdef FERRO_TS_PATCH
+ if((dataType&(0x8000u))!=0){
+    payloadSize+=8;
+}
+#endif
+    dataType&=~(0x8000u);
+
     if ( payloadSize < 0xffff && nElem < 0xffff ) {
         comBuf * pComBuf = this->bufs.last ();
         if ( ! pComBuf || pComBuf->unoccupiedBytes() < 16u ) {
@@ -290,14 +300,6 @@ void comQueSend::insertRequestHeader (
             this->pushComBuf ( *pComBuf );
         }
 
-
-
-#ifdef FERRO_TS_PATCH
- 	if((dataType&(0x8000u))!=0){
-	    payloadSize+=8;
-	}
-#endif
-        dataType&=~(0x8000u);
         pComBuf->push ( request ); 
         pComBuf->push ( static_cast < ca_uint16_t > ( payloadSize ) ); 
         pComBuf->push ( dataType ); 
