@@ -1,0 +1,1081 @@
+#@author Antonio Miguel Lopez
+#
+# Modified: 24 January 2018
+# Modified: 29 January 2019
+#
+
+
+######################################---  MEBT  ---######################################
+#########################################################################################
+
+#################### Pressure Transmitters #################### 
+
+record(ai, "MEBT:COOL_MPT_s1:P") {
+  field(DESC, "Pressure MCO01 MPT-s1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/0 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "bar")
+}
+
+
+record(ai, "MEBT:COOL_MPT_s2:P") {
+  field(DESC, "Pressure MCO01 MPT-s2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/4 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "bar")
+}
+
+
+record(ai, "MEBT:COOL_MPT_p1:P") {
+  field(DESC, "Pressure MCO01 MPT-p1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/8 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "bar")
+}
+
+
+record(ai, "MEBT:COOL_MPT_p2:P") {
+  field(DESC, "Pressure MCO01 MPT-p2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/12 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "bar")
+}
+
+
+record(ai, "MEBT:COOL_MPT_p3:P") {
+  field(DESC, "Pressure MCO01 MPT-p3")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/16 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "bar")
+}
+
+
+record(ai, "MEBT:COOL_MPT_p4:P") {
+  field(DESC, "Pressure MCO01 MPT-p4")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/20 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "bar")
+}
+
+
+record(ai, "MEBT:COOL_MPT_p5:P") {
+  field(DESC, "Pressure MCO01 MPT-p5")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/24 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "bar")
+}
+
+
+record(ai, "MEBT:COOL_MPT_p6:P") {
+  field(DESC, "Pressure MCO01 MPT-p6")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/28 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "bar")
+}
+
+#################### Temperature Transmitters #################### 
+
+record(ai, "MEBT:COOL_MTT_s1:T") {
+  field(DESC, "Pressure MCO01 MTT-s1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/32 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+
+record(ai, "MEBT:COOL_MTT_s2:T") {
+  field(DESC, "Pressure MCO01 MTT-s2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/36 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+
+record(ai, "MEBT:COOL_MTT_p1:T") {
+  field(DESC, "Pressure MCO01 MTT-p1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/40 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+
+record(ai, "MEBT:COOL_MTT_p2:T") {
+  field(DESC, "Pressure MCO01 MTT-p2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/44 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+
+record(ai, "MEBT:COOL_MTT_r1:T") {
+  field(DESC, "Pressure MCO01 MTT-r1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/48 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+
+record(ai, "MEBT:COOL_MTT_r2:T") {
+  field(DESC, "Pressure MCO01 MTT-r2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/52 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+
+record(ai, "MEBT:COOL_MTT_r3:T") {
+  field(DESC, "Pressure MCO01 MTT-r3")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/56 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+
+record(ai, "MEBT:COOL_MTT_r4:T") {
+  field(DESC, "Pressure MCO01 MTT-r4")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/60 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+#################### Flow Transmitters #################### 
+
+record(ai, "MEBT:COOL_MFM_s1:Flow") {
+  field(DESC, "Flow MCO01 MFM-s1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/64 T=FLOAT ")
+  field(PREC, "0")
+  #field(LINR,"SLOPE")
+  field(ASLO, "1000")
+  field(EGU, "l/h")
+}
+
+
+record(ai, "MEBT:COOL_MFM_s2:Flow") {
+  field(DESC, "Flow MCO01 MFM-s2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/68 T=FLOAT ")
+  field(PREC, "0")
+  field(ASLO, "1000")
+  field(EGU, "l/h")
+}
+
+
+record(ai, "MEBT:COOL_MFM_p1:Flow") {
+  field(DESC, "Flow MCO01 MFM-p1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/72 T=FLOAT ")
+  field(PREC, "0")
+  field(EGU, "l/h")
+}
+
+
+record(ai, "MEBT:COOL_MFM_r1:Flow") {
+  field(DESC, "Flow MCO01 MFM-r1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/76 T=FLOAT ")
+  field(PREC, "0")
+  field(EGU, "l/h")
+}
+
+
+record(ai, "MEBT:COOL_MFM_r2:Flow") {
+  field(DESC, "Flow MCO01 MFM-r2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/80 T=FLOAT ")
+  field(PREC, "0")
+  field(EGU, "l/h")
+}
+
+
+record(ai, "MEBT:COOL_MFM_r3:Flow") {
+  field(DESC, "Flow MCO01 MFM-r3")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/84 T=FLOAT ")
+  field(PREC, "0")
+  field(EGU, "l/h")
+}
+
+
+record(ai, "MEBT:COOL_MFM_r4:Flow") {
+  field(DESC, "Flow MEBT MFM-r4")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/88 T=FLOAT ")
+  field(PREC, "0")
+  field(EGU, "l/h")
+}
+
+#################### Conductivity Transmitter #################### 
+
+record(ai, "MEBT:COOL_MRE_p1:Cond") {
+  field(DESC, "Conductivity MCO01 MRE-p1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/92 T=FLOAT ")
+  field(PREC, "2")
+  field(EGU, "uS/cm")
+}
+
+#################### Variable Frequency Drives #################### 
+####################IMPORTANT########################################
+# Vfd1, Vfd2, Vfd3, Vfd4 statuses have been negated
+# due to an error in the PLC. If we change the value in the PLC,
+# the HMI will not work properly so this is the intermediate
+# solution.
+#####################################################################
+
+record(bi, "MEBT:COOL_Vfd1:StatusReal") {
+  field(DESC, "Pump Status MCO01 MCO01 Vfd-1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/96 T=BYTE B=0")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(calc, "MEBT:COOL_Vfd1:Status") {
+  field(DESC, "Status of the Vfd-1 pump")
+  field(CALC, "!A")
+  field(INPA, "MEBT:COOL_Vfd1:StatusReal.VAL CP")
+  field(SCAN, "2 second")
+}
+
+record(bi, "MEBT:COOL_Vfd1:AlarmReal") {
+  field(DESC, "Alarm MCO01 Vfd-1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/96 T=BYTE B=1")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(calc, "MEBT:COOL_Vfd1:Alarm") {
+  field(DESC, "Alarm MCO01 Vfd-1")
+  field(CALC, "!A")
+  field(INPA, "MEBT:COOL_Vfd1:AlarmReal.VAL CP")
+  field(SCAN, "2 second")
+}
+
+record(bi, "MEBT:COOL_Vfd2:StatusReal") {
+  field(DESC, "Pump Status MCO01 Vfd-2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/96 T=BYTE B=2")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(calc, "MEBT:COOL_Vfd2:Status") {
+  field(DESC, "Status of the Vfd-2 pump")
+  field(CALC, "!A")
+  field(INPA, "MEBT:COOL_Vfd2:StatusReal.VAL CP")
+  field(SCAN, "2 second")
+}
+
+record(bi, "MEBT:COOL_Vfd2:AlarmReal") {
+  field(DESC, "Alarm MCO01 Vfd-2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/96 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(calc, "MEBT:COOL_Vfd2:Alarm") {
+  field(DESC, "Alarm MCO01 Vfd-2")
+  field(CALC, "!A")
+  field(INPA, "MEBT:COOL_Vfd2:AlarmReal.VAL CP")
+  field(SCAN, "2 second")
+}
+
+record(bi, "MEBT:COOL_Vfd3:StatusReal") {
+  field(DESC, "MEBT:COOL_Vfd3:Status")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/96 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(calc, "MEBT:COOL_Vfd3:Status") {
+  field(DESC, "Status of the Vfd-3 pump")
+  field(CALC, "!A")
+  field(INPA, "MEBT:COOL_Vfd3:StatusReal.VAL CP")
+  field(SCAN, "2 second")
+}
+
+record(bi, "MEBT:COOL_Vfd3:AlarmReal") {
+  field(DESC, "Alarm MCO01 Vfd-3")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/96 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(calc, "MEBT:COOL_Vfd3:Alarm") {
+  field(DESC, "Alarm MCO01 Vfd-3")
+  field(CALC, "!A")
+  field(INPA, "MEBT:COOL_Vfd3:AlarmReal.VAL CP")
+  field(SCAN, "2 second")
+}
+
+record(bi, "MEBT:COOL_Vfd4:StatusReal") {
+  field(DESC, "Pump Status MCO01 Vfd-4")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/96 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(calc, "MEBT:COOL_Vfd4:Status") {
+  field(DESC, "Status of the Vfd-4 pump")
+  field(CALC, "!A")
+  field(INPA, "MEBT:COOL_Vfd4:StatusReal.VAL CP")
+  field(SCAN, "2 second")
+}
+
+record(bi, "MEBT:COOL_Vfd4:AlarmReal") {
+  field(DESC, "Alarm MCO01 Vfd-4")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/96 T=BYTE B=7")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+
+record(calc, "MEBT:COOL_Vfd4:Alarm") {
+  field(DESC, "Alarm MCO01 Vfd-4")
+  field(CALC, "!A")
+  field(INPA, "MEBT:COOL_Vfd4:AlarmReal.VAL CP")
+  field(SCAN, "2 second")
+}
+
+#################### Electrically Actuated Valves #################### 
+####################IMPORTANT########################################
+# MCV_p1, MCV_p2, MCV_p3, MCV_p4, MCV_p5 statuses have been negated
+# due to an error in the PLC. If we change the value in the PLC,
+# the HMI will not work properly so this is the intermediate
+# solution.
+#####################################################################
+
+record(ai, "MEBT:COOL_MWV_s1:Status") {
+  field(DESC, "Opening Status MCO01 MWV_s1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/98 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(bi, "MEBT:COOL_MCV_p1:StatusReal") {
+  field(DESC, "Opening Status MCO01 MCV-p1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/102 T=BYTE B=0")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(calc, "MEBT:COOL_MCV_p1:Status") {
+  field(DESC, "Opening Status MCO01 MCV-p1")
+  field(CALC, "!A")
+  field(INPA, "MEBT:COOL_MCV_p1:StatusReal.VAL CP")
+  field(SCAN, "2 second")
+}
+
+record(bi, "MEBT:COOL_MCV_p2:StatusReal") {
+  field(DESC, "Opening Status MCO01 MCV-p2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/102 T=BYTE B=1")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(calc, "MEBT:COOL_MCV_p2:Status") {
+  field(DESC, "Opening Status MCO01 MCV-p2")
+  field(CALC, "!A")
+  field(INPA, "MEBT:COOL_MCV_p2:StatusReal.VAL CP")
+  field(SCAN, "2 second")
+}
+
+record(bi, "MEBT:COOL_MCV_p3:StatusReal") {
+  field(DESC, "Opening Status MCO01 MCV-p3")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/102 T=BYTE B=2")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(calc, "MEBT:COOL_MCV_p3:Status") {
+  field(DESC, "Opening Status MCO01 MCV-p3")
+  field(CALC, "!A")
+  field(INPA, "MEBT:COOL_MCV_p3:StatusReal.VAL CP")
+  field(SCAN, "2 second")
+}
+
+
+record(bi, "MEBT:COOL_MCV_p4:StatusReal") {
+  field(DESC, "Opening Status MCO01 MCV-p4")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/102 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(calc, "MEBT:COOL_MCV_p4:Status") {
+  field(DESC, "Opening Status MCO01 MCV-p4")
+  field(CALC, "!A")
+  field(INPA, "MEBT:COOL_MCV_p4:StatusReal.VAL CP")
+  field(SCAN, "2 second")
+}
+
+record(bi, "MEBT:COOL_MCV_p5:StatusReal") {
+  field(DESC, "Opening Status MCO01 MCV-p5")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/102 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(calc, "MEBT:COOL_MCV_p5:Status") {
+  field(DESC, "Opening Status MCO01 MCV-p5")
+  field(CALC, "!A")
+  field(INPA, "MEBT:COOL_MCV_p5:StatusReal.VAL CP")
+  field(SCAN, "2 second")
+}
+
+#################### Alarms Emergency #################### 
+
+record(bi, "MEBT:COOL_Emerg_Switch:Alarm") {
+  field(DESC, "Emergency Switch Alarm MCO01")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/102 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+#################### MPS #################### 
+  
+  record(bi, "MEBT:COOL_MPS:Stat") {
+  field(DESC, "MCO01 Notification from MPS")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/102 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+#################### Alarms #################### 
+  
+  record(bi, "MEBT:COOL_Hooter:Alarm") {
+  field(DESC, "Magnet Skid Hooter Alarm")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/102 T=BYTE B=7")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+  record(bi, "MEBT:COOL_Beacon:Alarm") {
+  field(DESC, "Magnet Skid Beacon Alarm")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/103 T=BYTE B=0")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+######################################---  HEBT  ---######################################
+#########################################################################################
+
+
+#################### Pressure Transmitters #################### 
+
+
+record(ai, "HEBT:COOL_Ps_1:P") {
+  field(DESC, "Pressure Magnet Skid Ps_1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/128 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "bar")
+}
+
+
+record(ai, "HEBT:COOL_Ps_2:P") {
+  field(DESC, "Pressure Magnet Skid Ps_2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/132 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "bar")
+}
+
+
+record(ai, "HEBT:COOL_Pp_1:P") {
+  field(DESC, "Pressure Magnet Skid Pp_1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/136 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "bar")
+}
+
+
+record(ai, "HEBT:COOL_Pp_2:P") {
+  field(DESC, "Pressure Magnet Skid Pp_2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/140 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "bar")
+}
+
+
+record(ai, "HEBT:COOL_Pp_3:P") {
+  field(DESC, "Pressure Magnet Skid Pp_3")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/144 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "bar")
+}
+
+
+record(ai, "HEBT:COOL_Pp_4:P") {
+  field(DESC, "Pressure Magnet Skid Pp_4")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/148 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "bar")
+}
+
+#################### Temperature Transmitters #################### 
+
+
+record(ai, "HEBT:COOL_Ts_1:T") {
+  field(DESC, "Temperature Magnet Skid Ts_1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/152 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+
+record(ai, "HEBT:COOL_Ts_2:T") {
+  field(DESC, "Temperature Magnet Skid Ts_2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/156 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+
+record(ai, "HEBT:COOL_Tp_1:T") {
+  field(DESC, "Temperature Magnet Skid Tp_1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/160 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+
+record(ai, "HEBT:COOL_Tp_2:T") {
+  field(DESC, "Temperature Magnet Skid Tp_2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/164 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+
+record(ai, "HEBT:COOL_Tr_1:T") {
+  field(DESC, "Temperature Magnet Skid Tr_1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/168 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+
+record(ai, "HEBT:COOL_Tr_2:T") {
+  field(DESC, "Temperature Magnet Skid Tr_2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/172 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+
+record(ai, "HEBT:COOL_Tr_3:T") {
+  field(DESC, "Temperature Magnet Skid Tr_3")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/176 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+
+record(ai, "HEBT:COOL_Tr_4:T") {
+  field(DESC, "Temperature Magnet Skid Tr_4")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/180 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+
+record(ai, "HEBT:COOL_Tr_5:T") {
+  field(DESC, "Temperature Magnet Skid Tr_5")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/184 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+
+record(ai, "HEBT:COOL_Tr_6:T") {
+  field(DESC, "Temperature Magnet Skid Tr_6")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/188 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+record(ai, "HEBT:COOL_Tr_7:T") {
+  field(DESC, "Temperature Magnet Skid Tr_7")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/192 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "degC")
+}
+
+
+#################### Flow Transmitters #################### 
+
+
+record(ai, "HEBT:COOL_FMs_1:Flow") {
+  field(DESC, "Flow Magnet Skid FMs_1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/196 T=FLOAT ")
+  field(PREC, "0")
+  field(EGU, "l/h")
+}
+
+
+record(ai, "HEBT:COOL_FMs_2:Flow") {
+  field(DESC, "Flow Magnet Skid FMs_2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/200 T=FLOAT ")
+  field(PREC, "0")
+  field(EGU, "l/h")
+}
+
+
+record(ai, "HEBT:COOL_FMp_1:Flow") {
+  field(DESC, "Flow Magnet Skid FMp_1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/204 T=FLOAT ")
+  field(PREC, "0")
+  field(EGU, "l/h")
+}
+
+
+record(ai, "HEBT:COOL_FMp_2:Flow") {
+  field(DESC, "Flow Magnet Skid FMp_2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/208 T=FLOAT ")
+  field(PREC, "0")
+  field(EGU, "l/h")
+}
+
+
+record(ai, "HEBT:COOL_FMp_3:Flow") {
+  field(DESC, "Flow Magnet Skid FMp_3")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/212 T=FLOAT ")
+  field(PREC, "0")
+  field(EGU, "l/h")
+}
+
+record(ai, "HEBT:COOL_FMr_1:Flow") {
+  field(DESC, "Flow HEBT MFM-r1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/216 T=FLOAT ")
+  field(PREC, "0")
+  field(EGU, "l/h")
+}
+
+record(ai, "HEBT:COOL_FMr_2:Flow") {
+  field(DESC, "Flow HEBT MFM-r2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/220 T=FLOAT ")
+  field(PREC, "0")
+  field(EGU, "l/h")
+}
+
+record(ai, "HEBT:COOL_FMr_3:Flow") {
+  field(DESC, "Flow HEBT MFM-r3")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/224 T=FLOAT ")
+  field(PREC, "0")
+  field(EGU, "l/h")
+}
+
+record(ai, "HEBT:COOL_FMr_4:Flow") {
+  field(DESC, "Flow HEBT MFM-r4")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/228 T=FLOAT ")
+  field(PREC, "0")
+  field(EGU, "l/h")
+}
+
+record(ai, "HEBT:COOL_FMr_5:Flow") {
+  field(DESC, "Flow HEBT MFM-r5")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/232 T=FLOAT ")
+  field(PREC, "0")
+  field(EGU, "l/h")
+}
+
+record(ai, "HEBT:COOL_FMr_6:Flow") {
+  field(DESC, "Flow HEBT MFM-r6")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/236 T=FLOAT ")
+  field(PREC, "0")
+  field(EGU, "l/h")
+}
+
+record(ai, "HEBT:COOL_FMr_7:Flow") {
+  field(DESC, "Flow HEBT MFM-r7")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/240 T=FLOAT ")
+  field(PREC, "0")
+  field(EGU, "l/h")
+}
+
+#################### Conductivity Transmitter #################### 
+
+record(ai, "HEBT:COOL_REp_1:Cond") {
+  field(DESC, "Conductivity Magnet Skid MRE-p1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/244 T=FLOAT ")
+  field(PREC, "2")
+  field(EGU, "uS/cm")
+}
+
+#################### Electrically Actuated Valves #################### 
+
+record(ai, "HEBT:COOL_EVs_1:Status") {
+  field(DESC, "Opening Status Magnet Skid")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/248 T=FLOAT ")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+#################### Initial Flow Error ALARM  #################### 
+
+record(ai, "HEBT:COOL_Err_Ini:Flow") {
+  field(DESC, "Initial Flow Error Alarm Magnet Skid")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/252 T=FLOAT ")
+  field(PREC, "2")
+  field(EGU, "uS/cm")
+}
+
+#################### Variable Frequency Drives #################### 
+
+record(bi, "HEBT:COOL_Vfd1:Status") {
+  field(DESC, "Pump Status Magnet Skid Vfd-1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/256 T=BYTE B=0")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(bi, "HEBT:COOL_Vfd1:AlarmReal") {
+  field(DESC, "Alarm Magnet Skid Vfd-1")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/256 T=BYTE B=1")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(calc, "HEBT:COOL_Vfd1:Alarm") {
+  field(DESC, "Alarm HEBT Vfd-1")
+  field(CALC, "!A")
+  field(INPA, "HEBT:COOL_Vfd1:AlarmReal.VAL CP")
+  field(SCAN, "2 second")
+}
+
+record(bi, "HEBT:COOL_Vfd2:Status") {
+  field(DESC, "Pump Status Magnet Skid Vfd-2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/256 T=BYTE B=2")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(bi, "HEBT:COOL_Vfd2:AlarmReal") {
+  field(DESC, "Alarm Magnet Skid Vfd-2")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/256 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(calc, "HEBT:COOL_Vfd2:Alarm") {
+  field(DESC, "Alarm HEBT Vfd-2")
+  field(CALC, "!A")
+  field(INPA, "HEBT:COOL_Vfd2:AlarmReal.VAL CP")
+  field(SCAN, "2 second")
+}
+
+
+#################### Level Sensors #################### 
+
+
+record(bi, "HEBT:COOL_LSHp1:Status") {
+  field(DESC, "Magnet Skid LSHp1 Level")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/256 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(bi, "HEBT:COOL_LSLp1:Status") {
+  field(DESC, "Magnet Skid LSLp1 Level")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/256 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(bi, "HEBT:COOL_LSLLp1:Status") {
+  field(DESC, "Magnet Skid LSLLp1 Level")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/256 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+#################### Alarms Emergency #################### 
+
+record(bi, "HEBT:COOL_Emerg_Switch:Alarm") {
+  field(DESC, "Emergency Switch Alarm Magnet Skid")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/256 T=BYTE B=7")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+#################### Pressure Switch #################### 
+
+record(bi, "HEBT:COOL_PSp_1:P") {
+  field(DESC, "Aire Pressure Detection M. Skid")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/257 T=BYTE B=0")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+#################### MPS Notification #################### 
+  
+  record(bi, "HEBT:COOL_MPS:Stat") {
+  field(DESC, "Magnet Skid Notification from MPS")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/257 T=BYTE B=1")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+#################### Alarms #################### 
+  
+  record(bi, "HEBT:COOL_Beacon:Alarm") {
+  field(DESC, "Magnet Skid Beacon Alarm")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/257 T=BYTE B=2")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+  record(bi, "HEBT:COOL_Hooter:Alarm") {
+  field(DESC, "Magnet Skit Hooter Alarm")
+  field(SCAN, "I/O Intr")
+  field(PINI, "NO")
+  field(DTYP, "S7plc")
+  field(INP, "@xebtplc/257 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}

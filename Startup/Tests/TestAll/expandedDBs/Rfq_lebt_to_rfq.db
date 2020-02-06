@@ -1,0 +1,111 @@
+### LEBT to RFQ interface
+### resend LEBT parameters to RFQ Vacuum PLC
+### Created by Maurizio Montis - INFN Italy
+### Mail: maurizio.montis@lnl.infn.it
+
+
+## Pressure before valve
+
+record(calcout, "RFQ:LEBT_VAC:ConvP1") {
+      field(DESC, "torr to mBar conversion")
+      field(SCAN, "1 second")
+      field(INPA, "LEBT:VAC01:VacSGVC CP") 
+      field(B, "1.33322")
+      field(CALC, "A*B")
+      field(EGU, "mBar")
+      field(PREC, "8")
+      field(OOPT, "Every Time")
+      field(DOPT, "Use CALC")
+      field(IVOA, "Set output to IVOV")
+      field(IVOV, "1111")
+      field(OUT, "RFQ:LEBT_VAC:P1")
+      field(FLNK, "RFQ:LEBT_VAC:P1")
+}
+
+record(ao, "RFQ:LEBT_VAC:P1") {
+      field(DESC, "Pressure in the LEBT")
+      field(PINI, "YES")
+      field(DRVL, "")
+      field(DRVH, "")
+      field(EGU, "mBar")
+      field(PREC, "8")
+      field(LOPR, "")
+      field(HOPR, "")
+      field(LOW, "")
+      field(LSV, "")
+      field(HIGH, "")
+      field(HSV, "")
+      field(LOLO, "")
+      field(LLSV, "")
+      field(HIHI, "")
+      field(HHSV, "")
+      field(VAL, "9999")
+}
+
+
+## Pressure after Valve
+
+record(calcout, "RFQ:LEBT_VAC:ConvP2") {
+      field(DESC, "torr to mBar conversion")
+      field(SCAN, "1 second")
+      field(INPA, "LEBT:VAC02:VacSGVC CP")
+      field(B, "1.33322")
+      field(CALC, "A*B")
+      field(EGU, "mBar")
+      field(PREC, "8")
+      field(OOPT, "Every Time")
+      field(DOPT, "Use CALC")
+      field(IVOA, "Set output to IVOV")
+      field(IVOV, "1111")
+      field(OUT, "RFQ:LEBT_VAC:P")
+      field(FLNK, "RFQ:LEBT_VAC:P")
+}
+
+record(ao, "RFQ:LEBT_VAC:P") {
+      field(DESC, "Pressure in the LEBT")
+      field(DTYP, "S7plc")
+      field(PINI, "YES")
+      field(OUT, "$@SlaveP2006/8 T=FLOAT")
+      field(DRVL, "")
+      field(DRVH, "")
+      field(EGU, "mBar")
+      field(PREC, "8")
+      field(LOPR, "")
+      field(HOPR, "")
+      field(LOW, "")
+      field(LSV, "")
+      field(HIGH, "")
+      field(HSV, "")
+      field(LOLO, "")
+      field(LLSV, "")
+      field(HIHI, "")
+      field(HHSV, "")
+      field(VAL, "9999")
+}
+
+record(bo, "RFQ:LEBT_GV:CloseStat") {
+      field(DESC, "LEBT Gate Valve Close State")
+      field(DTYP, "S7plc")
+      field(PINI, "YES")
+      field(SCAN, "1 second")
+      field(OUT, "@SlaveP2006/16 B=0 T=BYTE")
+      field(ZNAM, "NOT CLOSED")
+      field(ONAM, "CLOSED")
+      field(VAL, "0")
+      field(DOL, "LEBT:GV:CloseStat")
+      field(OMSL, "closed_loop")
+}
+
+
+record(bo, "RFQ:LEBT_GV:OpenStat") {
+      field(DESC, "LEBT Gate Valve Open State")
+      field(DTYP, "S7plc")
+      field(PINI, "YES")
+      field(SCAN, "1 second")
+      field(OUT, "@SlaveP2006/16 B=1 T=BYTE")
+      field(ZNAM, "NOT OPEN")
+      field(ONAM, "OPEN")
+      field(VAL, "0")
+      field(DOL, "LEBT:GV:OpenStat")
+      field(OMSL, "closed_loop")
+}

@@ -1,0 +1,14 @@
+record(ai,"CCS:ALIVECHECKER_A:IocMovedRdbk") {
+	field(DESC,"1=IOC Moved.")
+	field(DTYP,"Soft Channel")
+	field(UDF,"0")
+	field(VAL,"1")
+	field(INP,"0")
+}
+record(calc,"CCS:ALIVECHECKER_A:HeartBeatCalc") {
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"A>100?0:A+B")
+	field(INPA,"CCS:ALIVECHECKER_A:HeartBeatCalc NPP NMS")
+	field(INPB,"1")
+}

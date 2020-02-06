@@ -1,0 +1,294 @@
+record(calc, MEBT:LEBT-CTransm:calc) {
+  field (INPA,"LEBT:ACCT:I") 
+  field (INPB,"MEBT:ACCT:IMesCret")
+  field (CALC,"(A > 0.5 && B > 0.5) ? 100*B/A  : 0 ")
+  field (SCAN, ".5 second")
+}
+
+record(calc, DPLA:LEBT-CTransm:calc) {
+  field (INPA,"LEBT:ACCT:I")
+  field (INPB,"DPLA:ACCT:IMesCret")
+  field (CALC,"(A > 0.5 && B > 0.5) ? 100*B/A  : 0 ")
+  field (SCAN, ".5 second")
+}
+
+
+record(calc, DPLA:MEBT-CTransm:calc) {
+  field (INPA,"MEBT:ACCT:IMesCret")
+  field (INPB,"DPLA:ACCT:IMesCret")
+  field (CALC,"(A > 0.5 && B > 0.5) ? 100*B/A  : 0 ")
+  field (SCAN, ".5 second")
+}
+
+record(calc, LPBD:DPLA-CTransm:calc) {
+  field (INPA,"DPLA:ACCT:IMesCret")
+  field (INPB,"LEBT:BS:I")
+  field (CALC,"(A > 0.5 && B > 0.5) ? 100*B/A  : 0 ")
+  field (SCAN, ".5 second")
+}
+
+
+record(calc, LPBD:LEBT-CTransm:calc) {
+  field (INPA,"LEBT:ACCT:I")
+  field (INPB,"LEBT:BS:I")
+  field (CALC,"(A > 0.5 && B > 0.5) ? 100*B/A  : 0 ")
+  field (SCAN, ".5 second")
+}
+
+record(calc, LEBT:BeamExtract:OnStat) {
+  field (INPA,"SRC:RF_GENE:MarcheRF")
+  field (INPB,"SRC:IE_PS:OnStat")
+  field (INPC,"LEBT:R_PS:OnStat")
+  field (INPD,"CCS:TSAPP:RfPulseWidthRdbk")
+  field (CALC,"(A = 1 && B = 1 && C = 1 && D > 1) ? 1 : 0 ")
+  field (SCAN, ".5 second")
+}
+
+record(calc, MEBT:BeamExtract:OnStat) {
+  field (INPA,"SRC:RF_GENE:MarcheRF")
+  field (INPB,"SRC:IE_PS:OnStat")
+  field (INPC,"LEBT:R_PS:OnStat")
+  field (INPD,"LEBT:FC:OutStat")
+  field (INPE,"CCS:TSAPP:RfPulseWidthRdbk")
+  field (CALC,"(A = 1 && B = 1 && C = 1 && D = 1 && E > 1) ? 1 : 0 ")
+  field (SCAN, ".5 second")
+}
+
+                                                    
+## Integrated OPI PVs
+
+record (bo,"MAIN-OP:CA-MODE-CHK"){
+ field(ONAM, "CHECKED")
+ field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:FC-MODE-CHK"){
+ field(ONAM, "CHECKED")
+ field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:BD-MODE-CHK"){
+ field(ONAM, "CHECKED")
+ field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:BEAM-BD-S1-CHK"){
+  field(ONAM, "CHECKED")
+  field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:BEAM-BD-S2-CHK"){
+  field(ONAM, "CHECKED")
+  field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:BEAM-BD-S3-CHK"){
+  field(ONAM, "CHECKED")
+  field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:BEAM-BD-S4-CHK"){
+ field(ONAM, "CHECKED")
+ field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:BEAM-BD-S5-CHK"){
+ field(ONAM, "CHECKED")
+ field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:BEAM-BD-S6-CHK"){
+ field(ONAM, "CHECKED")
+ field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:BEAM-BD-S7-CHK"){
+ field(ONAM, "CHECKED")
+ field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:BEAM-BD-S8-CHK"){
+ field(ONAM, "CHECKED")
+ field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:BEAM-BD-S9-CHK"){
+ field(ONAM, "CHECKED")
+ field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:BEAM-BD-S10-CHK"){
+ field(ONAM, "CHECKED")
+ field(ZNAM, "NOT CHECKED")
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-BD-S1-FRC"){
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-BD-S2-FRC"){
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-BD-S3-FRC"){
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-BD-S4-FRC"){
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-BD-S5-FRC"){
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-BD-S6-FRC"){
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-BD-S7-FRC"){
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-BD-S8-FRC"){
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-BD-S9-FRC"){
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-BD-S10-FRC"){
+}
+
+record (bo,"MAIN-OP:BEAM-FC-S1-CHK"){
+  field(ONAM, "CHECKED") 
+  field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:BEAM-FC-S3-CHK"){
+  field(ONAM, "CHECKED")
+  field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:BEAM-FC-S4-CHK"){
+ field(ONAM, "CHECKED")
+ field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:BEAM-FC-S5-CHK"){
+ field(ONAM, "CHECKED")
+ field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:BEAM-FC-S6-CHK"){
+ field(ONAM, "CHECKED")
+ field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:BEAM-FC-S7-CHK"){
+ field(ONAM, "CHECKED")
+ field(ZNAM, "NOT CHECKED")
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-FC-S1-FRC"){
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-FC-S3-FRC"){
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-FC-S4-FRC"){
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-FC-S5-FRC"){
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-FC-S6-FRC"){
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-FC-S7-FRC"){
+}
+
+record (bo,"MAIN-OP:CA-MODE-S1-CHK"){
+  field(ONAM, "CHECKED") 
+  field(ZNAM, "NOT CHECKED")
+}
+
+record (bo,"MAIN-OP:CA-MODE-S2-CHK"){
+  field(ONAM, "CHECKED") 
+  field(ZNAM, "NOT CHECKED")
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-CA-S1-FRC"){
+}
+
+record (mbboDirect,"MAIN-OP:BEAM-CA-S2-FRC"){
+}
+
+record (bo,"MAIN-OP:NA-MODE-CHK"){
+ field(ONAM, "CHECKED")
+ field(ZNAM, "NOT CHECKED")
+}
+
+record (mbboDirect,"MAIN-OP:NA-MODE-FRC"){
+}
+ 
+record (mbbo,"MAIN-OP:BEAM-BD"){
+  field(EIST, "NA2-501 TO NA2-503")
+  field(EIVL, "8")
+  field(ELST, "NA2-701 TO NA2-703")
+  field(ELVL, "11")
+  field(FRST, "NA2-111 TO NA2-114")
+  field(FRVL, "4")
+  field(FVST, "NA2-201 TO NA2-114")
+  field(FVVL, "5")
+  field(NIST, "NA2-601 TO NA2-606")
+  field(NIVL, "9")
+  field(ONST, "NA2-26 TO NA2-29")
+  field(ONVL, "1")
+  field(SVST, "NA2-401 TO NA2-405")
+  field(SVVL, "7")
+  field(SXST, "NA2-301 TO NA 2-303")
+  field(SXVL, "6")
+  field(TEST, "NA TO FC (CONDITIONING)")
+  field(TEVL, "10")
+  field(THST, "NA2-101 TO NA2-10")
+  field(THVL, "3")
+  field(TWST, "NA2-30 TO NA2-35")
+  field(TWVL, "2")
+}
+
+record (mbbo,"MAIN-OP:BEAM-FC"){ 
+  field(FRST, "NA2-1 TO NA2-5")
+  field(FRVL, "4")
+  field(FVST, "NA2-6 TO NA2-12")
+  field(FVVL, "5")
+  field(ONST, "NA1-3 (RFQ COND)")
+  field(ONVL, "1")
+  field(SIML, "TEST-MAIN-SYSM:P0-SIM-NOPLC CA")
+  field(SVST, "NA2-16 TO NA2-25")
+  field(SVVL, "7")
+  field(SXST, "NA2-13 TO NA2-15")
+  field(SXVL, "6")
+  field(THST, "NA1-5 (BEAM OP TO FC)")
+  field(THVL, "3")
+  field(TWST, "NA1-4 (PLASMA)")
+  field(TWVL, "2")
+}
+
+record (mbbo,"MAIN-OP:CA-MODE"){
+  field(ONST, "CA-1 TO CA-8")
+  field(ONVL, "1")
+  field(SIML, "TEST-MAIN-SYSM:P0-SIM-NOPLC CA")
+  field(THST, "CA2-1 TO CA 2-3")
+  field(THVL, "3")
+  field(TWST, "CA-9 TO CA-10")
+  field(TWVL, "2")
+}
+
+record (mbbo,"MAIN-OP:MODE-SEL"){
+  field(FRST, "BEAM TO BD")
+  field(FRVL, "4")
+  field(ONST, "CA-MODE")
+  field(ONVL, "1")
+  field(THST, "BEAM TO FC")
+  field(THVL, "3")
+  field(TWST, "NA1-1 to NA1-2")
+  field(TWVL, "2")
+}
+
+record (bo,"MAIN-OP:MANUAL"){              
+  field(ONAM, "MANUAL ON")
+  field(ZNAM, "MANUAL OFF")
+}

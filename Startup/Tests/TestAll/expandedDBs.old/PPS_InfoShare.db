@@ -1,0 +1,216 @@
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:1_1")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M0")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:1_2")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M1")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:1_3")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M2")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:1_4")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M3")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:2_1")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M4")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:2_2")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M5")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:2_3")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M6")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:2_4")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M7")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:3_1")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M8")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:3_2")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M9")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:3_3")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M10")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:3_4")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M11")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:4_1")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M12")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:4_2")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M13")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:4_3")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M14")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:4_4")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M15")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:5_1")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M16")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:5_2")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M17")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:5_3")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M18")
+	field(SEVR, "NO_ALARM")
+}
+
+record(mbbiDirect, "PPS:INFOSHARE:MONDATA:5_4")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M19")
+	field(SEVR, "NO_ALARM")
+}
+
+record(ai, "PPS:INFOSHARE:MONDATA:5_5")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M20")
+	field(SEVR, "NO_ALARM")
+}
+
+record(ai, "PPS:INFOSHARE:MONDATA:5_6")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M21")
+	field(SEVR, "NO_ALARM")
+}
+
+record(ai, "PPS:INFOSHARE:MONDATA:5_7")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M22")
+	field(SEVR, "NO_ALARM")
+}
+
+record(ai, "PPS:INFOSHARE:MONDATA:5_8_9")
+{
+	field(DESC, "")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP, "@simatic://$(target)/DEV1M23,FLOAT")
+	field(SEVR, "NO_ALARM")
+}
+

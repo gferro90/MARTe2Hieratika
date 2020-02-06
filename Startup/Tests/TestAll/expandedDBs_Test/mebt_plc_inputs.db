@@ -1,0 +1,3458 @@
+#############################################
+# Status of the connection to PLC01 in MEBT #
+#############################################
+record(bi, "MEBT:PLC01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc stat")
+  field(INP, "@plc_mebt")
+  field(ZNAM, "Disconnected")
+  field(ONAM, "Connected")
+}
+
+################################
+# Record for vacuum gauge VG01 #
+################################
+record(ai, "MEBT:VG01:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/0 T=FLOAT")
+  field(DESC, "Pressure IMG MBN01")
+  field(PREC, "4")
+  field(LINR, "SLOPE")
+  field(ASLO, "0.01")
+  field(AOFF, "0.0")
+  field(EGU, "mbar")
+}
+
+################################
+# Record for vacuum gauge VG02 #
+################################
+record(ai, "MEBT:VG02:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/4 T=FLOAT")
+  field(DESC, "Pressure IMG MBN02")
+  field(PREC, "4")
+  field(LINR, "SLOPE")
+  field(ASLO, "0.01")
+  field(AOFF, "0.0")
+  field(EGU, "mbar")
+}
+
+################################
+# Record for vacuum gauge VG03 #
+################################
+record(ai, "MEBT:VG03:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/8 T=FLOAT")
+  field(DESC, "Pressure HC gauge beamline")
+  field(PREC, "4")
+  field(LINR, "SLOPE")
+  field(ASLO, "0.01")
+  field(AOFF, "0.0")
+  field(EGU, "mbar")
+}
+
+################################
+# Record for vacuum gauge VG04 #
+################################
+record(ai, "MEBT:VG04:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/12 T=FLOAT")
+  field(DESC, "Pressure TC MBN01")
+  field(PREC, "4")
+  field(LINR, "SLOPE")
+  field(ASLO, "0.01")
+  field(AOFF, "0.0")
+  field(EGU, "mbar")
+}
+
+################################
+# Record for vacuum gauge VG05 #
+################################
+record(ai, "MEBT:VG05:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/16 T=FLOAT")
+  field(DESC, "Pressure Convector TP01")
+  field(PREC, "4")
+  field(LINR, "SLOPE")
+  field(ASLO, "0.01")
+  field(AOFF, "0.0")
+  field(EGU, "mbar")
+}
+
+################################
+# Record for vacuum gauge VG06 #
+################################
+record(ai, "MEBT:VG06:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/20 T=FLOAT")
+  field(DESC, "Pressure Convector TP02")
+  field(PREC, "4")
+  field(LINR, "SLOPE")
+  field(ASLO, "0.01")
+  field(AOFF, "0.0")
+  field(EGU, "mbar")
+}
+
+################################
+# Record for vacuum gauge VG07 #
+################################
+record(ai, "MEBT:VG07:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/24 T=FLOAT")
+  field(DESC, "Pressure Convector TP03")
+  field(PREC, "4")
+  field(LINR, "SLOPE")
+  field(ASLO, "0.01")
+  field(AOFF, "0.0")
+  field(EGU, "mbar")
+}
+
+############################
+# Records for buncher BN01 #
+############################
+
+# Auto tuner
+
+record(bi, "MEBT:BN01_PS:OffStat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/28 T=BYTE B=0")
+  field(ZNAM, "Activated")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Deactivated")
+  field(OSV, "NO_ALARM")
+  field(DESC, "BN01 driver current activation")
+}
+
+record(bi, "MEBT:BN01_PS:Err") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/28 T=BYTE B=1")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ERROR")
+  field(OSV, "MAJOR")
+  field(DESC, "BN01 driver error")
+}
+
+record(bi, "MEBT:BN01_PS:ResetStat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/28 T=BYTE B=2")
+  field(ZNAM, "Ready")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Resetting")
+  field(OSV, "NO_ALARM")
+  field(DESC, "BN01 driver reset state")
+}
+
+record(bi, "MEBT:BN01_PS:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/28 T=BYTE B=3")
+  field(ZNAM, "ON")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "OFF")
+  field(OSV, "NO_ALARM")
+  field(DESC, "BN01 driver Ready signal")
+}
+
+record(bi, "MEBT:BN01_PS:Dir") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/28 T=BYTE B=4")
+  field(ZNAM, "DOWN")
+  field(ONAM, "UP")
+  field(DESC, "BN01 auto tuner direction")
+}
+
+record(bi, "MEBT:BN01:Ilk") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/28 T=BYTE B=5")
+  field(ZNAM, "No interlock")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Interlock")
+  field(OSV, "MAJOR")
+  field(DESC, "BN01 Interlock for LLRF")
+}
+
+record(bi, "MEBT:BN01:PLCIlk") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/28 T=BYTE B=6")
+  field(ZNAM, "No interlock")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Interlock")
+  field(OSV, "MAJOR")
+  field(DESC, "BN01 Interlock for MSS")
+}
+
+record(bi, "MEBT:BN01:ExpStat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/28 T=BYTE B=7")
+  field(ZNAM, "Normal mode")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Expert mode")
+  field(OSV, "NO_ALARM")
+  field(DESC, "BN01 Expert mode")
+}
+
+# Limit switches
+
+record(bi, "MEBT:BN01_LW01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/30 T=BYTE B=0")
+  field(ZNAM, "Pressed")
+  field(ONAM, "Not pressed")
+  field(DESC, "BN01 auto tuner LW01 interlock")
+}
+
+record(bi, "MEBT:BN01_LW02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/30 T=BYTE B=1")
+  field(ZNAM, "Pressed")
+  field(ONAM, "Not pressed")
+  field(DESC, "BN01 auto tuner LW02")
+}
+
+record(bi, "MEBT:BN01_LW03:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/30 T=BYTE B=2")
+  field(ZNAM, "Pressed")
+  field(ONAM, "Not pressed")
+  field(DESC, "BN01 manual tuner LW03")
+}
+
+record(bi, "MEBT:BN01_LW04:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/30 T=BYTE B=3")
+  field(ZNAM, "Pressed")
+  field(ONAM, "Not pressed")
+  field(DESC, "BN01 manual tuner LW04")
+}
+
+# Flow switch
+# Stat is a 2 bits word:
+# LSB   --> digital input active when there is flow
+# bit 1 --> digital input active when there is NOT flow
+record(mbbi, "MEBT:BN01_FS:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/31 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Buncher BN01 flow switch state")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "MINOR")
+  field(ONVL, "1")
+  field(ONST, "Flow")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "No flow")
+  field(TWSV, "MINOR")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+# Motor positions
+
+record (ai, "MEBT:BN01_PM01:Pos") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/64 T=UINT16")
+  field(DESC, "BN01 auto tuner position")
+  field(PREC, "0")
+  field(LINR, "SLOPE")
+  field(ESLO, "1.0")
+  field(EOFF, "0.0")
+#  field(EGU, "mm")
+}
+
+record (ai, "MEBT:BN01_PM02:Pos") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/64+2 T=UINT16")
+  field(DESC, "BN01 manual tuner position")
+  field(PREC, "0")
+  field(LINR, "SLOPE")
+  field(ESLO, "1.0")
+  field(EOFF, "0.0")
+#  field(EGU, "mm")
+}
+
+# Calculation of the cavity voltage CW
+record(calc,"MEBT:BN01:VcavkV") {
+  field(SCAN, ".5 second")
+  field(INPA, "RF:LLRF5_CavB:VCavDbRdbk")
+  field(CALC,"(350*10^((A-8.454)/20))")
+  field(EGU,"kV")
+}
+
+# Calculation of the cavity voltage beginning T2
+record(calc,"MEBT:BN01:VcavBT2kV") {
+field(SCAN, ".5 second")
+field(INPA, "RF:LLRF5_CavB:VCavBT2DbRdbk")
+field(CALC,"(350*10^((A-8.454)/20))")
+field(EGU,"kV") 
+}
+
+# Calculation of the cavity voltage end T2
+record(calc,"MEBT:BN01:VcavET2kV") {
+field(SCAN, ".5 second")
+field(INPA, "RF:LLRF5_CavB:VCavET2DbRdbk")
+field(CALC,"(350*10^((A-8.454)/20))")
+field(EGU,"kV")
+}
+
+############################
+# Records for buncher BN02 #
+############################
+
+# Auto tuner
+
+record(bi, "MEBT:BN02_PS:OffStat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/29 T=BYTE B=0")
+  field(ZNAM, "Activated")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Deactivated")
+  field(OSV, "NO_ALARM")
+  field(DESC, "BN02 driver current activation")
+}
+
+record(bi, "MEBT:BN02_PS:Err") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/29 T=BYTE B=1")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ERROR")
+  field(OSV, "MAJOR")
+  field(DESC, "BN02 driver error")
+}
+
+record(bi, "MEBT:BN02_PS:ResetStat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/29 T=BYTE B=2")
+  field(ZNAM, "Ready")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Resetting")
+  field(OSV, "NO_ALARM")
+  field(DESC, "BN02 driver reset state")
+}
+
+record(bi, "MEBT:BN02_PS:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/29 T=BYTE B=3")
+  field(ZNAM, "ON")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "OFF")
+  field(OSV, "NO_ALARM")
+  field(DESC, "BN02 driver Ready signal")
+}
+
+record(bi, "MEBT:BN02_PS:Dir") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/29 T=BYTE B=4")
+  field(ZNAM, "DOWN")
+  field(ONAM, "UP")
+  field(DESC, "BN02 auto tuner direction")
+}
+
+record(bi, "MEBT:BN02:Ilk") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/29 T=BYTE B=5")
+  field(ZNAM, "No interlock")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Interlock")
+  field(OSV, "MAJOR")
+  field(DESC, "BN02 Interlock for LLRF")
+}
+
+record(bi, "MEBT:BN02:PLCIlk") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/29 T=BYTE B=6")
+  field(ZNAM, "No interlock")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Interlock")
+  field(OSV, "MAJOR")
+  field(DESC, "BN02 Interlock for MSS")
+}
+
+record(bi, "MEBT:BN02:ExpStat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/29 T=BYTE B=7")
+  field(ZNAM, "Normal mode")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Expert mode")
+  field(OSV, "NO_ALARM")
+  field(DESC, "BN02 Expert mode")
+}
+
+# Limit switches
+
+record(bi, "MEBT:BN02_LW01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/30 T=BYTE B=4")
+  field(ZNAM, "Pressed")
+  field(ONAM, "Not pressed")
+  field(DESC, "BN02 auto tuner LW01 interlock")
+}
+
+record(bi, "MEBT:BN02_LW02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/30 T=BYTE B=5")
+  field(ZNAM, "Pressed")
+  field(ONAM, "Not pressed")
+  field(DESC, "BN02 auto tuner LW02")
+}
+
+record(bi, "MEBT:BN02_LW03:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/30 T=BYTE B=6")
+  field(ZNAM, "Pressed")
+  field(ONAM, "Not pressed")
+  field(DESC, "BN02 manual tuner LW03")
+}
+
+record(bi, "MEBT:BN02_LW04:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/30 T=BYTE B=7")
+  field(ZNAM, "Pressed")
+  field(ONAM, "Not pressed")
+  field(DESC, "BN02 manual tuner LW04")
+}
+
+# Flow switch
+# Stat is a 2 bits word:
+# LSB   --> digital input active when there is flow
+# bit 1 --> digital input active when there is NOT flow
+record(mbbi, "MEBT:BN02_FS:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/31 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "2")
+  field(DESC, "Buncher BN02 flow switch state")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "MINOR")
+  field(ONVL, "1")
+  field(ONST, "Flow")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "No flow")
+  field(TWSV, "MINOR")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+# Motor positions
+
+record (ai, "MEBT:BN02_PM01:Pos") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/68 T=UINT16")
+  field(DESC, "BN02 auto tuner position")
+  field(PREC, "0")
+  field(LINR, "SLOPE")
+  field(ESLO, "1.0")
+  field(EOFF, "0.0")
+#  field(EGU, "mm")
+}
+
+record (ai, "MEBT:BN02_PM02:Pos") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/68+2 T=UINT16")
+  field(DESC, "BN02 manual tuner position")
+  field(PREC, "0")
+  field(LINR, "SLOPE")
+  field(ESLO, "1.0")
+  field(EOFF, "0.0")
+#  field(EGU, "mm")
+}
+
+# Calculation of the cavity voltage CW
+record(calc,"MEBT:BN02:VcavkV") {
+  field(SCAN, ".5 second")
+  field(INPA, "RF:LLRF5_CavA:VCavDbRdbk")
+  field(CALC,"(350*10^((A-7.279)/20))")
+  field(EGU,"kV")
+}
+
+# Calculation of the cavity voltage beginning T2
+record(calc,"MEBT:BN02:VcavBT2kV") {
+field(SCAN, ".5 second")
+field(INPA, "RF:LLRF5_CavA:VCavBT2DbRdbk")
+field(CALC,"(350*10^((A-7.279)/20))")
+field(EGU,"kV") 
+}
+
+# Calculation of the cavity voltage end T2
+record(calc,"MEBT:BN02:VcavET2kV") {
+field(SCAN, ".5 second")
+field(INPA, "RF:LLRF5_CavA:VCavET2DbRdbk")
+field(CALC,"(350*10^((A-7.279)/20))")
+field(EGU,"kV")
+}
+
+# Buncher BN01 temperature #
+record (ai, "MEBT:BN01_RT01:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/32 T=INT16")
+  field(DESC, "BN01 tuner temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Buncher BN01 temperature #
+record (ai, "MEBT:BN01_RT02:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/34 T=INT16")
+  field(DESC, "BN01 input flange temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Buncher BN01 temperature #
+record (ai, "MEBT:BN01_RT03:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/36 T=INT16")
+  field(DESC, "BN01 body bottom temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Buncher BN01 temperature #
+record (ai, "MEBT:BN01_RT04:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/38 T=INT16")
+  field(DESC, "BN01 pickup temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Buncher BN01 temperature #
+record (ai, "MEBT:BN01_RT05:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/40 T=INT16")
+  field(DESC, "BN01 output flange temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Buncher BN01 temperature #
+record (ai, "MEBT:BN01_RT06:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/42 T=INT16")
+  field(DESC, "BN01 body top last stem temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Buncher BN01 temperature #
+record (ai, "MEBT:BN01_RT07:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/44 T=INT16")
+  field(DESC, "BN01 output water temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Buncher BN01 temperature #
+record (ai, "MEBT:BN01_RT08:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/46 T=INT16")
+  field(DESC, "BN01 input water temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Buncher BN02 temperature #
+record (ai, "MEBT:BN02_RT01:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/48 T=INT16")
+  field(DESC, "BN02 tuner temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Buncher BN02 temperature #
+record (ai, "MEBT:BN02_RT02:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/50 T=INT16")
+  field(DESC, "BN02 input flange temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Buncher BN02 temperature #
+record (ai, "MEBT:BN02_RT03:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/52 T=INT16")
+  field(DESC, "BN02 bottom body temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Buncher BN02 temperature #
+record (ai, "MEBT:BN02_RT04:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/54 T=INT16")
+  field(DESC, "BN02 top body temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Buncher BN02 temperature #
+record (ai, "MEBT:BN02_RT05:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/56 T=INT16")
+  field(DESC, "BN02 output flange temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Buncher BN02 temperature #
+record (ai, "MEBT:BN02_RT06:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/58 T=INT16")
+  field(DESC, "BN02 body top temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Buncher BN02 temperature #
+record (ai, "MEBT:BN02_RT07:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/60 T=INT16")
+  field(DESC, "BN02 output water temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Buncher BN02 temperature #
+record (ai, "MEBT:BN02_RT08:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/62 T=INT16")
+  field(DESC, "BN02 input water temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+################################
+# Temperature of STH01 in MEBT #
+
+record (ai, "MEBT:STH01_TH:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/72 T=UINT16")
+  field(DESC, "Steerer STH01 coil temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+################################
+# Temperature of STV01 in MEBT #
+
+record (ai, "MEBT:STV01_TH:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/74 T=UINT16")
+  field(DESC, "Steerer STV01 coil temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+################################
+# Temperature of STH02 in MEBT #
+
+record (ai, "MEBT:STH02_TH:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/76 T=UINT16")
+  field(DESC, "Steerer STH02 coil temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+################################
+# Temperature of STV02 in MEBT #
+
+record (ai, "MEBT:STV02_TH:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/78 T=UINT16")
+  field(DESC, "Steerer STV02 coil temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+################################
+# Temperature of STH03 in MEBT #
+
+record (ai, "MEBT:STH03_TH:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/80 T=UINT16")
+  field(DESC, "Steerer STH03 coil temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+################################
+# Temperature of STV03 in MEBT #
+
+record (ai, "MEBT:STV03_TH:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/82 T=UINT16")
+  field(DESC, "Steerer STV03 coil temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+################################
+# Temperature of STH04 in MEBT #
+
+record (ai, "MEBT:STH04_TH:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/84 T=UINT16")
+  field(DESC, "Steerer STH04 coil temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+################################
+# Temperature of STV04 in MEBT #
+
+record (ai, "MEBT:STV04_TH:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/86 T=UINT16")
+  field(DESC, "Steerer STV04 coil temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+################################
+# Temperature of STH05 in MEBT #
+
+record (ai, "MEBT:STH05_TH:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/88 T=UINT16")
+  field(DESC, "Steerer STH05 coil temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+################################
+# Temperature of STV05 in MEBT #
+
+record (ai, "MEBT:STV05_TH:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/90 T=UINT16")
+  field(DESC, "Steerer STV05 coil temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+##########################
+# Turbopump TP01 in MEBT #
+##########################
+
+# Frequency
+record (ai, "MEBT:TP01:Freq") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/92 T=UINT16")
+  field(DESC, "Turbopump TP01 frequency")
+  field(PREC, "0")
+  field(EGU, "Hz")
+}
+
+record (ai, "MEBT:TP01:Power") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/92+6 T=UINT16")
+  field(DESC, "Turbopump TP01 power")
+  field(PREC, "0")
+  field(EGU, "W")
+}
+
+record (ai, "MEBT:TP01:Life") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/92+12 T=UINT16")
+  field(DESC, "Turbopump TP01 lifetime")
+  field(PREC, "0")
+  field(EGU, "h")
+}
+
+record (ai, "MEBT:TP01:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/92+18 T=UINT16")
+  field(DESC, "Turbopump TP01 temperature")
+  field(PREC, "0")
+  field(EGU, "degC")
+}
+
+record (ai, "MEBT:TP01:I") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/92+24 T=UINT16")
+  field(DESC, "Turbopump TP01 current")
+  field(PREC, "3")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "mA")
+}
+
+record (ai, "MEBT:TP01:V") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/92+30 T=UINT16")
+  field(DESC, "Turbopump TP01 voltage")
+  field(PREC, "1")
+  field(EGU, "V")
+}
+
+record (mbbi, "MEBT:TP01:Stat") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/92+36 T=UINT16")
+  field(NOBT,"8")
+  field(SHFT, "0")
+  field(DESC, "Turbopump TP01 status")
+  field(ZRVL,"0")
+  field(ZRST,"STOP")
+  field(ZRSV,"NO_ALARM")
+  field(ONVL,"1")
+  field(ONST,"WAITING INTERLOCK")
+  field(ONSV,"MAJOR")
+  field(TWVL,"2")
+  field(TWST,"STARTING")
+  field(TWSV,"MINOR")
+  field(THVL,"3")
+  field(THST,"AUTO-TUNING")
+  field(THSV,"MINOR")
+  field(FRVL,"4")
+  field(FRST,"BRAKING")
+  field(FRSV,"MINOR")
+  field(FVVL,"5")
+  field(FVST,"NORMAL")
+  field(FVSV,"NO_ALARM")
+  field(SXVL,"6")
+  field(SXST,"FAILURE")
+  field(SXSV,"MAJOR")
+}
+
+##########################
+# Turbopump TP02 in MEBT #
+##########################
+
+# Frequency
+record (ai, "MEBT:TP02:Freq") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/94 T=UINT16")
+  field(DESC, "Turbopump TP02 frequency")
+  field(PREC, "0")
+  field(EGU, "Hz")
+}
+
+record (ai, "MEBT:TP02:Power") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/94+6 T=UINT16")
+  field(DESC, "Turbopump TP02 power")
+  field(PREC, "0")
+  field(EGU, "W")
+}
+
+record (ai, "MEBT:TP02:Life") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/94+12 T=UINT16")
+  field(DESC, "Turbopump TP02 lifetime")
+  field(PREC, "0")
+  field(EGU, "h")
+}
+
+record (ai, "MEBT:TP02:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/94+18 T=UINT16")
+  field(DESC, "Turbopump TP02 temperature")
+  field(PREC, "0")
+  field(EGU, "degC")
+}
+
+record (ai, "MEBT:TP02:I") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/94+24 T=UINT16")
+  field(DESC, "Turbopump TP02 current")
+  field(PREC, "3")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "mA")
+}
+
+record (ai, "MEBT:TP02:V") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/94+30 T=UINT16")
+  field(DESC, "Turbopump TP02 voltage")
+  field(PREC, "1")
+  field(EGU, "V")
+}
+
+record (mbbi, "MEBT:TP02:Stat") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/94+36 T=UINT16")
+  field(NOBT,"8")
+  field(SHFT, "0")
+  field(DESC, "Turbopump TP02 status")
+  field(ZRVL,"0")
+  field(ZRST,"STOP")
+  field(ZRSV,"NO_ALARM")
+  field(ONVL,"1")
+  field(ONST,"WAITING INTERLOCK")
+  field(ONSV,"MAJOR")
+  field(TWVL,"2")
+  field(TWST,"STARTING")
+  field(TWSV,"MINOR")
+  field(THVL,"3")
+  field(THST,"AUTO-TUNING")
+  field(THSV,"MINOR")
+  field(FRVL,"4")
+  field(FRST,"BRAKING")
+  field(FRSV,"MINOR")
+  field(FVVL,"5")
+  field(FVST,"NORMAL")
+  field(FVSV,"NO_ALARM")
+  field(SXVL,"6")
+  field(SXST,"FAILURE")
+  field(SXSV,"MAJOR")
+}
+
+##########################
+# Turbopump TP03 in MEBT #
+##########################
+
+# Frequency
+record (ai, "MEBT:TP03:Freq") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/96 T=UINT16")
+  field(DESC, "Turbopump TP03 frequency")
+  field(PREC, "0")
+  field(EGU, "Hz")
+}
+
+record (ai, "MEBT:TP03:Power") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/96+6 T=UINT16")
+  field(DESC, "Turbopump TP03 power")
+  field(PREC, "0")
+  field(EGU, "W")
+}
+
+record (ai, "MEBT:TP03:Life") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/96+12 T=UINT16")
+  field(DESC, "Turbopump TP03 lifetime")
+  field(PREC, "0")
+  field(EGU, "h")
+}
+
+record (ai, "MEBT:TP03:T") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/96+18 T=UINT16")
+  field(DESC, "Turbopump TP03 temperature")
+  field(PREC, "0")
+  field(EGU, "degC")
+}
+
+record (ai, "MEBT:TP03:I") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/96+24 T=UINT16")
+  field(DESC, "Turbopump TP03 current")
+  field(PREC, "3")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "mA")
+}
+
+record (ai, "MEBT:TP03:V") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/96+30 T=UINT16")
+  field(DESC, "Turbopump TP03 voltage")
+  field(PREC, "1")
+  field(EGU, "V")
+}
+
+record (mbbi, "MEBT:TP03:Stat") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/96+36 T=UINT16")
+  field(NOBT,"8")
+  field(SHFT, "0")
+  field(DESC, "Turbopump TP03 status")
+  field(ZRVL,"0")
+  field(ZRST,"STOP")
+  field(ZRSV,"NO_ALARM")
+  field(ONVL,"1")
+  field(ONST,"WAITING INTERLOCK")
+  field(ONSV,"MAJOR")
+  field(TWVL,"2")
+  field(TWST,"STARTING")
+  field(TWSV,"MINOR")
+  field(THVL,"3")
+  field(THST,"AUTO-TUNING")
+  field(THSV,"MINOR")
+  field(FRVL,"4")
+  field(FRST,"BRAKING")
+  field(FRSV,"MINOR")
+  field(FVVL,"5")
+  field(FVST,"NORMAL")
+  field(FVSV,"NO_ALARM")
+  field(SXVL,"6")
+  field(SXST,"FAILURE")
+  field(SXSV,"MAJOR")
+}
+
+##################################
+# Records for valve GV01 in MEBT #
+##################################
+
+# Status
+record(mbbi, "MEBT:GV01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/134 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Status of valve MEBT->GV01")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Open")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Closed")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+#  field(FRVL, "4")
+#  field(FRST, "Timeout/Blocked")
+#  field(FRSV, "MAJOR")
+}
+
+# Actuation
+record(bi, "MEBT:GV01:Open"){
+ field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/134+1 T=BYTE B=0")
+  field(ZNAM, "Close")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Open")
+  field(OSV, "NO_ALARM")
+  field(DESC, "Valve GV01 actuation")
+}
+
+##################################
+# Records for valve GV02 in MEBT #
+##################################
+
+# Status
+record(mbbi, "MEBT:GV02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/134 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "2")
+  field(DESC, "Status of valve MEBT->GV02")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Open")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Closed")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+#  field(FRVL, "4")
+#  field(FRST, "Timeout/Blocked")
+#  field(FRSV, "MAJOR")
+}
+
+# Actuation
+record(bi, "MEBT:GV02:Open"){
+ field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/134+1 T=BYTE B=1")
+  field(ZNAM, "Close")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Open")
+  field(OSV, "NO_ALARM")
+  field(DESC, "Valve GV02 actuation")
+}
+
+##################################
+# Records for valve GV03 in MEBT #
+##################################
+
+# Status
+record(mbbi, "MEBT:GV03:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/134 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "4")
+  field(DESC, "Status of valve MEBT->GV03")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Open")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Closed")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+#  field(FRVL, "4")
+#  field(FRST, "Timeout/Blocked")
+#  field(FRSV, "MAJOR")
+}
+
+# Actuation
+record(bi, "MEBT:GV03:Open"){
+ field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/134+1 T=BYTE B=2")
+  field(ZNAM, "Close")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Open")
+  field(OSV, "NO_ALARM")
+  field(DESC, "Valve GV03 actuation")
+}
+
+##################################
+# Records for valve GV04 in MEBT #
+##################################
+
+# Status
+record(mbbi, "MEBT:GV04:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/134 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "6")
+  field(DESC, "Status of valve MEBT->GV04")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Open")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Closed")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+#  field(FRVL, "4")
+#  field(FRST, "Timeout/Blocked")
+#  field(FRSV, "MAJOR")
+}
+
+# Actuation
+record(bi, "MEBT:GV04:Open"){
+ field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/134+1 T=BYTE B=3")
+  field(ZNAM, "Close")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Open")
+  field(OSV, "NO_ALARM")
+  field(DESC, "Valve GV04 actuation")
+}
+
+######################################
+# Records for MEBT quadrupole QP01 #
+######################################
+
+# Thermal switches
+record(bi, "MEBT:QP01_TW01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/136 T=BYTE B=0")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP01 thermal switch 1 status")
+}
+record(bi, "MEBT:QP01_TW02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/136 T=BYTE B=1")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP01 thermal switch 2 status")
+}
+record(bi, "MEBT:QP01_TW03:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/136 T=BYTE B=2")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP01 thermal switch 3 status")
+}
+record(bi, "MEBT:QP01_TW04:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/136 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP01 thermal switch 4 status")
+}
+
+# Flow switch
+# Stat is a 2 bits word:
+# LSB   --> digital input active when there is flow
+# bit 1 --> digital input active when there is NOT flow
+record(mbbi, "MEBT:QP01_FS:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/138 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "4")
+  field(DESC, "Quadrupole QP01 flow switch status")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "MINOR")
+  field(ONVL, "1")
+  field(ONST, "Flow")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "No flow")
+  field(TWSV, "MINOR")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+######################################
+# Records for MEBT quadrupole QP02 #
+######################################
+
+# Thermal switches
+record(bi, "MEBT:QP02_TW01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/136 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP02 thermal switch 1 status")
+}
+record(bi, "MEBT:QP02_TW02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/136 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP02 thermal switch 2 status")
+}
+record(bi, "MEBT:QP02_TW03:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/136 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP02 thermal switch 3 status")
+}
+record(bi, "MEBT:QP02_TW04:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/136 T=BYTE B=7")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP02 thermal switch 4 status")
+}
+
+# Flow switch
+# Stat is a 2 bits word:
+# LSB   --> digital input active when there is flow
+# bit 1 --> digital input active when there is NOT flow
+record(mbbi, "MEBT:QP02_FS:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/138 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "6")
+  field(DESC, "Quadrupole QP02 flow switch status")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "MINOR")
+  field(ONVL, "1")
+  field(ONST, "Flow")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "No flow")
+  field(TWSV, "MINOR")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+######################################
+# Records for MEBT quadrupole QP03 #
+######################################
+
+# Thermal switches
+record(bi, "MEBT:QP03_TW01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/137 T=BYTE B=0")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP03 thermal switch 1 status")
+}
+record(bi, "MEBT:QP03_TW02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/137 T=BYTE B=1")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP03 thermal switch 2 status")
+}
+record(bi, "MEBT:QP03_TW03:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/137 T=BYTE B=2")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP03 thermal switch 3 status")
+}
+record(bi, "MEBT:QP03_TW04:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/137 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP03 thermal switch 4 status")
+}
+
+# Flow switch
+# Stat is a 2 bits word:
+# LSB   --> digital input active when there is flow
+# bit 1 --> digital input active when there is NOT flow
+record(mbbi, "MEBT:QP03_FS:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/139 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Quadrupole QP03 flow switch status")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "MINOR")
+  field(ONVL, "1")
+  field(ONST, "Flow")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "No flow")
+  field(TWSV, "MINOR")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+######################################
+# Records for MEBT quadrupole QP04 #
+######################################
+
+# Thermal switches
+record(bi, "MEBT:QP04_TW01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/137 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP04 thermal switch 1 status")
+}
+record(bi, "MEBT:QP04_TW02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/137 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP04 thermal switch 2 status")
+}
+record(bi, "MEBT:QP04_TW03:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/137 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP04 thermal switch 3 status")
+}
+record(bi, "MEBT:QP04_TW04:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/137 T=BYTE B=7")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP04 thermal switch 4 status")
+}
+
+# Flow switch
+# Stat is a 2 bits word:
+# LSB   --> digital input active when there is flow
+# bit 1 --> digital input active when there is NOT flow
+record(mbbi, "MEBT:QP04_FS:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/139 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "2")
+  field(DESC, "Quadrupole QP04 flow switch status")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "MINOR")
+  field(ONVL, "1")
+  field(ONST, "Flow")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "No flow")
+  field(TWSV, "MINOR")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+######################################
+# Records for MEBT quadrupole QP05 #
+######################################
+
+# Thermal switches
+record(bi, "MEBT:QP05_TW01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/138 T=BYTE B=0")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP05 thermal switch 1 status")
+}
+record(bi, "MEBT:QP05_TW02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/138 T=BYTE B=1")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP05 thermal switch 2 status")
+}
+record(bi, "MEBT:QP05_TW03:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/138 T=BYTE B=2")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP05 thermal switch 3 status")
+}
+record(bi, "MEBT:QP05_TW04:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/138 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "QP05 thermal switch 4 status")
+}
+
+# Flow switch
+# Stat is a 2 bits word:
+# LSB   --> digital input active when there is flow
+# bit 1 --> digital input active when there is NOT flow
+record(mbbi, "MEBT:QP05_FS:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/139 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "4")
+  field(DESC, "Quadrupole QP05 flow switch status")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "MINOR")
+  field(ONVL, "1")
+  field(ONST, "Flow")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "No flow")
+  field(TWSV, "MINOR")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+######################################
+# Flow switch for scraper SC01 in MEBT #
+# Stat is a 2 bits word:
+# LSB   --> digital input active when there is flow
+# bit 1 --> digital input active when there is NOT flow
+
+record(mbbi, "MEBT:SC01_FS:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/140 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Scraper SC01 flow switch status")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "MINOR")
+  field(ONVL, "1")
+  field(ONST, "Flow")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "No flow")
+  field(TWSV, "MINOR")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+######################################
+# Flow switch for scraper SC02 in MEBT #
+# Stat is a 2 bits word:
+# LSB   --> digital input active when there is flow
+# bit 1 --> digital input active when there is NOT flow
+
+record(mbbi, "MEBT:SC02_FS:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/140 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "2")
+  field(DESC, "Scraper SC02 flow switch status")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "MINOR")
+  field(ONVL, "1")
+  field(ONST, "Flow")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "No flow")
+  field(TWSV, "MINOR")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+##################################
+# Interlocks                     #
+##################################
+
+# GVOI Input Interlock
+record(bi, "MEBT:MPS:GVOI") { 
+ field(SCAN, "I/O Intr")
+ field(DTYP, "S7plc")
+ field(INP, "@plc_mebt/141 T=BYTE B=0")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "GVOI Input Interlock")
+}
+
+# Output Interlock to MCU03
+record(bi, "MEBT:CU03:Ilk") { 
+ field(SCAN, "I/O Intr")
+ field(DTYP, "S7plc")
+ field(INP, "@plc_mebt/141 T=BYTE B=1")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "Output Interlock to MCU03")
+}
+
+# Output Interlock to MCU04
+record(bi, "MEBT:CU04:Ilk") { 
+ field(SCAN, "I/O Intr")
+ field(DTYP, "S7plc")
+ field(INP, "@plc_mebt/141 T=BYTE B=2")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "Output Interlock to MCU03")
+}
+
+# Buncher temperature Output Interlock to MPS
+record(bi, "MEBT:MPS:BNTempIlk") { 
+ field(SCAN, "I/O Intr")
+ field(DTYP, "S7plc")
+ field(INP, "@plc_mebt/141 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "Buncher temperature Interlock to MPS")
+}
+
+# Quadrupole Cooling Output Interlock to MPS
+record(bi, "MEBT:MPS:QPFSIlk") { 
+ field(SCAN, "I/O Intr")
+ field(DTYP, "S7plc")
+ field(INP, "@plc_mebt/141 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "Quadrupole Cooling Interlock to MPS")
+}
+
+# Buncher Cooling Output Interlock to MPS
+record(bi, "MEBT:MPS:BNCoolIlk") { 
+ field(SCAN, "I/O Intr")
+ field(DTYP, "S7plc")
+ field(INP, "@plc_mebt/141 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "Buncher Cooling Interlock to MPS")
+}
+
+# Scrapers Cooling Output Interlock to MPS
+record(bi, "MEBT:MPS:SCFSIlk") { 
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/141 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "Scrapers Cooling Interlock to MPS")
+}
+
+# Scrapers Temperature Output Interlock to MPS
+record(bi, "MEBT:MPS:SCTempIlk") { 
+ field(SCAN, "I/O Intr")
+ field(DTYP, "S7plc")
+ field(INP, "@plc_mebt/141 T=BYTE B=7")
+ field(ZNAM, "OFF")
+ field(ZSV, "NO_ALARM")
+ field(ONAM, "ON")
+ field(OSV, "NO_ALARM")
+ field(DESC, "Scrapers Temperature Interlock to MPS")
+}
+
+# BN01 Interlock provided to MSS by PLC
+record(bi, "MEBT:MSS_BN01:Ilk") { 
+ field(DTYP, "S7plc")
+ field(INP, "@plc_mebt/142 T=BYTE B=0")
+ field(ZNAM, "OFF")
+ field(ZSV, "NO_ALARM")
+ field(ONAM, "ON")
+ field(OSV, "NO_ALARM")
+ field(DESC, "MSS BN01 Ilk received by PLC")
+}
+
+# VC01 VG01 Interlock
+record(bi, "MEBT:VC01_VG01:Ilk") { 
+ field(SCAN, "I/O Intr")
+ field(DTYP, "S7plc")
+ field(INP, "@plc_mebt/142 T=BYTE B=1")
+ field(ZNAM, "OFF")
+ field(ZSV, "NO_ALARM")
+ field(ONAM, "ON")
+ field(OSV, "NO_ALARM")
+ field(DESC, "VC01 VG01 Interlock")
+}
+
+# BN02 Interlock provided to MSS by PLC
+record(bi, "MEBT:MSS_BN02:Ilk") { 
+ field(SCAN, "I/O Intr")
+ field(DTYP, "S7plc")
+ field(INP, "@plc_mebt/142 T=BYTE B=2")
+ field(ZNAM, "OFF")
+ field(ZSV, "NO_ALARM")
+ field(ONAM, "ON")
+ field(OSV, "NO_ALARM")
+ field(DESC, "MSS BN02 Ilk received by PLC")
+}
+
+# VC01 VG02 Interlock
+record(bi, "MEBT:VC01_VG02:Ilk") { 
+ field(SCAN, "I/O Intr")
+ field(DTYP, "S7plc")
+ field(INP, "@plc_mebt/142 T=BYTE B=3")
+ field(ZNAM, "OFF")
+ field(ZSV, "NO_ALARM")
+ field(ONAM, "ON")
+ field(OSV, "NO_ALARM")
+ field(DESC, "VC01 VG02 Interlock")
+}
+
+# LLRF BN01 Interlock
+record(bi, "MEBT:LLRF_BN01:Ilk") { 
+ field(SCAN, "I/O Intr")
+ field(DTYP, "S7plc")
+ field(INP, "@plc_mebt/142 T=BYTE B=4")
+ field(ZNAM, "OFF")
+ field(ZSV, "NO_ALARM")
+ field(ONAM, "ON")
+ field(OSV, "NO_ALARM")
+ field(DESC, "Interlock to LLRF BN01")
+}
+
+# LLRF BN02 Interlock
+record(bi, "MEBT:LLRF_BN02:Ilk") { 
+ field(SCAN, "I/O Intr")
+ field(DTYP, "S7plc")
+ field(INP, "@plc_mebt/142 T=BYTE B=5")
+ field(ZNAM, "OFF")
+ field(ZSV, "NO_ALARM")
+ field(ONAM, "ON")
+ field(OSV, "NO_ALARM")
+ field(DESC, "Interlock to LLRF BN02")
+}
+
+
+# Vacuuum Interlock to MPS from MSS
+record(bi, "MEBT:MPS:VacIlk") { 
+ field(SCAN, "I/O Intr")
+ field(DTYP, "S7plc")
+ field(INP, "@plc_mebt/142 T=BYTE B=6")
+ field(ZNAM, "OFF")
+ field(ZSV, "NO_ALARM")
+ field(ONAM, "ON")
+ field(OSV, "NO_ALARM")
+ field(DESC, "Vacuuum Interlock to MPS")
+}
+
+##################################
+# Records for valve CV01 in MEBT #
+##################################
+
+# Actuation
+record(bi, "MEBT:CV01:Open"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/143 T=BYTE B=0")
+  field(ZNAM, "Close")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Open")
+  field(OSV, "NO_ALARM")
+  field(DESC, "CV01 actuation")
+}
+
+##################################
+# Records for valve CV02 in MEBT #
+##################################
+
+# Actuation
+record(bi, "MEBT:CV02:Open"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/143 T=BYTE B=1")
+  field(ZNAM, "Close")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Open")
+  field(OSV, "NO_ALARM")
+  field(DESC, "CV02 actuation")
+}
+
+##################################
+# Records for valve CV03 in MEBT #
+##################################
+
+# Actuation
+record(bi, "MEBT:CV03:Open"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/143 T=BYTE B=2")
+  field(ZNAM, "Close")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Open")
+  field(OSV, "NO_ALARM")
+  field(DESC, "CV03 actuation")
+}
+
+#############################
+# Primary pump PP01 in MEBT #
+#############################
+
+# Activation
+record(bi, "MEBT:PP01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/144 T=BYTE B=0")
+  field(ZNAM, "Stopped")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Running")
+  field(OSV, "NO_ALARM")
+  field(DESC, "PP01 status")
+}
+
+#############################
+# Primary pump PP02 in MEBT #
+#############################
+
+# Activation
+record(bi, "MEBT:PP02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/144 T=BYTE B=1")
+  field(ZNAM, "Stopped")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Running")
+  field(OSV, "NO_ALARM")
+  field(DESC, "PP02 status")
+}
+
+# Buncher Maximum RTs temperature #
+record (ai, "MEBT:BN_RT:MaxT") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/146 T=INT16")
+  field(DESC, "BN RT max temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Buncher Maximum RT output water temperature #
+record (ai, "MEBT:BN_RT07:MaxT") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/148 T=INT16")
+  field(DESC, "BN RT07 max out water temp")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Buncher2 Maximum RT04 temperature #
+record (ai, "MEBT:BN02_RT04:MaxT") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/150 T=INT16")
+  field(DESC, "BN RT max temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Steerers Maximum RTs temperature #
+record (ai, "MEBT:ST_TH:MaxT") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/152 T=INT16")
+  field(DESC, "Steerers TH max temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Scrapers Maximum Collimator temperature #
+record (ai, "MEBT:SC:MaxColT") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/154 T=INT16")
+  field(DESC, "Scrapers Collimator max temp")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+# Scrapers Maximum Motor temperature #
+record (ai, "MEBT:SC:MaxMotorT") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/156 T=INT16")
+  field(DESC, "Scrapers Motor max temp")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+####################################
+# Record for SC01 M01 inputs #
+####################################
+
+record(ai, "MEBT:SC01_PM01:Pos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/158 T=FLOAT")
+  field(DESC, "SC01 M01 Position")
+  field(PREC, "4")
+  field(EGU, "mm")
+}
+
+record(ai, "MEBT:SC01_M01:Speed") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/162 T=FLOAT")
+  field(DESC, "$SC01 M01 Speed")
+  field(PREC, "4")
+  field(EGU, "mm/s")
+}
+
+####################################
+# Record for SC01 M02 inputs #
+####################################
+
+record(ai, "MEBT:SC01_PM02:Pos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/166 T=FLOAT")
+  field(DESC, "SC01 M02 Position")
+  field(PREC, "4")
+  field(EGU, "mm")
+}
+
+record(ai, "MEBT:SC01_M02:Speed") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/170 T=FLOAT")
+  field(DESC, "$SC01 M02 Speed")
+  field(PREC, "4")
+  field(EGU, "mm/s")
+}
+
+####################################
+# Record for SC01 M03 inputs #
+####################################
+
+record(ai, "MEBT:SC01_PM03:Pos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/174 T=FLOAT")
+  field(DESC, "SC01 M03 Position")
+  field(PREC, "4")
+  field(EGU, "mm")
+}
+
+record(ai, "MEBT:SC01_M03:Speed") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/178 T=FLOAT")
+  field(DESC, "$SC01 M03 Speed")
+  field(PREC, "4")
+  field(EGU, "mm/s")
+}
+
+####################################
+# Record for SC01 M04 inputs #
+####################################
+
+record(ai, "MEBT:SC01_PM04:Pos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/182 T=FLOAT")
+  field(DESC, "SC01 M04 Position")
+  field(PREC, "4")
+  field(EGU, "mm")
+}
+
+record(ai, "MEBT:SC01_M04:Speed") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/186 T=FLOAT")
+  field(DESC, "$SC01 M04 Speed")
+  field(PREC, "4")
+  field(EGU, "mm/s")
+}
+
+####################################
+# Record for SC02 M01 inputs #
+####################################
+
+record(ai, "MEBT:SC02_PM01:Pos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/190 T=FLOAT")
+  field(DESC, "SC02 M01 Position")
+  field(PREC, "4")
+  field(EGU, "mm")
+}
+
+record(ai, "MEBT:SC02_M01:Speed") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/194 T=FLOAT")
+  field(DESC, "$SC02 M01 Speed")
+  field(PREC, "4")
+  field(EGU, "mm/s")
+}
+
+####################################
+# Record for SC02 M02 inputs #
+####################################
+
+record(ai, "MEBT:SC02_PM02:Pos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/198 T=FLOAT")
+  field(DESC, "SC02 M02 Position")
+  field(PREC, "4")
+  field(EGU, "mm")
+}
+
+record(ai, "MEBT:SC02_M02:Speed") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/202 T=FLOAT")
+  field(DESC, "$SC02 M02 Speed")
+  field(PREC, "4")
+  field(EGU, "mm/s")
+}
+
+####################################
+# Record for SC02 M03 inputs #
+####################################
+
+record(ai, "MEBT:SC02_PM03:Pos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/206 T=FLOAT")
+  field(DESC, "SC02 M03 Position")
+  field(PREC, "4")
+  field(EGU, "mm")
+}
+
+record(ai, "MEBT:SC02_M03:Speed") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/210 T=FLOAT")
+  field(DESC, "$SC02 M03 Speed")
+  field(PREC, "4")
+  field(EGU, "mm/s")
+}
+
+####################################
+# Record for SC02 M04 inputs #
+####################################
+
+record(ai, "MEBT:SC02_PM04:Pos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/214 T=FLOAT")
+  field(DESC, "SC02 M04 Position")
+  field(PREC, "4")
+  field(EGU, "mm")
+}
+
+record(ai, "MEBT:SC02_M04:Speed") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/218 T=FLOAT")
+  field(DESC, "$SC02 M04 Speed")
+  field(PREC, "4")
+  field(EGU, "mm/s")
+}
+
+####################################
+# Record for SC01 1 inputs #
+####################################
+
+record(ai, "MEBT:SC01_TH1:T") {
+ field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/222 T=UINT16")
+  field(DESC, "SC01 M1 temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+
+####################################
+# Record for SC01 2 inputs #
+####################################
+
+record(ai, "MEBT:SC01_TH2:T") {
+ field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/224 T=UINT16")
+  field(DESC, "SC01 coll1 temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+
+####################################
+# Record for SC01 3 inputs #
+####################################
+
+record(ai, "MEBT:SC01_TH3:T") {
+ field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/226 T=UINT16")
+  field(DESC, "SC01 M2 temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+
+####################################
+# Record for SC01 4 inputs #
+####################################
+
+record(ai, "MEBT:SC01_TH4:T") {
+ field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/228 T=UINT16")
+  field(DESC, "SC01 coll2 temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+
+####################################
+# Record for SC01 5 inputs #
+####################################
+
+record(ai, "MEBT:SC01_TH5:T") {
+ field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/230 T=UINT16")
+  field(DESC, "SC01 M3 temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+
+####################################
+# Record for SC01 6 inputs #
+####################################
+
+record(ai, "MEBT:SC01_TH6:T") {
+ field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/232 T=UINT16")
+  field(DESC, "SC01 coll3 temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+
+####################################
+# Record for SC01 7 inputs #
+####################################
+
+record(ai, "MEBT:SC01_TH7:T") {
+ field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/234 T=UINT16")
+  field(DESC, "SC01 M4 temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+
+####################################
+# Record for SC01 8 inputs #
+####################################
+
+record(ai, "MEBT:SC01_TH8:T") {
+ field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/236 T=UINT16")
+  field(DESC, "SC01 coll4 temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+
+####################################
+# Record for SC02 1 inputs #
+####################################
+
+record(ai, "MEBT:SC02_TH1:T") {
+ field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/238 T=UINT16")
+  field(DESC, "SC02 M1 temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+
+####################################
+# Record for SC02 2 inputs #
+####################################
+
+record(ai, "MEBT:SC02_TH2:T") {
+ field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/240 T=UINT16")
+  field(DESC, "SC02 coll1 temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+
+####################################
+# Record for SC02 3 inputs #
+####################################
+
+record(ai, "MEBT:SC02_TH3:T") {
+ field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/242 T=UINT16")
+  field(DESC, "SC02 M2 temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+
+####################################
+# Record for SC02 4 inputs #
+####################################
+
+record(ai, "MEBT:SC02_TH4:T") {
+ field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/244 T=UINT16")
+  field(DESC, "SC02 coll2 temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+
+####################################
+# Record for SC02 5 inputs #
+####################################
+
+record(ai, "MEBT:SC02_TH5:T") {
+ field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/246 T=UINT16")
+  field(DESC, "SC02 M3 temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+
+####################################
+# Record for SC02 6 inputs #
+####################################
+
+record(ai, "MEBT:SC02_TH6:T") {
+ field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/248 T=UINT16")
+  field(DESC, "SC02 coll3 temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+
+####################################
+# Record for SC02 7 inputs #
+####################################
+
+record(ai, "MEBT:SC02_TH7:T") {
+ field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/250 T=UINT16")
+  field(DESC, "SC02 M4 temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+
+####################################
+# Record for SC02 8 inputs #
+####################################
+
+record(ai, "MEBT:SC02_TH8:T") {
+ field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@plc_mebt/252 T=UINT16")
+  field(DESC, "SC02 coll4 temperature")
+  field(PREC, "1")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(EGU, "degC")
+}
+
+
+####################################
+# Record for SC01 01 inputs #
+####################################
+
+record(ai, "MEBT:SC01_PM01:PosOffset") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/254 T=FLOAT")
+  field(DESC, "SC01 01 Position Offset")
+  field(PREC, "4")
+  field(EGU, "mm")
+}
+
+####################################
+# Record for SC01 02 inputs #
+####################################
+
+record(ai, "MEBT:SC01_PM02:PosOffset") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/258 T=FLOAT")
+  field(DESC, "SC01 02 Position Offset")
+  field(PREC, "4")
+  field(EGU, "mm")
+}
+
+####################################
+# Record for SC01 03 inputs #
+####################################
+
+record(ai, "MEBT:SC01_PM03:PosOffset") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/262 T=FLOAT")
+  field(DESC, "SC01 03 Position Offset")
+  field(PREC, "4")
+  field(EGU, "mm")
+}
+
+####################################
+# Record for SC01 04 inputs #
+####################################
+
+record(ai, "MEBT:SC01_PM04:PosOffset") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/266 T=FLOAT")
+  field(DESC, "SC01 04 Position Offset")
+  field(PREC, "4")
+  field(EGU, "mm")
+}
+
+####################################
+# Record for SC02 01 inputs #
+####################################
+
+record(ai, "MEBT:SC02_PM01:PosOffset") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/270 T=FLOAT")
+  field(DESC, "SC02 01 Position Offset")
+  field(PREC, "4")
+  field(EGU, "mm")
+}
+
+####################################
+# Record for SC02 02 inputs #
+####################################
+
+record(ai, "MEBT:SC02_PM02:PosOffset") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/274 T=FLOAT")
+  field(DESC, "SC02 02 Position Offset")
+  field(PREC, "4")
+  field(EGU, "mm")
+}
+
+####################################
+# Record for SC02 03 inputs #
+####################################
+
+record(ai, "MEBT:SC02_PM03:PosOffset") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/278 T=FLOAT")
+  field(DESC, "SC02 03 Position Offset")
+  field(PREC, "4")
+  field(EGU, "mm")
+}
+
+####################################
+# Record for SC02 04 inputs #
+####################################
+
+record(ai, "MEBT:SC02_PM04:PosOffset") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/282 T=FLOAT")
+  field(DESC, "SC02 04 Position Offset")
+  field(PREC, "4")
+  field(EGU, "mm")
+}
+
+##########################################
+# Records for SC01 driver M01 err   #
+##########################################
+
+# Actuation
+record(bi, "MEBT:SC01_M01:DriverError"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/286 T=BYTE B=0")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M01 driver error")
+}
+
+##########################################
+# Records for SC01 driver M02 err   #
+##########################################
+
+# Actuation
+record(bi, "MEBT:SC01_M02:DriverError"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/286 T=BYTE B=1")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M02 driver error")
+}
+
+##########################################
+# Records for SC01 driver M03 err   #
+##########################################
+
+# Actuation
+record(bi, "MEBT:SC01_M03:DriverError"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/286 T=BYTE B=2")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M03 driver error")
+}
+
+##########################################
+# Records for SC01 driver M04 err   #
+##########################################
+
+# Actuation
+record(bi, "MEBT:SC01_M04:DriverError"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/286 T=BYTE B=3")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M04 driver error")
+}
+
+##########################################
+# Records for SC02 driver M01 err   #
+##########################################
+
+# Actuation
+record(bi, "MEBT:SC02_M01:DriverError"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/286 T=BYTE B=4")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M01 driver error")
+}
+
+##########################################
+# Records for SC02 driver M02 err   #
+##########################################
+
+# Actuation
+record(bi, "MEBT:SC02_M02:DriverError"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/286 T=BYTE B=5")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M02 driver error")
+}
+
+##########################################
+# Records for SC02 driver M03 err   #
+##########################################
+
+# Actuation
+record(bi, "MEBT:SC02_M03:DriverError"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/286 T=BYTE B=6")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M03 driver error")
+}
+
+##########################################
+# Records for SC02 driver M04 err   #
+##########################################
+
+# Actuation
+record(bi, "MEBT:SC02_M04:DriverError"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/286 T=BYTE B=7")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M04 driver error")
+}
+
+##########################################
+# Records for SC01 driver M01 stat  #
+##########################################
+
+# Done Stat
+record(bi, "MEBT:SC01_M01_Done:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/287 T=BYTE B=0")
+  field(ZNAM, "Moving")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Done")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M01 Done")
+}
+
+# Busy Stat
+record(bi, "MEBT:SC01_M01_Busy:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/287 T=BYTE B=1")
+  field(ZNAM, "Not busy")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Busy")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M01 Busy")
+}
+
+# Error Stat
+record(bi, "MEBT:SC01_M01:Error"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/287 T=BYTE B=2")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M01 Error")
+}
+
+# Expert Mode Stat
+record(bi, "MEBT:SC01_M01_ExpMode:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/287 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M01 Done")
+}
+
+# LW01 Stat
+record(bi, "MEBT:SC01_M01_LW01:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/287 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M01 LW01")
+}
+
+# LW02 Stat
+record(bi, "MEBT:SC01_M01_LW02:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/287 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M01 LW02")
+}
+
+# Collimator Over Temperature Stat
+record(bi, "MEBT:SC01_M01:CollOverT"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/287 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M01 Collimator Over Temperature")
+}
+
+##########################################
+# Records for SC01 driver M02 stat  #
+##########################################
+
+# Done Stat
+record(bi, "MEBT:SC01_M02_Done:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/288 T=BYTE B=0")
+  field(ZNAM, "Moving")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Done")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M02 Done")
+}
+
+# Busy Stat
+record(bi, "MEBT:SC01_M02_Busy:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/288 T=BYTE B=1")
+  field(ZNAM, "Not busy")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Busy")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M02 Busy")
+}
+
+# Error Stat
+record(bi, "MEBT:SC01_M02:Error"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/288 T=BYTE B=2")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M02 Error")
+}
+
+# Expert Mode Stat
+record(bi, "MEBT:SC01_M02_ExpMode:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/288 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M02 Done")
+}
+
+# LW01 Stat
+record(bi, "MEBT:SC01_M02_LW01:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/288 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M02 LW01")
+}
+
+# LW02 Stat
+record(bi, "MEBT:SC01_M02_LW02:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/288 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M02 LW02")
+}
+
+# Collimator Over Temperature Stat
+record(bi, "MEBT:SC01_M02:CollOverT"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/288 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M02 Collimator Over Temperature")
+}
+
+##########################################
+# Records for SC01 driver M03 stat  #
+##########################################
+
+# Done Stat
+record(bi, "MEBT:SC01_M03_Done:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/289 T=BYTE B=0")
+  field(ZNAM, "Moving")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Done")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M03 Done")
+}
+
+# Busy Stat
+record(bi, "MEBT:SC01_M03_Busy:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/289 T=BYTE B=1")
+  field(ZNAM, "Not busy")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Busy")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M03 Busy")
+}
+
+# Error Stat
+record(bi, "MEBT:SC01_M03:Error"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/289 T=BYTE B=2")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M03 Error")
+}
+
+# Expert Mode Stat
+record(bi, "MEBT:SC01_M03_ExpMode:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/289 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M03 Done")
+}
+
+# LW01 Stat
+record(bi, "MEBT:SC01_M03_LW01:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/289 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M03 LW01")
+}
+
+# LW02 Stat
+record(bi, "MEBT:SC01_M03_LW02:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/289 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M03 LW02")
+}
+
+# Collimator Over Temperature Stat
+record(bi, "MEBT:SC01_M03:CollOverT"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/289 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M03 Collimator Over Temperature")
+}
+
+##########################################
+# Records for SC01 driver M04 stat  #
+##########################################
+
+# Done Stat
+record(bi, "MEBT:SC01_M04_Done:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/290 T=BYTE B=0")
+  field(ZNAM, "Moving")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Done")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M04 Done")
+}
+
+# Busy Stat
+record(bi, "MEBT:SC01_M04_Busy:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/290 T=BYTE B=1")
+  field(ZNAM, "Not busy")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Busy")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M04 Busy")
+}
+
+# Error Stat
+record(bi, "MEBT:SC01_M04:Error"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/290 T=BYTE B=2")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M04 Error")
+}
+
+# Expert Mode Stat
+record(bi, "MEBT:SC01_M04_ExpMode:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/290 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M04 Done")
+}
+
+# LW01 Stat
+record(bi, "MEBT:SC01_M04_LW01:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/290 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M04 LW01")
+}
+
+# LW02 Stat
+record(bi, "MEBT:SC01_M04_LW02:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/290 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M04 LW02")
+}
+
+# Collimator Over Temperature Stat
+record(bi, "MEBT:SC01_M04:CollOverT"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/290 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC01 M04 Collimator Over Temperature")
+}
+
+##########################################
+# Records for SC02 driver M01 stat  #
+##########################################
+
+# Done Stat
+record(bi, "MEBT:SC02_M01_Done:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/291 T=BYTE B=0")
+  field(ZNAM, "Moving")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Done")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M01 Done")
+}
+
+# Busy Stat
+record(bi, "MEBT:SC02_M01_Busy:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/291 T=BYTE B=1")
+  field(ZNAM, "Not busy")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Busy")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M01 Busy")
+}
+
+# Error Stat
+record(bi, "MEBT:SC02_M01:Error"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/291 T=BYTE B=2")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M01 Error")
+}
+
+# Expert Mode Stat
+record(bi, "MEBT:SC02_M01_ExpMode:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/291 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M01 Done")
+}
+
+# LW01 Stat
+record(bi, "MEBT:SC02_M01_LW01:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/291 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M01 LW01")
+}
+
+# LW02 Stat
+record(bi, "MEBT:SC02_M01_LW02:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/291 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M01 LW02")
+}
+
+# Collimator Over Temperature Stat
+record(bi, "MEBT:SC02_M01:CollOverT"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/291 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M01 Collimator Over Temperature")
+}
+
+##########################################
+# Records for SC02 driver M02 stat  #
+##########################################
+
+# Done Stat
+record(bi, "MEBT:SC02_M02_Done:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/292 T=BYTE B=0")
+  field(ZNAM, "Moving")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Done")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M02 Done")
+}
+
+# Busy Stat
+record(bi, "MEBT:SC02_M02_Busy:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/292 T=BYTE B=1")
+  field(ZNAM, "Not busy")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Busy")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M02 Busy")
+}
+
+# Error Stat
+record(bi, "MEBT:SC02_M02:Error"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/292 T=BYTE B=2")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M02 Error")
+}
+
+# Expert Mode Stat
+record(bi, "MEBT:SC02_M02_ExpMode:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/292 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M02 Done")
+}
+
+# LW01 Stat
+record(bi, "MEBT:SC02_M02_LW01:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/292 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M02 LW01")
+}
+
+# LW02 Stat
+record(bi, "MEBT:SC02_M02_LW02:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/292 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M02 LW02")
+}
+
+# Collimator Over Temperature Stat
+record(bi, "MEBT:SC02_M02:CollOverT"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/292 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M02 Collimator Over Temperature")
+}
+
+##########################################
+# Records for SC02 driver M03 stat  #
+##########################################
+
+# Done Stat
+record(bi, "MEBT:SC02_M03_Done:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/293 T=BYTE B=0")
+  field(ZNAM, "Moving")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Done")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M03 Done")
+}
+
+# Busy Stat
+record(bi, "MEBT:SC02_M03_Busy:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/293 T=BYTE B=1")
+  field(ZNAM, "Not busy")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Busy")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M03 Busy")
+}
+
+# Error Stat
+record(bi, "MEBT:SC02_M03:Error"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/293 T=BYTE B=2")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M03 Error")
+}
+
+# Expert Mode Stat
+record(bi, "MEBT:SC02_M03_ExpMode:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/293 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M03 Done")
+}
+
+# LW01 Stat
+record(bi, "MEBT:SC02_M03_LW01:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/293 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M03 LW01")
+}
+
+# LW02 Stat
+record(bi, "MEBT:SC02_M03_LW02:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/293 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M03 LW02")
+}
+
+# Collimator Over Temperature Stat
+record(bi, "MEBT:SC02_M03:CollOverT"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/293 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M03 Collimator Over Temperature")
+}
+
+##########################################
+# Records for SC02 driver M04 stat  #
+##########################################
+
+# Done Stat
+record(bi, "MEBT:SC02_M04_Done:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/294 T=BYTE B=0")
+  field(ZNAM, "Moving")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Done")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M04 Done")
+}
+
+# Busy Stat
+record(bi, "MEBT:SC02_M04_Busy:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/294 T=BYTE B=1")
+  field(ZNAM, "Not busy")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Busy")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M04 Busy")
+}
+
+# Error Stat
+record(bi, "MEBT:SC02_M04:Error"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/294 T=BYTE B=2")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M04 Error")
+}
+
+# Expert Mode Stat
+record(bi, "MEBT:SC02_M04_ExpMode:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/294 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M04 Done")
+}
+
+# LW01 Stat
+record(bi, "MEBT:SC02_M04_LW01:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/294 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M04 LW01")
+}
+
+# LW02 Stat
+record(bi, "MEBT:SC02_M04_LW02:Stat"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/294 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M04 LW02")
+}
+
+# Collimator Over Temperature Stat
+record(bi, "MEBT:SC02_M04:CollOverT"){
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@plc_mebt/294 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ON")
+  field(OSV, "NO_ALARM")
+  field(DESC, "SC02 M04 Collimator Over Temperature")
+}
+

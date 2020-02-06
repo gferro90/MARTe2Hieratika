@@ -1,0 +1,85 @@
+record(ai, "LPBD:COOL:fluidFlowRdbk")
+{
+    field(DESC, "Fluid Flow Value")
+    field(SCAN, "Passive")
+    field(PREC, "2")
+    field(EGU, "pm")
+}
+
+record(ai, "LPBD:COOL:setPointRdbk")
+{
+    field(DESC, "Set Point Value")
+    field(SCAN, "Passive")
+    field(PREC, "2")
+    field(EGU, "degC")
+}
+record(ao, "LPBD:COOL:setPointSet")
+{
+    field(DESC, "Set Point Value")
+    field(SCAN, "Passive")
+    field(PREC, "2")
+    field(EGU, "degC")
+}
+record(ai, "LPBD:COOL:supTempRdbk")
+{
+    field(DESC, "Supply Temp. Value")
+    field(SCAN, "Passive")
+    field(PREC, "2")
+    field(EGU, "degC")
+}
+record(ai, "LPBD:COOL:suctTempRdbk")
+{
+    field(DESC, "Suction Temp. Value")
+    field(SCAN, "Passive")
+    field(PREC, "2")
+    field(EGU, "degC")
+}
+record(ai, "LPBD:COOL:retTempRdbk")
+{
+    field(DESC, "Return Temp. Value")
+    field(SCAN, "Passive")
+    field(PREC, "2")
+    field(EGU, "degC")
+}
+record(ai, "LPBD:COOL:extTempRdbk")
+{
+    field(DESC, "External Temp. Value")
+    field(SCAN, "Passive")
+    field(PREC, "2")
+    field(EGU, "degC")
+}
+record(ai, "LPBD:COOL:supPressRdbk")
+{
+    field(DESC, "Supply Press. Value")
+    field(SCAN, "Passive")
+    field(PREC, "2")
+    field(EGU, "bar")
+}
+record(ai, "LPBD:COOL:suctPressRdbk")
+{
+    field(DESC, "Suction Press.Value")
+    field(SCAN, "Passive")
+    field(PREC, "2")
+    field(EGU, "bar")
+}
+record(ai, "LPBD:COOL:retPressRdbk")
+{
+    field(DESC, "Return Press. Value")
+    field(SCAN, "Passive")
+    field(PREC, "2")
+    field(EGU, "bar")
+}
+record(ai, "LPBD:COOL:condPressRdbk")
+{
+    field(DESC, "Cond. Press. Value")
+    field(SCAN, "Passive")
+    field(PREC, "2")
+    field(EGU, "bar")
+}
+record(ai, "LPBD:COOL:fluidResistRdbk")
+{
+    field(DESC, "Fluid Resist. Value")
+    field(SCAN, "Passive")
+    field(PREC, "4")
+    field(EGU, "MO/cm")
+}

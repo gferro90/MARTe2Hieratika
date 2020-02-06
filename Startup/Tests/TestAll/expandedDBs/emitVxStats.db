@@ -1,0 +1,170 @@
+# C.E.A. IRFU/SIS/LDII
+#
+# @(#) $Id: vxStats.db,v 1.2 2010/10/27 12:09:14 cmsmgr Exp $
+#
+# vxStats sample database
+#
+# who       when      what
+# --------  --------  ----------------------------------------------
+# ylussign  10/06/10  created
+#
+
+	record(ai,"LEBT:VMEStats:cpuUsedPercent") {
+	    field(SCAN,"I/O Intr")
+	    field(DTYP,"VX stats")
+	    field(INP,"@cpu")
+	    field(HIHI,"90.0")
+	    field(HIGH,"60.0")
+	    field(HHSV,"MAJOR")
+	    field(HSV,"MINOR")
+	    field(EGU,"%")
+	}
+	
+	record(ai,"LEBT:VMEStats:memoryUsedPercent") {
+	    field(SCAN,"I/O Intr")
+	    field(DTYP,"VX stats")
+	    field(INP,"@memory")
+	    field(HIHI,"90.0")
+	    field(HIGH,"60.0")
+	    field(HHSV,"MAJOR")
+	    field(HSV,"MINOR")
+	    field(EGU,"%")
+	}
+	
+	record(ai,"LEBT:VMEStats:memoryTotal") {
+	    field(SCAN,"I/O Intr")
+	    field(DTYP,"VX stats")
+	    field(INP,"@memoryTotal")
+	}
+	
+	record(ai,"LEBT:VMEStats:memoryUsed") {
+	    field(SCAN,"I/O Intr")
+	    field(DTYP,"VX stats")
+	    field(INP,"@memoryUsed")
+	}
+	
+	record(ai,"LEBT:VMEStats:memoryFree") {
+	    field(SCAN,"I/O Intr")
+	    field(DTYP,"VX stats")
+	    field(INP,"@memoryFree")
+	}
+	
+#	record(ai,"LEBT:VMEStats:fdUsedPercent") {
+#	    field(SCAN,"I/O Intr")
+#	    field(DTYP,"VX stats")
+#	    field(INP,"@fd")
+#	    field(HIHI,"90.0")
+#	    field(HIGH,"60.0")
+#	    field(HHSV,"MAJOR")
+#	    field(HSV,"MINOR")
+#	    field(EGU,"%")
+#	}
+#	
+#	record(longin,"LEBT:VMEStats:fdTotal") {
+#	    field(SCAN,"I/O Intr")
+#	    field(DTYP,"VX stats")
+#	    field(INP,"@fdTotal")
+#	}
+#	
+#	record(longin,"LEBT:VMEStats:fdUsed") {
+#	    field(SCAN,"I/O Intr")
+#	    field(DTYP,"VX stats")
+#	    field(INP,"@fdUsed")
+#	}
+#	
+#	record(longin,"LEBT:VMEStats:fdFree") {
+#	    field(SCAN,"I/O Intr")
+#	    field(DTYP,"VX stats")
+#	    field(INP,"@fdFree")
+#	}
+#	
+#	record(longin,"LEBT:VMEStats:caLinksTotal") {
+#	    field(SCAN,"I/O Intr")
+#	    field(DTYP,"VX stats")
+#	    field(INP,"@caLinksTotal")
+#	}
+#	
+#	record(longin,"LEBT:VMEStats:caLinksDiscon") {
+#	    field(SCAN,"I/O Intr")
+#	    field(DTYP,"VX stats")
+#	    field(INP,"@caLinksDiscon")
+#	    field(HIGH,"1")
+#	    field(HSV,"MAJOR")
+#	}
+#	
+#	record(longin,"LEBT:VMEStats:caClients") {
+#	    field(SCAN,"I/O Intr")
+#	    field(DTYP,"VX stats")
+#	    field(INP,"@caClients")
+#	}
+#	
+#	record(longin,"LEBT:VMEStats:caChannels") {
+#	    field(SCAN,"I/O Intr")
+#	    field(DTYP,"VX stats")
+#	    field(INP,"@caChannels")
+#	}
+#	
+#	record(ao,"LEBT:VMEStats:memoryScanPeriod") {
+#	    field(DTYP,"VX stats")
+#	    field(OUT,"@memoryScanPeriod")
+#	}
+#	
+#	record(ao,"LEBT:VMEStats:memoryTotalScanPeriod") {
+#	    field(DTYP,"VX stats")
+#	    field(OUT,"@memoryTotalScanPeriod")
+#	}
+#	
+#	record(ao,"LEBT:VMEStats:memoryUsedScanPeriod") {
+#	    field(DTYP,"VX stats")
+#	    field(OUT,"@memoryUsedScanPeriod")
+#	}
+#	
+#	record(ao,"LEBT:VMEStats:memoryFreeScanPeriod") {
+#	    field(DTYP,"VX stats")
+#	    field(OUT,"@memoryFreeScanPeriod")
+#	}
+#	
+#	record(ao,"LEBT:VMEStats:fdScanPeriod") {
+#	    field(DTYP,"VX stats")
+#	    field(OUT,"@fdScanPeriod")
+#	}
+#	
+#	record(ao,"LEBT:VMEStats:fdTotalScanPeriod") {
+#	    field(DTYP,"VX stats")
+#	    field(OUT,"@fdTotalScanPeriod")
+#	}
+#	
+#	record(ao,"LEBT:VMEStats:fdUsedScanPeriod") {
+#	    field(DTYP,"VX stats")
+#	    field(OUT,"@fdUsedScanPeriod")
+#	}
+#	
+#	record(ao,"LEBT:VMEStats:fdFreeScanPeriod") {
+#	    field(DTYP,"VX stats")
+#	    field(OUT,"@fdFreeScanPeriod")
+#	}
+#	
+#	record(ao,"LEBT:VMEStats:cpuScanPeriod") {
+#	    field(DTYP,"VX stats")
+#	    field(OUT,"@cpuScanPeriod")
+#	}
+#
+#	record(ao,"LEBT:VMEStats:caLinksTotalScanPeriod") {
+#	    field(DTYP,"VX stats")
+#	    field(OUT,"@caLinksTotalScanPeriod")
+#	}
+#	
+#	record(ao,"LEBT:VMEStats:caLinksDisconScanPeriod") {
+#	    field(DTYP,"VX stats")
+#	    field(OUT,"@caLinksDisconScanPeriod")
+#	}
+#	
+#	record(ao,"LEBT:VMEStats:caClientsScanPeriod") {
+#	    field(DTYP,"VX stats")
+#	    field(OUT,"@caClientsScanPeriod")
+#	}
+#	
+#	record(ao,"LEBT:VMEStats:caChannelsScanPeriod") {
+#	    field(DTYP,"VX stats")
+#	    field(OUT,"@caChannelsScanPeriod")
+#	}

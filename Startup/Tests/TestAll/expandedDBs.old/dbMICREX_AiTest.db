@@ -1,0 +1,228 @@
+
+
+
+
+
+record(ai, "$(mname):LDEV$(devno):BCD1")
+{
+	field(DESC, "0(BCD)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M0,BCD=8.0")
+	field(PREC, "2")
+}
+
+record(ai, "$(mname):LDEV$(devno):BCD4")
+{
+	field(DESC, "0.00(BCD)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M0,BCD=8.2")
+	field(PREC, "2")
+}
+
+record(ai, "$(mname):LDEV$(devno):BCD2")
+{
+	field(DESC, "12345678(BCD)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M2,BCD=8.0")
+	field(PREC, "2")
+}
+
+record(ai, "$(mname):LDEV$(devno):BCD5")
+{
+	field(DESC, "123456.78(BCD)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M2,BCD=8.2")
+	field(PREC, "2")
+}
+
+record(ai, "$(mname):LDEV$(devno):BCD3")
+{
+	field(DESC, "99999999(BCD)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M4,BCD=8.0")
+	field(PREC, "2")
+}
+
+record(ai, "$(mname):LDEV$(devno):BCD6")
+{
+	field(DESC, "999999.99(BCD)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M4,BCD=8.2")
+	field(PREC, "2")
+}
+
+
+record(ai, "$(mname):LDEV$(devno):BCD7")
+{
+	field(DESC, "0.000E+00(BCD)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M6,BCD=4E2")
+	field(PREC, "3")
+}
+
+record(ai, "$(mname):LDEV$(devno):BCD8")
+{
+	field(DESC, "1.234E+56(BCD)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M8,BCD=4E2")
+	field(PREC, "3")
+}
+
+record(ai, "$(mname):LDEV$(devno):BCD9")
+{
+	field(DESC, "9.999E+99(BCD)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M10,BCD=4E2")
+	field(PREC, "3")
+}
+
+record(ai, "$(mname):LDEV$(devno):BCD10")
+{
+	field(DESC, "9.999E-99(BCD)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M12,BCD=4E2")
+	field(PREC, "3")
+}
+
+record(ai, "$(mname):LDEV$(devno):W1")
+{
+	field(DESC, "0.000")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M14")
+	field(EGUF, "65.535")
+	field(EGUL, "0.0")
+	field(LINR, "LINEAR")
+	field(PREC, "3")
+}
+
+record(ai, "$(mname):LDEV$(devno):DW1")
+{
+	field(DESC, "0.00")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M14,DWORD")
+	field(EGUF, "42949672.95")
+	field(EGUL, "0.0")
+	field(LINR, "LINEAR")
+	field(PREC, "2")
+}
+
+record(ai, "$(mname):LDEV$(devno):DW3")
+{
+	field(DESC, "0.00")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M14,DWORD")
+	field(EGUF, "-42949672.95")
+	field(EGUL, "0.0")
+	field(LINR, "LINEAR")
+	field(PREC, "2")
+}
+
+record(ai, "$(mname):LDEV$(devno):DW5")
+{
+	field(DESC, "0.0")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M14,DWORD")
+	field(EGUF, "429496729.5")
+	field(EGUL, "0.0")
+	field(LINR, "LINEAR")
+	field(PREC, "1")
+}
+
+record(ai, "$(mname):LDEV$(devno):W2")
+{
+	field(DESC, "9.999")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M16")
+	field(EGUF, "65.535")
+	field(EGUL, "0.0")
+	field(LINR, "LINEAR")
+	field(PREC, "3")
+}
+
+record(ai, "$(mname):LDEV$(devno):DW2")
+{
+	field(DESC, "99.99")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M16,DWORD")
+	field(EGUF, "42949672.95")
+	field(EGUL, "0.0")
+	field(LINR, "LINEAR")
+	field(PREC, "2")
+}
+
+record(ai, "$(mname):LDEV$(devno):DW4")
+{
+	field(DESC, "-99.99")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M16,DWORD")
+	field(EGUF, "-42949672.95")
+	field(EGUL, "0.0")
+	field(LINR, "LINEAR")
+	field(PREC, "2")
+}
+
+record(ai, "$(mname):LDEV$(devno):DW6")
+{
+	field(DESC, "9999999.9")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M18,DWORD")
+	field(EGUF, "429496729.5")
+	field(EGUL, "0.0")
+	field(LINR, "LINEAR")
+	field(PREC, "1")
+}
+
+record(ai, "$(mname):LDEV$(devno):FECEXP1")
+{
+	field(DESC, "0.000E+00")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M20,FECEXP")
+	field(PREC, "3")
+}
+
+record(ai, "$(mname):LDEV$(devno):FECEXP2")
+{
+	field(DESC, "9.999E+99")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M22,FECEXP")
+	field(PREC, "3")
+}
+
+record(ai, "$(mname):LDEV$(devno):FECEXP3")
+{
+	field(DESC, "9.999E-99")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M24,FECEXP")
+	field(PREC, "3")
+}
+
+record(ai, "$(mname):LDEV$(devno):FECEXP4")
+{
+	field(DESC, "-9.999E+00")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M26,FECEXP")
+	field(PREC, "3")
+}
+

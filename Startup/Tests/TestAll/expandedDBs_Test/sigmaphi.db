@@ -1,0 +1,1112 @@
+#register 00
+record(mbbo, "MEBT:STV01_PS:Cmd")
+{
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_SIGMAPHIV01:set00 0 -16)MODBUS_DATA")
+    field(DESC ,"Remotely drive the power supply")
+    field(ZRST, "ON")
+    field(ZRVL, "0x0011")
+    field(ONST, "ACK")
+    field(ONVL, "0x0003")
+    field(TWST, "OFF")
+    field(TWVL, "0x0012")
+}
+
+#register 01
+record(ai, "MEBT:STV01_PS:IRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIV01:get01 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Ouput current [A]")
+    field(EGU, "A")
+}
+
+#register 03
+record(ai, "MEBT:STV01_PS:VRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIV01:get03 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Ouput voltage")
+    field(EGU, "V")
+}
+
+#register 05
+#SET
+record(ao, "MEBT:STV01_PS:IRefSet") {
+    field(DTYP,"asynFloat64")
+    field(OUT,"@asyn(MODBUS_SIGMAPHIV01:set05 0 -16)MODBUS_DATA")
+    field(DESC ,"Current reference setting")
+    field(EGU, "A")
+    field(PREC,"4")
+}
+#GET
+record(ai, "MEBT:STV01_PS:IRefGet") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIV01:get05 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Current reference readback")
+    field(EGU, "A")
+}
+
+#register 07
+record(ai, "MEBT:STV01_PS:IErrorRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIV01:get07 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Output current error")
+    field(EGU, "A")
+}
+
+#register 09
+record(mbbi, "MEBT:STV01_PS:LocalRemoteRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV01:get09 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Local or Remote")
+    field(ZRST, "LOCAL")
+    field(ZRVL, "0x0000")
+    field(ONST, "REMOTE")
+    field(ONVL, "0x0001")
+}
+
+#register 10
+record(mbbi, "MEBT:STV01_PS:Stat") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV01:get10 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Power Supply State")
+    field(ZRST, "FAULT")
+    field(ZRVL, "0x0080")
+    field(ONST, "ACK1")
+    field(ONVL, "0x0081")
+    field(TWST, "ACK2")
+    field(TWVL, "0x0082")
+    field(THST, "ACK3")
+    field(THVL, "0x0083")
+    field(FRST, "WAIT")
+    field(FRVL, "0x0084")
+    field(FVST, "IDLE")
+    field(FVVL, "0x0022")
+    field(SXST, "INRUSH1")
+    field(SXVL, "0x0024")
+    field(SVST, "INRUSH2")
+    field(SVVL, "0x0025")
+    field(EIST, "INRUSH3")
+    field(EIVL, "0x0026")
+    field(NIST, "ON1")
+    field(NIVL, "0x0027")
+    field(TEST, "ON2")
+    field(TEVL, "0x0028")
+    field(ELST, "STOPPING1")
+    field(ELVL, "0x0029")
+    field(TVST, "STOPPING2")
+    field(TVVL, "0x0030")
+    field(TTST, "INRUSH1 (SP)")
+    field(TTVL, "0x0031")
+    field(FTST, "INRUSH2 (SP)")
+    field(FTVL, "0x0032")
+    field(FFST, "INRUSH3 (SP)")
+    field(FFVL, "0x0033")
+}
+
+#register 11
+record(mbbi, "MEBT:STV01_PS:SoftIlkRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV01:get11 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Software Interlocks")
+}
+
+#register 12
+record(mbbi, "MEBT:STV01_PS:HardIlkRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV01:get12 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Hardware Interlocks")
+}
+
+#register 14
+record(ai, "MEBT:STV01_PS:ExtraIlk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV01:get14 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Additional interlocks")
+}
+
+#register 00
+record(mbbo, "MEBT:STH01_PS:Cmd")
+{
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_SIGMAPHIH01:set00 0 -16)MODBUS_DATA")
+    field(DESC ,"Remotely drive the power supply")
+    field(ZRST, "ON")
+    field(ZRVL, "0x0011")
+    field(ONST, "ACK")
+    field(ONVL, "0x0003")
+    field(TWST, "OFF")
+    field(TWVL, "0x0012")
+}
+
+#register 01
+record(ai, "MEBT:STH01_PS:IRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIH01:get01 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Ouput current [A]")
+    field(EGU, "A")
+}
+
+#register 03
+record(ai, "MEBT:STH01_PS:VRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIH01:get03 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Ouput voltage")
+    field(EGU, "V")
+}
+
+#register 05
+#SET
+record(ao, "MEBT:STH01_PS:IRefSet") {
+    field(DTYP,"asynFloat64")
+    field(OUT,"@asyn(MODBUS_SIGMAPHIH01:set05 0 -16)MODBUS_DATA")
+    field(DESC ,"Current reference setting")
+    field(EGU, "A")
+    field(PREC,"4")
+}
+#GET
+record(ai, "MEBT:STH01_PS:IRefGet") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIH01:get05 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Current reference readback")
+    field(EGU, "A")
+}
+
+#register 07
+record(ai, "MEBT:STH01_PS:IErrorRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIH01:get07 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Output current error")
+    field(EGU, "A")
+}
+
+#register 09
+record(mbbi, "MEBT:STH01_PS:LocalRemoteRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH01:get09 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Local or Remote")
+    field(ZRST, "LOCAL")
+    field(ZRVL, "0x0000")
+    field(ONST, "REMOTE")
+    field(ONVL, "0x0001")
+}
+
+#register 10
+record(mbbi, "MEBT:STH01_PS:Stat") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH01:get10 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Power Supply State")
+    field(ZRST, "FAULT")
+    field(ZRVL, "0x0080")
+    field(ONST, "ACK1")
+    field(ONVL, "0x0081")
+    field(TWST, "ACK2")
+    field(TWVL, "0x0082")
+    field(THST, "ACK3")
+    field(THVL, "0x0083")
+    field(FRST, "WAIT")
+    field(FRVL, "0x0084")
+    field(FVST, "IDLE")
+    field(FVVL, "0x0022")
+    field(SXST, "INRUSH1")
+    field(SXVL, "0x0024")
+    field(SVST, "INRUSH2")
+    field(SVVL, "0x0025")
+    field(EIST, "INRUSH3")
+    field(EIVL, "0x0026")
+    field(NIST, "ON1")
+    field(NIVL, "0x0027")
+    field(TEST, "ON2")
+    field(TEVL, "0x0028")
+    field(ELST, "STOPPING1")
+    field(ELVL, "0x0029")
+    field(TVST, "STOPPING2")
+    field(TVVL, "0x0030")
+    field(TTST, "INRUSH1 (SP)")
+    field(TTVL, "0x0031")
+    field(FTST, "INRUSH2 (SP)")
+    field(FTVL, "0x0032")
+    field(FFST, "INRUSH3 (SP)")
+    field(FFVL, "0x0033")
+}
+
+#register 11
+record(mbbi, "MEBT:STH01_PS:SoftIlkRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH01:get11 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Software Interlocks")
+}
+
+#register 12
+record(mbbi, "MEBT:STH01_PS:HardIlkRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH01:get12 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Hardware Interlocks")
+}
+
+#register 14
+record(ai, "MEBT:STH01_PS:ExtraIlk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH01:get14 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Additional interlocks")
+}
+
+#register 00
+record(mbbo, "MEBT:STV03_PS:Cmd")
+{
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_SIGMAPHIV03:set00 0 -16)MODBUS_DATA")
+    field(DESC ,"Remotely drive the power supply")
+    field(ZRST, "ON")
+    field(ZRVL, "0x0011")
+    field(ONST, "ACK")
+    field(ONVL, "0x0003")
+    field(TWST, "OFF")
+    field(TWVL, "0x0012")
+}
+
+#register 01
+record(ai, "MEBT:STV03_PS:IRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIV03:get01 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Ouput current [A]")
+    field(EGU, "A")
+}
+
+#register 03
+record(ai, "MEBT:STV03_PS:VRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIV03:get03 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Ouput voltage")
+    field(EGU, "V")
+}
+
+#register 05
+#SET
+record(ao, "MEBT:STV03_PS:IRefSet") {
+    field(DTYP,"asynFloat64")
+    field(OUT,"@asyn(MODBUS_SIGMAPHIV03:set05 0 -16)MODBUS_DATA")
+    field(DESC ,"Current reference setting")
+    field(EGU, "A")
+    field(PREC,"4")
+}
+#GET
+record(ai, "MEBT:STV03_PS:IRefGet") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIV03:get05 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Current reference readback")
+    field(EGU, "A")
+}
+
+#register 07
+record(ai, "MEBT:STV03_PS:IErrorRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIV03:get07 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Output current error")
+    field(EGU, "A")
+}
+
+#register 09
+record(mbbi, "MEBT:STV03_PS:LocalRemoteRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV03:get09 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Local or Remote")
+    field(ZRST, "LOCAL")
+    field(ZRVL, "0x0000")
+    field(ONST, "REMOTE")
+    field(ONVL, "0x0001")
+}
+
+#register 10
+record(mbbi, "MEBT:STV03_PS:Stat") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV03:get10 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Power Supply State")
+    field(ZRST, "FAULT")
+    field(ZRVL, "0x0080")
+    field(ONST, "ACK1")
+    field(ONVL, "0x0081")
+    field(TWST, "ACK2")
+    field(TWVL, "0x0082")
+    field(THST, "ACK3")
+    field(THVL, "0x0083")
+    field(FRST, "WAIT")
+    field(FRVL, "0x0084")
+    field(FVST, "IDLE")
+    field(FVVL, "0x0022")
+    field(SXST, "INRUSH1")
+    field(SXVL, "0x0024")
+    field(SVST, "INRUSH2")
+    field(SVVL, "0x0025")
+    field(EIST, "INRUSH3")
+    field(EIVL, "0x0026")
+    field(NIST, "ON1")
+    field(NIVL, "0x0027")
+    field(TEST, "ON2")
+    field(TEVL, "0x0028")
+    field(ELST, "STOPPING1")
+    field(ELVL, "0x0029")
+    field(TVST, "STOPPING2")
+    field(TVVL, "0x0030")
+    field(TTST, "INRUSH1 (SP)")
+    field(TTVL, "0x0031")
+    field(FTST, "INRUSH2 (SP)")
+    field(FTVL, "0x0032")
+    field(FFST, "INRUSH3 (SP)")
+    field(FFVL, "0x0033")
+}
+
+#register 11
+record(mbbi, "MEBT:STV03_PS:SoftIlkRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV03:get11 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Software Interlocks")
+}
+
+#register 12
+record(mbbi, "MEBT:STV03_PS:HardIlkRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV03:get12 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Hardware Interlocks")
+}
+
+#register 14
+record(ai, "MEBT:STV03_PS:ExtraIlk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV03:get14 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Additional interlocks")
+}
+
+#register 00
+record(mbbo, "MEBT:STH03_PS:Cmd")
+{
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_SIGMAPHIH03:set00 0 -16)MODBUS_DATA")
+    field(DESC ,"Remotely drive the power supply")
+    field(ZRST, "ON")
+    field(ZRVL, "0x0011")
+    field(ONST, "ACK")
+    field(ONVL, "0x0003")
+    field(TWST, "OFF")
+    field(TWVL, "0x0012")
+}
+
+#register 01
+record(ai, "MEBT:STH03_PS:IRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIH03:get01 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Ouput current [A]")
+    field(EGU, "A")
+}
+
+#register 03
+record(ai, "MEBT:STH03_PS:VRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIH03:get03 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Ouput voltage")
+    field(EGU, "V")
+}
+
+#register 05
+#SET
+record(ao, "MEBT:STH03_PS:IRefSet") {
+    field(DTYP,"asynFloat64")
+    field(OUT,"@asyn(MODBUS_SIGMAPHIH03:set05 0 -16)MODBUS_DATA")
+    field(DESC ,"Current reference setting")
+    field(EGU, "A")
+    field(PREC,"4")
+}
+#GET
+record(ai, "MEBT:STH03_PS:IRefGet") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIH03:get05 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Current reference readback")
+    field(EGU, "A")
+}
+
+#register 07
+record(ai, "MEBT:STH03_PS:IErrorRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIH03:get07 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Output current error")
+    field(EGU, "A")
+}
+
+#register 09
+record(mbbi, "MEBT:STH03_PS:LocalRemoteRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH03:get09 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Local or Remote")
+    field(ZRST, "LOCAL")
+    field(ZRVL, "0x0000")
+    field(ONST, "REMOTE")
+    field(ONVL, "0x0001")
+}
+
+#register 10
+record(mbbi, "MEBT:STH03_PS:Stat") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH03:get10 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Power Supply State")
+    field(ZRST, "FAULT")
+    field(ZRVL, "0x0080")
+    field(ONST, "ACK1")
+    field(ONVL, "0x0081")
+    field(TWST, "ACK2")
+    field(TWVL, "0x0082")
+    field(THST, "ACK3")
+    field(THVL, "0x0083")
+    field(FRST, "WAIT")
+    field(FRVL, "0x0084")
+    field(FVST, "IDLE")
+    field(FVVL, "0x0022")
+    field(SXST, "INRUSH1")
+    field(SXVL, "0x0024")
+    field(SVST, "INRUSH2")
+    field(SVVL, "0x0025")
+    field(EIST, "INRUSH3")
+    field(EIVL, "0x0026")
+    field(NIST, "ON1")
+    field(NIVL, "0x0027")
+    field(TEST, "ON2")
+    field(TEVL, "0x0028")
+    field(ELST, "STOPPING1")
+    field(ELVL, "0x0029")
+    field(TVST, "STOPPING2")
+    field(TVVL, "0x0030")
+    field(TTST, "INRUSH1 (SP)")
+    field(TTVL, "0x0031")
+    field(FTST, "INRUSH2 (SP)")
+    field(FTVL, "0x0032")
+    field(FFST, "INRUSH3 (SP)")
+    field(FFVL, "0x0033")
+}
+
+#register 11
+record(mbbi, "MEBT:STH03_PS:SoftIlkRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH03:get11 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Software Interlocks")
+}
+
+#register 12
+record(mbbi, "MEBT:STH03_PS:HardIlkRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH03:get12 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Hardware Interlocks")
+}
+
+#register 14
+record(ai, "MEBT:STH03_PS:ExtraIlk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH03:get14 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Additional interlocks")
+}
+
+#register 00
+record(mbbo, "MEBT:STV04_PS:Cmd")
+{
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_SIGMAPHIV04:set00 0 -16)MODBUS_DATA")
+    field(DESC ,"Remotely drive the power supply")
+    field(ZRST, "ON")
+    field(ZRVL, "0x0011")
+    field(ONST, "ACK")
+    field(ONVL, "0x0003")
+    field(TWST, "OFF")
+    field(TWVL, "0x0012")
+}
+
+#register 01
+record(ai, "MEBT:STV04_PS:IRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIV04:get01 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Ouput current [A]")
+    field(EGU, "A")
+}
+
+#register 03
+record(ai, "MEBT:STV04_PS:VRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIV04:get03 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Ouput voltage")
+    field(EGU, "V")
+}
+
+#register 05
+#SET
+record(ao, "MEBT:STV04_PS:IRefSet") {
+    field(DTYP,"asynFloat64")
+    field(OUT,"@asyn(MODBUS_SIGMAPHIV04:set05 0 -16)MODBUS_DATA")
+    field(DESC ,"Current reference setting")
+    field(EGU, "A")
+    field(PREC,"4")
+}
+#GET
+record(ai, "MEBT:STV04_PS:IRefGet") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIV04:get05 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Current reference readback")
+    field(EGU, "A")
+}
+
+#register 07
+record(ai, "MEBT:STV04_PS:IErrorRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIV04:get07 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Output current error")
+    field(EGU, "A")
+}
+
+#register 09
+record(mbbi, "MEBT:STV04_PS:LocalRemoteRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV04:get09 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Local or Remote")
+    field(ZRST, "LOCAL")
+    field(ZRVL, "0x0000")
+    field(ONST, "REMOTE")
+    field(ONVL, "0x0001")
+}
+
+#register 10
+record(mbbi, "MEBT:STV04_PS:Stat") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV04:get10 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Power Supply State")
+    field(ZRST, "FAULT")
+    field(ZRVL, "0x0080")
+    field(ONST, "ACK1")
+    field(ONVL, "0x0081")
+    field(TWST, "ACK2")
+    field(TWVL, "0x0082")
+    field(THST, "ACK3")
+    field(THVL, "0x0083")
+    field(FRST, "WAIT")
+    field(FRVL, "0x0084")
+    field(FVST, "IDLE")
+    field(FVVL, "0x0022")
+    field(SXST, "INRUSH1")
+    field(SXVL, "0x0024")
+    field(SVST, "INRUSH2")
+    field(SVVL, "0x0025")
+    field(EIST, "INRUSH3")
+    field(EIVL, "0x0026")
+    field(NIST, "ON1")
+    field(NIVL, "0x0027")
+    field(TEST, "ON2")
+    field(TEVL, "0x0028")
+    field(ELST, "STOPPING1")
+    field(ELVL, "0x0029")
+    field(TVST, "STOPPING2")
+    field(TVVL, "0x0030")
+    field(TTST, "INRUSH1 (SP)")
+    field(TTVL, "0x0031")
+    field(FTST, "INRUSH2 (SP)")
+    field(FTVL, "0x0032")
+    field(FFST, "INRUSH3 (SP)")
+    field(FFVL, "0x0033")
+}
+
+#register 11
+record(mbbi, "MEBT:STV04_PS:SoftIlkRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV04:get11 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Software Interlocks")
+}
+
+#register 12
+record(mbbi, "MEBT:STV04_PS:HardIlkRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV04:get12 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Hardware Interlocks")
+}
+
+#register 14
+record(ai, "MEBT:STV04_PS:ExtraIlk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV04:get14 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Additional interlocks")
+}
+
+#register 00
+record(mbbo, "MEBT:STH04_PS:Cmd")
+{
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_SIGMAPHIH04:set00 0 -16)MODBUS_DATA")
+    field(DESC ,"Remotely drive the power supply")
+    field(ZRST, "ON")
+    field(ZRVL, "0x0011")
+    field(ONST, "ACK")
+    field(ONVL, "0x0003")
+    field(TWST, "OFF")
+    field(TWVL, "0x0012")
+}
+
+#register 01
+record(ai, "MEBT:STH04_PS:IRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIH04:get01 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Ouput current [A]")
+    field(EGU, "A")
+}
+
+#register 03
+record(ai, "MEBT:STH04_PS:VRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIH04:get03 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Ouput voltage")
+    field(EGU, "V")
+}
+
+#register 05
+#SET
+record(ao, "MEBT:STH04_PS:IRefSet") {
+    field(DTYP,"asynFloat64")
+    field(OUT,"@asyn(MODBUS_SIGMAPHIH04:set05 0 -16)MODBUS_DATA")
+    field(DESC ,"Current reference setting")
+    field(EGU, "A")
+    field(PREC,"4")
+}
+#GET
+record(ai, "MEBT:STH04_PS:IRefGet") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIH04:get05 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Current reference readback")
+    field(EGU, "A")
+}
+
+#register 07
+record(ai, "MEBT:STH04_PS:IErrorRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIH04:get07 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Output current error")
+    field(EGU, "A")
+}
+
+#register 09
+record(mbbi, "MEBT:STH04_PS:LocalRemoteRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH04:get09 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Local or Remote")
+    field(ZRST, "LOCAL")
+    field(ZRVL, "0x0000")
+    field(ONST, "REMOTE")
+    field(ONVL, "0x0001")
+}
+
+#register 10
+record(mbbi, "MEBT:STH04_PS:Stat") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH04:get10 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Power Supply State")
+    field(ZRST, "FAULT")
+    field(ZRVL, "0x0080")
+    field(ONST, "ACK1")
+    field(ONVL, "0x0081")
+    field(TWST, "ACK2")
+    field(TWVL, "0x0082")
+    field(THST, "ACK3")
+    field(THVL, "0x0083")
+    field(FRST, "WAIT")
+    field(FRVL, "0x0084")
+    field(FVST, "IDLE")
+    field(FVVL, "0x0022")
+    field(SXST, "INRUSH1")
+    field(SXVL, "0x0024")
+    field(SVST, "INRUSH2")
+    field(SVVL, "0x0025")
+    field(EIST, "INRUSH3")
+    field(EIVL, "0x0026")
+    field(NIST, "ON1")
+    field(NIVL, "0x0027")
+    field(TEST, "ON2")
+    field(TEVL, "0x0028")
+    field(ELST, "STOPPING1")
+    field(ELVL, "0x0029")
+    field(TVST, "STOPPING2")
+    field(TVVL, "0x0030")
+    field(TTST, "INRUSH1 (SP)")
+    field(TTVL, "0x0031")
+    field(FTST, "INRUSH2 (SP)")
+    field(FTVL, "0x0032")
+    field(FFST, "INRUSH3 (SP)")
+    field(FFVL, "0x0033")
+}
+
+#register 11
+record(mbbi, "MEBT:STH04_PS:SoftIlkRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH04:get11 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Software Interlocks")
+}
+
+#register 12
+record(mbbi, "MEBT:STH04_PS:HardIlkRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH04:get12 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Hardware Interlocks")
+}
+
+#register 14
+record(ai, "MEBT:STH04_PS:ExtraIlk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH04:get14 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Additional interlocks")
+}
+
+#register 00
+record(mbbo, "MEBT:STV05_PS:Cmd")
+{
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_SIGMAPHIV05:set00 0 -16)MODBUS_DATA")
+    field(DESC ,"Remotely drive the power supply")
+    field(ZRST, "ON")
+    field(ZRVL, "0x0011")
+    field(ONST, "ACK")
+    field(ONVL, "0x0003")
+    field(TWST, "OFF")
+    field(TWVL, "0x0012")
+}
+
+#register 01
+record(ai, "MEBT:STV05_PS:IRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIV05:get01 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Ouput current [A]")
+    field(EGU, "A")
+}
+
+#register 03
+record(ai, "MEBT:STV05_PS:VRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIV05:get03 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Ouput voltage")
+    field(EGU, "V")
+}
+
+#register 05
+#SET
+record(ao, "MEBT:STV05_PS:IRefSet") {
+    field(DTYP,"asynFloat64")
+    field(OUT,"@asyn(MODBUS_SIGMAPHIV05:set05 0 -16)MODBUS_DATA")
+    field(DESC ,"Current reference setting")
+    field(EGU, "A")
+    field(PREC,"4")
+}
+#GET
+record(ai, "MEBT:STV05_PS:IRefGet") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIV05:get05 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Current reference readback")
+    field(EGU, "A")
+}
+
+#register 07
+record(ai, "MEBT:STV05_PS:IErrorRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIV05:get07 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Output current error")
+    field(EGU, "A")
+}
+
+#register 09
+record(mbbi, "MEBT:STV05_PS:LocalRemoteRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV05:get09 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Local or Remote")
+    field(ZRST, "LOCAL")
+    field(ZRVL, "0x0000")
+    field(ONST, "REMOTE")
+    field(ONVL, "0x0001")
+}
+
+#register 10
+record(mbbi, "MEBT:STV05_PS:Stat") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV05:get10 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Power Supply State")
+    field(ZRST, "FAULT")
+    field(ZRVL, "0x0080")
+    field(ONST, "ACK1")
+    field(ONVL, "0x0081")
+    field(TWST, "ACK2")
+    field(TWVL, "0x0082")
+    field(THST, "ACK3")
+    field(THVL, "0x0083")
+    field(FRST, "WAIT")
+    field(FRVL, "0x0084")
+    field(FVST, "IDLE")
+    field(FVVL, "0x0022")
+    field(SXST, "INRUSH1")
+    field(SXVL, "0x0024")
+    field(SVST, "INRUSH2")
+    field(SVVL, "0x0025")
+    field(EIST, "INRUSH3")
+    field(EIVL, "0x0026")
+    field(NIST, "ON1")
+    field(NIVL, "0x0027")
+    field(TEST, "ON2")
+    field(TEVL, "0x0028")
+    field(ELST, "STOPPING1")
+    field(ELVL, "0x0029")
+    field(TVST, "STOPPING2")
+    field(TVVL, "0x0030")
+    field(TTST, "INRUSH1 (SP)")
+    field(TTVL, "0x0031")
+    field(FTST, "INRUSH2 (SP)")
+    field(FTVL, "0x0032")
+    field(FFST, "INRUSH3 (SP)")
+    field(FFVL, "0x0033")
+}
+
+#register 11
+record(mbbi, "MEBT:STV05_PS:SoftIlkRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV05:get11 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Software Interlocks")
+}
+
+#register 12
+record(mbbi, "MEBT:STV05_PS:HardIlkRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV05:get12 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Hardware Interlocks")
+}
+
+#register 14
+record(ai, "MEBT:STV05_PS:ExtraIlk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIV05:get14 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Additional interlocks")
+}
+
+#register 00
+record(mbbo, "MEBT:STH05_PS:Cmd")
+{
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_SIGMAPHIH05:set00 0 -16)MODBUS_DATA")
+    field(DESC ,"Remotely drive the power supply")
+    field(ZRST, "ON")
+    field(ZRVL, "0x0011")
+    field(ONST, "ACK")
+    field(ONVL, "0x0003")
+    field(TWST, "OFF")
+    field(TWVL, "0x0012")
+}
+
+#register 01
+record(ai, "MEBT:STH05_PS:IRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIH05:get01 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Ouput current [A]")
+    field(EGU, "A")
+}
+
+#register 03
+record(ai, "MEBT:STH05_PS:VRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIH05:get03 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Ouput voltage")
+    field(EGU, "V")
+}
+
+#register 05
+#SET
+record(ao, "MEBT:STH05_PS:IRefSet") {
+    field(DTYP,"asynFloat64")
+    field(OUT,"@asyn(MODBUS_SIGMAPHIH05:set05 0 -16)MODBUS_DATA")
+    field(DESC ,"Current reference setting")
+    field(EGU, "A")
+    field(PREC,"4")
+}
+#GET
+record(ai, "MEBT:STH05_PS:IRefGet") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIH05:get05 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Current reference readback")
+    field(EGU, "A")
+}
+
+#register 07
+record(ai, "MEBT:STH05_PS:IErrorRdbk") {
+    field(DTYP,"asynFloat64")
+    field(INP,"@asyn(MODBUS_SIGMAPHIH05:get07 0 -16)MODBUS_DATA")
+    field(PREC,"4")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Output current error")
+    field(EGU, "A")
+}
+
+#register 09
+record(mbbi, "MEBT:STH05_PS:LocalRemoteRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH05:get09 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Local or Remote")
+    field(ZRST, "LOCAL")
+    field(ZRVL, "0x0000")
+    field(ONST, "REMOTE")
+    field(ONVL, "0x0001")
+}
+
+#register 10
+record(mbbi, "MEBT:STH05_PS:Stat") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH05:get10 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Power Supply State")
+    field(ZRST, "FAULT")
+    field(ZRVL, "0x0080")
+    field(ONST, "ACK1")
+    field(ONVL, "0x0081")
+    field(TWST, "ACK2")
+    field(TWVL, "0x0082")
+    field(THST, "ACK3")
+    field(THVL, "0x0083")
+    field(FRST, "WAIT")
+    field(FRVL, "0x0084")
+    field(FVST, "IDLE")
+    field(FVVL, "0x0022")
+    field(SXST, "INRUSH1")
+    field(SXVL, "0x0024")
+    field(SVST, "INRUSH2")
+    field(SVVL, "0x0025")
+    field(EIST, "INRUSH3")
+    field(EIVL, "0x0026")
+    field(NIST, "ON1")
+    field(NIVL, "0x0027")
+    field(TEST, "ON2")
+    field(TEVL, "0x0028")
+    field(ELST, "STOPPING1")
+    field(ELVL, "0x0029")
+    field(TVST, "STOPPING2")
+    field(TVVL, "0x0030")
+    field(TTST, "INRUSH1 (SP)")
+    field(TTVL, "0x0031")
+    field(FTST, "INRUSH2 (SP)")
+    field(FTVL, "0x0032")
+    field(FFST, "INRUSH3 (SP)")
+    field(FFVL, "0x0033")
+}
+
+#register 11
+record(mbbi, "MEBT:STH05_PS:SoftIlkRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH05:get11 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Software Interlocks")
+}
+
+#register 12
+record(mbbi, "MEBT:STH05_PS:HardIlkRdbk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH05:get12 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Hardware Interlocks")
+}
+
+#register 14
+record(ai, "MEBT:STH05_PS:ExtraIlk") {
+    field(DTYP,"asynInt32")
+    field(INP,"@asynMask(MODBUS_SIGMAPHIH05:get14 0 -16)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Additional interlocks")
+}
+

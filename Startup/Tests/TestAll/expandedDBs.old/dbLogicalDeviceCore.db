@@ -1,0 +1,168 @@
+
+
+record(mbbiDirect, "$(mname):RM$(devno):DEVNO")
+{
+	field(DESC, "Device Number")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C0")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno):DEVTYPE")
+{
+	field(DESC, "Device Type")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C1")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno):FUTURE")
+{
+	field(DESC, "Device Future Bits")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C2")
+}
+
+record(bi, "$(mname):RM$(devno):REMOTE")
+{
+	field(DESC, "Remote/Local")
+	field(SCAN, "I/O Intr")		
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C3")
+	
+	field(ZNAM, "LOCAL")
+	field(ONAM, "REMOTE")
+}
+
+record(mbbi, "$(mname):RM$(devno):MSTAT")
+{
+	field(DESC, "Machine status")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C4")
+	field(NOBT, "16")
+	field(SHFT, "0")
+	
+	field( ZRVL, "0")	
+	field( ONVL, "1")	
+	field( TWVL, "2")	
+	field( THVL, "4")	
+	field( FRVL, "8")	
+	field( FVVL, "16")	
+	field( SXVL, "32")	
+	
+	field( ZRST, "INVALID")
+	field( ONST, "DOWN")
+	field( TWST, "STOP")
+	field( THST, "STANDBY")
+	field( FRST, "RUN")
+	field( FVST, "FAULT")
+	field( SXST, "EMERGENCY")
+}
+
+record(mbbi, "$(mname):RM$(devno):MREQ")
+{
+	field(DESC, "Machine request state")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C5")
+	field(NOBT, "16")
+	field(SHFT, "0")
+	
+	field( ZRVL, "0")	
+	field( ONVL, "1")	
+	field( TWVL, "2")	
+	field( THVL, "4")	
+	field( FRVL, "8")	
+	field( FVVL, "16")	
+	field( SXVL, "32")	
+	
+	field( ZRST, "INVALID")
+	field( ONST, "DOWN")
+	field( TWST, "STOP")
+	field( THST, "STANDBY")
+	field( FRST, "RUN")
+	field( FVST, "FAULT")
+	field( SXST, "EMERGENCY")
+}
+
+record(mbbo, "$(mname):RM$(devno):CMD")
+{
+	field(DESC, "Command code")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(OUT,  "@$(plc)://$(target)/DEV$(devno)C6")
+	field(NOBT, "16")
+	field(SHFT, "0")
+	
+	field( ZRVL, "1")	
+	field( ONVL, "2")	
+	field( TWVL, "4")	
+	field( THVL, "8")	
+	field( FRVL, "16")	
+	field( FVVL, "32")	
+	
+	field( ZRST, "GO-DOWN")
+	field( ONST, "GO-STOP")
+	field( TWST, "GO-STANDBY")
+	field( THST, "GO-RUN")
+	field( FRST, "RESET")
+	field( FVST, "SET-PARAM")
+}
+
+record(bi, "$(mname):RM$(devno):CMDFLG")
+{
+	field(DESC, "Command flag")
+	field(SCAN, "I/O Intr")		
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C7")
+	
+	field(ZNAM, "CMD READY")
+	field(ONAM, "CMD BUSY")
+}
+
+record(bi, "$(mname):RM$(devno):CSTAT")
+{
+	field(DESC, "Command status")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C8")
+	
+	field(ZNAM, "ACK")
+	field(ONAM, "NACK")
+}
+
+record(bi, "$(mname):RM$(devno):BUSY")
+{
+	field(DESC, "Busy flag")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C9")
+	
+	field(ZNAM, "READY")
+	field(ONAM, "BUSY")
+}
+
+record(bi, "$(mname):RM$(devno):WSTAT")
+{
+	field(DESC, "Waveform request flag")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C10:0.1")
+	
+	field(ZNAM, "WAIT")
+	field(ONAM, "REQUEST")
+}
+
+record(bo, "$(mname):RM$(devno):WREQ")
+{
+	field(DESC, "Waveform request flag")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(OUT,  "@$(plc)://$(target)/DEV$(devno)C10:0.1")
+	
+	field(ZNAM, "WAIT")
+	field(ONAM, "REQUEST")
+}
+

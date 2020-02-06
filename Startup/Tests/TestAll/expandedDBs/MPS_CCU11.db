@@ -1,0 +1,4172 @@
+record(mbbiDirect, "MPS:CCU11:SeqCntRdbk")
+{
+	field(DESC, "Sequence counter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0005")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DevNoSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C0")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DevTypeSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C1")
+}
+
+record(mbboDirect, "MPS:CCU11_01:FuncFlgSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C2")
+}
+
+record(mbboDirect, "MPS:CCU11_01:RemoteSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C3")
+}
+
+record(mbboDirect, "MPS:CCU11_01:StatCodeSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C4")
+}
+
+record(mbboDirect, "MPS:CCU11_01:TargetCodeSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C5")
+}
+
+record(mbboDirect, "MPS:CCU11_01:CmdSet")
+{
+	field(DESC, "16=module reset")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C6")
+}
+
+record(mbboDirect, "MPS:CCU11_01:CmdFlgSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C7")
+}
+
+record(mbboDirect, "MPS:CCU11_01:CmdStatSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C8")
+}
+
+record(mbboDirect, "MPS:CCU11_01:BusySet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C9")
+}
+
+record(mbboDirect, "MPS:CCU11_01:WfFlgSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C10")
+}
+
+record(mbboDirect, "MPS:CCU11_01:ReserveSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C11")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DevNoRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C0")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DevTypeRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C1")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:FuncFlgRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C2")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:RemoteRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C3")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:StatCodeRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C4")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:TargetCodeRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C5")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:CmdRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C6")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:CmdFlgRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C7")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:CmdStatRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C8")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:BusyRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C9")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:WfFlgRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C10")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:ReserveRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C11")
+}
+
+record(mbboDirect, "MPS:CCU11_01:InMask1Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0")
+}
+
+record(mbboDirect, "MPS:CCU11_01:InMask2Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1")
+}
+
+record(mbboDirect, "MPS:CCU11_01:InMask3Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P2")
+}
+
+record(mbboDirect, "MPS:CCU11_01:InMask4Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P3")
+}
+
+record(mbboDirect, "MPS:CCU11_01:InMask5Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P4")
+}
+
+record(mbboDirect, "MPS:CCU11_01:InMaskStrobeSet")
+{
+	field(DESC, "1=reset@8=output")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P5")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:InMask1Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P0")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:InMask2Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P1")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:InMask3Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P2")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:InMask4Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P3")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:InMask5Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P4")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:InMaskStrobeRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P5")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:Sig1Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M0")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:Sig2Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M1")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:Sig3Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M2")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:Sig4Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M3")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:Sig5Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M4")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:InMaskSig1Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M5")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:InMaskSig2Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M6")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:InMaskSig3Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M7")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:InMaskSig4Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M8")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:InMaskSig5Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M9")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:InMaskCfg1Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M10")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:InMaskCfg2Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M11")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:InMaskCfg3Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M12")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:InMaskCfg4Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M13")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:InMaskCfg5Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M14")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DevNoSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C0")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DevTypeSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C1")
+}
+
+record(mbboDirect, "MPS:CCU11_02:FuncFlgSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C2")
+}
+
+record(mbboDirect, "MPS:CCU11_02:RemoteSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C3")
+}
+
+record(mbboDirect, "MPS:CCU11_02:StatCodeSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C4")
+}
+
+record(mbboDirect, "MPS:CCU11_02:TargetCodeSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C5")
+}
+
+record(mbboDirect, "MPS:CCU11_02:CmdSet")
+{
+	field(DESC, "16=module reset")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C6")
+}
+
+record(mbboDirect, "MPS:CCU11_02:CmdFlgSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C7")
+}
+
+record(mbboDirect, "MPS:CCU11_02:CmdStatSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C8")
+}
+
+record(mbboDirect, "MPS:CCU11_02:BusySet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C9")
+}
+
+record(mbboDirect, "MPS:CCU11_02:WfFlgSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C10")
+}
+
+record(mbboDirect, "MPS:CCU11_02:ReserveSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C11")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DevNoRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C0")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DevTypeRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C1")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:FuncFlgRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C2")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:RemoteRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C3")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:StatCodeRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C4")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:TargetCodeRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C5")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:CmdRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C6")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:CmdFlgRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C7")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:CmdStatRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C8")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:BusyRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C9")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:WfFlgRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C10")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:ReserveRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C11")
+}
+
+record(mbboDirect, "MPS:CCU11_02:InMask1Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P0")
+}
+
+record(mbboDirect, "MPS:CCU11_02:InMask2Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P1")
+}
+
+record(mbboDirect, "MPS:CCU11_02:InMask3Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P2")
+}
+
+record(mbboDirect, "MPS:CCU11_02:InMask4Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P3")
+}
+
+record(mbboDirect, "MPS:CCU11_02:InMask5Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P4")
+}
+
+record(mbboDirect, "MPS:CCU11_02:InMaskStrobeSet")
+{
+	field(DESC, "1=reset@8=output")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P5")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:InMask1Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P0")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:InMask2Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P1")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:InMask3Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P2")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:InMask4Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P3")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:InMask5Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P4")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:InMaskStrobeRdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P5")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:Sig1Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M0")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:Sig2Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M1")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:Sig3Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M2")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:Sig4Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M3")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:Sig5Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M4")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:InMaskSig1Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M5")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:InMaskSig2Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M6")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:InMaskSig3Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M7")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:InMaskSig4Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M8")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:InMaskSig5Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M9")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:InMaskCfg1Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M10")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:InMaskCfg2Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M11")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:InMaskCfg3Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M12")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:InMaskCfg4Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M13")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:InMaskCfg5Rdbk")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M14")
+}
+
+record(calc, "MPS:PA_BRTZ:DebugIlk")
+{
+	field(DESC, "For debug")
+	field(SCAN, "1 second")
+	field(INPA, "MPS:CCU11_01:Sig1Rdbk.B7")
+	field(INPB, "0")
+	field(CALC, "( (A == 1 && B == 0) ? 1 : 0)")
+}
+
+record(calc, "MPS:PB_SBI:Gv1FaultIlk")
+{
+	field(DESC, "GV1 fault")
+	field(SCAN, "1 second")
+	field(INPA, "MPS:CCU11_01:Sig3Rdbk.B1")
+	field(INPB, "MPS:CCU11_01:InMaskCfg3Rdbk.B1")
+	field(CALC, "( (A == 1 && B == 0) ? 1 : 0)")
+}
+
+record(calc, "MPS:PA_SBI:LebtFocIlk")
+{
+	field(DESC, "True if all sol & repeller in operation")
+	field(SCAN, "1 second")
+	field(INPA, "MPS:CCU11_01:Sig3Rdbk.B2")
+	field(INPB, "MPS:CCU11_01:InMaskCfg3Rdbk.B1")
+	field(CALC, "( (A == 1 && B == 0) ? 1 : 0)")
+}
+
+record(calc, "MPS:PA_SBI:LebtVacIlk")
+{
+	field(DESC, "True if the LEBT vacuum is OK")
+	field(SCAN, "1 second")
+	field(INPA, "MPS:CCU11_01:Sig3Rdbk.B3")
+	field(INPB, "MPS:CCU11_01:InMaskCfg3Rdbk.B1")
+	field(CALC, "( (A == 1 && B == 0) ? 1 : 0)")
+}
+
+record(calc, "MPS:PA_SBI:Gv1OpenIlk")
+{
+	field(DESC, "True if GV1 is open")
+	field(SCAN, "1 second")
+	field(INPA, "MPS:CCU11_01:Sig3Rdbk.B4")
+	field(INPB, "MPS:CCU11_01:InMaskCfg3Rdbk.B1")
+	field(CALC, "( (A == 1 && B == 0) ? 1 : 0)")
+}
+
+record(calc, "MPS:PA_SBI:InjGlobalFaultIlk")
+{
+	field(DESC, "Focalization, vac or cooling err cond.")
+	field(SCAN, "1 second")
+	field(INPA, "MPS:CCU11_01:Sig4Rdbk.B0")
+	field(INPB, "MPS:CCU11_01:InMaskCfg3Rdbk.B0")
+	field(CALC, "( (A == 1 && B == 0) ? 1 : 0)")
+}
+
+record(calc, "MPS:PA_SBI:InjPpssHaltIlk")
+{
+	field(DESC, "have yet to be determined")
+	field(SCAN, "1 second")
+	field(INPA, "MPS:CCU11_01:Sig4Rdbk.B1")
+	field(INPB, "MPS:CCU11_01:InMaskCfg3Rdbk.B0")
+	field(CALC, "( (A == 1 && B == 0) ? 1 : 0)")
+}
+
+record(calc, "MPS:PA_SBI:InjCoolIlk")
+{
+	field(DESC, "True if injector cooling is OK")
+	field(SCAN, "1 second")
+	field(INPA, "MPS:CCU11_01:Sig4Rdbk.B2")
+	field(INPB, "MPS:CCU11_01:InMaskCfg3Rdbk.B0")
+	field(CALC, "( (A == 1 && B == 0) ? 1 : 0)")
+}
+
+record(calc, "MPS:PA_SBI:BimsAIlk")
+{
+	field(DESC, "True if BIMS A in operation")
+	field(SCAN, "1 second")
+	field(INPA, "MPS:CCU11_01:Sig2Rdbk.B0")
+	field(INPB, "MPS:CCU11_01:InMaskCfg3Rdbk.B0")
+	field(CALC, "( (A == 1 && B == 0) ? 1 : 0)")
+}
+
+record(calc, "MPS:PA_SBI:BimsBIlk")
+{
+	field(DESC, "True if BIMS B in operation")
+	field(SCAN, "1 second")
+	field(INPA, "MPS:CCU11_01:Sig2Rdbk.B1")
+	field(INPB, "MPS:CCU11_01:InMaskCfg3Rdbk.B0")
+	field(CALC, "( (A == 1 && B == 0) ? 1 : 0)")
+}
+
+record(calc, "MPS:PB_BRTZ:BdUnMatchIlk")
+{
+	field(DESC, "Beam Destination Unmatch")
+	field(SCAN, "1 second")
+	field(INPA, "MPS:CCU11_01:Sig1Rdbk.B0")
+	field(INPB, "0")
+	field(CALC, "( (A == 1 && B == 0) ? 1 : 0)")
+}
+
+record(calc, "MPS:PB_BRTZ:RepDischargeIlk")
+{
+	field(DESC, "Repair Discharg")
+	field(SCAN, "1 second")
+	field(INPA, "MPS:CCU11_01:Sig1Rdbk.B1")
+	field(INPB, "0")
+	field(CALC, "( (A == 1 && B == 0) ? 1 : 0)")
+}
+
+record(calc, "MPS:PB_SBI:CmnSkidIlk")
+{
+	field(DESC, "CMN SKID")
+	field(SCAN, "1 second")
+	field(INPA, "MPS:CCU11_01:Sig4Rdbk.B7")
+	field(INPB, "MPS:CCU11_01:InMaskCfg3Rdbk.B0")
+	field(CALC, "( (A == 1 && B == 0) ? 1 : 0)")
+}
+
+record(ai, "MPS:CCU11:TsSafetySwSet")
+{
+	field(DESC, "Beam Stop Logic - SW")
+	field(SCAN, "Passive")
+	field(INP, "1")
+}
+
+record(calc, "MPS:CCU11:FbiIlkStat")
+{
+	field(DESC, "Beam Stop Logic - FBI Judge")
+	field(SCAN, "1 second")
+	field(INPA, "MPS:CCU11_01:InMaskSig2Rdbk.B1")
+	field(INPB, "MPS:CCU11_01:InMaskCfg2Rdbk.B1")
+	field(INPC, "MPS:CCU11_01:InMaskSig4Rdbk.B2")
+	field(INPD, "MPS:CCU11_01:InMaskCfg4Rdbk.B2")
+	field(INPE, "MPS:CCU11_01:InMaskSig2Rdbk.B3")
+	field(INPF, "MPS:CCU11_01:InMaskCfg2Rdbk.B3")
+	field(INPG, "MPS:CCU11_01:InMaskSig2Rdbk.B5")
+	field(INPH, "MPS:CCU11_01:InMaskCfg2Rdbk.B5")
+	field(CALC, "(A=1&B=0)|(C=1&D=0)|(E=1&F=0)|(G=1&H=0)?1:0")
+	field(FLNK, "MPS:CCU11:TsSafetyErr")
+}
+
+record(calc, "MPS:CCU11:SbiIlkStat")
+{
+	field(DESC, "Beam Stop Logic - SBI Judge")
+	field(SCAN, "1 second")
+	field(INPA, "MPS:CCU11_01:InMaskSig3Rdbk.B0")
+	field(INPB, "MPS:CCU11_01:InMaskCfg3Rdbk.B0")
+	field(INPC, "MPS:CCU11_01:InMaskSig3Rdbk.B1")
+	field(INPD, "MPS:CCU11_01:InMaskCfg3Rdbk.B1")
+	field(INPE, "MPS:CCU11_01:InMaskSig5Rdbk.B2")
+	field(INPF, "MPS:CCU11_01:InMaskCfg5Rdbk.B2")
+	field(CALC, "(A=1&B=0)|(C=1&D=0)|(E=1&F=0)?1:0")
+	field(FLNK, "MPS:CCU11:TsSafetyErr")
+}
+
+record(calcout, "MPS:CCU11:TsSafetyErr")
+{
+	field(DESC, "Beam Stop Logic - Error Output")
+	field(SCAN, "Passive")
+	field(OUT, "MPS:CCU11:TsSafetyErrLatch PP")
+	field(INPA, "MPS:CCU11:FbiIlkStat")
+	field(INPB, "MPS:CCU11:SbiIlkStat")
+	field(INPC, "MPS:CCU11:TsSafetyErrCopy")
+	field(INPD, "MPS:CCU11:TsSafetySwSet")
+	field(INPE, "CCS:TSAPP:RfPulseWidthRdbk")
+	field(OOPT, "When Non-zero")
+	field(DOPT, "Use CALC")
+	field(CALC, "( (A+B)>0)&(C=0)&(D=1)&(E>0)?1:0")
+	field(FLNK, "MPS:CCU11:TsSafetyErrCopy")
+}
+
+record(calc, "MPS:CCU11:TsSafetyErrCopy")
+{
+	field(DESC, "Beam Stop Logic - MPS Error old")
+	field(SCAN, "Passive")
+	field(DTYP, "Soft Channel")
+	field(INPA, "MPS:CCU11:FbiIlkStat")
+	field(INPB, "MPS:CCU11:SbiIlkStat")
+	field(CALC, "A+B")
+}
+
+record(calcout, "MPS:CCU11:TsSafetyErrLatchOff")
+{
+	field(DESC, "Beam Stop Logic - Latch off Output")
+	field(SCAN, "1 second")
+	field(OUT, "MPS:CCU11:TsSafetyErrLatch PP")
+	field(INPA, "CCS:TSAPP:RfPulseWidthRdbk")
+	field(INPB, "MPS:CCU11:TsSafetyErrLatch")
+	field(INPC, "MPS:CCU11:TsSafetySwSet")
+	field(OOPT, "When Zero")
+	field(DOPT, "Use CALC")
+	field(CALC, "( (A<=0)&(B>0) )|(C=0)?0:1")
+}
+
+record(ai, "MPS:CCU11:TsSafetyErrLatch")
+{
+	field(DESC, "Beam Stop Logic - Error Latch")
+	field(SCAN, "Passive")
+	field(INP, "0")
+	field(FLNK, "MPS:CCU11:TsSafetyErrCnt")
+}
+
+record(calc, "MPS:CCU11:TsSafetyErrCnt")
+{
+	field(DESC, "Beam Stop Logic - Error Count")
+	field(SCAN, "Passive")
+	field(DTYP, "Soft Channel")
+	field(INPA, "MPS:CCU11:TsSafetyErrCnt")
+	field(INPB, "MPS:CCU11:TsSafetyErrLatch")
+	field(CALC, "A+B")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0000")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0001")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0002")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0003")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0004")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0005")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0006")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0007")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0008")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0009")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D10:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0010")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D11:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0011")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D12:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0012")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D13:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0013")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D14:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0014")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D15:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0015")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D16:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0016")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D17:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0017")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D18:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0018")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D19:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0019")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D20:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0020")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D21:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0021")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D22:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0022")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D23:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0023")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D24:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0024")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D25:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0025")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D26:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0026")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D27:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0027")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D28:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0028")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D29:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0029")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D30:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0030")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D31:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0031")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D32:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0032")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D33:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0033")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D34:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0034")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D35:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0035")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D36:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0036")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D37:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0037")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D38:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0038")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:D39:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0039")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:SB0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB0")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:SB1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB1")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:SB2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB2")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:SB3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB3")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:SB4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB4")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:SB5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB5")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:SB6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB6")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:SB7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB7")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:SB8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB8")
+}
+
+record(mbboDirect, "MPS:CCU11:DEBUG:SB9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB9")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:C0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C0")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:C1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C1")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:C2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C2")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:C3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C3")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:C4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C4")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:C5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C5")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:C6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C6")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:C7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C7")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:C8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C8")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:C9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C9")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:P0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:P1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:P2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P2")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:P3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P3")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:P4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P4")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:P5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P5")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:P6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P6")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:P7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P7")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:P8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P8")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:P9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P9")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:P10:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P10")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:P11:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P11")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:P12:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P12")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:P13:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P13")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:P14:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P14")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:M0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M0")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:M1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M1")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:M2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M2")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:M3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M3")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:M4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M4")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:M5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M5")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:M6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M6")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:M7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M7")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:M8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M8")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:M9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M9")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:I0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1I0")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:I1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1I1")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:E0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E0")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:E1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E1")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:E2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E2")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:E3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E3")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:E4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E4")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:E5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E5")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:E6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E6")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:E7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E7")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:E8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E8")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:E9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E9")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:O0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O0")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:O1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O1")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:O2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O2")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:O3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O3")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:O4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O4")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:O5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O5")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:O6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O6")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:O7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O7")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:O8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O8")
+}
+
+record(mbboDirect, "MPS:CCU11_01:DEBUG:O9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O9")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:C0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C0")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:C1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C1")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:C2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C2")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:C3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C3")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:C4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C4")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:C5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C5")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:C6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C6")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:C7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C7")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:C8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C8")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:C9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2C9")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:P0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P0")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:P1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P1")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:P2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P2")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:P3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P3")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:P4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P4")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:P5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P5")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:P6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P6")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:P7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P7")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:P8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P8")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:P9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P9")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:P10:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P10")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:P11:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P11")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:P12:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P12")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:P13:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P13")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:P14:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2P14")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:M0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2M0")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:M1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2M1")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:M2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2M2")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:M3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2M3")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:M4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2M4")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:M5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2M5")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:M6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2M6")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:M7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2M7")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:M8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2M8")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:M9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2M9")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:I0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2I0")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:I1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2I1")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:E0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2E0")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:E1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2E1")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:E2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2E2")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:E3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2E3")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:E4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2E4")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:E5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2E5")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:E6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2E6")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:E7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2E7")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:E8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2E8")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:E9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2E9")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:O0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2O0")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:O1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2O1")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:O2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2O2")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:O3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2O3")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:O4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2O4")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:O5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2O5")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:O6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2O6")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:O7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2O7")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:O8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2O8")
+}
+
+record(mbboDirect, "MPS:CCU11_02:DEBUG:O9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV2O9")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0000")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0001")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0002")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0003")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0004")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0005")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0006")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0007")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0008")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0009")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D10:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0010")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D11:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0011")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D12:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0012")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D13:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0013")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D14:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0014")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D15:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0015")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D16:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0016")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D17:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0017")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D18:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0018")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D19:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0019")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D20:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0020")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D21:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0021")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D22:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0022")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D23:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0023")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D24:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0024")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D25:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0025")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D26:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0026")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D27:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0027")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D28:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0028")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D29:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0029")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D30:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0030")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D31:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0031")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D32:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0032")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D33:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0033")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D34:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0034")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D35:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0035")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D36:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0036")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D37:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0037")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D38:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0038")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:D39:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0039")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:SB0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB0")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:SB1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB1")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:SB2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB2")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:SB3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB3")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:SB4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB4")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:SB5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB5")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:SB6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB6")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:SB7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB7")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:SB8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB8")
+}
+
+record(mbbiDirect, "MPS:CCU11:DEBUG:SB9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB9")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:C0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C0")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:C1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C1")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:C2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C2")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:C3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C3")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:C4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C4")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:C5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C5")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:C6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C6")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:C7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C7")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:C8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C8")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:C9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C9")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:P0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P0")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:P1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P1")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:P2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P2")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:P3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P3")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:P4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P4")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:P5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P5")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:P6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P6")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:P7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P7")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:P8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P8")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:P9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P9")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:P10:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P10")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:P11:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P11")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:P12:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P12")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:P13:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P13")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:P14:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P14")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M0")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M1")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M2")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M3")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M4")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M5")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M6")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M7")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M8")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M9")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M10:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M10")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M11:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M11")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M12:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M12")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M13:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M13")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M14:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M14")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M15:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M15")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M16:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M16")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M17:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M17")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M18:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M18")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:M19:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M19")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:I0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1I0")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:I1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1I1")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:E0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E0")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:E1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E1")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:E2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E2")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:E3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E3")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:E4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E4")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:E5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E5")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:E6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E6")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:E7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E7")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:E8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E8")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:E9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E9")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:O0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O0")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:O1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O1")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:O2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O2")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:O3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O3")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:O4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O4")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:O5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O5")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:O6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O6")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:O7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O7")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:O8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O8")
+}
+
+record(mbbiDirect, "MPS:CCU11_01:DEBUG:O9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O9")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:C0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C0")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:C1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C1")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:C2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C2")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:C3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C3")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:C4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C4")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:C5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C5")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:C6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C6")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:C7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C7")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:C8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C8")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:C9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2C9")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:P0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P0")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:P1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P1")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:P2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P2")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:P3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P3")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:P4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P4")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:P5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P5")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:P6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P6")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:P7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P7")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:P8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P8")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:P9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P9")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:P10:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P10")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:P11:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P11")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:P12:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P12")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:P13:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P13")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:P14:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2P14")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M0")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M1")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M2")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M3")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M4")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M5")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M6")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M7")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M8")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M9")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M10:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M10")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M11:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M11")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M12:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M12")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M13:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M13")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M14:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M14")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M15:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M15")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M16:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M16")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M17:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M17")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M18:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M18")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:M19:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2M19")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:I0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2I0")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:I1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2I1")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:E0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2E0")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:E1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2E1")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:E2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2E2")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:E3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2E3")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:E4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2E4")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:E5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2E5")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:E6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2E6")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:E7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2E7")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:E8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2E8")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:E9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2E9")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:O0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2O0")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:O1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2O1")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:O2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2O2")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:O3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2O3")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:O4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2O4")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:O5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2O5")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:O6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2O6")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:O7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2O7")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:O8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2O8")
+}
+
+record(mbbiDirect, "MPS:CCU11_02:DEBUG:O9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV2O9")
+}
+

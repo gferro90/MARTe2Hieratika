@@ -1,0 +1,70 @@
+# RF FAULT CONDITIONS - send error signal to RFQ:COOL_RFFL:FlatStat
+# developed by Maurizio Montis - INFN Italy
+# mail: maurizio.montis@lnl.infn.it
+
+## INTERLOCK MPS
+# Varaible: RFQ:COOL_RFFL:FlatStat_MPS
+# 
+# flatness evaluated on Quadrupole and Dipoles 
+
+record(seq, "RFQ:RF_MPS:BFlatCnst") {
+	field(DESC, "Parameter for Flatness")
+	field(DO1, "0.25")
+	field(DO2, "0.25")
+	field(DO3, "0.25")
+}
+
+record(calcout, "RFQ:RF_MPS:BFlatCond") {
+	field(DESC, "Check Field Flatness Critical Status")
+	field(SCAN, ".1 second")
+	#field(SDIS, "")
+	#field(DISV, "0")
+	field(INPA, "RFQ:RF:AvgMaxQuad CP")
+	field(INPB, "RFQ:RF:AvgMinQuad CP")
+	field(INPC, "RFQ:RF:AvgMaxODip CP")
+	field(INPD, "RFQ:RF:AvgMinODip CP")
+	field(INPE, "RFQ:RF:AvgMaxEDip CP")
+	field(INPF, "RFQ:RF:AvgMinEDip CP")
+	field(INPG, "RFQ:RF_MPS:BFlatCnst.DO1")
+	field(INPH, "RFQ:RF_MPS:BFlatCnst.DO2")
+	field(INPI, "RFQ:RF_MPS:BFlatCnst.DO3")
+	field(CALC, "(A>G||B<-G||C>H||D<-H||E>I||F<-I)?0:1")
+	field(OOPT, "Every Time")
+	field(DOPT, "Use CALC")
+	field(OUT, "RFQ:COOL_RFFL:FlatStat_MPS")
+}
+
+
+
+## INTERLOCK LLRF
+# Variable: RFQ:COOL_RFFL:FlatStat_LLRF
+# 
+# flatness evaluated on Quadrupole and Dipoles 
+
+
+record(seq, "RFQ:RF_LLRF:BFlatCnst") {
+	field(DESC, "Parameter for Flatness")
+	field(DO1, "0.25")
+	field(DO2, "0.25")
+	field(DO3, "0.25")
+}
+
+record(calcout, "RFQ:RF_LLRF:BFlatCond") {
+	field(DESC, "Check Field Flatness Critical Status")
+	field(SCAN, ".1 second")
+	#field(SDIS, "")
+	#field(DISV, "0")
+	field(INPA, "RFQ:RF:AvgMaxQuad CP")
+	field(INPB, "RFQ:RF:AvgMinQuad CP")
+	field(INPC, "RFQ:RF:AvgMaxODip CP")
+	field(INPD, "RFQ:RF:AvgMinODip CP")
+	field(INPE, "RFQ:RF:AvgMaxEDip CP")
+	field(INPF, "RFQ:RF:AvgMinEDip CP")
+	field(INPG, "RFQ:RF_LLRF:BFlatCnst.DO1")
+	field(INPH, "RFQ:RF_LLRF:BFlatCnst.DO2")
+	field(INPI, "RFQ:RF_LLRF:BFlatCnst.DO3")
+	field(CALC, "(A>G||B<-G||C>H||D<-H||E>I||F<-I)?0:1")
+	field(OOPT, "Every Time")
+	field(DOPT, "Use CALC")
+	field(OUT, "RFQ:COOL_RFFL:FlatStat_LLRF")
+}

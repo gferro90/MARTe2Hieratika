@@ -1,0 +1,116 @@
+
+
+
+
+
+
+record(mbbiDirect, "$(mname):RM$(devno):YEAR")
+{
+	field(DESC, "Request Year")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M3")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno):MONTH")
+{
+	field(DESC, "Request Month")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M4")
+	field(NOBT, "8")
+	field(SHFT, "8")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno):DAY")
+{
+	field(DESC, "Request Day")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M4")
+	field(NOBT, "8")
+	field(SHFT, "0")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno):HOUR")
+{
+	field(DESC, "Request Hour")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M5")
+	field(NOBT, "8")
+	field(SHFT, "8")
+}
+record(mbbiDirect, "$(mname):RM$(devno):MINUTE")
+{
+	field(DESC, "Request Minute")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M5")
+	field(NOBT, "8")
+	field(SHFT, "0")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno):SECOND")
+{
+	field(DESC, "Request Second")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M6")
+	field(NOBT, "8")
+	field(SHFT, "8")
+}
+
+
+record(mbbiDirect, "$(mname):RM$(devno)_UPD:Di1")
+{
+	field(DESC, "CH update done flag(1/2)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M9")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+record(mbbiDirect, "$(mname):RM$(devno)_UPD:Di2")
+{
+	field(DESC, "CH update done flag(2/2)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M10")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+record(mbbiDirect, "$(mname):RM$(devno)_UPD:Di3")
+{
+	field(DESC, "Setting No.")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M11")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+record(mbbiDirect, "$(mname):RM$(devno)_UPD:Di4")
+{
+	field(DESC, "Update item(1/2)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M13")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+record(mbbiDirect, "$(mname):RM$(devno)_UPD:Di5")
+{
+	field(DESC, "Update item(2/2)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M14")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+
+
+
+

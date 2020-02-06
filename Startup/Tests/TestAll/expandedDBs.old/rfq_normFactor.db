@@ -1,0 +1,20 @@
+# Normalization Factor
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+record(calc, "RFQ:RF:NormFactV") {
+		#field(DESC, "Normaliz Factor ")
+		#field(SCAN, ".1 second")
+        field(PHAS, "3")
+		field(INPA, "RFQ:RF:Q1Sum.VAL PP")
+		field(INPB, "RFQ:RF:Q2Sum.VAL PP")
+		field(INPC, "RFQ:RF:Q3Sum.VAL PP")
+		field(INPD, "RFQ:RF:Q4Sum.VAL PP")
+		field(INPE, "RFQ:RF:ZDim.VAL")
+		field(CALC, "(A+B+C+D)/E")
+		field(VAL, "0")	
+}
+
+

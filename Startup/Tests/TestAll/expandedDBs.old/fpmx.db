@@ -1,0 +1,1428 @@
+########### USB connection ###################
+
+record(bi,"DPLA:FPM01:Connection")
+{
+	field(DESC,"USB connection status")
+	field(DTYP,"asynInt32")
+	field(SCAN,"I/O Intr")
+	field(ZNAM,"Disconnected")
+	field(ZSV, "MAJOR")
+	field(ONAM,"Connected")
+	field(INP, "@asyn(DFP01,0)Connected")
+}
+
+############ Acquisition and status ###################
+
+record(bo,"DPLA:FPM01:AcqStart")
+{
+	field(DESC,"Toggles acquire and standby modes")
+	field(DTYP,"asynInt32")
+	field(ZNAM,"Stop")
+	field(ONAM,"Acquire")
+	field(OUT, "@asyn(DFP01,0)acqstart")
+	info(asyn:READBACK,"1")
+}
+
+record(bo,"DPLA:FPM01:SaveConfig")
+{
+	field(DESC,"Save all configurations to flash memory")
+	field(DTYP,"asynInt32")
+	field(ZNAM,"No command")
+	field(ONAM,"Save")
+	field(OUT, "@asyn(DFP01,0)SaveConfig")
+	field(HIGH,"1")
+}
+
+record(bo,"DPLA:FPM01:LoadConfig")
+{
+	field(DESC,"Load configuration from flash memory")
+	field(DTYP,"asynInt32")
+	field(ZNAM,"No command")
+	field(ONAM,"Load")
+	field(OUT, "@asyn(DFP01,0)LoadConfig")
+	field(HIGH,"1")
+}
+
+#record(bi,"DPLA:FPM01:StatusLed")
+#{
+#	field(DTYP,"asynInt32")
+#	field(SCAN,"I/O Intr")
+#	field(ZNAM,"OFF")
+#	field(ONAM,"ON")
+#	field(INP ,"@asyn(DFP01,0)statusled")
+#}
+
+################### EVENT DATA ##############
+
+record(longout,"DPLA:FPM01:TrigEnd") {
+	field(DESC,"Number of triggers allowed in acq. mode")
+	field(DTYP,"asynInt32")
+	field(OUT, "@asyn(DFP01,0)triggerend")
+	info(asyn:READBACK,"1")
+}
+
+record(bi,"DPLA:FPM01:OutOfRange")
+{
+	field(DTYP,"asynInt32")
+	field(SCAN,"I/O Intr")
+	field(ZNAM,"In range")
+	field(ONAM,"Out of range")
+	field(OSV, "MINOR")
+	field(INP, "@asyn(DFP01,0)outofrange")
+	field(TSE, "-2")
+}
+
+record(bi,"DPLA:FPM01:InputErr")
+{
+	field(DTYP,"asynInt32")
+	field(SCAN,"I/O Intr")
+	field(ZNAM,"No error")
+	field(ONAM,"Error")
+	field(OSV, "MINOR")
+	field(INP, "@asyn(DFP01,0)inperror")
+	field(TSE, "-2")
+}
+
+record(longin,"DPLA:FPM01:TrigCount")
+{
+	field(DTYP,"asynInt32")
+	field(SCAN,"I/O Intr")
+	field(INP, "@asyn(DFP01,0)trigcount")
+	field(TSE, "-2")
+}
+
+record(ai,"DPLA:FPM01:TrigRate")
+{
+	field(DTYP,"asynInt32")
+	field(SCAN,"I/O Intr")
+	field(INP, "@asyn(DFP01,0)trigrate")
+	field(EGU, "Hz")
+	field(PREC,"2")
+	field(AOFF,"0.0")
+	field(ASLO,"0.01")
+	field(HIHI,"20000")
+	field(HIGH,"666")
+	field(LOW,"0")
+	field(LOLO,"0")
+}
+
+record(longin,"DPLA:FPM01:EventCount")
+{
+	field(DTYP,"asynInt32")
+	field(SCAN,"I/O Intr")
+	field(INP, "@asyn(DFP01,0)eventcount")
+	field(TSE, "-2")
+}
+
+record(ai,"DPLA:FPM01:EventRate")
+{
+	field(DTYP,"asynInt32")
+	field(SCAN,"I/O Intr")
+	field(INP, "@asyn(DFP01,0)eventrate")
+	field(EGU, "Hz")
+	field(PREC,"2")
+	field(AOFF,"0.0")
+	field(ASLO,"0.01")
+	field(HIHI,"666")
+	field(HIGH,"660")
+	field(LOW,"0")
+	field(LOLO,"0")
+}
+
+record(ai,"DPLA:FPM01:TimeStamp")
+{
+	field(DTYP,"asynInt32")
+	field(INP, "@asyn(DFP01,0)timestamp")
+	field(SCAN,"I/O Intr")
+	field(EGU, "s")
+	field(PREC,"4")
+	field(AOFF,"0.0")
+	field(ASLO,"0.0001")
+	field(TSE, "-2")
+}
+
+################# INTEGRATION ###############
+
+record(bo,"DPLA:FPM01:Boxcar")
+{
+	field(DTYP,"asynInt32")
+	field(OUT, "@asyn(DFP01,0)boxcar")
+	info(asyn:READBACK,"1")
+	field(ZNAM,"OFF")
+	field(ONAM,"ON")
+}
+
+record(ao,"DPLA:FPM01:IntDelay") 
+{
+	field(DTYP,"asynInt32")
+	field(OUT, "@asyn(DFP01,0)intdelay")
+	info(asyn:READBACK,"1")
+	field(AOFF,"0.0")
+	field(ASLO,"0.01")
+	field(DRVH,"100000")
+	field(DRVL,"-28.5")
+	field(EGU, "us")
+	field(PREC,"2")
+}
+
+record(ao,"DPLA:FPM01:IntPeriod") 
+{
+	field(DTYP,"asynInt32")
+	field(OUT, "@asyn(DFP01,0)intperiod")
+	info(asyn:READBACK,"1")
+	field(AOFF,"0.0")
+	field(ASLO,"0.01")
+	field(DRVH,"100000")
+	field(DRVL,"0.05")
+	field(EGU, "us")
+	field(PREC,"2")
+}
+
+record(ai,"DPLA:FPM01:IntWidth")
+{
+	field(DESC,"Measured integration width (boxcar mode)")
+	field(DTYP,"asynInt32")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(INP, "@asyn(DFP01,0)intwidth")
+	field(AOFF,"0.0")
+	field(ASLO,"0.01")
+	field(EGU, "us")
+	field(TSE, "-2")
+}
+
+################# Trigger #####################
+
+record(mbbo,"DPLA:FPM01:TrigType")
+{
+	field(DTYP,"asynInt32")
+	field(ZRST,"Edge")
+	field(ZRVL,"0")
+	field(ONST,"Internal")
+	field(ONVL,"1")
+	field(TWST,"Level")
+	field(TWVL,"2")
+	field(THST,"Pre-Trigger")
+	field(THVL,"5")
+	field(OUT, "@asyn(DFP01,0)TriggerSource")
+	info(asyn:READBACK,"1")
+}
+
+record(ao,"DPLA:FPM01:TrgPeriod") 
+{
+	field(DTYP,"asynInt32")
+	field(OUT, "@asyn(DFP01,0)inttriggerper")
+	info(asyn:READBACK,"1")
+	field(AOFF,"0.0")
+	field(ASLO,"0.01")
+	field(DRVH,"100000")
+	field(DRVL,"5")
+	field(HIGH,"100000")
+	field(LOW,"1500")
+	field(EGU, "us")
+	field(PREC,"2")
+}
+
+################  Processing: background ###############
+
+record(bo,"DPLA:FPM01:BGSubtract")
+{
+	field(DESC,"Apply background subtraction")
+	field(DTYP,"asynInt32")
+	field(ZNAM,"Disabled")
+	field(ONAM,"Enabled")
+	field(OUT, "@asyn(DFP01,0)backgndsub")
+	info(asyn:READBACK,"1")
+}
+
+record(bo,"DPLA:FPM01:BGObtain")
+{
+	field(DESC,"Background calibration")
+	field(DTYP,"asynInt32")
+	field(ZNAM,"No command")
+	field(ONAM,"Obtain BG")
+	field(OUT, "@asyn(DFP01,0)backgndobtain")
+	info(asyn:READBACK,"1")
+}
+
+record(waveform,"DPLA:FPM01:Background")
+{
+	field(DESC,"Background level")
+	field(DTYP,"asynFloat32ArrayIn")
+	field(INP, "@asyn(DFP01,0)Background")
+	field(SCAN,"I/O Intr")
+	field(FTVL,"FLOAT")
+	field(PREC,"3")
+	field(NELM,"64")
+}
+
+################  Processing: gain #####################
+
+record(bo,"DPLA:FPM01:P1GainEqlz")
+{
+	field(DESC,"Equalize gain coefficients for profile 1")
+	field(DTYP,"asynInt32")
+	field(ZNAM,"No command")
+	field(ONAM,"Obtain gains")
+	field(OUT, "@asyn(DFP01,0)P1GainEqualize")
+}
+
+record(bo,"DPLA:FPM01:P2GainEqlz")
+{
+	field(DESC,"Equalize gain coefficients for profile 2")
+	field(DTYP,"asynInt32")
+	field(ZNAM,"No command")
+	field(ONAM,"Obtain gains")
+	field(OUT, "@asyn(DFP01,0)P2GainEqualize")
+}
+
+record(bo,"DPLA:FPM01:GainComp")
+{
+	field(DESC,"Apply gain compensation")
+	field(DTYP,"asynInt32")
+	field(ZNAM,"Disabled")
+	field(ONAM,"Enabled")
+	field(OUT, "@asyn(DFP01,0)gaincomp")
+	info(asyn:READBACK,"1")
+}
+
+####### High Voltage ################
+
+record(bo,"DPLA:FPM01_HV01:Enable")
+{
+	field(DTYP,"asynInt32")
+	field(ZNAM,"OFF")
+	field(ONAM,"ON")
+	field(OUT, "@asyn(DFP01,0)HV01_Enable")
+	info(asyn:READBACK,"1")
+}
+
+record(bo,"DPLA:FPM01_HV02:Enable")
+{
+	field(DTYP,"asynInt32")
+	field(ZNAM,"OFF")
+	field(ONAM,"ON")
+	field(OUT, "@asyn(DFP01,0)HV02_Enable")
+	info(asyn:READBACK,"1")
+}
+
+record(ao,"DPLA:FPM01_HV01:VMax") 
+{
+	field(DTYP,"asynInt32")
+	field(OUT, "@asyn(DFP01,0)HV01_VMax")
+	info(asyn:READBACK,"1")
+	field(AOFF,"0.0")
+	field(ASLO,"0.1")
+	field(DRVH,"900")
+	field(DRVL,"0")
+	field(PREC,"1")
+	field(EGU, "V")
+}
+record(ao,"DPLA:FPM01_HV02:VMax") 
+{
+	field(DTYP,"asynInt32")
+	field(OUT, "@asyn(DFP01,0)HV02_VMax")
+	info(asyn:READBACK,"1")
+	field(AOFF,"0.0")
+	field(ASLO,"0.1")
+	field(DRVH,"900")
+	field(DRVL,"0")
+	field(PREC,"1")
+	field(EGU, "V")
+}
+
+record(ao,"DPLA:FPM01_HV01:VSet") 
+{
+	field(DTYP,"asynInt32")
+	field(OUT, "@asyn(DFP01,0)HV01_VSet")
+	info(asyn:READBACK,"1")
+	field(PREC,"1")
+	field(AOFF,"0.0")
+	field(ASLO,"0.1")
+	field(DRVH,"900")
+	field(DRVL,"0")
+	field(EGU, "V")
+}
+
+record(ao,"DPLA:FPM01_HV02:VSet") 
+{
+	field(DTYP,"asynInt32")
+	field(OUT, "@asyn(DFP01,0)HV02_VSet")
+	info(asyn:READBACK,"1")
+	field(PREC,"1")
+	field(AOFF,"0.0")
+	field(ASLO,"0.1")
+	field(DRVH,"900")
+	field(DRVL,"0")
+	field(EGU, "V")
+}
+################# Profile ###########################
+
+record(waveform,"DPLA:FPM01:graph")
+{
+	field(DTYP,"asynFloat32ArrayIn")
+	field(INP, "@asyn(DFP01,0)Data")
+	field(SCAN,"I/O Intr")
+	info(asyn:FIFO,"100")
+	field(FTVL,"FLOAT")
+	field(EGU,"pC")
+	field(NELM,"64")
+	field(PREC,"3")
+	field(TSE, "-2")
+}
+
+record(mbbo,"DPLA:FPM01:Profile1")
+{
+	field(DESC,"First profile channels selection")
+	field(DTYP,"asynInt32")
+	field(OUT, "@asyn(DFP01,0)Profile1")
+	info(asyn:READBACK,"1")
+	field(ZRST,"None")
+	field(ZRVL,"0")
+# Concatenated
+	field(ONST,"1..64")
+	field(ONVL,"1")
+	field(TWST,"64..1")
+	field(TWVL,"2")
+# Staggered
+	field(THST,"1,33,2..63,32,64")
+	field(THVL,"3")
+	field(FRST,"64,32,63..2,33,1")
+	field(FRVL,"4")
+# First half
+	field(FVST,"1..32")
+	field(FVVL,"5")
+	field(SXST,"32..1")
+	field(SXVL,"6")
+# Second half
+	field(SVST,"33..64")
+	field(SVVL,"7")
+	field(EIST,"64..33")
+	field(EIVL,"8")
+}
+
+record(mbbo,"DPLA:FPM01:Profile2")
+{
+	field(DESC,"Second profile channels selection")
+	field(DTYP,"asynInt32")
+	field(OUT, "@asyn(DFP01,0)Profile2")
+	info(asyn:READBACK,"1")
+	field(ZRST,"None")
+	field(ZRVL,"0")
+# Concatenated
+	field(ONST,"1..64")
+	field(ONVL,"1")
+	field(TWST,"64..1")
+	field(TWVL,"2")
+# Staggered
+	field(THST,"1,33,2..63,32,64")
+	field(THVL,"3")
+	field(FRST,"64,32,63..2,33,1")
+	field(FRVL,"4")
+# First half
+	field(FVST,"1..32")
+	field(FVVL,"5")
+	field(SXST,"32..1")
+	field(SXVL,"6")
+# Second half
+	field(SVST,"33..64")
+	field(SVVL,"7")
+	field(EIST,"64..33")
+	field(EIVL,"8")
+}
+
+record(waveform,"DPLA:FPM01:ProfileH")
+{
+	field(DTYP,"asynFloat32ArrayIn")
+	field(INP, "@asyn(DFP01,0)DataProfile1")
+	field(SCAN,"I/O Intr")
+	info(asyn:FIFO,"100")
+	field(FTVL,"FLOAT")
+	field(EGU,"pC")
+	field(PREC,"3")
+	field(NELM,"64")
+	field(TSE, "-2")
+}
+
+record(waveform,"DPLA:FPM01:ProfileV")
+{
+	field(DTYP,"asynFloat32ArrayIn")
+	field(INP, "@asyn(DFP01,0)DataProfile2")
+	field(SCAN,"I/O Intr")
+	info(asyn:FIFO,"100")
+	field(FTVL,"FLOAT")
+	field(EGU,"pC")
+	field(PREC,"3")
+	field(NELM,"64")
+	field(TSE, "-2")
+}
+
+#record(compress,"DPLA:FPM01:chart")
+#{
+#	field(DESC,"Holds 100 previous events")
+#	field(ALG,"Circular Buffer")
+#	field(NSAM,"6400")
+#	field(INP, "DPLA:FPM01:graph")
+#}
+
+
+record(ao,"DPLA:FPM01:CH0Gain") 
+{
+	field(DESC, "Gain compensation for channel 0")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain0")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH1Gain") 
+{
+	field(DESC, "Gain compensation for channel 1")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain1")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH2Gain") 
+{
+	field(DESC, "Gain compensation for channel 2")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain2")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH3Gain") 
+{
+	field(DESC, "Gain compensation for channel 3")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain3")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH4Gain") 
+{
+	field(DESC, "Gain compensation for channel 4")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain4")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH5Gain") 
+{
+	field(DESC, "Gain compensation for channel 5")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain5")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH6Gain") 
+{
+	field(DESC, "Gain compensation for channel 6")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain6")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH7Gain") 
+{
+	field(DESC, "Gain compensation for channel 7")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain7")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH8Gain") 
+{
+	field(DESC, "Gain compensation for channel 8")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain8")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH9Gain") 
+{
+	field(DESC, "Gain compensation for channel 9")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain9")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH10Gain") 
+{
+	field(DESC, "Gain compensation for channel 10")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain10")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH11Gain") 
+{
+	field(DESC, "Gain compensation for channel 11")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain11")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH12Gain") 
+{
+	field(DESC, "Gain compensation for channel 12")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain12")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH13Gain") 
+{
+	field(DESC, "Gain compensation for channel 13")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain13")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH14Gain") 
+{
+	field(DESC, "Gain compensation for channel 14")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain14")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH15Gain") 
+{
+	field(DESC, "Gain compensation for channel 15")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain15")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH16Gain") 
+{
+	field(DESC, "Gain compensation for channel 16")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain16")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH17Gain") 
+{
+	field(DESC, "Gain compensation for channel 17")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain17")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH18Gain") 
+{
+	field(DESC, "Gain compensation for channel 18")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain18")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH19Gain") 
+{
+	field(DESC, "Gain compensation for channel 19")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain19")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH20Gain") 
+{
+	field(DESC, "Gain compensation for channel 20")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain20")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH21Gain") 
+{
+	field(DESC, "Gain compensation for channel 21")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain21")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH22Gain") 
+{
+	field(DESC, "Gain compensation for channel 22")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain22")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH23Gain") 
+{
+	field(DESC, "Gain compensation for channel 23")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain23")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH24Gain") 
+{
+	field(DESC, "Gain compensation for channel 24")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain24")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH25Gain") 
+{
+	field(DESC, "Gain compensation for channel 25")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain25")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH26Gain") 
+{
+	field(DESC, "Gain compensation for channel 26")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain26")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH27Gain") 
+{
+	field(DESC, "Gain compensation for channel 27")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain27")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH28Gain") 
+{
+	field(DESC, "Gain compensation for channel 28")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain28")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH29Gain") 
+{
+	field(DESC, "Gain compensation for channel 29")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain29")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH30Gain") 
+{
+	field(DESC, "Gain compensation for channel 30")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain30")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH31Gain") 
+{
+	field(DESC, "Gain compensation for channel 31")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain31")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH32Gain") 
+{
+	field(DESC, "Gain compensation for channel 32")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain32")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH33Gain") 
+{
+	field(DESC, "Gain compensation for channel 33")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain33")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH34Gain") 
+{
+	field(DESC, "Gain compensation for channel 34")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain34")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH35Gain") 
+{
+	field(DESC, "Gain compensation for channel 35")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain35")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH36Gain") 
+{
+	field(DESC, "Gain compensation for channel 36")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain36")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH37Gain") 
+{
+	field(DESC, "Gain compensation for channel 37")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain37")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH38Gain") 
+{
+	field(DESC, "Gain compensation for channel 38")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain38")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH39Gain") 
+{
+	field(DESC, "Gain compensation for channel 39")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain39")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH40Gain") 
+{
+	field(DESC, "Gain compensation for channel 40")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain40")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH41Gain") 
+{
+	field(DESC, "Gain compensation for channel 41")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain41")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH42Gain") 
+{
+	field(DESC, "Gain compensation for channel 42")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain42")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH43Gain") 
+{
+	field(DESC, "Gain compensation for channel 43")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain43")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH44Gain") 
+{
+	field(DESC, "Gain compensation for channel 44")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain44")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH45Gain") 
+{
+	field(DESC, "Gain compensation for channel 45")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain45")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH46Gain") 
+{
+	field(DESC, "Gain compensation for channel 46")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain46")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH47Gain") 
+{
+	field(DESC, "Gain compensation for channel 47")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain47")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH48Gain") 
+{
+	field(DESC, "Gain compensation for channel 48")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain48")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH49Gain") 
+{
+	field(DESC, "Gain compensation for channel 49")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain49")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH50Gain") 
+{
+	field(DESC, "Gain compensation for channel 50")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain50")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH51Gain") 
+{
+	field(DESC, "Gain compensation for channel 51")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain51")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH52Gain") 
+{
+	field(DESC, "Gain compensation for channel 52")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain52")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH53Gain") 
+{
+	field(DESC, "Gain compensation for channel 53")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain53")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH54Gain") 
+{
+	field(DESC, "Gain compensation for channel 54")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain54")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH55Gain") 
+{
+	field(DESC, "Gain compensation for channel 55")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain55")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH56Gain") 
+{
+	field(DESC, "Gain compensation for channel 56")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain56")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH57Gain") 
+{
+	field(DESC, "Gain compensation for channel 57")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain57")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH58Gain") 
+{
+	field(DESC, "Gain compensation for channel 58")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain58")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH59Gain") 
+{
+	field(DESC, "Gain compensation for channel 59")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain59")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH60Gain") 
+{
+	field(DESC, "Gain compensation for channel 60")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain60")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH61Gain") 
+{
+	field(DESC, "Gain compensation for channel 61")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain61")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH62Gain") 
+{
+	field(DESC, "Gain compensation for channel 62")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain62")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+
+record(ao,"DPLA:FPM01:CH63Gain") 
+{
+	field(DESC, "Gain compensation for channel 63")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn(DFP01,0)channelgain63")
+	info(asyn:READBACK, "1")
+    field(PREC,"3")
+    field(DRVH,"99.9969")
+    field(DRVL,"-100")
+	field(EGU, "%")
+	field(AOFF, "-100.0")
+	field(ASLO, "0.0030517578125")
+}
+
+

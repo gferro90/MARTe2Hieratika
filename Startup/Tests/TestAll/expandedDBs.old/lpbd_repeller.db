@@ -1,0 +1,27 @@
+record(ao, "LPBD:HVPS:Voltage"){   #
+#  field(VAL, "0")
+}
+
+record(ao, "LPBD:HVPS:Current"){   #
+#  field(VAL, "0.9")
+}
+
+record(ao, "LPBD:HVPS:SetVoltage"){
+}
+
+record(ao, "LPBD:HVPS:SetCurrent"){
+}
+
+record(bo,"LPBD:HVPS:ChangeVoltage"){
+}
+
+record(bo, "LPBD:HVPS:StopLoop"){
+}
+
+record(bo, "LPBD:HVPS:OutputOnOff"){
+}
+
+record(bo, "LPBD:HVPS:CtrlHeartBeat"){
+}
+
+

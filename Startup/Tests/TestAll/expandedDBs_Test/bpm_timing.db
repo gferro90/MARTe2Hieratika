@@ -1,0 +1,341 @@
+###################################################
+# BPM timing fanout board BPM_TIM01 records
+
+# STATUS
+
+record(bi, "DPLA:BPM_TIM01:FPGAStat") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@7:0e.0 bar=2 offset=0x0 mask=0x00000001")
+  field(SCAN, "5 second")
+  field(DESC, "FPGA status")
+  field(ZNAM, "ERROR")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Ok")
+}
+
+record(mbbi, "DPLA:BPM_TIM01:Mode") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@7:0e.0 bar=2 offset=0x0 mask=0x0000000c shift=2 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Operation mode readback")
+  field(ZRST, "Disabled")
+  field(ZRVL, "0")
+  field(ONST, "Fan-out")
+  field(ONVL, "1")
+  field(TWST, "Free running")
+  field(TWVL, "2")
+  field(THST, "Triggered train")
+  field(THVL, "3")
+}
+
+record(bi, "DPLA:BPM_TIM01:TrigSrc") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@7:0e.0 bar=2 offset=0x0 mask=0x00000010 shift=4 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Trigger source readback")
+  field(ZNAM, "External")
+  field(ONAM, "Software")
+}
+
+record(bi, "DPLA:BPM_TIM01:MeasValid") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@7:0e.0 bar=2 offset=0x0 mask=0x00000020 shift=5 initread=1")
+  field(PINI, "YES")
+  field(SCAN, "1 second")
+  field(DESC, "Period and width averaged values status")
+  field(ZNAM, "No valid")
+  field(ONAM, "Valid")
+}
+
+record(bi, "DPLA:BPM_TIM01:Limit") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@7:0e.0 bar=2 offset=0x0 mask=0x00000040 shift=6 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "1 second")
+  field(DESC, "Train number of pulses")
+  field(ZNAM, "Infinite")
+  field(ONAM, "Limited")
+}
+
+record(bi, "DPLA:BPM_TIM01:DelayStat") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@7:0e.0 bar=2 offset=0x0 mask=0x00000080 shift=7 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "1 second")
+  field(DESC, "Delay of first pulse in train")
+  field(ZNAM, "No delay")
+  field(ONAM, "Delayed")
+}
+
+#record(bi, "DPLA:BPM_TIM01:FIFOStat") {
+#  field(DTYP, "Explore Read32 LSB")
+#  field(INP, "@7:0e.0 bar=2 offset=0x0 mask=0x00000100 shift=8 initread=1")
+#  field(PINI, "YES")
+#  field(SCAN, "1 second")
+#  field(DESC, "Trigger event timestamp FIFO status")
+#  field(ZNAM, "Empty")
+#  field(ONAM, "Data")
+#}
+
+
+record(longin, "DPLA:BPM_TIM01:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@7:0e.0 bar=2 offset=0x0 mask=0xffff0000 shift=16 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "1 second")
+  field(DESC, "Front panel outputs enable state")
+}
+
+
+#CONTROL
+
+record(bo, "DPLA:BPM_TIM01:FPGAReset") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@7:0e.0 bar=2 offset=0x4 mask=0x00000001 initread=1")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(DESC, "FPGA general reset")
+  field(ZNAM, "No reset")
+  field(ONAM, "Reset")
+}
+
+record(bo, "DPLA:BPM_TIM01:CountReset") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@7:0e.0 bar=2 offset=0x4 mask=0x00000002 shift=1 initread=1")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(DESC, "Reset pulse counters")
+  field(ZNAM, "No reset")
+  field(ONAM, "Reset")
+}
+
+record(mbbo, "DPLA:BPM_TIM01:ModeSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@7:0e.0 bar=2 offset=0x4 mask=0x0000000c shift=2 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Operation mode setting")
+  field(ZRST, "Disabled")
+  field(ZRVL, "0")
+  field(ONST, "Fan-out")
+  field(ONVL, "1")
+  field(TWST, "Free running")
+  field(TWVL, "2")
+  field(THST, "Triggered train")
+  field(THVL, "3")
+  field(FLNK, "DPLA:BPM_TIM01:Mode")
+}
+
+record(bo, "DPLA:BPM_TIM01:TrigSrcSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@7:0e.0 bar=2 offset=0x4 mask=0x00000010 shift=4 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Trigger source setting")
+  field(ZNAM, "External")
+  field(ONAM, "Software")
+  field(FLNK, "DPLA:BPM_TIM01:TrigSrc")
+}
+
+record(bo, "DPLA:BPM_TIM01:NoAverage") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@7:0e.0 bar=2 offset=0x4 mask=0x00000020 shift=5 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Forces no averaging")
+  field(ZNAM, "Average")
+  field(ONAM, "No average")
+}
+
+record(bo, "DPLA:BPM_TIM01:LimitSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@7:0e.0 bar=2 offset=0x4 mask=0x00000040 shift=6 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Train amount of pulses setting")
+  field(ZNAM, "Infinite")
+  field(ONAM, "Limited")
+  field(FLNK, "DPLA:BPM_TIM01:Limit")
+}
+
+record(bo, "DPLA:BPM_TIM01:DelayCmd") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@7:0e.0 bar=2 offset=0x4 mask=0x00000080 shift=7 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Delay of first pulse in train setting")
+  field(ZNAM, "Do not delay")
+  field(ONAM, "Delay")
+  field(FLNK, "DPLA:BPM_TIM01:DelayStat")
+}
+
+record(longout, "DPLA:BPM_TIM01:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@7:0e.0 bar=2 offset=0x4 mask=0xffff0000 shift=16 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Front panel outputs enable state")
+  field(DRVH, "65535")
+  field(DRVL, "0")
+  field(FLNK, "DPLA:BPM_TIM01:Enable")
+}
+
+# TRIGGER_COUNT
+
+record(longin, "DPLA:BPM_TIM01:TrigCount") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@7:0e.0 bar=2 offset=0x8 mask=0xffffffff initread=1")
+  field(SCAN, "1 second")
+  field(DESC, "Trigger pulses counter (ext. or soft.)")
+}
+
+# PULSE_COUNT
+
+record(longin, "DPLA:BPM_TIM01:PulseCount") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@7:0e.0 bar=2 offset=0xc mask=0xffffffff initread=1")
+  field(SCAN, "1 second")
+  field(DESC, "Generated pulses counter")
+}
+
+# PULSE_PERIOD
+
+record(ai, "DPLA:BPM_TIM01:PulsPeriod") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@7:0e.0 bar=2 offset=0x10 mask=0xffffffff initread=1")
+  field(SCAN, "1 second")
+  field(DESC, "Average period between input pulses")
+  field(EGU, "s")
+  field(PREC, "6")
+  field(AOFF, "0")
+  field(ASLO, "0.00000001")
+}
+
+# PULSE_WIDTH
+
+record(ai, "DPLA:BPM_TIM01:PulsWidth") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@7:0e.0 bar=2 offset=0x14 mask=0xffffffff initread=1")
+  field(SCAN, "1 second")
+  field(DESC, "Average width of input pulses")
+  field(EGU, "s")
+  field(PREC, "6")
+  field(AOFF, "0")
+  field(ASLO, "0.00000001")
+}
+
+# DAC_LEVEL
+
+record(ao, "DPLA:BPM_TIM01:TriggerSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@7:0e.0 bar=2 offset=0x18 mask=0x0000ffff initread=1")
+  field(DESC, "External trigger level")
+  field(EGU, "V")
+  field(PREC, "3")
+  field(AOFF, "0")
+  field(ASLO, "7.629511E-5")
+  field(DRVH, "5")
+  field(DRVL, "0")
+}
+
+# SET_PERIOD
+
+record(ao, "DPLA:BPM_TIM01:PeriodSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@7:0e.0 bar=2 offset=0x20 mask=0xffffffff initread=1")
+  field(DESC, "Generated pulses period")
+  field(EGU, "s")
+  field(PREC, "6")
+  field(AOFF, "0")
+  field(ASLO, "0.00000001")
+}
+
+# SET_WIDTH
+
+record(ao, "DPLA:BPM_TIM01:WidthSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@7:0e.0 bar=2 offset=0x24 mask=0xffffffff initread=1")
+  field(DESC, "Generated pulses width")
+  field(EGU, "s")
+  field(PREC, "6")
+  field(AOFF, "0")
+  field(ASLO, "0.00000001")
+}
+
+# SET_NrPULSES
+
+record(longout, "DPLA:BPM_TIM01:Pulses") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@7:0e.0 bar=2 offset=0x28 mask=0xffffffff initread=1")
+  field(DESC, "Number of generated pulses")
+}
+
+# PULSEPERIODDELAY
+
+record(ao, "DPLA:BPM_TIM01:DelaySet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@7:0e.0 bar=2 offset=0x30 mask=0xffffffff initread=1")
+  field(DESC, "Generated pulses delay")
+  field(EGU, "s")
+  field(PREC, "6")
+  field(AOFF, "0")
+  field(ASLO, "0.00000001")
+}
+
+
+# sw_TRIGGER
+
+record(bo, "DPLA:BPM_TIM01:SWTrigger") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@7:0e.0 bar=2 offset=0xA0 mask=0xffffffff initread=0")
+  field(DESC, "Software trigger")
+  field(ZNAM, "No command")
+  field(ONAM, "Trigger")
+}
+
+# IFMIF_ADDR_BOARD_ID
+
+record(mbbi, "DPLA:BPM_TIM01:ID") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@7:0e.0 bar=2 offset=0xf0 mask=0xffff0000 shift=16 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Board identification")
+  field(ZRVL, "0x00001000")
+  field(ZRST, "AFE board")
+  field(ONVL, "0x00002000")
+  field(ONST, "CAL board")
+  field(TWVL, "0x00003000")
+  field(TWST, "Timing board")
+}
+
+record(longin, "DPLA:BPM_TIM01:SN") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@7:0e.0 bar=2 offset=0xf0 mask=0x0000ffff initread=1")
+  field(PINI, "YES")
+  field(DESC, "Board serial number")
+}
+
+record(mbbi, "DPLA:BPM_TIM01:Type") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@7:0e.0 bar=2 offset=0xf4 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Board type")
+  field(ZRVL, "0x12345678")
+  field(ZRST, "Standard")
+  field(ONVL, "0x00010000")
+  field(ONST, "Trigger")
+  field(TWVL, "0x0020000")
+  field(TWST, "Gate")
+}
+
+record(longin, "DPLA:BPM_TIM01:Version") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@7:0e.0 bar=2 offset=0xf8 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Board version")
+}
+
+record(longin, "DPLA:BPM_TIM01:FWVersion") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@7:0e.0 bar=2 offset=0xfc initread=1")
+  field(PINI, "YES")
+  field(DESC, "Firmware version")
+}
+
+

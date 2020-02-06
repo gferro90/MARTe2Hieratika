@@ -1,0 +1,180 @@
+OutTerminator = CR;
+InTerminator = CR;
+ReadTimeout = 2000;
+PollPeriod = 100;
+ReplyTimeout = 2000;
+ExtraInput = Ignore;
+WriteTimeout = 1000;
+
+
+
+Local {
+    out"RT,OFF";
+}
+
+Remote  {
+    out"RT,ON";
+}
+
+etatLocal {
+    out "?RT";
+    in "%[_A-Z ]";
+}
+
+InitMKS {
+	out "RT,ON";
+        out "DF,F";
+        out "VL1,OFF";
+        out "VL2,OFF";
+        out "DP1,1,3,1";
+        out "DP1,2,3,2";
+        out "DP2,OFF"; 
+        out "GN1,1.0";
+        out "RG1,5,12";
+        out "GN2,1.2";
+        out "RG2,5,12";
+}	
+
+Flow_mode {
+     out"DF,%s";
+}
+
+Open_Close_VL1 {
+     out"VL1,%s";
+}
+
+Open_Close_VL2 {
+     out"VL2,%s";
+}
+
+Open_Close_Valve {
+     out"VL0,%s";
+}
+
+Set_GN1 {
+	out "GN1,%f";
+}
+
+Set_GN2 {
+	out "GN2,%f";
+}
+
+Set_Range1 {
+	out "RG1,10,12";
+}
+
+Set_Range2 {
+	out "RG2,10,12";
+}
+
+Set_DP2 {
+	out "DP2,%s";
+}
+
+Set_DP1_1 {
+	out "DP1,1,3,1,%s";
+}
+
+Set_DP1_2 {
+	out "DP1,2,3,2,%s";
+}
+
+InitPR4000B {
+	out "RT,%s";
+
+}	
+
+readID {
+	out "?ID";
+        in "%s";
+}
+readGN1 {
+	out "?GN1";
+        in "%f";
+}
+readVL1 {
+	out "?VL1";
+        in "%s";
+}
+
+debit_H2 {
+    out "SP2,%f";
+}
+
+debit_D2 {
+    out "SP1,%f";
+}
+
+debit_Voie2 {
+    out "SP2,%f";
+}
+
+debit_voie1 {
+    out "SP1,%f";
+}
+
+
+LectCons1{
+    out "?SP1";
+    in "%f";
+}
+
+MesDeb1{
+    out "AV1";
+    in "%f";
+}
+
+OpenValve1{
+    out "VL1,%s";	
+    in "%s";
+}
+
+EtatVL1{
+    out "?VL1";
+    in "%[A-Z ]";	
+}
+
+
+LectCons2{
+    out "?SP2";
+    in "%f";
+}
+
+MesDeb2{
+    out "AV2";
+    in "%f";
+}
+
+OpenValve2{
+    out "VL2,%s";
+    in "%s";
+}
+
+SetEtat{
+    out "VL0,%s";  
+    in "%s";
+}
+
+EtatVL2{
+    out "?VL2";
+    in "%[A-Z ]";
+}
+
+# Connect a stringout record to this to get
+# a generic command interface.
+# After processing finishes, the record contains the reply.
+
+debug {
+    ExtraInput = Ignore;
+    out "%s"; in "%39c";
+}
+
+ValSP2 {
+   out "?SP2";
+   in "%39c";
+}
+
+ValSP1 {
+   out "?SP1";
+   in "%39c";
+}

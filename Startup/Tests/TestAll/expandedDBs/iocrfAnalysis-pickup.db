@@ -1,0 +1,6368 @@
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk011VCnst") {
+        field(DO1, "0.32286954458173")
+        field(DO2, "-25.9532953443613")
+        field(DO3, "0.0733122486")
+        field(DO4, "0.164")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk011V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH08:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk011VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk011VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk011VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk011PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk011PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk011V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk011NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk011NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk011PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk011Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH08:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk011VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk011VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk011PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk012VCnst") {
+        field(DO1, "0.323563991912016")
+        field(DO2, "-26.0489263760619")
+        field(DO3, "0.0775734626")
+        field(DO4, "0.164")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk012V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH09:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk012VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk012VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk012VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk012PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk012PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk012V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk012NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk012NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk012PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk012Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH09:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk012VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk012VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk012PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk013VCnst") {
+        field(DO1, "0.32152814298583")
+        field(DO2, "-25.6301442987762")
+        field(DO3, "0.0803819899")
+        field(DO4, "0.164")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk013V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH10:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk013VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk013VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk013VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk013PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk013PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk013V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk013NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk013NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk013PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk013Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH10:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk013VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk013VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk013PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk014VCnst") {
+        field(DO1, "0.309573931686019")
+        field(DO2, "-25.468864813721")
+        field(DO3, "0.0768955422")
+        field(DO4, "0.164")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk014V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH11:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk014VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk014VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk014VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk014PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk014PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk014V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk014NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk014NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk014PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk014Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH11:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk014VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk014VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk014PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk021VCnst") {
+        field(DO1, "0.307701256062344")
+        field(DO2, "-24.4341802666189")
+        field(DO3, "0.0765081591")
+        field(DO4, "0.709")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk021V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH12:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk021VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk021VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk021VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk021PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk021PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk021V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk021NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk021NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk021PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk021Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH12:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk021VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk021VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk021PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk022VCnst") {
+        field(DO1, "0.309157558366072")
+        field(DO2, "-25.9546779282765")
+        field(DO3, "0.0769923879")
+        field(DO4, "0.709")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk022V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH13:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk022VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk022VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk022VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk022PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk022PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk022V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk022NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk022NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk022PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk022Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH13:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk022VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk022VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk022PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk023VCnst") {
+        field(DO1, "0.328003541077779")
+        field(DO2, "-26.4259535871275")
+        field(DO3, "0.0785419203")
+        field(DO4, "0.709")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk023V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH14:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk023VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk023VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk023VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk023PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk023PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk023V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk023NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk023NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk023PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk023Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH14:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk023VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk023VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk023PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk024VCnst") {
+        field(DO1, "0.323468159376059")
+        field(DO2, "-25.7156569519926")
+        field(DO3, "0.078251383")
+        field(DO4, "0.709")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk024V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH15:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk024VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk024VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk024VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk024PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk024PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk024V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk024NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk024NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk024PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk024Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH15:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk024VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk024VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk024PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk041VCnst") {
+        field(DO1, "0.309581432742678")
+        field(DO2, "-26.4269611068894")
+        field(DO3, "0.0778639999")
+        field(DO4, "1.801")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk041V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH31:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk041VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk041VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk041VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk041PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk041PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk041V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk041NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk041NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk041PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk041Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH31:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk041VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk041VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk041PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk042VCnst") {
+        field(DO1, "0.332516838882554")
+        field(DO2, "-26.6282232118178")
+        field(DO3, "0.0765081591")
+        field(DO4, "1.801")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk042V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH30:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk042VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk042VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk042VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk042PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk042PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk042V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk042NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk042NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk042PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk042Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH30:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk042VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk042VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk042PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk043VCnst") {
+        field(DO1, "0.338148379268461")
+        field(DO2, "-27.0427160003976")
+        field(DO3, "0.0762176218")
+        field(DO4, "1.801")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk043V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH29:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk043VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk043VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk043VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk043PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk043PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk043V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk043NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk043NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk043PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk043Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH29:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk043VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk043VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk043PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk044VCnst") {
+        field(DO1, "0.344268223355879")
+        field(DO2, "-27.2594998573739")
+        field(DO3, "0.0776703083")
+        field(DO4, "1.801")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk044V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH28:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk044VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk044VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk044VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk044PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk044PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk044V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk044NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk044NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk044PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk044Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH28:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk044VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk044VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk044PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk061VCnst") {
+        field(DO1, "0.319919583554826")
+        field(DO2, "-27.0118112345665")
+        field(DO3, "0.0785419203")
+        field(DO4, "2.893")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk061V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH27:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk061VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk061VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk061VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk061PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk061PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk061V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk061NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk061NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk061PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk061Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH27:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk061VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk061VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk061PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk062VCnst") {
+        field(DO1, "0.331083749720845")
+        field(DO2, "-27.6788129656839")
+        field(DO3, "0.0767018506")
+        field(DO4, "2.893")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk062V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH26:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk062VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk062VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk062VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk062PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk062PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk062V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk062NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk062NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk062PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk062Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH26:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk062VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk062VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk062PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk063VCnst") {
+        field(DO1, "0.321251602100627")
+        field(DO2, "-26.8426925539705")
+        field(DO3, "0.0742807063")
+        field(DO4, "2.893")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk063V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH25:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk063VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk063VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk063VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk063PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk063PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk063V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk063NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk063NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk063PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk063Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH25:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk063VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk063VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk063PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk064VCnst") {
+        field(DO1, "0.34401100303107")
+        field(DO2, "-27.1984651474783")
+        field(DO3, "0.0758302387")
+        field(DO4, "2.893")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk064V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH24:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk064VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk064VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk064VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk064PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk064PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk064V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk064NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk064NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk064PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk064Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH24:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk064VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk064VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk064PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk081VCnst") {
+        field(DO1, "0.345600171752041")
+        field(DO2, "-27.494385860592")
+        field(DO3, "0.0816409849")
+        field(DO4, "3.985")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk081V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH23:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk081VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk081VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk081VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk081PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk081PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk081V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk081NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk081NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk081PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk081Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH23:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk081VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk081VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk081PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk082VCnst") {
+        field(DO1, "0.342266389372597")
+        field(DO2, "-27.3059940926932")
+        field(DO3, "0.0811567561")
+        field(DO4, "3.985")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk082V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH22:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk082VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk082VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk082VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk082PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk082PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk082V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk082NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk082NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk082PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk082Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH22:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk082VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk082VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk082PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk083VCnst") {
+        field(DO1, "0.344904985458813")
+        field(DO2, "-27.3678205393456")
+        field(DO3, "0.0778639999")
+        field(DO4, "3.985")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk083V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH21:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk083VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk083VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk083VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk083PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk083PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk083V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk083NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk083NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk083PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk083Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH21:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk083VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk083VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk083PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk084VCnst") {
+        field(DO1, "0.331536567576963")
+        field(DO2, "-26.6434440245677")
+        field(DO3, "0.0780576914")
+        field(DO4, "3.985")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk084V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH20:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk084VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk084VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk084VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk084PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk084PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk084V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk084NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk084NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk084PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk084Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH20:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk084VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk084VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk084PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk101VCnst") {
+        field(DO1, "0.3419003079939")
+        field(DO2, "-26.8490042531865")
+        field(DO3, "0.0982984575")
+        field(DO4, "5.077")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk101V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH19:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk101VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk101VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk101VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk101PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk101PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk101V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk101NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk101NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk101PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk101Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH19:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk101VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk101VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk101PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk102VCnst") {
+        field(DO1, "0.33231644292663")
+        field(DO2, "-26.5777354890608")
+        field(DO3, "0.0995574526")
+        field(DO4, "5.077")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk102V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH18:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk102VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk102VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk102VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk102PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk102PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk102V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk102NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk102NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk102PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk102Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH18:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk102VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk102VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk102PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk103VCnst") {
+        field(DO1, "0.335445669540347")
+        field(DO2, "-26.7646481981321")
+        field(DO3, "0.0966520794")
+        field(DO4, "5.077")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk103V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH17:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk103VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk103VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk103VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk103PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk103PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk103V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk103NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk103NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk103PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk103Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH17:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk103VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk103VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk103PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk104VCnst") {
+        field(DO1, "0.361188079732866")
+        field(DO2, "-27.9036731347263")
+        field(DO3, "0.0952962386")
+        field(DO4, "5.077")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk104V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL1_CH16:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk104VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk104VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk104VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk104PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk104PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk104V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk104NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk104NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk104PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk104Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL1_CH16:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk104VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk104VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk104PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk111VCnst") {
+        field(DO1, "0.355646445650252")
+        field(DO2, "-27.905012682389")
+        field(DO3, "0.1130190147")
+        field(DO4, "5.843")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk111V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH12:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk111VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk111VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk111VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk111PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk111PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk111V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk111NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk111NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk111PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk111Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH12:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk111VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk111VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk111PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk112VCnst") {
+        field(DO1, "0.344449714242815")
+        field(DO2, "-26.7110298743726")
+        field(DO3, "0.115440159")
+        field(DO4, "5.843")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk112V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH13:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk112VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk112VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk112VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk112PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk112PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk112V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk112NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk112NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk112PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk112Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH13:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk112VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk112VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk112PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk113VCnst") {
+        field(DO1, "0.333672663922577")
+        field(DO2, "-27.8599518293406")
+        field(DO3, "0.1125347859")
+        field(DO4, "5.843")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk113V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH14:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk113VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk113VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk113VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk113PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk113PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk113V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk113NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk113NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk113PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk113Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH14:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk113VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk113VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk113PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk114VCnst") {
+        field(DO1, "0.355177997819449")
+        field(DO2, "-28.1308396694118")
+        field(DO3, "0.1105978705")
+        field(DO4, "5.843")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk114V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH15:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk114VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk114VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk114VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk114PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk114PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk114V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk114NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk114NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk114PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk114Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH15:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk114VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk114VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk114PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk131VCnst") {
+        field(DO1, "0.354353898868668")
+        field(DO2, "-28.9972526834686")
+        field(DO3, "0.1230909749")
+        field(DO4, "6.714")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk131V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH31:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk131VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk131VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk131PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk131PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk131V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk131NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk131NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk131PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk131Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH31:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk131VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk131PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk132VCnst") {
+        field(DO1, "0.356306501252665")
+        field(DO2, "-27.6086045456593")
+        field(DO3, "0.1255121192")
+        field(DO4, "6.714")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk132V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH30:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk132VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk132VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk132VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk132PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk132PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk132V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk132NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk132NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk132PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk132Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH30:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk132VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk132VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk132PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk133VCnst") {
+        field(DO1, "0.356139787521458")
+        field(DO2, "-28.1627549586536")
+        field(DO3, "0.1230909749")
+        field(DO4, "6.714")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk133V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH29:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk133VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk133VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk133VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk133PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk133PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk133V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk133NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk133NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk133PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk133Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH29:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk133VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk133VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk133PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk134VCnst") {
+        field(DO1, "0.349772627128353")
+        field(DO2, "-27.477111359134")
+        field(DO3, "0.1215414426")
+        field(DO4, "6.714")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk134V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH28:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk134VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk134VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk134VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk134PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk134PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk134V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk134NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk134NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk134PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk134Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH28:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk134VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk134VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk134PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk151VCnst") {
+        field(DO1, "0.367856433697431")
+        field(DO2, "-29.5500036149114")
+        field(DO3, "0.1253184277")
+        field(DO4, "7.8")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk151V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH27:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk151VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk151VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk151VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk151PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk151PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk151V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk151NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk151NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk151PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk151Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH27:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk151VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk151VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk151PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk152VCnst") {
+        field(DO1, "0.354873089476905")
+        field(DO2, "-27.4210181965737")
+        field(DO3, "0.1252215819")
+        field(DO4, "7.8")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk152V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH26:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk152VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk152VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk152VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk152PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk152PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk152V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk152NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk152NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk152PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk152Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH26:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk152VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk152VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk152PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk153VCnst") {
+        field(DO1, "0.374088349331529")
+        field(DO2, "-29.3601584647687")
+        field(DO3, "0.1239625869")
+        field(DO4, "7.8")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk153V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH25:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk153VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk153VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk153VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk153PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk153PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk153V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk153NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk153NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk153PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk153Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH25:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk153VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk153VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk153PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk154VCnst") {
+        field(DO1, "0.365195491525351")
+        field(DO2, "-29.8588117474661")
+        field(DO3, "0.1245436615")
+        field(DO4, "7.8")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk154V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH24:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk154VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk154VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk154VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk154PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk154PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk154V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk154NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk154NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk154PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk154Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH24:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk154VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk154VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk154PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk171VCnst") {
+        field(DO1, "0.36510421940939")
+        field(DO2, "-29.6461104517094")
+        field(DO3, "0.1260931938")
+        field(DO4, "8.888")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk171V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH23:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk171VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk171VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk171VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk171PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk171PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk171V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk171NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk171NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk171PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk171Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH23:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk171VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk171VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk171PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk172VCnst") {
+        field(DO1, "0.335129154363361")
+        field(DO2, "-28.5957237645578")
+        field(DO3, "0.1221225172")
+        field(DO4, "8.888")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk172V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH22:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk172VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk172VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk172VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk172PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk172PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk172V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk172NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk172NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk172PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk172Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH22:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk172VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk172VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk172PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk173VCnst") {
+        field(DO1, "0.367488595432372")
+        field(DO2, "-30.0412713538985")
+        field(DO3, "0.1223162088")
+        field(DO4, "8.888")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk173V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH21:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk173VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk173VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk173VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk173PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk173PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk173V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk173NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk173NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk173PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk173Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH21:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk173VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk173VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk173PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk174VCnst") {
+        field(DO1, "0.360695004957556")
+        field(DO2, "-30.1531291734136")
+        field(DO3, "0.12686796")
+        field(DO4, "8.888")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk174V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH20:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk174VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk174VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk174VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk174PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk174PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk174V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk174NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk174NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk174PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk174Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH20:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk174VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk174VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk174PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk181VCnst") {
+        field(DO1, "0.368521532680211")
+        field(DO2, "-29.1636370011308")
+        field(DO3, "0.1236720495")
+        field(DO4, "9.652")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk181V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH19:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk181VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk181VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk181VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk181PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk181PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk181V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk181NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk181NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk181PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk181Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH19:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk181VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk181VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk181PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk182VCnst") {
+        field(DO1, "0.370190319667346")
+        field(DO2, "-29.1882775886179")
+        field(DO3, "0.1221225172")
+        field(DO4, "9.652")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk182V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH18:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk182VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk182VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk182VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk182PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk182PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk182V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk182NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk182NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk182PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk182Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH18:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk182VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk182VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk182PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk183VCnst") {
+        field(DO1, "0.373536020444979")
+        field(DO2, "-29.3838186241366")
+        field(DO3, "0.1230909749")
+        field(DO4, "9.652")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk183V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH17:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk183VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk183VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk183VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk183PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk183PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk183V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk183NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk183NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk183PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk183Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH17:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk183VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk183VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk183PivV")
+}
+# Pickup Voltages 
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# - Costants used for Pickup Voltage - 
+record(seq, "RFQ:RF:Pk184VCnst") {
+        field(DO1, "0.366654376594941")
+        field(DO2, "-29.3273965020919")
+        field(DO3, "0.124737353")
+        field(DO4, "9.652")
+        field(PINI, "YES")
+}
+
+
+
+# - Pickup Voltage  -
+record(calcout, "RFQ:RF:Pk184V") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "SQR(0.001)*D*10^((A-C)/(20*B))")
+        field(INPA, "RFQ:RFSL2_CH16:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk184VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk184VCnst.DO2 CP")
+        field(INPD, "RFQ:RF:Pk184VCnst.DO3 CP")
+        field(PREC, "4")
+        field(EGU, "kV")
+		field(FLNK, "RFQ:RF:Pk184PivV")
+}
+
+
+# - Pickup Pivot Voltage  -
+record(calcout, "RFQ:RF:Pk184PivV") {
+        field(CALC, "A/B")
+        field(INPA, "RFQ:RF:Pk184V.VAL CP")
+        field(INPB, "RFQ:RF:Pk131V.VAL CP")
+        field(PREC, "4")
+        field(EGU, "")
+        #field(FLNK, "RFQ:RF:Pk184NormV")     
+}
+
+
+# - Pickup Normalized Voltage - 
+# Executed after Norm Factor calculation 
+record(calcout, "RFQ:RF:Pk184NormV") {
+		field(DESC, "Normaliz Voltage")
+		field(SCAN, ".1 second")
+        field(PHAS, "4")
+        field(INPA, "RFQ:RF:Pk184PivV.VAL")
+        field(INPB, "RFQ:RF:NormFactV.VAL PP") 
+        field(CALC, "A*4/B")
+}        
+
+
+
+
+# - Pickup Power  -
+record(calcout, "RFQ:RF:Pk184Pwr") {
+        field(SCAN, ".1 second")
+        field(PHAS, "0")
+        field(CALC, "D*10^((A-C)/(10*B))")
+        field(INPA, "RFQ:RFSL2_CH16:V.VAL CP")
+        field(INPB, "RFQ:RF:Pk184VCnst.DO1 CP")
+        field(INPC, "RFQ:RF:Pk184VCnst.DO2 CP")
+        field(INPD, "1.00E-6")
+        field(PREC, "4")
+        field(EGU, "kW")
+		#field(FLNK, "RFQ:RF:Pk184PivV")
+}
+# Pickup Nominal Voltages  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+record(ai, "RFQ:RF:M01NomV") {
+		field(DESC, "M01 Nominal Voltage")
+		field(VAL, "0.783")
+		field(PINI, "YES")
+}
+# Pickup Nominal Voltages  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+record(ai, "RFQ:RF:M02NomV") {
+		field(DESC, "M02 Nominal Voltage")
+		field(VAL, "0.783")
+		field(PINI, "YES")
+}
+# Pickup Nominal Voltages  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+record(ai, "RFQ:RF:M04NomV") {
+		field(DESC, "M04 Nominal Voltage")
+		field(VAL, "0.783")
+		field(PINI, "YES")
+}
+# Pickup Nominal Voltages  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+record(ai, "RFQ:RF:M06NomV") {
+		field(DESC, "M06 Nominal Voltage")
+		field(VAL, "0.783")
+		field(PINI, "YES")
+}
+# Pickup Nominal Voltages  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+record(ai, "RFQ:RF:M08NomV") {
+		field(DESC, "M08 Nominal Voltage")
+		field(VAL, "0.815")
+		field(PINI, "YES")
+}
+# Pickup Nominal Voltages  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+record(ai, "RFQ:RF:M10NomV") {
+		field(DESC, "M10 Nominal Voltage")
+		field(VAL, "1.003")
+		field(PINI, "YES")
+}
+# Pickup Nominal Voltages  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+record(ai, "RFQ:RF:M11NomV") {
+		field(DESC, "M11 Nominal Voltage")
+		field(VAL, "1.174")
+		field(PINI, "YES")
+}
+# Pickup Nominal Voltages  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+record(ai, "RFQ:RF:M13NomV") {
+		field(DESC, "M13 Nominal Voltage")
+		field(VAL, "1.288")
+		field(PINI, "YES")
+}
+# Pickup Nominal Voltages  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+record(ai, "RFQ:RF:M15NomV") {
+		field(DESC, "M15 Nominal Voltage")
+		field(VAL, "1.304")
+		field(PINI, "YES")
+}
+# Pickup Nominal Voltages  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+record(ai, "RFQ:RF:M17NomV") {
+		field(DESC, "M17 Nominal Voltage")
+		field(VAL, "1.304")
+		field(PINI, "YES")
+}
+# Pickup Nominal Voltages  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+record(ai, "RFQ:RF:M18NomV") {
+		field(DESC, "M18 Nominal Voltage")
+		field(VAL, "1.304")
+		field(PINI, "YES")
+}
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk011NAdd") {
+		field(DESC, "Pk011 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk011PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO1")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk012NAdd") {
+		field(DESC, "Pk012 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk012PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO1")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk013NAdd") {
+		field(DESC, "Pk013 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk013PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO1")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk014NAdd") {
+		field(DESC, "Pk014 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk014PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO1")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk021NAdd") {
+		field(DESC, "Pk021 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk021PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO2")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk022NAdd") {
+		field(DESC, "Pk022 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk022PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO2")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk023NAdd") {
+		field(DESC, "Pk023 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk023PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO2")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk024NAdd") {
+		field(DESC, "Pk024 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk024PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO2")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk041NAdd") {
+		field(DESC, "Pk041 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk041PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO3")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk042NAdd") {
+		field(DESC, "Pk042 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk042PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO3")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk043NAdd") {
+		field(DESC, "Pk043 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk043PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO3")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk044NAdd") {
+		field(DESC, "Pk044 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk044PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO3")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk061NAdd") {
+		field(DESC, "Pk061 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk061PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO4")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk062NAdd") {
+		field(DESC, "Pk062 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk062PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO4")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk063NAdd") {
+		field(DESC, "Pk063 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk063PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO4")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk064NAdd") {
+		field(DESC, "Pk064 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk064PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO4")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk081NAdd") {
+		field(DESC, "Pk081 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk081PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO5")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk082NAdd") {
+		field(DESC, "Pk082 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk082PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO5")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk083NAdd") {
+		field(DESC, "Pk083 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk083PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO5")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk084NAdd") {
+		field(DESC, "Pk084 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk084PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO5")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk101NAdd") {
+		field(DESC, "Pk101 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk101PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO6")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk102NAdd") {
+		field(DESC, "Pk102 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk102PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO6")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk103NAdd") {
+		field(DESC, "Pk103 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk103PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO6")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk104NAdd") {
+		field(DESC, "Pk104 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk104PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO6")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk111NAdd") {
+		field(DESC, "Pk111 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk111PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO7")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk112NAdd") {
+		field(DESC, "Pk112 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk112PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO7")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk113NAdd") {
+		field(DESC, "Pk113 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk113PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO7")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk114NAdd") {
+		field(DESC, "Pk114 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk114PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO7")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk131NAdd") {
+		field(DESC, "Pk131 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk131PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO8")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk132NAdd") {
+		field(DESC, "Pk132 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk132PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO8")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk133NAdd") {
+		field(DESC, "Pk133 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk133PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO8")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk134NAdd") {
+		field(DESC, "Pk134 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk134PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO8")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk151NAdd") {
+		field(DESC, "Pk151 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk151PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO9")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk152NAdd") {
+		field(DESC, "Pk152 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk152PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO9")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk153NAdd") {
+		field(DESC, "Pk153 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk153PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO9")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk154NAdd") {
+		field(DESC, "Pk154 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk154PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DO9")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk171NAdd") {
+		field(DESC, "Pk171 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk171PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DOA")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk172NAdd") {
+		field(DESC, "Pk172 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk172PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DOA")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk173NAdd") {
+		field(DESC, "Pk173 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk173PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DOA")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+
+# Normalization Factor - pickup factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Pk174NAdd") {
+		field(DESC, "Pk174 Contrib to Norm Factor")
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk174PivV.VAL")
+		field(INPB, "RFQ:RF:DltDim.DOA")
+		field(CALC, "A*B")
+		field(VAL, "0")	
+}
+
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+# Normalization Factor - Quadrant factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Q1Sum") {
+		field(DESC, "Q1 Sum")
+		field(SCAN, ".1 second")
+        field(PHAS, "2")
+		field(INPA, "RFQ:RF:Pk011NAdd.VAL PP")
+		field(INPB, "RFQ:RF:Pk021NAdd.VAL PP")
+		field(INPC, "RFQ:RF:Pk041NAdd.VAL PP")
+		field(INPD, "RFQ:RF:Pk061NAdd.VAL PP")
+		field(INPE, "RFQ:RF:Pk081NAdd.VAL PP")
+		field(INPF, "RFQ:RF:Pk101NAdd.VAL PP")
+		field(INPG, "RFQ:RF:Pk111NAdd.VAL PP")
+		field(INPH, "RFQ:RF:Pk131NAdd.VAL PP")
+		field(INPI, "RFQ:RF:Pk151NAdd.VAL PP")
+		field(INPJ, "RFQ:RF:Pk171NAdd.VAL PP")
+		field(CALC, "A+B+C+D+E+F+G+H+I+J")
+		field(VAL, "0")	
+}
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+# Normalization Factor - Quadrant factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Q2Sum") {
+		field(DESC, "Q2 Sum")
+		field(SCAN, ".1 second")
+        field(PHAS, "2")
+		field(INPA, "RFQ:RF:Pk012NAdd.VAL PP")
+		field(INPB, "RFQ:RF:Pk022NAdd.VAL PP")
+		field(INPC, "RFQ:RF:Pk042NAdd.VAL PP")
+		field(INPD, "RFQ:RF:Pk062NAdd.VAL PP")
+		field(INPE, "RFQ:RF:Pk082NAdd.VAL PP")
+		field(INPF, "RFQ:RF:Pk102NAdd.VAL PP")
+		field(INPG, "RFQ:RF:Pk112NAdd.VAL PP")
+		field(INPH, "RFQ:RF:Pk132NAdd.VAL PP")
+		field(INPI, "RFQ:RF:Pk152NAdd.VAL PP")
+		field(INPJ, "RFQ:RF:Pk172NAdd.VAL PP")
+		field(CALC, "A+B+C+D+E+F+G+H+I+J")
+		field(VAL, "0")	
+}
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+# Normalization Factor - Quadrant factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Q3Sum") {
+		field(DESC, "Q3 Sum")
+		field(SCAN, ".1 second")
+        field(PHAS, "2")
+		field(INPA, "RFQ:RF:Pk013NAdd.VAL PP")
+		field(INPB, "RFQ:RF:Pk023NAdd.VAL PP")
+		field(INPC, "RFQ:RF:Pk043NAdd.VAL PP")
+		field(INPD, "RFQ:RF:Pk063NAdd.VAL PP")
+		field(INPE, "RFQ:RF:Pk083NAdd.VAL PP")
+		field(INPF, "RFQ:RF:Pk103NAdd.VAL PP")
+		field(INPG, "RFQ:RF:Pk113NAdd.VAL PP")
+		field(INPH, "RFQ:RF:Pk133NAdd.VAL PP")
+		field(INPI, "RFQ:RF:Pk153NAdd.VAL PP")
+		field(INPJ, "RFQ:RF:Pk173NAdd.VAL PP")
+		field(CALC, "A+B+C+D+E+F+G+H+I+J")
+		field(VAL, "0")	
+}
+# Normalization Factor - addendums  
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+# Normalization Factor - Quadrant factor contribution
+# Contributions come from Module 1 to Module 17 (M18 excluded)
+#
+
+record(calc, "RFQ:RF:Q4Sum") {
+		field(DESC, "Q4 Sum")
+		field(SCAN, ".1 second")
+        field(PHAS, "2")
+		field(INPA, "RFQ:RF:Pk014NAdd.VAL PP")
+		field(INPB, "RFQ:RF:Pk024NAdd.VAL PP")
+		field(INPC, "RFQ:RF:Pk044NAdd.VAL PP")
+		field(INPD, "RFQ:RF:Pk064NAdd.VAL PP")
+		field(INPE, "RFQ:RF:Pk084NAdd.VAL PP")
+		field(INPF, "RFQ:RF:Pk104NAdd.VAL PP")
+		field(INPG, "RFQ:RF:Pk114NAdd.VAL PP")
+		field(INPH, "RFQ:RF:Pk134NAdd.VAL PP")
+		field(INPI, "RFQ:RF:Pk154NAdd.VAL PP")
+		field(INPJ, "RFQ:RF:Pk174NAdd.VAL PP")
+		field(CALC, "A+B+C+D+E+F+G+H+I+J")
+		field(VAL, "0")	
+}
+# RF Modal Components Extimation
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages are (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+
+# - Quadrupole -
+record(calc, "RFQ:RF:Mod01Quad") {
+		field(SCAN, ".1 second")
+        field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk011NormV.VAL")
+		field(INPB, "RFQ:RF:Pk012NormV.VAL")
+		field(INPC, "RFQ:RF:Pk013NormV.VAL")
+		field(INPD, "RFQ:RF:Pk014NormV.VAL")
+		field(CALC, "(A+B+C+D)/2")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod01ODip")	
+	
+}
+
+# - Dipole 1 -
+record(calc, "RFQ:RF:Mod01ODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk011NormV.VAL")
+		field(INPB, "RFQ:RF:Pk013NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod01EDip")	
+	
+}
+
+# - Dipole 2 -
+record(calc, "RFQ:RF:Mod01EDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk012NormV.VAL")
+		field(INPB, "RFQ:RF:Pk014NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod01Mono")	
+	
+}
+
+# - Monopole -
+record(calc, "RFQ:RF:Mod01Mono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk011NormV.VAL")
+		field(INPB, "RFQ:RF:Pk012NormV.VAL")
+		field(INPC, "RFQ:RF:Pk013NormV.VAL")
+		field(INPD, "RFQ:RF:Pk014NormV.VAL")
+		field(CALC, "(A-B+C-D)/2")
+		field(VAL, "0")	
+		field(FLNK, "RFQ:RF:Mod01DQuad")
+}
+
+
+# - Quadrupole Perturbation Component -
+record(calc, "RFQ:RF:Mod01DQuad") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "5")
+		field(INPA, "RFQ:RF:Mod01Quad.VAL")
+		field(INPB, "RFQ:RF:M01NomV.VAL")
+		field(CALC, "(A-2*B)/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod01DODip")	
+	
+}
+
+# - Dipole 1 Perturbation Component -
+record(calc, "RFQ:RF:Mod01DODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod01ODip.VAL")
+		field(INPB, "RFQ:RF:M01NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod01DEDip")	
+	
+}
+
+# - Dipole 2 Perturbation Component -
+record(calc, "RFQ:RF:Mod01DEDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod01EDip.VAL")
+		field(INPB, "RFQ:RF:M01NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod01DMono")	
+	
+}
+
+# - Monopole Perturbation Component -
+record(calc, "RFQ:RF:Mod01DMono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod01Mono.VAL")
+		field(INPB, "RFQ:RF:M01NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+	
+}
+# RF Modal Components Extimation
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages are (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+
+# - Quadrupole -
+record(calc, "RFQ:RF:Mod02Quad") {
+		field(SCAN, ".1 second")
+        field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk021NormV.VAL")
+		field(INPB, "RFQ:RF:Pk022NormV.VAL")
+		field(INPC, "RFQ:RF:Pk023NormV.VAL")
+		field(INPD, "RFQ:RF:Pk024NormV.VAL")
+		field(CALC, "(A+B+C+D)/2")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod02ODip")	
+	
+}
+
+# - Dipole 1 -
+record(calc, "RFQ:RF:Mod02ODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk021NormV.VAL")
+		field(INPB, "RFQ:RF:Pk023NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod02EDip")	
+	
+}
+
+# - Dipole 2 -
+record(calc, "RFQ:RF:Mod02EDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk022NormV.VAL")
+		field(INPB, "RFQ:RF:Pk024NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod02Mono")	
+	
+}
+
+# - Monopole -
+record(calc, "RFQ:RF:Mod02Mono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk021NormV.VAL")
+		field(INPB, "RFQ:RF:Pk022NormV.VAL")
+		field(INPC, "RFQ:RF:Pk023NormV.VAL")
+		field(INPD, "RFQ:RF:Pk024NormV.VAL")
+		field(CALC, "(A-B+C-D)/2")
+		field(VAL, "0")	
+		field(FLNK, "RFQ:RF:Mod02DQuad")
+}
+
+
+# - Quadrupole Perturbation Component -
+record(calc, "RFQ:RF:Mod02DQuad") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "5")
+		field(INPA, "RFQ:RF:Mod02Quad.VAL")
+		field(INPB, "RFQ:RF:M02NomV.VAL")
+		field(CALC, "(A-2*B)/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod02DODip")	
+	
+}
+
+# - Dipole 1 Perturbation Component -
+record(calc, "RFQ:RF:Mod02DODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod02ODip.VAL")
+		field(INPB, "RFQ:RF:M02NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod02DEDip")	
+	
+}
+
+# - Dipole 2 Perturbation Component -
+record(calc, "RFQ:RF:Mod02DEDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod02EDip.VAL")
+		field(INPB, "RFQ:RF:M02NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod02DMono")	
+	
+}
+
+# - Monopole Perturbation Component -
+record(calc, "RFQ:RF:Mod02DMono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod02Mono.VAL")
+		field(INPB, "RFQ:RF:M02NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+	
+}
+# RF Modal Components Extimation
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages are (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+
+# - Quadrupole -
+record(calc, "RFQ:RF:Mod04Quad") {
+		field(SCAN, ".1 second")
+        field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk041NormV.VAL")
+		field(INPB, "RFQ:RF:Pk042NormV.VAL")
+		field(INPC, "RFQ:RF:Pk043NormV.VAL")
+		field(INPD, "RFQ:RF:Pk044NormV.VAL")
+		field(CALC, "(A+B+C+D)/2")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod04ODip")	
+	
+}
+
+# - Dipole 1 -
+record(calc, "RFQ:RF:Mod04ODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk041NormV.VAL")
+		field(INPB, "RFQ:RF:Pk043NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod04EDip")	
+	
+}
+
+# - Dipole 2 -
+record(calc, "RFQ:RF:Mod04EDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk042NormV.VAL")
+		field(INPB, "RFQ:RF:Pk044NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod04Mono")	
+	
+}
+
+# - Monopole -
+record(calc, "RFQ:RF:Mod04Mono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk041NormV.VAL")
+		field(INPB, "RFQ:RF:Pk042NormV.VAL")
+		field(INPC, "RFQ:RF:Pk043NormV.VAL")
+		field(INPD, "RFQ:RF:Pk044NormV.VAL")
+		field(CALC, "(A-B+C-D)/2")
+		field(VAL, "0")	
+		field(FLNK, "RFQ:RF:Mod04DQuad")
+}
+
+
+# - Quadrupole Perturbation Component -
+record(calc, "RFQ:RF:Mod04DQuad") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "5")
+		field(INPA, "RFQ:RF:Mod04Quad.VAL")
+		field(INPB, "RFQ:RF:M04NomV.VAL")
+		field(CALC, "(A-2*B)/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod04DODip")	
+	
+}
+
+# - Dipole 1 Perturbation Component -
+record(calc, "RFQ:RF:Mod04DODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod04ODip.VAL")
+		field(INPB, "RFQ:RF:M04NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod04DEDip")	
+	
+}
+
+# - Dipole 2 Perturbation Component -
+record(calc, "RFQ:RF:Mod04DEDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod04EDip.VAL")
+		field(INPB, "RFQ:RF:M04NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod04DMono")	
+	
+}
+
+# - Monopole Perturbation Component -
+record(calc, "RFQ:RF:Mod04DMono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod04Mono.VAL")
+		field(INPB, "RFQ:RF:M04NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+	
+}
+# RF Modal Components Extimation
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages are (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+
+# - Quadrupole -
+record(calc, "RFQ:RF:Mod06Quad") {
+		field(SCAN, ".1 second")
+        field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk061NormV.VAL")
+		field(INPB, "RFQ:RF:Pk062NormV.VAL")
+		field(INPC, "RFQ:RF:Pk063NormV.VAL")
+		field(INPD, "RFQ:RF:Pk064NormV.VAL")
+		field(CALC, "(A+B+C+D)/2")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod06ODip")	
+	
+}
+
+# - Dipole 1 -
+record(calc, "RFQ:RF:Mod06ODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk061NormV.VAL")
+		field(INPB, "RFQ:RF:Pk063NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod06EDip")	
+	
+}
+
+# - Dipole 2 -
+record(calc, "RFQ:RF:Mod06EDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk062NormV.VAL")
+		field(INPB, "RFQ:RF:Pk064NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod06Mono")	
+	
+}
+
+# - Monopole -
+record(calc, "RFQ:RF:Mod06Mono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk061NormV.VAL")
+		field(INPB, "RFQ:RF:Pk062NormV.VAL")
+		field(INPC, "RFQ:RF:Pk063NormV.VAL")
+		field(INPD, "RFQ:RF:Pk064NormV.VAL")
+		field(CALC, "(A-B+C-D)/2")
+		field(VAL, "0")	
+		field(FLNK, "RFQ:RF:Mod06DQuad")
+}
+
+
+# - Quadrupole Perturbation Component -
+record(calc, "RFQ:RF:Mod06DQuad") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "5")
+		field(INPA, "RFQ:RF:Mod06Quad.VAL")
+		field(INPB, "RFQ:RF:M06NomV.VAL")
+		field(CALC, "(A-2*B)/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod06DODip")	
+	
+}
+
+# - Dipole 1 Perturbation Component -
+record(calc, "RFQ:RF:Mod06DODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod06ODip.VAL")
+		field(INPB, "RFQ:RF:M06NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod06DEDip")	
+	
+}
+
+# - Dipole 2 Perturbation Component -
+record(calc, "RFQ:RF:Mod06DEDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod06EDip.VAL")
+		field(INPB, "RFQ:RF:M06NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod06DMono")	
+	
+}
+
+# - Monopole Perturbation Component -
+record(calc, "RFQ:RF:Mod06DMono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod06Mono.VAL")
+		field(INPB, "RFQ:RF:M06NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+	
+}
+# RF Modal Components Extimation
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages are (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+
+# - Quadrupole -
+record(calc, "RFQ:RF:Mod08Quad") {
+		field(SCAN, ".1 second")
+        field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk081NormV.VAL")
+		field(INPB, "RFQ:RF:Pk082NormV.VAL")
+		field(INPC, "RFQ:RF:Pk083NormV.VAL")
+		field(INPD, "RFQ:RF:Pk084NormV.VAL")
+		field(CALC, "(A+B+C+D)/2")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod08ODip")	
+	
+}
+
+# - Dipole 1 -
+record(calc, "RFQ:RF:Mod08ODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk081NormV.VAL")
+		field(INPB, "RFQ:RF:Pk083NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod08EDip")	
+	
+}
+
+# - Dipole 2 -
+record(calc, "RFQ:RF:Mod08EDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk082NormV.VAL")
+		field(INPB, "RFQ:RF:Pk084NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod08Mono")	
+	
+}
+
+# - Monopole -
+record(calc, "RFQ:RF:Mod08Mono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk081NormV.VAL")
+		field(INPB, "RFQ:RF:Pk082NormV.VAL")
+		field(INPC, "RFQ:RF:Pk083NormV.VAL")
+		field(INPD, "RFQ:RF:Pk084NormV.VAL")
+		field(CALC, "(A-B+C-D)/2")
+		field(VAL, "0")	
+		field(FLNK, "RFQ:RF:Mod08DQuad")
+}
+
+
+# - Quadrupole Perturbation Component -
+record(calc, "RFQ:RF:Mod08DQuad") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "5")
+		field(INPA, "RFQ:RF:Mod08Quad.VAL")
+		field(INPB, "RFQ:RF:M08NomV.VAL")
+		field(CALC, "(A-2*B)/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod08DODip")	
+	
+}
+
+# - Dipole 1 Perturbation Component -
+record(calc, "RFQ:RF:Mod08DODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod08ODip.VAL")
+		field(INPB, "RFQ:RF:M08NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod08DEDip")	
+	
+}
+
+# - Dipole 2 Perturbation Component -
+record(calc, "RFQ:RF:Mod08DEDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod08EDip.VAL")
+		field(INPB, "RFQ:RF:M08NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod08DMono")	
+	
+}
+
+# - Monopole Perturbation Component -
+record(calc, "RFQ:RF:Mod08DMono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod08Mono.VAL")
+		field(INPB, "RFQ:RF:M08NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+	
+}
+# RF Modal Components Extimation
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages are (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+
+# - Quadrupole -
+record(calc, "RFQ:RF:Mod10Quad") {
+		field(SCAN, ".1 second")
+        field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk101NormV.VAL")
+		field(INPB, "RFQ:RF:Pk102NormV.VAL")
+		field(INPC, "RFQ:RF:Pk103NormV.VAL")
+		field(INPD, "RFQ:RF:Pk104NormV.VAL")
+		field(CALC, "(A+B+C+D)/2")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod10ODip")	
+	
+}
+
+# - Dipole 1 -
+record(calc, "RFQ:RF:Mod10ODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk101NormV.VAL")
+		field(INPB, "RFQ:RF:Pk103NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod10EDip")	
+	
+}
+
+# - Dipole 2 -
+record(calc, "RFQ:RF:Mod10EDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk102NormV.VAL")
+		field(INPB, "RFQ:RF:Pk104NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod10Mono")	
+	
+}
+
+# - Monopole -
+record(calc, "RFQ:RF:Mod10Mono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk101NormV.VAL")
+		field(INPB, "RFQ:RF:Pk102NormV.VAL")
+		field(INPC, "RFQ:RF:Pk103NormV.VAL")
+		field(INPD, "RFQ:RF:Pk104NormV.VAL")
+		field(CALC, "(A-B+C-D)/2")
+		field(VAL, "0")	
+		field(FLNK, "RFQ:RF:Mod10DQuad")
+}
+
+
+# - Quadrupole Perturbation Component -
+record(calc, "RFQ:RF:Mod10DQuad") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "5")
+		field(INPA, "RFQ:RF:Mod10Quad.VAL")
+		field(INPB, "RFQ:RF:M10NomV.VAL")
+		field(CALC, "(A-2*B)/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod10DODip")	
+	
+}
+
+# - Dipole 1 Perturbation Component -
+record(calc, "RFQ:RF:Mod10DODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod10ODip.VAL")
+		field(INPB, "RFQ:RF:M10NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod10DEDip")	
+	
+}
+
+# - Dipole 2 Perturbation Component -
+record(calc, "RFQ:RF:Mod10DEDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod10EDip.VAL")
+		field(INPB, "RFQ:RF:M10NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod10DMono")	
+	
+}
+
+# - Monopole Perturbation Component -
+record(calc, "RFQ:RF:Mod10DMono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod10Mono.VAL")
+		field(INPB, "RFQ:RF:M10NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+	
+}
+# RF Modal Components Extimation
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages are (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+
+# - Quadrupole -
+record(calc, "RFQ:RF:Mod11Quad") {
+		field(SCAN, ".1 second")
+        field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk111NormV.VAL")
+		field(INPB, "RFQ:RF:Pk112NormV.VAL")
+		field(INPC, "RFQ:RF:Pk113NormV.VAL")
+		field(INPD, "RFQ:RF:Pk114NormV.VAL")
+		field(CALC, "(A+B+C+D)/2")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod11ODip")	
+	
+}
+
+# - Dipole 1 -
+record(calc, "RFQ:RF:Mod11ODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk111NormV.VAL")
+		field(INPB, "RFQ:RF:Pk113NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod11EDip")	
+	
+}
+
+# - Dipole 2 -
+record(calc, "RFQ:RF:Mod11EDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk112NormV.VAL")
+		field(INPB, "RFQ:RF:Pk114NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod11Mono")	
+	
+}
+
+# - Monopole -
+record(calc, "RFQ:RF:Mod11Mono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk111NormV.VAL")
+		field(INPB, "RFQ:RF:Pk112NormV.VAL")
+		field(INPC, "RFQ:RF:Pk113NormV.VAL")
+		field(INPD, "RFQ:RF:Pk114NormV.VAL")
+		field(CALC, "(A-B+C-D)/2")
+		field(VAL, "0")	
+		field(FLNK, "RFQ:RF:Mod11DQuad")
+}
+
+
+# - Quadrupole Perturbation Component -
+record(calc, "RFQ:RF:Mod11DQuad") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "5")
+		field(INPA, "RFQ:RF:Mod11Quad.VAL")
+		field(INPB, "RFQ:RF:M11NomV.VAL")
+		field(CALC, "(A-2*B)/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod11DODip")	
+	
+}
+
+# - Dipole 1 Perturbation Component -
+record(calc, "RFQ:RF:Mod11DODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod11ODip.VAL")
+		field(INPB, "RFQ:RF:M11NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod11DEDip")	
+	
+}
+
+# - Dipole 2 Perturbation Component -
+record(calc, "RFQ:RF:Mod11DEDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod11EDip.VAL")
+		field(INPB, "RFQ:RF:M11NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod11DMono")	
+	
+}
+
+# - Monopole Perturbation Component -
+record(calc, "RFQ:RF:Mod11DMono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod11Mono.VAL")
+		field(INPB, "RFQ:RF:M11NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+	
+}
+# RF Modal Components Extimation
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages are (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+
+# - Quadrupole -
+record(calc, "RFQ:RF:Mod13Quad") {
+		field(SCAN, ".1 second")
+        field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk131NormV.VAL")
+		field(INPB, "RFQ:RF:Pk132NormV.VAL")
+		field(INPC, "RFQ:RF:Pk133NormV.VAL")
+		field(INPD, "RFQ:RF:Pk134NormV.VAL")
+		field(CALC, "(A+B+C+D)/2")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod13ODip")	
+	
+}
+
+# - Dipole 1 -
+record(calc, "RFQ:RF:Mod13ODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk131NormV.VAL")
+		field(INPB, "RFQ:RF:Pk133NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod13EDip")	
+	
+}
+
+# - Dipole 2 -
+record(calc, "RFQ:RF:Mod13EDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk132NormV.VAL")
+		field(INPB, "RFQ:RF:Pk134NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod13Mono")	
+	
+}
+
+# - Monopole -
+record(calc, "RFQ:RF:Mod13Mono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk131NormV.VAL")
+		field(INPB, "RFQ:RF:Pk132NormV.VAL")
+		field(INPC, "RFQ:RF:Pk133NormV.VAL")
+		field(INPD, "RFQ:RF:Pk134NormV.VAL")
+		field(CALC, "(A-B+C-D)/2")
+		field(VAL, "0")	
+		field(FLNK, "RFQ:RF:Mod13DQuad")
+}
+
+
+# - Quadrupole Perturbation Component -
+record(calc, "RFQ:RF:Mod13DQuad") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "5")
+		field(INPA, "RFQ:RF:Mod13Quad.VAL")
+		field(INPB, "RFQ:RF:M13NomV.VAL")
+		field(CALC, "(A-2*B)/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod13DODip")	
+	
+}
+
+# - Dipole 1 Perturbation Component -
+record(calc, "RFQ:RF:Mod13DODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod13ODip.VAL")
+		field(INPB, "RFQ:RF:M13NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod13DEDip")	
+	
+}
+
+# - Dipole 2 Perturbation Component -
+record(calc, "RFQ:RF:Mod13DEDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod13EDip.VAL")
+		field(INPB, "RFQ:RF:M13NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod13DMono")	
+	
+}
+
+# - Monopole Perturbation Component -
+record(calc, "RFQ:RF:Mod13DMono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod13Mono.VAL")
+		field(INPB, "RFQ:RF:M13NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+	
+}
+# RF Modal Components Extimation
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages are (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+
+# - Quadrupole -
+record(calc, "RFQ:RF:Mod15Quad") {
+		field(SCAN, ".1 second")
+        field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk151NormV.VAL")
+		field(INPB, "RFQ:RF:Pk152NormV.VAL")
+		field(INPC, "RFQ:RF:Pk153NormV.VAL")
+		field(INPD, "RFQ:RF:Pk154NormV.VAL")
+		field(CALC, "(A+B+C+D)/2")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod15ODip")	
+	
+}
+
+# - Dipole 1 -
+record(calc, "RFQ:RF:Mod15ODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk151NormV.VAL")
+		field(INPB, "RFQ:RF:Pk153NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod15EDip")	
+	
+}
+
+# - Dipole 2 -
+record(calc, "RFQ:RF:Mod15EDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk152NormV.VAL")
+		field(INPB, "RFQ:RF:Pk154NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod15Mono")	
+	
+}
+
+# - Monopole -
+record(calc, "RFQ:RF:Mod15Mono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk151NormV.VAL")
+		field(INPB, "RFQ:RF:Pk152NormV.VAL")
+		field(INPC, "RFQ:RF:Pk153NormV.VAL")
+		field(INPD, "RFQ:RF:Pk154NormV.VAL")
+		field(CALC, "(A-B+C-D)/2")
+		field(VAL, "0")	
+		field(FLNK, "RFQ:RF:Mod15DQuad")
+}
+
+
+# - Quadrupole Perturbation Component -
+record(calc, "RFQ:RF:Mod15DQuad") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "5")
+		field(INPA, "RFQ:RF:Mod15Quad.VAL")
+		field(INPB, "RFQ:RF:M15NomV.VAL")
+		field(CALC, "(A-2*B)/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod15DODip")	
+	
+}
+
+# - Dipole 1 Perturbation Component -
+record(calc, "RFQ:RF:Mod15DODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod15ODip.VAL")
+		field(INPB, "RFQ:RF:M15NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod15DEDip")	
+	
+}
+
+# - Dipole 2 Perturbation Component -
+record(calc, "RFQ:RF:Mod15DEDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod15EDip.VAL")
+		field(INPB, "RFQ:RF:M15NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod15DMono")	
+	
+}
+
+# - Monopole Perturbation Component -
+record(calc, "RFQ:RF:Mod15DMono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod15Mono.VAL")
+		field(INPB, "RFQ:RF:M15NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+	
+}
+# RF Modal Components Extimation
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages are (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+
+# - Quadrupole -
+record(calc, "RFQ:RF:Mod17Quad") {
+		field(SCAN, ".1 second")
+        field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk171NormV.VAL")
+		field(INPB, "RFQ:RF:Pk172NormV.VAL")
+		field(INPC, "RFQ:RF:Pk173NormV.VAL")
+		field(INPD, "RFQ:RF:Pk174NormV.VAL")
+		field(CALC, "(A+B+C+D)/2")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod17ODip")	
+	
+}
+
+# - Dipole 1 -
+record(calc, "RFQ:RF:Mod17ODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk171NormV.VAL")
+		field(INPB, "RFQ:RF:Pk173NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod17EDip")	
+	
+}
+
+# - Dipole 2 -
+record(calc, "RFQ:RF:Mod17EDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk172NormV.VAL")
+		field(INPB, "RFQ:RF:Pk174NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod17Mono")	
+	
+}
+
+# - Monopole -
+record(calc, "RFQ:RF:Mod17Mono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk171NormV.VAL")
+		field(INPB, "RFQ:RF:Pk172NormV.VAL")
+		field(INPC, "RFQ:RF:Pk173NormV.VAL")
+		field(INPD, "RFQ:RF:Pk174NormV.VAL")
+		field(CALC, "(A-B+C-D)/2")
+		field(VAL, "0")	
+		field(FLNK, "RFQ:RF:Mod17DQuad")
+}
+
+
+# - Quadrupole Perturbation Component -
+record(calc, "RFQ:RF:Mod17DQuad") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "5")
+		field(INPA, "RFQ:RF:Mod17Quad.VAL")
+		field(INPB, "RFQ:RF:M17NomV.VAL")
+		field(CALC, "(A-2*B)/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod17DODip")	
+	
+}
+
+# - Dipole 1 Perturbation Component -
+record(calc, "RFQ:RF:Mod17DODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod17ODip.VAL")
+		field(INPB, "RFQ:RF:M17NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod17DEDip")	
+	
+}
+
+# - Dipole 2 Perturbation Component -
+record(calc, "RFQ:RF:Mod17DEDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod17EDip.VAL")
+		field(INPB, "RFQ:RF:M17NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod17DMono")	
+	
+}
+
+# - Monopole Perturbation Component -
+record(calc, "RFQ:RF:Mod17DMono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod17Mono.VAL")
+		field(INPB, "RFQ:RF:M17NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+	
+}
+# RF Modal Components Extimation
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages are (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+
+# - Quadrupole -
+record(calc, "RFQ:RF:Mod18Quad") {
+		field(SCAN, ".1 second")
+        field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk181NormV.VAL")
+		field(INPB, "RFQ:RF:Pk182NormV.VAL")
+		field(INPC, "RFQ:RF:Pk183NormV.VAL")
+		field(INPD, "RFQ:RF:Pk184NormV.VAL")
+		field(CALC, "(A+B+C+D)/2")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod18ODip")	
+	
+}
+
+# - Dipole 1 -
+record(calc, "RFQ:RF:Mod18ODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk181NormV.VAL")
+		field(INPB, "RFQ:RF:Pk183NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod18EDip")	
+	
+}
+
+# - Dipole 2 -
+record(calc, "RFQ:RF:Mod18EDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk182NormV.VAL")
+		field(INPB, "RFQ:RF:Pk184NormV.VAL")
+		field(CALC, "(A-B)/sqr(2)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod18Mono")	
+	
+}
+
+# - Monopole -
+record(calc, "RFQ:RF:Mod18Mono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Pk181NormV.VAL")
+		field(INPB, "RFQ:RF:Pk182NormV.VAL")
+		field(INPC, "RFQ:RF:Pk183NormV.VAL")
+		field(INPD, "RFQ:RF:Pk184NormV.VAL")
+		field(CALC, "(A-B+C-D)/2")
+		field(VAL, "0")	
+		field(FLNK, "RFQ:RF:Mod18DQuad")
+}
+
+
+# - Quadrupole Perturbation Component -
+record(calc, "RFQ:RF:Mod18DQuad") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "5")
+		field(INPA, "RFQ:RF:Mod18Quad.VAL")
+		field(INPB, "RFQ:RF:M18NomV.VAL")
+		field(CALC, "(A-2*B)/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod18DODip")	
+	
+}
+
+# - Dipole 1 Perturbation Component -
+record(calc, "RFQ:RF:Mod18DODip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod18ODip.VAL")
+		field(INPB, "RFQ:RF:M18NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod18DEDip")	
+	
+}
+
+# - Dipole 2 Perturbation Component -
+record(calc, "RFQ:RF:Mod18DEDip") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod18EDip.VAL")
+		field(INPB, "RFQ:RF:M18NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+		field(FLNK, "RFQ:RF:Mod18DMono")	
+	
+}
+
+# - Monopole Perturbation Component -
+record(calc, "RFQ:RF:Mod18DMono") {
+		#field(SCAN, ".1 second")
+        #field(PHAS, "1")
+		field(INPA, "RFQ:RF:Mod18Mono.VAL")
+		field(INPB, "RFQ:RF:M18NomV.VAL")
+		field(CALC, "A/(2*B)")
+		field(VAL, "0")
+	
+}
+# Records for Vane Voltages and Modes plotting - Associated to SNL Program "modeComponents_graph.st"
+# developed by Maurizio Montis
+# maurizio.montis@lnl.infn.it
+
+
+record(waveform, "RFQ:RF:Q1NormVWf") {
+  field(SCAN, "Passive")
+  field(PINI, "YES")
+  field(DTYP, "Soft Channel")
+  field(PREC, "5")
+  field(NELM, "11")
+  field(FTVL, "FLOAT")
+}
+# Records for Vane Voltages and Modes plotting - Associated to SNL Program "modeComponents_graph.st"
+# developed by Maurizio Montis
+# maurizio.montis@lnl.infn.it
+
+
+record(waveform, "RFQ:RF:Q2NormVWf") {
+  field(SCAN, "Passive")
+  field(PINI, "YES")
+  field(DTYP, "Soft Channel")
+  field(PREC, "5")
+  field(NELM, "11")
+  field(FTVL, "FLOAT")
+}
+# Records for Vane Voltages and Modes plotting - Associated to SNL Program "modeComponents_graph.st"
+# developed by Maurizio Montis
+# maurizio.montis@lnl.infn.it
+
+
+record(waveform, "RFQ:RF:Q3NormVWf") {
+  field(SCAN, "Passive")
+  field(PINI, "YES")
+  field(DTYP, "Soft Channel")
+  field(PREC, "5")
+  field(NELM, "11")
+  field(FTVL, "FLOAT")
+}
+# Records for Vane Voltages and Modes plotting - Associated to SNL Program "modeComponents_graph.st"
+# developed by Maurizio Montis
+# maurizio.montis@lnl.infn.it
+
+
+record(waveform, "RFQ:RF:Q4NormVWf") {
+  field(SCAN, "Passive")
+  field(PINI, "YES")
+  field(DTYP, "Soft Channel")
+  field(PREC, "5")
+  field(NELM, "11")
+  field(FTVL, "FLOAT")
+}
+# Records for Vane Voltages and Modes plotting - Associated to SNL Program "modeComponents_graph.st"
+# developed by Maurizio Montis
+# maurizio.montis@lnl.infn.it
+
+
+record(waveform, "RFQ:RF:QuadWf") {
+  field(SCAN, "Passive")
+  field(PINI, "YES")
+  field(DTYP, "Soft Channel")
+  field(PREC, "5")
+  field(NELM, "11")
+  field(FTVL, "FLOAT")
+}
+# Records for Vane Voltages and Modes plotting - Associated to SNL Program "modeComponents_graph.st"
+# developed by Maurizio Montis
+# maurizio.montis@lnl.infn.it
+
+
+record(waveform, "RFQ:RF:ODipWf") {
+  field(SCAN, "Passive")
+  field(PINI, "YES")
+  field(DTYP, "Soft Channel")
+  field(PREC, "5")
+  field(NELM, "11")
+  field(FTVL, "FLOAT")
+}
+# Records for Vane Voltages and Modes plotting - Associated to SNL Program "modeComponents_graph.st"
+# developed by Maurizio Montis
+# maurizio.montis@lnl.infn.it
+
+
+record(waveform, "RFQ:RF:EDipWf") {
+  field(SCAN, "Passive")
+  field(PINI, "YES")
+  field(DTYP, "Soft Channel")
+  field(PREC, "5")
+  field(NELM, "11")
+  field(FTVL, "FLOAT")
+}
+# Records for Vane Voltages and Modes plotting - Associated to SNL Program "modeComponents_graph.st"
+# developed by Maurizio Montis
+# maurizio.montis@lnl.infn.it
+
+
+record(waveform, "RFQ:RF:MonoWf") {
+  field(SCAN, "Passive")
+  field(PINI, "YES")
+  field(DTYP, "Soft Channel")
+  field(PREC, "5")
+  field(NELM, "11")
+  field(FTVL, "FLOAT")
+}
+# Records for Vane Voltages and Modes plotting - Associated to SNL Program "modeComponents_graph.st"
+# developed by Maurizio Montis
+# maurizio.montis@lnl.infn.it
+
+
+record(waveform, "RFQ:RF:DQuadWf") {
+  field(SCAN, "Passive")
+  field(PINI, "YES")
+  field(DTYP, "Soft Channel")
+  field(PREC, "5")
+  field(NELM, "11")
+  field(FTVL, "FLOAT")
+}
+# Records for Vane Voltages and Modes plotting - Associated to SNL Program "modeComponents_graph.st"
+# developed by Maurizio Montis
+# maurizio.montis@lnl.infn.it
+
+
+record(waveform, "RFQ:RF:DODipWf") {
+  field(SCAN, "Passive")
+  field(PINI, "YES")
+  field(DTYP, "Soft Channel")
+  field(PREC, "5")
+  field(NELM, "11")
+  field(FTVL, "FLOAT")
+}
+# Records for Vane Voltages and Modes plotting - Associated to SNL Program "modeComponents_graph.st"
+# developed by Maurizio Montis
+# maurizio.montis@lnl.infn.it
+
+
+record(waveform, "RFQ:RF:DEDipWf") {
+  field(SCAN, "Passive")
+  field(PINI, "YES")
+  field(DTYP, "Soft Channel")
+  field(PREC, "5")
+  field(NELM, "11")
+  field(FTVL, "FLOAT")
+}
+# Records for Vane Voltages and Modes plotting - Associated to SNL Program "modeComponents_graph.st"
+# developed by Maurizio Montis
+# maurizio.montis@lnl.infn.it
+
+
+record(waveform, "RFQ:RF:DMonoWf") {
+  field(SCAN, "Passive")
+  field(PINI, "YES")
+  field(DTYP, "Soft Channel")
+  field(PREC, "5")
+  field(NELM, "11")
+  field(FTVL, "FLOAT")
+}
+# Records for Vane Voltages and Modes plotting - Associated to SNL Program "modeComponents_graph.st"
+# developed by Maurizio Montis
+# maurizio.montis@lnl.infn.it
+
+
+record(waveform, "RFQ:RF:LnWf") {
+  field(SCAN, "Passive")
+  field(PINI, "YES")
+  field(DTYP, "Soft Channel")
+  field(PREC, "5")
+  field(NELM, "11")
+  field(FTVL, "CHAR")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp1FwdCnst") {
+    field(DO1, "70.3")
+	field(DO2, "35.425")
+    field(DO3, "0.347333917")
+	field(DO4, "10.798665007593")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp1FwdPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl1 Fwd - RDC11")
+	field(PHAS, "0")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL1_CH00:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp1FwdCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp1FwdCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp1FwdCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp1FwdCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp1FwdCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp1RevCnst") {
+    field(DO1, "70.0")
+	field(DO2, "35.423")
+    field(DO3, "0.34683391587906")
+	field(DO4, "10.497558643393")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp1RevPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl1 Rev - RDC12")
+	field(PHAS, "0")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL1_CH01:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp1RevCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp1RevCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp1RevCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp1RevCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp1RevCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp2FwdCnst") {
+    field(DO1, "69.8")
+	field(DO2, "35.385")
+    field(DO3, "0.34500057946644")
+	field(DO4, "10.696839593862")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp2FwdPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl2 Fwd - RDC21")
+	field(PHAS, "0")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL1_CH04:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp2FwdCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp2FwdCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp2FwdCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp2FwdCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp2FwdCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp2RevCnst") {
+    field(DO1, "70")
+	field(DO2, "35.376")
+    field(DO3, "0.33950057022857")
+	field(DO4, "10.390666470120")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp2RevPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl2 Rev - RDC22")
+	field(PHAS, "0")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL1_CH05:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp2RevCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp2RevCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp2RevCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp2RevCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp2RevCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp3FwdCnst") {
+    field(DO1, "70")
+	field(DO2, "35.48")
+    field(DO3, "0.3355005635101")
+	field(DO4, "10.243054358237")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp3FwdPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl3 Fwd - RDC31")
+	field(PHAS, "0")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL1_CH06:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp3FwdCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp3FwdCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp3FwdCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp3FwdCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp3FwdCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp3RevCnst") {
+    field(DO1, "69.9")
+	field(DO2, "35.374")
+    field(DO3, "0.36166727412665")
+	field(DO4, "10.894278686277")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp3RevPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl3 Rev - RDC32")
+	field(PHAS, "0")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL1_CH07:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp3RevCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp3RevCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp3RevCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp3RevCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp3RevCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp4FwdCnst") {
+    field(DO1, "70.1")
+	field(DO2, "35.533")
+    field(DO3, "0.3401672380149")
+	field(DO4, "10.381310156798")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp4FwdPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl4 Fwd - RDC41")
+	field(PHAS, "0")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH00:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp4FwdCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp4FwdCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp4FwdCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp4FwdCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp4FwdCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp4RevCnst") {
+    field(DO1, "69.9")
+	field(DO2, "35.533")
+    field(DO3, "0.35533393015577")
+	field(DO4, "10.860207845651")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp4RevPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl4 Rev - RDC42")
+	field(PHAS, "0")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH01:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp4RevCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp4RevCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp4RevCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp4RevCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp4RevCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp5FwdCnst") {
+    field(DO1, "69.9")
+	field(DO2, "35.88")
+    field(DO3, "0.3448339125198")
+	field(DO4, "10.198318264761")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp5FwdPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl5 Fwd - RDC51")
+	field(PHAS, "0")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH04:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp5FwdCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp5FwdCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp5FwdCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp5FwdCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp5FwdCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp5RevCnst") {
+    field(DO1, "69.8")
+	field(DO2, "35.824")
+    field(DO3, "0.3433339100004")
+	field(DO4, "10.63408810985")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp5RevPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl5 Rev - RDC52")
+	field(PHAS, "0")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH05:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp5RevCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp5RevCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp5RevCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp5RevCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp5RevCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp6FwdCnst") {
+    field(DO1, "69.7")
+	field(DO2, "35.815")
+    field(DO3, "0.34850058534508")
+	field(DO4, "10.718492435079")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp6FwdPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl6 Fwd - RDC61")
+	field(PHAS, "0")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH06:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp6FwdCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp6FwdCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp6FwdCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp6FwdCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp6FwdCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp6RevCnst") {
+    field(DO1, "70")
+	field(DO2, "35.814")
+    field(DO3, "0.34733391671887")
+	field(DO4, "10.64407772618")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp6RevPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl6 Rev - RDC61")
+	field(PHAS, "0")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH07:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp6RevCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp6RevCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp6RevCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp6RevCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp6RevCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp7FwdCnst") {
+    field(DO1, "69.3")
+	field(DO2, "35.985")
+    field(DO3, "0.34783391755867")
+	field(DO4, "10.947480605471")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp7FwdPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl7 Fwd - RDC71")
+	field(PHAS, "0")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH08:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp7FwdCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp7FwdCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp7FwdCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp7FwdCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp7FwdCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp7RevCnst") {
+    field(DO1, "69.6")
+	field(DO2, "35.744")
+    field(DO3, "0.34083390580138")
+	field(DO4, "10.704094508630")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp7RevPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl7 Rev - RDC72")
+	field(PHAS, "0")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH09:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp7RevCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp7RevCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp7RevCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp7RevCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp7RevCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp8FwdCnst") {
+    field(DO1, "70.2")
+	field(DO2, "35.800")
+    field(DO3, "0.34786725094799")
+	field(DO4, "10.61844852464")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp8FwdPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl8 Fwd - RDC82")
+	field(PHAS, "0")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH10:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp8FwdCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp8FwdCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp8FwdCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp8FwdCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp8FwdCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp8RevCnst") {
+    field(DO1, "70")
+	field(DO2, "35.813")
+    field(DO3, "0.35033392175771")
+	field(DO4, "10.612169522331")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp8RevPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl8 Rev - RDC82")
+	field(PHAS, "0")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH11:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp8RevCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp8RevCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp8RevCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp8RevCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp8RevCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# Check status of RFQ field
+# developed by Maurizio Montis - INFN Italy
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+# Scan Phase foe modal components is set to 1 
+# PHASE=1 
+
+record(compress, "RFQ:RF:MaxQuad") {
+	field(DESC, "evaluate Max Quad value")
+	field(SCAN, ".1 second")
+	field(PHAS, "6")
+	field(ALG, "N to 1 High Value")
+	field(N, "11")
+	field(NSAM, "1")
+	field(PREC, "2")
+	field(INP, "RFQ:RF:DQuadWf")
+	field(FLNK, "RFQ:RF:AvgMaxQuad")
+}
+
+record(compress, "RFQ:RF:AvgMaxQuad") {
+        field(DESC, "evaluate Max Quad value")
+        field(ALG, "N to 1 Average")
+        field(N, "5")
+        field(NSAM, "1")
+        field(PREC, "2")
+        field(INP, "RFQ:RF:MaxQuad")
+}
+# Check status of RFQ field
+# developed by Maurizio Montis - INFN Italy
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+# Scan Phase foe modal components is set to 1 
+# PHASE=1 
+
+record(compress, "RFQ:RF:MinQuad") {
+	field(DESC, "evaluate Min Quad value")
+	field(SCAN, ".1 second")
+	field(PHAS, "6")
+	field(ALG, "N to 1 Low Value")
+	field(N, "11")
+	field(NSAM, "1")
+	field(PREC, "2")
+	field(INP, "RFQ:RF:DQuadWf")
+	field(FLNK, "RFQ:RF:AvgMinQuad")
+}
+
+record(compress, "RFQ:RF:AvgMinQuad") {
+        field(DESC, "evaluate Min Quad value")
+        field(ALG, "N to 1 Average")
+        field(N, "5")
+        field(NSAM, "1")
+        field(PREC, "2")
+        field(INP, "RFQ:RF:MinQuad")
+}
+# Check status of RFQ field
+# developed by Maurizio Montis - INFN Italy
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+# Scan Phase foe modal components is set to 1 
+# PHASE=1 
+
+record(compress, "RFQ:RF:MaxODip") {
+	field(DESC, "evaluate Max ODip value")
+	field(SCAN, ".1 second")
+	field(PHAS, "6")
+	field(ALG, "N to 1 High Value")
+	field(N, "11")
+	field(NSAM, "1")
+	field(PREC, "2")
+	field(INP, "RFQ:RF:DODipWf")
+	field(FLNK, "RFQ:RF:AvgMaxODip")
+}
+
+record(compress, "RFQ:RF:AvgMaxODip") {
+        field(DESC, "evaluate Max ODip value")
+        field(ALG, "N to 1 Average")
+        field(N, "5")
+        field(NSAM, "1")
+        field(PREC, "2")
+        field(INP, "RFQ:RF:MaxODip")
+}
+# Check status of RFQ field
+# developed by Maurizio Montis - INFN Italy
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+# Scan Phase foe modal components is set to 1 
+# PHASE=1 
+
+record(compress, "RFQ:RF:MinODip") {
+	field(DESC, "evaluate Min ODip value")
+	field(SCAN, ".1 second")
+	field(PHAS, "6")
+	field(ALG, "N to 1 Low Value")
+	field(N, "11")
+	field(NSAM, "1")
+	field(PREC, "2")
+	field(INP, "RFQ:RF:DODipWf")
+	field(FLNK, "RFQ:RF:AvgMinODip")
+}
+
+record(compress, "RFQ:RF:AvgMinODip") {
+        field(DESC, "evaluate Min ODip value")
+        field(ALG, "N to 1 Average")
+        field(N, "5")
+        field(NSAM, "1")
+        field(PREC, "2")
+        field(INP, "RFQ:RF:MinODip")
+}
+# Check status of RFQ field
+# developed by Maurizio Montis - INFN Italy
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+# Scan Phase foe modal components is set to 1 
+# PHASE=1 
+
+record(compress, "RFQ:RF:MaxEDip") {
+	field(DESC, "evaluate Max EDip value")
+	field(SCAN, ".1 second")
+	field(PHAS, "6")
+	field(ALG, "N to 1 High Value")
+	field(N, "11")
+	field(NSAM, "1")
+	field(PREC, "2")
+	field(INP, "RFQ:RF:DEDipWf")
+	field(FLNK, "RFQ:RF:AvgMaxEDip")
+}
+
+record(compress, "RFQ:RF:AvgMaxEDip") {
+        field(DESC, "evaluate Max EDip value")
+        field(ALG, "N to 1 Average")
+        field(N, "5")
+        field(NSAM, "1")
+        field(PREC, "2")
+        field(INP, "RFQ:RF:MaxEDip")
+}
+# Check status of RFQ field
+# developed by Maurizio Montis - INFN Italy
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+# Scan Phase foe modal components is set to 1 
+# PHASE=1 
+
+record(compress, "RFQ:RF:MinEDip") {
+	field(DESC, "evaluate Min EDip value")
+	field(SCAN, ".1 second")
+	field(PHAS, "6")
+	field(ALG, "N to 1 Low Value")
+	field(N, "11")
+	field(NSAM, "1")
+	field(PREC, "2")
+	field(INP, "RFQ:RF:DEDipWf")
+	field(FLNK, "RFQ:RF:AvgMinEDip")
+}
+
+record(compress, "RFQ:RF:AvgMinEDip") {
+        field(DESC, "evaluate Min EDip value")
+        field(ALG, "N to 1 Average")
+        field(N, "5")
+        field(NSAM, "1")
+        field(PREC, "2")
+        field(INP, "RFQ:RF:MinEDip")
+}
+# Check status of RFQ field
+# developed by Maurizio Montis - INFN Italy
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+# Scan Phase foe modal components is set to 1 
+# PHASE=1 
+
+record(compress, "RFQ:RF:MaxMono") {
+	field(DESC, "evaluate Max Mono value")
+	field(SCAN, ".1 second")
+	field(PHAS, "6")
+	field(ALG, "N to 1 High Value")
+	field(N, "11")
+	field(NSAM, "1")
+	field(PREC, "2")
+	field(INP, "RFQ:RF:DMonoWf")
+	field(FLNK, "RFQ:RF:AvgMaxMono")
+}
+
+record(compress, "RFQ:RF:AvgMaxMono") {
+        field(DESC, "evaluate Max Mono value")
+        field(ALG, "N to 1 Average")
+        field(N, "5")
+        field(NSAM, "1")
+        field(PREC, "2")
+        field(INP, "RFQ:RF:MaxMono")
+}
+# Check status of RFQ field
+# developed by Maurizio Montis - INFN Italy
+# mail: maurizio.montis@lnl.infn.it
+
+
+# NOTE:
+# Scan Phase for Pickup Voltages (RFQ:RFQ:Pk_XY_V) is set to 0
+# PHASE=0
+# Scan Phase foe modal components is set to 1 
+# PHASE=1 
+
+record(compress, "RFQ:RF:MinMono") {
+	field(DESC, "evaluate Min Mono value")
+	field(SCAN, ".1 second")
+	field(PHAS, "6")
+	field(ALG, "N to 1 Low Value")
+	field(N, "11")
+	field(NSAM, "1")
+	field(PREC, "2")
+	field(INP, "RFQ:RF:DMonoWf")
+	field(FLNK, "RFQ:RF:AvgMinMono")
+}
+
+record(compress, "RFQ:RF:AvgMinMono") {
+        field(DESC, "evaluate Min Mono value")
+        field(ALG, "N to 1 Average")
+        field(N, "5")
+        field(NSAM, "1")
+        field(PREC, "2")
+        field(INP, "RFQ:RF:MinMono")
+}
+## Delta Power Measured in Coupler 
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+# - Delta Power - 
+# Amplifier_FWD_Power - Amplifier_REV_Powewr - Cavity_REV_Power
+record(calcout, "RFQ:RF:Coup1DPwr") {
+        field(DESC, "Delta Power Cp1Fwd-Cp1Rev")
+        field(SCAN, ".1 second")
+        field(PHAS, "1")
+        field(CALC, "A-B")
+        field(INPA, "RFQ:RF:Cp1FwdPwr.VAL CP")
+        field(INPB, "RFQ:RF:Cp1RevPwr.VAL CP")
+        field(PREC, "2")
+        field(EGU, "kW")
+        field(LOPR, "0")
+        field(HOPR, "1600")
+}
+## Delta Power Measured in Coupler 
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+# - Delta Power - 
+# Amplifier_FWD_Power - Amplifier_REV_Powewr - Cavity_REV_Power
+record(calcout, "RFQ:RF:Coup2DPwr") {
+        field(DESC, "Delta Power Cp2Fwd-Cp2Rev")
+        field(SCAN, ".1 second")
+        field(PHAS, "1")
+        field(CALC, "A-B")
+        field(INPA, "RFQ:RF:Cp2FwdPwr.VAL CP")
+        field(INPB, "RFQ:RF:Cp2RevPwr.VAL CP")
+        field(PREC, "2")
+        field(EGU, "kW")
+        field(LOPR, "0")
+        field(HOPR, "1600")
+}
+## Delta Power Measured in Coupler 
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+# - Delta Power - 
+# Amplifier_FWD_Power - Amplifier_REV_Powewr - Cavity_REV_Power
+record(calcout, "RFQ:RF:Coup3DPwr") {
+        field(DESC, "Delta Power Cp3Fwd-Cp3Rev")
+        field(SCAN, ".1 second")
+        field(PHAS, "1")
+        field(CALC, "A-B")
+        field(INPA, "RFQ:RF:Cp3FwdPwr.VAL CP")
+        field(INPB, "RFQ:RF:Cp3RevPwr.VAL CP")
+        field(PREC, "2")
+        field(EGU, "kW")
+        field(LOPR, "0")
+        field(HOPR, "1600")
+}
+## Delta Power Measured in Coupler 
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+# - Delta Power - 
+# Amplifier_FWD_Power - Amplifier_REV_Powewr - Cavity_REV_Power
+record(calcout, "RFQ:RF:Coup4DPwr") {
+        field(DESC, "Delta Power Cp4Fwd-Cp4Rev")
+        field(SCAN, ".1 second")
+        field(PHAS, "1")
+        field(CALC, "A-B")
+        field(INPA, "RFQ:RF:Cp4FwdPwr.VAL CP")
+        field(INPB, "RFQ:RF:Cp4RevPwr.VAL CP")
+        field(PREC, "2")
+        field(EGU, "kW")
+        field(LOPR, "0")
+        field(HOPR, "1600")
+}
+## Delta Power Measured in Coupler 
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+# - Delta Power - 
+# Amplifier_FWD_Power - Amplifier_REV_Powewr - Cavity_REV_Power
+record(calcout, "RFQ:RF:Coup5DPwr") {
+        field(DESC, "Delta Power Cp5Fwd-Cp5Rev")
+        field(SCAN, ".1 second")
+        field(PHAS, "1")
+        field(CALC, "A-B")
+        field(INPA, "RFQ:RF:Cp5FwdPwr.VAL CP")
+        field(INPB, "RFQ:RF:Cp5RevPwr.VAL CP")
+        field(PREC, "2")
+        field(EGU, "kW")
+        field(LOPR, "0")
+        field(HOPR, "1600")
+}
+## Delta Power Measured in Coupler 
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+# - Delta Power - 
+# Amplifier_FWD_Power - Amplifier_REV_Powewr - Cavity_REV_Power
+record(calcout, "RFQ:RF:Coup6DPwr") {
+        field(DESC, "Delta Power Cp6Fwd-Cp6Rev")
+        field(SCAN, ".1 second")
+        field(PHAS, "1")
+        field(CALC, "A-B")
+        field(INPA, "RFQ:RF:Cp6FwdPwr.VAL CP")
+        field(INPB, "RFQ:RF:Cp6RevPwr.VAL CP")
+        field(PREC, "2")
+        field(EGU, "kW")
+        field(LOPR, "0")
+        field(HOPR, "1600")
+}
+## Delta Power Measured in Coupler 
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+# - Delta Power - 
+# Amplifier_FWD_Power - Amplifier_REV_Powewr - Cavity_REV_Power
+record(calcout, "RFQ:RF:Coup7DPwr") {
+        field(DESC, "Delta Power Cp7Fwd-Cp7Rev")
+        field(SCAN, ".1 second")
+        field(PHAS, "1")
+        field(CALC, "A-B")
+        field(INPA, "RFQ:RF:Cp7FwdPwr.VAL CP")
+        field(INPB, "RFQ:RF:Cp7RevPwr.VAL CP")
+        field(PREC, "2")
+        field(EGU, "kW")
+        field(LOPR, "0")
+        field(HOPR, "1600")
+}
+## Delta Power Measured in Coupler 
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+# - Delta Power - 
+# Amplifier_FWD_Power - Amplifier_REV_Powewr - Cavity_REV_Power
+record(calcout, "RFQ:RF:Coup8DPwr") {
+        field(DESC, "Delta Power Cp8Fwd-Cp8Rev")
+        field(SCAN, ".1 second")
+        field(PHAS, "1")
+        field(CALC, "A-B")
+        field(INPA, "RFQ:RF:Cp8FwdPwr.VAL CP")
+        field(INPB, "RFQ:RF:Cp8RevPwr.VAL CP")
+        field(PREC, "2")
+        field(EGU, "kW")
+        field(LOPR, "0")
+        field(HOPR, "1600")
+}

@@ -1,0 +1,12 @@
+record(seq, RFQTDT:PS1:ShutDown) {
+  field(SELM, "All")
+  field(DOL1, "0")
+  field(LNK1, "RFQTDT:PS1:VSet:aio0_8_SET.VAL PP NMS")
+  field(DOL2, "0")
+  field(LNK2, "RFQTDT:PS2:VSet:aio0_9_SET.VAL PP NMS")
+  field(DOL3, "0")
+  field(LNK3, "RFQTDT:PS3:VSet:aio0_10_SET.VAL PP NMS")
+  field(DOL4, "0")
+  field(LNK4, "RFQTDT:PS4:VSet:aio0_11_SET.VAL PP NMS")
+		  }
+

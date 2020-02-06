@@ -1,0 +1,59 @@
+# Delta Freq elaboration from LLRF system
+# developed by Maurizio Montis - INFN Italy
+# maurizio.montis@lnl.infn.it
+
+
+## RF Frequiency calculated using RF:LLRF1_CavA:TunBfT1MeasFreqOffsetRdbk [from LLRF]
+record(calcout, "RFQ:RF:T1RfFreq") {
+	field(SCAN, "1 second")
+	field(PHAS, "0")
+	field(INPA, "175000")
+	field(INPB, "RF:LLRF1_CavA:TunBfT1MeasFreqOffsetRdbk")
+	field(CALC, "A+B")
+	field(DISV, "0")
+	field(SDIS, "RFQ:RF:ClosLoopEn")
+	field(PREC, "3")
+	field(EGU, "kHz")
+	field(FLNK, "RFQ:RF:T1Freq")
+	
+}
+
+## RFQ Frequency calculated 
+record(calcout, "RFQ:RF:T1Freq") {
+	field(SCAN, "Passive")
+	field(INPA, "RFQ:RF:T1RfFreq")
+	field(INPB, "RF:LLRF1_CavA:TunDiphasCentralT1Rdbk")
+	field(INPC, "RFQ:RF:Qload")
+	field(CALC, "-A/(tan(d2r*B)/(2*C)-1)")
+	field(PREC, "3")
+        field(EGU, "kHz")
+	field(FLNK, "RFQ:RF:T1DFreq")
+}
+
+## RFQ Delta Frequency calculated
+record(calcout, "RFQ:RF:T1DFreq") {
+	field(SCAN, "Passive")
+	field(INPA, "175000")
+	field(INPB, "RFQ:RF:BeamDFreq")
+	field(INPC, "RFQ:RF:T1Freq")
+	field(CALC, "A+B-C")
+	field(PREC, "3")
+        field(EGU, "kHz")
+	field(FLNK, "RFQ:RF:T1AvgDFreq")
+	
+	
+}
+
+## RFQ Delta Frequency Average calculated for RF:LLRF1_CavA:TunBfT1MeasFreqOffsetRdbk  and RF:LLRF1_CavA:TunDiphasCentralT1Rdbk
+record(compress, "RFQ:RF:T1AvgDFreq") {
+	field(SCAN, "Passive")
+	field(PINI, "YES")
+	field(ALG, "Average")
+	field(NSAM, "1")
+	field(N, "5")
+	field(INP, "RFQ:RF:T1DFreq")
+	field(PREC, "3")
+        field(EGU, "kHz")
+	field(FLNK, "RFQ:RF:DFreq")
+
+}

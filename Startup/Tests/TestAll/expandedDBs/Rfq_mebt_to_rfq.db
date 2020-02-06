@@ -1,0 +1,46 @@
+### MEBT to RFQ interface
+### resend LEBT parameters to RFQ Vacuum PLC
+### Created by Maurizio Montis - INFN Italy
+### Mail: maurizio.montis@lnl.infn.it
+
+
+## Pressure before valve
+
+record(calcout, "RFQ:MEBT_VAC:ConvP") {
+      field(DESC, "mBar to mBar conversion")
+      field(SCAN, "1 second")
+      field(INPA, "MEBT:VG01:P CP") 
+      field(B, "1")
+      field(CALC, "A*B")
+      field(EGU, "mBar")
+      field(PREC, "8")
+      field(OOPT, "Every Time")
+      field(DOPT, "Use CALC")
+      #field(IVOA, "Set output to IVOV")
+      #field(IVOV, "1111")
+      field(OUT, "RFQ:MEBT_VAC:P")
+      field(FLNK, "RFQ:MEBT_VAC:P")
+}
+
+record(ao, "RFQ:MEBT_VAC:P") {
+      field(DESC, "Pressure in the MEBT")
+      field(DTYP, "S7plc")
+      field(PINI, "YES")
+      field(OUT, "$@SlaveP2006/12 T=FLOAT")
+      field(DRVL, "")
+      field(DRVH, "")
+      field(EGU, "mBar")
+      field(PREC, "8")
+      field(LOPR, "")
+      field(HOPR, "")
+      field(LOW, "")
+      field(LSV, "")
+      field(HIGH, "")
+      field(HSV, "")
+      field(LOLO, "")
+      field(LLSV, "")
+      field(HIHI, "")
+      field(HHSV, "")
+      field(VAL, "9999")
+}
+

@@ -1,0 +1,2271 @@
+record(mbbiDirect, "GVMS:COMMON:AlertInStat")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M0")
+}
+
+record(mbbiDirect, "GVMS:COMMON:LIPAcInStat")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M1")
+}
+
+record(mbbiDirect, "GVMS:COMMON:TestInStat")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M2")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DetFaultStat")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M3")
+}
+
+record(mbbiDirect, "GVMS:COMMON:ScenarioStat")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M4")
+}
+
+record(mbbiDirect, "GVMS:COMMON:PermitOutStat")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M5")
+}
+
+record(mbboDirect, "GVMS:COMMON:InMaskCfgSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0")
+}
+
+record(mbboDirect, "GVMS:COMMON:OutMaskCfgSet")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1")
+}
+
+record(mbbiDirect, "GVMS:COMMON:InMaskCfgStat")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P0")
+}
+
+record(mbbiDirect, "GVMS:COMMON:OutMaskCfgStat")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P1")
+}
+
+record(bo, "GVMS:COMMON:InMaskCfg0Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0:0.0")
+}
+
+record(bo, "GVMS:COMMON:InMaskCfg1Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0:0.1")
+}
+
+record(bo, "GVMS:COMMON:InMaskCfg2Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0:0.2")
+}
+
+record(bo, "GVMS:COMMON:InMaskCfg3Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0:0.3")
+}
+
+record(bo, "GVMS:COMMON:InMaskCfg4Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0:0.4")
+}
+
+record(bo, "GVMS:COMMON:InMaskCfg5Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0:0.5")
+}
+
+record(bo, "GVMS:COMMON:InMaskCfg6Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0:0.6")
+}
+
+record(bo, "GVMS:COMMON:InMaskCfg7Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0:0.7")
+}
+
+record(bo, "GVMS:COMMON:InMaskCfg8Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0:0.8")
+}
+
+record(bo, "GVMS:COMMON:InMaskCfg9Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0:0.9")
+}
+
+record(bo, "GVMS:COMMON:InMaskCfg10Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0:0.10")
+}
+
+record(bo, "GVMS:COMMON:InMaskCfg11Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0:0.11")
+}
+
+record(bo, "GVMS:COMMON:InMaskCfg12Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0:0.12")
+}
+
+record(bo, "GVMS:COMMON:InMaskCfg13Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0:0.13")
+}
+
+record(bo, "GVMS:COMMON:InMaskCfg14Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0:0.14")
+}
+
+record(bo, "GVMS:COMMON:InMaskCfg15Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0:0.15")
+}
+
+record(bo, "GVMS:COMMON:OutMaskCfg0Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1:0.0")
+}
+
+record(bo, "GVMS:COMMON:OutMaskCfg1Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1:0.1")
+}
+
+record(bo, "GVMS:COMMON:OutMaskCfg2Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1:0.2")
+}
+
+record(bo, "GVMS:COMMON:OutMaskCfg3Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1:0.3")
+}
+
+record(bo, "GVMS:COMMON:OutMaskCfg4Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1:0.4")
+}
+
+record(bo, "GVMS:COMMON:OutMaskCfg5Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1:0.5")
+}
+
+record(bo, "GVMS:COMMON:OutMaskCfg6Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1:0.6")
+}
+
+record(bo, "GVMS:COMMON:OutMaskCfg7Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1:0.7")
+}
+
+record(bo, "GVMS:COMMON:OutMaskCfg8Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1:0.8")
+}
+
+record(bo, "GVMS:COMMON:OutMaskCfg9Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1:0.9")
+}
+
+record(bo, "GVMS:COMMON:OutMaskCfg10Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1:0.10")
+}
+
+record(bo, "GVMS:COMMON:OutMaskCfg11Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1:0.11")
+}
+
+record(bo, "GVMS:COMMON:OutMaskCfg12Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1:0.12")
+}
+
+record(bo, "GVMS:COMMON:OutMaskCfg13Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1:0.13")
+}
+
+record(bo, "GVMS:COMMON:OutMaskCfg14Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1:0.14")
+}
+
+record(bo, "GVMS:COMMON:OutMaskCfg15Set")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1:0.15")
+}
+
+record(mbbiDirect, "GVMS:COMMON:SeqCntRdbk")
+{
+	field(DESC, "Sequence counter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0005")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0000")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0001")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0002")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0003")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0004")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0005")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0006")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0007")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0008")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0009")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D10:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0010")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D11:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0011")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D12:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0012")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D13:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0013")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D14:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0014")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D15:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0015")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D16:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0016")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D17:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0017")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D18:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0018")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D19:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0019")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D20:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0020")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D21:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0021")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D22:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0022")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D23:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0023")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D24:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0024")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D25:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0025")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D26:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0026")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D27:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0027")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D28:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0028")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D29:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0029")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D30:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0030")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D31:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0031")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D32:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0032")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D33:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0033")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D34:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0034")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D35:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0035")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D36:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0036")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D37:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0037")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D38:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0038")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:D39:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0039")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:C0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C0")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:C1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C1")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:C2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C2")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:C3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C3")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:C4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C4")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:C5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C5")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:C6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C6")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:C7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C7")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:C8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C8")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:C9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C9")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:P0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:P1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:P2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P2")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:P3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P3")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:P4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P4")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:P5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P5")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:P6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P6")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:P7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P7")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:P8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P8")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:P9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P9")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:P10:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P10")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:P11:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P11")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:P12:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P12")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:P13:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P13")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:P14:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P14")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:M0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M0")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:M1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M1")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:M2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M2")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:M3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M3")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:M4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M4")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:M5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M5")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:M6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M6")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:M7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M7")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:M8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M8")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:M9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M9")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:I0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1I0")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:I1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1I1")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:SB0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB0")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:SB1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB1")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:SB2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB2")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:SB3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB3")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:SB4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB4")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:SB5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB5")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:SB6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB6")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:SB7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB7")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:SB8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB8")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:SB9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB9")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:E0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E0")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:E1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E1")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:E2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E2")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:E3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E3")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:E4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E4")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:E5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E5")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:E6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E6")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:E7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E7")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:E8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E8")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:E9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E9")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:O0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O0")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:O1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O1")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:O2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O2")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:O3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O3")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:O4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O4")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:O5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O5")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:O6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O6")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:O7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O7")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:O8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O8")
+}
+
+record(mbboDirect, "GVMS:COMMON:DEBUG:O9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O9")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0000")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0001")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0002")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0003")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0004")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0005")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0006")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0007")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0008")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0009")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D10:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0010")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D11:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0011")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D12:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0012")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D13:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0013")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D14:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0014")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D15:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0015")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D16:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0016")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D17:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0017")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D18:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0018")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D19:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0019")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D20:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0020")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D21:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0021")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D22:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0022")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D23:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0023")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D24:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0024")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D25:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0025")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D26:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0026")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D27:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0027")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D28:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0028")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D29:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0029")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D30:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0030")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D31:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0031")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D32:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0032")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D33:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0033")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D34:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0034")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D35:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0035")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D36:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0036")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D37:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0037")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D38:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0038")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:D39:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0039")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:C0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C0")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:C1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C1")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:C2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C2")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:C3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C3")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:C4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C4")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:C5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C5")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:C6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C6")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:C7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C7")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:C8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C8")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:C9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C9")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:P0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P0")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:P1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P1")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:P2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P2")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:P3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P3")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:P4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P4")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:P5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P5")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:P6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P6")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:P7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P7")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:P8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P8")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:P9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P9")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:P10:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P10")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:P11:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P11")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:P12:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P12")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:P13:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P13")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:P14:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P14")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:M0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M0")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:M1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M1")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:M2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M2")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:M3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M3")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:M4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M4")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:M5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M5")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:M6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M6")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:M7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M7")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:M8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M8")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:M9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M9")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:I0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1I0")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:I1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1I1")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:SB0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB0")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:SB1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB1")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:SB2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB2")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:SB3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB3")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:SB4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB4")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:SB5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB5")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:SB6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB6")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:SB7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB7")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:SB8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB8")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:SB9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB9")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:E0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E0")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:E1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E1")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:E2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E2")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:E3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E3")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:E4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E4")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:E5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E5")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:E6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E6")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:E7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E7")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:E8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E8")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:E9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E9")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:O0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O0")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:O1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O1")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:O2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O2")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:O3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O3")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:O4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O4")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:O5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O5")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:O6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O6")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:O7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O7")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:O8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O8")
+}
+
+record(mbbiDirect, "GVMS:COMMON:DEBUG:O9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O9")
+}
+

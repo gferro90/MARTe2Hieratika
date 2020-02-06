@@ -1,0 +1,309 @@
+
+
+
+
+
+
+record(mbbiDirect, "$(mname):RM$(devno):YEAR")
+{
+	field(DESC, "Request Year")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M3")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno):MONTH")
+{
+	field(DESC, "Request Month")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M4")
+	field(NOBT, "8")
+	field(SHFT, "8")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno):DAY")
+{
+	field(DESC, "Request Day")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M4")
+	field(NOBT, "8")
+	field(SHFT, "0")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno):HOUR")
+{
+	field(DESC, "Request Hour")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M5")
+	field(NOBT, "8")
+	field(SHFT, "8")
+}
+record(mbbiDirect, "$(mname):RM$(devno):MINUTE")
+{
+	field(DESC, "Request Minute")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M5")
+	field(NOBT, "8")
+	field(SHFT, "0")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno):SECOND")
+{
+	field(DESC, "Request Second")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M6")
+	field(NOBT, "8")
+	field(SHFT, "8")
+}
+
+
+record(mbbiDirect, "$(mname):RM$(devno)_STAT:Di1")
+{
+	field(DESC, "SX_A fail info(1/3)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M9")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+record(mbbiDirect, "$(mname):RM$(devno)_STAT:Di2")
+{
+	field(DESC, "SX_A fail info(2/3)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M10")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+record(mbbiDirect, "$(mname):RM$(devno)_STAT:Di3")
+{
+	field(DESC, "SX_A fail info(3/3)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M11")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+record(mbbiDirect, "$(mname):RM$(devno)_STAT:Di4")
+{
+	field(DESC, "SX_B fail info(1/3)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M12")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+record(mbbiDirect, "$(mname):RM$(devno)_STAT:Di5")
+{
+	field(DESC, "SX_B fail info(2/3)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M13")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+record(mbbiDirect, "$(mname):RM$(devno)_STAT:Di6")
+{
+	field(DESC, "SX_B fail info(3/3)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M14")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+record(mbbiDirect, "$(mname):RM$(devno)_STAT:Di7")
+{
+	field(DESC, "SX_C fail info(1/3)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M15")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+record(mbbiDirect, "$(mname):RM$(devno)_STAT:Di8")
+{
+	field(DESC, "SX_C fail info(2/3)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M16")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+record(mbbiDirect, "$(mname):RM$(devno)_STAT:Di9")
+{
+	field(DESC, "SX_C fail info(3/3)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M17")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+record(mbbiDirect, "$(mname):RM$(devno)_STAT:Di10")
+{
+	field(DESC, "Bypass info")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M18")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+record(mbbiDirect, "$(mname):RM$(devno)_STAT:Di11")
+{
+	field(DESC, "Interlock info")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M19")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+
+
+record(ai, "$(mname):RM$(devno)_GAS:Ai1")
+{
+	field(DESC, "3H gas concentration")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M355")
+	field(EGUF, "65535.0")
+	field(EGUL, "0.0")
+	field(LINR, "LINEAR")
+	field(PREC, "0")
+}
+
+record(ai, "$(mname):RM$(devno)_GAS:Ai2")
+{
+	field(DESC, "41Ar gas concentration")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M356")
+	field(EGUF, "65535.0")
+	field(EGUL, "0.0")
+	field(LINR, "LINEAR")
+	field(PREC, "0")
+}
+
+record(ai, "$(mname):RM$(devno)_GAS:Ai3")
+{
+	field(DESC, "EA gas concentration")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M357")
+	field(EGUF, "65535.0")
+	field(EGUL, "0.0")
+	field(LINR, "LINEAR")
+	field(PREC, "0")
+}
+
+record(ai, "$(mname):RM$(devno)_GAS:Ai4")
+{
+	field(DESC, "EA duct counting rate")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M358")
+	field(EGUF, "65535.0")
+	field(EGUL, "0.0")
+	field(LINR, "LINEAR")
+	field(PREC, "0")
+}
+
+record(ai, "$(mname):RM$(devno)_GAS:Ai1:cus")
+{
+	field(DESC, "3H gas concentration")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M355,SIGNED=YES")
+	field(EGUF, "32767.0")
+	field(EGUL, "-32768.0")
+	field(LINR, "LINEAR")
+	field(PREC, "0")
+}
+
+record(ai, "$(mname):RM$(devno)_GAS:Ai2:cus")
+{
+	field(DESC, "41Ar gas concentration")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M356,SIGNED=YES")
+	field(EGUF, "32767.0")
+	field(EGUL, "-32768.0")
+	field(LINR, "LINEAR")
+	field(PREC, "0")
+}
+
+record(ai, "$(mname):RM$(devno)_GAS:Ai3:cus")
+{
+	field(DESC, "EA gas concentration")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M357,SIGNED=YES")
+	field(EGUF, "32767.0")
+	field(EGUL, "-32768.0")
+	field(LINR, "LINEAR")
+	field(PREC, "0")
+}
+
+record(ai, "$(mname):RM$(devno)_GAS:Ai4:cus")
+{
+	field(DESC, "EA duct counting rate")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M358,SIGNED=YES")
+	field(EGUF, "32767.0")
+	field(EGUL, "-32768.0")
+	field(LINR, "LINEAR")
+	field(PREC, "0")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno)_GAS:Di1")
+{
+	field(DESC, "Gas monitor alarm(1/2)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M360")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno)_GAS:Di2")
+{
+	field(DESC, "Gas monitor alarm(2/2)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M361")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+
+record(mbbiDirect, "$(mname):RM$(devno)_ANN:Di1")
+{
+	field(DESC, "Alarm hold info(1/2)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M365")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno)_ANN:Di2")
+{
+	field(DESC, "Alarm hold info(2/2)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M366")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+
+
+
+

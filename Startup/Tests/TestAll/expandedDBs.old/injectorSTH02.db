@@ -1,0 +1,53 @@
+#Author: Antonio Miguel Lopez
+
+record(stringin, "LEBT:STH02_PS:idn")
+{
+    field(DESC, "get IDN")
+    field(DTYP, "stream")
+    field(INP, "@PBZ20_proto.db getidn PS-STH02")
+}
+
+record(ao, "LEBT:STH02_PS:ISet")
+{
+    field(DESC, "Set Current")
+    field(DTYP, "stream")
+    field(OUT, "@PBZ20_proto.db setcurr PS-STH02")
+    field(EGU, "V")
+    field(LOPR, "-20")
+    field(HOPR, "20")
+}
+
+record(ai, "LEBT:STH02_PS:IRdbkcalc")
+{
+    field(DESC, "Measured Current")
+    field(DTYP, "stream")
+    field(INP, "@PBZ20_proto.db meascurr PS-STH02")
+    field(EGU, "V")
+    field(SCAN, "2 second")
+}
+
+record(bi, "LEBT:STH02_PS:OnStat")
+{
+    field(DESC, "PS On/Off status")
+    field(DTYP, "stream")
+    field(INP, "@PBZ20_proto.db onstat PS-STH02")
+    field(SCAN, "2 second")
+}
+
+record(bo, "LEBT:STH02_PS:ON")
+{
+    field(DESC, "PS On command")
+    field(DTYP, "stream")
+    field(HIGH, "1")
+    field(OUT, "@PBZ20_proto.db on PS-STH02")
+}
+
+record(bo, "LEBT:STH02_PS:OFF")
+{
+    field(DESC, "PS Off command")
+    field(DTYP, "stream")
+    field(HIGH, "1")
+    field(OUT, "@PBZ20_proto.db off PS-STH02")
+}
+
+

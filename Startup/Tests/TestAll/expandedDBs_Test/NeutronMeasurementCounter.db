@@ -1,0 +1,157 @@
+record(mbbiDirect, "NTRON:CycleCounter:R")
+{
+	field(DESC, "counter for alive")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0005")
+}
+
+record(mbbiDirect, "NTRON:PARAM1:R")
+{
+	field(DESC, "Remote Reset Resistor")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P0")
+}
+
+record(mbboDirect, "NTRON:PARAM1:W")
+{
+	field(DESC, "Remote Reset Resistor")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0")
+}
+
+record(mbbiDirect, "NTRON:MONI1:R")
+{
+	field(DESC, "SigIN1 Count VAL [counts/Sec] U-WORD")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M0")
+}
+
+record(mbbiDirect, "NTRON:MONI2:R")
+{
+	field(DESC, "SigIN1 Count VAL [counts/Sec] L-WORD")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M1")
+}
+
+record(mbbiDirect, "NTRON:MONI3:R")
+{
+	field(DESC, "SigIN2 Count VAL [counts/Sec] U-WORD")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M2")
+}
+
+record(mbbiDirect, "NTRON:MONI4:R")
+{
+	field(DESC, "SigIN2 Count VAL [counts/Sec] L-WORD")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M3")
+}
+
+record(mbbiDirect, "NTRON:MONI5:R")
+{
+	field(DESC, "FRC STATUS info")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M4")
+}
+
+record(longin, "NTRON:COUNTER1:R")
+{
+	field(DESC, "counter1")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(FLNK, "NTRON:COUNTER1:Y:R")
+	field(INP, "@simatic://$(target)/DEV1M0")
+}
+
+record(longin, "NTRON:COUNTER2:R")
+{
+	field(DESC, "counter2")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M2")
+}
+
+record(bo, "NTRON:RESET:W")
+{
+	field(DESC, "reset bit")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0:0")
+}
+
+record(calc, "NTRON:ALIVE:R")
+{
+	field(DESC, "alive make at CycleCounter")
+	field(SCAN, "5 second")
+	field(CALC, "A#B?1:0")
+	field(INPA, "NTRON:CycleCounter:R")
+	field(INPB, "NTRON:CycleCounterCopy:R")
+	field(FLNK, "NTRON:CycleCounterCopy:R")
+}
+
+record(mbbiDirect, "NTRON:CycleCounterCopy:R")
+{
+	field(DESC, "cyclecounter copy for alive")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "Soft Channel")
+	field(SEVR, "NO_ALARM")
+	field(INP, "NTRON:CycleCounter:R")
+}
+
+record(calc, "NTRON:COUNTER1:Y:R")
+{
+	field(SCAN, "Passive")
+	field(CALC, "(A/(1-A*C*0.000001)/D/(412*3600*0.000001*3.68)*4*E*(B*B) )")
+	field(INPA, "NTRON:COUNTER1:R")
+	field(INPB, "NTRON:COUNTER1:D:W")
+	field(INPC, "NTRON:COUNTER1:t:W")
+	field(INPD, "NTRON:COUNTER1:f:W")
+	field(INPE, "3.14")
+}
+
+record(ai, "NTRON:COUNTER1:D:W")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(SEVR, "NO_ALARM")
+	field(FLNK, "NTRON:COUNTER1:Y:R")
+	field(INP, "250")
+}
+
+record(ai, "NTRON:COUNTER1:t:W")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(SEVR, "NO_ALARM")
+	field(FLNK, "NTRON:COUNTER1:Y:R")
+	field(INP, "10")
+}
+
+record(ai, "NTRON:COUNTER1:f:W")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(SEVR, "NO_ALARM")
+	field(FLNK, "NTRON:COUNTER1:Y:R")
+	field(INP, "1")
+}
+

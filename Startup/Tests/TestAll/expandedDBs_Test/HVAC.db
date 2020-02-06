@@ -1,0 +1,2572 @@
+record(ai, "HVAC:PLC:Analog1Rdbk")
+{
+	field(DESC, "Monitoring Information PIW272")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(PREC, "0")
+	field(LINR, "LINEAR")
+	field(EGUF, "32767")
+	field(EGUL, "-32768")
+	field(INP, "@simatic://$(target)/DEV1M0,SIGNED=YES")
+}
+
+record(ai, "HVAC:PLC:Analog2Rdbk")
+{
+	field(DESC, "Monitoring Information PIW274")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(PREC, "0")
+	field(LINR, "LINEAR")
+	field(EGUF, "32767")
+	field(EGUL, "-32768")
+	field(INP, "@simatic://$(target)/DEV1M1,SIGNED=YES")
+}
+
+record(ai, "HVAC:PLC:Analog3Rdbk")
+{
+	field(DESC, "Monitoring Information PIW276")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(PREC, "0")
+	field(LINR, "LINEAR")
+	field(EGUF, "32767")
+	field(EGUL, "-32768")
+	field(INP, "@simatic://$(target)/DEV1M2,SIGNED=YES")
+}
+
+record(ai, "HVAC:PLC:Analog4Rdbk")
+{
+	field(DESC, "Monitoring Information PIW278")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(PREC, "0")
+	field(LINR, "LINEAR")
+	field(EGUF, "32767")
+	field(EGUL, "-32768")
+	field(INP, "@simatic://$(target)/DEV1M3,SIGNED=YES")
+}
+
+record(ai, "HVAC:PLC:Analog5Rdbk")
+{
+	field(DESC, "Monitoring Information PIW280")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(PREC, "0")
+	field(LINR, "LINEAR")
+	field(EGUF, "32767")
+	field(EGUL, "-32768")
+	field(INP, "@simatic://$(target)/DEV1M4,SIGNED=YES")
+}
+
+record(ai, "HVAC:PLC:Analog6Rdbk")
+{
+	field(DESC, "Monitoring Information PIW282")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(PREC, "0")
+	field(LINR, "LINEAR")
+	field(EGUF, "32767")
+	field(EGUL, "-32768")
+	field(INP, "@simatic://$(target)/DEV1M5,SIGNED=YES")
+}
+
+record(ai, "HVAC:PLC:Analog7Rdbk")
+{
+	field(DESC, "Monitoring Information PIW284")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(PREC, "0")
+	field(LINR, "LINEAR")
+	field(EGUF, "32767")
+	field(EGUL, "-32768")
+	field(INP, "@simatic://$(target)/DEV1M6,SIGNED=YES")
+}
+
+record(ai, "HVAC:PLC:Analog8Rdbk")
+{
+	field(DESC, "Monitoring Information PIW286")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(PREC, "0")
+	field(LINR, "LINEAR")
+	field(EGUF, "32767")
+	field(EGUL, "-32768")
+	field(INP, "@simatic://$(target)/DEV1M7,SIGNED=YES")
+}
+
+record(mbbiDirect, "HVAC:PLC:Di1_16Rdbk")
+{
+	field(DESC, "Monitoring Information IW8")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M8")
+}
+
+record(mbbiDirect, "HVAC:PLC:Di17_32Rdbk")
+{
+	field(DESC, "Monitoring Information IW12")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M9")
+}
+
+record(calc, "HVAC:PLC:AccAreaPCalc")
+{
+	field(SCAN, "1 second")
+	field(EGU, "Pa")
+	field(CALC, "A*400/27648-300")
+	field(INPA, "HVAC:PLC:Analog1Rdbk")
+}
+
+record(calc, "HVAC:PLC:AccAreaSupTCalc")
+{
+	field(SCAN, "1 second")
+	field(EGU, "℃")
+	field(CALC, "(A*1000/27648-200)/10")
+	field(INPA, "HVAC:PLC:Analog2Rdbk")
+}
+
+record(calc, "HVAC:PLC:AccAreaExTCalc")
+{
+	field(SCAN, "1 second")
+	field(EGU, "℃")
+	field(CALC, "(A*1000/27648-200)/10")
+	field(INPA, "HVAC:PLC:Analog3Rdbk")
+}
+
+record(calc, "HVAC:PLC:Ty1CtlAreaExVolumeCalc")
+{
+	field(SCAN, "1 second")
+	field(EGU, "m3/h")
+	field(CALC, "A*25000/27648")
+	field(INPA, "HVAC:PLC:Analog4Rdbk")
+}
+
+record(calc, "HVAC:PLC:CoolWaterHotAreaPCalc")
+{
+	field(SCAN, "1 second")
+	field(EGU, "Pa")
+	field(CALC, "A*300/27648-200")
+	field(INPA, "HVAC:PLC:Analog5Rdbk")
+}
+
+record(calc, "HVAC:PLC:CoolWaterHotAreaSupTCalc")
+{
+	field(SCAN, "1 second")
+	field(EGU, "℃")
+	field(CALC, "(A*1000/27648-200)/10")
+	field(INPA, "HVAC:PLC:Analog6Rdbk")
+}
+
+record(calc, "HVAC:PLC:PowerAreaPCalc")
+{
+	field(SCAN, "1 second")
+	field(EGU, "Pa")
+	field(CALC, "A*300/27648-200")
+	field(INPA, "HVAC:PLC:Analog7Rdbk")
+}
+
+record(calc, "HVAC:PLC:PowerAreaSupTCalc")
+{
+	field(SCAN, "1 second")
+	field(EGU, "℃")
+	field(CALC, "(A*1000/27648-200)/10")
+	field(INPA, "HVAC:PLC:Analog8Rdbk")
+}
+
+record(calc, "HVAC:PLC:AccAreaSupFanAlarmCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di1_16Rdbk")
+	field(INPB, "2048")
+}
+
+record(calc, "HVAC:PLC:AccAreaExFanAlarm1Calc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di1_16Rdbk")
+	field(INPB, "4096")
+}
+
+record(calc, "HVAC:PLC:AccAreaExFanAlarm2Calc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di1_16Rdbk")
+	field(INPB, "8192")
+}
+
+record(calc, "HVAC:PLC:AccAreaPHighErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di1_16Rdbk")
+	field(INPB, "16384")
+}
+
+record(calc, "HVAC:PLC:AccAreaPLowErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di1_16Rdbk")
+	field(INPB, "32768")
+}
+
+record(calc, "HVAC:PLC:HotAreaSupFanAlarmCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di17_32Rdbk")
+	field(INPB, "1")
+}
+
+record(calc, "HVAC:PLC:HotAreaExFanAlarm1Calc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di17_32Rdbk")
+	field(INPB, "2")
+}
+
+record(calc, "HVAC:PLC:HotAreaExFanAlarm2Calc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di17_32Rdbk")
+	field(INPB, "4")
+}
+
+record(calc, "HVAC:PLC:CoolWaterHotAreaPHighErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di1_16Rdbk")
+	field(INPB, "1")
+}
+
+record(calc, "HVAC:PLC:CoolWaterHotAreaPLowErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di1_16Rdbk")
+	field(INPB, "2")
+}
+
+record(calc, "HVAC:PLC:PowerAreaSupFanOpeNowCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di1_16Rdbk")
+	field(INPB, "4")
+}
+
+record(calc, "HVAC:PLC:PowerAreaSupFanAlarmCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di1_16Rdbk")
+	field(INPB, "8")
+}
+
+record(calc, "HVAC:PLC:PowerAreaExFanOpeNowCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di1_16Rdbk")
+	field(INPB, "16")
+}
+
+record(calc, "HVAC:PLC:PowerAreaExFanAlarmCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di1_16Rdbk")
+	field(INPB, "32")
+}
+
+record(calc, "HVAC:PLC:PowerAreaSupValveClosedCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di1_16Rdbk")
+	field(INPB, "64")
+}
+
+record(calc, "HVAC:PLC:PowerAreaExValveClosedCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di1_16Rdbk")
+	field(INPB, "128")
+}
+
+record(calc, "HVAC:PLC:PowerAreaPHighErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di1_16Rdbk")
+	field(INPB, "256")
+}
+
+record(calc, "HVAC:PLC:PowerAreaPLowErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di1_16Rdbk")
+	field(INPB, "512")
+}
+
+record(calc, "HVAC:PLC:PowerAreaVentErrStoppedCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "( (A&B) != 0 ? 1 : 0)")
+	field(INPA, "HVAC:PLC:Di1_16Rdbk")
+	field(INPB, "1024")
+}
+
+record(calc, "HVAC:PLC:AccAreaPOErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "A=B?1:0")
+	field(INPA, "HVAC:PLC:Analog1Rdbk")
+	field(INPB, "32767")
+}
+
+record(calc, "HVAC:PLC:AccAreaSupTOErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "A=B?1:0")
+	field(INPA, "HVAC:PLC:Analog2Rdbk")
+	field(INPB, "32767")
+}
+
+record(calc, "HVAC:PLC:AccAreaExTOErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "A=B?1:0")
+	field(INPA, "HVAC:PLC:Analog3Rdbk")
+	field(INPB, "32767")
+}
+
+record(calc, "HVAC:PLC:Ty1CtlAreaExVolumeOErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "A=B?1:0")
+	field(INPA, "HVAC:PLC:Analog4Rdbk")
+	field(INPB, "32767")
+}
+
+record(calc, "HVAC:PLC:CoolWaterHotAreaPOErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "A=B?1:0")
+	field(INPA, "HVAC:PLC:Analog5Rdbk")
+	field(INPB, "32767")
+}
+
+record(calc, "HVAC:PLC:CoolWaterHotAreaSupTOErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "A=B?1:0")
+	field(INPA, "HVAC:PLC:Analog6Rdbk")
+	field(INPB, "32767")
+}
+
+record(calc, "HVAC:PLC:PowerAreaPOErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "A=B?1:0")
+	field(INPA, "HVAC:PLC:Analog7Rdbk")
+	field(INPB, "32767")
+}
+
+record(calc, "HVAC:PLC:PowerAreaSupTOErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "A=B?1:0")
+	field(INPA, "HVAC:PLC:Analog8Rdbk")
+	field(INPB, "32767")
+}
+
+record(calc, "HVAC:PLC:AccAreaPUErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "A=B?1:0")
+	field(INPA, "HVAC:PLC:Analog1Rdbk")
+	field(INPB, "-32768")
+}
+
+record(calc, "HVAC:PLC:AccAreaSupTUErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "A=B?1:0")
+	field(INPA, "HVAC:PLC:Analog2Rdbk")
+	field(INPB, "-32768")
+}
+
+record(calc, "HVAC:PLC:AccAreaExTUErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "A=B?1:0")
+	field(INPA, "HVAC:PLC:Analog3Rdbk")
+	field(INPB, "-32768")
+}
+
+record(calc, "HVAC:PLC:Ty1CtlAreaExVolumeUErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "A=B?1:0")
+	field(INPA, "HVAC:PLC:Analog4Rdbk")
+	field(INPB, "-32768")
+}
+
+record(calc, "HVAC:PLC:CoolWaterHotAreaPUErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "A=B?1:0")
+	field(INPA, "HVAC:PLC:Analog5Rdbk")
+	field(INPB, "-32768")
+}
+
+record(calc, "HVAC:PLC:CoolWaterHotAreaSupTUErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "A=B?1:0")
+	field(INPA, "HVAC:PLC:Analog6Rdbk")
+	field(INPB, "-32768")
+}
+
+record(calc, "HVAC:PLC:PowerAreaPUErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "A=B?1:0")
+	field(INPA, "HVAC:PLC:Analog7Rdbk")
+	field(INPB, "-32768")
+}
+
+record(calc, "HVAC:PLC:PowerAreaSupTUErrCalc")
+{
+	field(SCAN, "1 second")
+	field(CALC, "A=B?1:0")
+	field(INPA, "HVAC:PLC:Analog8Rdbk")
+	field(INPB, "-32768")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0000")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0001")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0002")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0003")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0004")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0005")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0006")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0007")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0008")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0009")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D10:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0010")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D11:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0011")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D12:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0012")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D13:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0013")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D14:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0014")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D15:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0015")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D16:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0016")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D17:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0017")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D18:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0018")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D19:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0019")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D20:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0020")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D21:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0021")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D22:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0022")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D23:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0023")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D24:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0024")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D25:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0025")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D26:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0026")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D27:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0027")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D28:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0028")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D29:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0029")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D30:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0030")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D31:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0031")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D32:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0032")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D33:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0033")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D34:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0034")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D35:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0035")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D36:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0036")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D37:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0037")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D38:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0038")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:D39:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0039")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C0")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C1")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C2")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C3")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C4")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C5")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C6")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C7")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C8")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C9")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C10:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C10")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C11:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C11")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C12:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C12")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C13:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C13")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C14:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C14")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C15:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C15")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C16:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C16")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C17:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C17")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C18:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C18")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:C19:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C19")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:P0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:P1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:P2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P2")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:P3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P3")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:P4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P4")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:P5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P5")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:P6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P6")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:P7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P7")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:P8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P8")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:P9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P9")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:P10:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P10")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:P11:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P11")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:P12:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P12")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:P13:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P13")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:P14:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P14")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:M0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M0")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:M1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M1")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:M2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M2")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:M3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M3")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:M4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M4")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:M5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M5")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:M6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M6")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:M7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M7")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:M8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M8")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:M9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M9")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:I0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1I0")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:I1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1I1")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:SB0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB0")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:SB1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB1")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:SB2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB2")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:SB3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB3")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:SB4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB4")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:SB5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB5")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:SB6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB6")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:SB7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB7")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:SB8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB8")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:SB9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/SB9")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:E0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E0")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:E1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E1")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:E2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E2")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:E3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E3")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:E4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E4")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:E5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E5")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:E6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E6")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:E7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E7")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:E8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E8")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:E9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E9")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:O0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O0")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:O1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O1")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:O2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O2")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:O3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O3")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:O4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O4")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:O5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O5")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:O6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O6")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:O7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O7")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:O8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O8")
+}
+
+record(mbboDirect, "HVAC:PLC:DEBUG:O9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O9")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0000")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0001")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0002")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0003")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0004")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0005")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0006")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0007")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0008")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0009")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D10:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0010")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D11:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0011")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D12:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0012")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D13:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0013")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D14:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0014")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D15:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0015")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D16:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0016")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D17:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0017")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D18:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0018")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D19:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0019")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D20:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0020")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D21:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0021")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D22:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0022")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D23:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0023")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D24:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0024")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D25:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0025")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D26:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0026")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D27:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0027")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D28:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0028")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D29:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0029")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D30:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0030")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D31:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0031")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D32:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0032")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D33:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0033")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D34:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0034")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D35:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0035")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D36:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0036")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D37:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0037")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D38:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0038")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:D39:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0039")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C0")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C1")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C2")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C3")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C4")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C5")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C6")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C7")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C8")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C9")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C10:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C10")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C11:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C11")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C12:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C12")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C13:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C13")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C14:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C14")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C15:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C15")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C16:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C16")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C17:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C17")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C18:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C18")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:C19:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C19")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:P0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P0")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:P1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P1")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:P2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P2")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:P3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P3")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:P4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P4")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:P5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P5")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:P6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P6")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:P7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P7")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:P8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P8")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:P9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P9")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:P10:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P10")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:P11:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P11")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:P12:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P12")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:P13:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P13")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:P14:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P14")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:M0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M0")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:M1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M1")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:M2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M2")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:M3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M3")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:M4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M4")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:M5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M5")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:M6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M6")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:M7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M7")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:M8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M8")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:M9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M9")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:I0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1I0")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:I1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1I1")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:SB0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB0")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:SB1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB1")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:SB2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB2")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:SB3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB3")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:SB4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB4")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:SB5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB5")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:SB6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB6")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:SB7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB7")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:SB8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB8")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:SB9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/SB9")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:E0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E0")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:E1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E1")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:E2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E2")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:E3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E3")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:E4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E4")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:E5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E5")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:E6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E6")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:E7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E7")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:E8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E8")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:E9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E9")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:O0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O0")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:O1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O1")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:O2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O2")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:O3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O3")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:O4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O4")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:O5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O5")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:O6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O6")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:O7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O7")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:O8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O8")
+}
+
+record(mbbiDirect, "HVAC:PLC:DEBUG:O9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O9")
+}
+

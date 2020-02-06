@@ -1,0 +1,53 @@
+#Author: Ryo Ichimiya, T. Akagi
+# Integration of new Steerer power supply: 08/05/2018
+
+record(stringin, "LEBT:STV02_PS:idn")
+{
+    field(DESC, "get IDN")
+    field(DTYP, "stream")
+    field(INP, "@PBZ20_proto.db getidn PS-STV02")
+}
+
+record(ao, "LEBT:STV02_PS:ISet")
+{
+    field(DESC, "Set Current")
+    field(DTYP, "stream")
+    field(OUT, "@PBZ20_proto.db setcurr PS-STV02")
+    field(EGU, "V")
+    field(LOPR, "-20")
+    field(HOPR, "20")
+}
+
+record(ai, "LEBT:STV02_PS:IRdbkcalc")
+{
+    field(DESC, "Measured Current")
+    field(DTYP, "stream")
+    field(INP, "@PBZ20_proto.db meascurr PS-STV02")
+    field(EGU, "V")
+    field(SCAN, "2 second")
+}
+
+record(bi, "LEBT:STV02_PS:OnStat")
+{
+    field(DESC, "PS On/Off status")
+    field(DTYP, "stream")
+    field(INP, "@PBZ20_proto.db onstat PS-STV02")
+    field(SCAN, "2 second")
+}
+
+record(bo, "LEBT:STV02_PS:ON")
+{
+    field(DESC, "PS On command")
+    field(DTYP, "stream")
+    field(HIGH, "1")
+    field(OUT, "@PBZ20_proto.db on PS-STV02")
+}
+
+record(bo, "LEBT:STV02_PS:OFF")
+{
+    field(DESC, "PS Off command")
+    field(DTYP, "stream")
+    field(HIGH, "1")
+    field(OUT, "@PBZ20_proto.db off PS-STV02")
+}
+

@@ -1,0 +1,43 @@
+
+Terminator = LF;
+#
+getIDN {
+    out "*IDN?";    in "%39c";
+}
+
+###### CURRent get/set ######
+
+getCURR {
+    out "CURR?"; in "%f";
+}
+
+setCURR {
+    out "CURR %f";
+#   @init { getCURR; }
+}
+
+###### MEASure CURRent ######
+
+measCURR {
+    out "MEAS:CURR?";
+    in  "%13f";
+}
+
+
+###### On/Off Status ######
+
+onStat {
+    out "OUTP:STAT?";
+    in "%{0|1}";
+#    in "%b";
+}
+
+###### Set On/Off ######
+
+on {
+    out "OUTP 1"
+}
+
+off {
+    out "OUTP 0"
+}

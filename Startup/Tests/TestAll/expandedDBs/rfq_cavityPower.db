@@ -1,0 +1,146 @@
+## Cavity Power Measured and Calculated
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+#######################################################################################
+## Calculation from fast acquisition
+#######################################################################################
+
+# - Costants used for Measured Cavity Power - 
+record(seq, "RFQ:RF:CavCnst") {
+	# DO1 -> param A
+	field(DO1, "-0.220411")
+	# DO2 -> param B
+	field(DO2, "1.951002")
+	# DO3 -> param Beta Cavity
+	field(DO3, "70.30")
+	field(PINI, "YES")
+}
+
+# - Measured Cavity Power [with Fast signals]-
+record(calcout, "RFQ:RF:FastCavPwr") {
+	field(DESC, "Cav Pwr with Fast Signals")
+	field(SCAN, ".1 second")
+	field(PHAS, "2")
+	field(CALC, "H*10^((G+(A-C)/B+(D-F)/E)/10)")
+	field(INPA, "RFQ:RFFS_CH2:VMeas.VAL CP")
+	field(INPB, "RFQ:RF:CavCnst.DO1 CP")
+	field(INPC, "RFQ:RF:CavCnst.DO2 CP")
+	field(INPD, "RFQ:RFFS_CH0:VMeas.VAL CP")
+	field(INPE, "RFQ:RF:Cp1FwdCnst.DO3 CP")
+	field(INPF, "RFQ:RF:Cp1FwdCnst.DO4 CP")
+	field(INPG, "RFQ:RF:CavCnst.DO3 CP")
+	field(H, "1E-6")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(LOPR, "0")
+	field(HOPR, "1600")
+	field(FLNK, "RFQ:RF:FastCavV")	
+}
+
+
+# - Measured Cavity Voltage [with Fast signals]-
+record(calcout, "RFQ:RF:FastCavV") {
+	field(DESC, "Cav Volt with Fast Signals")
+	field(CALC, "SQR(0.001)*B*SQR(A)")
+	field(INPA, "RFQ:RF:FastCavPwr.VAL CP")
+	field(INPB, "RFQ:RF:Pk131VCnst.DO3 CP")
+	field(PREC, "2")
+	field(LOPR, "0")
+	field(HOPR, "150")
+	field(EGU, "kV")	
+}
+
+#######################################################################################
+## Calculation from slow acquisition
+#######################################################################################
+
+#  - Cavity Power - Referred to Pickup  M13 Q1  (copied from RFQ:RF:Pk131Pwr)
+record(ao, "RFQ:RF:CavPwr") {
+	field(DESC, "Cav Power")
+	field(SCAN, ".1 second")
+	field(PHAS, "2")
+	field(OMSL, "closed_loop")
+	field(DOL, "RFQ:RF:Pk131Pwr")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(LOPR, "0")
+	field(HOPR, "1600")
+	field(FLNK, "RFQ:RF:CavAgvPwr")	
+}
+
+# - Average Cavity Power -
+record(calcout, "RFQ:RF:CavAvgPwr") {
+	field(DESC, "Cav Average Power")
+	field(CALC, "A*B/C")
+	field(INPA, "RFQ:RF:CavPwr.VAL CP")
+	field(INPB, "RF:LLRF1_CavA:WidthUsecRdbk CP")
+	field(INPC, "RF:LLRF1_CavA:PeriodUsecRdbk CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(LOPR, "0")
+	field(HOPR, "1600")
+	field(FLNK, "RFQ:RF:CavV")	
+}
+
+# - Cavity Voltage - Referred to Pickup  M13 Q1  (copied from RFQ:RF:Pk131V)
+record(calc, "RFQ:RF:CavV") {
+	field(DESC, "Cavity Voltage")
+	field(INPA, "RFQ:RF:Pk131V")
+	field(INPB, "1.43299481")
+	field(CALC, "A*B")
+	field(PREC, "2")
+	field(LOPR, "0")
+	field(HOPR, "150")
+	field(EGU, "kV")
+	#field(FLNK, "RFQ:RF:CavAvgV")
+}
+
+# - Average Cavity Voltage -
+#record(calcout, "RFQ:RF:CavAvgV") {
+#	field(DESC, "Cavity Average Voltage")
+#	field(CALC, "A*B/C")
+#	field(INPA, "RFQ:RF:CavV.VAL CP")
+#	field(INPB, "RF:LLRF1_CavA:WidthUsecRdbk CP")
+#	field(INPC, "RF:LLRF1_CavA:PeriodUsecRdbk CP")
+#	field(PREC, "2")
+#	field(LOPR, "0")
+#	field(HOPR, "150")
+#	field(EGU, "kV")	
+#}
+
+
+# - Total Cavity Power - 
+# Difference between Forward Powers and Reflected Powers injected into the RFQ
+# considering the presence of 8 couplers
+record(calcout, "RFQ:RF:TotPwr") {
+	field(SCAN, ".1 second")
+	field(PHAS, "2")
+	field(INPA, "RFQ:RF:Coup1DPwr.VAL CP")
+	field(INPB, "RFQ:RF:Coup2DPwr.VAL CP")
+	field(INPC, "RFQ:RF:Coup3DPwr.VAL CP")
+	field(INPD, "RFQ:RF:Coup4DPwr.VAL CP")
+	field(INPE, "RFQ:RF:Coup5DPwr.VAL CP")
+	field(INPF, "RFQ:RF:Coup6DPwr.VAL CP")
+	field(INPG, "RFQ:RF:Coup7DPwr.VAL CP")
+	field(INPH, "RFQ:RF:Coup8DPwr.VAL CP")
+	field(CALC, "A+B+C+D+E+F+G+H")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(LOPR, "0")
+	field(HOPR, "1600")	
+	field(FLNK, "RFQ:RF:TotAvgPwr")
+}
+
+# - Total Average Cavity Power -
+record(calcout, "RFQ:RF:TotAvgPwr") {
+	field(CALC, "A*B/C")
+	field(INPA, "RFQ:RF:TotPwr.VAL CP")
+	field(INPB, "RF:LLRF1_CavA:WidthUsecRdbk CP")
+	field(INPC, "RF:LLRF1_CavA:PeriodUsecRdbk CP")
+	field(PREC, "2")
+	field(LOPR, "0")
+	field(HOPR, "1600")
+	field(EGU, "kW")	
+}

@@ -1,0 +1,132 @@
+record(dfanout, LEBT:HVsparkSuppressor:Switch){
+  field(VAL, "0")
+  field(PINI, "1")
+  field(OUTA, "LEBT:HV:Vmonitor.DISV")
+  field(OUTB, "LEBT:Repeller:Vmonitor.DISV")
+  field(OUTC, "LEBT:HV:VThRatio.DISV")
+  field(OUTD, "LEBT:Repeller:VThRatio.DISV")
+}
+
+record(ai, LEBT:HV:Vmonitor){
+  field(DESC, "HV spark application input #1")
+  field(SCAN, ".01 second")
+  field(DTYP, "ICV150")
+  field(LINR, "LINEAR")
+  #field(PREC, "2")
+  field(INP, "#C0 S14 @")
+  field(EGUF, "10")
+  field(EGUL, "-10")
+  field(EGU, "V")
+  field(HOPR, "10")
+  field(LOPR, "-10")
+  field(FLNK, "LEBT:HV:Comparator")
+}
+
+record(ai, LEBT:Repeller:Vmonitor){
+  field(DESC, "HV spark application input #2")
+  field(SCAN, ".01 second")
+  field(DTYP, "ICV150")
+  field(LINR, "LINEAR")
+  #field(PREC, "2")
+  field(INP, "#C0 S15 @")
+  field(EGUF, "10")
+  field(EGUL, "-10")
+  field(EGU, "V")
+  field(HOPR, "10")
+  field(LOPR, "-10")
+  field(FLNK, "LEBT:Repeller:Comparator")
+}
+
+record(ao, LEBT:HV:VThRatio){
+  field(DESC, "Setup Threshold1")
+  field(EGU, "V")
+}
+
+record(ao, LEBT:Repeller:VThRatio){
+  field(DESC, "Setup Threshold2")
+  field(EGU, "V")
+}
+
+record(calcout, LEBT:HV:Comparator){
+#  field(SCAN, ".01 second")
+  field(DESC, "HV spark application digital input #1")
+  field(INPA, "LEBT:HV:Vmonitor")
+  field(INPB, "LEBT:HV:VThRatio")
+  field(CALC,"(A<B)")
+  field(OOPT, "Transition To Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "LEBT:HV:Counts PP")
+  field(FLNK, "LEBT:HVsparkSuppressor:OnOff")
+}
+
+record(bo, LEBT:HV:Counts){
+  field(VAL, "1")
+  field(FLNK, "LEBT:HV:Counter")
+}
+
+record(calc, LEBT:HV:Counter){
+  field(CALC, "A+1")
+  field(INPA, "LEBT:HV:Counter")
+  field(FLNK, "LEBT:HVsparkSuppressor:Counts")
+}
+
+record(calcout, LEBT:Repeller:Comparator){
+#  field(SCAN, ".01 second")
+  field(DESC, "HV spark application digital input #2")
+  field(INPA, "LEBT:Repeller:Vmonitor")
+  field(INPB, "LEBT:Repeller:VThRatio")
+  field(CALC,"(A<B)")
+  field(OOPT, "Transition To Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "LEBT:Repeller:Counts PP")
+  field(FLNK, "LEBT:HVsparkSuppressor:OnOff")
+}
+
+record(bo, LEBT:Repeller:Counts){
+  field(VAL, "1")
+  field(FLNK, "LEBT:Repeller:Counter")  
+}
+
+record(calc, LEBT:Repeller:Counter){
+  field(CALC, "A+1")
+  field(INPA, "LEBT:Repeller:Counter")
+  field(FLNK, "LEBT:HVsparkSuppressor:Counts")
+}
+
+record(calcout, LEBT:HVsparkSuppressor:OnOff){
+  field(DESC, "HV spark comparator")
+  field(OOPT, "When Non-zero")
+  field(DOPT, "Use CALC")
+  field(INPA, "LEBT:HV:Comparator")
+  field(INPB, "LEBT:Repeller:Comparator")
+  field(CALC, "(((A=1)||(B=1))?1:0)")
+  field(OUT, "LEBT:HVsparkSuppressor:IntCmd PP")
+}
+
+record(bo, LEBT:HVsparkSuppressor:IntCmd){
+  field(SCAN, "Passive")
+  field(VAL, "1")
+  field(OUT, "LEBT:MPS:HVsparkSuppressor:delay PP")
+}
+
+record(bo, LEBT:HVsparkSuppressor:Counts){
+  field(VAL, "1")
+  field(FLNK, "LEBT:HVsparkSuppressor:Counter")
+}
+
+record(calc, LEBT:HVsparkSuppressor:Counter){
+  field(CALC, "A+1")
+  field(INPA, "LEBT:HVsparkSuppressor:Counter")
+}
+
+record(bo, LEBT:MPS:HVsparkSuppressor:delay){
+  field(DESC, "HV spark output to MPS")
+  field(HIGH, "0.5")
+  field(DTYP, "ICV196")
+  field(OUT, "#C0 S47 @")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+
+

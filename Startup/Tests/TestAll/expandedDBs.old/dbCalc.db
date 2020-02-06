@@ -1,0 +1,57 @@
+record(calc, "CTL_RMS1:RM1_GAS:Ai1v")
+{
+	field(DESC, "Calc record for RM1_GAS_Ai1")
+	field(INPA, "CTL_RMS1:RM1_GAS:Ai1")
+	field(CALC, "10.0**((A/3200)-3)")
+	field(SCAN, "1 second")
+}
+record(calc, "CTL_RMS1:RM1_GAS:Ai2v")
+{
+	field(DESC, "Calc record for RM1_GAS_Ai2")
+	field(INPA, "CTL_RMS1:RM1_GAS:Ai2")
+	field(CALC, "10.0**((A/3200)-3)")
+	field(SCAN, "1 second")
+}
+record(calc, "CTL_RMS1:RM1_GAS:Ai3v")
+{
+	field(DESC, "Calc record for RM1_GAS_Ai3")
+	field(INPA, "CTL_RMS1:RM1_GAS:Ai3")
+	field(CALC, "10.0**((A/3200)-3)")
+	field(SCAN, "1 second")
+}
+record(calc, "CTL_RMS1:RM1_GAS:Ai4v")
+{
+	field(DESC, "Calc record for RM1_GAS_Ai4444")
+	field(INPA, "CTL_RMS1:RM1_GAS:Ai4")
+	field(CALC, "10.0**((A/3200)-1)")
+	field(SCAN, "1 second")
+}
+
+record(calc, "CTL_RMS1:RM1_GAS:Ai1v:cus")
+{
+	field(DESC, "Calc record for RM1_GAS_Ai1")
+	field(INPA, "CTL_RMS1:RM1_GAS:Ai1:cus")
+	field(CALC, "10.0**((A/3200)-3)")
+	field(SCAN, "1 second")
+}
+record(calc, "CTL_RMS1:RM1_GAS:Ai2v:cus")
+{
+	field(DESC, "Calc record for RM1_GAS_Ai2")
+	field(INPA, "CTL_RMS1:RM1_GAS:Ai2:cus")
+	field(CALC, "10.0**((A/3200)-3)")
+	field(SCAN, "1 second")
+}
+record(calc, "CTL_RMS1:RM1_GAS:Ai3v:cus")
+{
+	field(DESC, "Calc record for RM1_GAS_Ai3")
+	field(INPA, "CTL_RMS1:RM1_GAS:Ai3:cus")
+	field(CALC, "10.0**((A/3200)-3)")
+	field(SCAN, "1 second")
+}
+record(calc, "CTL_RMS1:RM1_GAS:Ai4v:cus")
+{
+	field(DESC, "Calc record for RM1_GAS_Ai4444")
+	field(INPA, "CTL_RMS1:RM1_GAS:Ai4:cus")
+	field(CALC, "10.0**((A/3200)-1)")
+	field(SCAN, "1 second")
+}

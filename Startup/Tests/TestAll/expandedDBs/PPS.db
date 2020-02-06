@@ -1,0 +1,2067 @@
+record(ai,"PPS:INFOSHARE:MONDATA:5_5") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"12")
+	field(INP,"@simatic://172.16.8.135/DEV1M20")
+	field(ESLO,"0")
+}
+record(ai,"PPS:INFOSHARE:MONDATA:5_6") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(INP,"@simatic://172.16.8.135/DEV1M21")
+	field(ESLO,"0")
+}
+record(ai,"PPS:INFOSHARE:MONDATA:5_7") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(INP,"@simatic://172.16.8.135/DEV1M22")
+	field(ESLO,"0")
+}
+record(ai,"PPS:INFOSHARE:MONDATA:5_8_9") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"0.20000000298023")
+	field(INP,"@simatic://172.16.8.135/DEV1M23,FLOAT")
+	field(ESLO,"0")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:C0:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"1")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1C0")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:C1:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"1")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1C1")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:C2:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1C2")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:C3:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"1")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1C3")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:C4:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"2")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1C4")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:C5:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"2")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1C5")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:C6:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1C6")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:C7:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1C7")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:C8:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1C8")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:C9:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1C9")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D0:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0000")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D10:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0010")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D11:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"100")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0011")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D12:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"100")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0012")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D13:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"65535")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0013")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D14:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0014")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D15:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0015")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D16:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0016")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D17:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0017")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D18:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0018")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D19:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0019")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D1:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"19011")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0001")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D20:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0020")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D21:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0021")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D22:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0022")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D23:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0023")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D24:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0024")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D25:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0025")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D26:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0026")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D27:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0027")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D28:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0028")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D29:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0029")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D2:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"258")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0002")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D30:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0030")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D31:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0031")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D32:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0032")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D33:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"64156")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0033")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D34:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0034")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D35:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0035")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D36:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0036")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D37:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0037")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D38:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0038")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D39:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0039")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D3:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"8213")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0003")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D4:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"4130")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0004")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D5:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"38916")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0005")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D6:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"1")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0006")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D7:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"2183")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0007")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D8:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"44048")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0008")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:D9:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"65535")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/D0009")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:E0:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1E0")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:E1:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1E1")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:E2:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1E2")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:E3:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1E3")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:E4:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1E4")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:E5:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1E5")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:E6:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1E6")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:E7:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1E7")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:E8:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1E8")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:E9:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1E9")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:I0:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1I0")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:I1:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1I1")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M0:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"42112")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M0")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M10:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M10")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M11:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M11")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M12:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"15875")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M12")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M13:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"2")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M13")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M14:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"32037")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M14")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M15:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M15")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M16:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"37399")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M16")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M17:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"12")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M17")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M18:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M18")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M19:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"2")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M19")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M1:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"65279")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M1")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M20:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"12")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M20")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M21:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M21")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M22:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M22")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M23:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"15948")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M23")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M24:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"52429")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M24")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M25:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M25")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M26:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M26")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M27:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M27")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M28:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M28")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M29:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M29")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M2:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"32607")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M2")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M3:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"3")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M3")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M4:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M4")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M5:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M5")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M6:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M6")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M7:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M7")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M8:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"47658")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M8")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:M9:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"7999")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M9")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:O0:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1O0")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:O1:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1O1")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:O2:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1O2")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:O3:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1O3")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:O4:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1O4")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:O5:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1O5")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:O6:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1O6")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:O7:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1O7")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:O8:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1O8")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:O9:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1O9")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:P0:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1P0")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:P10:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1P10")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:P11:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1P11")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:P12:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1P12")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:P13:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1P13")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:P14:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1P14")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:P1:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1P1")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:P2:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1P2")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:P3:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1P3")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:P4:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1P4")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:P5:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1P5")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:P6:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1P6")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:P7:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1P7")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:P8:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1P8")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:P9:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1P9")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:SB0:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/SB0")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:SB1:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/SB1")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:SB2:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/SB2")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:SB3:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/SB3")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:SB4:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/SB4")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:SB5:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/SB5")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:SB6:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/SB6")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:SB7:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/SB7")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:SB8:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/SB8")
+}
+record(mbbiDirect,"NAT:DRV:DEBUG:PPS:SB9:R") {
+	field(DESC,"parameter")
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/SB9")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:1_1") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"42112")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M0")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:1_2") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"65279")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M1")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:1_3") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"32607")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M2")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:1_4") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"3")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M3")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:2_1") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M4")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:2_2") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M5")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:2_3") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M6")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:2_4") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M7")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:3_1") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"47658")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M8")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:3_2") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"7999")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M9")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:3_3") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M10")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:3_4") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M11")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:4_1") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"15875")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M12")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:4_2") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"2")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M13")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:4_3") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"32037")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M14")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:4_4") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M15")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:5_1") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"37399")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M16")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:5_2") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"12")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M17")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:5_3") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M18")
+}
+record(mbbiDirect,"PPS:INFOSHARE:MONDATA:5_4") {
+	field(SCAN,"I/O Intr")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(VAL,"2")
+	field(NOBT,"16")
+	field(INP,"@simatic://172.16.8.135/DEV1M19")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:C0:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1C0")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:C1:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1C1")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:C2:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1C2")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:C3:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1C3")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:C4:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1C4")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:C5:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1C5")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:C6:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1C6")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:C7:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1C7")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:C8:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1C8")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:C9:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1C9")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D0:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0000")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D10:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0010")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D11:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0011")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D12:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0012")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D13:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0013")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D14:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0014")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D15:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0015")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D16:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0016")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D17:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0017")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D18:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0018")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D19:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0019")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D1:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0001")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D20:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0020")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D21:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0021")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D22:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0022")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D23:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0023")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D24:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0024")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D25:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0025")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D26:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0026")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D27:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0027")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D28:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0028")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D29:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0029")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D2:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0002")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D30:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0030")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D31:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0031")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D32:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0032")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D33:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0033")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D34:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0034")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D35:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0035")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D36:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0036")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D37:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0037")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D38:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0038")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D39:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0039")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D3:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0003")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D4:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0004")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D5:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0005")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D6:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0006")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D7:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0007")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D8:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0008")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:D9:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/D0009")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:E0:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1E0")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:E1:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1E1")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:E2:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1E2")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:E3:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1E3")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:E4:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1E4")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:E5:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1E5")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:E6:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1E6")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:E7:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1E7")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:E8:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1E8")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:E9:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1E9")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:I0:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1I0")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:I1:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1I1")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M0:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M0")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M10:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M10")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M11:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M11")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M12:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M12")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M13:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M13")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M14:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M14")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M15:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M15")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M16:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M16")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M17:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M17")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M18:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M18")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M19:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M19")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M1:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M1")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M20:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M20")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M21:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M21")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M22:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M22")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M23:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M23")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M24:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M24")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M25:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M25")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M26:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M26")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M27:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M27")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M28:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M28")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M29:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M29")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M2:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M2")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M3:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M3")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M4:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M4")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M5:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M5")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M6:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M6")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M7:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M7")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M8:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M8")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:M9:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1M9")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:O0:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1O0")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:O1:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1O1")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:O2:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1O2")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:O3:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1O3")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:O4:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1O4")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:O5:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1O5")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:O6:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1O6")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:O7:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1O7")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:O8:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1O8")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:O9:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1O9")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:P0:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1P0")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:P10:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1P10")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:P11:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1P11")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:P12:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1P12")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:P13:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1P13")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:P14:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1P14")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:P1:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1P1")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:P2:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1P2")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:P3:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1P3")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:P4:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1P4")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:P5:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1P5")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:P6:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1P6")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:P7:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1P7")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:P8:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1P8")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:P9:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/DEV1P9")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:SB0:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/SB0")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:SB1:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/SB1")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:SB2:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/SB2")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:SB3:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/SB3")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:SB4:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/SB4")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:SB5:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/SB5")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:SB6:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/SB6")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:SB7:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/SB7")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:SB8:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/SB8")
+}
+record(mbboDirect,"NAT:DRV:DEBUG:PPS:SB9:W") {
+	field(DESC,"parameter")
+	field(DTYP,"IFMIF PLC")
+	field(UDF,"0")
+	field(NOBT,"16")
+	field(OUT,"@simatic://172.16.8.135/SB9")
+}

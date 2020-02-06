@@ -1,0 +1,17 @@
+# Balanced control for +-10kV Power Supply
+# Maurizio Montis - INFN Italy
+# mail: maurizio.montis@lnl.infn.it
+
+record(ai, "RFQTDT:PS10K:VSet") {
+	field(DESC, "10kV Common Setpoint")
+	field(PINI, "YES")
+	field(VAL, "0")
+	field(FLNK, "RFQTDT:PS10K:VSetFwd")
+}
+
+record(fanout, "RFQTDT:PS10K:VSetFwd") {
+	#field(DOL, " RFQTDT:PS10K:VSet")
+	#field(OMSL, "closed_loop")
+	field(LNK1, "RFQTDT:PS2:VSet:aio0_9_SET")
+	field(LNK2, "RFQTDT:PS3:VSet:aio0_10_SET")
+}

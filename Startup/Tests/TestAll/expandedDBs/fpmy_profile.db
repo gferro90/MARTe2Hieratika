@@ -1,0 +1,23 @@
+record(aSub,"DPLA:FPM02:Profile") {
+    field(DESC ,"FPM profile processing")
+    field(SCAN ,"Passive")
+    field(SNAM,"FPM_Interleaved")
+# inputs
+    field(FTA, "FLOAT")
+    field(NOA, "64")
+    field(INPA, "DPLA:FPM02:graph NPP MS")
+# outputs
+    field(FTVA, "FLOAT")
+    field(NOVA, "64")
+    field(OUTA, "DPLA:FPM02:ProfileV PP")
+}
+
+record(waveform,"DPLA:FPM02:ProfileV")
+{
+	field(FTVL, "FLOAT")
+	field(SCAN, "Passive")
+	field(NELM, "64")
+	field(DESC, "DFP02 vertical profile")
+}
+
+

@@ -1,0 +1,3474 @@
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0000")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0001")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0002")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0003")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0004")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0005")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0006")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0007")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0008")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0009")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D10:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0010")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D11:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0011")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D12:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0012")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D13:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0013")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D14:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0014")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D15:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0015")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D16:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0016")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D17:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0017")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D18:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0018")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D19:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0019")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D20:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0020")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D21:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0021")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D22:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0022")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D23:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0023")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D24:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0024")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D25:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0025")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D26:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0026")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D27:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0027")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D28:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0028")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D29:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0029")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D30:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0030")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D31:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0031")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D32:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0032")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D33:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0033")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D34:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0034")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D35:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0035")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D36:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0036")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D37:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0037")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D38:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0038")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):D39:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/D0039")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C0")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C1")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C2")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C3")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C4")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C5")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C6")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C7")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C8")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C9")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C10:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C10")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C11:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C11")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C12:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C12")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C13:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C13")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C14:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C14")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C15:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C15")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C16:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C16")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C17:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C17")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C18:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C18")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):C19:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1C19")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P0")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P1")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P2")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P3")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P4")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P5")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P6")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P7")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P8")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P9")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P10:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P10")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P11:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P11")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P12:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P12")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P13:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P13")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P14:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P14")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P15:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P15")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P16:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P16")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P17:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P17")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P18:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P18")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P19:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P19")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P20:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P20")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P21:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P21")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P22:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P22")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P23:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P23")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P24:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P24")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P25:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P25")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P26:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P26")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P27:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P27")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P28:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P28")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P29:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P29")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P30:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P30")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P31:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P31")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P32:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P32")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P33:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P33")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P34:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P34")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P35:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P35")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P36:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P36")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P37:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P37")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P38:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P38")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P39:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P39")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):P40:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1P40")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M0")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M1")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M2")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M3")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M4")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M5")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M6")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M7")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M8")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M9")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M10:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M10")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M11:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M11")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M12:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M12")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M13:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M13")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M14:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M14")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M15:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M15")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M16:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M16")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M17:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M17")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M18:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M18")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M19:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M19")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M20:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M20")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M21:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M21")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M22:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M22")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M23:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M23")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M24:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M24")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M25:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M25")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M26:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M26")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M27:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M27")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M28:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M28")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M29:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M29")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M30:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M30")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M31:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M31")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M32:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M32")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M33:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M33")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M34:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M34")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M35:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M35")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M36:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M36")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M37:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M37")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M38:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M38")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M39:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M39")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M40:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M40")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M41:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M41")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M42:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M42")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M43:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M43")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M44:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M44")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M45:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M45")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M46:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M46")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M47:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M47")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M48:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M48")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M49:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M49")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M50:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M50")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M51:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M51")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M52:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M52")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M53:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M53")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M54:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M54")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M55:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M55")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M56:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M56")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M57:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M57")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M58:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M58")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):M59:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1M59")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):I0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1I0")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):I1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1I1")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):SB0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1SB0")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):SB1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1SB1")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):SB2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1SB2")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):SB3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1SB3")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):SB4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1SB4")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):SB5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1SB5")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):SB6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1SB6")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):SB7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1SB7")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):SB8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1SB8")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):SB9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1SB9")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):E0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E0")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):E1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E1")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):E2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E2")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):E3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E3")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):E4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E4")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):E5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E5")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):E6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E6")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):E7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E7")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):E8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E8")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):E9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1E9")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):O0:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O0")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):O1:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O1")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):O2:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O2")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):O3:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O3")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):O4:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O4")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):O5:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O5")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):O6:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O6")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):O7:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O7")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):O8:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O8")
+}
+
+record(mbboDirect, "NAT:DRV:DEBUG:$(targetname):O9:W")
+{
+	field(DESC, "parameter")
+	field(SCAN, "Passive")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(OUT, "@simatic://$(target)/DEV1O9")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0000")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0001")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0002")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0003")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0004")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0005")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0006")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0007")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0008")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0009")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D10:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0010")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D11:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0011")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D12:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0012")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D13:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0013")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D14:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0014")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D15:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0015")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D16:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0016")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D17:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0017")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D18:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0018")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D19:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0019")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D20:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0020")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D21:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0021")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D22:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0022")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D23:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0023")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D24:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0024")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D25:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0025")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D26:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0026")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D27:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0027")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D28:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0028")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D29:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0029")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D30:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0030")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D31:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0031")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D32:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0032")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D33:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0033")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D34:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0034")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D35:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0035")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D36:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0036")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D37:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0037")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D38:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0038")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):D39:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/D0039")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C0")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C1")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C2")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C3")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C4")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C5")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C6")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C7")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C8")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C9")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C10:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C10")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C11:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C11")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C12:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C12")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C13:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C13")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C14:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C14")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C15:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C15")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C16:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C16")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C17:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C17")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C18:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C18")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):C19:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1C19")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P0")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P1")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P2")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P3")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P4")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P5")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P6")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P7")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P8")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P9")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P10:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P10")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P11:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P11")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P12:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P12")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P13:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P13")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P14:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P14")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P15:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P15")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P16:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P16")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P17:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P17")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P18:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P18")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P19:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P19")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P20:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P20")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P21:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P21")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P22:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P22")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P23:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P23")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P24:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P24")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P25:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P25")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P26:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P26")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P27:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P27")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P28:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P28")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P29:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P29")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P30:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P30")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P31:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P31")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P32:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P32")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P33:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P33")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P34:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P34")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P35:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P35")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P36:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P36")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P37:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P37")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P38:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P38")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P39:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P39")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):P40:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1P40")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M0")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M1")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M2")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M3")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M4")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M5")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M6")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M7")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M8")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M9")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M10:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M10")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M11:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M11")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M12:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M12")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M13:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M13")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M14:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M14")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M15:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M15")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M16:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M16")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M17:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M17")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M18:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M18")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M19:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M19")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M20:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M20")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M21:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M21")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M22:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M22")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M23:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M23")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M24:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M24")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M25:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M25")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M26:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M26")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M27:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M27")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M28:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M28")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M29:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M29")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M30:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M30")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M31:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M31")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M32:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M32")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M33:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M33")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M34:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M34")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M35:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M35")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M36:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M36")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M37:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M37")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M38:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M38")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M39:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M39")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M40:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M40")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M41:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M41")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M42:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M42")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M43:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M43")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M44:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M44")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M45:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M45")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M46:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M46")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M47:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M47")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M48:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M48")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M49:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M49")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M50:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M50")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M51:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M51")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M52:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M52")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M53:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M53")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M54:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M54")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M55:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M55")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M56:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M56")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M57:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M57")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M58:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M58")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):M59:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1M59")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):I0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1I0")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):I1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1I1")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):SB0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1SB0")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):SB1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1SB1")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):SB2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1SB2")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):SB3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1SB3")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):SB4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1SB4")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):SB5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1SB5")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):SB6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1SB6")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):SB7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1SB7")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):SB8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1SB8")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):SB9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1SB9")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):E0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E0")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):E1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E1")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):E2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E2")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):E3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E3")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):E4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E4")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):E5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E5")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):E6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E6")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):E7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E7")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):E8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E8")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):E9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1E9")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):O0:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O0")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):O1:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O1")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):O2:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O2")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):O3:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O3")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):O4:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O4")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):O5:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O5")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):O6:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O6")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):O7:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O7")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):O8:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O8")
+}
+
+record(mbbiDirect, "NAT:DRV:DEBUG:$(targetname):O9:R")
+{
+	field(DESC, "parameter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(SEVR, "NO_ALARM")
+	field(INP, "@simatic://$(target)/DEV1O9")
+}
+

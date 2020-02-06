@@ -1,0 +1,4422 @@
+#############################################
+# Status of the connection to PLC01 in DPLA #
+#############################################
+record(bi, "DPLA:PLC01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc stat")
+  field(INP, "@dpla_plc")
+  field(ZNAM, "Disconnected")
+  field(ONAM, "Connected")
+}
+
+##################################
+# Records VACUUM STATE MACHINE
+##################################
+
+# Machine state
+record(mbbi, "DPLA:VAC01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/0 T=BYTE")
+  field(DESC, "D-Plate vacuum state machine")
+  field(NOBT, "4")
+  
+  field(ZRVL, "0")
+  field(ZRST, "STAND-BY")
+  field(ZRSV, "NO_ALARM")
+
+  field(ONVL, "1")
+  field(ONST, "INITIAL")
+  field(ONSV, "NO_ALARM")
+
+  field(TWVL, "2")
+  field(TWST, "ROUGHING")
+  field(TWSV, "NO_ALARM")
+
+  field(THVL, "3")
+  field(THST, "HIGH VACUUM")
+  field(THSV, "NO_ALARM")
+  
+  field(FRVL, "4")
+  field(FRST, "UHV W/O BEAM")
+  field(FRSV, "NO_ALARM")
+  
+  field(FVVL, "5")
+  field(FVST, "READY W/O BEAM")
+  field(FVSV, "NO_ALARM")
+  
+  field(SXVL, "6")
+  field(SXST, "BEAM-ON")
+  field(SXSV, "NO_ALARM")
+  
+  field(SVVL, "7")
+  field(SVST, "VENTING")
+  field(SVSV, "NO_ALARM")
+  
+  field(EIVL, "8")
+  field(EIST, "REGENERATION")
+  field(EISV, "NO_ALARM")
+  
+  field(NIVL, "9")
+  field(NIST, "ERROR TROLLEY")
+  field(NISV, "MAJOR")
+  
+  field(TEVL, "10")
+  field(TEST, "ERROR ALL IONIC")
+  field(TESV, "MAJOR")
+  
+  field(ELVL, "11")
+  field(ELST, "ERR PRESURE BEAM")
+  field(ELSV, "MAJOR")
+  
+  field(TVVL, "12")
+  field(TVST, "MANUAL")
+  field(TVSV, "NO_ALARM")
+}
+
+##################################
+# Records for valve GV01 in DPLA #
+##################################
+
+# Status is a 2 bits word:
+# LSB   --> digital input active when there is it is open
+# bit 1 --> digital input active when there is closed
+record(mbbi, "DPLA:GV01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/1 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Status of valve DPLA->GV01")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Open")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Closed")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+# bit 2 --> PLC timeout flag when both inputs are inactive for too long (TBD)
+record(bi, "DPLA:GV01:Timeout") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/1 T=BYTE B=2")
+  field(ZNAM, "No timeout")
+  field(ONAM, "Timeout")
+  field(OSV, "MINOR")
+  field(DESC, "DPLA->GV01 valve timeout")
+}
+
+# Open is the actuaction of the PLC sends over the valve
+record(bi, "DPLA:GV01:Open") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/1 T=BYTE B=3")
+  field(ZNAM, "Closed")
+  field(ONAM, "Open")
+  field(DESC, "Actuation over valve DPLA->GV01")
+}
+
+##################################
+# Records for valve VV01 in DPLA #
+##################################
+
+# Status is a 2 bits word:
+# LSB   --> digital input active when there is it is open
+# bit 1 --> digital input active when there is closed
+record(mbbi, "DPLA:VV01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/2 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Status of valve DPLA->VV01")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Open")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Closed")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+# bit 2 --> PLC timeout flag when both inputs are inactive for too long (TBD)
+record(bi, "DPLA:VV01:Timeout") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/2 T=BYTE B=2")
+  field(ZNAM, "No timeout")
+  field(ONAM, "Timeout")
+  field(OSV, "MINOR")
+  field(DESC, "DPLA->VV01 valve timeout")
+}
+
+# Open is the actuaction of the PLC sends over the valve
+record(bi, "DPLA:VV01:Open") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/2 T=BYTE B=3")
+  field(ZNAM, "Closed")
+  field(ONAM, "Open")
+  field(DESC, "Actuation over valve DPLA->VV01")
+}
+
+##################################
+# Records for valve VV02 in DPLA #
+##################################
+
+# Status is a 2 bits word:
+# LSB   --> digital input active when there is it is open
+# bit 1 --> digital input active when there is closed
+record(mbbi, "DPLA:VV02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/3 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Status of valve DPLA->VV02")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Open")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Closed")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+# bit 2 --> PLC timeout flag when both inputs are inactive for too long (TBD)
+record(bi, "DPLA:VV02:Timeout") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/3 T=BYTE B=2")
+  field(ZNAM, "No timeout")
+  field(ONAM, "Timeout")
+  field(OSV, "MINOR")
+  field(DESC, "DPLA->VV02 valve timeout")
+}
+
+# Open is the actuaction of the PLC sends over the valve
+record(bi, "DPLA:VV02:Open") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/3 T=BYTE B=3")
+  field(ZNAM, "Closed")
+  field(ONAM, "Open")
+  field(DESC, "Actuation over valve DPLA->VV02")
+}
+
+##################################
+# Records for valve VV03 in DPLA #
+##################################
+
+# Status is a 2 bits word:
+# LSB   --> digital input active when there is it is open
+# bit 1 --> digital input active when there is closed
+record(mbbi, "DPLA:VV03:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/4 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Status of valve DPLA->VV03")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Open")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Closed")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+# bit 2 --> PLC timeout flag when both inputs are inactive for too long (TBD)
+record(bi, "DPLA:VV03:Timeout") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/4 T=BYTE B=2")
+  field(ZNAM, "No timeout")
+  field(ONAM, "Timeout")
+  field(OSV, "MINOR")
+  field(DESC, "DPLA->VV03 valve timeout")
+}
+
+# Open is the actuaction of the PLC sends over the valve
+record(bi, "DPLA:VV03:Open") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/4 T=BYTE B=3")
+  field(ZNAM, "Closed")
+  field(ONAM, "Open")
+  field(DESC, "Actuation over valve DPLA->VV03")
+}
+
+##################################
+# Records for valve VV04 in DPLA #
+##################################
+
+# Status is a 2 bits word:
+# LSB   --> digital input active when there is it is open
+# bit 1 --> digital input active when there is closed
+record(mbbi, "DPLA:VV04:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/5 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Status of valve DPLA->VV04")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Open")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Closed")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+# bit 2 --> PLC timeout flag when both inputs are inactive for too long (TBD)
+record(bi, "DPLA:VV04:Timeout") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/5 T=BYTE B=2")
+  field(ZNAM, "No timeout")
+  field(ONAM, "Timeout")
+  field(OSV, "MINOR")
+  field(DESC, "DPLA->VV04 valve timeout")
+}
+
+# Open is the actuaction of the PLC sends over the valve
+record(bi, "DPLA:VV04:Open") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/5 T=BYTE B=3")
+  field(ZNAM, "Closed")
+  field(ONAM, "Open")
+  field(DESC, "Actuation over valve DPLA->VV04")
+}
+
+##################################
+# Records for valve VV05 in DPLA #
+##################################
+
+# Status is a 2 bits word:
+# LSB   --> digital input active when there is it is open
+# bit 1 --> digital input active when there is closed
+record(mbbi, "DPLA:VV05:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/6 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Status of valve DPLA->VV05")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Open")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Closed")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+# bit 2 --> PLC timeout flag when both inputs are inactive for too long (TBD)
+record(bi, "DPLA:VV05:Timeout") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/6 T=BYTE B=2")
+  field(ZNAM, "No timeout")
+  field(ONAM, "Timeout")
+  field(OSV, "MINOR")
+  field(DESC, "DPLA->VV05 valve timeout")
+}
+
+# Open is the actuaction of the PLC sends over the valve
+record(bi, "DPLA:VV05:Open") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/6 T=BYTE B=3")
+  field(ZNAM, "Closed")
+  field(ONAM, "Open")
+  field(DESC, "Actuation over valve DPLA->VV05")
+}
+
+##################################
+# Records for valve VV06 in DPLA #
+##################################
+
+# Status is a 2 bits word:
+# LSB   --> digital input active when there is it is open
+# bit 1 --> digital input active when there is closed
+record(mbbi, "DPLA:VV06:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/7 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Status of valve DPLA->VV06")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Open")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Closed")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+# bit 2 --> PLC timeout flag when both inputs are inactive for too long (TBD)
+record(bi, "DPLA:VV06:Timeout") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/7 T=BYTE B=2")
+  field(ZNAM, "No timeout")
+  field(ONAM, "Timeout")
+  field(OSV, "MINOR")
+  field(DESC, "DPLA->VV06 valve timeout")
+}
+
+# Open is the actuaction of the PLC sends over the valve
+record(bi, "DPLA:VV06:Open") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/7 T=BYTE B=3")
+  field(ZNAM, "Closed")
+  field(ONAM, "Open")
+  field(DESC, "Actuation over valve DPLA->VV06")
+}
+
+###############################
+# Record for flow switch FS01 #
+###############################
+
+# Status is a 2 bits word:
+# LSB   --> digital input active when there is flow
+# bit 1 --> digital input active when there is NOT flow
+record(mbbi, "DPLA:FS01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/8 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "DSL01 flow switch status")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Flow")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "No flow")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+# bit 2 --> PLC timeout flag when both inputs are inactive for too long (TBD)
+record(bi, "DPLA:FS01:Timeout") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/8 T=BYTE B=2")
+  field(DESC, "DSL01 flow switch timeout")
+  field(ZNAM, "No timeout")
+  field(ONAM, "Timeout")
+  field(OSV, "MINOR")
+}
+
+###############################
+# Record for flow switch FS02 #
+###############################
+
+# Status is a 2 bits word:
+# LSB   --> digital input active when there is flow
+# bit 1 --> digital input active when there is NOT flow
+record(mbbi, "DPLA:FS02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/9 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "DSL02 flow switch status")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Flow")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "No flow")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+# bit 2 --> PLC timeout flag when both inputs are inactive for too long (TBD)
+record(bi, "DPLA:FS02:Timeout") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/9 T=BYTE B=2")
+  field(DESC, "DSL02 flow switch timeout")
+  field(ZNAM, "No timeout")
+  field(ONAM, "Timeout")
+  field(OSV, "MINOR")
+}
+
+###############################
+# Record for flow switch FS03 #
+###############################
+
+# Status is a 2 bits word:
+# LSB   --> digital input active when there is flow
+# bit 1 --> digital input active when there is NOT flow
+record(mbbi, "DPLA:FS03:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/10 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "LPBD flow switch status")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Flow")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "No flow")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+
+# bit 2 --> PLC timeout flag when both inputs are inactive for too long (TBD)
+record(bi, "DPLA:FS03:Timeout") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/10 T=BYTE B=2")
+  field(DESC, "LPBD flow switch timeout")
+  field(ZNAM, "No timeout")
+  field(ONAM, "Timeout")
+  field(OSV, "MINOR")
+}
+
+##########################
+# Records for PT100 RT01 #
+##########################
+# Temperature
+record(ai, "DPLA:RT01:T") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/12 T=FLOAT32")
+  field(DESC, "Temperature PT100 @DWC01 IN")
+  field(EGU, "degC")
+  field(PREC, "1")
+  field(HIHI, "31")
+  field(HHSV, "MAJOR")
+}
+
+##########################
+# Records for PT100 RT02 #
+##########################
+# Temperature
+record(ai, "DPLA:RT02:T") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/16 T=FLOAT32")
+  field(DESC, "Temperature PT100 @DWC01 OUT")
+  field(EGU, "degC")
+  field(PREC, "1")
+  field(HIHI, "32.5")
+  field(HHSV, "MAJOR")
+}
+
+##########################
+# Records for PT100 WC01 #
+##########################
+# Temperature
+record(ai, "DPLA:WC01:DeltaT") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/20 T=FLOAT32")
+  field(DESC, "Temp diff DRT02-DRT01 @DWC01")
+  field(EGU, "degC")
+  field(PREC, "1")
+  field(HIHI, "1.5")
+  field(HHSV, "MAJOR")
+}
+
+##########################
+# Records for PT100 TH03 #
+##########################
+# Temperature
+record(ai, "DPLA:TH03:T") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/316 T=FLOAT32")
+  field(DESC, "LPBD temperature")
+  field(EGU, "degC")
+  field(PREC, "1")
+  field(HIHI, "25")
+  field(HHSV, "MAJOR")
+}
+
+#####################################
+# Records for vacuum controller     #
+# Suited for Pfeiffer Vacuum TPG300 #
+#####################################
+
+# Communications status
+record(bi, "DPLA:VAC01:CommStat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/11 T=BYTE B=0")
+  field(ZNAM, "Disconnected")
+  field(ONAM, "Connected")
+  field(DESC, "TPG300 Communications status")
+}
+
+# Error switching function (fifth relay in TPG300 IF300P)
+# TPG300 do not report this, but Sirius PLC could
+# It signals a fault in a measuring circuit or a fatal error.
+record(bi, "DPLA:VAC01:ErrorRelay") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/11 T=BYTE B=1")
+  field(ZNAM, "Error")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Ok")
+  field(OSV, "NO_ALARM")
+  field(DESC, "Vacuum controller error, relay signal")
+}
+
+# Reference gauges pair (pirani & penning)
+record(bi, "DPLA:VAC01:RefGauges") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/11 T=BYTE B=2")
+  field(ZNAM, "DVG03 & DVG04")
+  field(ONAM, "DVG01 & DVG02")
+  field(DESC, "Gauge pair used as reference")
+}
+
+########################################
+# Records for vacuum gauge VG01        #
+# Suited for Balzers TPG300 controller #
+########################################
+
+# Pressure
+# PROFIBUS Block ID 1, Slot 1, 2, 3 or 4, Index 20, cyclic read
+record(ai, "DPLA:VG01:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/24 T=FLOAT32")
+  field(DESC, "Pressure of pirani before slits chamber")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+
+# Pressure as analog signal
+# 0 to 10V signal generated by TPG300 digitized by S7300 analog input
+record(ai, "DPLA:VG01:V") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/24+4 T=FLOAT32")
+  field(DESC, "Voltage of pirani before slits chamber")
+  field(PREC, "3")
+  field(EGU, "V")
+}
+
+# Gauge status
+# PROFIBUS Block ID 1, Slot 1, 2, 3 or 4, Index 21, cyclic read
+record(mbbi, "DPLA:VG01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/24+8 T=BYTE")
+  field(NOBT, "3")
+  field(SHFT, "0")
+  field(DESC, "Gauge status")
+  field(ZRVL, "0")
+  field(ZRST, "Data ok")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Underrrange")
+  field(ONSV, "MINOR")
+  field(TWVL, "2")
+  field(TWST, "Overrange")
+  field(TWSV, "MINOR")
+  field(THVL, "3")
+  field(THST, "ERROR")
+  field(THSV, "MAJOR")
+  field(FRVL, "4")
+  field(FRST, "OFF")
+  field(FRSV, "NO_ALARM")
+  field(FVVL, "5")
+  field(FVST, "No hardware")
+  field(FVSV, "MAJOR")
+}
+
+# Measuring circuit on/off
+# PROFIBUS Block ID 0, Slot 0, Index 20, acyclic read
+record(mbbi, "DPLA:VG01:OnStat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/24+9 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Status Measuring circuit on/off")
+  field(ZRVL, "0")
+  field(ZRST, "No measuring")
+  field(ZRSV, "MAJOR")
+  field(ONVL, "1")
+  field(ONST, "Off")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Automatic")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "On")
+  field(THSV, "NO_ALARM")
+}
+
+# Filter time constant
+# PROFIBUS Block ID 1, Slot 1, 2, 3 or 4, Index 23, acyclic read or write
+
+#readback
+record(mbbi, "DPLA:VG01:Filter") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/24+10 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Filter time constant readback")
+  field(ONVL, "1")
+  field(ONST, "Fast")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Medium")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Slow")
+  field(THSV, "NO_ALARM")
+}
+
+# Switching thresholds
+
+# Upper threshold readback
+# SP1, SP2, SP3, SP4 mnemonic, cacheable
+record (ai, "DPLA:VG01:UpperTH") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@dpla_plc/24+12 T=FLOAT32")
+  field(DESC, "Upper threshold readback")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+
+# Lower threshold readback
+# SP1, SP2, SP3, SP4 mnemonic, cacheable
+record (ai, "DPLA:VG01:LowerTH") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@dpla_plc/24+16 T=FLOAT32")
+  field(DESC, "Lower threshold readback")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+
+# Switching function status
+# SPS mnemonic, continuous poll
+record(bi, "DPLA:VG01:Relay") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/24+11 T=BYTE B=0")
+  field(ZNAM, "Error")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Ok")
+  field(OSV, "NO_ALARM")
+  field(DESC, "VG01 relay status")
+}
+
+# Gas correction factor
+# Calibration factor relative to N2. It depends on gas and sensor type
+# TPG300 does not accounts for it, it is PLC that has to divide reading by factor.
+
+record(ai, "DPLA:VG01:GasCF") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/24+20 T=FLOAT32")
+  field(DESC, "Gas Correction Factor readback")
+  field(PREC, "2")
+  field(EGU, "")
+}
+
+# Usage timers
+record(longin, "DPLA:VG01:TimerHHHH") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/536 T=UINT32")
+  field(DESC, "Vacuum gauge hours time counter")
+  field(EGU, "hours")
+}
+record(longin, "DPLA:VG01:TimerMM") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/536+4 T=BYTE")
+  field(DESC, "Vacuum gauge minutes time counter")
+  field(EGU, "min")
+}
+record(longin, "DPLA:VG01:TimerSS") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/536+5 T=BYTE")
+  field(DESC, "Vacuum gauge seconds time counter")
+  field(EGU, "s")
+}
+
+########################################
+# Records for vacuum gauge VG02        #
+# Suited for Balzers TPG300 controller #
+########################################
+
+# Pressure
+# PROFIBUS Block ID 1, Slot 1, 2, 3 or 4, Index 20, cyclic read
+record(ai, "DPLA:VG02:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/48 T=FLOAT32")
+  field(DESC, "Pressure of penning before slits chamber")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+
+# Pressure as analog signal
+# 0 to 10V signal generated by TPG300 digitized by S7300 analog input
+record(ai, "DPLA:VG02:V") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/48+4 T=FLOAT32")
+  field(DESC, "Voltage of penning before slits chamber")
+  field(PREC, "3")
+  field(EGU, "V")
+}
+
+# Gauge status
+# PROFIBUS Block ID 1, Slot 1, 2, 3 or 4, Index 21, cyclic read
+record(mbbi, "DPLA:VG02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/48+8 T=BYTE")
+  field(NOBT, "3")
+  field(SHFT, "0")
+  field(DESC, "Gauge status")
+  field(ZRVL, "0")
+  field(ZRST, "Data ok")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Underrrange")
+  field(ONSV, "MINOR")
+  field(TWVL, "2")
+  field(TWST, "Overrange")
+  field(TWSV, "MINOR")
+  field(THVL, "3")
+  field(THST, "ERROR")
+  field(THSV, "MAJOR")
+  field(FRVL, "4")
+  field(FRST, "OFF")
+  field(FRSV, "NO_ALARM")
+  field(FVVL, "5")
+  field(FVST, "No hardware")
+  field(FVSV, "MAJOR")
+}
+
+# Measuring circuit on/off
+# PROFIBUS Block ID 0, Slot 0, Index 20, acyclic read
+record(mbbi, "DPLA:VG02:OnStat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/48+9 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Status Measuring circuit on/off")
+  field(ZRVL, "0")
+  field(ZRST, "No measuring")
+  field(ZRSV, "MAJOR")
+  field(ONVL, "1")
+  field(ONST, "Off")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Automatic")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "On")
+  field(THSV, "NO_ALARM")
+}
+
+# Filter time constant
+# PROFIBUS Block ID 1, Slot 1, 2, 3 or 4, Index 23, acyclic read or write
+
+#readback
+record(mbbi, "DPLA:VG02:Filter") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/48+10 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Filter time constant readback")
+  field(ONVL, "1")
+  field(ONST, "Fast")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Medium")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Slow")
+  field(THSV, "NO_ALARM")
+}
+
+# Switching thresholds
+
+# Upper threshold readback
+# SP1, SP2, SP3, SP4 mnemonic, cacheable
+record (ai, "DPLA:VG02:UpperTH") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@dpla_plc/48+12 T=FLOAT32")
+  field(DESC, "Upper threshold readback")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+
+# Lower threshold readback
+# SP1, SP2, SP3, SP4 mnemonic, cacheable
+record (ai, "DPLA:VG02:LowerTH") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@dpla_plc/48+16 T=FLOAT32")
+  field(DESC, "Lower threshold readback")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+
+# Switching function status
+# SPS mnemonic, continuous poll
+record(bi, "DPLA:VG02:Relay") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/48+11 T=BYTE B=0")
+  field(ZNAM, "Error")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Ok")
+  field(OSV, "NO_ALARM")
+  field(DESC, "VG02 relay status")
+}
+
+# Gas correction factor
+# Calibration factor relative to N2. It depends on gas and sensor type
+# TPG300 does not accounts for it, it is PLC that has to divide reading by factor.
+
+record(ai, "DPLA:VG02:GasCF") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/48+20 T=FLOAT32")
+  field(DESC, "Gas Correction Factor readback")
+  field(PREC, "2")
+  field(EGU, "")
+}
+
+# Usage timers
+record(longin, "DPLA:VG02:TimerHHHH") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/542 T=UINT32")
+  field(DESC, "Vacuum gauge hours time counter")
+  field(EGU, "hours")
+}
+record(longin, "DPLA:VG02:TimerMM") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/542+4 T=BYTE")
+  field(DESC, "Vacuum gauge minutes time counter")
+  field(EGU, "min")
+}
+record(longin, "DPLA:VG02:TimerSS") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/542+5 T=BYTE")
+  field(DESC, "Vacuum gauge seconds time counter")
+  field(EGU, "s")
+}
+
+########################################
+# Records for vacuum gauge VG03        #
+# Suited for Balzers TPG300 controller #
+########################################
+
+# Pressure
+# PROFIBUS Block ID 1, Slot 1, 2, 3 or 4, Index 20, cyclic read
+record(ai, "DPLA:VG03:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/72 T=FLOAT32")
+  field(DESC, "Pressure of pirani in FPM chamber")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+
+# Pressure as analog signal
+# 0 to 10V signal generated by TPG300 digitized by S7300 analog input
+record(ai, "DPLA:VG03:V") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/72+4 T=FLOAT32")
+  field(DESC, "Voltage of pirani in FPM chamber")
+  field(PREC, "3")
+  field(EGU, "V")
+}
+
+# Gauge status
+# PROFIBUS Block ID 1, Slot 1, 2, 3 or 4, Index 21, cyclic read
+record(mbbi, "DPLA:VG03:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/72+8 T=BYTE")
+  field(NOBT, "3")
+  field(SHFT, "0")
+  field(DESC, "Gauge status")
+  field(ZRVL, "0")
+  field(ZRST, "Data ok")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Underrrange")
+  field(ONSV, "MINOR")
+  field(TWVL, "2")
+  field(TWST, "Overrange")
+  field(TWSV, "MINOR")
+  field(THVL, "3")
+  field(THST, "ERROR")
+  field(THSV, "MAJOR")
+  field(FRVL, "4")
+  field(FRST, "OFF")
+  field(FRSV, "NO_ALARM")
+  field(FVVL, "5")
+  field(FVST, "No hardware")
+  field(FVSV, "MAJOR")
+}
+
+# Measuring circuit on/off
+# PROFIBUS Block ID 0, Slot 0, Index 20, acyclic read
+record(mbbi, "DPLA:VG03:OnStat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/72+9 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Status Measuring circuit on/off")
+  field(ZRVL, "0")
+  field(ZRST, "No measuring")
+  field(ZRSV, "MAJOR")
+  field(ONVL, "1")
+  field(ONST, "Off")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Automatic")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "On")
+  field(THSV, "NO_ALARM")
+}
+
+# Filter time constant
+# PROFIBUS Block ID 1, Slot 1, 2, 3 or 4, Index 23, acyclic read or write
+
+#readback
+record(mbbi, "DPLA:VG03:Filter") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/72+10 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Filter time constant readback")
+  field(ONVL, "1")
+  field(ONST, "Fast")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Medium")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Slow")
+  field(THSV, "NO_ALARM")
+}
+
+# Switching thresholds
+
+# Upper threshold readback
+# SP1, SP2, SP3, SP4 mnemonic, cacheable
+record (ai, "DPLA:VG03:UpperTH") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@dpla_plc/72+12 T=FLOAT32")
+  field(DESC, "Upper threshold readback")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+
+# Lower threshold readback
+# SP1, SP2, SP3, SP4 mnemonic, cacheable
+record (ai, "DPLA:VG03:LowerTH") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@dpla_plc/72+16 T=FLOAT32")
+  field(DESC, "Lower threshold readback")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+
+# Switching function status
+# SPS mnemonic, continuous poll
+record(bi, "DPLA:VG03:Relay") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/72+11 T=BYTE B=0")
+  field(ZNAM, "Error")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Ok")
+  field(OSV, "NO_ALARM")
+  field(DESC, "VG03 relay status")
+}
+
+# Gas correction factor
+# Calibration factor relative to N2. It depends on gas and sensor type
+# TPG300 does not accounts for it, it is PLC that has to divide reading by factor.
+
+record(ai, "DPLA:VG03:GasCF") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/72+20 T=FLOAT32")
+  field(DESC, "Gas Correction Factor readback")
+  field(PREC, "2")
+  field(EGU, "")
+}
+
+# Usage timers
+record(longin, "DPLA:VG03:TimerHHHH") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/548 T=UINT32")
+  field(DESC, "Vacuum gauge hours time counter")
+  field(EGU, "hours")
+}
+record(longin, "DPLA:VG03:TimerMM") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/548+4 T=BYTE")
+  field(DESC, "Vacuum gauge minutes time counter")
+  field(EGU, "min")
+}
+record(longin, "DPLA:VG03:TimerSS") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/548+5 T=BYTE")
+  field(DESC, "Vacuum gauge seconds time counter")
+  field(EGU, "s")
+}
+
+########################################
+# Records for vacuum gauge VG04        #
+# Suited for Balzers TPG300 controller #
+########################################
+
+# Pressure
+# PROFIBUS Block ID 1, Slot 1, 2, 3 or 4, Index 20, cyclic read
+record(ai, "DPLA:VG04:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/96 T=FLOAT32")
+  field(DESC, "Pressure of penning in FPM chamber")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+
+# Pressure as analog signal
+# 0 to 10V signal generated by TPG300 digitized by S7300 analog input
+record(ai, "DPLA:VG04:V") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/96+4 T=FLOAT32")
+  field(DESC, "Voltage of penning in FPM chamber")
+  field(PREC, "3")
+  field(EGU, "V")
+}
+
+# Gauge status
+# PROFIBUS Block ID 1, Slot 1, 2, 3 or 4, Index 21, cyclic read
+record(mbbi, "DPLA:VG04:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/96+8 T=BYTE")
+  field(NOBT, "3")
+  field(SHFT, "0")
+  field(DESC, "Gauge status")
+  field(ZRVL, "0")
+  field(ZRST, "Data ok")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Underrrange")
+  field(ONSV, "MINOR")
+  field(TWVL, "2")
+  field(TWST, "Overrange")
+  field(TWSV, "MINOR")
+  field(THVL, "3")
+  field(THST, "ERROR")
+  field(THSV, "MAJOR")
+  field(FRVL, "4")
+  field(FRST, "OFF")
+  field(FRSV, "NO_ALARM")
+  field(FVVL, "5")
+  field(FVST, "No hardware")
+  field(FVSV, "MAJOR")
+}
+
+# Measuring circuit on/off
+# PROFIBUS Block ID 0, Slot 0, Index 20, acyclic read
+record(mbbi, "DPLA:VG04:OnStat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/96+9 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Status Measuring circuit on/off")
+  field(ZRVL, "0")
+  field(ZRST, "No measuring")
+  field(ZRSV, "MAJOR")
+  field(ONVL, "1")
+  field(ONST, "Off")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Automatic")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "On")
+  field(THSV, "NO_ALARM")
+}
+
+# Filter time constant
+# PROFIBUS Block ID 1, Slot 1, 2, 3 or 4, Index 23, acyclic read or write
+
+#readback
+record(mbbi, "DPLA:VG04:Filter") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/96+10 T=BYTE")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Filter time constant readback")
+  field(ONVL, "1")
+  field(ONST, "Fast")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Medium")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Slow")
+  field(THSV, "NO_ALARM")
+}
+
+# Switching thresholds
+
+# Upper threshold readback
+# SP1, SP2, SP3, SP4 mnemonic, cacheable
+record (ai, "DPLA:VG04:UpperTH") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@dpla_plc/96+12 T=FLOAT32")
+  field(DESC, "Upper threshold readback")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+
+# Lower threshold readback
+# SP1, SP2, SP3, SP4 mnemonic, cacheable
+record (ai, "DPLA:VG04:LowerTH") {
+  field(DTYP, "S7plc")
+  field(SCAN, "I/O Intr")
+  field(INP, "@dpla_plc/96+16 T=FLOAT32")
+  field(DESC, "Lower threshold readback")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+
+# Switching function status
+# SPS mnemonic, continuous poll
+record(bi, "DPLA:VG04:Relay") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/96+11 T=BYTE B=0")
+  field(ZNAM, "Error")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Ok")
+  field(OSV, "NO_ALARM")
+  field(DESC, "VG04 relay status")
+}
+
+# Gas correction factor
+# Calibration factor relative to N2. It depends on gas and sensor type
+# TPG300 does not accounts for it, it is PLC that has to divide reading by factor.
+
+record(ai, "DPLA:VG04:GasCF") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/96+20 T=FLOAT32")
+  field(DESC, "Gas Correction Factor readback")
+  field(PREC, "2")
+  field(EGU, "")
+}
+
+# Usage timers
+record(longin, "DPLA:VG04:TimerHHHH") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/554 T=UINT32")
+  field(DESC, "Vacuum gauge hours time counter")
+  field(EGU, "hours")
+}
+record(longin, "DPLA:VG04:TimerMM") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/554+4 T=BYTE")
+  field(DESC, "Vacuum gauge minutes time counter")
+  field(EGU, "min")
+}
+record(longin, "DPLA:VG04:TimerSS") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/554+5 T=BYTE")
+  field(DESC, "Vacuum gauge seconds time counter")
+  field(EGU, "s")
+}
+
+#########################################
+# Records for interceptives diagnostics #
+# Digital inputs                        #
+#########################################
+
+# All slits parking
+record(bi, "DPLA:SL:AllParking") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32 B=11")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+  field(DESC, "Indicates if all slits are parking")
+}
+
+# DPLA SEM grid 01 selection
+record(bi, "DPLA:SEM01:Selected") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32 B=12")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+  field(DESC, "DPLA SEM grid 01 selection")
+}
+
+# DSL01/02 Out of ROI
+record(bi, "DPLA:SL:OutOfROI") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32 B=27")
+  field(ZNAM, "In ROI")
+  field(ONAM, "Out of ROI")
+  field(OSV, "MAJOR")
+  field(DESC, "DSL01/DSL02 scan out of ROI")
+}
+
+# SEM grid acquisition permit
+record(bi, "DPLA:SEM01:PermitAcq") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32 B=28")
+  field(ZNAM, "Do not acquire")
+  field(ONAM, "Acq. permited")
+  field(DESC, "SEM grid acquisition")
+}
+
+# Interceptives motion (any of them)
+record(bi, "DPLA:SL:Motion") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32 B=29")
+  field(ZNAM, "Stopped")
+  field(ONAM, "Moving")
+  field(DESC, "Any interceptive motion")
+}
+
+# HEBT SEM grid 01 selection
+record(bi, "HEBT:SEM01:Selected") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+8 T=UINT32 B=12")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+  field(DESC, "HEBT SEM grid 01 selection")
+}
+
+# HSL01 Out of ROI
+record(bi, "HEBT:SL01:OutOfROI") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+8 T=UINT32 B=27")
+  field(ZNAM, "In ROI")
+  field(ONAM, "Out of ROI")
+  field(OSV, "MAJOR")
+  field(DESC, "HSL01 scan out of ROI")
+}
+
+# DSG01 status
+record(mbbi, "DPLA:SEM01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32")
+  field(NOBT, "2")
+  field(SHFT, "22")
+  field(DESC, "DSG01 position status")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ONVL, "1")
+  field(ONST, "In")
+  field(TWVL, "2")
+  field(TWST, "Out")
+  field(THVL, "3")
+  field(THST, "ERROR")
+  field(THSV, "MAJOR")
+}
+
+# D-Plate SEM grid 01 timeout
+record(bi, "DPLA:SEM01:Timeout") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32 B=14")
+  field(ZNAM, "Ok")
+  field(ONAM, "Timeout")
+  field(OSV, "MAJOR")
+  field(DESC, "DPLA SEM grid 01 timeout")
+}
+
+# DPLA SEM grid 01 actuation
+record(bi, "DPLA:SEM01:Actuation") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32 B=30")
+  field(ZNAM, "Remove")
+  field(ONAM, "Insert")
+  field(DESC, "DPLA SEM grid 01 actuation")
+}
+
+# HSG01 status
+record(mbbi, "HEBT:SEM01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+4 T=UINT32")
+  field(NOBT, "2")
+  field(SHFT, "22")
+  field(DESC, "HSG01 position status")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ONVL, "1")
+  field(ONST, "In")
+  field(TWVL, "2")
+  field(TWST, "Out")
+  field(THVL, "3")
+  field(THST, "ERROR")
+  field(THSV, "MAJOR")
+}
+
+# HEBT SEM grid 01 timeout
+record(bi, "HEBT:SEM01:Timeout") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+4 T=UINT32 B=14")
+  field(ZNAM, "Ok")
+  field(ONAM, "Timeout")
+  field(DESC, "HEBT SEM grid 01 timeout")
+}
+
+# HEBT SEM grid 01 actuation
+record(bi, "HEBT:SEM01:Actuation") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+4 T=UINT32 B=30")
+  field(ZNAM, "Remove")
+  field(ONAM, "Insert")
+  field(DESC, "HEBT SEM grid 01 actuation")
+}
+
+#######################################
+# Records for interceptive diagnostic #
+# SL01 in DPLA                        #
+#######################################
+
+# Interceptive activation
+record(bi, "DPLA:SL01:Activation") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32 B=0")
+  field(ZNAM, "Deactivated")
+  field(ONAM, "Activated")
+  field(DESC, "SL01 activation")
+}
+
+# Boost
+record(bi, "DPLA:SL01:Boost") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32 B=1")
+  field(ZNAM, "Normal")
+  field(ONAM, "Boost")
+  field(DESC, "SL01 stepper motor boost")
+}
+
+# Reset
+record(bi, "DPLA:SL01:Reset") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32 B=2")
+  field(ZNAM, "Ready")
+  field(ONAM, "Reseting")
+  field(DESC, "SL01 stepper motor reset")
+}
+
+# Interceptive properly referenced
+record(bi, "DPLA:SL01:Referenced") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32 B=3")
+  field(ZNAM, "Not referenced")
+  field(ONAM, "Referenced")
+  field(DESC, "SL01 motion referenced")
+}
+
+# Operation mode as bitfield
+record(mbbi, "DPLA:SL01:OpMode") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32")
+  field(NOBT, "7")
+  field(SHFT, "4")
+  field(DESC, "SL01 operation mode")
+  field(ZRVL, "1")
+  field(ZRST, "Homing")
+  field(ONVL, "2")
+  field(ONST, "Manual")
+  field(TWVL, "4")
+  field(TWST, "Center")
+  field(THVL, "8")
+  field(THST, "Scan")
+  field(FRVL, "16")
+  field(FRST, "CheckTotalRange")
+  field(FVVL, "32")
+  field(FVST, "Reset")
+  field(SXVL, "64")
+  field(SXST, "Wait new mode")
+}
+
+# Interceptive selection
+record(bi, "DPLA:SL01:Selected") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32 B=13")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+  field(DESC, "DPLA SL01 selection")
+}
+
+# Phytron error
+record(bi, "DPLA:SL01_SM01:PhytronErr") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32 B=24")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ERROR")
+  field(OSV, "MAJOR")
+  field(DESC, "SL01_SM01 Phytron error")
+}
+
+# Phytron error
+record(bi, "DPLA:SL01_SM01:EL2521Err") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32 B=25")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ERROR")
+  field(OSV, "MAJOR")
+  field(DESC, "SL01_SM01 EL2521 error")
+}
+
+# Alarm
+record(bi, "DPLA:SL01:Alarm") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32 B=26")
+  field(ZNAM, "No alarm")
+  field(ONAM, "ALARM")
+  field(OSV, "MAJOR")
+  field(DESC, "Scan out of ROI")
+}
+
+#######################################
+# Records for interceptive diagnostic #
+# SL02 in DPLA                        #
+#######################################
+
+# Interceptive activation
+record(bi, "DPLA:SL02:Activation") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/124 T=UINT32 B=0")
+  field(ZNAM, "Deactivated")
+  field(ONAM, "Activated")
+  field(DESC, "SL02 activation")
+}
+
+# Boost
+record(bi, "DPLA:SL02:Boost") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/124 T=UINT32 B=1")
+  field(ZNAM, "Normal")
+  field(ONAM, "Boost")
+  field(DESC, "SL02 stepper motor boost")
+}
+
+# Reset
+record(bi, "DPLA:SL02:Reset") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/124 T=UINT32 B=2")
+  field(ZNAM, "Ready")
+  field(ONAM, "Reseting")
+  field(DESC, "SL02 stepper motor reset")
+}
+
+# Interceptive properly referenced
+record(bi, "DPLA:SL02:Referenced") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/124 T=UINT32 B=3")
+  field(ZNAM, "Not referenced")
+  field(ONAM, "Referenced")
+  field(DESC, "SL02 motion referenced")
+}
+
+# Operation mode as bitfield
+record(mbbi, "DPLA:SL02:OpMode") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/124 T=UINT32")
+  field(NOBT, "7")
+  field(SHFT, "4")
+  field(DESC, "SL02 operation mode")
+  field(ZRVL, "1")
+  field(ZRST, "Homing")
+  field(ONVL, "2")
+  field(ONST, "Manual")
+  field(TWVL, "4")
+  field(TWST, "Center")
+  field(THVL, "8")
+  field(THST, "Scan")
+  field(FRVL, "16")
+  field(FRST, "CheckTotalRange")
+  field(FVVL, "32")
+  field(FVST, "Reset")
+  field(SXVL, "64")
+  field(SXST, "Wait new mode")
+}
+
+# Interceptive selection
+record(bi, "DPLA:SL02:Selected") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/124 T=UINT32 B=13")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+  field(DESC, "DPLA SL02 selection")
+}
+
+# Phytron error
+record(bi, "DPLA:SL02_SM02:PhytronErr") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/124 T=UINT32 B=24")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ERROR")
+  field(OSV, "MAJOR")
+  field(DESC, "SL02_SM02 Phytron error")
+}
+
+# Phytron error
+record(bi, "DPLA:SL02_SM02:EL2521Err") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/124 T=UINT32 B=25")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ERROR")
+  field(OSV, "MAJOR")
+  field(DESC, "SL02_SM02 EL2521 error")
+}
+
+# Alarm
+record(bi, "DPLA:SL02:Alarm") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/124 T=UINT32 B=26")
+  field(ZNAM, "No alarm")
+  field(ONAM, "ALARM")
+  field(OSV, "MAJOR")
+  field(DESC, "Scan out of ROI")
+}
+
+#######################################
+# Records for interceptive diagnostic #
+# SL01 in HEBT                        #
+#######################################
+
+# Interceptive activation
+record(bi, "HEBT:SL01:Activation") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/128 T=UINT32 B=0")
+  field(ZNAM, "Deactivated")
+  field(ONAM, "Activated")
+  field(DESC, "SL01 activation")
+}
+
+# Boost
+record(bi, "HEBT:SL01:Boost") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/128 T=UINT32 B=1")
+  field(ZNAM, "Normal")
+  field(ONAM, "Boost")
+  field(DESC, "SL01 stepper motor boost")
+}
+
+# Reset
+record(bi, "HEBT:SL01:Reset") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/128 T=UINT32 B=2")
+  field(ZNAM, "Ready")
+  field(ONAM, "Reseting")
+  field(DESC, "SL01 stepper motor reset")
+}
+
+# Interceptive properly referenced
+record(bi, "HEBT:SL01:Referenced") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/128 T=UINT32 B=3")
+  field(ZNAM, "Not referenced")
+  field(ONAM, "Referenced")
+  field(DESC, "SL01 motion referenced")
+}
+
+# Operation mode as bitfield
+record(mbbi, "HEBT:SL01:OpMode") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/128 T=UINT32")
+  field(NOBT, "7")
+  field(SHFT, "4")
+  field(DESC, "SL01 operation mode")
+  field(ZRVL, "1")
+  field(ZRST, "Homing")
+  field(ONVL, "2")
+  field(ONST, "Manual")
+  field(TWVL, "4")
+  field(TWST, "Center")
+  field(THVL, "8")
+  field(THST, "Scan")
+  field(FRVL, "16")
+  field(FRST, "CheckTotalRange")
+  field(FVVL, "32")
+  field(FVST, "Reset")
+  field(SXVL, "64")
+  field(SXST, "Wait new mode")
+}
+
+# Interceptive selection
+record(bi, "HEBT:SL01:Selected") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/128 T=UINT32 B=13")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+  field(DESC, "HEBT SL01 selection")
+}
+
+# Phytron error
+record(bi, "HEBT:SL01_SM01:PhytronErr") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/128 T=UINT32 B=24")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ERROR")
+  field(OSV, "MAJOR")
+  field(DESC, "SL01_SM01 Phytron error")
+}
+
+# Phytron error
+record(bi, "HEBT:SL01_SM01:EL2521Err") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/128 T=UINT32 B=25")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ERROR")
+  field(OSV, "MAJOR")
+  field(DESC, "SL01_SM01 EL2521 error")
+}
+
+# Alarm
+record(bi, "HEBT:SL01:Alarm") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/128 T=UINT32 B=26")
+  field(ZNAM, "No alarm")
+  field(ONAM, "ALARM")
+  field(OSV, "MAJOR")
+  field(DESC, "Scan out of ROI")
+}
+
+#######################################
+# Records for interceptive diagnostic #
+# FC01 in HEBT                        #
+#######################################
+
+# Interceptive activation
+record(bi, "HEBT:FC01:Activation") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/132 T=UINT32 B=0")
+  field(ZNAM, "Deactivated")
+  field(ONAM, "Activated")
+  field(DESC, "FC01 activation")
+}
+
+# Boost
+record(bi, "HEBT:FC01:Boost") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/132 T=UINT32 B=1")
+  field(ZNAM, "Normal")
+  field(ONAM, "Boost")
+  field(DESC, "FC01 stepper motor boost")
+}
+
+# Reset
+record(bi, "HEBT:FC01:Reset") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/132 T=UINT32 B=2")
+  field(ZNAM, "Ready")
+  field(ONAM, "Reseting")
+  field(DESC, "FC01 stepper motor reset")
+}
+
+# Interceptive properly referenced
+record(bi, "HEBT:FC01:Referenced") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/132 T=UINT32 B=3")
+  field(ZNAM, "Not referenced")
+  field(ONAM, "Referenced")
+  field(DESC, "FC01 motion referenced")
+}
+
+# Operation mode as bitfield
+record(mbbi, "HEBT:FC01:OpMode") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/132 T=UINT32")
+  field(NOBT, "7")
+  field(SHFT, "4")
+  field(DESC, "FC01 operation mode")
+  field(ZRVL, "1")
+  field(ZRST, "Homing")
+  field(ONVL, "2")
+  field(ONST, "Manual")
+  field(TWVL, "4")
+  field(TWST, "Center")
+  field(THVL, "8")
+  field(THST, "Scan")
+  field(FRVL, "16")
+  field(FRST, "CheckTotalRange")
+  field(FVVL, "32")
+  field(FVST, "Reset")
+  field(SXVL, "64")
+  field(SXST, "Wait new mode")
+}
+
+# Interceptive selection
+record(bi, "HEBT:FC01:Selected") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/132 T=UINT32 B=13")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+  field(DESC, "HEBT FC01 selection")
+}
+
+# Phytron error
+record(bi, "HEBT:FC01_SM02:PhytronErr") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/132 T=UINT32 B=24")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ERROR")
+  field(OSV, "MAJOR")
+  field(DESC, "FC01_SM02 Phytron error")
+}
+
+# Phytron error
+record(bi, "HEBT:FC01_SM02:EL2521Err") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/132 T=UINT32 B=25")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "ERROR")
+  field(OSV, "MAJOR")
+  field(DESC, "FC01_SM02 EL2521 error")
+}
+
+# Alarm
+record(bi, "HEBT:FC01:Alarm") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/132 T=UINT32 B=26")
+  field(ZNAM, "No alarm")
+  field(ONAM, "ALARM")
+  field(OSV, "MAJOR")
+  field(DESC, "Scan out of ROI")
+}
+
+###########################################
+# Records for interceptive limit switches #
+# both in DPLA and HEBT                   #
+###########################################
+
+# DPLA
+
+# DSL01_DLW05
+record(mbbi, "DPLA:SL01_LW05:Contacts") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32")
+  field(NOBT, "2")
+  field(SHFT, "15")
+  field(DESC, "DSL01 DLW05 parking switch contacts")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ONVL, "1")
+  field(ONST, "No parking")
+  field(TWVL, "2")
+  field(TWST, "Parking")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+record(bi, "DPLA:SL01_LW05:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32 B=17")
+  field(ZNAM, "Error")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Ok")
+  field(DESC, "DSL01 DLW05 parking switch status")
+}
+record(bi, "DPLA:SL01_LW05:Alarm") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32 B=18")
+  field(ZNAM, "No alarm")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Wrong state")
+  field(OSV, "MAJOR")
+  field(DESC, "DSL01 DLW05 parking switch alarm")
+}
+
+# DSL01 slit status
+record(mbbi, "DPLA:SL01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120 T=UINT32")
+  field(NOBT, "3")
+  field(SHFT, "19")
+  field(DESC, "DSL01 position status")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ONVL, "1")
+  field(ONST, "Out")
+  field(TWVL, "2")
+  field(TWST, "In")
+  field(THVL, "4")
+  field(THST, "Parking")
+  field(FRVL, "5")
+  field(FRST, "Parking/Out")
+}
+
+# DSL02_DLW06
+record(mbbi, "DPLA:SL02_LW06:Contacts") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+4 T=UINT32")
+  field(NOBT, "2")
+  field(SHFT, "15")
+  field(DESC, "DSL02 DLW06 parking switch contacts")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ONVL, "1")
+  field(ONST, "No parking")
+  field(TWVL, "2")
+  field(TWST, "Parking")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+record(bi, "DPLA:SL02_LW06:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+4 T=UINT32 B=17")
+  field(ZNAM, "Error")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Ok")
+  field(DESC, "DSL02 DLW06 parking switch status")
+}
+record(bi, "DPLA:SL02_LW06:Alarm") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+4 T=UINT32 B=18")
+  field(ZNAM, "No alarm")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Wrong state")
+  field(OSV, "MAJOR")
+  field(DESC, "DSL02 DLW06 parking switch alarm")
+}
+
+# DSL02 slit status
+record(mbbi, "DPLA:SL02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+4 T=UINT32")
+  field(NOBT, "3")
+  field(SHFT, "19")
+  field(DESC, "DSL02 position status")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ONVL, "1")
+  field(ONST, "Out")
+  field(TWVL, "2")
+  field(TWST, "In")
+  field(THVL, "4")
+  field(THST, "Parking")
+  field(FRVL, "5")
+  field(FRST, "Parking/Out")
+}
+
+# HEBT slit
+
+# HSL01_DLW01 IN
+record(mbbi, "HEBT:SL01_LW01:Contacts") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+8 T=UINT32")
+  field(NOBT, "2")
+  field(SHFT, "15")
+  field(DESC, "HSL01 HLW01 IN switch contacts")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ONVL, "1")
+  field(ONST, "No in")
+  field(TWVL, "2")
+  field(TWST, "In")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+record(bi, "HEBT:SL01_LW01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+8 T=UINT32 B=17")
+  field(ZNAM, "Error")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Ok")
+  field(DESC, "HSL01 HLW01 IN switch status")
+}
+record(bi, "HEBT:SL01_LW01:Alarm") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+8 T=UINT32 B=18")
+  field(ZNAM, "No alarm")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Wrong state")
+  field(OSV, "MAJOR")
+  field(DESC, "HSL01 HLW01 IN switch alarm")
+}
+
+# HSL01_DLW02 OUT
+record(mbbi, "HEBT:SL01_LW02:Contacts") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+8 T=UINT32")
+  field(NOBT, "2")
+  field(SHFT, "19")
+  field(DESC, "HSL01 HLW02 OUT switch contacts")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ONVL, "1")
+  field(ONST, "No out")
+  field(TWVL, "2")
+  field(TWST, "Out")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+record(bi, "HEBT:SL01_LW02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+8 T=UINT32 B=21")
+  field(ZNAM, "Error")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Ok")
+  field(DESC, "HSL01 HLW02 OUT switch status")
+}
+record(bi, "HEBT:SL01_LW02:Alarm") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+8 T=UINT32 B=22")
+  field(ZNAM, "No alarm")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Wrong state")
+  field(OSV, "MAJOR")
+  field(DESC, "HSL01 HLW02 OUT switch alarm")
+}
+
+# HEBT faraday cup
+
+# HFC01_DLW03 IN
+record(mbbi, "HEBT:FC01_LW03:Contacts") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+12 T=UINT32")
+  field(NOBT, "2")
+  field(SHFT, "15")
+  field(DESC, "HFC01 HLW03 IN switch contacts")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ONVL, "1")
+  field(ONST, "No in")
+  field(TWVL, "2")
+  field(TWST, "In")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+record(bi, "HEBT:FC01_LW03:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+12 T=UINT32 B=17")
+  field(ZNAM, "Error")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Ok")
+  field(DESC, "HFC01 HLW03 IN switch status")
+}
+record(bi, "HEBT:FC01_LW03:Alarm") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+12 T=UINT32 B=18")
+  field(ZNAM, "No alarm")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Wrong state")
+  field(OSV, "MAJOR")
+  field(DESC, "HFC01 HLW03 IN switch alarm")
+}
+
+# HFC01_DLW04 OUT
+record(mbbi, "HEBT:FC01_LW04:Contacts") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+12 T=UINT32")
+  field(NOBT, "2")
+  field(SHFT, "19")
+  field(DESC, "HFC01 HLW04 OUT switch contacts")
+  field(ZRVL, "0")
+  field(ZRST, "Transition")
+  field(ONVL, "1")
+  field(ONST, "No out")
+  field(TWVL, "2")
+  field(TWST, "Out")
+  field(THVL, "3")
+  field(THST, "Short circuit")
+  field(THSV, "MAJOR")
+}
+record(bi, "HEBT:FC01_LW04:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+12 T=UINT32 B=21")
+  field(ZNAM, "Error")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Ok")
+  field(DESC, "HFC01 HLW04 OUT switch status")
+}
+record(bi, "HEBT:FC01_LW04:Alarm") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/120+12 T=UINT32 B=22")
+  field(ZNAM, "No alarm")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Wrong state")
+  field(OSV, "MAJOR")
+  field(DESC, "HFC01 HLW04 OUT switch alarm")
+}
+
+#######################################
+# Records for slit SL01 in DPLA       #
+# Analog inputs                       #
+#######################################
+
+# Position
+record(ai, "DPLA:SL01:Pos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/136 T=FLOAT32")
+  field(DESC, "SL01 current position")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# IN position according to potentiometer
+record(ai, "DPLA:SL01_PM01:InPos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/136+4 T=FLOAT32")
+  field(DESC, "SL01 IN position (potentiometer)")
+  field(EGU, "counts")
+  field(PREC, "0")  
+}
+
+# Current position according to potentiometer
+record(ai, "DPLA:SL01_PM01:Pos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/136+8 T=FLOAT32")
+  field(DESC, "SL01 current position (potentiometer)")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# Stepper motor temperature
+record(ai, "DPLA:SL01_SM01:T") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/136+12 T=FLOAT32")
+  field(DESC, "SL01 stepper motor temperature")
+  field(EGU, "degC")
+  field(PREC, "1")  
+}
+
+# Stepper motor frequency
+record(ai, "DPLA:SL01_SM01:Freq") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/136+16 T=FLOAT32")
+  field(DESC, "SL01 stepper motor frequency")
+  field(EGU, "Hz")
+  field(PREC, "2")  
+}
+
+# Operation mode
+#record(mbbi, "DPLA:SL01:OpMode") {
+#  field(SCAN, "I/O Intr")
+#  field(DTYP, "S7plc")
+#  field(INP, "@dpla_plc/136+20 T=UINT32")
+#  field(NOBT, "8")
+#  field(SHFT, "0")
+#  field(DESC, "SL01 operation mode")
+#  field(ZRVL, "10")
+#  field(ZRST, "Homing")
+#  field(ONVL, "20")
+#  field(ONST, "Manual")
+#  field(TWVL, "30")
+#  field(TWST, "Scan")
+#  field(THVL, "50")
+#  field(THST, "Homing & calib.")
+#  field(FRVL, "99")
+#  field(FRST, "Reset")
+#}
+
+# OUT position according to potentiometer
+record(ai, "DPLA:SL01_PM01:OutPos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/136+24 T=FLOAT32")
+  field(DESC, "SL01 OUT position (potentiometer)")
+  field(EGU, "counts")
+  field(PREC, "0")  
+}
+
+# Range of movement from IN to OUT positions
+record(ai, "DPLA:SL01:InOutRange") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/136+28 T=FLOAT32")
+  field(DESC, "SL01 range from IN to OUT positions")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# Scan starting point
+record(ai, "DPLA:SL01:YaPos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/136+32 T=FLOAT32")
+  field(DESC, "SL01 initial Ya scan position")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# Scan final point
+record(ai, "DPLA:SL01:YbPos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/136+36 T=FLOAT32")
+  field(DESC, "SL01 final Yb scan position")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# Current step in scan
+record(longin, "DPLA:SL01:Step") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/136+40 T=UINT32")
+  field(DESC, "SL01 current step")
+}
+
+# Total number of steps in scan
+record(longin, "DPLA:SL01:NSteps") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/136+44 T=UINT32")
+  field(DESC, "SL01 total number of steps")
+}
+
+#######################################
+# Records for slit SL02 in DPLA       #
+# Analog inputs                       #
+#######################################
+
+# Position
+record(ai, "DPLA:SL02:Pos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/184 T=FLOAT32")
+  field(DESC, "SL02 current position")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# IN position according to potentiometer
+record(ai, "DPLA:SL02_PM02:InPos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/184+4 T=FLOAT32")
+  field(DESC, "SL02 IN position (potentiometer)")
+  field(EGU, "counts")
+  field(PREC, "0")  
+}
+
+# Current position according to potentiometer
+record(ai, "DPLA:SL02_PM02:Pos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/184+8 T=FLOAT32")
+  field(DESC, "SL02 current position (potentiometer)")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# Stepper motor temperature
+record(ai, "DPLA:SL02_SM02:T") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/184+12 T=FLOAT32")
+  field(DESC, "SL02 stepper motor temperature")
+  field(EGU, "degC")
+  field(PREC, "1")  
+}
+
+# Stepper motor frequency
+record(ai, "DPLA:SL02_SM02:Freq") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/184+16 T=FLOAT32")
+  field(DESC, "SL02 stepper motor frequency")
+  field(EGU, "Hz")
+  field(PREC, "2")  
+}
+
+# Operation mode
+#record(mbbi, "DPLA:SL02:OpMode") {
+#  field(SCAN, "I/O Intr")
+#  field(DTYP, "S7plc")
+#  field(INP, "@dpla_plc/184+20 T=UINT32")
+#  field(NOBT, "8")
+#  field(SHFT, "0")
+#  field(DESC, "SL02 operation mode")
+#  field(ZRVL, "10")
+#  field(ZRST, "Homing")
+#  field(ONVL, "20")
+#  field(ONST, "Manual")
+#  field(TWVL, "30")
+#  field(TWST, "Scan")
+#  field(THVL, "50")
+#  field(THST, "Homing & calib.")
+#  field(FRVL, "99")
+#  field(FRST, "Reset")
+#}
+
+# OUT position according to potentiometer
+record(ai, "DPLA:SL02_PM02:OutPos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/184+24 T=FLOAT32")
+  field(DESC, "SL02 OUT position (potentiometer)")
+  field(EGU, "counts")
+  field(PREC, "0")  
+}
+
+# Range of movement from IN to OUT positions
+record(ai, "DPLA:SL02:InOutRange") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/184+28 T=FLOAT32")
+  field(DESC, "SL02 range from IN to OUT positions")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# Scan starting point
+record(ai, "DPLA:SL02:XaPos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/184+32 T=FLOAT32")
+  field(DESC, "SL02 initial Xa scan position")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# Scan final point
+record(ai, "DPLA:SL02:XbPos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/184+36 T=FLOAT32")
+  field(DESC, "SL02 final Xb scan position")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# Current step in scan
+record(longin, "DPLA:SL02:Step") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/184+40 T=UINT32")
+  field(DESC, "SL02 current step")
+}
+
+# Total number of steps in scan
+record(longin, "DPLA:SL02:NSteps") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/184+44 T=UINT32")
+  field(DESC, "SL02 total number of steps")
+}
+
+#######################################
+# Records for slit SL01 in HEBT       #
+# Analog inputs                       #
+#######################################
+
+# Position
+record(ai, "HEBT:SL01:Pos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/232 T=FLOAT32")
+  field(DESC, "SL01 current position")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# IN position according to potentiometer
+record(ai, "HEBT:SL01_PM01:InPos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/232+4 T=FLOAT32")
+  field(DESC, "SL01 IN position (potentiometer)")
+  field(EGU, "counts")
+  field(PREC, "0")  
+}
+
+# Current position according to potentiometer
+record(ai, "HEBT:SL01_PM01:Pos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/232+8 T=FLOAT32")
+  field(DESC, "SL01 current position (potentiometer)")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# Stepper motor temperature
+record(ai, "HEBT:SL01_SM01:T") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/232+12 T=FLOAT32")
+  field(DESC, "SL01 stepper motor temperature")
+  field(EGU, "degC")
+  field(PREC, "1")  
+}
+
+# Stepper motor frequency
+record(ai, "HEBT:SL01_SM01:Freq") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/232+16 T=FLOAT32")
+  field(DESC, "SL01 stepper motor frequency")
+  field(EGU, "Hz")
+  field(PREC, "2")  
+}
+
+# Operation mode
+#record(mbbi, "HEBT:SL01:OpMode") {
+#  field(SCAN, "I/O Intr")
+#  field(DTYP, "S7plc")
+#  field(INP, "@dpla_plc/232+20 T=UINT32")
+#  field(NOBT, "8")
+#  field(SHFT, "0")
+#  field(DESC, "SL01 operation mode")
+#  field(ZRVL, "10")
+#  field(ZRST, "Homing")
+#  field(ONVL, "20")
+#  field(ONST, "Manual")
+#  field(TWVL, "30")
+#  field(TWST, "Scan")
+#  field(THVL, "50")
+#  field(THST, "Homing & calib.")
+#  field(FRVL, "99")
+#  field(FRST, "Reset")
+#}
+
+# OUT position according to potentiometer
+record(ai, "HEBT:SL01_PM01:OutPos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/232+24 T=FLOAT32")
+  field(DESC, "SL01 OUT position (potentiometer)")
+  field(EGU, "counts")
+  field(PREC, "0")  
+}
+
+# Range of movement from IN to OUT positions
+record(ai, "HEBT:SL01:InOutRange") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/232+28 T=FLOAT32")
+  field(DESC, "SL01 range from IN to OUT positions")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# Scan starting point
+record(ai, "HEBT:SL01:YaPos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/232+32 T=FLOAT32")
+  field(DESC, "SL01 initial Ya scan position")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# Scan final point
+record(ai, "HEBT:SL01:YbPos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/232+36 T=FLOAT32")
+  field(DESC, "SL01 final Yb scan position")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# Current step in scan
+record(longin, "HEBT:SL01:Step") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/232+40 T=UINT32")
+  field(DESC, "SL01 current step")
+}
+
+# Total number of steps in scan
+record(longin, "HEBT:SL01:NSteps") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/232+44 T=UINT32")
+  field(DESC, "SL01 total number of steps")
+}
+
+########################################
+# Records for faraday cup FC01 in HEBT #
+# Analog inputs                        #
+########################################
+
+# Position
+record(ai, "HEBT:FC01:Pos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/280 T=FLOAT32")
+  field(DESC, "FC01 current position")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# Stepper motor temperature
+record(ai, "HEBT:FC01_SM02:T") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/280+4 T=FLOAT32")
+  field(DESC, "FC01 stepper motor temperature")
+  field(EGU, "degC")
+  field(PREC, "1")  
+}
+
+# Stepper motor frequency
+record(ai, "HEBT:FC01_SM02:Freq") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/280+8 T=FLOAT32")
+  field(DESC, "FC01 stepper motor frequency")
+  field(EGU, "Hz")
+  field(PREC, "2")  
+}
+
+# Operation mode
+#record(mbbi, "HEBT:FC01:OpMode") {
+#  field(SCAN, "I/O Intr")
+#  field(DTYP, "S7plc")
+#  field(INP, "@dpla_plc/280+12 T=UINT32")
+#  field(NOBT, "8")
+#  field(SHFT, "0")
+#  field(DESC, "FC01 operation mode")
+#  field(ZRVL, "10")
+#  field(ZRST, "Homing")
+#  field(ONVL, "20")
+#  field(ONST, "Manual")
+#  field(TWVL, "30")
+#  field(TWST, "Scan")
+#  field(THVL, "50")
+#  field(THST, "Homing & calib.")
+#  field(FRVL, "99")
+#  field(FRST, "Reset")
+#}
+
+# Range of movement from IN to OUT positions
+record(ai, "HEBT:FC01:InOutRange") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/280+16 T=FLOAT32")
+  field(DESC, "FC01 range from IN to OUT positions")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# Scan starting point
+record(ai, "HEBT:FC01:YaPos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/280+20 T=FLOAT32")
+  field(DESC, "FC01 initial Ya scan position")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# Scan final point
+record(ai, "HEBT:FC01:YbPos") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/280+24 T=FLOAT32")
+  field(DESC, "FC01 final Yb scan position")
+  field(EGU, "mm")
+  field(PREC, "3")  
+}
+
+# Current step in scan
+record(longin, "HEBT:FC01:Step") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/280+28 T=UINT32")
+  field(DESC, "FC01 current step")
+}
+
+# Total number of steps in scan
+record(longin, "HEBT:FC01:NSteps") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/280+32 T=UINT32")
+  field(DESC, "FC01 total number of steps")
+}
+
+###############################
+#          DPLA MPS           #
+###############################
+
+# These PVs are readbacks of Safety PLC outputs to MPS.
+# Signals are reported to Main PLC through Profibus,
+# then to EPICS through ethernet.
+
+record(bi, "DPLA:RSS01:MPS908Rdbk") {
+  field (DESC, "MPS908: All Interceptives Fault")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+3 T=BYTE B=0")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Beam permit")
+  field (ZNAM, "Beam stop")
+  field (ZSV, "MAJOR")
+ }
+ 
+record(bi, "DPLA:RSS01:MPS906Rdbk") {
+  field (DESC, "MPS906: Interceptives Device Status")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+3 T=BYTE B=1")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Beam permit")
+  field (ZNAM, "Beam stop")
+ }
+ 
+record(bi, "DPLA:RSS01:MPS916Rdbk") {
+  field (DESC, "MPS916: D-Plate Sector Vacuum Level")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+3 T=BYTE B=2")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Beam permit")
+  field (ZNAM, "Beam stop")
+  field (ZSV, "MINOR")
+ }
+ 
+record(bi, "DPLA:RSS01:MPS910Rdbk") {
+  field (DESC, "MPS910: DFS01/02 Flow Switches Status")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+3 T=BYTE B=3")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Flow")
+  field (ZNAM, "No flow")
+  field (ZSV, "MAJOR")
+}
+ 
+record(bi, "DPLA:RSS01:MPS921Rdbk") {
+  field (DESC, "MPS921: DFS03 @LPBD Flow Switch Error")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+3 T=BYTE B=4")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Beam permit")
+  field (ZNAM, "Beam stop")
+  field (ZSV, "MAJOR")
+ }
+ 
+record(bi, "DPLA:RSS01:MPS915Rdbk") {
+  field (DESC, "MPS915: DWC01 Temp diff DRT02-01 Error")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+3 T=BYTE B=5")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Cooled")
+  field (ZNAM, "Overheated")
+  field (ZSV, "MAJOR")
+ }
+ 
+record(bi, "DPLA:RSS01:MPS920Rdbk") {
+  field (DESC, "MPS920: DTH03 @LPBD Temperature Error")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+3 T=BYTE B=6")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Cooled")
+  field (ZNAM, "Overheated")
+  field (ZSV, "MAJOR")
+ }
+ 
+record(bi, "DPLA:RSS01:MPS917Rdbk") {
+  field (DESC, "MPS917: DGV01 DPlate Gate Valve Fault")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+3 T=BYTE B=7")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Beam permit")
+  field (ZNAM, "Beam stop")
+  field (ZSV, "MAJOR")
+ }
+ 
+record(bi, "DPLA:RSS01:MPS918Rdbk") {
+  field (DESC, "MPS918: DGV01 DPlate Gate Valve Status")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+2 T=BYTE B=0")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Beam permit")
+  field (ZNAM, "Beam stop")
+ }
+ 
+record(bi, "DPLA:RSS01:MPS922Rdbk") {
+  field (DESC, "MPS922: DSL01&02 Slits Status OUT")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+2 T=BYTE B=1")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "DSL01&02 OUT")
+  field (ZNAM, "DSL01&02 Non-OUT")
+ }
+ 
+record(bi, "DPLA:RSS01:MPS923Rdbk") {
+  field (DESC, "MPS923: DSL01&02 Slits Status IN")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+2 T=BYTE B=2")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "DSL01&02 IN")
+  field (ZNAM, "DSL01&02 Non-IN")
+ }
+ 
+record(bi, "DPLA:RSS01:MPS924Rdbk") {
+  field (DESC, "MPS924: DSG01 SEM Grid Status OUT")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+2 T=BYTE B=3")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "DSG01 OUT")
+  field (ZNAM, "DSG01 Non-OUT")
+ }
+ 
+record(bi, "DPLA:RSS01:MPS925Rdbk") {
+  field (DESC, "MPS925: DSG01 SEM Grid Status IN")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+2 T=BYTE B=4")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "DSG01 IN")
+  field (ZNAM, "DSG01 Non-IN")
+ }
+ 
+# These PVs are readbacks of Safety PLC inputs from MPS.
+# Signals are reported to Main PLC through Profibus,
+# then to EPICS through ethernet.
+
+record(bi, "DPLA:RSS01:MPS901Rdbk") {
+  field (DESC, "MPS901: Slit In Permit")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+2 T=BYTE B=5")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Permit")
+  field (ZNAM, "Non-Permit")
+ }
+ 
+record(bi, "DPLA:RSS01:MPS902Rdbk") {
+  field (DESC, "MPS902: SEM Grid In Permit")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+2 T=BYTE B=6")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Permit")
+  field (ZNAM, "Non-Permit")
+ }
+ 
+record(bi, "DPLA:RSS01:MPS919Rdbk") {
+  field (DESC, "MPS919: DGV01 Open Inhibit/Permit")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+2 T=BYTE B=7")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Non-close")
+  field (ZNAM, "Close")
+ }
+
+# These PVs are readbacks of inputs to Safety PLC.
+# Signals are generated by Main PLC
+# and sent to Safety PLC through Profibus,
+# and also reported back to EPICS through ethernet.
+
+record(bi, "DPLA:RSS01:DSL01Park") {
+  field (DESC, "DSL01 Slit parking status > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+1 T=BYTE B=0")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Non-parking")
+  field (ZNAM, "Parking")
+ }
+
+record(bi, "DPLA:RSS01:DSL02Park") {
+  field (DESC, "DSL02 Slit parking status > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+1 T=BYTE B=1")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Non-parking")
+  field (ZNAM, "Parking")
+}
+
+record(bi, "DPLA:RSS01:HSL01Park") {
+  field (DESC, "HSL01 Slit parking status > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+1 T=BYTE B=2")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Non-parking")
+  field (ZNAM, "Parking")
+}
+
+record(bi, "DPLA:RSS01:HFC01Park") {
+  field (DESC, "HFC01 Faraday cup parking status > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+1 T=BYTE B=3")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Non-parking")
+  field (ZNAM, "Parking")
+}
+
+record(bi, "DPLA:RSS01:DSG01Out") {
+  field (DESC, "DSG01 State OUT > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+1 T=BYTE B=4")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Non-OUT")
+  field (ZNAM, "OUT")
+}
+
+record(bi, "DPLA:RSS01:DSG01IN") {
+  field (DESC, "DSG01 State IN > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+1 T=BYTE B=5")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Non-IN")
+  field (ZNAM, "IN")
+}
+record(bi, "DPLA:RSS01:HSG01Out") {
+  field (DESC, "HSG01 State OUT > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+1 T=BYTE B=6")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Non-OUT")
+  field (ZNAM, "OUT")
+}
+
+record(bi, "DPLA:RSS01:HSG01IN") {
+  field (DESC, "HSG01 State IN > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+1 T=BYTE B=7")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Non-IN")
+  field (ZNAM, "IN")
+}
+record(bi, "DPLA:RSS01:DFS1NFStat") {
+  field (DESC, "DFS01 Flow switch non-flow status > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+1 T=BYTE B=0")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Flow")
+  field (ZNAM, "Non-Flow")
+}
+record(bi, "DPLA:RSS01:DFS1FStat") {
+  field (DESC, "DFS01 Flow switch flow status > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+1 T=BYTE B=1")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Non-Flow")
+  field (ZNAM, "Flow")
+}
+record(bi, "DPLA:RSS01:DFS2NFStat") {
+  field (DESC, "DFS02 Flow switch non-flow status > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320 T=BYTE B=2")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Flow")
+  field (ZNAM, "Non-Flow")
+}
+record(bi, "DPLA:RSS01:DFS2FStat") {
+  field (DESC, "DFS02 Flow switch flow status > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320 T=BYTE B=3")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Non-Flow")
+  field (ZNAM, "Flow")
+}
+
+record(bi, "DPLA:RSS01:DGV01Open") {
+  field (DESC, "DGV01 LCS OPEN Stat > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320 T=BYTE B=4")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Non-Open")
+  field (ZNAM, "Open")
+}
+record(bi, "DPLA:RSS01:DGV01Close") {
+  field (DESC, "DGV01 LCS CLOSE Stat > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320 T=BYTE B=5")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Non-Close")
+  field (ZNAM, "Close")
+}
+record(bi, "DPLA:RSS01:SLStat") {
+  field (DESC, "SLITS general Parking Stat > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320 T=BYTE B=6")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Non-Parking")
+  field (ZNAM, "Parking")
+}
+record(bi, "DPLA:RSS01:DVGR5Error") {
+  field (DESC, "DVG General Relay 5 ERROR > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320 T=BYTE B=7")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Non-Error")
+  field (ZNAM, "Error")
+}
+
+record(bi, "DPLA:RSS01:DFS3NFStat") {
+  field (DESC, "DFS03 Flow switch non-flow status > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+7 T=BYTE B=4")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Flow")
+  field (ZNAM, "Non-Flow")
+}
+
+record(bi, "DPLA:RSS01:DFS3FStat") {
+  field (DESC, "DFS03 Flow switch flow status > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+7 T=BYTE B=5")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Non-Flow")
+  field (ZNAM, "Flow")
+}
+
+record(bi, "DPLA:RSS01:VacFault") {
+  field (DESC, "Vacuum fault (Vanalog>=8.75V) > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+6 T=BYTE B=0")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Out of Range")
+  field (ZNAM, "In Range")
+}
+
+record(bi, "DPLA:RSS01:VacStat") {
+  field (DESC, "Vacuum status (Panalog!=Pdigital) > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+6 T=BYTE B=1")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "Out of Range")
+  field (ZNAM, "In Range")
+}
+
+record(bi, "DPLA:RSS01:DWC01Error") {
+  field (DESC, "DWC01 temp difference < 1.5degC > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+6 T=BYTE B=2")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "In Range")
+  field (ZNAM, "Out of Range")
+}
+
+record(bi, "DPLA:RSS01:DTH03Error") {
+  field (DESC, "DTH03 @LPBD temperature <= 20degC > RSS")
+  field (DTYP, "S7plc")
+  field (INP,  "@dpla_plc/320+6 T=BYTE B=3")
+  field (SCAN, "I/O Intr")
+  field (ONAM, "In Range")
+  field (ZNAM, "Out of Range")
+}
+
+#######################################################
+# Records for ionic tsp pump controller IPC01 in DPLA #
+# Type Gamma Vacuum MPCe                              #
+#######################################################
+
+# Connection
+record(bi, "DPLA:IPC01:CommStat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/328 T=BYTE B=0")
+  field(DESC, "Connection to ionic pump controller")
+  field(ZNAM, "Disconnected")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Connected")
+  field(OSV, "NO_ALARM")
+}
+
+# TSP FIRING CONDITION [0x71]
+record(bi, "DPLA:TSP01:Firing") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/330 T=BYTE B=0")
+  field(DESC, "Firing state of the remote TSP")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+}
+
+# GET CURRENT [0x74]
+record(ai, "DPLA:TSP01:I") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/330+10 T=UINT16")
+  field(DESC, "Instaneous current of firing filament")
+  field(EGU, "A")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(PREC, "1")
+}
+
+# GET VOLTAGE [0x93]
+record(ai, "DPLA:TSP01:V") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/330+8 T=UINT16")
+  field(DESC, "Instaneous voltage of firing filament")
+  field(EGU, "V")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(PREC, "1")
+}
+
+#######################################################
+# Records for ionic tsp pump controller IPC02 in DPLA #
+# Type Gamma Vacuum MPCe                              #
+#######################################################
+
+# Connection
+record(bi, "DPLA:IPC02:CommStat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/329 T=BYTE B=0")
+  field(DESC, "Connection to ionic pump controller")
+  field(ZNAM, "Disconnected")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Connected")
+  field(OSV, "NO_ALARM")
+}
+
+# TSP FIRING CONDITION [0x71]
+record(bi, "DPLA:TSP02:Firing") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/346 T=BYTE B=0")
+  field(DESC, "Firing state of the remote TSP")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+}
+
+# GET CURRENT [0x74]
+record(ai, "DPLA:TSP02:I") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/346+10 T=UINT16")
+  field(DESC, "Instaneous current of firing filament")
+  field(EGU, "A")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(PREC, "1")
+}
+
+# GET VOLTAGE [0x93]
+record(ai, "DPLA:TSP02:V") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/346+8 T=UINT16")
+  field(DESC, "Instaneous voltage of firing filament")
+  field(EGU, "V")
+  field(LINR, "SLOPE")
+  field(ESLO, "0.10")
+  field(EOFF, "0.0")
+  field(PREC, "1")
+}
+
+######################################
+# Records for tsp pump TSP01 in DPLA #
+######################################
+
+# FIRING CONDITION [0x71]
+record(bi, "DPLA:TSP01:Firing") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/330 T=BYTE B=0")
+  field(DESC, "Firing state of the remote TSP")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+}
+
+# GET ACTIVE TSP [0xD5]
+record(bi, "DPLA:TSP01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/330 T=BYTE B=1")
+  field(DESC, "Returns the current activation status")
+  field(ZNAM, "Inactive")
+  field(ONAM, "Active")
+}
+
+# GET SUB LEVEL 1 [0x30]
+record(longin, "DPLA:TSP01:SublLevel") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/330+1 T=BYTE")
+  field(DESC, "Gets sublimation level in Amps")
+  field(EGU, "A")
+  field(HOPR, "50")
+  field(LOPR, "0")
+}
+
+# TSP1 STATUS [0x2A CCC]
+record(longin, "DPLA:TSP01:RemCycles") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/330+2 T=UINT16")
+  field(DESC, "Number of remaining cycles")
+  field(EGU, "cycles")
+}
+
+# GET QUAL PRESSURE 1 [0x31]
+record(ai, "DPLA:TSP01:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/330+4 T=FLOAT32")
+  field(DESC, "Gets programmed qualifying pressure")
+  field(EGU, "mbar")
+}
+
+# GET TIME 1 (DURATION) [0x72]
+record(longin, "DPLA:TSP01:OnTime") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/330+12 T=UINT16")
+  field(DESC, "Duration of each firing in prog. mode")
+  field(EGU, "s")
+}
+
+# GET PERIOD 1 [0x73]
+record(longin, "DPLA:TSP01:Period") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/330+14 T=UINT16")
+  field(DESC, "Cycle period in programmed mode")
+  field(EGU, "s")
+}
+
+record(longin, "DPLA:TSP01:Fil1Timer") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/498 T=UINT16")
+  field(DESC, "Filament timer")
+  field(EGU, "min")
+}
+
+
+record(longin, "DPLA:TSP01:Fil2Timer") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/498+2 T=UINT16")
+  field(DESC, "Filament timer")
+  field(EGU, "min")
+}
+
+
+record(longin, "DPLA:TSP01:Fil3Timer") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/498+4 T=UINT16")
+  field(DESC, "Filament timer")
+  field(EGU, "min")
+}
+
+
+record(longin, "DPLA:TSP01:Fil4Timer") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/498+6 T=UINT16")
+  field(DESC, "Filament timer")
+  field(EGU, "min")
+}
+
+
+
+######################################
+# Records for tsp pump TSP02 in DPLA #
+######################################
+
+# FIRING CONDITION [0x71]
+record(bi, "DPLA:TSP02:Firing") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/346 T=BYTE B=0")
+  field(DESC, "Firing state of the remote TSP")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+}
+
+# GET ACTIVE TSP [0xD5]
+record(bi, "DPLA:TSP02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/346 T=BYTE B=1")
+  field(DESC, "Returns the current activation status")
+  field(ZNAM, "Inactive")
+  field(ONAM, "Active")
+}
+
+# GET SUB LEVEL 1 [0x30]
+record(longin, "DPLA:TSP02:SublLevel") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/346+1 T=BYTE")
+  field(DESC, "Gets sublimation level in Amps")
+  field(EGU, "A")
+  field(HOPR, "50")
+  field(LOPR, "0")
+}
+
+# TSP1 STATUS [0x2A CCC]
+record(longin, "DPLA:TSP02:RemCycles") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/346+2 T=UINT16")
+  field(DESC, "Number of remaining cycles")
+  field(EGU, "cycles")
+}
+
+# GET QUAL PRESSURE 1 [0x31]
+record(ai, "DPLA:TSP02:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/346+4 T=FLOAT32")
+  field(DESC, "Gets programmed qualifying pressure")
+  field(EGU, "mbar")
+}
+
+# GET TIME 1 (DURATION) [0x72]
+record(longin, "DPLA:TSP02:OnTime") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/346+12 T=UINT16")
+  field(DESC, "Duration of each firing in prog. mode")
+  field(EGU, "s")
+}
+
+# GET PERIOD 1 [0x73]
+record(longin, "DPLA:TSP02:Period") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/346+14 T=UINT16")
+  field(DESC, "Cycle period in programmed mode")
+  field(EGU, "s")
+}
+
+record(longin, "DPLA:TSP02:Fil1Timer") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/506 T=UINT16")
+  field(DESC, "Filament timer")
+  field(EGU, "min")
+}
+
+
+record(longin, "DPLA:TSP02:Fil2Timer") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/506+2 T=UINT16")
+  field(DESC, "Filament timer")
+  field(EGU, "min")
+}
+
+
+record(longin, "DPLA:TSP02:Fil3Timer") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/506+4 T=UINT16")
+  field(DESC, "Filament timer")
+  field(EGU, "min")
+}
+
+
+record(longin, "DPLA:TSP02:Fil4Timer") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/506+6 T=UINT16")
+  field(DESC, "Filament timer")
+  field(EGU, "min")
+}
+
+
+
+######################################
+# Records for tsp pump TSP03 in DPLA #
+######################################
+
+# FIRING CONDITION [0x71]
+record(bi, "DPLA:TSP03:Firing") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/362 T=BYTE B=0")
+  field(DESC, "Firing state of the remote TSP")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+}
+
+# GET ACTIVE TSP [0xD5]
+record(bi, "DPLA:TSP03:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/362 T=BYTE B=1")
+  field(DESC, "Returns the current activation status")
+  field(ZNAM, "Inactive")
+  field(ONAM, "Active")
+}
+
+# GET SUB LEVEL 1 [0x30]
+record(longin, "DPLA:TSP03:SublLevel") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/362+1 T=BYTE")
+  field(DESC, "Gets sublimation level in Amps")
+  field(EGU, "A")
+  field(HOPR, "50")
+  field(LOPR, "0")
+}
+
+# TSP1 STATUS [0x2A CCC]
+record(longin, "DPLA:TSP03:RemCycles") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/362+2 T=UINT16")
+  field(DESC, "Number of remaining cycles")
+  field(EGU, "cycles")
+}
+
+# GET QUAL PRESSURE 1 [0x31]
+record(ai, "DPLA:TSP03:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/362+4 T=FLOAT32")
+  field(DESC, "Gets programmed qualifying pressure")
+  field(EGU, "mbar")
+}
+
+# GET TIME 1 (DURATION) [0x72]
+record(longin, "DPLA:TSP03:OnTime") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/362+12 T=UINT16")
+  field(DESC, "Duration of each firing in prog. mode")
+  field(EGU, "s")
+}
+
+# GET PERIOD 1 [0x73]
+record(longin, "DPLA:TSP03:Period") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/362+14 T=UINT16")
+  field(DESC, "Cycle period in programmed mode")
+  field(EGU, "s")
+}
+
+record(longin, "DPLA:TSP03:Fil1Timer") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/514 T=UINT16")
+  field(DESC, "Filament timer")
+  field(EGU, "min")
+}
+
+
+record(longin, "DPLA:TSP03:Fil2Timer") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/514+2 T=UINT16")
+  field(DESC, "Filament timer")
+  field(EGU, "min")
+}
+
+
+record(longin, "DPLA:TSP03:Fil3Timer") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/514+4 T=UINT16")
+  field(DESC, "Filament timer")
+  field(EGU, "min")
+}
+
+
+record(longin, "DPLA:TSP03:Fil4Timer") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/514+6 T=UINT16")
+  field(DESC, "Filament timer")
+  field(EGU, "min")
+}
+
+
+
+######################################
+# Records for tsp pump TSP04 in DPLA #
+######################################
+
+# FIRING CONDITION [0x71]
+record(bi, "DPLA:TSP04:Firing") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/378 T=BYTE B=0")
+  field(DESC, "Firing state of the remote TSP")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+}
+
+# GET ACTIVE TSP [0xD5]
+record(bi, "DPLA:TSP04:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/378 T=BYTE B=1")
+  field(DESC, "Returns the current activation status")
+  field(ZNAM, "Inactive")
+  field(ONAM, "Active")
+}
+
+# GET SUB LEVEL 1 [0x30]
+record(longin, "DPLA:TSP04:SublLevel") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/378+1 T=BYTE")
+  field(DESC, "Gets sublimation level in Amps")
+  field(EGU, "A")
+  field(HOPR, "50")
+  field(LOPR, "0")
+}
+
+# TSP1 STATUS [0x2A CCC]
+record(longin, "DPLA:TSP04:RemCycles") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/378+2 T=UINT16")
+  field(DESC, "Number of remaining cycles")
+  field(EGU, "cycles")
+}
+
+# GET QUAL PRESSURE 1 [0x31]
+record(ai, "DPLA:TSP04:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/378+4 T=FLOAT32")
+  field(DESC, "Gets programmed qualifying pressure")
+  field(EGU, "mbar")
+}
+
+# GET TIME 1 (DURATION) [0x72]
+record(longin, "DPLA:TSP04:OnTime") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/378+12 T=UINT16")
+  field(DESC, "Duration of each firing in prog. mode")
+  field(EGU, "s")
+}
+
+# GET PERIOD 1 [0x73]
+record(longin, "DPLA:TSP04:Period") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/378+14 T=UINT16")
+  field(DESC, "Cycle period in programmed mode")
+  field(EGU, "s")
+}
+
+record(longin, "DPLA:TSP04:Fil1Timer") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/522 T=UINT16")
+  field(DESC, "Filament timer")
+  field(EGU, "min")
+}
+
+
+record(longin, "DPLA:TSP04:Fil2Timer") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/522+2 T=UINT16")
+  field(DESC, "Filament timer")
+  field(EGU, "min")
+}
+
+
+record(longin, "DPLA:TSP04:Fil3Timer") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/522+4 T=UINT16")
+  field(DESC, "Filament timer")
+  field(EGU, "min")
+}
+
+
+record(longin, "DPLA:TSP04:Fil4Timer") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/522+6 T=UINT16")
+  field(DESC, "Filament timer")
+  field(EGU, "min")
+}
+
+
+
+###############################
+# Records for ionic pump IP01 #
+###############################
+
+# GET SUPPLY STATUS [0x0D]
+record(mbbi, "DPLA:IP01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/394 T=BYTE")
+  field(NOBT, "4")
+  field(SHFT, "0")
+  field(DESC, "Ionic pump status")
+  
+  field(ZRVL, "1")
+  field(ZRST, "WAITING TO START")
+  field(ZRSV, "NO_ALARM")
+
+  field(ONVL, "2")
+  field(ONST, "STANDBY")
+  field(ONSV, "NO_ALARM")
+
+  field(TWVL, "3")
+  field(TWST, "SAFE-CONN")
+  field(TWSV, "NO_ALARM")
+
+  field(THVL, "4")
+  field(THST, "RUNNING")
+  field(THSV, "NO_ALARM")
+  
+  field(FRVL, "5")
+  field(FRST, "COOL DOWN ERROR")
+  field(FRSV, "MAJOR")
+  
+  field(FVVL, "6")
+  field(FVST, "PUMP ERROR")
+  field(FVSV, "MAJOR")
+  
+  field(SXVL, "7")
+  field(SXST, "SAFE-CONN ERROR")
+  field(SXSV, "MAJOR")
+  
+  field(SVVL, "8")
+  field(SVST, "RUNNING ERROR")
+  field(SVSV, "MAJOR")
+  
+  field(EIVL, "9")
+  field(EIST, "INTERLOCK ERROR")
+  field(EISV, "MAJOR")
+  
+  field(NIVL, "10")
+  field(NIST, "SHUT DOWN ERROR")
+  field(NISV, "MAJOR")
+  
+  field(TEVL, "11")
+  field(TEST, "CALIBRATION ERROR")
+  field(TESV, "MAJOR")
+}
+
+# IS HIGH VOLTAGE ON [0x61]
+record(bi, "DPLA:IP01:HV_Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/394+1 T=BYTE B=0")
+  field(DESC, "Indicates if high voltage is enabled")
+  field(ZNAM, "HV off")
+  field(ONAM, "HV on")
+}
+
+# GET AUTO RESTART [0x34/0x25]
+record(bi, "DPLA:IP01:AR") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/394+1 T=BYTE B=1")
+  field(DESC, "Automatically restart on power up")
+  field(ZNAM, "NO Auto-restart")
+  field(ONAM, "YES Auto-restart")
+}
+
+# ERROR
+# PLC calculated: Error if (status == INTERLOCK | SHUT_DOWN | PUMP_ERROR | STAND-BY ) && DPLA:VAC01:Stat == BEAM-ON
+record(bi, "DPLA:IP01:Error") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/394+1 T=BYTE B=2")
+  field(DESC, "Ionic pump error with beam-on")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "MAJOR")
+}
+
+# GET PUMP SIZE 0x11
+record(longin, "DPLA:IP01:Size") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/394+2 T=UINT16")
+  field(DESC, "Ionic pump size in liters per second")
+  field(EGU, "l/s")
+}
+
+# READ PRESSURE [0x0B]
+record(ai, "DPLA:IP01:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/394+4 T=FLOAT32")
+  field(DESC, "Ionic Pump Pressure")
+  field(PREC, "3")
+  field(EGU, "mbar")
+}
+
+# READ VOLTAGE [0x0C]
+record(ai, "DPLA:IP01:V") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/394+8 T=UINT32")
+  field(DESC, "Ionic Pump Voltage")
+  field(PREC, "0")
+  field(EGU, "V")
+  field(HIHI, "7500")
+  field(HHSV, "MAJOR")
+  field(HIGH, "7300")
+  field(HSV, "MAJOR")
+  field(LOW, "5000")
+  field(LSV, "MINOR")
+  field(LOLO, "0")
+  field(LLSV, "MAJOR")
+}
+
+# READ CURRENT [0x0A]
+record(ai, "DPLA:IP01:I") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/394+12 T=FLOAT32")
+  field(DESC, "Ionic Pump Current")
+  field(PREC, "3")
+  field(EGU, "A")
+  field(HIHI, "0.5")
+  field(HHSV, "MAJOR")
+  field(HIGH, "0.5")
+  field(HSV, "MAJOR")
+  field(LOW, "0")
+  field(LSV, "MAJOR")
+  field(LOLO, "0")
+  field(LLSV, "MAJOR")
+}
+
+# GET CALIBRATION [0x1D]
+record(ai, "DPLA:IP01:Cal") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/394+16 T=FLOAT32")
+  field(DESC, "Pressure calibration factor readback")
+  field(PREC, "2")
+}
+
+# Usage timers
+record(longin, "DPLA:IP01:TimerHHHH") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/394+20 T=UINT32")
+  field(DESC, "Ionic pump hours time counter")
+  field(EGU, "hours")
+}
+record(longin, "DPLA:IP01:TimerMM") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/394+24 T=BYTE")
+  field(DESC, "Ionic pump minutes time counter")
+  field(EGU, "min")
+}
+record(longin, "DPLA:IP01:TimerSS") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/394+25 T=BYTE")
+  field(DESC, "Ionic pump seconds time counter")
+  field(EGU, "s")
+}
+
+###############################
+# Records for ionic pump IP02 #
+###############################
+
+# GET SUPPLY STATUS [0x0D]
+record(mbbi, "DPLA:IP02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/420 T=BYTE")
+  field(NOBT, "4")
+  field(SHFT, "0")
+  field(DESC, "Ionic pump status")
+  
+  field(ZRVL, "1")
+  field(ZRST, "WAITING TO START")
+  field(ZRSV, "NO_ALARM")
+
+  field(ONVL, "2")
+  field(ONST, "STANDBY")
+  field(ONSV, "NO_ALARM")
+
+  field(TWVL, "3")
+  field(TWST, "SAFE-CONN")
+  field(TWSV, "NO_ALARM")
+
+  field(THVL, "4")
+  field(THST, "RUNNING")
+  field(THSV, "NO_ALARM")
+  
+  field(FRVL, "5")
+  field(FRST, "COOL DOWN ERROR")
+  field(FRSV, "MAJOR")
+  
+  field(FVVL, "6")
+  field(FVST, "PUMP ERROR")
+  field(FVSV, "MAJOR")
+  
+  field(SXVL, "7")
+  field(SXST, "SAFE-CONN ERROR")
+  field(SXSV, "MAJOR")
+  
+  field(SVVL, "8")
+  field(SVST, "RUNNING ERROR")
+  field(SVSV, "MAJOR")
+  
+  field(EIVL, "9")
+  field(EIST, "INTERLOCK ERROR")
+  field(EISV, "MAJOR")
+  
+  field(NIVL, "10")
+  field(NIST, "SHUT DOWN ERROR")
+  field(NISV, "MAJOR")
+  
+  field(TEVL, "11")
+  field(TEST, "CALIBRATION ERROR")
+  field(TESV, "MAJOR")
+}
+
+# IS HIGH VOLTAGE ON [0x61]
+record(bi, "DPLA:IP02:HV_Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/420+1 T=BYTE B=0")
+  field(DESC, "Indicates if high voltage is enabled")
+  field(ZNAM, "HV off")
+  field(ONAM, "HV on")
+}
+
+# GET AUTO RESTART [0x34/0x25]
+record(bi, "DPLA:IP02:AR") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/420+1 T=BYTE B=1")
+  field(DESC, "Automatically restart on power up")
+  field(ZNAM, "NO Auto-restart")
+  field(ONAM, "YES Auto-restart")
+}
+
+# ERROR
+# PLC calculated: Error if (status == INTERLOCK | SHUT_DOWN | PUMP_ERROR | STAND-BY ) && DPLA:VAC01:Stat == BEAM-ON
+record(bi, "DPLA:IP02:Error") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/420+1 T=BYTE B=2")
+  field(DESC, "Ionic pump error with beam-on")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "MAJOR")
+}
+
+# GET PUMP SIZE 0x11
+record(longin, "DPLA:IP02:Size") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/420+2 T=UINT16")
+  field(DESC, "Ionic pump size in liters per second")
+  field(EGU, "l/s")
+}
+
+# READ PRESSURE [0x0B]
+record(ai, "DPLA:IP02:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/420+4 T=FLOAT32")
+  field(DESC, "Ionic Pump Pressure")
+  field(PREC, "3")
+  field(EGU, "mbar")
+}
+
+# READ VOLTAGE [0x0C]
+record(ai, "DPLA:IP02:V") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/420+8 T=UINT32")
+  field(DESC, "Ionic Pump Voltage")
+  field(PREC, "0")
+  field(EGU, "V")
+  field(HIHI, "7500")
+  field(HHSV, "MAJOR")
+  field(HIGH, "7300")
+  field(HSV, "MAJOR")
+  field(LOW, "5000")
+  field(LSV, "MINOR")
+  field(LOLO, "0")
+  field(LLSV, "MAJOR")
+}
+
+# READ CURRENT [0x0A]
+record(ai, "DPLA:IP02:I") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/420+12 T=FLOAT32")
+  field(DESC, "Ionic Pump Current")
+  field(PREC, "3")
+  field(EGU, "A")
+  field(HIHI, "0.5")
+  field(HHSV, "MAJOR")
+  field(HIGH, "0.5")
+  field(HSV, "MAJOR")
+  field(LOW, "0")
+  field(LSV, "MAJOR")
+  field(LOLO, "0")
+  field(LLSV, "MAJOR")
+}
+
+# GET CALIBRATION [0x1D]
+record(ai, "DPLA:IP02:Cal") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/420+16 T=FLOAT32")
+  field(DESC, "Pressure calibration factor readback")
+  field(PREC, "2")
+}
+
+# Usage timers
+record(longin, "DPLA:IP02:TimerHHHH") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/420+20 T=UINT32")
+  field(DESC, "Ionic pump hours time counter")
+  field(EGU, "hours")
+}
+record(longin, "DPLA:IP02:TimerMM") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/420+24 T=BYTE")
+  field(DESC, "Ionic pump minutes time counter")
+  field(EGU, "min")
+}
+record(longin, "DPLA:IP02:TimerSS") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/420+25 T=BYTE")
+  field(DESC, "Ionic pump seconds time counter")
+  field(EGU, "s")
+}
+
+###############################
+# Records for ionic pump IP03 #
+###############################
+
+# GET SUPPLY STATUS [0x0D]
+record(mbbi, "DPLA:IP03:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/446 T=BYTE")
+  field(NOBT, "4")
+  field(SHFT, "0")
+  field(DESC, "Ionic pump status")
+  
+  field(ZRVL, "1")
+  field(ZRST, "WAITING TO START")
+  field(ZRSV, "NO_ALARM")
+
+  field(ONVL, "2")
+  field(ONST, "STANDBY")
+  field(ONSV, "NO_ALARM")
+
+  field(TWVL, "3")
+  field(TWST, "SAFE-CONN")
+  field(TWSV, "NO_ALARM")
+
+  field(THVL, "4")
+  field(THST, "RUNNING")
+  field(THSV, "NO_ALARM")
+  
+  field(FRVL, "5")
+  field(FRST, "COOL DOWN ERROR")
+  field(FRSV, "MAJOR")
+  
+  field(FVVL, "6")
+  field(FVST, "PUMP ERROR")
+  field(FVSV, "MAJOR")
+  
+  field(SXVL, "7")
+  field(SXST, "SAFE-CONN ERROR")
+  field(SXSV, "MAJOR")
+  
+  field(SVVL, "8")
+  field(SVST, "RUNNING ERROR")
+  field(SVSV, "MAJOR")
+  
+  field(EIVL, "9")
+  field(EIST, "INTERLOCK ERROR")
+  field(EISV, "MAJOR")
+  
+  field(NIVL, "10")
+  field(NIST, "SHUT DOWN ERROR")
+  field(NISV, "MAJOR")
+  
+  field(TEVL, "11")
+  field(TEST, "CALIBRATION ERROR")
+  field(TESV, "MAJOR")
+}
+
+# IS HIGH VOLTAGE ON [0x61]
+record(bi, "DPLA:IP03:HV_Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/446+1 T=BYTE B=0")
+  field(DESC, "Indicates if high voltage is enabled")
+  field(ZNAM, "HV off")
+  field(ONAM, "HV on")
+}
+
+# GET AUTO RESTART [0x34/0x25]
+record(bi, "DPLA:IP03:AR") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/446+1 T=BYTE B=1")
+  field(DESC, "Automatically restart on power up")
+  field(ZNAM, "NO Auto-restart")
+  field(ONAM, "YES Auto-restart")
+}
+
+# ERROR
+# PLC calculated: Error if (status == INTERLOCK | SHUT_DOWN | PUMP_ERROR | STAND-BY ) && DPLA:VAC01:Stat == BEAM-ON
+record(bi, "DPLA:IP03:Error") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/446+1 T=BYTE B=2")
+  field(DESC, "Ionic pump error with beam-on")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "MAJOR")
+}
+
+# GET PUMP SIZE 0x11
+record(longin, "DPLA:IP03:Size") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/446+2 T=UINT16")
+  field(DESC, "Ionic pump size in liters per second")
+  field(EGU, "l/s")
+}
+
+# READ PRESSURE [0x0B]
+record(ai, "DPLA:IP03:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/446+4 T=FLOAT32")
+  field(DESC, "Ionic Pump Pressure")
+  field(PREC, "3")
+  field(EGU, "mbar")
+}
+
+# READ VOLTAGE [0x0C]
+record(ai, "DPLA:IP03:V") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/446+8 T=UINT32")
+  field(DESC, "Ionic Pump Voltage")
+  field(PREC, "0")
+  field(EGU, "V")
+  field(HIHI, "7500")
+  field(HHSV, "MAJOR")
+  field(HIGH, "7300")
+  field(HSV, "MAJOR")
+  field(LOW, "5000")
+  field(LSV, "MINOR")
+  field(LOLO, "0")
+  field(LLSV, "MAJOR")
+}
+
+# READ CURRENT [0x0A]
+record(ai, "DPLA:IP03:I") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/446+12 T=FLOAT32")
+  field(DESC, "Ionic Pump Current")
+  field(PREC, "3")
+  field(EGU, "A")
+  field(HIHI, "0.5")
+  field(HHSV, "MAJOR")
+  field(HIGH, "0.5")
+  field(HSV, "MAJOR")
+  field(LOW, "0")
+  field(LSV, "MAJOR")
+  field(LOLO, "0")
+  field(LLSV, "MAJOR")
+}
+
+# GET CALIBRATION [0x1D]
+record(ai, "DPLA:IP03:Cal") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/446+16 T=FLOAT32")
+  field(DESC, "Pressure calibration factor readback")
+  field(PREC, "2")
+}
+
+# Usage timers
+record(longin, "DPLA:IP03:TimerHHHH") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/446+20 T=UINT32")
+  field(DESC, "Ionic pump hours time counter")
+  field(EGU, "hours")
+}
+record(longin, "DPLA:IP03:TimerMM") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/446+24 T=BYTE")
+  field(DESC, "Ionic pump minutes time counter")
+  field(EGU, "min")
+}
+record(longin, "DPLA:IP03:TimerSS") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/446+25 T=BYTE")
+  field(DESC, "Ionic pump seconds time counter")
+  field(EGU, "s")
+}
+
+###############################
+# Records for ionic pump IP04 #
+###############################
+
+# GET SUPPLY STATUS [0x0D]
+record(mbbi, "DPLA:IP04:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/472 T=BYTE")
+  field(NOBT, "4")
+  field(SHFT, "0")
+  field(DESC, "Ionic pump status")
+  
+  field(ZRVL, "1")
+  field(ZRST, "WAITING TO START")
+  field(ZRSV, "NO_ALARM")
+
+  field(ONVL, "2")
+  field(ONST, "STANDBY")
+  field(ONSV, "NO_ALARM")
+
+  field(TWVL, "3")
+  field(TWST, "SAFE-CONN")
+  field(TWSV, "NO_ALARM")
+
+  field(THVL, "4")
+  field(THST, "RUNNING")
+  field(THSV, "NO_ALARM")
+  
+  field(FRVL, "5")
+  field(FRST, "COOL DOWN ERROR")
+  field(FRSV, "MAJOR")
+  
+  field(FVVL, "6")
+  field(FVST, "PUMP ERROR")
+  field(FVSV, "MAJOR")
+  
+  field(SXVL, "7")
+  field(SXST, "SAFE-CONN ERROR")
+  field(SXSV, "MAJOR")
+  
+  field(SVVL, "8")
+  field(SVST, "RUNNING ERROR")
+  field(SVSV, "MAJOR")
+  
+  field(EIVL, "9")
+  field(EIST, "INTERLOCK ERROR")
+  field(EISV, "MAJOR")
+  
+  field(NIVL, "10")
+  field(NIST, "SHUT DOWN ERROR")
+  field(NISV, "MAJOR")
+  
+  field(TEVL, "11")
+  field(TEST, "CALIBRATION ERROR")
+  field(TESV, "MAJOR")
+}
+
+# IS HIGH VOLTAGE ON [0x61]
+record(bi, "DPLA:IP04:HV_Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/472+1 T=BYTE B=0")
+  field(DESC, "Indicates if high voltage is enabled")
+  field(ZNAM, "HV off")
+  field(ONAM, "HV on")
+}
+
+# GET AUTO RESTART [0x34/0x25]
+record(bi, "DPLA:IP04:AR") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/472+1 T=BYTE B=1")
+  field(DESC, "Automatically restart on power up")
+  field(ZNAM, "NO Auto-restart")
+  field(ONAM, "YES Auto-restart")
+}
+
+# ERROR
+# PLC calculated: Error if (status == INTERLOCK | SHUT_DOWN | PUMP_ERROR | STAND-BY ) && DPLA:VAC01:Stat == BEAM-ON
+record(bi, "DPLA:IP04:Error") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/472+1 T=BYTE B=2")
+  field(DESC, "Ionic pump error with beam-on")
+  field(ZNAM, "No error")
+  field(ZSV, "NO_ALARM")
+  field(ONAM, "Error")
+  field(OSV, "MAJOR")
+}
+
+# GET PUMP SIZE 0x11
+record(longin, "DPLA:IP04:Size") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/472+2 T=UINT16")
+  field(DESC, "Ionic pump size in liters per second")
+  field(EGU, "l/s")
+}
+
+# READ PRESSURE [0x0B]
+record(ai, "DPLA:IP04:P") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/472+4 T=FLOAT32")
+  field(DESC, "Ionic Pump Pressure")
+  field(PREC, "3")
+  field(EGU, "mbar")
+}
+
+# READ VOLTAGE [0x0C]
+record(ai, "DPLA:IP04:V") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/472+8 T=UINT32")
+  field(DESC, "Ionic Pump Voltage")
+  field(PREC, "0")
+  field(EGU, "V")
+  field(HIHI, "7500")
+  field(HHSV, "MAJOR")
+  field(HIGH, "7300")
+  field(HSV, "MAJOR")
+  field(LOW, "5000")
+  field(LSV, "MINOR")
+  field(LOLO, "0")
+  field(LLSV, "MAJOR")
+}
+
+# READ CURRENT [0x0A]
+record(ai, "DPLA:IP04:I") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/472+12 T=FLOAT32")
+  field(DESC, "Ionic Pump Current")
+  field(PREC, "3")
+  field(EGU, "A")
+  field(HIHI, "0.5")
+  field(HHSV, "MAJOR")
+  field(HIGH, "0.5")
+  field(HSV, "MAJOR")
+  field(LOW, "0")
+  field(LSV, "MAJOR")
+  field(LOLO, "0")
+  field(LLSV, "MAJOR")
+}
+
+# GET CALIBRATION [0x1D]
+record(ai, "DPLA:IP04:Cal") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/472+16 T=FLOAT32")
+  field(DESC, "Pressure calibration factor readback")
+  field(PREC, "2")
+}
+
+# Usage timers
+record(longin, "DPLA:IP04:TimerHHHH") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/472+20 T=UINT32")
+  field(DESC, "Ionic pump hours time counter")
+  field(EGU, "hours")
+}
+record(longin, "DPLA:IP04:TimerMM") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/472+24 T=BYTE")
+  field(DESC, "Ionic pump minutes time counter")
+  field(EGU, "min")
+}
+record(longin, "DPLA:IP04:TimerSS") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/472+25 T=BYTE")
+  field(DESC, "Ionic pump seconds time counter")
+  field(EGU, "s")
+}
+
+#######################################
+# Records for scalance network switch #
+#######################################
+
+# Ring error
+record(bi, "DPLA:NW01:RingErr") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/530 T=BYTE B=0")
+  field(ZNAM, "Error")
+  field(ZSV, "MINOR")
+  field(ONAM, "No error")
+  field(DESC, "Network ring error")
+}
+
+# Power supply error
+record(bi, "DPLA:NW01:PSErr") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/530 T=BYTE B=1")
+  field(ZNAM, "Error")
+  field(ZSV, "MINOR")
+  field(ONAM, "No error")
+  field(DESC, "Power supply error")
+}
+
+#####################################
+# Records for cubicle door switches #
+#####################################
+
+# DCU05 front door
+record(bi, "DPLA:CU05_CD01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/530 T=BYTE B=2")
+  field(ZNAM, "Open")
+  field(ZSV, "MINOR")
+  field(ONAM, "Closed")
+  field(DESC, "DCU05 front door status")
+}
+
+# DCU05 rear door
+record(bi, "DPLA:CU05_CD02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/530 T=BYTE B=3")
+  field(ZNAM, "Open")
+  field(ZSV, "MINOR")
+  field(ONAM, "Closed")
+  field(DESC, "DCU05 rear door status")
+}
+
+# DCU06 front door
+record(bi, "DPLA:CU06_CD01:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/530 T=BYTE B=4")
+  field(ZNAM, "Open")
+  field(ZSV, "MINOR")
+  field(ONAM, "Closed")
+  field(DESC, "DCU06 front door status")
+}
+
+# DCU06 rear door
+record(bi, "DPLA:CU06_CD02:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/530 T=BYTE B=5")
+  field(ZNAM, "Open")
+  field(ZSV, "MINOR")
+  field(ONAM, "Closed")
+  field(DESC, "DCU06 rear door status")
+}
+
+#######################################
+# Records for farday cup FC01 in HEBT #
+#######################################
+
+# Power supply status
+record(bi, "HEBT:FC01_PS:Stat") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/531 T=BYTE B=0")
+  field(ZNAM, "Off")
+  field(ONAM, "On")
+  field(DESC, "Faraday cup FC01 power supply status")
+}
+
+# Current
+record(ai, "HEBT:FC01:I") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(INP, "@dpla_plc/531+1 T=FLOAT32")
+  field(DESC, "Faraday cup FC01 current")
+  field(EGU, "A")
+  field(PREC, "4")
+}
+

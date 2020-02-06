@@ -1,0 +1,181 @@
+
+
+record(mbbiDirect, "$(mname):RM$(devno)_CH$(ch):Di1")
+{
+	field(DESC, "CH$(ch) Monitor Status")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+0")
+	field(NOBT, "8")
+	field(SHFT, "8")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno)_CH$(ch):Di2")
+{
+	field(DESC, "CH$(ch) Error info")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+0")
+	field(NOBT, "8")
+	field(SHFT, "0")
+}
+
+record(ai, "$(mname):RM$(devno)_CH$(ch):Ai1")
+{
+	field(DESC, "CH$(ch) Value #1")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+1,FECEXP")
+	field(PREC, "3")
+}
+record(ai, "$(mname):RM$(devno)_CH$(ch):Ai1_NUM")
+{
+	field(DESC, "CH$(ch) Value #1(number)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+1")
+	field(EGUF, "65.535")
+	field(EGUL, "0.0")
+	field(LINR, "LINEAR")
+	field(PREC, "3")
+}
+record(ai, "$(mname):RM$(devno)_CH$(ch):Ai1_EXP")
+{
+	field(DESC, "CH$(ch) Value #1(index)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+2,SIGNED=YES")
+	field(EGUF, "32767.0")
+	field(EGUL, "-32768.0")
+	field(LINR, "LINEAR")
+	field(PREC, "0")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno)_CH$(ch):Ai1_UT")
+{
+	field(DESC, "CH$(ch) Unit #1")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+3")
+	field(NOBT, "8")
+	field(SHFT, "8")
+}
+record(mbbiDirect, "$(mname):RM$(devno)_CH$(ch):Ai1_ALM")
+{
+	field(DESC, "CH$(ch) Alarm #1")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+3")
+	field(NOBT, "8")
+	field(SHFT, "0")
+}
+
+record(ai, "$(mname):RM$(devno)_CH$(ch):Ai2")
+{
+	field(DESC, "CH$(ch) Value #2")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+4,FECEXP")
+	field(PREC, "3")
+}
+record(ai, "$(mname):RM$(devno)_CH$(ch):Ai2_NUM")
+{
+	field(DESC, "CH$(ch) Value #2(number)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+4")
+	field(EGUF, "65.535")
+	field(EGUL, "0.0")
+	field(LINR, "LINEAR")
+	field(PREC, "3")
+}
+record(ai, "$(mname):RM$(devno)_CH$(ch):Ai2_EXP")
+{
+	field(DESC, "CH$(ch) Value #2(index)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+5,SIGNED=YES")
+	field(EGUF, "32767.0")
+	field(EGUL, "-32768.0")
+	field(LINR, "LINEAR")
+	field(PREC, "0")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno)_CH$(ch):Ai2_UT")
+{
+	field(DESC, "CH$(ch) Unit #2")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+6")
+	field(NOBT, "8")
+	field(SHFT, "8")
+}
+record(mbbiDirect, "$(mname):RM$(devno)_CH$(ch):Ai2_ALM")
+{
+	field(DESC, "CH$(ch) Alarm #2")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+6")
+	field(NOBT, "8")
+	field(SHFT, "0")
+}
+
+record(ai, "$(mname):RM$(devno)_CH$(ch):Ai3")
+{
+	field(DESC, "CH$(ch) Value #3")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+7,FECEXP")
+	field(PREC, "3")
+}
+record(ai, "$(mname):RM$(devno)_CH$(ch):Ai3_NUM")
+{
+	field(DESC, "CH$(ch) Value #3(number)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+7")
+	field(EGUF, "65.535")
+	field(EGUL, "0.0")
+	field(LINR, "LINEAR")
+	field(PREC, "3")
+}
+record(ai, "$(mname):RM$(devno)_CH$(ch):Ai3_EXP")
+{
+	field(DESC, "CH$(ch) Value #3(index)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+8,SIGNED=YES")
+	field(EGUF, "32767.0")
+	field(EGUL, "-32768.0")
+	field(LINR, "LINEAR")
+	field(PREC, "0")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno)_CH$(ch):Ai3_UT")
+{
+	field(DESC, "CH$(ch) Unit #3")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+9")
+	field(NOBT, "8")
+	field(SHFT, "8")
+}
+record(mbbiDirect, "$(mname):RM$(devno)_CH$(ch):Ai3_ALM")
+{
+	field(DESC, "CH$(ch) Alarm #3")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+9")
+	field(NOBT, "8")
+	field(SHFT, "0")
+}
+
+record(mbbiDirect, "$(mname):RM$(devno)_CH$(ch):Di3")
+{
+	field(DESC, "CH$(ch) Mode")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M$(base)+10")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}

@@ -1,0 +1,1573 @@
+##################################
+# Records for valve GV01 in MEBT #
+##################################
+
+# Open command
+record(bo, "MEBT:GV01:OpenCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/11 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to open MEBT->GV01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Close command
+record(bo, "MEBT:GV01:CloseCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/11 T=BYTE B=4")
+  field(ZNAM, "No command")
+  field(ONAM, "Close")
+  field(DESC, "Command to close MEBT->GV01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##################################
+# Records for valve GV02 in MEBT #
+##################################
+
+# Open command
+record(bo, "MEBT:GV02:OpenCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/11 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to open MEBT->GV02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Close command
+record(bo, "MEBT:GV02:CloseCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/11 T=BYTE B=5")
+  field(ZNAM, "No command")
+  field(ONAM, "Close")
+  field(DESC, "Command to close MEBT->GV02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##################################
+# Records for valve GV03 in MEBT #
+##################################
+
+# Open command
+record(bo, "MEBT:GV03:OpenCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/11 T=BYTE B=2")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to open MEBT->GV03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Close command
+record(bo, "MEBT:GV03:CloseCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/11 T=BYTE B=6")
+  field(ZNAM, "No command")
+  field(ONAM, "Close")
+  field(DESC, "Command to close MEBT->GV03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##################################
+# Records for valve GV04 in MEBT #
+##################################
+
+# Open command
+record(bo, "MEBT:GV04:OpenCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/11 T=BYTE B=3")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to open MEBT->GV04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Close command
+record(bo, "MEBT:GV04:CloseCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/11 T=BYTE B=7")
+  field(ZNAM, "No command")
+  field(ONAM, "Close")
+  field(DESC, "Command to close MEBT->GV04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+#############################
+# Primary pump PP01 in MEBT #
+#############################
+
+# Start command
+record(bo, "MEBT:PP01:StartCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/12 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Start")
+  field(DESC, "Command to start MEBT->PP01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop command
+record(bo, "MEBT:PP01:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/12 T=BYTE B=2")
+  field(ZNAM, "No command")
+  field(ONAM, "Stop")
+  field(DESC, "Command to stop MEBT->PP01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+#############################
+# Primary pump PP02 in MEBT #
+#############################
+
+# Start command
+record(bo, "MEBT:PP02:StartCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/12 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "Start")
+  field(DESC, "Command to start MEBT->PP02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop command
+record(bo, "MEBT:PP02:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/12 T=BYTE B=3")
+  field(ZNAM, "No command")
+  field(ONAM, "Stop")
+  field(DESC, "Command to stop MEBT->PP02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##################################
+# Records for valve CV01 in MEBT #
+##################################
+
+# Open command
+record(bo, "MEBT:CV01:OpenCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/13 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to open MEBT->CV01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Close command
+record(bo, "MEBT:CV01:CloseCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/13 T=BYTE B=3")
+  field(ZNAM, "No command")
+  field(ONAM, "Close")
+  field(DESC, "Command to close MEBT->CV01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##################################
+# Records for valve CV02 in MEBT #
+##################################
+
+# Open command
+record(bo, "MEBT:CV02:OpenCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/13 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to open MEBT->CV02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Close command
+record(bo, "MEBT:CV02:CloseCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/13 T=BYTE B=4")
+  field(ZNAM, "No command")
+  field(ONAM, "Close")
+  field(DESC, "Command to close MEBT->CV02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##################################
+# Records for valve CV03 in MEBT #
+##################################
+
+# Open command
+record(bo, "MEBT:CV03:OpenCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/13 T=BYTE B=2")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to open MEBT->CV03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Close command
+record(bo, "MEBT:CV03:CloseCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/13 T=BYTE B=5")
+  field(ZNAM, "No command")
+  field(ONAM, "Close")
+  field(DESC, "Command to close MEBT->CV03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##########################
+# Turbopump TP01 in MEBT #
+##########################
+
+# Start command
+record(bo, "MEBT:TP01:StartCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to start MEBT->TP01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop command
+record(bo, "MEBT:TP01:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14 T=BYTE B=3")
+  field(ZNAM, "No command")
+  field(ONAM, "Stop")
+  field(DESC, "Command to stop MEBT->TP01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Low Speed
+record(bo, "MEBT:TP01:LSpeed") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+1 T=BYTE B=0")
+  field(ZNAM, "High speed")
+  field(ONAM, "Low speed")
+  field(DESC, "Command to choose pump speed MEBT->TP01")
+  field(PINI, "YES")
+  field(HIGH, "0")
+}
+
+# Soft start
+record(bo, "MEBT:TP01:SoftStart") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+1 T=BYTE B=3")
+  field(ZNAM, "Normal start")
+  field(ONAM, "Soft start")
+  field(DESC, "Command to choose start mode MEBT->TP01")
+  field(PINI, "YES")
+  field(HIGH, "0")
+}
+
+# Venting valve
+record(bo, "MEBT:TP01:VentValve") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+2 T=BYTE B=0")
+  field(ZNAM, "No venting")
+  field(ONAM, "Venting")
+  field(DESC, "Command to vent MEBT->TP01")
+  field(PINI, "YES")
+  field(HIGH, "0")
+}
+
+# Internal fan
+record(bo, "MEBT:TP01:IntFan") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+3 T=BYTE B=0")
+  field(ZNAM, "No fan")
+  field(ONAM, "Running")
+  field(DESC, "Command to fan internal MEBT->TP01")
+  field(PINI, "YES")
+  field(HIGH, "0")
+}
+
+# External fan
+record(bo, "MEBT:TP01:ExtFan") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+3 T=BYTE B=3")
+  field(ZNAM, "No fan")
+  field(ONAM, "Running")
+  field(DESC, "Command to fan external MEBT->TP01")
+  field(PINI, "YES")
+  field(HIGH, "0")
+}
+
+# Heating resistance switch on
+record(bo, "MEBT:HR01:OnCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+4 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Switch on")
+  field(DESC, "Command to switch on heating resistance")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Heating resistance switch off
+record(bo, "MEBT:HR01:OffCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+4 T=BYTE B=3")
+  field(ZNAM, "No command")
+  field(ONAM, "Switch off")
+  field(DESC, "Command to switch off heating resistance")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##########################
+# Turbopump TP02 in MEBT #
+##########################
+
+# Start command
+record(bo, "MEBT:TP02:StartCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to start MEBT->TP02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop command
+record(bo, "MEBT:TP02:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14 T=BYTE B=4")
+  field(ZNAM, "No command")
+  field(ONAM, "Stop")
+  field(DESC, "Command to stop MEBT->TP02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Low Speed
+record(bo, "MEBT:TP02:LSpeed") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+1 T=BYTE B=1")
+  field(ZNAM, "High speed")
+  field(ONAM, "Low speed")
+  field(DESC, "Command to choose pump speed MEBT->TP02")
+  field(PINI, "YES")
+  field(HIGH, "0")
+}
+
+# Soft start
+record(bo, "MEBT:TP02:SoftStart") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+1 T=BYTE B=4")
+  field(ZNAM, "Normal start")
+  field(ONAM, "Soft start")
+  field(DESC, "Command to choose start mode MEBT->TP02")
+  field(PINI, "YES")
+  field(HIGH, "0")
+}
+
+# Venting valve
+record(bo, "MEBT:TP02:VentValve") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+2 T=BYTE B=1")
+  field(ZNAM, "No venting")
+  field(ONAM, "Venting")
+  field(DESC, "Command to vent MEBT->TP02")
+  field(PINI, "YES")
+  field(HIGH, "0")
+}
+
+# Internal fan
+record(bo, "MEBT:TP02:IntFan") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+3 T=BYTE B=1")
+  field(ZNAM, "No fan")
+  field(ONAM, "Running")
+  field(DESC, "Command to fan internal MEBT->TP02")
+  field(PINI, "YES")
+  field(HIGH, "0")
+}
+
+# External fan
+record(bo, "MEBT:TP02:ExtFan") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+3 T=BYTE B=4")
+  field(ZNAM, "No fan")
+  field(ONAM, "Running")
+  field(DESC, "Command to fan external MEBT->TP02")
+  field(PINI, "YES")
+  field(HIGH, "0")
+}
+
+# Heating resistance switch on
+record(bo, "MEBT:HR02:OnCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+4 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "Switch on")
+  field(DESC, "Command to switch on heating resistance")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Heating resistance switch off
+record(bo, "MEBT:HR02:OffCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+4 T=BYTE B=4")
+  field(ZNAM, "No command")
+  field(ONAM, "Switch off")
+  field(DESC, "Command to switch off heating resistance")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##########################
+# Turbopump TP03 in MEBT #
+##########################
+
+# Start command
+record(bo, "MEBT:TP03:StartCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14 T=BYTE B=2")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to start MEBT->TP03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop command
+record(bo, "MEBT:TP03:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14 T=BYTE B=5")
+  field(ZNAM, "No command")
+  field(ONAM, "Stop")
+  field(DESC, "Command to stop MEBT->TP03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Low Speed
+record(bo, "MEBT:TP03:LSpeed") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+1 T=BYTE B=2")
+  field(ZNAM, "High speed")
+  field(ONAM, "Low speed")
+  field(DESC, "Command to choose pump speed MEBT->TP03")
+  field(PINI, "YES")
+  field(HIGH, "0")
+}
+
+# Soft start
+record(bo, "MEBT:TP03:SoftStart") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+1 T=BYTE B=5")
+  field(ZNAM, "Normal start")
+  field(ONAM, "Soft start")
+  field(DESC, "Command to choose start mode MEBT->TP03")
+  field(PINI, "YES")
+  field(HIGH, "0")
+}
+
+# Venting valve
+record(bo, "MEBT:TP03:VentValve") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+2 T=BYTE B=2")
+  field(ZNAM, "No venting")
+  field(ONAM, "Venting")
+  field(DESC, "Command to vent MEBT->TP03")
+  field(PINI, "YES")
+  field(HIGH, "0")
+}
+
+# Internal fan
+record(bo, "MEBT:TP03:IntFan") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+3 T=BYTE B=2")
+  field(ZNAM, "No fan")
+  field(ONAM, "Running")
+  field(DESC, "Command to fan internal MEBT->TP03")
+  field(PINI, "YES")
+  field(HIGH, "0")
+}
+
+# External fan
+record(bo, "MEBT:TP03:ExtFan") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+3 T=BYTE B=5")
+  field(ZNAM, "No fan")
+  field(ONAM, "Running")
+  field(DESC, "Command to fan external MEBT->TP03")
+  field(PINI, "YES")
+  field(HIGH, "0")
+}
+
+# Heating resistance switch on
+record(bo, "MEBT:HR03:OnCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+4 T=BYTE B=2")
+  field(ZNAM, "No command")
+  field(ONAM, "Switch on")
+  field(DESC, "Command to switch on heating resistance")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Heating resistance switch off
+record(bo, "MEBT:HR03:OffCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/14+4 T=BYTE B=5")
+  field(ZNAM, "No command")
+  field(ONAM, "Switch off")
+  field(DESC, "Command to switch off heating resistance")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+############################
+# Records for buncher BN01 #
+############################
+
+# Auto tuner
+
+# Deactivate motor current command
+record(bo, "MEBT:BN01_PS:OffCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/19 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Deactivate")
+  field(DESC, "Command to deactivate BN01 motor current")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Reset motor driver command
+record(bo, "MEBT:BN01_PS:RstCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/19 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "Reset")
+  field(DESC, "Command to reset BN01 motor driver")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Activate manual expert mode for motor
+record(bo, "MEBT:BN01:ExpSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/21 T=BYTE B=0")
+  field(ZNAM, "Off")
+  field(ONAM, "Enable")
+  field(DESC, "Command enable BN01 expert mode")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Deactivate manual expert mode for motor
+record(bo, "MEBT:BN01:ExpClear") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/21 T=BYTE B=1")
+  field(ZNAM, "Off")
+  field(ONAM, "Disable")
+  field(DESC, "Command disable BN01 expert mode")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+############################
+# Records for buncher BN02 #
+############################
+
+# Auto tuner
+
+# Deactivate motor current command
+record(bo, "MEBT:BN02_PS:OffCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/20 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Deactivate")
+  field(DESC, "Command to deactivate BN02 motor current")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Reset motor driver command
+record(bo, "MEBT:BN02_PS:RstCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/20 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "Reset")
+  field(DESC, "Command to reset BN02 motor driver")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Activate manual expert mode for motor
+record(bo, "MEBT:BN02:ExpSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/21 T=BYTE B=2")
+  field(ZNAM, "Off")
+  field(ONAM, "Enable")
+  field(DESC, "Command enable BN02 expert mode")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Deactivate manual expert mode for motor
+record(bo, "MEBT:BN02:ExpClear") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/21 T=BYTE B=3")
+  field(ZNAM, "Off")
+  field(ONAM, "Disable")
+  field(DESC, "Command disable BN02 expert mode")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+#####################################
+# Record for SC01 M01 outputs #
+#####################################
+
+record(ao, "MEBT:SC01_PM01:PosSet") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/22 T=FLOAT")
+  field(DESC, "SC01 M01 Position Setpoint")
+  field(PREC, "4")
+#  field(LINR, "SLOPE")
+#  field(ASLO, "0.01")
+#  field(AOFF, "0.0")
+  field(EGU, "mm")
+}
+
+record(ao, "MEBT:SC01_M01:SpeedSet") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/26 T=FLOAT")
+  field(DESC, "SC01 M01 Speed Setpoint")
+  field(PREC, "4")
+#  field(LINR, "SLOPE")
+#  field(ASLO, "0.01")
+#  field(AOFF, "0.0")
+  field(EGU, "mm/s")
+}
+
+#####################################
+# Record for SC01 M02 outputs #
+#####################################
+
+record(ao, "MEBT:SC01_PM02:PosSet") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/30 T=FLOAT")
+  field(DESC, "SC01 M02 Position Setpoint")
+  field(PREC, "4")
+#  field(LINR, "SLOPE")
+#  field(ASLO, "0.01")
+#  field(AOFF, "0.0")
+  field(EGU, "mm")
+}
+
+record(ao, "MEBT:SC01_M02:SpeedSet") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/34 T=FLOAT")
+  field(DESC, "SC01 M02 Speed Setpoint")
+  field(PREC, "4")
+#  field(LINR, "SLOPE")
+#  field(ASLO, "0.01")
+#  field(AOFF, "0.0")
+  field(EGU, "mm/s")
+}
+
+#####################################
+# Record for SC01 M03 outputs #
+#####################################
+
+record(ao, "MEBT:SC01_PM03:PosSet") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/38 T=FLOAT")
+  field(DESC, "SC01 M03 Position Setpoint")
+  field(PREC, "4")
+#  field(LINR, "SLOPE")
+#  field(ASLO, "0.01")
+#  field(AOFF, "0.0")
+  field(EGU, "mm")
+}
+
+record(ao, "MEBT:SC01_M03:SpeedSet") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/42 T=FLOAT")
+  field(DESC, "SC01 M03 Speed Setpoint")
+  field(PREC, "4")
+#  field(LINR, "SLOPE")
+#  field(ASLO, "0.01")
+#  field(AOFF, "0.0")
+  field(EGU, "mm/s")
+}
+
+#####################################
+# Record for SC01 M04 outputs #
+#####################################
+
+record(ao, "MEBT:SC01_PM04:PosSet") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/46 T=FLOAT")
+  field(DESC, "SC01 M04 Position Setpoint")
+  field(PREC, "4")
+#  field(LINR, "SLOPE")
+#  field(ASLO, "0.01")
+#  field(AOFF, "0.0")
+  field(EGU, "mm")
+}
+
+record(ao, "MEBT:SC01_M04:SpeedSet") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/50 T=FLOAT")
+  field(DESC, "SC01 M04 Speed Setpoint")
+  field(PREC, "4")
+#  field(LINR, "SLOPE")
+#  field(ASLO, "0.01")
+#  field(AOFF, "0.0")
+  field(EGU, "mm/s")
+}
+
+#####################################
+# Record for SC02 M01 outputs #
+#####################################
+
+record(ao, "MEBT:SC02_PM01:PosSet") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/54 T=FLOAT")
+  field(DESC, "SC02 M01 Position Setpoint")
+  field(PREC, "4")
+#  field(LINR, "SLOPE")
+#  field(ASLO, "0.01")
+#  field(AOFF, "0.0")
+  field(EGU, "mm")
+}
+
+record(ao, "MEBT:SC02_M01:SpeedSet") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/58 T=FLOAT")
+  field(DESC, "SC02 M01 Speed Setpoint")
+  field(PREC, "4")
+#  field(LINR, "SLOPE")
+#  field(ASLO, "0.01")
+#  field(AOFF, "0.0")
+  field(EGU, "mm/s")
+}
+
+#####################################
+# Record for SC02 M02 outputs #
+#####################################
+
+record(ao, "MEBT:SC02_PM02:PosSet") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/62 T=FLOAT")
+  field(DESC, "SC02 M02 Position Setpoint")
+  field(PREC, "4")
+#  field(LINR, "SLOPE")
+#  field(ASLO, "0.01")
+#  field(AOFF, "0.0")
+  field(EGU, "mm")
+}
+
+record(ao, "MEBT:SC02_M02:SpeedSet") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/66 T=FLOAT")
+  field(DESC, "SC02 M02 Speed Setpoint")
+  field(PREC, "4")
+#  field(LINR, "SLOPE")
+#  field(ASLO, "0.01")
+#  field(AOFF, "0.0")
+  field(EGU, "mm/s")
+}
+
+#####################################
+# Record for SC02 M03 outputs #
+#####################################
+
+record(ao, "MEBT:SC02_PM03:PosSet") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/70 T=FLOAT")
+  field(DESC, "SC02 M03 Position Setpoint")
+  field(PREC, "4")
+#  field(LINR, "SLOPE")
+#  field(ASLO, "0.01")
+#  field(AOFF, "0.0")
+  field(EGU, "mm")
+}
+
+record(ao, "MEBT:SC02_M03:SpeedSet") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/74 T=FLOAT")
+  field(DESC, "SC02 M03 Speed Setpoint")
+  field(PREC, "4")
+#  field(LINR, "SLOPE")
+#  field(ASLO, "0.01")
+#  field(AOFF, "0.0")
+  field(EGU, "mm/s")
+}
+
+#####################################
+# Record for SC02 M04 outputs #
+#####################################
+
+record(ao, "MEBT:SC02_PM04:PosSet") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/78 T=FLOAT")
+  field(DESC, "SC02 M04 Position Setpoint")
+  field(PREC, "4")
+#  field(LINR, "SLOPE")
+#  field(ASLO, "0.01")
+#  field(AOFF, "0.0")
+  field(EGU, "mm")
+}
+
+record(ao, "MEBT:SC02_M04:SpeedSet") {
+  field(SCAN, "I/O Intr")
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/82 T=FLOAT")
+  field(DESC, "SC02 M04 Speed Setpoint")
+  field(PREC, "4")
+#  field(LINR, "SLOPE")
+#  field(ASLO, "0.01")
+#  field(AOFF, "0.0")
+  field(EGU, "mm/s")
+}
+
+#####################################
+# Record for SC01 M01 outputs #
+#####################################
+
+record(bo, "MEBT:SC01_M01:MoveCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/88 T=BYTE B=0")
+  field(ZNAM, "No move")
+  field(ONAM, "Move")
+  field(DESC, "Command to move MEBT SC01_M01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+record(bo, "MEBT:SC01_M01:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/88 T=BYTE B=1")
+  field(ZNAM, "No stop")
+  field(ONAM, "Stop")
+  field(DESC, "Command to stop MEBT SC01_M01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+record(bo, "MEBT:SC01_M01:ResetCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/88 T=BYTE B=2")
+  field(ZNAM, "No reset")
+  field(ONAM, "Reset")
+  field(DESC, "Command to reset MEBT SC01_M01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+
+#####################################
+# Record for SC01 M02 outputs #
+#####################################
+
+record(bo, "MEBT:SC01_M02:MoveCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/89 T=BYTE B=0")
+  field(ZNAM, "No move")
+  field(ONAM, "Move")
+  field(DESC, "Command to move MEBT SC01_M02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+record(bo, "MEBT:SC01_M02:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/89 T=BYTE B=1")
+  field(ZNAM, "No stop")
+  field(ONAM, "Stop")
+  field(DESC, "Command to stop MEBT SC01_M02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+record(bo, "MEBT:SC01_M02:ResetCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/89 T=BYTE B=2")
+  field(ZNAM, "No reset")
+  field(ONAM, "Reset")
+  field(DESC, "Command to reset MEBT SC01_M02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+
+#####################################
+# Record for SC01 M03 outputs #
+#####################################
+
+record(bo, "MEBT:SC01_M03:MoveCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/90 T=BYTE B=0")
+  field(ZNAM, "No move")
+  field(ONAM, "Move")
+  field(DESC, "Command to move MEBT SC01_M03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+record(bo, "MEBT:SC01_M03:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/90 T=BYTE B=1")
+  field(ZNAM, "No stop")
+  field(ONAM, "Stop")
+  field(DESC, "Command to stop MEBT SC01_M03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+record(bo, "MEBT:SC01_M03:ResetCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/90 T=BYTE B=2")
+  field(ZNAM, "No reset")
+  field(ONAM, "Reset")
+  field(DESC, "Command to reset MEBT SC01_M03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+
+#####################################
+# Record for SC01 M04 outputs #
+#####################################
+
+record(bo, "MEBT:SC01_M04:MoveCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/91 T=BYTE B=0")
+  field(ZNAM, "No move")
+  field(ONAM, "Move")
+  field(DESC, "Command to move MEBT SC01_M04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+record(bo, "MEBT:SC01_M04:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/91 T=BYTE B=1")
+  field(ZNAM, "No stop")
+  field(ONAM, "Stop")
+  field(DESC, "Command to stop MEBT SC01_M04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+record(bo, "MEBT:SC01_M04:ResetCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/91 T=BYTE B=2")
+  field(ZNAM, "No reset")
+  field(ONAM, "Reset")
+  field(DESC, "Command to reset MEBT SC01_M04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+
+#####################################
+# Record for SC02 M01 outputs #
+#####################################
+
+record(bo, "MEBT:SC02_M01:MoveCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/92 T=BYTE B=0")
+  field(ZNAM, "No move")
+  field(ONAM, "Move")
+  field(DESC, "Command to move MEBT SC02_M01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+record(bo, "MEBT:SC02_M01:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/92 T=BYTE B=1")
+  field(ZNAM, "No stop")
+  field(ONAM, "Stop")
+  field(DESC, "Command to stop MEBT SC02_M01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+record(bo, "MEBT:SC02_M01:ResetCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/92 T=BYTE B=2")
+  field(ZNAM, "No reset")
+  field(ONAM, "Reset")
+  field(DESC, "Command to reset MEBT SC02_M01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+
+#####################################
+# Record for SC02 M02 outputs #
+#####################################
+
+record(bo, "MEBT:SC02_M02:MoveCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/93 T=BYTE B=0")
+  field(ZNAM, "No move")
+  field(ONAM, "Move")
+  field(DESC, "Command to move MEBT SC02_M02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+record(bo, "MEBT:SC02_M02:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/93 T=BYTE B=1")
+  field(ZNAM, "No stop")
+  field(ONAM, "Stop")
+  field(DESC, "Command to stop MEBT SC02_M02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+record(bo, "MEBT:SC02_M02:ResetCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/93 T=BYTE B=2")
+  field(ZNAM, "No reset")
+  field(ONAM, "Reset")
+  field(DESC, "Command to reset MEBT SC02_M02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+
+#####################################
+# Record for SC02 M03 outputs #
+#####################################
+
+record(bo, "MEBT:SC02_M03:MoveCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/94 T=BYTE B=0")
+  field(ZNAM, "No move")
+  field(ONAM, "Move")
+  field(DESC, "Command to move MEBT SC02_M03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+record(bo, "MEBT:SC02_M03:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/94 T=BYTE B=1")
+  field(ZNAM, "No stop")
+  field(ONAM, "Stop")
+  field(DESC, "Command to stop MEBT SC02_M03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+record(bo, "MEBT:SC02_M03:ResetCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/94 T=BYTE B=2")
+  field(ZNAM, "No reset")
+  field(ONAM, "Reset")
+  field(DESC, "Command to reset MEBT SC02_M03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+
+#####################################
+# Record for SC02 M04 outputs #
+#####################################
+
+record(bo, "MEBT:SC02_M04:MoveCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/95 T=BYTE B=0")
+  field(ZNAM, "No move")
+  field(ONAM, "Move")
+  field(DESC, "Command to move MEBT SC02_M04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+record(bo, "MEBT:SC02_M04:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/95 T=BYTE B=1")
+  field(ZNAM, "No stop")
+  field(ONAM, "Stop")
+  field(DESC, "Command to stop MEBT SC02_M04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+record(bo, "MEBT:SC02_M04:ResetCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/95 T=BYTE B=2")
+  field(ZNAM, "No reset")
+  field(ONAM, "Reset")
+  field(DESC, "Command to reset MEBT SC02_M04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+
+############################################
+# Records for SC01 in MEBT expert mode #
+############################################
+
+# Enable command
+record(bo, "MEBT:SC01:ExpSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/96 T=BYTE B=0")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Enable MEBT->SC01 expert mode")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Disable command
+record(bo, "MEBT:SC01:ExpClear") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/96 T=BYTE B=1")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Disable MEBT->SC01 expert mode")
+  field(PINI, "YES")
+  field(HIGH,"1")
+}
+############################################
+# Records for SC02 in MEBT expert mode #
+############################################
+
+# Enable command
+record(bo, "MEBT:SC02:ExpSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/96 T=BYTE B=2")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Enable MEBT->SC02 expert mode")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Disable command
+record(bo, "MEBT:SC02:ExpClear") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/96 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Disable MEBT->SC02 expert mode")
+  field(PINI, "YES")
+  field(HIGH,"1")
+}
+#####################################################
+# Records for SC01 M01 in MEBT expert mode #
+#####################################################
+
+# Move Forward
+record(bo, "MEBT:SC01_M01:MoveFwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/97 T=BYTE B=0")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Fwd MEBT->SC01 M01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop Forward
+record(bo, "MEBT:SC01_M01:StopFwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/97 T=BYTE B=1")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Fwd MEBT->SC01 M01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Move Backward
+record(bo, "MEBT:SC01_M01:MoveBwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/99 T=BYTE B=0")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Bwd MEBT->SC01 M01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop Forward
+record(bo, "MEBT:SC01_M01:StopBwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/99 T=BYTE B=1")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Bwd MEBT->SC01 M01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+#####################################################
+# Records for SC01 M02 in MEBT expert mode #
+#####################################################
+
+# Move Forward
+record(bo, "MEBT:SC01_M02:MoveFwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/97 T=BYTE B=2")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Fwd MEBT->SC01 M02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop Forward
+record(bo, "MEBT:SC01_M02:StopFwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/97 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Fwd MEBT->SC01 M02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Move Backward
+record(bo, "MEBT:SC01_M02:MoveBwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/99 T=BYTE B=2")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Bwd MEBT->SC01 M02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop Forward
+record(bo, "MEBT:SC01_M02:StopBwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/99 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Bwd MEBT->SC01 M02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+#####################################################
+# Records for SC01 M03 in MEBT expert mode #
+#####################################################
+
+# Move Forward
+record(bo, "MEBT:SC01_M03:MoveFwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/97 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Fwd MEBT->SC01 M03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop Forward
+record(bo, "MEBT:SC01_M03:StopFwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/97 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Fwd MEBT->SC01 M03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Move Backward
+record(bo, "MEBT:SC01_M03:MoveBwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/99 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Bwd MEBT->SC01 M03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop Forward
+record(bo, "MEBT:SC01_M03:StopBwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/99 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Bwd MEBT->SC01 M03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+#####################################################
+# Records for SC01 M04 in MEBT expert mode #
+#####################################################
+
+# Move Forward
+record(bo, "MEBT:SC01_M04:MoveFwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/97 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Fwd MEBT->SC01 M04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop Forward
+record(bo, "MEBT:SC01_M04:StopFwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/97 T=BYTE B=7")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Fwd MEBT->SC01 M04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Move Backward
+record(bo, "MEBT:SC01_M04:MoveBwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/99 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Bwd MEBT->SC01 M04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop Forward
+record(bo, "MEBT:SC01_M04:StopBwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/99 T=BYTE B=7")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Bwd MEBT->SC01 M04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+#####################################################
+# Records for SC02 M01 in MEBT expert mode #
+#####################################################
+
+# Move Forward
+record(bo, "MEBT:SC02_M01:MoveFwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/98 T=BYTE B=0")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Fwd MEBT->SC02 M01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop Forward
+record(bo, "MEBT:SC02_M01:StopFwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/98 T=BYTE B=1")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Fwd MEBT->SC02 M01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Move Backward
+record(bo, "MEBT:SC02_M01:MoveBwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/100 T=BYTE B=0")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Bwd MEBT->SC02 M01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop Forward
+record(bo, "MEBT:SC02_M01:StopBwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/100 T=BYTE B=1")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Bwd MEBT->SC02 M01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+#####################################################
+# Records for SC02 M02 in MEBT expert mode #
+#####################################################
+
+# Move Forward
+record(bo, "MEBT:SC02_M02:MoveFwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/98 T=BYTE B=2")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Fwd MEBT->SC02 M02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop Forward
+record(bo, "MEBT:SC02_M02:StopFwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/98 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Fwd MEBT->SC02 M02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Move Backward
+record(bo, "MEBT:SC02_M02:MoveBwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/100 T=BYTE B=2")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Bwd MEBT->SC02 M02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop Forward
+record(bo, "MEBT:SC02_M02:StopBwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/100 T=BYTE B=3")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Bwd MEBT->SC02 M02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+#####################################################
+# Records for SC02 M03 in MEBT expert mode #
+#####################################################
+
+# Move Forward
+record(bo, "MEBT:SC02_M03:MoveFwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/98 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Fwd MEBT->SC02 M03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop Forward
+record(bo, "MEBT:SC02_M03:StopFwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/98 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Fwd MEBT->SC02 M03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Move Backward
+record(bo, "MEBT:SC02_M03:MoveBwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/100 T=BYTE B=4")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Bwd MEBT->SC02 M03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop Forward
+record(bo, "MEBT:SC02_M03:StopBwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/100 T=BYTE B=5")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Bwd MEBT->SC02 M03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+#####################################################
+# Records for SC02 M04 in MEBT expert mode #
+#####################################################
+
+# Move Forward
+record(bo, "MEBT:SC02_M04:MoveFwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/98 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Fwd MEBT->SC02 M04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop Forward
+record(bo, "MEBT:SC02_M04:StopFwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/98 T=BYTE B=7")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Fwd MEBT->SC02 M04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Move Backward
+record(bo, "MEBT:SC02_M04:MoveBwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/100 T=BYTE B=6")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Bwd MEBT->SC02 M04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Stop Forward
+record(bo, "MEBT:SC02_M04:StopBwd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@plc_mebt/100 T=BYTE B=7")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(DESC, "Move Bwd MEBT->SC02 M04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}

@@ -1,0 +1,3444 @@
+record(calc, "JUDGE:CW_PULSE:TIMING")
+{
+	field(SCAN, "1 second")
+	field(DESC, "CW/Pulse comp")
+	field(INPA, "SRC:TIM:Mode")
+	field(INPB, "JUDGE:PPS:ONEPULSE")
+	field(INPC, "JUDGE:PPS:TENPULSE")
+	field(INPD, "JUDGE:PPS:CW")
+	field(INPE, "PPS:INFOSHARE:MONDATA:1_1.BA")
+	field(CALC, "(E == 1 ? ( (A<<3)+(B<<2)+(C<<1)+(D<<0) ) : 99)")
+}
+
+record(calc, "JUDGE:CW_PULSE:RF_GENE:CWON")
+{
+	field(SCAN, "1 second")
+	field(DESC, "CW/Pulse comp")
+	field(INPA, "SRC:RF_GENE:CWmdOn")
+	field(INPB, "JUDGE:PPS:ONEPULSE")
+	field(INPC, "JUDGE:PPS:TENPULSE")
+	field(INPD, "JUDGE:PPS:CW")
+	field(INPE, "PPS:INFOSHARE:MONDATA:1_1.BA")
+	field(CALC, "(E == 1 ? ( (A<<3)+(B<<2)+(C<<1)+(D<<0) ) : 99)")
+}
+
+record(calc, "JUDGE:CW_PULSE:RF_GENE:PORC")
+{
+	field(SCAN, "1 second")
+	field(DESC, "CW/Pulse comp")
+	field(INPA, "SRC:RF_GENE:PulseOrCW")
+	field(INPB, "JUDGE:PPS:ONEPULSE")
+	field(INPC, "JUDGE:PPS:TENPULSE")
+	field(INPD, "JUDGE:PPS:CW")
+	field(INPE, "PPS:INFOSHARE:MONDATA:1_1.BA")
+	field(CALC, "(E == 1 ? ( (A<<3)+(B<<2)+(C<<1)+(D<<0) ) : 99)")
+}
+
+record(calc, "JUDGE:CW_PULSE:RF_GENE:MODBUS")
+{
+	field(SCAN, "1 second")
+	field(DESC, "CW/Pulse comp")
+	field(INPA, "SRC:RF_GENE:Modbus")
+	field(INPB, "JUDGE:PPS:ONEPULSE")
+	field(INPC, "JUDGE:PPS:TENPULSE")
+	field(INPD, "JUDGE:PPS:CW")
+	field(INPE, "PPS:INFOSHARE:MONDATA:1_1.BA")
+	field(CALC, "(E == 1 ? ( (A<<3)+(B<<2)+(C<<1)+(D<<0) ) : 99)")
+}
+
+record(calc, "JUDGE:PPS:ONEPULSE")
+{
+	field(SCAN, "1 second")
+	field(DESC, "PPS reserved 1%")
+	field(INPA, "PPS:INFOSHARE:MONDATA:5_1")
+	field(CALC, "(A&0x2000)!=0?1:0")
+}
+
+record(calc, "JUDGE:PPS:TENPULSE")
+{
+	field(SCAN, "1 second")
+	field(DESC, "PPS reserved 100%")
+	field(INPA, "PPS:INFOSHARE:MONDATA:5_1")
+	field(CALC, "(A&0x1000)!=0?1:0")
+}
+
+record(calc, "JUDGE:PPS:CW")
+{
+	field(SCAN, "1 second")
+	field(DESC, "PPS reserved CW")
+	field(INPA, "PPS:INFOSHARE:MONDATA:5_1")
+	field(CALC, "(A&0x0800)!=0?1:0")
+}
+
+record(ao, "BUZZER:INJ:EnableSet")
+{
+	field(DESC, "UserSet 0:Disable 1:Enable")
+	field(OUT, "0")
+	field(VAL, "${INJEnableSet}")
+}
+
+record(calc, "JUDGE:IE_PS:OVERCURRENT")
+{
+	field(SCAN, "1 second")
+	field(DESC, "IE Current Error")
+	field(INPA, "SRC:IE_PS:IRdbkcalc")
+	field(INPG, "BUZZER:INJ:EnableSet")
+	field(CALC, "(G == 1 ? (A>=5 ? 1 : 0) : 0)")
+}
+
+record(calc, "JUDGE:R_PS:V:READBACKUNDER")
+{
+	field(SCAN, "1 second")
+	field(DESC, "R_PS Voltage Error")
+	field(INPA, "LEBT:R_PS:VRdbkcalc")
+	field(INPB, "LEBT:R_PS:VSet")
+	field(INPC, "JUDGE:R_PS:V:READBACKUNDER:COUNTER")
+	field(INPG, "BUZZER:INJ:EnableSet")
+	field(CALC, "(G == 1 ? ( (A<(B-0.2) && C>=5) ? 1 : 0) : 0)")
+}
+
+record(calc, "JUDGE:INJ:MUSCADE")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Muscade")
+	field(INPA, "INJ:PLC:MuscadeForcON")
+	field(INPG, "BUZZER:INJ:EnableSet")
+	field(CALC, "(G == 1 ? ( (A!=0) ? 1 : 0) : 0)")
+}
+
+record(calc, "JUDGE:INJ:GVOPEN")
+{
+	field(SCAN, "1 second")
+	field(DESC, "GV1 Open.")
+	field(INPA, "LEBT:GV:OpenStat")
+	field(INPB, "LEBT:GV:CloseStat")
+	field(INPG, "BUZZER:INJ:EnableSet")
+	field(CALC, "(G == 1 ? ( (A == 1 && B == 0) ? 1 : 0) : 0)")
+}
+
+record(calc, "JUDGE:INJ:GVABNORMAL")
+{
+	field(SCAN, "1 second")
+	field(DESC, "GV1 Abnormal.")
+	field(INPA, "LEBT:GV:OpenStat")
+	field(INPB, "LEBT:GV:CloseStat")
+	field(INPG, "BUZZER:INJ:EnableSet")
+	field(CALC, "(G == 1 ? ( (A == B) ? 1 : 0) : 0)")
+}
+
+record(calc, "JUDGE:IE_PS:V:READBACKUNDER")
+{
+	field(SCAN, "1 second")
+	field(DESC, "IE_PS Voltage Error")
+	field(INPA, "SRC:IE_PS:VRdbkcalc")
+	field(INPB, "SRC:IE_PS:VSet")
+	field(INPC, "JUDGE:IE_PS:V:READBACKUNDER:COUNTER")
+	field(INPG, "BUZZER:INJ:EnableSet")
+	field(CALC, "(G == 1 ? ( (A<(B-1) && C>=5) ? 1 : 0) : 0)")
+}
+
+record(calc, "JUDGE:R_PS:V:READBACKUNDER:COUNTER")
+{
+	field(SCAN, "1 second")
+	field(DESC, "R_PS Voltage Error(Counter)")
+	field(INPA, "LEBT:R_PS:VRdbkcalc")
+	field(INPB, "LEBT:R_PS:VSet")
+	field(INPC, "JUDGE:R_PS:V:READBACKUNDER:COUNTER")
+	field(CALC, "(A<(B-0.2) ? C+1 : 0)")
+}
+
+record(calc, "JUDGE:IE_PS:V:READBACKUNDER:COUNTER")
+{
+	field(SCAN, "1 second")
+	field(DESC, "IE_PS Voltage Error(Counter)")
+	field(INPA, "SRC:IE_PS:VRdbkcalc")
+	field(INPB, "SRC:IE_PS:VSet")
+	field(INPC, "JUDGE:IE_PS:V:READBACKUNDER:COUNTER")
+	field(CALC, "(A<(B-1) ? C+1 : 0)")
+}
+
+record(ao, "BUZZER:RFQ:EnableSet")
+{
+	field(DESC, "UserSet 0:Disable 1:Enable")
+	field(OUT, "0")
+	field(VAL, "${RFQEnableSet}")
+}
+
+record(calc, "BUZZER:RFQ:PErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RFQ Pressure")
+	field(INPA, "RFQ:VAC_SYS:RfqP")
+	field(INPB, "0.0000005")
+	field(INPC, "0.0000005")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CryoErr1")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Remote Helium Compressor 1")
+	field(INPA, "RFQ:VAC_HC1:HcErr")
+	field(INPB, "RFQ:VAC_HC1:PowErr")
+	field(INPC, "RFQ:VAC_HC1:P1WarnT")
+	field(INPD, "RFQ:VAC_HC1:P2WarnT")
+	field(INPE, "RFQ:VAC_HC1:P1TTh")
+	field(INPF, "RFQ:VAC_HC1:P2TTh")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? ( (B == 0 ? 1 : 0)+A+C+D+E+F) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CryoErr2")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Remote Helium Compressor 2")
+	field(INPA, "RFQ:VAC_HC2:HcErr")
+	field(INPB, "RFQ:VAC_HC2:PowErr")
+	field(INPC, "RFQ:VAC_HC2:P1WarnT")
+	field(INPD, "RFQ:VAC_HC2:P2WarnT")
+	field(INPE, "RFQ:VAC_HC2:P1TTh")
+	field(INPF, "RFQ:VAC_HC2:P2TTh")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? ( (B == 0 ? 1 : 0)+A+C+D+E+F) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CryoErr3")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Remote Helium Compressor 3")
+	field(INPA, "RFQ:VAC_HC3:HcErr")
+	field(INPB, "RFQ:VAC_HC3:PowErr")
+	field(INPC, "RFQ:VAC_HC3:P1WarnT")
+	field(INPD, "RFQ:VAC_HC3:P2WarnT")
+	field(INPE, "RFQ:VAC_HC3:P1TTh")
+	field(INPF, "RFQ:VAC_HC3:P2TTh")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? ( (B == 0 ? 1 : 0)+A+C+D+E+F) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CryoErr4")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Remote Helium Compressor 4")
+	field(INPA, "RFQ:VAC_HC4:HcErr")
+	field(INPB, "RFQ:VAC_HC4:PowErr")
+	field(INPC, "RFQ:VAC_HC4:P1WarnT")
+	field(INPD, "RFQ:VAC_HC4:P2WarnT")
+	field(INPE, "RFQ:VAC_HC4:P1TTh")
+	field(INPF, "RFQ:VAC_HC4:P2TTh")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? ( (B == 0 ? 1 : 0)+A+C+D+E+F) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CryoErr5")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Remote Helium Compressor 5")
+	field(INPA, "RFQ:VAC_HC5:HcErr")
+	field(INPB, "RFQ:VAC_HC5:PowErr")
+	field(INPC, "RFQ:VAC_HC5:P1WarnT")
+	field(INPD, "RFQ:VAC_HC5:P2WarnT")
+	field(INPE, "RFQ:VAC_HC5:P1TTh")
+	field(INPF, "RFQ:VAC_HC5:P2TTh")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? ( (B == 0 ? 1 : 0)+A+C+D+E+F) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CryoErr6")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Remote Helium Compressor 6")
+	field(INPA, "RFQ:VAC_HC6:HcErr")
+	field(INPB, "RFQ:VAC_HC6:PowErr")
+	field(INPC, "RFQ:VAC_HC6:P1WarnT")
+	field(INPD, "RFQ:VAC_HC6:P2WarnT")
+	field(INPE, "RFQ:VAC_HC6:P1TTh")
+	field(INPF, "RFQ:VAC_HC6:P2TTh")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? ( (B == 0 ? 1 : 0)+A+C+D+E+F) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolOpErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Cooling State Machine")
+	field(INPA, "RFQ:COOL_OP:ErrStat")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt31Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 1 - cold input")
+	field(INPA, "RFQ:COOL_RT31:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt32Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 2 - cold input")
+	field(INPA, "RFQ:COOL_RT32:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt33Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 3 - cold input")
+	field(INPA, "RFQ:COOL_RT33:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt31TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 1 - cold input")
+	field(INPA, "RFQ:COOL_RT31:T")
+	field(INPB, "25")
+	field(INPC, "30")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt32TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 2 - cold input")
+	field(INPA, "RFQ:COOL_RT32:T")
+	field(INPB, "25")
+	field(INPC, "30")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt33TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 3 - cold input")
+	field(INPA, "RFQ:COOL_RT33:T")
+	field(INPB, "25")
+	field(INPC, "30")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt41Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 1 - cold output")
+	field(INPA, "RFQ:COOL_RT41:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt42Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 2 - cold output")
+	field(INPA, "RFQ:COOL_RT42:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt43Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 3 - cold output")
+	field(INPA, "RFQ:COOL_RT43:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt41TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 1 - cold output")
+	field(INPA, "RFQ:COOL_RT41:T")
+	field(INPB, "45")
+	field(INPC, "55")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt42TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 2 - cold output")
+	field(INPA, "RFQ:COOL_RT42:T")
+	field(INPB, "45")
+	field(INPC, "55")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt43TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 3 - cold output")
+	field(INPA, "RFQ:COOL_RT43:T")
+	field(INPB, "45")
+	field(INPC, "55")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt51Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 1 - warn input")
+	field(INPA, "RFQ:COOL_RT51:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt52Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 2 - warn input")
+	field(INPA, "RFQ:COOL_RT52:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt53Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 3 - warn input")
+	field(INPA, "RFQ:COOL_RT53:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt51TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 1 - warn input")
+	field(INPA, "RFQ:COOL_RT51:T")
+	field(INPB, "40")
+	field(INPC, "45")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt52TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 2 - warn input")
+	field(INPA, "RFQ:COOL_RT52:T")
+	field(INPB, "40")
+	field(INPC, "45")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt53TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 3 - warn input")
+	field(INPA, "RFQ:COOL_RT53:T")
+	field(INPB, "40")
+	field(INPC, "45")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt61Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 1 - warn output")
+	field(INPA, "RFQ:COOL_RT61:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt62Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 2 - warn output")
+	field(INPA, "RFQ:COOL_RT62:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt63Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 3 - warn output")
+	field(INPA, "RFQ:COOL_RT63:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt61TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 1 - warn output")
+	field(INPA, "RFQ:COOL_RT61:T")
+	field(INPB, "55")
+	field(INPC, "59")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt62TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 2 - warn output")
+	field(INPA, "RFQ:COOL_RT62:T")
+	field(INPB, "55")
+	field(INPC, "59")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt63TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "super module 3 - warn output")
+	field(INPA, "RFQ:COOL_RT63:T")
+	field(INPB, "55")
+	field(INPC, "59")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt71Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 1 - Error")
+	field(INPA, "RFQ:COOL_RT71:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt72Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 3 - Error")
+	field(INPA, "RFQ:COOL_RT72:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt73Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 4 - Error")
+	field(INPA, "RFQ:COOL_RT73:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt74Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 5 - Error")
+	field(INPA, "RFQ:COOL_RT74:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt75Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 6 - Error")
+	field(INPA, "RFQ:COOL_RT75:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt76Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 7 - Error")
+	field(INPA, "RFQ:COOL_RT76:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt77Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 8 - Error")
+	field(INPA, "RFQ:COOL_RT77:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt78Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 9 - Error")
+	field(INPA, "RFQ:COOL_RT78:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt91Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 10 - Error")
+	field(INPA, "RFQ:COOL_RT91:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt92Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 11 - Error")
+	field(INPA, "RFQ:COOL_RT92:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt93Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 12 - Error")
+	field(INPA, "RFQ:COOL_RT93:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt94Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 13 - Error")
+	field(INPA, "RFQ:COOL_RT94:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt95Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 14 - Error")
+	field(INPA, "RFQ:COOL_RT95:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt96Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 15 - Error")
+	field(INPA, "RFQ:COOL_RT96:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt97Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 16 - Error")
+	field(INPA, "RFQ:COOL_RT97:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt98Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 18 - Error")
+	field(INPA, "RFQ:COOL_RT98:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt71TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 1 - OverT")
+	field(INPA, "RFQ:COOL_RT71:T")
+	field(INPB, "50")
+	field(INPC, "60")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt72TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 3 - OverT")
+	field(INPA, "RFQ:COOL_RT72:T")
+	field(INPB, "50")
+	field(INPC, "60")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt73TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 4 - OverT")
+	field(INPA, "RFQ:COOL_RT73:T")
+	field(INPB, "50")
+	field(INPC, "60")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt74TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 5 - OverT")
+	field(INPA, "RFQ:COOL_RT74:T")
+	field(INPB, "50")
+	field(INPC, "60")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt75TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 6 - OverT")
+	field(INPA, "RFQ:COOL_RT75:T")
+	field(INPB, "50")
+	field(INPC, "60")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt76TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 7 - OverT")
+	field(INPA, "RFQ:COOL_RT76:T")
+	field(INPB, "50")
+	field(INPC, "60")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt77TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 8 - OverT")
+	field(INPA, "RFQ:COOL_RT77:T")
+	field(INPB, "50")
+	field(INPC, "60")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt78TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 9 - OverT")
+	field(INPA, "RFQ:COOL_RT78:T")
+	field(INPB, "50")
+	field(INPC, "60")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt91TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 10 - OverT")
+	field(INPA, "RFQ:COOL_RT91:T")
+	field(INPB, "50")
+	field(INPC, "60")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt92TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 11 - OverT")
+	field(INPA, "RFQ:COOL_RT92:T")
+	field(INPB, "50")
+	field(INPC, "60")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt93TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 12 - OverT")
+	field(INPA, "RFQ:COOL_RT93:T")
+	field(INPB, "50")
+	field(INPC, "60")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt94TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 13 - OverT")
+	field(INPA, "RFQ:COOL_RT94:T")
+	field(INPB, "50")
+	field(INPC, "60")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt95TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 14 - OverT")
+	field(INPA, "RFQ:COOL_RT95:T")
+	field(INPB, "50")
+	field(INPC, "60")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt96TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 15 - OverT")
+	field(INPA, "RFQ:COOL_RT96:T")
+	field(INPB, "50")
+	field(INPC, "60")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt97TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 16 - OverT")
+	field(INPA, "RFQ:COOL_RT97:T")
+	field(INPB, "50")
+	field(INPC, "60")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt98TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in module 18 - OverT")
+	field(INPA, "RFQ:COOL_RT98:T")
+	field(INPB, "50")
+	field(INPC, "60")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt81Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in coupler 1 - Error")
+	field(INPA, "RFQ:COOL_RT81:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt82Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in coupler 2 - Error")
+	field(INPA, "RFQ:COOL_RT82:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt83Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in coupler 3 - Error")
+	field(INPA, "RFQ:COOL_RT83:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt84Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in coupler 4 - Error")
+	field(INPA, "RFQ:COOL_RT84:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt85Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in coupler 5 - Error")
+	field(INPA, "RFQ:COOL_RT85:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt86Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in coupler 6 - Error")
+	field(INPA, "RFQ:COOL_RT86:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt87Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in coupler 7 - Error")
+	field(INPA, "RFQ:COOL_RT87:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt88Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in coupler 8 - Error")
+	field(INPA, "RFQ:COOL_RT88:Err")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt81TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in coupler 1 - OverT")
+	field(INPA, "RFQ:COOL_RT81:T")
+	field(INPB, "45")
+	field(INPC, "50")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt82TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in coupler 2 - OverT")
+	field(INPA, "RFQ:COOL_RT82:T")
+	field(INPB, "45")
+	field(INPC, "50")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt83TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in coupler 3 - OverT")
+	field(INPA, "RFQ:COOL_RT83:T")
+	field(INPB, "45")
+	field(INPC, "50")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt84TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in coupler 4 - OverT")
+	field(INPA, "RFQ:COOL_RT84:T")
+	field(INPB, "45")
+	field(INPC, "50")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt85TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in coupler 5 - OverT")
+	field(INPA, "RFQ:COOL_RT85:T")
+	field(INPB, "45")
+	field(INPC, "50")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt86TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in coupler 6 - OverT")
+	field(INPA, "RFQ:COOL_RT86:T")
+	field(INPB, "45")
+	field(INPC, "50")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt87TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in coupler 7 - OverT")
+	field(INPA, "RFQ:COOL_RT87:T")
+	field(INPB, "45")
+	field(INPC, "50")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolRt88TErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "temp sensor in coupler 8 - OverT")
+	field(INPA, "RFQ:COOL_RT88:T")
+	field(INPB, "45")
+	field(INPC, "50")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolAd1TimErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Arc detectior - Error")
+	field(INPA, "RFQ:COOL_AD01:TimErr")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? A : 0)")
+}
+
+record(calc, "BUZZER:RFQ:CoolAd1LastTimErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Arc detectior - Arcs(2:Error)")
+	field(INPA, "RFQ:COOL_AD01:LastTim")
+	field(INPB, "1")
+	field(INPC, "1")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A >= C ? 1 : 0) : 0)")
+}
+
+record(ai, "BUZZER:RFQ:RfQuadWfErrMax")
+{
+	field(DESC, "RFQ:RF:QuadWf - MAX(from SNL)")
+	field(INP, "0")
+}
+
+record(ai, "BUZZER:RFQ:RfODipWfErrMax")
+{
+	field(DESC, "RFQ:RF:ODipWf - MAX(from SNL)")
+	field(INP, "0")
+}
+
+record(ai, "BUZZER:RFQ:RfEDipWfErrMax")
+{
+	field(DESC, "RFQ:RF:EDipWf - MAX(from SNL)")
+	field(INP, "0")
+}
+
+record(ai, "BUZZER:RFQ:RfMonoWfErrMax")
+{
+	field(DESC, "RFQ:RF:MonoWf - MAX(from SNL)")
+	field(INP, "0")
+}
+
+record(ai, "BUZZER:RFQ:RfQuadWfErrMin")
+{
+	field(DESC, "RFQ:RF:QuadWf - MIN(from SNL)")
+	field(INP, "0")
+}
+
+record(ai, "BUZZER:RFQ:RfODipWfErrMin")
+{
+	field(DESC, "RFQ:RF:ODipWf - MIN(from SNL)")
+	field(INP, "0")
+}
+
+record(ai, "BUZZER:RFQ:RfEDipWfErrMin")
+{
+	field(DESC, "RFQ:RF:EDipWf - MIN(from SNL)")
+	field(INP, "0")
+}
+
+record(ai, "BUZZER:RFQ:RfMonoWfErrMin")
+{
+	field(DESC, "RFQ:RF:MonoWf - MIN(from SNL)")
+	field(INP, "0")
+}
+
+record(calc, "BUZZER:RFQ:RfQuadWfErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Field Flatness - Quadrupole")
+	field(INPA, "BUZZER:RFQ:RfQuadWfErr_W")
+	field(INPB, "BUZZER:RFQ:RfQuadWfErr_E")
+	field(INPC, "2.5")
+	field(INPD, "4")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A+B) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfODipWfErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Field Flatness - Odd Dipole")
+	field(INPA, "BUZZER:RFQ:RfODipWfErr_W")
+	field(INPB, "BUZZER:RFQ:RfODipWfErr_E")
+	field(INPC, "2.5")
+	field(INPD, "4")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A+B) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfEDipWfErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Field Flatness - Even Dipole")
+	field(INPA, "BUZZER:RFQ:RfEDipWfErr_W")
+	field(INPB, "BUZZER:RFQ:RfEDipWfErr_E")
+	field(INPC, "2.5")
+	field(INPD, "4")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A+B) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfMonoWfErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Field Flatness - Monopole")
+	field(INPA, "BUZZER:RFQ:RfMonoWfErr_W")
+	field(INPB, "BUZZER:RFQ:RfMonoWfErr_E")
+	field(INPC, "2.5")
+	field(INPD, "4")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A+B) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfQuadWfErr_W")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Field Flatness - Quadrupole")
+	field(INPA, "BUZZER:RFQ:RfQuadWfErrMax")
+	field(INPB, "BUZZER:RFQ:RfQuadWfErrMin")
+	field(INPC, "2.5")
+	field(INPD, "4")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "( (ABS(A) >= C)||(ABS(B) >= C) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfODipWfErr_W")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Field Flatness - Odd Dipole")
+	field(INPA, "BUZZER:RFQ:RfODipWfErrMax")
+	field(INPB, "BUZZER:RFQ:RfODipWfErrMin")
+	field(INPC, "2.5")
+	field(INPD, "4")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "( (ABS(A) >= C)||(ABS(B) >= C) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfEDipWfErr_W")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Field Flatness - Even Dipole")
+	field(INPA, "BUZZER:RFQ:RfEDipWfErrMax")
+	field(INPB, "BUZZER:RFQ:RfEDipWfErrMin")
+	field(INPC, "2.5")
+	field(INPD, "4")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "( (ABS(A) >= C)||(ABS(B) >= C) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfMonoWfErr_W")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Field Flatness - Monopole")
+	field(INPA, "BUZZER:RFQ:RfMonoWfErrMax")
+	field(INPB, "BUZZER:RFQ:RfMonoWfErrMin")
+	field(INPC, "2.5")
+	field(INPD, "4")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "( (ABS(A) >= C)||(ABS(B) >= C) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfQuadWfErr_E")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Field Flatness - Quadrupole")
+	field(INPA, "BUZZER:RFQ:RfQuadWfErrMax")
+	field(INPB, "BUZZER:RFQ:RfQuadWfErrMin")
+	field(INPC, "2.5")
+	field(INPD, "4")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "( (ABS(A) >= D)||(ABS(B) >= D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfODipWfErr_E")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Field Flatness - Odd Dipole")
+	field(INPA, "BUZZER:RFQ:RfODipWfErrMax")
+	field(INPB, "BUZZER:RFQ:RfODipWfErrMin")
+	field(INPC, "2.5")
+	field(INPD, "4")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "( (ABS(A) >= D)||(ABS(B) >= D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfEDipWfErr_E")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Field Flatness - Even Dipole")
+	field(INPA, "BUZZER:RFQ:RfEDipWfErrMax")
+	field(INPB, "BUZZER:RFQ:RfEDipWfErrMin")
+	field(INPC, "2.5")
+	field(INPD, "4")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "( (ABS(A) >= D)||(ABS(B) >= D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfMonoWfErr_E")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Field Flatness - Monopole")
+	field(INPA, "BUZZER:RFQ:RfMonoWfErrMax")
+	field(INPB, "BUZZER:RFQ:RfMonoWfErrMin")
+	field(INPC, "2.5")
+	field(INPD, "4")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "( (ABS(A) >= D)||(ABS(B) >= D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfCavMeasPwrErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Cavity Power")
+	field(INPA, "RFQ:RF:CavMeasPwr")
+	field(INPB, "10")
+	field(INPC, "20")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? (A >= B ? 1 : 0)+(A > C ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfCp1Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Coupler 1 Power")
+	field(INPA, "RFQ:RF:Cp1RevPwr")
+	field(INPB, "RFQ:RF:Cp1FwdPwr")
+	field(INPC, "10")
+	field(INPD, "20")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? ( (A/B*100) >= C ? 1 : 0)+( (A/B*100) > D ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfCp2Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Coupler 2 Power")
+	field(INPA, "RFQ:RF:Cp2RevPwr")
+	field(INPB, "RFQ:RF:Cp2FwdPwr")
+	field(INPC, "10")
+	field(INPD, "20")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? ( (A/B*100) >= C ? 1 : 0)+( (A/B*100) > D ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfCp3Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Coupler 3 Power")
+	field(INPA, "RFQ:RF:Cp3RevPwr")
+	field(INPB, "RFQ:RF:Cp3FwdPwr")
+	field(INPC, "10")
+	field(INPD, "20")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? ( (A/B*100) >= C ? 1 : 0)+( (A/B*100) > D ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfCp4Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Coupler 4 Power")
+	field(INPA, "RFQ:RF:Cp4RevPwr")
+	field(INPB, "RFQ:RF:Cp4FwdPwr")
+	field(INPC, "10")
+	field(INPD, "20")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? ( (A/B*100) >= C ? 1 : 0)+( (A/B*100) > D ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfCp5Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Coupler 5 Power")
+	field(INPA, "RFQ:RF:Cp5RevPwr")
+	field(INPB, "RFQ:RF:Cp5FwdPwr")
+	field(INPC, "10")
+	field(INPD, "20")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? ( (A/B*100) >= C ? 1 : 0)+( (A/B*100) > D ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfCp6Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Coupler 6 Power")
+	field(INPA, "RFQ:RF:Cp6RevPwr")
+	field(INPB, "RFQ:RF:Cp6FwdPwr")
+	field(INPC, "10")
+	field(INPD, "20")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? ( (A/B*100) >= C ? 1 : 0)+( (A/B*100) > D ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfCp7Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Coupler 7 Power")
+	field(INPA, "RFQ:RF:Cp7RevPwr")
+	field(INPB, "RFQ:RF:Cp7FwdPwr")
+	field(INPC, "10")
+	field(INPD, "20")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? ( (A/B*100) >= C ? 1 : 0)+( (A/B*100) > D ? 1 : 0) : 0)")
+}
+
+record(calc, "BUZZER:RFQ:RfCp8Err")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Coupler 8 Power")
+	field(INPA, "RFQ:RF:Cp8RevPwr")
+	field(INPB, "RFQ:RF:Cp8FwdPwr")
+	field(INPC, "10")
+	field(INPD, "20")
+	field(INPG, "BUZZER:RFQ:EnableSet")
+	field(CALC, "(G == 1 ? ( (A/B*100) >= C ? 1 : 0)+( (A/B*100) > D ? 1 : 0) : 0)")
+}
+
+record(ao, "BUZZER:RF:NightSet")
+{
+	field(DESC, "UserSet 0:Daytime 1:Night ")
+	field(OUT, "0")
+	field(VAL, "${RFNightSet}")
+}
+
+record(ai, "BUZZER:RF:RfCav1AOn")
+{
+	field(DESC, "RFAMP:SYS1A:State=1=ON(from SNL)")
+	field(INP, "0")
+}
+
+record(ai, "BUZZER:RF:RfCav1BOn")
+{
+	field(DESC, "RFAMP:SYS1B:State=1=ON(from SNL)")
+	field(INP, "0")
+}
+
+record(ai, "BUZZER:RF:RfCav2AOn")
+{
+	field(DESC, "RFAMP:SYS2A:State=1=ON(from SNL)")
+	field(INP, "0")
+}
+
+record(ai, "BUZZER:RF:RfCav2BOn")
+{
+	field(DESC, "RFAMP:SYS2B:State=1=ON(from SNL)")
+	field(INP, "0")
+}
+
+record(ai, "BUZZER:RF:RfCav3AOn")
+{
+	field(DESC, "RFAMP:SYS3A:State=1=ON(from SNL)")
+	field(INP, "0")
+}
+
+record(ai, "BUZZER:RF:RfCav3BOn")
+{
+	field(DESC, "RFAMP:SYS3B:State=1=ON(from SNL)")
+	field(INP, "0")
+}
+
+record(ai, "BUZZER:RF:RfCav4AOn")
+{
+	field(DESC, "RFAMP:SYS4A:State=1=ON(from SNL)")
+	field(INP, "0")
+}
+
+record(ai, "BUZZER:RF:RfCav4BOn")
+{
+	field(DESC, "RFAMP:SYS4B:State=1=ON(from SNL)")
+	field(INP, "0")
+}
+
+record(calc, "BUZZER:RF:RfCav1ANightOffErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RF1A Cavity OFF")
+	field(INPA, "BUZZER:RF:RfCav1AOn")
+	field(INPB, "1")
+	field(INPC, "BUZZER:RF:NightSet")
+	field(INPD, "1")
+	field(CALC, "( (A!=B)&&(C=D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RF:RfCav1BNightOffErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RF1B Cavity OFF")
+	field(INPA, "BUZZER:RF:RfCav1BOn")
+	field(INPB, "1")
+	field(INPC, "BUZZER:RF:NightSet")
+	field(INPD, "1")
+	field(CALC, "( (A!=B)&&(C=D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RF:RfCav2ANightOffErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RF2A Cavity OFF")
+	field(INPA, "BUZZER:RF:RfCav2AOn")
+	field(INPB, "1")
+	field(INPC, "BUZZER:RF:NightSet")
+	field(INPD, "1")
+	field(CALC, "( (A!=B)&&(C=D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RF:RfCav2BNightOffErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RF2B Cavity OFF")
+	field(INPA, "BUZZER:RF:RfCav2BOn")
+	field(INPB, "1")
+	field(INPC, "BUZZER:RF:NightSet")
+	field(INPD, "1")
+	field(CALC, "( (A!=B)&&(C=D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RF:RfCav3ANightOffErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RF3A Cavity OFF")
+	field(INPA, "BUZZER:RF:RfCav3AOn")
+	field(INPB, "1")
+	field(INPC, "BUZZER:RF:NightSet")
+	field(INPD, "1")
+	field(CALC, "( (A!=B)&&(C=D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RF:RfCav3BNightOffErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RF3B Cavity OFF")
+	field(INPA, "BUZZER:RF:RfCav3BOn")
+	field(INPB, "1")
+	field(INPC, "BUZZER:RF:NightSet")
+	field(INPD, "1")
+	field(CALC, "( (A!=B)&&(C=D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RF:RfCav4ANightOffErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RF4A Cavity OFF")
+	field(INPA, "BUZZER:RF:RfCav4AOn")
+	field(INPB, "1")
+	field(INPC, "BUZZER:RF:NightSet")
+	field(INPD, "1")
+	field(CALC, "( (A!=B)&&(C=D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RF:RfCav4BNightOffErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RF4B Cavity OFF")
+	field(INPA, "BUZZER:RF:RfCav4BOn")
+	field(INPB, "1")
+	field(INPC, "BUZZER:RF:NightSet")
+	field(INPD, "1")
+	field(CALC, "( (A!=B)&&(C=D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RF:RfCav1ANightPsErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RF1A LLRFPS Error")
+	field(INPA, "RF:LLRF1_CavA:DInAllIlkRdbk")
+	field(INPB, "0")
+	field(INPC, "BUZZER:RF:NightSet")
+	field(INPD, "1")
+	field(CALC, "( ( (A&128)!=B)&&(C=D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RF:RfCav1BNightPsErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RF1B LLRFPS Error")
+	field(INPA, "RF:LLRF1_CavB:DInAllIlkRdbk")
+	field(INPB, "0")
+	field(INPC, "BUZZER:RF:NightSet")
+	field(INPD, "1")
+	field(CALC, "( ( (A&128)!=B)&&(C=D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RF:RfCav2ANightPsErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RF2A LLRFPS Error")
+	field(INPA, "RF:LLRF2_CavA:DInAllIlkRdbk")
+	field(INPB, "0")
+	field(INPC, "BUZZER:RF:NightSet")
+	field(INPD, "1")
+	field(CALC, "( ( (A&128)!=B)&&(C=D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RF:RfCav2BNightPsErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RF2B LLRFPS Error")
+	field(INPA, "RF:LLRF2_CavB:DInAllIlkRdbk")
+	field(INPB, "0")
+	field(INPC, "BUZZER:RF:NightSet")
+	field(INPD, "1")
+	field(CALC, "( ( (A&128)!=B)&&(C=D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RF:RfCav3ANightPsErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RF3A LLRFPS Error")
+	field(INPA, "RF:LLRF3_CavA:DInAllIlkRdbk")
+	field(INPB, "0")
+	field(INPC, "BUZZER:RF:NightSet")
+	field(INPD, "1")
+	field(CALC, "( ( (A&128)!=B)&&(C=D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RF:RfCav3BNightPsErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RF3B LLRFPS Error")
+	field(INPA, "RF:LLRF3_CavB:DInAllIlkRdbk")
+	field(INPB, "0")
+	field(INPC, "BUZZER:RF:NightSet")
+	field(INPD, "1")
+	field(CALC, "( ( (A&128)!=B)&&(C=D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RF:RfCav4ANightPsErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RF4A LLRFPS Error")
+	field(INPA, "RF:LLRF4_CavA:DInAllIlkRdbk")
+	field(INPB, "0")
+	field(INPC, "BUZZER:RF:NightSet")
+	field(INPD, "1")
+	field(CALC, "( ( (A&128)!=B)&&(C=D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RF:RfCav4BNightPsErr")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RF4B LLRFPS Error")
+	field(INPA, "RF:LLRF4_CavB:DInAllIlkRdbk")
+	field(INPB, "0")
+	field(INPC, "BUZZER:RF:NightSet")
+	field(INPD, "1")
+	field(CALC, "( ( (A&128)!=B)&&(C=D) ? 1 : 0)")
+}
+
+record(calc, "BUZZER:RFQ:PErr_arrange")
+{
+	field(SCAN, "Passive")
+	field(DESC, "RFQ Pressure")
+	field(INPA, "RFQ:VAC_SYS:RfqP")
+	field(INPC, "BUZZER:RFQ:PErr_arrangeCnt")
+	field(CALC, "(E = 1 ? ( (A >= B && C >= D) ? 1 : 0) : 0)")
+	field(B, "${PErrLim}")
+	field(D, "${PErrCntLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:PErr_arrangeCnt")
+{
+	field(SCAN, "1 second")
+	field(DESC, "RFQ Pressure(Counter)")
+	field(INPA, "RFQ:VAC_SYS:RfqP")
+	field(INPC, "BUZZER:RFQ:PErr_arrangeCnt")
+	field(CALC, "(E = 1 ? (A >= B ? C+1 : 0) : 0)")
+	field(FLNK, "BUZZER:RFQ:PErr_arrange")
+	field(B, "${PErrLim}")
+	field(E, "1")
+}
+
+record(ao, "BUZZER:RFQ:PErrLim")
+{
+	field(SCAN, "Passive")
+	field(DESC, "RFQ Pressure")
+	field(HOPR, "1")
+	field(DRVH, "1")
+	field(LOPR, "0.00000001")
+	field(DRVL, "0.00000001")
+	field(EGU, "mbar")
+	field(VAL, "${PErrLim}")
+}
+
+record(ao, "BUZZER:RFQ:PErrCntLim")
+{
+	field(SCAN, "Passive")
+	field(DESC, "RFQ Pressure")
+	field(HOPR, "30")
+	field(DRVH, "30")
+	field(LOPR, "1")
+	field(DRVL, "1")
+	field(EGU, "s")
+	field(VAL, "${PErrCntLim}")
+}
+
+record(calc, "BUZZER:RFQ:Rhc1P1T")
+{
+	field(SCAN, "Passive")
+	field(DESC, "Remote Helium Compressor 1_1")
+	field(INPA, "RFQ:VAC_HC1:P1T")
+	field(INPC, "BUZZER:RFQ:Rhc1P1TCnt")
+	field(CALC, "(E = 1 ? ( (A >= B && C >= D) ? 1 : 0) : 0)")
+	field(B, "${RhcPTLim}")
+	field(D, "${RhcPTCntLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc1P1TCnt")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Remote Helium Compressor 1_1(Counter)")
+	field(INPA, "RFQ:VAC_HC1:P1T")
+	field(INPC, "BUZZER:RFQ:Rhc1P1TCnt")
+	field(CALC, "(E = 1 ? (A >= B ? C+1 : 0) : 0)")
+	field(FLNK, "BUZZER:RFQ:Rhc1P1T")
+	field(B, "${RhcPTLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc1P2T")
+{
+	field(SCAN, "Passive")
+	field(DESC, "Remote Helium Compressor 1_2")
+	field(INPA, "RFQ:VAC_HC1:P2T")
+	field(INPC, "BUZZER:RFQ:Rhc1P2TCnt")
+	field(CALC, "(E = 1 ? ( (A >= B && C >= D) ? 1 : 0) : 0)")
+	field(B, "${RhcPTLim}")
+	field(D, "${RhcPTCntLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc1P2TCnt")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Remote Helium Compressor 1_2(Counter)")
+	field(INPA, "RFQ:VAC_HC1:P2T")
+	field(INPC, "BUZZER:RFQ:Rhc1P2TCnt")
+	field(CALC, "(E = 1 ? (A >= B ? C+1 : 0) : 0)")
+	field(FLNK, "BUZZER:RFQ:Rhc1P2T")
+	field(B, "${RhcPTLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc2P1T")
+{
+	field(SCAN, "Passive")
+	field(DESC, "Remote Helium Compressor 2_1")
+	field(INPA, "RFQ:VAC_HC2:P1T")
+	field(INPC, "BUZZER:RFQ:Rhc2P1TCnt")
+	field(CALC, "(E = 1 ? ( (A >= B && C >= D) ? 1 : 0) : 0)")
+	field(B, "${RhcPTLim}")
+	field(D, "${RhcPTCntLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc2P1TCnt")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Remote Helium Compressor 2_1(Counter)")
+	field(INPA, "RFQ:VAC_HC2:P1T")
+	field(INPC, "BUZZER:RFQ:Rhc2P1TCnt")
+	field(CALC, "(E = 1 ? (A >= B ? C+1 : 0) : 0)")
+	field(FLNK, "BUZZER:RFQ:Rhc2P1T")
+	field(B, "${RhcPTLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc2P2T")
+{
+	field(SCAN, "Passive")
+	field(DESC, "Remote Helium Compressor 2_2")
+	field(INPA, "RFQ:VAC_HC2:P2T")
+	field(INPC, "BUZZER:RFQ:Rhc2P2TCnt")
+	field(CALC, "(E = 1 ? ( (A >= B && C >= D) ? 1 : 0) : 0)")
+	field(B, "${RhcPTLim}")
+	field(D, "${RhcPTCntLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc2P2TCnt")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Remote Helium Compressor 2_2(Counter)")
+	field(INPA, "RFQ:VAC_HC2:P2T")
+	field(INPC, "BUZZER:RFQ:Rhc2P2TCnt")
+	field(CALC, "(E = 1 ? (A >= B ? C+1 : 0) : 0)")
+	field(FLNK, "BUZZER:RFQ:Rhc2P2T")
+	field(B, "${RhcPTLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc3P1T")
+{
+	field(SCAN, "Passive")
+	field(DESC, "Remote Helium Compressor 3_1")
+	field(INPA, "RFQ:VAC_HC3:P1T")
+	field(INPC, "BUZZER:RFQ:Rhc3P1TCnt")
+	field(CALC, "(E = 1 ? ( (A >= B && C >= D) ? 1 : 0) : 0)")
+	field(B, "${RhcPTLim}")
+	field(D, "${RhcPTCntLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc3P1TCnt")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Remote Helium Compressor 3_1(Counter)")
+	field(INPA, "RFQ:VAC_HC3:P1T")
+	field(INPC, "BUZZER:RFQ:Rhc3P1TCnt")
+	field(CALC, "(E = 1 ? (A >= B ? C+1 : 0) : 0)")
+	field(FLNK, "BUZZER:RFQ:Rhc3P1T")
+	field(B, "${RhcPTLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc3P2T")
+{
+	field(SCAN, "Passive")
+	field(DESC, "Remote Helium Compressor 3_2")
+	field(INPA, "RFQ:VAC_HC3:P2T")
+	field(INPC, "BUZZER:RFQ:Rhc3P2TCnt")
+	field(CALC, "(E = 1 ? ( (A >= B && C >= D) ? 1 : 0) : 0)")
+	field(B, "${RhcPTLim}")
+	field(D, "${RhcPTCntLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc3P2TCnt")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Remote Helium Compressor 3_2(Counter)")
+	field(INPA, "RFQ:VAC_HC3:P2T")
+	field(INPC, "BUZZER:RFQ:Rhc3P2TCnt")
+	field(CALC, "(E = 1 ? (A >= B ? C+1 : 0) : 0)")
+	field(FLNK, "BUZZER:RFQ:Rhc3P2T")
+	field(B, "${RhcPTLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc4P1T")
+{
+	field(SCAN, "Passive")
+	field(DESC, "Remote Helium Compressor 4_1")
+	field(INPA, "RFQ:VAC_HC4:P1T")
+	field(INPC, "BUZZER:RFQ:Rhc4P1TCnt")
+	field(CALC, "(E = 1 ? ( (A >= B && C >= D) ? 1 : 0) : 0)")
+	field(B, "${RhcPTLim}")
+	field(D, "${RhcPTCntLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc4P1TCnt")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Remote Helium Compressor 4_1(Counter)")
+	field(INPA, "RFQ:VAC_HC4:P1T")
+	field(INPC, "BUZZER:RFQ:Rhc4P1TCnt")
+	field(CALC, "(E = 1 ? (A >= B ? C+1 : 0) : 0)")
+	field(FLNK, "BUZZER:RFQ:Rhc4P1T")
+	field(B, "${RhcPTLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc4P2T")
+{
+	field(SCAN, "Passive")
+	field(DESC, "Remote Helium Compressor 4_2")
+	field(INPA, "RFQ:VAC_HC4:P2T")
+	field(INPC, "BUZZER:RFQ:Rhc4P2TCnt")
+	field(CALC, "(E = 1 ? ( (A >= B && C >= D) ? 1 : 0) : 0)")
+	field(B, "${RhcPTLim}")
+	field(D, "${RhcPTCntLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc4P2TCnt")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Remote Helium Compressor 4_2(Counter)")
+	field(INPA, "RFQ:VAC_HC4:P2T")
+	field(INPC, "BUZZER:RFQ:Rhc4P2TCnt")
+	field(CALC, "(E = 1 ? (A >= B ? C+1 : 0) : 0)")
+	field(FLNK, "BUZZER:RFQ:Rhc4P2T")
+	field(B, "${RhcPTLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc5P1T")
+{
+	field(SCAN, "Passive")
+	field(DESC, "Remote Helium Compressor 5_1")
+	field(INPA, "RFQ:VAC_HC5:P1T")
+	field(INPC, "BUZZER:RFQ:Rhc5P1TCnt")
+	field(CALC, "(E = 1 ? ( (A >= B && C >= D) ? 1 : 0) : 0)")
+	field(B, "${RhcPTLim}")
+	field(D, "${RhcPTCntLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc5P1TCnt")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Remote Helium Compressor 5_1(Counter)")
+	field(INPA, "RFQ:VAC_HC5:P1T")
+	field(INPC, "BUZZER:RFQ:Rhc5P1TCnt")
+	field(CALC, "(E = 1 ? (A >= B ? C+1 : 0) : 0)")
+	field(FLNK, "BUZZER:RFQ:Rhc5P1T")
+	field(B, "${RhcPTLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc5P2T")
+{
+	field(SCAN, "Passive")
+	field(DESC, "Remote Helium Compressor 5_2")
+	field(INPA, "RFQ:VAC_HC5:P2T")
+	field(INPC, "BUZZER:RFQ:Rhc5P2TCnt")
+	field(CALC, "(E = 1 ? ( (A >= B && C >= D) ? 1 : 0) : 0)")
+	field(B, "${RhcPTLim}")
+	field(D, "${RhcPTCntLim}")
+	field(E, "1")
+}
+
+record(calc, "BUZZER:RFQ:Rhc5P2TCnt")
+{
+	field(SCAN, "1 second")
+	field(DESC, "Remote Helium Compressor 5_2(Counter)")
+	field(INPA, "RFQ:VAC_HC5:P2T")
+	field(INPC, "BUZZER:RFQ:Rhc5P2TCnt")
+	field(CALC, "(E = 1 ? (A >= B ? C+1 : 0) : 0)")
+	field(FLNK, "BUZZER:RFQ:Rhc5P2T")
+	field(B, "${RhcPTLim}")
+	field(E, "1")
+}
+
+record(ao, "BUZZER:RFQ:RhcPTLim")
+{
+	field(SCAN, "Passive")
+	field(DESC, "Remote Helium Compressor")
+	field(HOPR, "300")
+	field(DRVH, "300")
+	field(LOPR, "0")
+	field(DRVL, "0")
+	field(EGU, "K")
+	field(VAL, "${RhcPTLim}")
+}
+
+record(ao, "BUZZER:RFQ:RhcPTCntLim")
+{
+	field(SCAN, "Passive")
+	field(DESC, "Remote Helium Compressor")
+	field(HOPR, "30")
+	field(DRVH, "30")
+	field(LOPR, "1")
+	field(DRVL, "1")
+	field(EGU, "s")
+	field(VAL, "${RhcPTCntLim}")
+}
+
+record(calc, "BUZZER:MPS:PbBrtzBdUnMatchIlk")
+{
+	field(SCAN, "1 second")
+	field(DESC, "BRTZ Error")
+	field(INPA, "MPS:PB_BRTZ:BdUnMatchIlk")
+	field(INPB, "BUZZER:MPS:PbBrtzBdUnMatchIlkCnt")
+	field(CALC, "(A=1 && B>=3 ? 1 : 0)")
+}
+
+record(calc, "BUZZER:MPS:PbBrtzBdUnMatchIlkCnt")
+{
+	field(SCAN, "1 second")
+	field(DESC, "BRTZ Error(Cnt)")
+	field(INPA, "MPS:PB_BRTZ:BdUnMatchIlk")
+	field(INPB, "BUZZER:MPS:PbBrtzBdUnMatchIlkCnt")
+	field(CALC, "(A=1 ? B+1 : 0)")
+}
+
+record(calc, "BUZZER:MPS:PbBrtzRepDischargeIlk")
+{
+	field(SCAN, "1 second")
+	field(DESC, "BRTZ Error")
+	field(INPA, "MPS:PB_BRTZ:RepDischargeIlk")
+	field(INPB, "BUZZER:MPS:PbBrtzRepDischargeIlkCnt")
+	field(CALC, "(A=1 && B>=3 ? 1 : 0)")
+}
+
+record(calc, "BUZZER:MPS:PbBrtzRepDischargeIlkCnt")
+{
+	field(SCAN, "1 second")
+	field(DESC, "BRTZ Error(Cnt)")
+	field(INPA, "MPS:PB_BRTZ:RepDischargeIlk")
+	field(INPB, "BUZZER:MPS:PbBrtzRepDischargeIlkCnt")
+	field(CALC, "(A=1 ? B+1 : 0)")
+}
+
+record(calc, "BUZZER:MPS:PaBrtzDebugIlk")
+{
+	field(SCAN, "1 second")
+	field(DESC, "BRTZ Error")
+	field(INPA, "MPS:PA_BRTZ:DebugIlk")
+	field(INPB, "BUZZER:MPS:PaBrtzDebugIlkCnt")
+	field(CALC, "(A=1 && B>=3 ? 1 : 0)")
+}
+
+record(calc, "BUZZER:MPS:PaBrtzDebugIlkCnt")
+{
+	field(SCAN, "1 second")
+	field(DESC, "BRTZ Error(Cnt)")
+	field(INPA, "MPS:PA_BRTZ:DebugIlk")
+	field(INPB, "BUZZER:MPS:PaBrtzDebugIlkCnt")
+	field(CALC, "(A=1 ? B+1 : 0)")
+}
+
+record(calc, "BUZZER:MPS:PbBrtzBlomAle1LdcIlk")
+{
+	field(SCAN, "1 second")
+	field(DESC, "BRTZ Error")
+	field(INPA, "MPS:PB_BRTZ:BlomAle1LdcIlk")
+	field(INPB, "BUZZER:MPS:PbBrtzBlomAle1LdcIlkCnt")
+	field(CALC, "(A=1 && B>=3 ? 1 : 0)")
+}
+
+record(calc, "BUZZER:MPS:PbBrtzBlomAle1LdcIlkCnt")
+{
+	field(SCAN, "1 second")
+	field(DESC, "BRTZ Error(Cnt)")
+	field(INPA, "MPS:PB_BRTZ:BlomAle1LdcIlk")
+	field(INPB, "BUZZER:MPS:PbBrtzBlomAle1LdcIlkCnt")
+	field(CALC, "(A=1 ? B+1 : 0)")
+}
+
+record(calc, "FOROPI:LED:STATUS")
+{
+	field(SCAN, "1 second")
+	field(INPA, "FOROPI:BUZZER_ON")
+	field(INPB, "FOROPI:BLINK:MAKER")
+	field(INPC, "FOROPI:ERROR_ON")
+	field(CALC, "(A=1?B:C)")
+}
+
+record(bi, "FOROPI:LOGREFRESH")
+{
+	field(INP, "0")
+}
+
+record(calc, "FOROPI:BLINK:MAKER")
+{
+	field(SCAN, "1 second")
+	field(INPA, "FOROPI:BLINK:MAKER")
+	field(CALC, "A=0?1:0")
+}
+
+record(bi, "FOROPI:BUZZER_ON")
+{
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:ERROR_ON")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:CW_PULSE:TIMING:1")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:CW_PULSE:TIMING:10")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:CW_PULSE:TIMING:CW")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:CW_PULSE:RF_GENE:CWON:1")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:CW_PULSE:RF_GENE:CWON:10")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:CW_PULSE:RF_GENE:CWON:CW")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:CW_PULSE:RF_GENE:PORC:1")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:CW_PULSE:RF_GENE:PORC:10")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:CW_PULSE:RF_GENE:PORC:CW")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:CW_PULSE:RF_GENE:MODBUS:1")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:CW_PULSE:RF_GENE:MODBUS:10")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:CW_PULSE:RF_GENE:MODBUS:CW")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPaBrtzDebugIlk")
+{
+	field(DESC, "For debug(TEST-1)")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPaSbiLebtFocIlk")
+{
+	field(DESC, "LEBT focalization(MPS-408)")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPaSbiLebtVacIlk")
+{
+	field(DESC, "LEBT vacuum(MPS-410)")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPaSbiGv1OpenIlk")
+{
+	field(DESC, "GV1 open(MPS-411)")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPaSbiInjGlobalFaultIlk")
+{
+	field(DESC, "Injector global fault(MPS-406)")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPaSbiInjPpssHaltIlk")
+{
+	field(DESC, "Injector halt by PPS")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPaSbiInjCoolIlk")
+{
+	field(DESC, "Injector cooling(MPS-412)")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPaSbiBimsAIlk")
+{
+	field(DESC, "BIMS-A Error(BIMS A ER)")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPaSbiBimsBIlk")
+{
+	field(DESC, "BIMS-B Error(BIMS B ER)")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbBrtzBdUnMatchIlk")
+{
+	field(DESC, "Beam Destination Unmatch")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbBrtzRepDischargeIlk")
+{
+	field(DESC, "Repair Discharg")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbSbiGv1FaultIlk")
+{
+	field(DESC, "GV1 fault")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbSbiCmnSkidIlk")
+{
+	field(DESC, "CMN SKID")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbBrtzRfqArcIlk")
+{
+	field(DESC, "RFQ arcing")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbBrtzRfqRfCoupArcIlk")
+{
+	field(DESC, "RF coupler arcing")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiRfqRfFieldIlk")
+{
+	field(DESC, "RF field state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiRfqVac1Ilk")
+{
+	field(DESC, "RFQ vacuum - 1")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiGv2OpenIlk")
+{
+	field(DESC, "GV2 open")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiGv2FaultIlk")
+{
+	field(DESC, "GV2 fault")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiMebtFocQuadIlk")
+{
+	field(DESC, "MEBT focaliz.err -Quadrupole")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiMebtFocSTIlk")
+{
+	field(DESC, "MEBT focaliz.err- Steerer")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiMebtVac1Ilk")
+{
+	field(DESC, "MEBT vacuum -1")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbSbiRfqTIlk")
+{
+	field(DESC, "RFQ temp. state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbSbiRfqCoupTIlk")
+{
+	field(DESC, "RF coupler temp.")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbSbiBunTFaultIlk")
+{
+	field(DESC, "Bunchers temp fault")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbSbiMagFlowSwIlk")
+{
+	field(DESC, "Magnets flow switches")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbSbiBunFlowSwIlk")
+{
+	field(DESC, "Bunchers flow switches")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbSbiScrFlowSwIlk")
+{
+	field(DESC, "Scrapers flow switches")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbSbiMebtCoilTIlk")
+{
+	field(DESC, "MEBT collimator temp")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiInterDevStateIlk")
+{
+	field(DESC, "INTERCEPTIVES DEVICES STATE CIEMAT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiInterDevFaultCiematIlk")
+{
+	field(DESC, "INTERCEPTIVES DEVICES FAULT CIEMAT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbSbiSlitCoolFlowSwIlk")
+{
+	field(DESC, "SLITS COOLING FLOW SWITCH")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbSbiSlitCollectorTIlk")
+{
+	field(DESC, "SLITS COLLECTOR TEMP")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbSbiLpbdTIlk")
+{
+	field(DESC, "LPBD TEMP")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiDpVacFaultIlk")
+{
+	field(DESC, "DP VACUUM FAULT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiGV5FaultIlk")
+{
+	field(DESC, "GV5 FAULT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiGV5OpenIlk")
+{
+	field(DESC, "GV5 OPEN")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiChopHvpsOpeIlk")
+{
+	field(DESC, "Chopper HVPS Operation OK")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM1PsysAIlk")
+{
+	field(DESC, "RFQ RF1 PSYS state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM1PsysBIlk")
+{
+	field(DESC, "RFQ RF2 PSYS state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM2PsysAIlk")
+{
+	field(DESC, "RFQ RF3 PSYS state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM2PsysBIlk")
+{
+	field(DESC, "RFQ RF4 PSYS state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM3PsysAIlk")
+{
+	field(DESC, "RFQ RF5 PSYS state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM3PsysBIlk")
+{
+	field(DESC, "RFQ RF6 PSYS state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM4PsysAIlk")
+{
+	field(DESC, "RFQ RF7 PSYS state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM4PsysBIlk")
+{
+	field(DESC, "RFQ RF8 PSYS state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM1PlcAIlk")
+{
+	field(DESC, "RFQ RF1 PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM1PlcBIlk")
+{
+	field(DESC, "RFQ RF2 PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM2PlcAIlk")
+{
+	field(DESC, "RFQ RF3 PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM2PlcBIlk")
+{
+	field(DESC, "RFQ RF4 PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM3PlcAIlk")
+{
+	field(DESC, "RFQ RF5 PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM3PlcBIlk")
+{
+	field(DESC, "RFQ RF6 PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM4PlcAIlk")
+{
+	field(DESC, "RFQ RF7 PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM4PlcBIlk")
+{
+	field(DESC, "RFQ RF8 PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM1LlrfAIlk")
+{
+	field(DESC, "RFQ LLRF-1 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM1LlrfBIlk")
+{
+	field(DESC, "RFQ LLRF-2 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM2LlrfAIlk")
+{
+	field(DESC, "RFQ LLRF-3 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM2LlrfBIlk")
+{
+	field(DESC, "RFQ LLRF-4 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM3LlrfAIlk")
+{
+	field(DESC, "RFQ LLRF-5 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM3LlrfBIlk")
+{
+	field(DESC, "RFQ LLRF-6 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM4LlrfAIlk")
+{
+	field(DESC, "RFQ LLRF-7 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM4LlrfBIlk")
+{
+	field(DESC, "RFQ LLRF-8 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM5PlcAIlk")
+{
+	field(DESC, "undefined")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM5PlcBIlk")
+{
+	field(DESC, "undefined")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM5PsysAIlk")
+{
+	field(DESC, "Buncher RF1 PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM5PsysBIlk")
+{
+	field(DESC, "Buncher RF2 PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM5LlrfAIlk")
+{
+	field(DESC, "Buncher LLRF-1 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM5LlrfBIlk")
+{
+	field(DESC, "Buncher LLRF-2 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM6PsysAIlk")
+{
+	field(DESC, "SRF cavity1 RF PSYS state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM6PsysBIlk")
+{
+	field(DESC, "SRF cavity2 RF PSYS state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM7PsysAIlk")
+{
+	field(DESC, "SRF cavity3 RF PSYS state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM7PsysBIlk")
+{
+	field(DESC, "SRF cavity4 RF PSYS state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM8PsysAIlk")
+{
+	field(DESC, "SRF cavity5 RF PSYS state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM8PsysBIlk")
+{
+	field(DESC, "SRF cavity6 RF PSYS state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM9PsysAIlk")
+{
+	field(DESC, "SRF cavity7 RF PSYS state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM9PsysBIlk")
+{
+	field(DESC, "SRF cavity8 RF PSYS state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM6PlcAIlk")
+{
+	field(DESC, "SRF cavity1 RF PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM6PlcBIlk")
+{
+	field(DESC, "SRF cavity2 RF PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM7PlcAIlk")
+{
+	field(DESC, "SRF cavity3 RF PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM7PlcBIlk")
+{
+	field(DESC, "SRF cavity4 RF PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM8PlcAIlk")
+{
+	field(DESC, "SRF cavity5 RF PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM8PlcBIlk")
+{
+	field(DESC, "SRF cavity6 RF PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM9PlcAIlk")
+{
+	field(DESC, "SRF cavity7 RF PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM9PlcBIlk")
+{
+	field(DESC, "SRF cavity8 RF PLC state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM6LlrfAIlk")
+{
+	field(DESC, "SRF LLRF-1 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM6LlrfBIlk")
+{
+	field(DESC, "SRF LLRF-2 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM7LlrfAIlk")
+{
+	field(DESC, "SRF LLRF-3 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM7LlrfBIlk")
+{
+	field(DESC, "SRF LLRF-4 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM8LlrfAIlk")
+{
+	field(DESC, "SRF LLRF-5 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM8LlrfBIlk")
+{
+	field(DESC, "SRF LLRF-6 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM9LlrfAIlk")
+{
+	field(DESC, "SRF LLRF-7 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiM9LlrfBIlk")
+{
+	field(DESC, "SRF LLRF-8 state")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbSbiLpbdCoolFlowSwIlk")
+{
+	field(DESC, "LPBD COOLING FLOW SWITCH")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbSbiRfqCoolIlk")
+{
+	field(DESC, "RFQ cooling")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbSbiHebtCoolFaultIlk")
+{
+	field(DESC, "HEBT cooling skid fault")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbSbiMebtBunchCoolIlk")
+{
+	field(DESC, "MEBT bunchers cooling")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbBrtzBlomAle1LdcIlk")
+{
+	field(DESC, "BLoM Alerm1 LDC")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiBlomAle1HdcIlk")
+{
+	field(DESC, "BLoM Alerm1 HDC")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiInterDiagStatIlk")
+{
+	field(DESC, "Interceptive Diag status")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbFbiInterDevFaultCeaIlk")
+{
+	field(DESC, "Interceptive devices fault_CEA")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:MpsPbSbiBlomMalfIlk")
+{
+	field(DESC, "BLOM malfunction")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:IE_PS:OVERCURRENT")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:R_PS:V:READBACKUNDER")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:INJ:MUSCADE")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:INJ:GVOPEN")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:INJ:GVABNORMAL")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "FOROPI:JUDGE:IE_PS:V:READBACKUNDER")
+{
+	field(DESC, "bit1:error bit0:warning")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:PSet")
+{
+	field(DESC, "RFQ Pressure")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CryoSet1")
+{
+	field(DESC, "Remote Helium Compressor 1")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CryoSet2")
+{
+	field(DESC, "Remote Helium Compressor 2")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CryoSet3")
+{
+	field(DESC, "Remote Helium Compressor 3")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CryoSet4")
+{
+	field(DESC, "Remote Helium Compressor 4")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CryoSet5")
+{
+	field(DESC, "Remote Helium Compressor 5")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CryoSet6")
+{
+	field(DESC, "Remote Helium Compressor 6")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolOpSet")
+{
+	field(DESC, "Cooling State Machine")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt31Set")
+{
+	field(DESC, "super module 1 - cold input")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt32Set")
+{
+	field(DESC, "super module 2 - cold input")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt33Set")
+{
+	field(DESC, "super module 3 - cold input")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt31TSet")
+{
+	field(DESC, "super module 1 - cold input")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt32TSet")
+{
+	field(DESC, "super module 2 - cold input")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt33TSet")
+{
+	field(DESC, "super module 3 - cold input")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt41Set")
+{
+	field(DESC, "super module 1 - cold output")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt42Set")
+{
+	field(DESC, "super module 2 - cold output")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt43Set")
+{
+	field(DESC, "super module 3 - cold output")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt41TSet")
+{
+	field(DESC, "super module 1 - cold output")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt42TSet")
+{
+	field(DESC, "super module 2 - cold output")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt43TSet")
+{
+	field(DESC, "super module 3 - cold output")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt51Set")
+{
+	field(DESC, "super module 1 - warn input")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt52Set")
+{
+	field(DESC, "super module 2 - warn input")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt53Set")
+{
+	field(DESC, "super module 3 - warn input")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt51TSet")
+{
+	field(DESC, "super module 1 - warn input")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt52TSet")
+{
+	field(DESC, "super module 2 - warn input")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt53TSet")
+{
+	field(DESC, "super module 3 - warn input")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt61Set")
+{
+	field(DESC, "super module 1 - warn output")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt62Set")
+{
+	field(DESC, "super module 2 - warn output")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt63Set")
+{
+	field(DESC, "super module 3 - warn output")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt61TSet")
+{
+	field(DESC, "super module 1 - warn output")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt62TSet")
+{
+	field(DESC, "super module 2 - warn output")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt63TSet")
+{
+	field(DESC, "super module 3 - warn output")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt71Set")
+{
+	field(DESC, "temp sensor in module 1 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt72Set")
+{
+	field(DESC, "temp sensor in module 3 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt73Set")
+{
+	field(DESC, "temp sensor in module 4 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt74Set")
+{
+	field(DESC, "temp sensor in module 5 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt75Set")
+{
+	field(DESC, "temp sensor in module 6 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt76Set")
+{
+	field(DESC, "temp sensor in module 7 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt77Set")
+{
+	field(DESC, "temp sensor in module 8 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt78Set")
+{
+	field(DESC, "temp sensor in module 9 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt91Set")
+{
+	field(DESC, "temp sensor in module 10 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt92Set")
+{
+	field(DESC, "temp sensor in module 11 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt93Set")
+{
+	field(DESC, "temp sensor in module 12 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt94Set")
+{
+	field(DESC, "temp sensor in module 13 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt95Set")
+{
+	field(DESC, "temp sensor in module 14 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt96Set")
+{
+	field(DESC, "temp sensor in module 15 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt97Set")
+{
+	field(DESC, "temp sensor in module 16 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt98Set")
+{
+	field(DESC, "temp sensor in module 18 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt71TSet")
+{
+	field(DESC, "temp sensor in module 1 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt72TSet")
+{
+	field(DESC, "temp sensor in module 3 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt73TSet")
+{
+	field(DESC, "temp sensor in module 4 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt74TSet")
+{
+	field(DESC, "temp sensor in module 5 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt75TSet")
+{
+	field(DESC, "temp sensor in module 6 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt76TSet")
+{
+	field(DESC, "temp sensor in module 7 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt77TSet")
+{
+	field(DESC, "temp sensor in module 8 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt78TSet")
+{
+	field(DESC, "temp sensor in module 9 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt91TSet")
+{
+	field(DESC, "temp sensor in module 10 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt92TSet")
+{
+	field(DESC, "temp sensor in module 11 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt93TSet")
+{
+	field(DESC, "temp sensor in module 12 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt94TSet")
+{
+	field(DESC, "temp sensor in module 13 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt95TSet")
+{
+	field(DESC, "temp sensor in module 14 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt96TSet")
+{
+	field(DESC, "temp sensor in module 15 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt97TSet")
+{
+	field(DESC, "temp sensor in module 16 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt98TSet")
+{
+	field(DESC, "temp sensor in module 18 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt81Set")
+{
+	field(DESC, "temp sensor in coupler 1 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt82Set")
+{
+	field(DESC, "temp sensor in coupler 3 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt83Set")
+{
+	field(DESC, "temp sensor in coupler 4 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt84Set")
+{
+	field(DESC, "temp sensor in coupler 5 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt85Set")
+{
+	field(DESC, "temp sensor in coupler 6 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt86Set")
+{
+	field(DESC, "temp sensor in coupler 7 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt87Set")
+{
+	field(DESC, "temp sensor in coupler 8 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt88Set")
+{
+	field(DESC, "temp sensor in coupler 9 - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt81TSet")
+{
+	field(DESC, "temp sensor in coupler 1 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt82TSet")
+{
+	field(DESC, "temp sensor in coupler 3 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt83TSet")
+{
+	field(DESC, "temp sensor in coupler 4 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt84TSet")
+{
+	field(DESC, "temp sensor in coupler 5 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt85TSet")
+{
+	field(DESC, "temp sensor in coupler 6 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt86TSet")
+{
+	field(DESC, "temp sensor in coupler 7 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt87TSet")
+{
+	field(DESC, "temp sensor in coupler 8 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolRt88TSet")
+{
+	field(DESC, "temp sensor in coupler 9 - OverT")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolAd1TimSet")
+{
+	field(DESC, "Arc detectior - Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:CoolAd1LastTimSet")
+{
+	field(DESC, "Arc detectior - Arcs")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfQuadWfSet")
+{
+	field(DESC, "Field Flatness - Quadrupole")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfODipWfSet")
+{
+	field(DESC, "Field Flatness - Odd Dipole")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfEDipWfSet")
+{
+	field(DESC, "Field Flatness - Even Dipole")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfMonoWfSet")
+{
+	field(DESC, "Field Flatness - Monopole")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCavMeasPwrSet")
+{
+	field(DESC, "Cavity Power")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCp1Set")
+{
+	field(DESC, "Coupler 1 Power")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCp2Set")
+{
+	field(DESC, "Coupler 2 Power")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCp3Set")
+{
+	field(DESC, "Coupler 3 Power")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCp4Set")
+{
+	field(DESC, "Coupler 4 Power")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCp5Set")
+{
+	field(DESC, "Coupler 5 Power")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCp6Set")
+{
+	field(DESC, "Coupler 6 Power")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCp7Set")
+{
+	field(DESC, "Coupler 7 Power")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCp8Set")
+{
+	field(DESC, "Coupler 8 Power")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCav1ANightOffErr")
+{
+	field(DESC, "RF1A Cavity OFF")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCav1BNightOffErr")
+{
+	field(DESC, "RF1B Cavity OFF")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCav2ANightOffErr")
+{
+	field(DESC, "RF2A Cavity OFF")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCav2BNightOffErr")
+{
+	field(DESC, "RF2B Cavity OFF")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCav3ANightOffErr")
+{
+	field(DESC, "RF3A Cavity OFF")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCav3BNightOffErr")
+{
+	field(DESC, "RF3B Cavity OFF")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCav4ANightOffErr")
+{
+	field(DESC, "RF4A Cavity OFF")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCav4BNightOffErr")
+{
+	field(DESC, "RF4B Cavity OFF")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCav1ANightPsErr")
+{
+	field(DESC, "RF1A LLRFPS Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCav1BNightPsErr")
+{
+	field(DESC, "RF1B LLRFPS Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCav2ANightPsErr")
+{
+	field(DESC, "RF2A LLRFPS Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCav2BNightPsErr")
+{
+	field(DESC, "RF2B LLRFPS Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCav3ANightPsErr")
+{
+	field(DESC, "RF3A LLRFPS Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCav3BNightPsErr")
+{
+	field(DESC, "RF3B LLRFPS Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCav4ANightPsErr")
+{
+	field(DESC, "RF4A LLRFPS Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:RfCav4BNightPsErr")
+{
+	field(DESC, "RF4B LLRFPS Error")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:PSet_arrange")
+{
+	field(DESC, "RFQ Pressure")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:Rhc1P1TErr")
+{
+	field(DESC, "Remote Helium Compressor 1_1")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:Rhc1P2TErr")
+{
+	field(DESC, "Remote Helium Compressor 1_2")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:Rhc2P1TErr")
+{
+	field(DESC, "Remote Helium Compressor 2_1")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:Rhc2P2TErr")
+{
+	field(DESC, "Remote Helium Compressor 2_2")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:Rhc3P1TErr")
+{
+	field(DESC, "Remote Helium Compressor 3_1")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:Rhc3P2TErr")
+{
+	field(DESC, "Remote Helium Compressor 3_2")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:Rhc4P1TErr")
+{
+	field(DESC, "Remote Helium Compressor 4_1")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:Rhc4P2TErr")
+{
+	field(DESC, "Remote Helium Compressor 4_2")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:Rhc5P1TErr")
+{
+	field(DESC, "Remote Helium Compressor 5_1")
+	field(INP, "0")
+}
+
+record(mbbiDirect, "BUZZER:GUI:Rhc5P2TErr")
+{
+	field(DESC, "Remote Helium Compressor 5_2")
+	field(INP, "0")
+}
+
+record(calc, "FOROPI:ALIVE")
+{
+	field(SCAN, "5 second")
+	field(DESC, "alive make at SoftCounter")
+	field(INPA, "FOROPI:ALIVECOUNTER")
+	field(INPB, "FOROPI:ALIVECOUNTER:COPY")
+	field(CALC, "A#B?1:0")
+	field(FLNK, "FOROPI:ALIVECOUNTER:COPY")
+}
+
+record(ai, "FOROPI:ALIVECOUNTER:COPY")
+{
+	field(SCAN, "I/O Intr")
+	field(DESC, "softcounter copy for alive")
+	field(DTYP, "Soft Channel")
+	field(INP, "FOROPI:ALIVECOUNTER")
+}
+
+record(ai, "FOROPI:ALIVECOUNTER")
+{
+	field(DESC, "softcounter")
+	field(INP, "0")
+}
+
+record(ai, "SENDMAIL:FLG")
+{
+	field(DESC, "sendmail flg")
+	field(INP, "0")
+}
+
+record(stringin, "SENDMAIL:ERROR_TITLE")
+{
+	field(SCAN, "1 second")
+	field(INP, "")
+}
+
+record(stringin, "SENDMAIL:ERROR_MESSAGE")
+{
+	field(SCAN, "1 second")
+	field(INP, "")
+}
+

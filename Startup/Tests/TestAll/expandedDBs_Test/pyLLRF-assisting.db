@@ -1,0 +1,118 @@
+#Quick rearm variables to match with pyLLRF-quick-rearm-V3.py
+record(ao, "LLRFQuickReArm:RestartCounter"){   #
+  field(VAL, "0")
+}
+
+record(bo, "LLRFQuickReArm:ManualRestart"){   #
+  field(HIGH, "1")
+  field(VAL, "0")
+}
+
+record(ao, "LLRFQuickReArm:RestoreToX"){   #
+  field(VAL, "0.9")
+}
+
+record(ai, "LLRFQuickReArm:SlowerRamp"){   #
+  field(VAL, "6")
+}
+
+record(bi, "LLRFQuickReArm:OnOff"){   #
+  field(VAL, "0")
+}
+
+record(ao, "LLRFQuickReArm:CloseLoop1bDelay"){   #
+  field(VAL, "1")
+}
+
+record(ao, "LLRFQuickReArm:CloseLoop2aDelay"){   #
+  field(VAL, "1")
+}
+
+record(ao, "LLRFQuickReArm:CloseLoop2bDelay"){   #
+  field(VAL, "1")
+}
+
+record(ao, "LLRFQuickReArm:CloseLoop3aDelay"){   #
+  field(VAL, "1")
+}
+
+record(ao, "LLRFQuickReArm:CloseLoop3bDelay"){   #
+  field(VAL, "1")
+}
+
+record(ao, "LLRFQuickReArm:CloseLoop4aDelay"){   #
+  field(VAL, "1")
+}
+
+record(ao, "LLRFQuickReArm:CloseLoop4bDelay"){   #
+  field(VAL, "1")
+}
+
+record(ao, "LLRFQuickReArm:ManFreqSet1Delay"){   #
+  field(VAL, "1")
+}
+
+record(ao, "LLRFQuickReArm:ManFreqSet2Delay"){   #
+  field(VAL, "1")
+}
+
+record(ao, "LLRFQuickReArm:ManFreqSet3Delay"){   #
+  field(VAL, "1")
+}
+
+record(ao, "LLRFQuickReArm:ManFreqCtrlEnDelay"){   #
+  field(VAL, "1")
+}
+
+record(ao, "LLRFQuickReArm:AutoFreqOffsetDelay"){   #
+  field(VAL, "1")
+}
+
+record(ao, "LLRFQuickReArm:AutoFreqCentralOffsetDelay"){   #
+  field(VAL, "1")
+}
+
+# changes from V2 -> V3
+
+record(bo, "LLRFQuickReArm:ContinuouswaveOn"){   #
+  field(VAL, "0")
+}
+
+# changes from v3 -> v3 cw+pulses
+
+record(bo, "LLRFQuickReArm:PulsesOnContWave"){   #
+  field(VAL, "0")
+}
+
+record(ao, "LLRFQuickReArm:Amprefmindelay"){   #
+  field(VAL, "0")
+}
+
+record(ao, "LLRFQuickReArm:CondModeEnabledelay"){   #
+  field(VAL, "0")
+}
+
+record(ao, "LLRFQuickReArm:Pwrrampendelay"){   #
+  field(VAL, "0")
+}
+
+record(ao, "LLRFQuickReArm:pcwrampdelay"){   #
+  field(VAL, "0")
+}
+
+record(ao, "LLRFQuickReArm:PulseOnCWRamp"){   #
+  field(VAL, "0")
+}
+
+record(ao, "LLRFQuickReArm:PulseOnCWCavVol"){   #
+  field(VAL, "0")
+}
+
+record(ao, "LLRFQuickReArm:ReArmStatus"){   #
+  field(VAL, "0")
+}
+
+
+
+
+

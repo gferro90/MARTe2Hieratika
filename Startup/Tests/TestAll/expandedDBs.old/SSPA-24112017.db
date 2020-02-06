@@ -1,0 +1,1709 @@
+record(ai,"RFM5A:LLRF:MorfDet") {
+	field(DESC,"Master Oscilator Detection")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"0.0086805559694767")
+	field(INP,"@S7-300 station_1.PLC_1.A:LLRF:MORF_DET")
+	field(EGU,"V")
+}
+record(ai,"RFM5A:MPAC_DET:Multipact") {
+	field(DESC,"AI Multipact")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:MPAC_DET:MULTIPACT")
+	field(PREC,"2")
+	field(EGU,"V")
+}
+record(ai,"RFM5A:PAMP:DpIm1") {
+	field(DESC,"Direct Power MB 1 & 2")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PAMP:DP_IM1")
+	field(PREC,"2")
+	field(EGU,"V")
+}
+record(ai,"RFM5A:PAMP:DpIm10") {
+	field(DESC,"Direct Power MB 19 & 20")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PAMP:DP_IM10")
+	field(PREC,"2")
+	field(EGU,"V")
+}
+record(ai,"RFM5A:PAMP:DpIm2") {
+	field(DESC,"Direct Power MB 3 & 4")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PAMP:DP_IM2")
+	field(PREC,"2")
+	field(EGU,"V")
+}
+record(ai,"RFM5A:PAMP:DpIm3") {
+	field(DESC,"Direct Power MB 5 & 6")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PAMP:DP_IM3")
+	field(PREC,"2")
+	field(EGU,"V")
+}
+record(ai,"RFM5A:PAMP:DpIm4") {
+	field(DESC,"Direct Power MB 7 & 8")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PAMP:DP_IM4")
+	field(PREC,"2")
+	field(EGU,"V")
+}
+record(ai,"RFM5A:PAMP:DpIm5") {
+	field(DESC,"Direct Power MB 9 & 10")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PAMP:DP_IM5")
+	field(PREC,"2")
+	field(EGU,"V")
+}
+record(ai,"RFM5A:PAMP:DpIm6") {
+	field(DESC,"Direct Power MB 11 & 12")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PAMP:DP_IM6")
+	field(PREC,"2")
+	field(EGU,"V")
+}
+record(ai,"RFM5A:PAMP:DpIm7") {
+	field(DESC,"Direct Power MB 13 & 14")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PAMP:DP_IM7")
+	field(PREC,"2")
+	field(EGU,"V")
+}
+record(ai,"RFM5A:PAMP:DpIm8") {
+	field(DESC,"Direct Power MB 15 & 16")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PAMP:DP_IM8")
+	field(PREC,"2")
+	field(EGU,"V")
+}
+record(ai,"RFM5A:PAMP:DpIm9") {
+	field(DESC,"Direct Power MB 17 & 18")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PAMP:DP_IM9")
+	field(PREC,"2")
+	field(EGU,"V")
+}
+record(ai,"RFM5A:PECO:CoolTemp") {
+	field(DESC,"Temperature Input")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"4")
+	field(INP,"@S7-300 station_1.PLC_1.A:PERIPH_CONTROL:COOL_TEMP")
+	field(PREC,"2")
+	field(EGU,"mA")
+}
+record(ai,"RFM5A:PVCO:BmFailed") {
+	field(DESC,"MB Failed (NONE / 1 MB / 2MB / >2MB)")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PV_CONTROL:BM_FAILED")
+}
+record(ai,"RFM5A:PVCO:DpMeas") {
+	field(DESC,"Direct Power")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PV_CONTROL:DP_MEAS")
+	field(PREC,"2")
+	field(EGU,"V")
+}
+record(ai,"RFM5A:PVCO:MaDeMdRdbk") {
+	field(DESC,"Degraded Mode Manual (41V 43V 48V 50V)")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"4")
+	field(INP,"@S7-300 station_1.PLC_1.A:PV_CONTROL:MAN_DEGR_MODE")
+	field(EGU,"V")
+}
+record(ai,"RFM5A:PVCO:RpMeas") {
+	field(DESC,"Reflected Power")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PV_CONTROL:RP_MEAS")
+	field(PREC,"2")
+	field(EGU,"V")
+}
+record(ai,"RFM5A:PVCO:SelDpGoal") {
+	field(DESC,"Direct power to reach")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"1")
+	field(INP,"@S7-300 station_1.PLC_1.A:PV_CONTROL:SELECTED_GOAL")
+}
+record(ai,"RFM5A:SYS:State") {
+	field(DESC,"Current state of system control")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"1")
+	field(INP,"@S7-300 station_1.PLC_1.A:SYS:STATE")
+}
+record(ai,"RFM5A:SYS:Status") {
+	field(DESC,"Current status of system control")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"3")
+	field(INP,"@S7-300 station_1.PLC_1.A:SYS:STATUS")
+}
+record(ai,"RFM5B:LLRF:MorfDet") {
+	field(DESC,"Master Oscilator Detection")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"0.0086805559694767")
+	field(INP,"@S7-300 station_1.PLC_1.B:LLRF:MORF_DET")
+	field(EGU,"V")
+}
+record(ai,"RFM5B:MPAC_DET:Multipact") {
+	field(DESC,"AI Multipact")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:MPAC_DET:MULTIPACT")
+	field(PREC,"2")
+	field(EGU,"V")
+}
+record(ai,"RFM5B:PAMP:DpIm1") {
+	field(DESC,"Direct Power MB 1 & 2")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PAMP:DP_IM1")
+	field(EGU,"V")
+}
+record(ai,"RFM5B:PAMP:DpIm10") {
+	field(DESC,"Direct Power MB 19 & 20")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PAMP:DP_IM10")
+	field(EGU,"V")
+}
+record(ai,"RFM5B:PAMP:DpIm2") {
+	field(DESC,"Direct Power MB 3 & 4")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PAMP:DP_IM2")
+	field(EGU,"V")
+}
+record(ai,"RFM5B:PAMP:DpIm3") {
+	field(DESC,"Direct Power MB 5 & 6")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PAMP:DP_IM3")
+	field(EGU,"V")
+}
+record(ai,"RFM5B:PAMP:DpIm4") {
+	field(DESC,"Direct Power MB 7 & 8")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PAMP:DP_IM4")
+	field(EGU,"V")
+}
+record(ai,"RFM5B:PAMP:DpIm5") {
+	field(DESC,"Direct Power MB 9 & 10")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PAMP:DP_IM5")
+	field(EGU,"V")
+}
+record(ai,"RFM5B:PAMP:DpIm6") {
+	field(DESC,"Direct Power MB 11 & 12")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PAMP:DP_IM6")
+	field(EGU,"V")
+}
+record(ai,"RFM5B:PAMP:DpIm7") {
+	field(DESC,"Direct Power MB 13 & 14")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PAMP:DP_IM7")
+	field(EGU,"V")
+}
+record(ai,"RFM5B:PAMP:DpIm8") {
+	field(DESC,"Direct Power MB 15 & 16")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PAMP:DP_IM8")
+	field(EGU,"V")
+}
+record(ai,"RFM5B:PAMP:DpIm9") {
+	field(DESC,"Direct Power MB 17 & 18")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PAMP:DP_IM9")
+	field(EGU,"V")
+}
+record(ai,"RFM5B:PECO:CoolTemp") {
+	field(DESC,"Temperature Input")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"4")
+	field(INP,"@S7-300 station_1.PLC_1.B:PERIPH_CONTROL:COOL_TEMP")
+	field(EGU,"mA")
+}
+record(ai,"RFM5B:PVCO:BmFailed") {
+	field(DESC,"Degraded Mode Manual")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PV_CONTROL:BM_FAILED")
+}
+record(ai,"RFM5B:PVCO:DpMeas") {
+	field(DESC,"Direct Power")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PV_CONTROL:DP_MEAS")
+	field(EGU,"V")
+}
+record(ai,"RFM5B:PVCO:MaDeMdRdbk") {
+	field(DESC,"Degraded Mode Manual")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"4")
+	field(INP,"@S7-300 station_1.PLC_1.B:PV_CONTROL:MAN_DEGR_MODE")
+	field(EGU,"V")
+}
+record(ai,"RFM5B:PVCO:RpMeas") {
+	field(DESC,"Reflected Power")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PV_CONTROL:RP_MEAS")
+	field(EGU,"V")
+}
+record(ai,"RFM5B:PVCO:SelDpGoal") {
+	field(DESC,"Direct power to reach")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"1")
+	field(INP,"@S7-300 station_1.PLC_1.B:PV_CONTROL:SELECTED_GOAL")
+}
+record(ai,"RFM5B:SYS:State") {
+	field(DESC,"Current state of system control")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"1")
+	field(INP,"@S7-300 station_1.PLC_1.B:SYS:STATE")
+}
+record(ai,"RFM5B:SYS:Status") {
+	field(DESC,"Current status of system control")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"3")
+	field(INP,"@S7-300 station_1.PLC_1.B:SYS:STATUS")
+}
+record(ao,"RFM5A:PVCO:DpGoal") {
+	field(DESC,"Direct Power Goal")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"9")
+	field(OUT,"@S7-300 station_1.PLC_1.A:PV_CONTROL:DP_GOAL")
+	field(PREC,"2")
+	field(EGU,"Kw")
+}
+record(ao,"RFM5A:PVCO:MaDeMdSet") {
+	field(DESC,"Degraded Mode Manual (41V 43V 48V 50V)")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"4")
+	field(OUT,"@S7-300 station_1.PLC_1.A:PV_CONTROL:MAN_DEGR_MODE")
+	field(EGU,"V")
+}
+record(ao,"RFM5A:SYS:Command") {
+	field(DESC,"Secure start up command")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"4")
+	field(OUT,"@S7-300 station_1.PLC_1.A:SYS:COMMAND")
+	field(EGU,"V")
+}
+record(ao,"RFM5A:SYS:CooTempSet") {
+	field(DESC,"Sets coolant fluid temperature alarm if")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"11.3999977111816")
+	field(OUT,"@S7-300 station_1.PLC_1.A:SYS:COOLANT_TEMPERATURE")
+	field(EGU,"mA")
+}
+record(ao,"RFM5A:SYS:DirPowSet") {
+	field(DESC,"Sets direct power alarm if measure is")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.A:SYS:DIRECT_POWER")
+	field(EGU,"V")
+}
+record(ao,"RFM5A:SYS:Goal1Set") {
+	field(DESC,"Range Goal 1 threshold")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"9.5")
+	field(OUT,"@S7-300 station_1.PLC_1.A:SYS:GOAL_TH1")
+	field(PREC,"2")
+	field(EGU,"kW")
+}
+record(ao,"RFM5A:SYS:Goal2Set") {
+	field(DESC,"Range Goal 2 threshold")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"11.5")
+	field(OUT,"@S7-300 station_1.PLC_1.A:SYS:GOAL_TH2")
+	field(PREC,"2")
+	field(EGU,"kW")
+}
+record(ao,"RFM5A:SYS:Goal3Set") {
+	field(DESC,"Range Goal 3 threshold")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"13")
+	field(OUT,"@S7-300 station_1.PLC_1.A:SYS:GOAL_TH3")
+	field(PREC,"2")
+	field(EGU,"kW")
+}
+record(ao,"RFM5A:SYS:VacHighSet") {
+	field(DESC,"Close the LLRF interlock High if measure")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.A:SYS:VACUUM_HIGH")
+	field(EGU,"mBar")
+}
+record(ao,"RFM5A:SYS:VacLowSet") {
+	field(DESC,"Close the LLRF interlock Low if measure")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.A:SYS:VACUUM_LOW")
+	field(EGU,"mBar")
+}
+record(ao,"RFM5A:VAC_DET:VacRdbk") {
+	field(DESC,"AlVacuum")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.A:VAC_DET:VACUUM")
+	field(PREC,"2")
+	field(EGU,"mBar")
+}
+record(ao,"RFM5B:PVCO:DpGoal") {
+	field(DESC,"Direct Power Goal")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"7")
+	field(OUT,"@S7-300 station_1.PLC_1.B:PV_CONTROL:DP_GOAL")
+	field(PREC,"2")
+	field(EGU,"Kw")
+}
+record(ao,"RFM5B:PVCO:MaDeMdSet") {
+	field(DESC,"Degraded Mode Manual")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"4")
+	field(OUT,"@S7-300 station_1.PLC_1.B:PV_CONTROL:MAN_DEGR_MODE")
+	field(EGU,"V")
+}
+record(ao,"RFM5B:SYS:Command") {
+	field(DESC,"Secure start up command")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"1")
+	field(OUT,"@S7-300 station_1.PLC_1.B:SYS:COMMAND")
+	field(EGU,"V")
+}
+record(ao,"RFM5B:SYS:CooTempSet") {
+	field(DESC,"Sets coolant fluid temperature alarm if")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"9.09999942779541")
+	field(OUT,"@S7-300 station_1.PLC_1.B:SYS:COOLANT_TEMPERATURE")
+	field(EGU,"mA")
+}
+record(ao,"RFM5B:SYS:DirPowSet") {
+	field(DESC,"Sets direct power alarm if measure is")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.B:SYS:DIRECT_POWER")
+	field(EGU,"V")
+}
+record(ao,"RFM5B:SYS:Goal1Set") {
+	field(DESC,"Range Goal 1 threshold")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"9.5")
+	field(OUT,"@S7-300 station_1.PLC_1.B:SYS:GOAL_TH1")
+	field(PREC,"2")
+	field(EGU,"kW")
+}
+record(ao,"RFM5B:SYS:Goal2Set") {
+	field(DESC,"Range Goal 2 threshold")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"11.5")
+	field(OUT,"@S7-300 station_1.PLC_1.B:SYS:GOAL_TH2")
+	field(PREC,"2")
+	field(EGU,"kW")
+}
+record(ao,"RFM5B:SYS:Goal3Set") {
+	field(DESC,"Range Goal 3 threshold")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(VAL,"13")
+	field(OUT,"@S7-300 station_1.PLC_1.B:SYS:GOAL_TH3")
+	field(PREC,"2")
+	field(EGU,"kW")
+}
+record(ao,"RFM5B:SYS:VacHighSet") {
+	field(DESC,"Close the LLRF interlock High if measure")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.B:SYS:VACUUM_HIGH")
+	field(EGU,"mBar")
+}
+record(ao,"RFM5B:SYS:VacLowSet") {
+	field(DESC,"Close the LLRF interlock Low if measure")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.B:SYS:VACUUM_LOW")
+	field(EGU,"mBar")
+}
+record(ao,"RFM5B:VAC_DET:VacRdbk") {
+	field(DESC,"AlVacuum")
+	field(SCAN,"1 second")
+	field(DTYP,"opc")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.B:VAC_DET:VACUUM")
+	field(PREC,"2")
+	field(EGU,"mBar")
+}
+record(bi,"RFM5:CTRL:CabinBreak") {
+	field(DESC,"Cabinet breaker")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.CTRL:CABINET_BREAKER")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5:CTRL:CabinSurge") {
+	field(DESC,"Cabinet surge")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.CTRL:CABINET_SURGE")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5:PPS1:Permission") {
+	field(DESC,"Permit emit RF wave into the MEBT cavity")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.PPS_1:PERMISSION")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5:PPS2:Permission") {
+	field(DESC,"Permit emit RF wave into the MEBT cavity")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.PPS_2:PERMISSION")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5:UPS:Status") {
+	field(DESC,"UPS Status")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.UPS:STATUS")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:ARC_DET:Arc1") {
+	field(DESC,"Arc Detector Signal 1")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:ARC_DET:ARC1")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:ARC_DET:Arc2") {
+	field(DESC,"Arc Detector Signal 2")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:ARC_DET:ARC2")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:ARC_DET:Arc3") {
+	field(DESC,"Arc Detector Signal 3")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:ARC_DET:ARC3")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:ARC_DET:Arc4") {
+	field(DESC,"Arc Detector Signal 4")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:ARC_DET:ARC4")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:ARC_DET:Arc5") {
+	field(DESC,"Arc Detector Signal 5")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:ARC_DET:ARC5")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:ARC_DET:Arc6") {
+	field(DESC,"Arc Detector Signal 6")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:ARC_DET:ARC6")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:ARC_DET:Arc7") {
+	field(DESC,"Arc Detector Signal 7")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:ARC_DET:ARC7")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:ARC_DET:Arc8") {
+	field(DESC,"Arc Detector Signal 8")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:ARC_DET:ARC8")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:IFUN:AlarmsAmps") {
+	field(DESC,"Alarm Amplifiers")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:IF_UNIT:ALARM_AMPS")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:IFUN:ReAlarStat") {
+	field(DESC,"Command Reset Alarms")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:IF_UNIT:RESET_ALARMS")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:IFUN:WarAmps") {
+	field(DESC,"Warning Amplifiers")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:IF_UNIT:WARN_AMPS")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:IFUN:WarCabinet") {
+	field(DESC,"Warning Cabinet")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:IF_UNIT:WARN_CABINET")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:LLRF:IntLocIn") {
+	field(DESC,"Interlock Input (From LLRF)")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:LLRF:INTERLOCK_IN")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:LLRF:IntLocOut") {
+	field(DESC,"Interlock Output (to LLRF) (Tx Ready A)")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:LLRF:INTERLOCK_OUT")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:LLRF:VacIntLocH") {
+	field(DESC,"Vacuum High level threshold ( DO VACUUM)")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:LLRF:VACUUM_ITCK_H")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:LLRF:VacIntLocL") {
+	field(DESC,"Vacuum Low level threshold ( DO VACUUM)")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:LLRF:VACUUM_ITCK_L")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:MPS:SysFault") {
+	field(DESC,"RF 9 Interlock (MEBT)")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:MPS:SYSTEM_FAULT")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:PDRV:GenAlarm") {
+	field(DESC,"General Alarm from Pre driver")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PRE_DRIVER:ALARM")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:PDRV:StartUpStat") {
+	field(DESC,"Predriver Start Up Status")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PRE_DRIVER:STATUS")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:PECO:AlaCoolFlw") {
+	field(DESC,"Alarm Water flowrate")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PERIPH_CONTROL:ALARM_COOL_FLOW")
+	field(ZNAM,"ALA")
+	field(ONAM,"OK")
+}
+record(bi,"RFM5A:PECO:CoolPress") {
+	field(DESC,"Pressure Input")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PERIPH_CONTROL:COOL_PRESS")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:PECO:MainsSuper") {
+	field(DESC,"AC + - 20%")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PERIPH_CONTROL:MAINS_SUPERVISION")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:PECO:SspaMaBrk") {
+	field(DESC,"Breaker status")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PERIPH_CONTROL:SSPA_MAINS_BREAKER")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:PECO:StartUp") {
+	field(DESC,"Startup System")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PERIPH_CONTROL:START_UP")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:PECO:Status") {
+	field(DESC,"Peripheral Control Status")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PERIPH_CONTROL:STATUS")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:PECO:WarCoolFlw") {
+	field(DESC,"Warning Water flowrate")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PERIPH_CONTROL:WARN_COOL_FLOW")
+	field(ZNAM,"OK")
+	field(ONAM,"WAR")
+}
+record(bi,"RFM5A:PVCO:AuDiEfStat") {
+	field(DESC,"DegradedModeAuto(Max Effic/High Aviab)")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PV_CONTROL:AUTO_DISP_EFFIC")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:PVCO:MdMaAuStat") {
+	field(DESC,"Mode Automatic or Manual ( Degraded op)")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PV_CONTROL:MODE_MAN_AUTO")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:PVCO:Ready") {
+	field(DESC,"RF Amplifier Ready")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:PV_CONTROL:READY")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:PVCO:TestMdStat") {
+	field(DESC,"Test Mode")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:IF_UNIT:TEST_MODE")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:SWCH1:OpenClose") {
+	field(DESC,"Command Open/close switch")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:SWITCH_1:OPEN_CLOSE")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:SWCH2:OpenClose") {
+	field(DESC,"Command Open/close switch")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:SWITCH_2:OPEN_CLOSE")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5A:SYS:ContWaveRdk") {
+	field(DESC,"Continuous wave mode readback")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.A:SYS:CONT_WAVE_ENABLE")
+}
+record(bi,"RFM5B:ARC_DET:Arc1") {
+	field(DESC,"Arc Detector Signal 1")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:ARC_DET:ARC1")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:ARC_DET:Arc2") {
+	field(DESC,"Arc Detector Signal 2")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:ARC_DET:ARC2")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:ARC_DET:Arc3") {
+	field(DESC,"Arc Detector Signal 3")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:ARC_DET:ARC3")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:ARC_DET:Arc4") {
+	field(DESC,"Arc Detector Signal 4")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:ARC_DET:ARC4")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:ARC_DET:Arc5") {
+	field(DESC,"Arc Detector Signal 5")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:ARC_DET:ARC5")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:ARC_DET:Arc6") {
+	field(DESC,"Arc Detector Signal 6")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:ARC_DET:ARC6")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:ARC_DET:Arc7") {
+	field(DESC,"Arc Detector Signal 7")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:ARC_DET:ARC7")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:ARC_DET:Arc8") {
+	field(DESC,"Arc Detector Signal 8")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:ARC_DET:ARC8")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:IFUN:AlarmsAmps") {
+	field(DESC,"Alarm Amplifiers")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:IF_UNIT:ALARM_AMPS")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:IFUN:ReAlarStat") {
+	field(DESC,"Command Reset Alarms")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:IF_UNIT:RESET_ALARMS")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:IFUN:WarAmps") {
+	field(DESC,"Warning Amplifiers")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:IF_UNIT:WARN_AMPS")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:IFUN:WarCabinet") {
+	field(DESC,"Warning Cabinet")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:IF_UNIT:WARN_CABINET")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:LLRF:IntLocIn") {
+	field(DESC,"Interlock Input (From LLRF)")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:LLRF:INTERLOCK_IN")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:LLRF:IntLocOut") {
+	field(DESC,"Interlock Output (to LLRF) (Tx Ready B)")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:LLRF:INTERLOCK_OUT")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:LLRF:VacIntLocH") {
+	field(DESC,"Vacuum High level threshold ( DO VACUUM)")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:LLRF:VACUUM_ITCK_H")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:LLRF:VacIntLocL") {
+	field(DESC,"Vacuum Low level threshold ( DO VACUUM)")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:LLRF:VACUUM_ITCK_L")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:MPS:SysFault") {
+	field(DESC,"RF 10 Interlock (MEBT)")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:MPS:SYSTEM_FAULT")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:PDRV:GenAlarm") {
+	field(DESC,"General Alarm from Pre driver")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PRE_DRIVER:ALARM")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:PDRV:StartUpStat") {
+	field(DESC,"Predriver Start Up Status")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PRE_DRIVER:STATUS")
+	field(VAL,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:PECO:AlaCoolFlw") {
+	field(DESC,"Alarm Water flowrate")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PERIPH_CONTROL:ALARM_COOL_FLOW")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:PECO:CoolPress") {
+	field(DESC,"Pressure Input")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PERIPH_CONTROL:COOL_PRESS")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:PECO:MainsSuper") {
+	field(DESC,"AC + - 20%")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PERIPH_CONTROL:MAINS_SUPERVISION")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:PECO:SspaMaBrk") {
+	field(DESC,"Breaker status")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PERIPH_CONTROL:SSPA_MAINS_BREAKER")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:PECO:StartUp") {
+	field(DESC,"Startup System")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PERIPH_CONTROL:START_UP")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:PECO:Status") {
+	field(DESC,"Peripheral Control Status")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PERIPH_CONTROL:STATUS")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:PECO:WarCoolFlw") {
+	field(DESC,"Warning Water flowrate")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PERIPH_CONTROL:WARN_COOL_FLOW")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:PVCO:AuDiEfStat") {
+	field(DESC,"Degraded Mode Automatic.")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PV_CONTROL:AUTO_DISP_EFFIC")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:PVCO:MdMaAuStat") {
+	field(DESC,"Mode Automatic or Manual ( Degraded op)")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PV_CONTROL:MODE_MAN_AUTO")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:PVCO:Ready") {
+	field(DESC,"RF Amplifier Ready")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:PV_CONTROL:READY")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:PVCO:TestMdStat") {
+	field(DESC,"Test Mode")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:IF_UNIT:TEST_MODE")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:SWCH1:OpenClose") {
+	field(DESC,"Command Open/close switch")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:SWITCH_1:OPEN_CLOSE")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:SWCH2:OpenClose") {
+	field(DESC,"Command Open/close switch")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:SWITCH_2:OPEN_CLOSE")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bi,"RFM5B:SYS:ContWaveRdk") {
+	field(DESC,"Continuous wave mode readback")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(INP,"@S7-300 station_1.PLC_1.B:SYS:CONT_WAVE_ENABLE")
+}
+record(bo,"RFM5:ARC_DET:ArcReset") {
+	field(DESC,"Reset")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.ARC_DET:ARC_RESET")
+	field(HIGH,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bo,"RFM5A:IFUN:ReAlarCmd") {
+	field(DESC,"Command Reset Alarms")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.A:IF_UNIT:RESET_ALARMS")
+	field(HIGH,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bo,"RFM5A:PDRV:StartUpCmd") {
+	field(DESC,"General Alarm from Pre driver")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.A:PRE_DRIVER:START_UP")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bo,"RFM5A:PVCO:AuDiEfCmd") {
+	field(DESC,"DegradedModeAuto(Max Effic/High Aviab)")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.A:PV_CONTROL:AUTO_DISP_EFFIC")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bo,"RFM5A:PVCO:MdMaAuCmd") {
+	field(DESC,"Mode Automatic or Manual ( Degraded op)")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.A:PV_CONTROL:MODE_MAN_AUTO")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bo,"RFM5A:PVCO:TestMdCmd") {
+	field(DESC,"Test Mode")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.A:IF_UNIT:TEST_MODE")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bo,"RFM5A:SYS:AcProteCmd") {
+	field(DESC,"Consider/ignore peripheral control mains")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.A:SYS:AC_PROTECTION")
+}
+record(bo,"RFM5A:SYS:ContWaveSet") {
+	field(DESC,"Continuous wave mode Set")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.A:SYS:CONT_WAVE_ENABLE")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bo,"RFM5B:IFUN:ReAlarCmd") {
+	field(DESC,"Command Reset Alarms")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.B:IF_UNIT:RESET_ALARMS")
+	field(HIGH,"1")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bo,"RFM5B:PDRV:StartUpCmd") {
+	field(DESC,"General Alarm from Pre driver")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.B:PRE_DRIVER:START_UP")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bo,"RFM5B:PVCO:AuDiEfCmd") {
+	field(DESC,"Degraded Mode Automatic.")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.B:PV_CONTROL:AUTO_DISP_EFFIC")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bo,"RFM5B:PVCO:MdMaAuCmd") {
+	field(DESC,"Mode Automatic or Manual ( Degraded op)")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.B:PV_CONTROL:MODE_MAN_AUTO")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bo,"RFM5B:PVCO:TestMdCmd") {
+	field(DESC,"Test Mode")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.B:IF_UNIT:TEST_MODE")
+	field(ZNAM,"0")
+	field(ONAM,"1")
+}
+record(bo,"RFM5B:SYS:AcProteCmd") {
+	field(DESC,"Consider/ignore peripheral control mains")
+	field(SCAN,"1 second")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.B:SYS:AC_PROTECTION")
+}
+record(bo,"RFM5B:SYS:ContWaveSet") {
+	field(SCAN,"1 second")
+	field(PINI,"YES")
+	field(DTYP,"opcRaw")
+	field(UDF,"0")
+	field(OUT,"@S7-300 station_1.PLC_1.B:SYS:CONT_WAVE_ENABLE")
+}
+record(calc,"RFM5:PPS:Permission") {
+	field(DESC,"Permit emit RF wave into the MEBT cavity")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"MIN(A,B)")
+	field(INPA,"RFM5:PPS1:Permission NPP NMS")
+	field(INPB,"RFM5:PPS2:Permission NPP NMS")
+}
+record(calc,"RFM5A:ARC_DET:ArcSum") {
+	field(DESC,"Arc Detector Signals Summary")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"MIN(A,B,C,D,E,F,G,H)")
+	field(INPA,"RFM5A:ARC_DET:Arc1 NPP NMS")
+	field(INPB,"RFM5A:ARC_DET:Arc2 NPP NMS")
+	field(INPC,"RFM5A:ARC_DET:Arc3 NPP NMS")
+	field(INPD,"RFM5A:ARC_DET:Arc4 NPP NMS")
+	field(INPE,"RFM5A:ARC_DET:Arc5 NPP NMS")
+	field(INPF,"RFM5A:ARC_DET:Arc6 NPP NMS")
+	field(INPG,"RFM5A:ARC_DET:Arc7 NPP NMS")
+	field(INPH,"RFM5A:ARC_DET:Arc8 NPP NMS")
+}
+record(calc,"RFM5A:IFUN:EvAmps") {
+	field(DESC,"Event Amplifiers")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"MAX(A*1,B*2)")
+	field(INPA,"RFM5A:IFUN:WarAmps NPP NMS")
+	field(INPB,"RFM5A:IFUN:AlarmsAmps NPP NMS")
+}
+record(calc,"RFM5A:LLRF:VacIntLoc") {
+	field(DESC,"Vacuum level event")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"A + B")
+	field(INPA,"RFM5A:LLRF:VacIntLocH NPP NMS")
+	field(INPB,"RFM5A:LLRF:VacIntLocL NPP NMS")
+}
+record(calc,"RFM5A:PAMP:DpIm10Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5A:PAMP:DpIm10 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5A:PAMP:DpIm1Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5A:PAMP:DpIm1 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5A:PAMP:DpIm2Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5A:PAMP:DpIm2 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5A:PAMP:DpIm3Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5A:PAMP:DpIm3 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5A:PAMP:DpIm4Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5A:PAMP:DpIm4 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5A:PAMP:DpIm5Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5A:PAMP:DpIm5 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5A:PAMP:DpIm6Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5A:PAMP:DpIm6 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5A:PAMP:DpIm7Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5A:PAMP:DpIm7 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5A:PAMP:DpIm8Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5A:PAMP:DpIm8 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5A:PAMP:DpIm9Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5A:PAMP:DpIm9 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5A:PECO:CoolTempDeg") {
+	field(DESC,"Temperature Input Celsius Degrees")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"5.625*(A-4)")
+	field(INPA,"RFM5A:PECO:CoolTemp NPP NMS")
+	field(EGU,"deg")
+	field(PREC,"1")
+}
+record(calc,"RFM5A:PECO:EvCoolFlw") {
+	field(DESC,"Event Water flowrate")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"MAX(A*1,(!B)*2)")
+	field(INPA,"RFM5A:PECO:WarCoolFlw NPP NMS")
+	field(INPB,"RFM5A:PECO:AlaCoolFlw NPP NMS")
+}
+record(calc,"RFM5A:PPS:Permission") {
+	field(DESC,"Permit emit RF wave into the MEBT cavity")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"MIN(A,B)")
+	field(INPA,"RFM5:PPS1:Permission NPP NMS")
+	field(INPB,"RFM5:PPS2:Permission NPP NMS")
+}
+record(calc,"RFM5A:PVCO:DpMeasKw") {
+	field(DESC,"Direct Power Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"16*(A/8.13)*(A/8.13)")
+	field(INPA,"RFM5A:PVCO:DpMeas NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"25")
+}
+record(calc,"RFM5A:PVCO:RpMeasKw") {
+	field(DESC,"Reflected Power Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"16*(A/8.13)*(A/8.13)")
+	field(INPA,"RFM5A:PVCO:RpMeas NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"25")
+}
+record(calc,"RFM5A:SYS:CooTempSetDeg") {
+	field(DESC,"Temperature Input Celsius Degrees")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"5.625*(A-4)")
+	field(INPA,"RFM5A:SYS:CooTempSet NPP NMS")
+	field(EGU,"deg")
+	field(PREC,"1")
+}
+record(calc,"RFM5B:ARC_DET:ArcSum") {
+	field(DESC,"Arc Detector Signals Summary")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"MAX(A,B,C,D,E,F,G,H)")
+	field(INPA,"RFM5B:ARC_DET:Arc1 NPP NMS")
+	field(INPB,"RFM5B:ARC_DET:Arc2 NPP NMS")
+	field(INPC,"RFM5B:ARC_DET:Arc3 NPP NMS")
+	field(INPD,"RFM5B:ARC_DET:Arc4 NPP NMS")
+	field(INPE,"RFM5B:ARC_DET:Arc5 NPP NMS")
+	field(INPF,"RFM5B:ARC_DET:Arc6 NPP NMS")
+	field(INPG,"RFM5B:ARC_DET:Arc7 NPP NMS")
+	field(INPH,"RFM5B:ARC_DET:Arc8 NPP NMS")
+}
+record(calc,"RFM5B:IFUN:EvAmps") {
+	field(DESC,"Event Amplifiers")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"MAX(A*1,B*2)")
+	field(INPA,"RFM5B:IFUN:WarAmps NPP NMS")
+	field(INPB,"RFM5B:IFUN:AlarmsAmps NPP NMS")
+}
+record(calc,"RFM5B:LLRF:VacIntLoc") {
+	field(DESC,"Vacuum level event")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"A + B")
+	field(INPA,"RFM5B:LLRF:VacIntLocH NPP NMS")
+	field(INPB,"RFM5B:LLRF:VacIntLocL NPP NMS")
+}
+record(calc,"RFM5B:PAMP:DpIm10Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5B:PAMP:DpIm10 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5B:PAMP:DpIm1Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5B:PAMP:DpIm1 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5B:PAMP:DpIm2Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5B:PAMP:DpIm2 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5B:PAMP:DpIm3Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5B:PAMP:DpIm3 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5B:PAMP:DpIm4Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5B:PAMP:DpIm4 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5B:PAMP:DpIm5Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5B:PAMP:DpIm5 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5B:PAMP:DpIm6Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5B:PAMP:DpIm6 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5B:PAMP:DpIm7Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5B:PAMP:DpIm7 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5B:PAMP:DpIm8Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5B:PAMP:DpIm8 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5B:PAMP:DpIm9Kw") {
+	field(DESC,"Direct Power MB 1 & 2 Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"1.75*(A/8.56)*(A/8.56)")
+	field(INPA,"RFM5B:PAMP:DpIm9 NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"3.12")
+}
+record(calc,"RFM5B:PECO:CoolTempDeg") {
+	field(DESC,"Temperature Input Celsius Degrees")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"5.625*(A-4)")
+	field(INPA,"RFM5B:PECO:CoolTemp NPP NMS")
+	field(EGU,"deg")
+	field(PREC,"1")
+}
+record(calc,"RFM5B:PECO:EvCoolFlw") {
+	field(DESC,"Event Water flowrate")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"MAX(A*1,(!B)*2)")
+	field(INPA,"RFM5B:PECO:WarCoolFlw NPP NMS")
+	field(INPB,"RFM5B:PECO:AlaCoolFlw NPP NMS")
+}
+record(calc,"RFM5B:PPS:Permission") {
+	field(DESC,"Permit emit RF wave into the MEBT cavity")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"MIN(A,B)")
+	field(INPA,"RFM5:PPS1:Permission NPP NMS")
+	field(INPB,"RFM5:PPS2:Permission NPP NMS")
+}
+record(calc,"RFM5B:PVCO:DpMeasKw") {
+	field(DESC,"Direct Power Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"16*(A/8.13)*(A/8.13)")
+	field(INPA,"RFM5B:PVCO:DpMeas NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"25")
+}
+record(calc,"RFM5B:PVCO:RpMeasKw") {
+	field(DESC,"Reflected Power Kw")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"16*(A/8.13)*(A/8.13)")
+	field(INPA,"RFM5B:PVCO:RpMeas NPP NMS")
+	field(EGU,"KW")
+	field(PREC,"2")
+	field(HOPR,"25")
+}
+record(calc,"RFM5B:SYS:CooTempSetDeg") {
+	field(DESC,"Temperature Input Celsius Degrees")
+	field(SCAN,"1 second")
+	field(UDF,"0")
+	field(CALC,"5.625*(A-4)")
+	field(INPA,"RFM5B:SYS:CooTempSet NPP NMS")
+	field(EGU,"deg")
+	field(PREC,"1")
+}

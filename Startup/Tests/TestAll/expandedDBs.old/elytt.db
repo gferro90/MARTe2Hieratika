@@ -1,0 +1,4950 @@
+# INPUT REGISTERS
+
+# registers 30001-32
+# This record gets the first 32 input registers in a single modbus transaction
+# It is not intended for direct use, but only to feed aInputRegs record
+record(waveform, "MEBT:QP01_PS:InputRegs"){
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:get30001-32 0 2000)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Modbus input registers")
+    field(NELM, "32")
+    field(FTVL, "ULONG")
+    field(FLNK, "MEBT:QP01_PS:aInputRegs")
+}
+
+# This record combines decimal and integer part for current and voltage,
+# and also forward values to destination individual records.
+# It is not intended for direct use, but only to feed out records
+# Subroutine CalcIR is located at aSubElytt.c source file.
+record(aSub,"MEBT:QP01_PS:aInputRegs") {
+    field(DESC ,"Input registers calcs")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcIR")
+  # Input registers input
+    field(FTA, "ULONG")
+    field(NOA, "32")
+    field(INPA, "MEBT:QP01_PS:InputRegs NPP MSS")
+  # Outputs:
+    # Current monitor
+    field(FTVA, "DOUBLE")
+    field(OUTA, "MEBT:QP01_PS:IRdbk PP MSS")
+    # Voltage monitor
+    field(FTVB, "DOUBLE")
+    field(OUTB, "MEBT:QP01_PS:VRdbk PP MSS")
+    # Fan main
+    field(FTVC, "DOUBLE")
+    field(OUTC, "MEBT:QP01_PS:FanMain PP MSS")
+    # Fan power
+    field(FTVD, "DOUBLE")
+    field(OUTD, "MEBT:QP01_PS:FanPower PP MSS")
+    # Temp power module
+    field(FTVE, "DOUBLE")
+    field(OUTE, "MEBT:QP01_PS:PowerModT PP MSS")
+    # Temp HF trafo
+    field(FTVF, "DOUBLE")
+    field(OUTF, "MEBT:QP01_PS:HFtrafoT PP MSS")
+    # Temp chamber
+    field(FTVG, "DOUBLE")
+    field(OUTG, "MEBT:QP01_PS:ChamberT PP MSS")
+    # Status
+    field(FTVH, "ULONG")
+    field(OUTH, "MEBT:QP01_PS:Stat PP MSS")
+    # Errors
+    field(FTVI, "ULONG")
+    field(OUTI, "MEBT:QP01_PS:Errors PP MSS")
+    # Last interlock
+    field(FTVJ, "STRING")
+    field(OUTJ, "MEBT:QP01_PS:Ilk PP MSS")
+    # Last interlock code
+    field(FTVK, "ULONG")
+    # Last interlock description
+    field(FTVL, "STRING")
+}
+
+#Output current monitor
+record(ai, "MEBT:QP01_PS:IRdbk") {
+    field(DESC ,"Ouput current monitor")
+    field(PREC, "3")
+    field(HOPR, "180")
+    field(HIHI, "179")
+    field(HIGH, "175")
+    field(LOW, "0")
+    field(LOLO, "0")
+    field(LOPR, "0")
+    field(EGU, "A")
+}
+
+#Output voltage monitor
+record(ai, "MEBT:QP01_PS:VRdbk") {
+    field(DESC ,"Ouput voltage monitor")
+    field(PREC, "2")
+    field(HOPR, "20")
+    field(LOPR, "0")
+    field(EGU, "V")
+}
+
+#register 30005
+record(ai, "MEBT:QP01_PS:FanMain") {
+    field(DESC ,"Fan Main")
+    field(HOPR, "6000")
+    field(LOPR, "0")
+    field(EGU, "rpm")
+}
+
+#register 30006
+record(ai, "MEBT:QP01_PS:FanPower") {
+    field(DESC ,"Fan Power")
+    field(HOPR, "2900")
+    field(LOPR, "0")
+    field(EGU, "rpm")
+}
+
+#register 30007
+#record(ai, "MEBT:QP01_PS:TempPowMod") {
+record(ai, "MEBT:QP01_PS:PowerModT") {
+    field(PREC,"1")
+    field(DESC ,"Temperature Power Module")
+    field(HOPR, "125")
+    field(LOPR, "0")
+    field(EGU, "degC")
+}
+
+#register 30008
+record(ai, "MEBT:QP01_PS:HFtrafoT") {
+    field(PREC,"1")
+    field(DESC ,"Temperature HF Trafo")
+    field(HOPR, "125")
+    field(LOPR, "0")
+    field(EGU, "degC")
+}
+
+#register 30009
+record(ai, "MEBT:QP01_PS:ChamberT") {
+    field(PREC,"1")
+    field(DESC ,"Temperature Chamber")
+    field(HOPR, "125")
+    field(LOPR, "0")
+    field(EGU, "degC")
+}
+
+#register 30010
+record(mbbi, "MEBT:QP01_PS:Stat") {
+    field(DESC ,"Power Unit status")
+    field(ZRST, "STARTING")
+    field(ZRVL, "0x0000")
+    field(ONST, "MAKING SOFTSTART")
+    field(ONVL, "0x0001")
+    field(TWST, "IDLE")
+    field(TWVL, "0x0002")
+    field(THST, "OPERATING")
+    field(THVL, "0x0003")
+    field(FRST, "SLOW SHUTDOWN")
+    field(FRVL, "0x0004")
+    field(FVST, "EMERGENCY STOP")
+    field(FVVL, "0x0005")
+}
+
+#registers 30011-2
+record(longin, "MEBT:QP01_PS:Errors") {
+    field(DESC, "Errors")
+}
+
+#interlocks 
+
+#Last (most recent) interlock.
+record(stringin, "MEBT:QP01_PS:Ilk"){
+    field(DESC ,"Most recent interlock")
+}
+
+# HOLDING REGISTERS
+
+# registers 40001-8
+# This record gets the eight holding registers in a single modbus transaction
+# It is not intended for direct use, but only to feed aHoldRegs record
+record(waveform, "MEBT:QP01_PS:HoldRegs"){
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:get40001-8 0 2000)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Modbus holding registers")
+    field(NELM, "8")
+    field(FTVL, "ULONG")
+    field(FLNK, "MEBT:QP01_PS:aHoldRegs")
+}
+
+# This record combines decimal and integer part for limits and setpoint,
+# and also forward values to destination individual records.
+# It is not intended for direct use, but only to feed out records
+# Subroutine CalcHR is located at aSubElytt.c source file.
+record(aSub,"MEBT:QP01_PS:aHoldRegs") {
+    field(DESC ,"Holding registers calcs")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcHR")
+  # Holding registers input
+    field(FTA, "ULONG")
+    field(NOA, "8")
+    field(INPA, "MEBT:QP01_PS:HoldRegs NPP MSS")
+  # Outputs:
+    # Current setpoint
+    field(FTVA, "DOUBLE")
+    field(OUTA, "MEBT:QP01_PS:ISet PP MSS")
+    # Operating state
+    field(FTVB, "ENUM")
+    field(OUTB, "MEBT:QP01_PS:OnCmd PP MSS")
+    # Errors command
+    field(FTVC, "ENUM")
+    field(OUTC, "MEBT:QP01_PS:ErrorReset PP MSS")
+    # Current limit
+    field(FTVD, "DOUBLE")
+    field(OUTD, "MEBT:QP01_PS:ILimit PP MSS")
+    field(FTVE, "DOUBLE")
+    field(OUTE, "MEBT:QP01_PS:ISet.DRVH NPP NMS")
+    # Voltage limit
+    field(FTVF, "DOUBLE")
+    field(OUTF, "MEBT:QP01_PS:VLimit PP MSS")
+}
+
+#IMPORTANT: Integer setting must be preceded by decimal setting
+#register 40001 - I
+record(ao, "MEBT:QP01_PS:IISet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT1:set40001 0 2000)MODBUS_DATA")
+    field(DESC ,"Current integer register")
+    field(EGU, "A")
+    field(PREC,"0")
+    field(DRVH, "180")
+    field(DRVL, "0")
+}
+
+#IMPORTANT: Decimal setting is not applied until further integer setting.
+#register 40002 - D
+record(ao, "MEBT:QP01_PS:IDSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT1:set40002 0 2000)MODBUS_DATA")
+    field(DESC ,"Current decimal register")
+    field(EGU, "mA")
+    field(PREC,"0")
+    field(DRVH, "999")
+    field(DRVL, "0")
+    field(FLNK, "MEBT:QP01_PS:IISet")
+}
+
+#Current setpoint
+record(ao, "MEBT:QP01_PS:ISet")
+{
+	field(DESC, "Current Setpoint")
+	field(PREC, "3")
+	field(SCAN, "Passive")
+    field(EGU, "A")
+	field(DRVH, "180.000")
+# DRVH is linked to ILimit
+	field(DRVL, "0")
+	field(HOPR, "180.000")
+	field(LOPR, "0.000")
+	field(FLNK, "MEBT:QP01_PS:IDSetCalc")
+}
+
+#Calculus of decimal part (mA) of current setpoint
+record(calcout, "MEBT:QP01_PS:IDSetCalc") {
+    field(SCAN, "Passive")
+	field(INPA, "MEBT:QP01_PS:ISet.VAL NPP MS")
+    #dec
+    field(OUT, "MEBT:QP01_PS:IDSet NPP")
+    field(CALC, "(A-FLOOR(A))*1000")
+	field(FLNK, "MEBT:QP01_PS:IISetCalc")
+    field(SDIS, "MEBT:QP01_PS:aHoldRegs.PACT")
+}
+
+#Calculus of integer part (A) of current setpoint
+record(calcout, "MEBT:QP01_PS:IISetCalc") {
+	field(SCAN, "Passive")
+    field(INPA, "MEBT:QP01_PS:ISet.VAL NPP MS")
+    #int
+    field(OUT, "MEBT:QP01_PS:IISet NPP")
+    field(CALC, "FLOOR(A)")
+	field(FLNK, "MEBT:QP01_PS:IDSet")
+}
+
+#register 40003
+record(bo, "MEBT:QP01_PS:MOnCmd") {
+    field(DOL, "MEBT:QP01_PS:OnCmd")
+    field(OMSL, "closed_loop")
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_ELYTT1:set40003 0 2000)MODBUS_DATA")
+    field(DESC ,"Operation state modbus register")
+    field(ZNAM, "IDLE")
+    field(ONAM, "OPERATING")
+    field(SDIS, "MEBT:QP01_PS:aHoldRegs.PACT")
+}
+
+# Operation state
+record(bo, "MEBT:QP01_PS:OnCmd") {
+    field(DESC,"Operation state")
+    field(ZNAM, "IDLE")
+    field(ONAM, "OPERATING")
+    field(FLNK, "MEBT:QP01_PS:MOnCmd")
+}
+
+
+#register 40004
+record(bo, "MEBT:QP01_PS:MErrReset") {
+    field(DOL, "MEBT:QP01_PS:ErrorReset")
+    field(OMSL, "closed_loop")
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_ELYTT1:set40004 0 2000)MODBUS_DATA")
+    field(DESC ,"Reset errors modbus register")
+    field(ZNAM, "NO RESET")
+    field(ONAM, "RESET")
+    field(SDIS, "MEBT:QP01_PS:aHoldRegs.PACT")
+}
+
+# Error Reset
+record(bo, "MEBT:QP01_PS:ErrorReset") {
+    field(DESC,"Reset errors")
+    field(ZNAM, "NO RESET")
+    field(ONAM, "RESET")
+    field(FLNK, "MEBT:QP01_PS:MErrReset")
+}
+
+#register 40005
+record(ao, "MEBT:QP01_PS:IILimitSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT1:set40005 0 2000)MODBUS_DATA")
+    field(DESC ,"Current limit integer register")
+    field(PREC,"0")
+    field(DRVH, "180")
+    field(DRVL, "0")
+    field(EGU, "A")
+}
+
+#register 40006
+record(ao, "MEBT:QP01_PS:IDLimitSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT1:set40006 0 2000)MODBUS_DATA")
+    field(DESC ,"Current limit decimal register")
+    field(PREC,"0")
+    field(DRVH, "999")
+    field(DRVL, "0")
+    field(EGU, "mA")
+    field(FLNK,"MEBT:QP01_PS:IILimitSet")
+}
+
+# Current Limit
+# ILimit -> ILSetCalc -> ILSetCalc -> ILDSet -> ILISet
+record(ao, "MEBT:QP01_PS:ILimit")
+{
+    field(SCAN, "Passive")
+    field(DESC, "Current Limit")
+    field(PREC, "3")
+    field(EGU, "A")
+    field(DRVH, "180.000")
+    field(DRVL, "0")
+	field(HOPR, "180.000")
+	field(LOPR, "0.000")
+    field(FLNK,"MEBT:QP01_PS:IDLSetCalc")
+}
+
+record(calcout, "MEBT:QP01_PS:IDLSetCalc") {
+   field(SCAN, "Passive")
+   field(INPA, "MEBT:QP01_PS:ILimit.VAL NPP MS")
+   #dec
+   field(OUT, "MEBT:QP01_PS:IDLimitSet NPP")
+   field(CALC, "(A-FLOOR(A))*1000")
+   field(FLNK,"MEBT:QP01_PS:IILSetCalc")
+   field(SDIS, "MEBT:QP01_PS:aHoldRegs.PACT")
+}
+
+record(calcout, "MEBT:QP01_PS:IILSetCalc") {
+    field(SCAN, "Passive")
+     field(INPA, "MEBT:QP01_PS:ILimit.VAL NPP MS")
+     #int
+     field(OUT, "MEBT:QP01_PS:IILimitSet NPP")
+     field(CALC, "FLOOR(A)")
+     field(FLNK,"MEBT:QP01_PS:IDLimitSet")
+}
+
+#register 40007
+record(ao, "MEBT:QP01_PS:VISet") {
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT1:set40007 0 2000)MODBUS_DATA")
+    field(DESC ,"Voltage limit integer register")
+    field(DRVH, "20.000")
+    field(DRVL, "0")
+    field(PREC,"2")
+    field(EGU, "V")
+}
+
+# Current limit readback
+record(ai, "MEBT:QP01_PS:ILimitRdbk") {
+    field(DESC,"Current limit readback")
+    field(PREC,"3")
+    field(SCAN ,"Passive")
+    field(EGU, "A")
+    field(HOPR, "180")
+    field(LOPR, "0")
+}
+
+#register 40008
+record(ao, "MEBT:QP01_PS:VDSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT1:set40008 0 2000)MODBUS_DATA")
+    field(DESC ,"Voltage decimal")
+    field(PREC,"2")
+    field(EGU, "mV")
+    field(DRVH, "999")
+    field(DRVL, "0")
+    field(FLNK, "MEBT:QP01_PS:VISet")
+}
+
+#register 40007+4008
+record(ao, "MEBT:QP01_PS:VLimit")
+{
+    field(DESC, "Voltage Limt")
+    field(PREC, "2")
+    field(SCAN, "Passive")
+    field(EGU, "V")
+    field(DRVH, "20.00")
+    field(DRVL, "0")
+	field(HOPR, "20.00")
+	field(LOPR, "0.00")
+    field(FLNK,"MEBT:QP01_PS:VDSetCalc")
+}
+
+record(calcout, "MEBT:QP01_PS:VDSetCalc") {
+    field(SCAN, "Passive")
+    field(INPA, "MEBT:QP01_PS:VLimit.VAL NPP MS")
+    #dec
+    field(OUT, "MEBT:QP01_PS:VDSet NPP")
+    field(CALC, "(A-FLOOR(A))*100")
+    field(FLNK,"MEBT:QP01_PS:VISetCalc")
+    field(SDIS, "MEBT:QP01_PS:aHoldRegs.PACT")
+}
+
+record(calcout, "MEBT:QP01_PS:VISetCalc") {
+    field(SCAN, "Passive")
+     field(INPA, "MEBT:QP01_PS:VLimit.VAL NPP MS")
+     #int
+     field(OUT, "MEBT:QP01_PS:VISet NPP")
+     field(CALC, "FLOOR(A)")
+     field(FLNK,"MEBT:QP01_PS:VDSet")
+}
+
+# INTERLOCK LOG
+
+record(aSub,"MEBT:QP01_PS:IlkLogA") {
+    field(DESC ,"Interlock log, last to 100th")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcIlkLog")
+    field(FTA, "LONG")
+    field(NOA, "100")
+    field(INPA, "MEBT:QP01_PS:IlkBlk01 NPP MS")
+    field(FTB, "LONG")
+    field(NOB, "100")
+    field(INPB, "MEBT:QP01_PS:IlkBlk02 NPP MS")
+    field(FTC, "LONG")
+    field(NOC, "100")
+    field(INPC, "MEBT:QP01_PS:IlkBlk03 NPP MS")
+    field(FTD, "LONG")
+    field(NOD, "100")
+    field(INPD, "MEBT:QP01_PS:IlkBlk04 NPP MS")
+    field(FTE, "LONG")
+    field(NOE, "100")
+    field(INPE, "MEBT:QP01_PS:IlkBlk05 NPP MS")
+    field(FTF, "LONG")
+    field(NOF, "100")
+    field(INPF, "MEBT:QP01_PS:IlkBlk06 NPP MS")
+    field(FTG, "LONG")
+    field(NOG, "100")
+    field(INPG, "MEBT:QP01_PS:IlkBlk07 NPP MS")
+    field(FTH, "LONG")
+    field(NOH, "100")
+    field(INPH, "MEBT:QP01_PS:IlkBlk08 NPP MS")
+    field(FTI, "LONG")
+    field(NOI, "100")
+    field(INPI, "MEBT:QP01_PS:IlkBlk09 NPP MS")
+    field(FTJ, "LONG")
+    field(NOJ, "100")
+    field(INPJ, "MEBT:QP01_PS:IlkBlk10 NPP MS")
+    field(FTK, "LONG")
+    field(NOK, "100")
+    field(INPK, "MEBT:QP01_PS:IlkBlk11 NPP MS")
+    field(FTL, "LONG")
+    field(NOL, "100")
+    field(INPL, "MEBT:QP01_PS:IlkBlk12 NPP MS")
+    field(FTM, "LONG")
+    field(NOM, "100")
+    field(INPM, "MEBT:QP01_PS:IlkBlk13 NPP MS")
+    field(FTN, "LONG")
+    field(NON, "100")
+    field(INPN, "MEBT:QP01_PS:IlkBlk14 NPP MS")
+    field(FTO, "LONG")
+    field(NOO, "100")
+    field(INPO, "MEBT:QP01_PS:IlkBlk15 NPP MS")
+    field(FTP, "LONG")
+    field(NOP, "100")
+    field(INPP, "MEBT:QP01_PS:IlkBlk16 NPP MS")
+    field(FTQ, "LONG")
+    field(NOQ, "100")
+    field(INPQ, "MEBT:QP01_PS:IlkBlk17 NPP MS")
+    field(FTR, "LONG")
+    field(NOR, "100")
+    field(INPR, "MEBT:QP01_PS:IlkBlk18 NPP MS")
+    field(FTS, "LONG")
+    field(NOS, "100")
+    field(INPS, "MEBT:QP01_PS:IlkBlk19 NPP MS")
+    field(FTT, "LONG")
+    field(NOT, "100")
+    field(INPT, "MEBT:QP01_PS:IlkBlk20 NPP MS")
+    field(FTVA, "STRING")
+    field(NOVA, "100")
+    field(FLNK, "MEBT:QP01_PS:IlkLogB PP")
+}
+record(aSub,"MEBT:QP01_PS:IlkLogB") {
+    field(DESC ,"Interlock log, 101st to 200th")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcIlkLog")
+    field(FTA, "LONG")
+    field(NOA, "100")
+    field(INPA, "MEBT:QP01_PS:IlkBlk21 NPP MS")
+    field(FTB, "LONG")
+    field(NOB, "100")
+    field(INPB, "MEBT:QP01_PS:IlkBlk22 NPP MS")
+    field(FTC, "LONG")
+    field(NOC, "100")
+    field(INPC, "MEBT:QP01_PS:IlkBlk23 NPP MS")
+    field(FTD, "LONG")
+    field(NOD, "100")
+    field(INPD, "MEBT:QP01_PS:IlkBlk24 NPP MS")
+    field(FTE, "LONG")
+    field(NOE, "100")
+    field(INPE, "MEBT:QP01_PS:IlkBlk25 NPP MS")
+    field(FTF, "LONG")
+    field(NOF, "100")
+    field(INPF, "MEBT:QP01_PS:IlkBlk26 NPP MS")
+    field(FTG, "LONG")
+    field(NOG, "100")
+    field(INPG, "MEBT:QP01_PS:IlkBlk27 NPP MS")
+    field(FTH, "LONG")
+    field(NOH, "100")
+    field(INPH, "MEBT:QP01_PS:IlkBlk28 NPP MS")
+    field(FTI, "LONG")
+    field(NOI, "100")
+    field(INPI, "MEBT:QP01_PS:IlkBlk29 NPP MS")
+    field(FTJ, "LONG")
+    field(NOJ, "100")
+    field(INPJ, "MEBT:QP01_PS:IlkBlk30 NPP MS")
+    field(FTK, "LONG")
+    field(NOK, "100")
+    field(INPK, "MEBT:QP01_PS:IlkBlk31 NPP MS")
+    field(FTL, "LONG")
+    field(NOL, "100")
+    field(INPL, "MEBT:QP01_PS:IlkBlk32 NPP MS")
+    field(FTM, "LONG")
+    field(NOM, "100")
+    field(INPM, "MEBT:QP01_PS:IlkBlk33 NPP MS")
+    field(FTN, "LONG")
+    field(NON, "100")
+    field(INPN, "MEBT:QP01_PS:IlkBlk34 NPP MS")
+    field(FTO, "LONG")
+    field(NOO, "100")
+    field(INPO, "MEBT:QP01_PS:IlkBlk35 NPP MS")
+    field(FTP, "LONG")
+    field(NOP, "100")
+    field(INPP, "MEBT:QP01_PS:IlkBlk36 NPP MS")
+    field(FTQ, "LONG")
+    field(NOQ, "100")
+    field(INPQ, "MEBT:QP01_PS:IlkBlk37 NPP MS")
+    field(FTR, "LONG")
+    field(NOR, "100")
+    field(INPR, "MEBT:QP01_PS:IlkBlk38 NPP MS")
+    field(FTS, "LONG")
+    field(NOS, "100")
+    field(INPS, "MEBT:QP01_PS:IlkBlk39 NPP MS")
+    field(FTT, "LONG")
+    field(NOT, "100")
+    field(INPT, "MEBT:QP01_PS:IlkBlk40 NPP MS")
+    field(FTVA, "STRING")
+    field(NOVA, "100")
+    field(FLNK, "MEBT:QP01_PS:IlkLog PP")
+}
+
+record(aSub,"MEBT:QP01_PS:IlkLog") {
+    field(DESC ,"Interlock log")
+    field(SCAN ,"Passive")
+    field(SNAM,"ConcatIlkLog")
+    field(FTA, "STRING")
+    field(NOA, "100")
+    field(INPA, "MEBT:QP01_PS:IlkLogA.VALA NPP MS")
+    field(FTB, "STRING")
+    field(NOB, "100")
+    field(INPB, "MEBT:QP01_PS:IlkLogB.VALA NPP MS")
+    field(FTVA, "STRING")
+    field(NOVA, "200")
+}
+
+# Interlock Block 01, holds 01 to 05
+record(waveform, "MEBT:QP01_PS:IlkBlk01") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk01,0,2000)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Aux Interlocks Block 01")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk02 PP")
+}
+# Interlock Block 02, holds 06 to 10
+record(waveform, "MEBT:QP01_PS:IlkBlk02") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk02,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 02")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk03 PP")
+}
+# Interlock Block 03, holds 11 to 15
+record(waveform, "MEBT:QP01_PS:IlkBlk03") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk03,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 03")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk04 PP")
+}
+# Interlock Block 04, holds 16 to 20
+record(waveform, "MEBT:QP01_PS:IlkBlk04") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk04,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 04")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk05 PP")
+}
+# Interlock Block 05, holds 21 to 25
+record(waveform, "MEBT:QP01_PS:IlkBlk05") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk05 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 05")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk06 PP")
+}
+# Interlock Block 06, holds 26 to 30
+record(waveform, "MEBT:QP01_PS:IlkBlk06") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk06 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 06")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk07 PP")
+}
+# Interlock Block 07, holds 31 to 35
+record(waveform, "MEBT:QP01_PS:IlkBlk07") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk07 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 07")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk08 PP")
+}
+# Interlock Block 08, holds 36 to 40
+record(waveform, "MEBT:QP01_PS:IlkBlk08") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk08 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 08")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk09 PP")
+}
+# Interlock Block 09, holds 41 to 45
+record(waveform, "MEBT:QP01_PS:IlkBlk09") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk09 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 09")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk10 PP")
+}
+# Interlock Block 10, holds 46 to 50
+record(waveform, "MEBT:QP01_PS:IlkBlk10") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk10 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 10")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk11 PP")
+}
+# Interlock Block 11, holds 51 to 55
+record(waveform, "MEBT:QP01_PS:IlkBlk11") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk11 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 11")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk12 PP")
+}
+# Interlock Block 12, holds 56 to 60
+record(waveform, "MEBT:QP01_PS:IlkBlk12") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk12 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 12")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk13 PP")
+}
+# Interlock Block 13, holds 61 to 65
+record(waveform, "MEBT:QP01_PS:IlkBlk13") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk13 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 13")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk14 PP")
+}
+# Interlock Block 14, holds 66 to 70
+record(waveform, "MEBT:QP01_PS:IlkBlk14") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk14 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 14")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk15 PP")
+}
+# Interlock Block 15, holds 71 to 75
+record(waveform, "MEBT:QP01_PS:IlkBlk15") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk15 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 15")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk16 PP")
+}
+# Interlock Block 16, holds 76 to 80
+record(waveform, "MEBT:QP01_PS:IlkBlk16") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk16 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 16")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk17 PP")
+}
+# Interlock Block 17, holds 81 to 85
+record(waveform, "MEBT:QP01_PS:IlkBlk17") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk17 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 17")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk18 PP")
+}
+# Interlock Block 18, holds 86 to 90
+record(waveform, "MEBT:QP01_PS:IlkBlk18") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk18 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 18")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk19 PP")
+}
+# Interlock Block 19, holds 91 to 95
+record(waveform, "MEBT:QP01_PS:IlkBlk19") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk19 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 19")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk20 PP")
+}
+# Interlock Block 20, holds 96 to 100
+record(waveform, "MEBT:QP01_PS:IlkBlk20") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk20 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 20")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk21 PP")
+}
+
+# Interlock Block 21, holds 101 to 105
+record(waveform, "MEBT:QP01_PS:IlkBlk21") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk21,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 21")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk22 PP")
+}
+# Interlock Block 22, holds 106 to 110
+record(waveform, "MEBT:QP01_PS:IlkBlk22") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk22,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 22")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk23 PP")
+}
+# Interlock Block 23, holds 111 to 115
+record(waveform, "MEBT:QP01_PS:IlkBlk23") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk23,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 23")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk24 PP")
+}
+# Interlock Block 24, holds 116 to 120
+record(waveform, "MEBT:QP01_PS:IlkBlk24") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk24,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 24")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk25 PP")
+}
+# Interlock Block 25, holds 121 to 125
+record(waveform, "MEBT:QP01_PS:IlkBlk25") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk25 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 25")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk26 PP")
+}
+# Interlock Block 26, holds 126 to 130
+record(waveform, "MEBT:QP01_PS:IlkBlk26") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk26 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 26")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk27 PP")
+}
+# Interlock Block 27, holds 131 to 135
+record(waveform, "MEBT:QP01_PS:IlkBlk27") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk27 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 27")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk28 PP")
+}
+# Interlock Block 28, holds 136 to 140
+record(waveform, "MEBT:QP01_PS:IlkBlk28") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk28 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 28")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk29 PP")
+}
+# Interlock Block 29, holds 141 to 145
+record(waveform, "MEBT:QP01_PS:IlkBlk29") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk29 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 29")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk30 PP")
+}
+# Interlock Block 30, holds 146 to 150
+record(waveform, "MEBT:QP01_PS:IlkBlk30") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk30 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 30")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk31 PP")
+}
+# Interlock Block 31, holds 151 to 155
+record(waveform, "MEBT:QP01_PS:IlkBlk31") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk31 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 31")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk32 PP")
+}
+# Interlock Block 32, holds 156 to 160
+record(waveform, "MEBT:QP01_PS:IlkBlk32") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk32 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 32")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk33 PP")
+}
+# Interlock Block 33, holds 161 to 165
+record(waveform, "MEBT:QP01_PS:IlkBlk33") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk33 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 33")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk34 PP")
+}
+# Interlock Block 34, holds 166 to 170
+record(waveform, "MEBT:QP01_PS:IlkBlk34") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk34 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 34")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk35 PP")
+}
+# Interlock Block 35, holds 171 to 175
+record(waveform, "MEBT:QP01_PS:IlkBlk35") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk35 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 35")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk36 PP")
+}
+# Interlock Block 36, holds 176 to 180
+record(waveform, "MEBT:QP01_PS:IlkBlk36") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk36 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 36")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk37 PP")
+}
+# Interlock Block 37, holds 181 to 185
+record(waveform, "MEBT:QP01_PS:IlkBlk37") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk37 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 37")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk38 PP")
+}
+# Interlock Block 38, holds 186 to 190
+record(waveform, "MEBT:QP01_PS:IlkBlk38") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk38 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 38")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk39 PP")
+}
+# Interlock Block 39, holds 191 to 195
+record(waveform, "MEBT:QP01_PS:IlkBlk39") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk39 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 39")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkBlk40 PP")
+}
+# Interlock Block 40, holds 196 to 200
+record(waveform, "MEBT:QP01_PS:IlkBlk40") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT1:getIlkBlk40 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 40")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP01_PS:IlkLogA PP")
+}
+# INPUT REGISTERS
+
+# registers 30001-32
+# This record gets the first 32 input registers in a single modbus transaction
+# It is not intended for direct use, but only to feed aInputRegs record
+record(waveform, "MEBT:QP02_PS:InputRegs"){
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:get30001-32 0 2000)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Modbus input registers")
+    field(NELM, "32")
+    field(FTVL, "ULONG")
+    field(FLNK, "MEBT:QP02_PS:aInputRegs")
+}
+
+# This record combines decimal and integer part for current and voltage,
+# and also forward values to destination individual records.
+# It is not intended for direct use, but only to feed out records
+# Subroutine CalcIR is located at aSubElytt.c source file.
+record(aSub,"MEBT:QP02_PS:aInputRegs") {
+    field(DESC ,"Input registers calcs")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcIR")
+  # Input registers input
+    field(FTA, "ULONG")
+    field(NOA, "32")
+    field(INPA, "MEBT:QP02_PS:InputRegs NPP MSS")
+  # Outputs:
+    # Current monitor
+    field(FTVA, "DOUBLE")
+    field(OUTA, "MEBT:QP02_PS:IRdbk PP MSS")
+    # Voltage monitor
+    field(FTVB, "DOUBLE")
+    field(OUTB, "MEBT:QP02_PS:VRdbk PP MSS")
+    # Fan main
+    field(FTVC, "DOUBLE")
+    field(OUTC, "MEBT:QP02_PS:FanMain PP MSS")
+    # Fan power
+    field(FTVD, "DOUBLE")
+    field(OUTD, "MEBT:QP02_PS:FanPower PP MSS")
+    # Temp power module
+    field(FTVE, "DOUBLE")
+    field(OUTE, "MEBT:QP02_PS:PowerModT PP MSS")
+    # Temp HF trafo
+    field(FTVF, "DOUBLE")
+    field(OUTF, "MEBT:QP02_PS:HFtrafoT PP MSS")
+    # Temp chamber
+    field(FTVG, "DOUBLE")
+    field(OUTG, "MEBT:QP02_PS:ChamberT PP MSS")
+    # Status
+    field(FTVH, "ULONG")
+    field(OUTH, "MEBT:QP02_PS:Stat PP MSS")
+    # Errors
+    field(FTVI, "ULONG")
+    field(OUTI, "MEBT:QP02_PS:Errors PP MSS")
+    # Last interlock
+    field(FTVJ, "STRING")
+    field(OUTJ, "MEBT:QP02_PS:Ilk PP MSS")
+    # Last interlock code
+    field(FTVK, "ULONG")
+    # Last interlock description
+    field(FTVL, "STRING")
+}
+
+#Output current monitor
+record(ai, "MEBT:QP02_PS:IRdbk") {
+    field(DESC ,"Ouput current monitor")
+    field(PREC, "3")
+    field(HOPR, "180")
+    field(HIHI, "179")
+    field(HIGH, "175")
+    field(LOW, "0")
+    field(LOLO, "0")
+    field(LOPR, "0")
+    field(EGU, "A")
+}
+
+#Output voltage monitor
+record(ai, "MEBT:QP02_PS:VRdbk") {
+    field(DESC ,"Ouput voltage monitor")
+    field(PREC, "2")
+    field(HOPR, "20")
+    field(LOPR, "0")
+    field(EGU, "V")
+}
+
+#register 30005
+record(ai, "MEBT:QP02_PS:FanMain") {
+    field(DESC ,"Fan Main")
+    field(HOPR, "6000")
+    field(LOPR, "0")
+    field(EGU, "rpm")
+}
+
+#register 30006
+record(ai, "MEBT:QP02_PS:FanPower") {
+    field(DESC ,"Fan Power")
+    field(HOPR, "2900")
+    field(LOPR, "0")
+    field(EGU, "rpm")
+}
+
+#register 30007
+#record(ai, "MEBT:QP02_PS:TempPowMod") {
+record(ai, "MEBT:QP02_PS:PowerModT") {
+    field(PREC,"1")
+    field(DESC ,"Temperature Power Module")
+    field(HOPR, "125")
+    field(LOPR, "0")
+    field(EGU, "degC")
+}
+
+#register 30008
+record(ai, "MEBT:QP02_PS:HFtrafoT") {
+    field(PREC,"1")
+    field(DESC ,"Temperature HF Trafo")
+    field(HOPR, "125")
+    field(LOPR, "0")
+    field(EGU, "degC")
+}
+
+#register 30009
+record(ai, "MEBT:QP02_PS:ChamberT") {
+    field(PREC,"1")
+    field(DESC ,"Temperature Chamber")
+    field(HOPR, "125")
+    field(LOPR, "0")
+    field(EGU, "degC")
+}
+
+#register 30010
+record(mbbi, "MEBT:QP02_PS:Stat") {
+    field(DESC ,"Power Unit status")
+    field(ZRST, "STARTING")
+    field(ZRVL, "0x0000")
+    field(ONST, "MAKING SOFTSTART")
+    field(ONVL, "0x0001")
+    field(TWST, "IDLE")
+    field(TWVL, "0x0002")
+    field(THST, "OPERATING")
+    field(THVL, "0x0003")
+    field(FRST, "SLOW SHUTDOWN")
+    field(FRVL, "0x0004")
+    field(FVST, "EMERGENCY STOP")
+    field(FVVL, "0x0005")
+}
+
+#registers 30011-2
+record(longin, "MEBT:QP02_PS:Errors") {
+    field(DESC, "Errors")
+}
+
+#interlocks 
+
+#Last (most recent) interlock.
+record(stringin, "MEBT:QP02_PS:Ilk"){
+    field(DESC ,"Most recent interlock")
+}
+
+# HOLDING REGISTERS
+
+# registers 40001-8
+# This record gets the eight holding registers in a single modbus transaction
+# It is not intended for direct use, but only to feed aHoldRegs record
+record(waveform, "MEBT:QP02_PS:HoldRegs"){
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:get40001-8 0 2000)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Modbus holding registers")
+    field(NELM, "8")
+    field(FTVL, "ULONG")
+    field(FLNK, "MEBT:QP02_PS:aHoldRegs")
+}
+
+# This record combines decimal and integer part for limits and setpoint,
+# and also forward values to destination individual records.
+# It is not intended for direct use, but only to feed out records
+# Subroutine CalcHR is located at aSubElytt.c source file.
+record(aSub,"MEBT:QP02_PS:aHoldRegs") {
+    field(DESC ,"Holding registers calcs")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcHR")
+  # Holding registers input
+    field(FTA, "ULONG")
+    field(NOA, "8")
+    field(INPA, "MEBT:QP02_PS:HoldRegs NPP MSS")
+  # Outputs:
+    # Current setpoint
+    field(FTVA, "DOUBLE")
+    field(OUTA, "MEBT:QP02_PS:ISet PP MSS")
+    # Operating state
+    field(FTVB, "ENUM")
+    field(OUTB, "MEBT:QP02_PS:OnCmd PP MSS")
+    # Errors command
+    field(FTVC, "ENUM")
+    field(OUTC, "MEBT:QP02_PS:ErrorReset PP MSS")
+    # Current limit
+    field(FTVD, "DOUBLE")
+    field(OUTD, "MEBT:QP02_PS:ILimit PP MSS")
+    field(FTVE, "DOUBLE")
+    field(OUTE, "MEBT:QP02_PS:ISet.DRVH NPP NMS")
+    # Voltage limit
+    field(FTVF, "DOUBLE")
+    field(OUTF, "MEBT:QP02_PS:VLimit PP MSS")
+}
+
+#IMPORTANT: Integer setting must be preceded by decimal setting
+#register 40001 - I
+record(ao, "MEBT:QP02_PS:IISet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT2:set40001 0 2000)MODBUS_DATA")
+    field(DESC ,"Current integer register")
+    field(EGU, "A")
+    field(PREC,"0")
+    field(DRVH, "180")
+    field(DRVL, "0")
+}
+
+#IMPORTANT: Decimal setting is not applied until further integer setting.
+#register 40002 - D
+record(ao, "MEBT:QP02_PS:IDSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT2:set40002 0 2000)MODBUS_DATA")
+    field(DESC ,"Current decimal register")
+    field(EGU, "mA")
+    field(PREC,"0")
+    field(DRVH, "999")
+    field(DRVL, "0")
+    field(FLNK, "MEBT:QP02_PS:IISet")
+}
+
+#Current setpoint
+record(ao, "MEBT:QP02_PS:ISet")
+{
+	field(DESC, "Current Setpoint")
+	field(PREC, "3")
+	field(SCAN, "Passive")
+    field(EGU, "A")
+	field(DRVH, "180.000")
+# DRVH is linked to ILimit
+	field(DRVL, "0")
+	field(HOPR, "180.000")
+	field(LOPR, "0.000")
+	field(FLNK, "MEBT:QP02_PS:IDSetCalc")
+}
+
+#Calculus of decimal part (mA) of current setpoint
+record(calcout, "MEBT:QP02_PS:IDSetCalc") {
+    field(SCAN, "Passive")
+	field(INPA, "MEBT:QP02_PS:ISet.VAL NPP MS")
+    #dec
+    field(OUT, "MEBT:QP02_PS:IDSet NPP")
+    field(CALC, "(A-FLOOR(A))*1000")
+	field(FLNK, "MEBT:QP02_PS:IISetCalc")
+    field(SDIS, "MEBT:QP02_PS:aHoldRegs.PACT")
+}
+
+#Calculus of integer part (A) of current setpoint
+record(calcout, "MEBT:QP02_PS:IISetCalc") {
+	field(SCAN, "Passive")
+    field(INPA, "MEBT:QP02_PS:ISet.VAL NPP MS")
+    #int
+    field(OUT, "MEBT:QP02_PS:IISet NPP")
+    field(CALC, "FLOOR(A)")
+	field(FLNK, "MEBT:QP02_PS:IDSet")
+}
+
+#register 40003
+record(bo, "MEBT:QP02_PS:MOnCmd") {
+    field(DOL, "MEBT:QP02_PS:OnCmd")
+    field(OMSL, "closed_loop")
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_ELYTT2:set40003 0 2000)MODBUS_DATA")
+    field(DESC ,"Operation state modbus register")
+    field(ZNAM, "IDLE")
+    field(ONAM, "OPERATING")
+    field(SDIS, "MEBT:QP02_PS:aHoldRegs.PACT")
+}
+
+# Operation state
+record(bo, "MEBT:QP02_PS:OnCmd") {
+    field(DESC,"Operation state")
+    field(ZNAM, "IDLE")
+    field(ONAM, "OPERATING")
+    field(FLNK, "MEBT:QP02_PS:MOnCmd")
+}
+
+
+#register 40004
+record(bo, "MEBT:QP02_PS:MErrReset") {
+    field(DOL, "MEBT:QP02_PS:ErrorReset")
+    field(OMSL, "closed_loop")
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_ELYTT2:set40004 0 2000)MODBUS_DATA")
+    field(DESC ,"Reset errors modbus register")
+    field(ZNAM, "NO RESET")
+    field(ONAM, "RESET")
+    field(SDIS, "MEBT:QP02_PS:aHoldRegs.PACT")
+}
+
+# Error Reset
+record(bo, "MEBT:QP02_PS:ErrorReset") {
+    field(DESC,"Reset errors")
+    field(ZNAM, "NO RESET")
+    field(ONAM, "RESET")
+    field(FLNK, "MEBT:QP02_PS:MErrReset")
+}
+
+#register 40005
+record(ao, "MEBT:QP02_PS:IILimitSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT2:set40005 0 2000)MODBUS_DATA")
+    field(DESC ,"Current limit integer register")
+    field(PREC,"0")
+    field(DRVH, "180")
+    field(DRVL, "0")
+    field(EGU, "A")
+}
+
+#register 40006
+record(ao, "MEBT:QP02_PS:IDLimitSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT2:set40006 0 2000)MODBUS_DATA")
+    field(DESC ,"Current limit decimal register")
+    field(PREC,"0")
+    field(DRVH, "999")
+    field(DRVL, "0")
+    field(EGU, "mA")
+    field(FLNK,"MEBT:QP02_PS:IILimitSet")
+}
+
+# Current Limit
+# ILimit -> ILSetCalc -> ILSetCalc -> ILDSet -> ILISet
+record(ao, "MEBT:QP02_PS:ILimit")
+{
+    field(SCAN, "Passive")
+    field(DESC, "Current Limit")
+    field(PREC, "3")
+    field(EGU, "A")
+    field(DRVH, "180.000")
+    field(DRVL, "0")
+	field(HOPR, "180.000")
+	field(LOPR, "0.000")
+    field(FLNK,"MEBT:QP02_PS:IDLSetCalc")
+}
+
+record(calcout, "MEBT:QP02_PS:IDLSetCalc") {
+   field(SCAN, "Passive")
+   field(INPA, "MEBT:QP02_PS:ILimit.VAL NPP MS")
+   #dec
+   field(OUT, "MEBT:QP02_PS:IDLimitSet NPP")
+   field(CALC, "(A-FLOOR(A))*1000")
+   field(FLNK,"MEBT:QP02_PS:IILSetCalc")
+   field(SDIS, "MEBT:QP02_PS:aHoldRegs.PACT")
+}
+
+record(calcout, "MEBT:QP02_PS:IILSetCalc") {
+    field(SCAN, "Passive")
+     field(INPA, "MEBT:QP02_PS:ILimit.VAL NPP MS")
+     #int
+     field(OUT, "MEBT:QP02_PS:IILimitSet NPP")
+     field(CALC, "FLOOR(A)")
+     field(FLNK,"MEBT:QP02_PS:IDLimitSet")
+}
+
+#register 40007
+record(ao, "MEBT:QP02_PS:VISet") {
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT2:set40007 0 2000)MODBUS_DATA")
+    field(DESC ,"Voltage limit integer register")
+    field(DRVH, "20.000")
+    field(DRVL, "0")
+    field(PREC,"2")
+    field(EGU, "V")
+}
+
+# Current limit readback
+record(ai, "MEBT:QP02_PS:ILimitRdbk") {
+    field(DESC,"Current limit readback")
+    field(PREC,"3")
+    field(SCAN ,"Passive")
+    field(EGU, "A")
+    field(HOPR, "180")
+    field(LOPR, "0")
+}
+
+#register 40008
+record(ao, "MEBT:QP02_PS:VDSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT2:set40008 0 2000)MODBUS_DATA")
+    field(DESC ,"Voltage decimal")
+    field(PREC,"2")
+    field(EGU, "mV")
+    field(DRVH, "999")
+    field(DRVL, "0")
+    field(FLNK, "MEBT:QP02_PS:VISet")
+}
+
+#register 40007+4008
+record(ao, "MEBT:QP02_PS:VLimit")
+{
+    field(DESC, "Voltage Limt")
+    field(PREC, "2")
+    field(SCAN, "Passive")
+    field(EGU, "V")
+    field(DRVH, "20.00")
+    field(DRVL, "0")
+	field(HOPR, "20.00")
+	field(LOPR, "0.00")
+    field(FLNK,"MEBT:QP02_PS:VDSetCalc")
+}
+
+record(calcout, "MEBT:QP02_PS:VDSetCalc") {
+    field(SCAN, "Passive")
+    field(INPA, "MEBT:QP02_PS:VLimit.VAL NPP MS")
+    #dec
+    field(OUT, "MEBT:QP02_PS:VDSet NPP")
+    field(CALC, "(A-FLOOR(A))*100")
+    field(FLNK,"MEBT:QP02_PS:VISetCalc")
+    field(SDIS, "MEBT:QP02_PS:aHoldRegs.PACT")
+}
+
+record(calcout, "MEBT:QP02_PS:VISetCalc") {
+    field(SCAN, "Passive")
+     field(INPA, "MEBT:QP02_PS:VLimit.VAL NPP MS")
+     #int
+     field(OUT, "MEBT:QP02_PS:VISet NPP")
+     field(CALC, "FLOOR(A)")
+     field(FLNK,"MEBT:QP02_PS:VDSet")
+}
+
+# INTERLOCK LOG
+
+record(aSub,"MEBT:QP02_PS:IlkLogA") {
+    field(DESC ,"Interlock log, last to 100th")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcIlkLog")
+    field(FTA, "LONG")
+    field(NOA, "100")
+    field(INPA, "MEBT:QP02_PS:IlkBlk01 NPP MS")
+    field(FTB, "LONG")
+    field(NOB, "100")
+    field(INPB, "MEBT:QP02_PS:IlkBlk02 NPP MS")
+    field(FTC, "LONG")
+    field(NOC, "100")
+    field(INPC, "MEBT:QP02_PS:IlkBlk03 NPP MS")
+    field(FTD, "LONG")
+    field(NOD, "100")
+    field(INPD, "MEBT:QP02_PS:IlkBlk04 NPP MS")
+    field(FTE, "LONG")
+    field(NOE, "100")
+    field(INPE, "MEBT:QP02_PS:IlkBlk05 NPP MS")
+    field(FTF, "LONG")
+    field(NOF, "100")
+    field(INPF, "MEBT:QP02_PS:IlkBlk06 NPP MS")
+    field(FTG, "LONG")
+    field(NOG, "100")
+    field(INPG, "MEBT:QP02_PS:IlkBlk07 NPP MS")
+    field(FTH, "LONG")
+    field(NOH, "100")
+    field(INPH, "MEBT:QP02_PS:IlkBlk08 NPP MS")
+    field(FTI, "LONG")
+    field(NOI, "100")
+    field(INPI, "MEBT:QP02_PS:IlkBlk09 NPP MS")
+    field(FTJ, "LONG")
+    field(NOJ, "100")
+    field(INPJ, "MEBT:QP02_PS:IlkBlk10 NPP MS")
+    field(FTK, "LONG")
+    field(NOK, "100")
+    field(INPK, "MEBT:QP02_PS:IlkBlk11 NPP MS")
+    field(FTL, "LONG")
+    field(NOL, "100")
+    field(INPL, "MEBT:QP02_PS:IlkBlk12 NPP MS")
+    field(FTM, "LONG")
+    field(NOM, "100")
+    field(INPM, "MEBT:QP02_PS:IlkBlk13 NPP MS")
+    field(FTN, "LONG")
+    field(NON, "100")
+    field(INPN, "MEBT:QP02_PS:IlkBlk14 NPP MS")
+    field(FTO, "LONG")
+    field(NOO, "100")
+    field(INPO, "MEBT:QP02_PS:IlkBlk15 NPP MS")
+    field(FTP, "LONG")
+    field(NOP, "100")
+    field(INPP, "MEBT:QP02_PS:IlkBlk16 NPP MS")
+    field(FTQ, "LONG")
+    field(NOQ, "100")
+    field(INPQ, "MEBT:QP02_PS:IlkBlk17 NPP MS")
+    field(FTR, "LONG")
+    field(NOR, "100")
+    field(INPR, "MEBT:QP02_PS:IlkBlk18 NPP MS")
+    field(FTS, "LONG")
+    field(NOS, "100")
+    field(INPS, "MEBT:QP02_PS:IlkBlk19 NPP MS")
+    field(FTT, "LONG")
+    field(NOT, "100")
+    field(INPT, "MEBT:QP02_PS:IlkBlk20 NPP MS")
+    field(FTVA, "STRING")
+    field(NOVA, "100")
+    field(FLNK, "MEBT:QP02_PS:IlkLogB PP")
+}
+record(aSub,"MEBT:QP02_PS:IlkLogB") {
+    field(DESC ,"Interlock log, 101st to 200th")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcIlkLog")
+    field(FTA, "LONG")
+    field(NOA, "100")
+    field(INPA, "MEBT:QP02_PS:IlkBlk21 NPP MS")
+    field(FTB, "LONG")
+    field(NOB, "100")
+    field(INPB, "MEBT:QP02_PS:IlkBlk22 NPP MS")
+    field(FTC, "LONG")
+    field(NOC, "100")
+    field(INPC, "MEBT:QP02_PS:IlkBlk23 NPP MS")
+    field(FTD, "LONG")
+    field(NOD, "100")
+    field(INPD, "MEBT:QP02_PS:IlkBlk24 NPP MS")
+    field(FTE, "LONG")
+    field(NOE, "100")
+    field(INPE, "MEBT:QP02_PS:IlkBlk25 NPP MS")
+    field(FTF, "LONG")
+    field(NOF, "100")
+    field(INPF, "MEBT:QP02_PS:IlkBlk26 NPP MS")
+    field(FTG, "LONG")
+    field(NOG, "100")
+    field(INPG, "MEBT:QP02_PS:IlkBlk27 NPP MS")
+    field(FTH, "LONG")
+    field(NOH, "100")
+    field(INPH, "MEBT:QP02_PS:IlkBlk28 NPP MS")
+    field(FTI, "LONG")
+    field(NOI, "100")
+    field(INPI, "MEBT:QP02_PS:IlkBlk29 NPP MS")
+    field(FTJ, "LONG")
+    field(NOJ, "100")
+    field(INPJ, "MEBT:QP02_PS:IlkBlk30 NPP MS")
+    field(FTK, "LONG")
+    field(NOK, "100")
+    field(INPK, "MEBT:QP02_PS:IlkBlk31 NPP MS")
+    field(FTL, "LONG")
+    field(NOL, "100")
+    field(INPL, "MEBT:QP02_PS:IlkBlk32 NPP MS")
+    field(FTM, "LONG")
+    field(NOM, "100")
+    field(INPM, "MEBT:QP02_PS:IlkBlk33 NPP MS")
+    field(FTN, "LONG")
+    field(NON, "100")
+    field(INPN, "MEBT:QP02_PS:IlkBlk34 NPP MS")
+    field(FTO, "LONG")
+    field(NOO, "100")
+    field(INPO, "MEBT:QP02_PS:IlkBlk35 NPP MS")
+    field(FTP, "LONG")
+    field(NOP, "100")
+    field(INPP, "MEBT:QP02_PS:IlkBlk36 NPP MS")
+    field(FTQ, "LONG")
+    field(NOQ, "100")
+    field(INPQ, "MEBT:QP02_PS:IlkBlk37 NPP MS")
+    field(FTR, "LONG")
+    field(NOR, "100")
+    field(INPR, "MEBT:QP02_PS:IlkBlk38 NPP MS")
+    field(FTS, "LONG")
+    field(NOS, "100")
+    field(INPS, "MEBT:QP02_PS:IlkBlk39 NPP MS")
+    field(FTT, "LONG")
+    field(NOT, "100")
+    field(INPT, "MEBT:QP02_PS:IlkBlk40 NPP MS")
+    field(FTVA, "STRING")
+    field(NOVA, "100")
+    field(FLNK, "MEBT:QP02_PS:IlkLog PP")
+}
+
+record(aSub,"MEBT:QP02_PS:IlkLog") {
+    field(DESC ,"Interlock log")
+    field(SCAN ,"Passive")
+    field(SNAM,"ConcatIlkLog")
+    field(FTA, "STRING")
+    field(NOA, "100")
+    field(INPA, "MEBT:QP02_PS:IlkLogA.VALA NPP MS")
+    field(FTB, "STRING")
+    field(NOB, "100")
+    field(INPB, "MEBT:QP02_PS:IlkLogB.VALA NPP MS")
+    field(FTVA, "STRING")
+    field(NOVA, "200")
+}
+
+# Interlock Block 01, holds 01 to 05
+record(waveform, "MEBT:QP02_PS:IlkBlk01") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk01,0,2000)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Aux Interlocks Block 01")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk02 PP")
+}
+# Interlock Block 02, holds 06 to 10
+record(waveform, "MEBT:QP02_PS:IlkBlk02") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk02,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 02")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk03 PP")
+}
+# Interlock Block 03, holds 11 to 15
+record(waveform, "MEBT:QP02_PS:IlkBlk03") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk03,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 03")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk04 PP")
+}
+# Interlock Block 04, holds 16 to 20
+record(waveform, "MEBT:QP02_PS:IlkBlk04") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk04,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 04")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk05 PP")
+}
+# Interlock Block 05, holds 21 to 25
+record(waveform, "MEBT:QP02_PS:IlkBlk05") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk05 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 05")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk06 PP")
+}
+# Interlock Block 06, holds 26 to 30
+record(waveform, "MEBT:QP02_PS:IlkBlk06") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk06 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 06")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk07 PP")
+}
+# Interlock Block 07, holds 31 to 35
+record(waveform, "MEBT:QP02_PS:IlkBlk07") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk07 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 07")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk08 PP")
+}
+# Interlock Block 08, holds 36 to 40
+record(waveform, "MEBT:QP02_PS:IlkBlk08") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk08 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 08")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk09 PP")
+}
+# Interlock Block 09, holds 41 to 45
+record(waveform, "MEBT:QP02_PS:IlkBlk09") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk09 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 09")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk10 PP")
+}
+# Interlock Block 10, holds 46 to 50
+record(waveform, "MEBT:QP02_PS:IlkBlk10") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk10 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 10")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk11 PP")
+}
+# Interlock Block 11, holds 51 to 55
+record(waveform, "MEBT:QP02_PS:IlkBlk11") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk11 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 11")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk12 PP")
+}
+# Interlock Block 12, holds 56 to 60
+record(waveform, "MEBT:QP02_PS:IlkBlk12") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk12 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 12")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk13 PP")
+}
+# Interlock Block 13, holds 61 to 65
+record(waveform, "MEBT:QP02_PS:IlkBlk13") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk13 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 13")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk14 PP")
+}
+# Interlock Block 14, holds 66 to 70
+record(waveform, "MEBT:QP02_PS:IlkBlk14") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk14 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 14")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk15 PP")
+}
+# Interlock Block 15, holds 71 to 75
+record(waveform, "MEBT:QP02_PS:IlkBlk15") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk15 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 15")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk16 PP")
+}
+# Interlock Block 16, holds 76 to 80
+record(waveform, "MEBT:QP02_PS:IlkBlk16") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk16 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 16")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk17 PP")
+}
+# Interlock Block 17, holds 81 to 85
+record(waveform, "MEBT:QP02_PS:IlkBlk17") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk17 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 17")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk18 PP")
+}
+# Interlock Block 18, holds 86 to 90
+record(waveform, "MEBT:QP02_PS:IlkBlk18") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk18 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 18")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk19 PP")
+}
+# Interlock Block 19, holds 91 to 95
+record(waveform, "MEBT:QP02_PS:IlkBlk19") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk19 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 19")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk20 PP")
+}
+# Interlock Block 20, holds 96 to 100
+record(waveform, "MEBT:QP02_PS:IlkBlk20") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk20 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 20")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk21 PP")
+}
+
+# Interlock Block 21, holds 101 to 105
+record(waveform, "MEBT:QP02_PS:IlkBlk21") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk21,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 21")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk22 PP")
+}
+# Interlock Block 22, holds 106 to 110
+record(waveform, "MEBT:QP02_PS:IlkBlk22") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk22,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 22")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk23 PP")
+}
+# Interlock Block 23, holds 111 to 115
+record(waveform, "MEBT:QP02_PS:IlkBlk23") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk23,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 23")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk24 PP")
+}
+# Interlock Block 24, holds 116 to 120
+record(waveform, "MEBT:QP02_PS:IlkBlk24") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk24,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 24")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk25 PP")
+}
+# Interlock Block 25, holds 121 to 125
+record(waveform, "MEBT:QP02_PS:IlkBlk25") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk25 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 25")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk26 PP")
+}
+# Interlock Block 26, holds 126 to 130
+record(waveform, "MEBT:QP02_PS:IlkBlk26") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk26 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 26")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk27 PP")
+}
+# Interlock Block 27, holds 131 to 135
+record(waveform, "MEBT:QP02_PS:IlkBlk27") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk27 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 27")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk28 PP")
+}
+# Interlock Block 28, holds 136 to 140
+record(waveform, "MEBT:QP02_PS:IlkBlk28") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk28 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 28")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk29 PP")
+}
+# Interlock Block 29, holds 141 to 145
+record(waveform, "MEBT:QP02_PS:IlkBlk29") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk29 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 29")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk30 PP")
+}
+# Interlock Block 30, holds 146 to 150
+record(waveform, "MEBT:QP02_PS:IlkBlk30") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk30 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 30")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk31 PP")
+}
+# Interlock Block 31, holds 151 to 155
+record(waveform, "MEBT:QP02_PS:IlkBlk31") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk31 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 31")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk32 PP")
+}
+# Interlock Block 32, holds 156 to 160
+record(waveform, "MEBT:QP02_PS:IlkBlk32") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk32 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 32")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk33 PP")
+}
+# Interlock Block 33, holds 161 to 165
+record(waveform, "MEBT:QP02_PS:IlkBlk33") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk33 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 33")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk34 PP")
+}
+# Interlock Block 34, holds 166 to 170
+record(waveform, "MEBT:QP02_PS:IlkBlk34") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk34 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 34")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk35 PP")
+}
+# Interlock Block 35, holds 171 to 175
+record(waveform, "MEBT:QP02_PS:IlkBlk35") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk35 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 35")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk36 PP")
+}
+# Interlock Block 36, holds 176 to 180
+record(waveform, "MEBT:QP02_PS:IlkBlk36") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk36 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 36")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk37 PP")
+}
+# Interlock Block 37, holds 181 to 185
+record(waveform, "MEBT:QP02_PS:IlkBlk37") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk37 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 37")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk38 PP")
+}
+# Interlock Block 38, holds 186 to 190
+record(waveform, "MEBT:QP02_PS:IlkBlk38") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk38 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 38")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk39 PP")
+}
+# Interlock Block 39, holds 191 to 195
+record(waveform, "MEBT:QP02_PS:IlkBlk39") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk39 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 39")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkBlk40 PP")
+}
+# Interlock Block 40, holds 196 to 200
+record(waveform, "MEBT:QP02_PS:IlkBlk40") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT2:getIlkBlk40 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 40")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP02_PS:IlkLogA PP")
+}
+# INPUT REGISTERS
+
+# registers 30001-32
+# This record gets the first 32 input registers in a single modbus transaction
+# It is not intended for direct use, but only to feed aInputRegs record
+record(waveform, "MEBT:QP03_PS:InputRegs"){
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:get30001-32 0 2000)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Modbus input registers")
+    field(NELM, "32")
+    field(FTVL, "ULONG")
+    field(FLNK, "MEBT:QP03_PS:aInputRegs")
+}
+
+# This record combines decimal and integer part for current and voltage,
+# and also forward values to destination individual records.
+# It is not intended for direct use, but only to feed out records
+# Subroutine CalcIR is located at aSubElytt.c source file.
+record(aSub,"MEBT:QP03_PS:aInputRegs") {
+    field(DESC ,"Input registers calcs")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcIR")
+  # Input registers input
+    field(FTA, "ULONG")
+    field(NOA, "32")
+    field(INPA, "MEBT:QP03_PS:InputRegs NPP MSS")
+  # Outputs:
+    # Current monitor
+    field(FTVA, "DOUBLE")
+    field(OUTA, "MEBT:QP03_PS:IRdbk PP MSS")
+    # Voltage monitor
+    field(FTVB, "DOUBLE")
+    field(OUTB, "MEBT:QP03_PS:VRdbk PP MSS")
+    # Fan main
+    field(FTVC, "DOUBLE")
+    field(OUTC, "MEBT:QP03_PS:FanMain PP MSS")
+    # Fan power
+    field(FTVD, "DOUBLE")
+    field(OUTD, "MEBT:QP03_PS:FanPower PP MSS")
+    # Temp power module
+    field(FTVE, "DOUBLE")
+    field(OUTE, "MEBT:QP03_PS:PowerModT PP MSS")
+    # Temp HF trafo
+    field(FTVF, "DOUBLE")
+    field(OUTF, "MEBT:QP03_PS:HFtrafoT PP MSS")
+    # Temp chamber
+    field(FTVG, "DOUBLE")
+    field(OUTG, "MEBT:QP03_PS:ChamberT PP MSS")
+    # Status
+    field(FTVH, "ULONG")
+    field(OUTH, "MEBT:QP03_PS:Stat PP MSS")
+    # Errors
+    field(FTVI, "ULONG")
+    field(OUTI, "MEBT:QP03_PS:Errors PP MSS")
+    # Last interlock
+    field(FTVJ, "STRING")
+    field(OUTJ, "MEBT:QP03_PS:Ilk PP MSS")
+    # Last interlock code
+    field(FTVK, "ULONG")
+    # Last interlock description
+    field(FTVL, "STRING")
+}
+
+#Output current monitor
+record(ai, "MEBT:QP03_PS:IRdbk") {
+    field(DESC ,"Ouput current monitor")
+    field(PREC, "3")
+    field(HOPR, "180")
+    field(HIHI, "179")
+    field(HIGH, "175")
+    field(LOW, "0")
+    field(LOLO, "0")
+    field(LOPR, "0")
+    field(EGU, "A")
+}
+
+#Output voltage monitor
+record(ai, "MEBT:QP03_PS:VRdbk") {
+    field(DESC ,"Ouput voltage monitor")
+    field(PREC, "2")
+    field(HOPR, "20")
+    field(LOPR, "0")
+    field(EGU, "V")
+}
+
+#register 30005
+record(ai, "MEBT:QP03_PS:FanMain") {
+    field(DESC ,"Fan Main")
+    field(HOPR, "6000")
+    field(LOPR, "0")
+    field(EGU, "rpm")
+}
+
+#register 30006
+record(ai, "MEBT:QP03_PS:FanPower") {
+    field(DESC ,"Fan Power")
+    field(HOPR, "2900")
+    field(LOPR, "0")
+    field(EGU, "rpm")
+}
+
+#register 30007
+#record(ai, "MEBT:QP03_PS:TempPowMod") {
+record(ai, "MEBT:QP03_PS:PowerModT") {
+    field(PREC,"1")
+    field(DESC ,"Temperature Power Module")
+    field(HOPR, "125")
+    field(LOPR, "0")
+    field(EGU, "degC")
+}
+
+#register 30008
+record(ai, "MEBT:QP03_PS:HFtrafoT") {
+    field(PREC,"1")
+    field(DESC ,"Temperature HF Trafo")
+    field(HOPR, "125")
+    field(LOPR, "0")
+    field(EGU, "degC")
+}
+
+#register 30009
+record(ai, "MEBT:QP03_PS:ChamberT") {
+    field(PREC,"1")
+    field(DESC ,"Temperature Chamber")
+    field(HOPR, "125")
+    field(LOPR, "0")
+    field(EGU, "degC")
+}
+
+#register 30010
+record(mbbi, "MEBT:QP03_PS:Stat") {
+    field(DESC ,"Power Unit status")
+    field(ZRST, "STARTING")
+    field(ZRVL, "0x0000")
+    field(ONST, "MAKING SOFTSTART")
+    field(ONVL, "0x0001")
+    field(TWST, "IDLE")
+    field(TWVL, "0x0002")
+    field(THST, "OPERATING")
+    field(THVL, "0x0003")
+    field(FRST, "SLOW SHUTDOWN")
+    field(FRVL, "0x0004")
+    field(FVST, "EMERGENCY STOP")
+    field(FVVL, "0x0005")
+}
+
+#registers 30011-2
+record(longin, "MEBT:QP03_PS:Errors") {
+    field(DESC, "Errors")
+}
+
+#interlocks 
+
+#Last (most recent) interlock.
+record(stringin, "MEBT:QP03_PS:Ilk"){
+    field(DESC ,"Most recent interlock")
+}
+
+# HOLDING REGISTERS
+
+# registers 40001-8
+# This record gets the eight holding registers in a single modbus transaction
+# It is not intended for direct use, but only to feed aHoldRegs record
+record(waveform, "MEBT:QP03_PS:HoldRegs"){
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:get40001-8 0 2000)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Modbus holding registers")
+    field(NELM, "8")
+    field(FTVL, "ULONG")
+    field(FLNK, "MEBT:QP03_PS:aHoldRegs")
+}
+
+# This record combines decimal and integer part for limits and setpoint,
+# and also forward values to destination individual records.
+# It is not intended for direct use, but only to feed out records
+# Subroutine CalcHR is located at aSubElytt.c source file.
+record(aSub,"MEBT:QP03_PS:aHoldRegs") {
+    field(DESC ,"Holding registers calcs")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcHR")
+  # Holding registers input
+    field(FTA, "ULONG")
+    field(NOA, "8")
+    field(INPA, "MEBT:QP03_PS:HoldRegs NPP MSS")
+  # Outputs:
+    # Current setpoint
+    field(FTVA, "DOUBLE")
+    field(OUTA, "MEBT:QP03_PS:ISet PP MSS")
+    # Operating state
+    field(FTVB, "ENUM")
+    field(OUTB, "MEBT:QP03_PS:OnCmd PP MSS")
+    # Errors command
+    field(FTVC, "ENUM")
+    field(OUTC, "MEBT:QP03_PS:ErrorReset PP MSS")
+    # Current limit
+    field(FTVD, "DOUBLE")
+    field(OUTD, "MEBT:QP03_PS:ILimit PP MSS")
+    field(FTVE, "DOUBLE")
+    field(OUTE, "MEBT:QP03_PS:ISet.DRVH NPP NMS")
+    # Voltage limit
+    field(FTVF, "DOUBLE")
+    field(OUTF, "MEBT:QP03_PS:VLimit PP MSS")
+}
+
+#IMPORTANT: Integer setting must be preceded by decimal setting
+#register 40001 - I
+record(ao, "MEBT:QP03_PS:IISet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT3:set40001 0 2000)MODBUS_DATA")
+    field(DESC ,"Current integer register")
+    field(EGU, "A")
+    field(PREC,"0")
+    field(DRVH, "180")
+    field(DRVL, "0")
+}
+
+#IMPORTANT: Decimal setting is not applied until further integer setting.
+#register 40002 - D
+record(ao, "MEBT:QP03_PS:IDSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT3:set40002 0 2000)MODBUS_DATA")
+    field(DESC ,"Current decimal register")
+    field(EGU, "mA")
+    field(PREC,"0")
+    field(DRVH, "999")
+    field(DRVL, "0")
+    field(FLNK, "MEBT:QP03_PS:IISet")
+}
+
+#Current setpoint
+record(ao, "MEBT:QP03_PS:ISet")
+{
+	field(DESC, "Current Setpoint")
+	field(PREC, "3")
+	field(SCAN, "Passive")
+    field(EGU, "A")
+	field(DRVH, "180.000")
+# DRVH is linked to ILimit
+	field(DRVL, "0")
+	field(HOPR, "180.000")
+	field(LOPR, "0.000")
+	field(FLNK, "MEBT:QP03_PS:IDSetCalc")
+}
+
+#Calculus of decimal part (mA) of current setpoint
+record(calcout, "MEBT:QP03_PS:IDSetCalc") {
+    field(SCAN, "Passive")
+	field(INPA, "MEBT:QP03_PS:ISet.VAL NPP MS")
+    #dec
+    field(OUT, "MEBT:QP03_PS:IDSet NPP")
+    field(CALC, "(A-FLOOR(A))*1000")
+	field(FLNK, "MEBT:QP03_PS:IISetCalc")
+    field(SDIS, "MEBT:QP03_PS:aHoldRegs.PACT")
+}
+
+#Calculus of integer part (A) of current setpoint
+record(calcout, "MEBT:QP03_PS:IISetCalc") {
+	field(SCAN, "Passive")
+    field(INPA, "MEBT:QP03_PS:ISet.VAL NPP MS")
+    #int
+    field(OUT, "MEBT:QP03_PS:IISet NPP")
+    field(CALC, "FLOOR(A)")
+	field(FLNK, "MEBT:QP03_PS:IDSet")
+}
+
+#register 40003
+record(bo, "MEBT:QP03_PS:MOnCmd") {
+    field(DOL, "MEBT:QP03_PS:OnCmd")
+    field(OMSL, "closed_loop")
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_ELYTT3:set40003 0 2000)MODBUS_DATA")
+    field(DESC ,"Operation state modbus register")
+    field(ZNAM, "IDLE")
+    field(ONAM, "OPERATING")
+    field(SDIS, "MEBT:QP03_PS:aHoldRegs.PACT")
+}
+
+# Operation state
+record(bo, "MEBT:QP03_PS:OnCmd") {
+    field(DESC,"Operation state")
+    field(ZNAM, "IDLE")
+    field(ONAM, "OPERATING")
+    field(FLNK, "MEBT:QP03_PS:MOnCmd")
+}
+
+
+#register 40004
+record(bo, "MEBT:QP03_PS:MErrReset") {
+    field(DOL, "MEBT:QP03_PS:ErrorReset")
+    field(OMSL, "closed_loop")
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_ELYTT3:set40004 0 2000)MODBUS_DATA")
+    field(DESC ,"Reset errors modbus register")
+    field(ZNAM, "NO RESET")
+    field(ONAM, "RESET")
+    field(SDIS, "MEBT:QP03_PS:aHoldRegs.PACT")
+}
+
+# Error Reset
+record(bo, "MEBT:QP03_PS:ErrorReset") {
+    field(DESC,"Reset errors")
+    field(ZNAM, "NO RESET")
+    field(ONAM, "RESET")
+    field(FLNK, "MEBT:QP03_PS:MErrReset")
+}
+
+#register 40005
+record(ao, "MEBT:QP03_PS:IILimitSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT3:set40005 0 2000)MODBUS_DATA")
+    field(DESC ,"Current limit integer register")
+    field(PREC,"0")
+    field(DRVH, "180")
+    field(DRVL, "0")
+    field(EGU, "A")
+}
+
+#register 40006
+record(ao, "MEBT:QP03_PS:IDLimitSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT3:set40006 0 2000)MODBUS_DATA")
+    field(DESC ,"Current limit decimal register")
+    field(PREC,"0")
+    field(DRVH, "999")
+    field(DRVL, "0")
+    field(EGU, "mA")
+    field(FLNK,"MEBT:QP03_PS:IILimitSet")
+}
+
+# Current Limit
+# ILimit -> ILSetCalc -> ILSetCalc -> ILDSet -> ILISet
+record(ao, "MEBT:QP03_PS:ILimit")
+{
+    field(SCAN, "Passive")
+    field(DESC, "Current Limit")
+    field(PREC, "3")
+    field(EGU, "A")
+    field(DRVH, "180.000")
+    field(DRVL, "0")
+	field(HOPR, "180.000")
+	field(LOPR, "0.000")
+    field(FLNK,"MEBT:QP03_PS:IDLSetCalc")
+}
+
+record(calcout, "MEBT:QP03_PS:IDLSetCalc") {
+   field(SCAN, "Passive")
+   field(INPA, "MEBT:QP03_PS:ILimit.VAL NPP MS")
+   #dec
+   field(OUT, "MEBT:QP03_PS:IDLimitSet NPP")
+   field(CALC, "(A-FLOOR(A))*1000")
+   field(FLNK,"MEBT:QP03_PS:IILSetCalc")
+   field(SDIS, "MEBT:QP03_PS:aHoldRegs.PACT")
+}
+
+record(calcout, "MEBT:QP03_PS:IILSetCalc") {
+    field(SCAN, "Passive")
+     field(INPA, "MEBT:QP03_PS:ILimit.VAL NPP MS")
+     #int
+     field(OUT, "MEBT:QP03_PS:IILimitSet NPP")
+     field(CALC, "FLOOR(A)")
+     field(FLNK,"MEBT:QP03_PS:IDLimitSet")
+}
+
+#register 40007
+record(ao, "MEBT:QP03_PS:VISet") {
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT3:set40007 0 2000)MODBUS_DATA")
+    field(DESC ,"Voltage limit integer register")
+    field(DRVH, "20.000")
+    field(DRVL, "0")
+    field(PREC,"2")
+    field(EGU, "V")
+}
+
+# Current limit readback
+record(ai, "MEBT:QP03_PS:ILimitRdbk") {
+    field(DESC,"Current limit readback")
+    field(PREC,"3")
+    field(SCAN ,"Passive")
+    field(EGU, "A")
+    field(HOPR, "180")
+    field(LOPR, "0")
+}
+
+#register 40008
+record(ao, "MEBT:QP03_PS:VDSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT3:set40008 0 2000)MODBUS_DATA")
+    field(DESC ,"Voltage decimal")
+    field(PREC,"2")
+    field(EGU, "mV")
+    field(DRVH, "999")
+    field(DRVL, "0")
+    field(FLNK, "MEBT:QP03_PS:VISet")
+}
+
+#register 40007+4008
+record(ao, "MEBT:QP03_PS:VLimit")
+{
+    field(DESC, "Voltage Limt")
+    field(PREC, "2")
+    field(SCAN, "Passive")
+    field(EGU, "V")
+    field(DRVH, "20.00")
+    field(DRVL, "0")
+	field(HOPR, "20.00")
+	field(LOPR, "0.00")
+    field(FLNK,"MEBT:QP03_PS:VDSetCalc")
+}
+
+record(calcout, "MEBT:QP03_PS:VDSetCalc") {
+    field(SCAN, "Passive")
+    field(INPA, "MEBT:QP03_PS:VLimit.VAL NPP MS")
+    #dec
+    field(OUT, "MEBT:QP03_PS:VDSet NPP")
+    field(CALC, "(A-FLOOR(A))*100")
+    field(FLNK,"MEBT:QP03_PS:VISetCalc")
+    field(SDIS, "MEBT:QP03_PS:aHoldRegs.PACT")
+}
+
+record(calcout, "MEBT:QP03_PS:VISetCalc") {
+    field(SCAN, "Passive")
+     field(INPA, "MEBT:QP03_PS:VLimit.VAL NPP MS")
+     #int
+     field(OUT, "MEBT:QP03_PS:VISet NPP")
+     field(CALC, "FLOOR(A)")
+     field(FLNK,"MEBT:QP03_PS:VDSet")
+}
+
+# INTERLOCK LOG
+
+record(aSub,"MEBT:QP03_PS:IlkLogA") {
+    field(DESC ,"Interlock log, last to 100th")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcIlkLog")
+    field(FTA, "LONG")
+    field(NOA, "100")
+    field(INPA, "MEBT:QP03_PS:IlkBlk01 NPP MS")
+    field(FTB, "LONG")
+    field(NOB, "100")
+    field(INPB, "MEBT:QP03_PS:IlkBlk02 NPP MS")
+    field(FTC, "LONG")
+    field(NOC, "100")
+    field(INPC, "MEBT:QP03_PS:IlkBlk03 NPP MS")
+    field(FTD, "LONG")
+    field(NOD, "100")
+    field(INPD, "MEBT:QP03_PS:IlkBlk04 NPP MS")
+    field(FTE, "LONG")
+    field(NOE, "100")
+    field(INPE, "MEBT:QP03_PS:IlkBlk05 NPP MS")
+    field(FTF, "LONG")
+    field(NOF, "100")
+    field(INPF, "MEBT:QP03_PS:IlkBlk06 NPP MS")
+    field(FTG, "LONG")
+    field(NOG, "100")
+    field(INPG, "MEBT:QP03_PS:IlkBlk07 NPP MS")
+    field(FTH, "LONG")
+    field(NOH, "100")
+    field(INPH, "MEBT:QP03_PS:IlkBlk08 NPP MS")
+    field(FTI, "LONG")
+    field(NOI, "100")
+    field(INPI, "MEBT:QP03_PS:IlkBlk09 NPP MS")
+    field(FTJ, "LONG")
+    field(NOJ, "100")
+    field(INPJ, "MEBT:QP03_PS:IlkBlk10 NPP MS")
+    field(FTK, "LONG")
+    field(NOK, "100")
+    field(INPK, "MEBT:QP03_PS:IlkBlk11 NPP MS")
+    field(FTL, "LONG")
+    field(NOL, "100")
+    field(INPL, "MEBT:QP03_PS:IlkBlk12 NPP MS")
+    field(FTM, "LONG")
+    field(NOM, "100")
+    field(INPM, "MEBT:QP03_PS:IlkBlk13 NPP MS")
+    field(FTN, "LONG")
+    field(NON, "100")
+    field(INPN, "MEBT:QP03_PS:IlkBlk14 NPP MS")
+    field(FTO, "LONG")
+    field(NOO, "100")
+    field(INPO, "MEBT:QP03_PS:IlkBlk15 NPP MS")
+    field(FTP, "LONG")
+    field(NOP, "100")
+    field(INPP, "MEBT:QP03_PS:IlkBlk16 NPP MS")
+    field(FTQ, "LONG")
+    field(NOQ, "100")
+    field(INPQ, "MEBT:QP03_PS:IlkBlk17 NPP MS")
+    field(FTR, "LONG")
+    field(NOR, "100")
+    field(INPR, "MEBT:QP03_PS:IlkBlk18 NPP MS")
+    field(FTS, "LONG")
+    field(NOS, "100")
+    field(INPS, "MEBT:QP03_PS:IlkBlk19 NPP MS")
+    field(FTT, "LONG")
+    field(NOT, "100")
+    field(INPT, "MEBT:QP03_PS:IlkBlk20 NPP MS")
+    field(FTVA, "STRING")
+    field(NOVA, "100")
+    field(FLNK, "MEBT:QP03_PS:IlkLogB PP")
+}
+record(aSub,"MEBT:QP03_PS:IlkLogB") {
+    field(DESC ,"Interlock log, 101st to 200th")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcIlkLog")
+    field(FTA, "LONG")
+    field(NOA, "100")
+    field(INPA, "MEBT:QP03_PS:IlkBlk21 NPP MS")
+    field(FTB, "LONG")
+    field(NOB, "100")
+    field(INPB, "MEBT:QP03_PS:IlkBlk22 NPP MS")
+    field(FTC, "LONG")
+    field(NOC, "100")
+    field(INPC, "MEBT:QP03_PS:IlkBlk23 NPP MS")
+    field(FTD, "LONG")
+    field(NOD, "100")
+    field(INPD, "MEBT:QP03_PS:IlkBlk24 NPP MS")
+    field(FTE, "LONG")
+    field(NOE, "100")
+    field(INPE, "MEBT:QP03_PS:IlkBlk25 NPP MS")
+    field(FTF, "LONG")
+    field(NOF, "100")
+    field(INPF, "MEBT:QP03_PS:IlkBlk26 NPP MS")
+    field(FTG, "LONG")
+    field(NOG, "100")
+    field(INPG, "MEBT:QP03_PS:IlkBlk27 NPP MS")
+    field(FTH, "LONG")
+    field(NOH, "100")
+    field(INPH, "MEBT:QP03_PS:IlkBlk28 NPP MS")
+    field(FTI, "LONG")
+    field(NOI, "100")
+    field(INPI, "MEBT:QP03_PS:IlkBlk29 NPP MS")
+    field(FTJ, "LONG")
+    field(NOJ, "100")
+    field(INPJ, "MEBT:QP03_PS:IlkBlk30 NPP MS")
+    field(FTK, "LONG")
+    field(NOK, "100")
+    field(INPK, "MEBT:QP03_PS:IlkBlk31 NPP MS")
+    field(FTL, "LONG")
+    field(NOL, "100")
+    field(INPL, "MEBT:QP03_PS:IlkBlk32 NPP MS")
+    field(FTM, "LONG")
+    field(NOM, "100")
+    field(INPM, "MEBT:QP03_PS:IlkBlk33 NPP MS")
+    field(FTN, "LONG")
+    field(NON, "100")
+    field(INPN, "MEBT:QP03_PS:IlkBlk34 NPP MS")
+    field(FTO, "LONG")
+    field(NOO, "100")
+    field(INPO, "MEBT:QP03_PS:IlkBlk35 NPP MS")
+    field(FTP, "LONG")
+    field(NOP, "100")
+    field(INPP, "MEBT:QP03_PS:IlkBlk36 NPP MS")
+    field(FTQ, "LONG")
+    field(NOQ, "100")
+    field(INPQ, "MEBT:QP03_PS:IlkBlk37 NPP MS")
+    field(FTR, "LONG")
+    field(NOR, "100")
+    field(INPR, "MEBT:QP03_PS:IlkBlk38 NPP MS")
+    field(FTS, "LONG")
+    field(NOS, "100")
+    field(INPS, "MEBT:QP03_PS:IlkBlk39 NPP MS")
+    field(FTT, "LONG")
+    field(NOT, "100")
+    field(INPT, "MEBT:QP03_PS:IlkBlk40 NPP MS")
+    field(FTVA, "STRING")
+    field(NOVA, "100")
+    field(FLNK, "MEBT:QP03_PS:IlkLog PP")
+}
+
+record(aSub,"MEBT:QP03_PS:IlkLog") {
+    field(DESC ,"Interlock log")
+    field(SCAN ,"Passive")
+    field(SNAM,"ConcatIlkLog")
+    field(FTA, "STRING")
+    field(NOA, "100")
+    field(INPA, "MEBT:QP03_PS:IlkLogA.VALA NPP MS")
+    field(FTB, "STRING")
+    field(NOB, "100")
+    field(INPB, "MEBT:QP03_PS:IlkLogB.VALA NPP MS")
+    field(FTVA, "STRING")
+    field(NOVA, "200")
+}
+
+# Interlock Block 01, holds 01 to 05
+record(waveform, "MEBT:QP03_PS:IlkBlk01") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk01,0,2000)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Aux Interlocks Block 01")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk02 PP")
+}
+# Interlock Block 02, holds 06 to 10
+record(waveform, "MEBT:QP03_PS:IlkBlk02") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk02,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 02")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk03 PP")
+}
+# Interlock Block 03, holds 11 to 15
+record(waveform, "MEBT:QP03_PS:IlkBlk03") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk03,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 03")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk04 PP")
+}
+# Interlock Block 04, holds 16 to 20
+record(waveform, "MEBT:QP03_PS:IlkBlk04") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk04,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 04")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk05 PP")
+}
+# Interlock Block 05, holds 21 to 25
+record(waveform, "MEBT:QP03_PS:IlkBlk05") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk05 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 05")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk06 PP")
+}
+# Interlock Block 06, holds 26 to 30
+record(waveform, "MEBT:QP03_PS:IlkBlk06") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk06 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 06")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk07 PP")
+}
+# Interlock Block 07, holds 31 to 35
+record(waveform, "MEBT:QP03_PS:IlkBlk07") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk07 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 07")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk08 PP")
+}
+# Interlock Block 08, holds 36 to 40
+record(waveform, "MEBT:QP03_PS:IlkBlk08") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk08 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 08")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk09 PP")
+}
+# Interlock Block 09, holds 41 to 45
+record(waveform, "MEBT:QP03_PS:IlkBlk09") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk09 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 09")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk10 PP")
+}
+# Interlock Block 10, holds 46 to 50
+record(waveform, "MEBT:QP03_PS:IlkBlk10") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk10 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 10")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk11 PP")
+}
+# Interlock Block 11, holds 51 to 55
+record(waveform, "MEBT:QP03_PS:IlkBlk11") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk11 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 11")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk12 PP")
+}
+# Interlock Block 12, holds 56 to 60
+record(waveform, "MEBT:QP03_PS:IlkBlk12") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk12 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 12")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk13 PP")
+}
+# Interlock Block 13, holds 61 to 65
+record(waveform, "MEBT:QP03_PS:IlkBlk13") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk13 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 13")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk14 PP")
+}
+# Interlock Block 14, holds 66 to 70
+record(waveform, "MEBT:QP03_PS:IlkBlk14") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk14 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 14")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk15 PP")
+}
+# Interlock Block 15, holds 71 to 75
+record(waveform, "MEBT:QP03_PS:IlkBlk15") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk15 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 15")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk16 PP")
+}
+# Interlock Block 16, holds 76 to 80
+record(waveform, "MEBT:QP03_PS:IlkBlk16") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk16 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 16")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk17 PP")
+}
+# Interlock Block 17, holds 81 to 85
+record(waveform, "MEBT:QP03_PS:IlkBlk17") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk17 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 17")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk18 PP")
+}
+# Interlock Block 18, holds 86 to 90
+record(waveform, "MEBT:QP03_PS:IlkBlk18") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk18 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 18")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk19 PP")
+}
+# Interlock Block 19, holds 91 to 95
+record(waveform, "MEBT:QP03_PS:IlkBlk19") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk19 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 19")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk20 PP")
+}
+# Interlock Block 20, holds 96 to 100
+record(waveform, "MEBT:QP03_PS:IlkBlk20") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk20 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 20")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk21 PP")
+}
+
+# Interlock Block 21, holds 101 to 105
+record(waveform, "MEBT:QP03_PS:IlkBlk21") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk21,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 21")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk22 PP")
+}
+# Interlock Block 22, holds 106 to 110
+record(waveform, "MEBT:QP03_PS:IlkBlk22") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk22,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 22")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk23 PP")
+}
+# Interlock Block 23, holds 111 to 115
+record(waveform, "MEBT:QP03_PS:IlkBlk23") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk23,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 23")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk24 PP")
+}
+# Interlock Block 24, holds 116 to 120
+record(waveform, "MEBT:QP03_PS:IlkBlk24") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk24,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 24")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk25 PP")
+}
+# Interlock Block 25, holds 121 to 125
+record(waveform, "MEBT:QP03_PS:IlkBlk25") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk25 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 25")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk26 PP")
+}
+# Interlock Block 26, holds 126 to 130
+record(waveform, "MEBT:QP03_PS:IlkBlk26") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk26 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 26")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk27 PP")
+}
+# Interlock Block 27, holds 131 to 135
+record(waveform, "MEBT:QP03_PS:IlkBlk27") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk27 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 27")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk28 PP")
+}
+# Interlock Block 28, holds 136 to 140
+record(waveform, "MEBT:QP03_PS:IlkBlk28") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk28 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 28")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk29 PP")
+}
+# Interlock Block 29, holds 141 to 145
+record(waveform, "MEBT:QP03_PS:IlkBlk29") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk29 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 29")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk30 PP")
+}
+# Interlock Block 30, holds 146 to 150
+record(waveform, "MEBT:QP03_PS:IlkBlk30") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk30 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 30")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk31 PP")
+}
+# Interlock Block 31, holds 151 to 155
+record(waveform, "MEBT:QP03_PS:IlkBlk31") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk31 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 31")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk32 PP")
+}
+# Interlock Block 32, holds 156 to 160
+record(waveform, "MEBT:QP03_PS:IlkBlk32") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk32 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 32")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk33 PP")
+}
+# Interlock Block 33, holds 161 to 165
+record(waveform, "MEBT:QP03_PS:IlkBlk33") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk33 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 33")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk34 PP")
+}
+# Interlock Block 34, holds 166 to 170
+record(waveform, "MEBT:QP03_PS:IlkBlk34") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk34 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 34")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk35 PP")
+}
+# Interlock Block 35, holds 171 to 175
+record(waveform, "MEBT:QP03_PS:IlkBlk35") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk35 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 35")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk36 PP")
+}
+# Interlock Block 36, holds 176 to 180
+record(waveform, "MEBT:QP03_PS:IlkBlk36") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk36 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 36")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk37 PP")
+}
+# Interlock Block 37, holds 181 to 185
+record(waveform, "MEBT:QP03_PS:IlkBlk37") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk37 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 37")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk38 PP")
+}
+# Interlock Block 38, holds 186 to 190
+record(waveform, "MEBT:QP03_PS:IlkBlk38") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk38 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 38")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk39 PP")
+}
+# Interlock Block 39, holds 191 to 195
+record(waveform, "MEBT:QP03_PS:IlkBlk39") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk39 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 39")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkBlk40 PP")
+}
+# Interlock Block 40, holds 196 to 200
+record(waveform, "MEBT:QP03_PS:IlkBlk40") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT3:getIlkBlk40 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 40")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP03_PS:IlkLogA PP")
+}
+# INPUT REGISTERS
+
+# registers 30001-32
+# This record gets the first 32 input registers in a single modbus transaction
+# It is not intended for direct use, but only to feed aInputRegs record
+record(waveform, "MEBT:QP04_PS:InputRegs"){
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:get30001-32 0 2000)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Modbus input registers")
+    field(NELM, "32")
+    field(FTVL, "ULONG")
+    field(FLNK, "MEBT:QP04_PS:aInputRegs")
+}
+
+# This record combines decimal and integer part for current and voltage,
+# and also forward values to destination individual records.
+# It is not intended for direct use, but only to feed out records
+# Subroutine CalcIR is located at aSubElytt.c source file.
+record(aSub,"MEBT:QP04_PS:aInputRegs") {
+    field(DESC ,"Input registers calcs")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcIR")
+  # Input registers input
+    field(FTA, "ULONG")
+    field(NOA, "32")
+    field(INPA, "MEBT:QP04_PS:InputRegs NPP MSS")
+  # Outputs:
+    # Current monitor
+    field(FTVA, "DOUBLE")
+    field(OUTA, "MEBT:QP04_PS:IRdbk PP MSS")
+    # Voltage monitor
+    field(FTVB, "DOUBLE")
+    field(OUTB, "MEBT:QP04_PS:VRdbk PP MSS")
+    # Fan main
+    field(FTVC, "DOUBLE")
+    field(OUTC, "MEBT:QP04_PS:FanMain PP MSS")
+    # Fan power
+    field(FTVD, "DOUBLE")
+    field(OUTD, "MEBT:QP04_PS:FanPower PP MSS")
+    # Temp power module
+    field(FTVE, "DOUBLE")
+    field(OUTE, "MEBT:QP04_PS:PowerModT PP MSS")
+    # Temp HF trafo
+    field(FTVF, "DOUBLE")
+    field(OUTF, "MEBT:QP04_PS:HFtrafoT PP MSS")
+    # Temp chamber
+    field(FTVG, "DOUBLE")
+    field(OUTG, "MEBT:QP04_PS:ChamberT PP MSS")
+    # Status
+    field(FTVH, "ULONG")
+    field(OUTH, "MEBT:QP04_PS:Stat PP MSS")
+    # Errors
+    field(FTVI, "ULONG")
+    field(OUTI, "MEBT:QP04_PS:Errors PP MSS")
+    # Last interlock
+    field(FTVJ, "STRING")
+    field(OUTJ, "MEBT:QP04_PS:Ilk PP MSS")
+    # Last interlock code
+    field(FTVK, "ULONG")
+    # Last interlock description
+    field(FTVL, "STRING")
+}
+
+#Output current monitor
+record(ai, "MEBT:QP04_PS:IRdbk") {
+    field(DESC ,"Ouput current monitor")
+    field(PREC, "3")
+    field(HOPR, "180")
+    field(HIHI, "179")
+    field(HIGH, "175")
+    field(LOW, "0")
+    field(LOLO, "0")
+    field(LOPR, "0")
+    field(EGU, "A")
+}
+
+#Output voltage monitor
+record(ai, "MEBT:QP04_PS:VRdbk") {
+    field(DESC ,"Ouput voltage monitor")
+    field(PREC, "2")
+    field(HOPR, "20")
+    field(LOPR, "0")
+    field(EGU, "V")
+}
+
+#register 30005
+record(ai, "MEBT:QP04_PS:FanMain") {
+    field(DESC ,"Fan Main")
+    field(HOPR, "6000")
+    field(LOPR, "0")
+    field(EGU, "rpm")
+}
+
+#register 30006
+record(ai, "MEBT:QP04_PS:FanPower") {
+    field(DESC ,"Fan Power")
+    field(HOPR, "2900")
+    field(LOPR, "0")
+    field(EGU, "rpm")
+}
+
+#register 30007
+#record(ai, "MEBT:QP04_PS:TempPowMod") {
+record(ai, "MEBT:QP04_PS:PowerModT") {
+    field(PREC,"1")
+    field(DESC ,"Temperature Power Module")
+    field(HOPR, "125")
+    field(LOPR, "0")
+    field(EGU, "degC")
+}
+
+#register 30008
+record(ai, "MEBT:QP04_PS:HFtrafoT") {
+    field(PREC,"1")
+    field(DESC ,"Temperature HF Trafo")
+    field(HOPR, "125")
+    field(LOPR, "0")
+    field(EGU, "degC")
+}
+
+#register 30009
+record(ai, "MEBT:QP04_PS:ChamberT") {
+    field(PREC,"1")
+    field(DESC ,"Temperature Chamber")
+    field(HOPR, "125")
+    field(LOPR, "0")
+    field(EGU, "degC")
+}
+
+#register 30010
+record(mbbi, "MEBT:QP04_PS:Stat") {
+    field(DESC ,"Power Unit status")
+    field(ZRST, "STARTING")
+    field(ZRVL, "0x0000")
+    field(ONST, "MAKING SOFTSTART")
+    field(ONVL, "0x0001")
+    field(TWST, "IDLE")
+    field(TWVL, "0x0002")
+    field(THST, "OPERATING")
+    field(THVL, "0x0003")
+    field(FRST, "SLOW SHUTDOWN")
+    field(FRVL, "0x0004")
+    field(FVST, "EMERGENCY STOP")
+    field(FVVL, "0x0005")
+}
+
+#registers 30011-2
+record(longin, "MEBT:QP04_PS:Errors") {
+    field(DESC, "Errors")
+}
+
+#interlocks 
+
+#Last (most recent) interlock.
+record(stringin, "MEBT:QP04_PS:Ilk"){
+    field(DESC ,"Most recent interlock")
+}
+
+# HOLDING REGISTERS
+
+# registers 40001-8
+# This record gets the eight holding registers in a single modbus transaction
+# It is not intended for direct use, but only to feed aHoldRegs record
+record(waveform, "MEBT:QP04_PS:HoldRegs"){
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:get40001-8 0 2000)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Modbus holding registers")
+    field(NELM, "8")
+    field(FTVL, "ULONG")
+    field(FLNK, "MEBT:QP04_PS:aHoldRegs")
+}
+
+# This record combines decimal and integer part for limits and setpoint,
+# and also forward values to destination individual records.
+# It is not intended for direct use, but only to feed out records
+# Subroutine CalcHR is located at aSubElytt.c source file.
+record(aSub,"MEBT:QP04_PS:aHoldRegs") {
+    field(DESC ,"Holding registers calcs")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcHR")
+  # Holding registers input
+    field(FTA, "ULONG")
+    field(NOA, "8")
+    field(INPA, "MEBT:QP04_PS:HoldRegs NPP MSS")
+  # Outputs:
+    # Current setpoint
+    field(FTVA, "DOUBLE")
+    field(OUTA, "MEBT:QP04_PS:ISet PP MSS")
+    # Operating state
+    field(FTVB, "ENUM")
+    field(OUTB, "MEBT:QP04_PS:OnCmd PP MSS")
+    # Errors command
+    field(FTVC, "ENUM")
+    field(OUTC, "MEBT:QP04_PS:ErrorReset PP MSS")
+    # Current limit
+    field(FTVD, "DOUBLE")
+    field(OUTD, "MEBT:QP04_PS:ILimit PP MSS")
+    field(FTVE, "DOUBLE")
+    field(OUTE, "MEBT:QP04_PS:ISet.DRVH NPP NMS")
+    # Voltage limit
+    field(FTVF, "DOUBLE")
+    field(OUTF, "MEBT:QP04_PS:VLimit PP MSS")
+}
+
+#IMPORTANT: Integer setting must be preceded by decimal setting
+#register 40001 - I
+record(ao, "MEBT:QP04_PS:IISet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT4:set40001 0 2000)MODBUS_DATA")
+    field(DESC ,"Current integer register")
+    field(EGU, "A")
+    field(PREC,"0")
+    field(DRVH, "180")
+    field(DRVL, "0")
+}
+
+#IMPORTANT: Decimal setting is not applied until further integer setting.
+#register 40002 - D
+record(ao, "MEBT:QP04_PS:IDSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT4:set40002 0 2000)MODBUS_DATA")
+    field(DESC ,"Current decimal register")
+    field(EGU, "mA")
+    field(PREC,"0")
+    field(DRVH, "999")
+    field(DRVL, "0")
+    field(FLNK, "MEBT:QP04_PS:IISet")
+}
+
+#Current setpoint
+record(ao, "MEBT:QP04_PS:ISet")
+{
+	field(DESC, "Current Setpoint")
+	field(PREC, "3")
+	field(SCAN, "Passive")
+    field(EGU, "A")
+	field(DRVH, "180.000")
+# DRVH is linked to ILimit
+	field(DRVL, "0")
+	field(HOPR, "180.000")
+	field(LOPR, "0.000")
+	field(FLNK, "MEBT:QP04_PS:IDSetCalc")
+}
+
+#Calculus of decimal part (mA) of current setpoint
+record(calcout, "MEBT:QP04_PS:IDSetCalc") {
+    field(SCAN, "Passive")
+	field(INPA, "MEBT:QP04_PS:ISet.VAL NPP MS")
+    #dec
+    field(OUT, "MEBT:QP04_PS:IDSet NPP")
+    field(CALC, "(A-FLOOR(A))*1000")
+	field(FLNK, "MEBT:QP04_PS:IISetCalc")
+    field(SDIS, "MEBT:QP04_PS:aHoldRegs.PACT")
+}
+
+#Calculus of integer part (A) of current setpoint
+record(calcout, "MEBT:QP04_PS:IISetCalc") {
+	field(SCAN, "Passive")
+    field(INPA, "MEBT:QP04_PS:ISet.VAL NPP MS")
+    #int
+    field(OUT, "MEBT:QP04_PS:IISet NPP")
+    field(CALC, "FLOOR(A)")
+	field(FLNK, "MEBT:QP04_PS:IDSet")
+}
+
+#register 40003
+record(bo, "MEBT:QP04_PS:MOnCmd") {
+    field(DOL, "MEBT:QP04_PS:OnCmd")
+    field(OMSL, "closed_loop")
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_ELYTT4:set40003 0 2000)MODBUS_DATA")
+    field(DESC ,"Operation state modbus register")
+    field(ZNAM, "IDLE")
+    field(ONAM, "OPERATING")
+    field(SDIS, "MEBT:QP04_PS:aHoldRegs.PACT")
+}
+
+# Operation state
+record(bo, "MEBT:QP04_PS:OnCmd") {
+    field(DESC,"Operation state")
+    field(ZNAM, "IDLE")
+    field(ONAM, "OPERATING")
+    field(FLNK, "MEBT:QP04_PS:MOnCmd")
+}
+
+
+#register 40004
+record(bo, "MEBT:QP04_PS:MErrReset") {
+    field(DOL, "MEBT:QP04_PS:ErrorReset")
+    field(OMSL, "closed_loop")
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_ELYTT4:set40004 0 2000)MODBUS_DATA")
+    field(DESC ,"Reset errors modbus register")
+    field(ZNAM, "NO RESET")
+    field(ONAM, "RESET")
+    field(SDIS, "MEBT:QP04_PS:aHoldRegs.PACT")
+}
+
+# Error Reset
+record(bo, "MEBT:QP04_PS:ErrorReset") {
+    field(DESC,"Reset errors")
+    field(ZNAM, "NO RESET")
+    field(ONAM, "RESET")
+    field(FLNK, "MEBT:QP04_PS:MErrReset")
+}
+
+#register 40005
+record(ao, "MEBT:QP04_PS:IILimitSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT4:set40005 0 2000)MODBUS_DATA")
+    field(DESC ,"Current limit integer register")
+    field(PREC,"0")
+    field(DRVH, "180")
+    field(DRVL, "0")
+    field(EGU, "A")
+}
+
+#register 40006
+record(ao, "MEBT:QP04_PS:IDLimitSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT4:set40006 0 2000)MODBUS_DATA")
+    field(DESC ,"Current limit decimal register")
+    field(PREC,"0")
+    field(DRVH, "999")
+    field(DRVL, "0")
+    field(EGU, "mA")
+    field(FLNK,"MEBT:QP04_PS:IILimitSet")
+}
+
+# Current Limit
+# ILimit -> ILSetCalc -> ILSetCalc -> ILDSet -> ILISet
+record(ao, "MEBT:QP04_PS:ILimit")
+{
+    field(SCAN, "Passive")
+    field(DESC, "Current Limit")
+    field(PREC, "3")
+    field(EGU, "A")
+    field(DRVH, "180.000")
+    field(DRVL, "0")
+	field(HOPR, "180.000")
+	field(LOPR, "0.000")
+    field(FLNK,"MEBT:QP04_PS:IDLSetCalc")
+}
+
+record(calcout, "MEBT:QP04_PS:IDLSetCalc") {
+   field(SCAN, "Passive")
+   field(INPA, "MEBT:QP04_PS:ILimit.VAL NPP MS")
+   #dec
+   field(OUT, "MEBT:QP04_PS:IDLimitSet NPP")
+   field(CALC, "(A-FLOOR(A))*1000")
+   field(FLNK,"MEBT:QP04_PS:IILSetCalc")
+   field(SDIS, "MEBT:QP04_PS:aHoldRegs.PACT")
+}
+
+record(calcout, "MEBT:QP04_PS:IILSetCalc") {
+    field(SCAN, "Passive")
+     field(INPA, "MEBT:QP04_PS:ILimit.VAL NPP MS")
+     #int
+     field(OUT, "MEBT:QP04_PS:IILimitSet NPP")
+     field(CALC, "FLOOR(A)")
+     field(FLNK,"MEBT:QP04_PS:IDLimitSet")
+}
+
+#register 40007
+record(ao, "MEBT:QP04_PS:VISet") {
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT4:set40007 0 2000)MODBUS_DATA")
+    field(DESC ,"Voltage limit integer register")
+    field(DRVH, "20.000")
+    field(DRVL, "0")
+    field(PREC,"2")
+    field(EGU, "V")
+}
+
+# Current limit readback
+record(ai, "MEBT:QP04_PS:ILimitRdbk") {
+    field(DESC,"Current limit readback")
+    field(PREC,"3")
+    field(SCAN ,"Passive")
+    field(EGU, "A")
+    field(HOPR, "180")
+    field(LOPR, "0")
+}
+
+#register 40008
+record(ao, "MEBT:QP04_PS:VDSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT4:set40008 0 2000)MODBUS_DATA")
+    field(DESC ,"Voltage decimal")
+    field(PREC,"2")
+    field(EGU, "mV")
+    field(DRVH, "999")
+    field(DRVL, "0")
+    field(FLNK, "MEBT:QP04_PS:VISet")
+}
+
+#register 40007+4008
+record(ao, "MEBT:QP04_PS:VLimit")
+{
+    field(DESC, "Voltage Limt")
+    field(PREC, "2")
+    field(SCAN, "Passive")
+    field(EGU, "V")
+    field(DRVH, "20.00")
+    field(DRVL, "0")
+	field(HOPR, "20.00")
+	field(LOPR, "0.00")
+    field(FLNK,"MEBT:QP04_PS:VDSetCalc")
+}
+
+record(calcout, "MEBT:QP04_PS:VDSetCalc") {
+    field(SCAN, "Passive")
+    field(INPA, "MEBT:QP04_PS:VLimit.VAL NPP MS")
+    #dec
+    field(OUT, "MEBT:QP04_PS:VDSet NPP")
+    field(CALC, "(A-FLOOR(A))*100")
+    field(FLNK,"MEBT:QP04_PS:VISetCalc")
+    field(SDIS, "MEBT:QP04_PS:aHoldRegs.PACT")
+}
+
+record(calcout, "MEBT:QP04_PS:VISetCalc") {
+    field(SCAN, "Passive")
+     field(INPA, "MEBT:QP04_PS:VLimit.VAL NPP MS")
+     #int
+     field(OUT, "MEBT:QP04_PS:VISet NPP")
+     field(CALC, "FLOOR(A)")
+     field(FLNK,"MEBT:QP04_PS:VDSet")
+}
+
+# INTERLOCK LOG
+
+record(aSub,"MEBT:QP04_PS:IlkLogA") {
+    field(DESC ,"Interlock log, last to 100th")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcIlkLog")
+    field(FTA, "LONG")
+    field(NOA, "100")
+    field(INPA, "MEBT:QP04_PS:IlkBlk01 NPP MS")
+    field(FTB, "LONG")
+    field(NOB, "100")
+    field(INPB, "MEBT:QP04_PS:IlkBlk02 NPP MS")
+    field(FTC, "LONG")
+    field(NOC, "100")
+    field(INPC, "MEBT:QP04_PS:IlkBlk03 NPP MS")
+    field(FTD, "LONG")
+    field(NOD, "100")
+    field(INPD, "MEBT:QP04_PS:IlkBlk04 NPP MS")
+    field(FTE, "LONG")
+    field(NOE, "100")
+    field(INPE, "MEBT:QP04_PS:IlkBlk05 NPP MS")
+    field(FTF, "LONG")
+    field(NOF, "100")
+    field(INPF, "MEBT:QP04_PS:IlkBlk06 NPP MS")
+    field(FTG, "LONG")
+    field(NOG, "100")
+    field(INPG, "MEBT:QP04_PS:IlkBlk07 NPP MS")
+    field(FTH, "LONG")
+    field(NOH, "100")
+    field(INPH, "MEBT:QP04_PS:IlkBlk08 NPP MS")
+    field(FTI, "LONG")
+    field(NOI, "100")
+    field(INPI, "MEBT:QP04_PS:IlkBlk09 NPP MS")
+    field(FTJ, "LONG")
+    field(NOJ, "100")
+    field(INPJ, "MEBT:QP04_PS:IlkBlk10 NPP MS")
+    field(FTK, "LONG")
+    field(NOK, "100")
+    field(INPK, "MEBT:QP04_PS:IlkBlk11 NPP MS")
+    field(FTL, "LONG")
+    field(NOL, "100")
+    field(INPL, "MEBT:QP04_PS:IlkBlk12 NPP MS")
+    field(FTM, "LONG")
+    field(NOM, "100")
+    field(INPM, "MEBT:QP04_PS:IlkBlk13 NPP MS")
+    field(FTN, "LONG")
+    field(NON, "100")
+    field(INPN, "MEBT:QP04_PS:IlkBlk14 NPP MS")
+    field(FTO, "LONG")
+    field(NOO, "100")
+    field(INPO, "MEBT:QP04_PS:IlkBlk15 NPP MS")
+    field(FTP, "LONG")
+    field(NOP, "100")
+    field(INPP, "MEBT:QP04_PS:IlkBlk16 NPP MS")
+    field(FTQ, "LONG")
+    field(NOQ, "100")
+    field(INPQ, "MEBT:QP04_PS:IlkBlk17 NPP MS")
+    field(FTR, "LONG")
+    field(NOR, "100")
+    field(INPR, "MEBT:QP04_PS:IlkBlk18 NPP MS")
+    field(FTS, "LONG")
+    field(NOS, "100")
+    field(INPS, "MEBT:QP04_PS:IlkBlk19 NPP MS")
+    field(FTT, "LONG")
+    field(NOT, "100")
+    field(INPT, "MEBT:QP04_PS:IlkBlk20 NPP MS")
+    field(FTVA, "STRING")
+    field(NOVA, "100")
+    field(FLNK, "MEBT:QP04_PS:IlkLogB PP")
+}
+record(aSub,"MEBT:QP04_PS:IlkLogB") {
+    field(DESC ,"Interlock log, 101st to 200th")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcIlkLog")
+    field(FTA, "LONG")
+    field(NOA, "100")
+    field(INPA, "MEBT:QP04_PS:IlkBlk21 NPP MS")
+    field(FTB, "LONG")
+    field(NOB, "100")
+    field(INPB, "MEBT:QP04_PS:IlkBlk22 NPP MS")
+    field(FTC, "LONG")
+    field(NOC, "100")
+    field(INPC, "MEBT:QP04_PS:IlkBlk23 NPP MS")
+    field(FTD, "LONG")
+    field(NOD, "100")
+    field(INPD, "MEBT:QP04_PS:IlkBlk24 NPP MS")
+    field(FTE, "LONG")
+    field(NOE, "100")
+    field(INPE, "MEBT:QP04_PS:IlkBlk25 NPP MS")
+    field(FTF, "LONG")
+    field(NOF, "100")
+    field(INPF, "MEBT:QP04_PS:IlkBlk26 NPP MS")
+    field(FTG, "LONG")
+    field(NOG, "100")
+    field(INPG, "MEBT:QP04_PS:IlkBlk27 NPP MS")
+    field(FTH, "LONG")
+    field(NOH, "100")
+    field(INPH, "MEBT:QP04_PS:IlkBlk28 NPP MS")
+    field(FTI, "LONG")
+    field(NOI, "100")
+    field(INPI, "MEBT:QP04_PS:IlkBlk29 NPP MS")
+    field(FTJ, "LONG")
+    field(NOJ, "100")
+    field(INPJ, "MEBT:QP04_PS:IlkBlk30 NPP MS")
+    field(FTK, "LONG")
+    field(NOK, "100")
+    field(INPK, "MEBT:QP04_PS:IlkBlk31 NPP MS")
+    field(FTL, "LONG")
+    field(NOL, "100")
+    field(INPL, "MEBT:QP04_PS:IlkBlk32 NPP MS")
+    field(FTM, "LONG")
+    field(NOM, "100")
+    field(INPM, "MEBT:QP04_PS:IlkBlk33 NPP MS")
+    field(FTN, "LONG")
+    field(NON, "100")
+    field(INPN, "MEBT:QP04_PS:IlkBlk34 NPP MS")
+    field(FTO, "LONG")
+    field(NOO, "100")
+    field(INPO, "MEBT:QP04_PS:IlkBlk35 NPP MS")
+    field(FTP, "LONG")
+    field(NOP, "100")
+    field(INPP, "MEBT:QP04_PS:IlkBlk36 NPP MS")
+    field(FTQ, "LONG")
+    field(NOQ, "100")
+    field(INPQ, "MEBT:QP04_PS:IlkBlk37 NPP MS")
+    field(FTR, "LONG")
+    field(NOR, "100")
+    field(INPR, "MEBT:QP04_PS:IlkBlk38 NPP MS")
+    field(FTS, "LONG")
+    field(NOS, "100")
+    field(INPS, "MEBT:QP04_PS:IlkBlk39 NPP MS")
+    field(FTT, "LONG")
+    field(NOT, "100")
+    field(INPT, "MEBT:QP04_PS:IlkBlk40 NPP MS")
+    field(FTVA, "STRING")
+    field(NOVA, "100")
+    field(FLNK, "MEBT:QP04_PS:IlkLog PP")
+}
+
+record(aSub,"MEBT:QP04_PS:IlkLog") {
+    field(DESC ,"Interlock log")
+    field(SCAN ,"Passive")
+    field(SNAM,"ConcatIlkLog")
+    field(FTA, "STRING")
+    field(NOA, "100")
+    field(INPA, "MEBT:QP04_PS:IlkLogA.VALA NPP MS")
+    field(FTB, "STRING")
+    field(NOB, "100")
+    field(INPB, "MEBT:QP04_PS:IlkLogB.VALA NPP MS")
+    field(FTVA, "STRING")
+    field(NOVA, "200")
+}
+
+# Interlock Block 01, holds 01 to 05
+record(waveform, "MEBT:QP04_PS:IlkBlk01") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk01,0,2000)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Aux Interlocks Block 01")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk02 PP")
+}
+# Interlock Block 02, holds 06 to 10
+record(waveform, "MEBT:QP04_PS:IlkBlk02") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk02,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 02")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk03 PP")
+}
+# Interlock Block 03, holds 11 to 15
+record(waveform, "MEBT:QP04_PS:IlkBlk03") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk03,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 03")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk04 PP")
+}
+# Interlock Block 04, holds 16 to 20
+record(waveform, "MEBT:QP04_PS:IlkBlk04") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk04,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 04")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk05 PP")
+}
+# Interlock Block 05, holds 21 to 25
+record(waveform, "MEBT:QP04_PS:IlkBlk05") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk05 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 05")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk06 PP")
+}
+# Interlock Block 06, holds 26 to 30
+record(waveform, "MEBT:QP04_PS:IlkBlk06") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk06 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 06")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk07 PP")
+}
+# Interlock Block 07, holds 31 to 35
+record(waveform, "MEBT:QP04_PS:IlkBlk07") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk07 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 07")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk08 PP")
+}
+# Interlock Block 08, holds 36 to 40
+record(waveform, "MEBT:QP04_PS:IlkBlk08") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk08 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 08")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk09 PP")
+}
+# Interlock Block 09, holds 41 to 45
+record(waveform, "MEBT:QP04_PS:IlkBlk09") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk09 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 09")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk10 PP")
+}
+# Interlock Block 10, holds 46 to 50
+record(waveform, "MEBT:QP04_PS:IlkBlk10") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk10 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 10")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk11 PP")
+}
+# Interlock Block 11, holds 51 to 55
+record(waveform, "MEBT:QP04_PS:IlkBlk11") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk11 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 11")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk12 PP")
+}
+# Interlock Block 12, holds 56 to 60
+record(waveform, "MEBT:QP04_PS:IlkBlk12") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk12 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 12")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk13 PP")
+}
+# Interlock Block 13, holds 61 to 65
+record(waveform, "MEBT:QP04_PS:IlkBlk13") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk13 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 13")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk14 PP")
+}
+# Interlock Block 14, holds 66 to 70
+record(waveform, "MEBT:QP04_PS:IlkBlk14") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk14 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 14")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk15 PP")
+}
+# Interlock Block 15, holds 71 to 75
+record(waveform, "MEBT:QP04_PS:IlkBlk15") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk15 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 15")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk16 PP")
+}
+# Interlock Block 16, holds 76 to 80
+record(waveform, "MEBT:QP04_PS:IlkBlk16") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk16 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 16")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk17 PP")
+}
+# Interlock Block 17, holds 81 to 85
+record(waveform, "MEBT:QP04_PS:IlkBlk17") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk17 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 17")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk18 PP")
+}
+# Interlock Block 18, holds 86 to 90
+record(waveform, "MEBT:QP04_PS:IlkBlk18") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk18 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 18")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk19 PP")
+}
+# Interlock Block 19, holds 91 to 95
+record(waveform, "MEBT:QP04_PS:IlkBlk19") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk19 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 19")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk20 PP")
+}
+# Interlock Block 20, holds 96 to 100
+record(waveform, "MEBT:QP04_PS:IlkBlk20") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk20 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 20")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk21 PP")
+}
+
+# Interlock Block 21, holds 101 to 105
+record(waveform, "MEBT:QP04_PS:IlkBlk21") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk21,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 21")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk22 PP")
+}
+# Interlock Block 22, holds 106 to 110
+record(waveform, "MEBT:QP04_PS:IlkBlk22") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk22,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 22")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk23 PP")
+}
+# Interlock Block 23, holds 111 to 115
+record(waveform, "MEBT:QP04_PS:IlkBlk23") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk23,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 23")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk24 PP")
+}
+# Interlock Block 24, holds 116 to 120
+record(waveform, "MEBT:QP04_PS:IlkBlk24") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk24,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 24")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk25 PP")
+}
+# Interlock Block 25, holds 121 to 125
+record(waveform, "MEBT:QP04_PS:IlkBlk25") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk25 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 25")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk26 PP")
+}
+# Interlock Block 26, holds 126 to 130
+record(waveform, "MEBT:QP04_PS:IlkBlk26") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk26 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 26")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk27 PP")
+}
+# Interlock Block 27, holds 131 to 135
+record(waveform, "MEBT:QP04_PS:IlkBlk27") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk27 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 27")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk28 PP")
+}
+# Interlock Block 28, holds 136 to 140
+record(waveform, "MEBT:QP04_PS:IlkBlk28") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk28 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 28")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk29 PP")
+}
+# Interlock Block 29, holds 141 to 145
+record(waveform, "MEBT:QP04_PS:IlkBlk29") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk29 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 29")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk30 PP")
+}
+# Interlock Block 30, holds 146 to 150
+record(waveform, "MEBT:QP04_PS:IlkBlk30") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk30 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 30")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk31 PP")
+}
+# Interlock Block 31, holds 151 to 155
+record(waveform, "MEBT:QP04_PS:IlkBlk31") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk31 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 31")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk32 PP")
+}
+# Interlock Block 32, holds 156 to 160
+record(waveform, "MEBT:QP04_PS:IlkBlk32") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk32 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 32")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk33 PP")
+}
+# Interlock Block 33, holds 161 to 165
+record(waveform, "MEBT:QP04_PS:IlkBlk33") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk33 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 33")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk34 PP")
+}
+# Interlock Block 34, holds 166 to 170
+record(waveform, "MEBT:QP04_PS:IlkBlk34") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk34 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 34")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk35 PP")
+}
+# Interlock Block 35, holds 171 to 175
+record(waveform, "MEBT:QP04_PS:IlkBlk35") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk35 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 35")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk36 PP")
+}
+# Interlock Block 36, holds 176 to 180
+record(waveform, "MEBT:QP04_PS:IlkBlk36") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk36 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 36")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk37 PP")
+}
+# Interlock Block 37, holds 181 to 185
+record(waveform, "MEBT:QP04_PS:IlkBlk37") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk37 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 37")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk38 PP")
+}
+# Interlock Block 38, holds 186 to 190
+record(waveform, "MEBT:QP04_PS:IlkBlk38") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk38 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 38")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk39 PP")
+}
+# Interlock Block 39, holds 191 to 195
+record(waveform, "MEBT:QP04_PS:IlkBlk39") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk39 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 39")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkBlk40 PP")
+}
+# Interlock Block 40, holds 196 to 200
+record(waveform, "MEBT:QP04_PS:IlkBlk40") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT4:getIlkBlk40 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 40")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP04_PS:IlkLogA PP")
+}
+# INPUT REGISTERS
+
+# registers 30001-32
+# This record gets the first 32 input registers in a single modbus transaction
+# It is not intended for direct use, but only to feed aInputRegs record
+record(waveform, "MEBT:QP05_PS:InputRegs"){
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:get30001-32 0 2000)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Modbus input registers")
+    field(NELM, "32")
+    field(FTVL, "ULONG")
+    field(FLNK, "MEBT:QP05_PS:aInputRegs")
+}
+
+# This record combines decimal and integer part for current and voltage,
+# and also forward values to destination individual records.
+# It is not intended for direct use, but only to feed out records
+# Subroutine CalcIR is located at aSubElytt.c source file.
+record(aSub,"MEBT:QP05_PS:aInputRegs") {
+    field(DESC ,"Input registers calcs")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcIR")
+  # Input registers input
+    field(FTA, "ULONG")
+    field(NOA, "32")
+    field(INPA, "MEBT:QP05_PS:InputRegs NPP MSS")
+  # Outputs:
+    # Current monitor
+    field(FTVA, "DOUBLE")
+    field(OUTA, "MEBT:QP05_PS:IRdbk PP MSS")
+    # Voltage monitor
+    field(FTVB, "DOUBLE")
+    field(OUTB, "MEBT:QP05_PS:VRdbk PP MSS")
+    # Fan main
+    field(FTVC, "DOUBLE")
+    field(OUTC, "MEBT:QP05_PS:FanMain PP MSS")
+    # Fan power
+    field(FTVD, "DOUBLE")
+    field(OUTD, "MEBT:QP05_PS:FanPower PP MSS")
+    # Temp power module
+    field(FTVE, "DOUBLE")
+    field(OUTE, "MEBT:QP05_PS:PowerModT PP MSS")
+    # Temp HF trafo
+    field(FTVF, "DOUBLE")
+    field(OUTF, "MEBT:QP05_PS:HFtrafoT PP MSS")
+    # Temp chamber
+    field(FTVG, "DOUBLE")
+    field(OUTG, "MEBT:QP05_PS:ChamberT PP MSS")
+    # Status
+    field(FTVH, "ULONG")
+    field(OUTH, "MEBT:QP05_PS:Stat PP MSS")
+    # Errors
+    field(FTVI, "ULONG")
+    field(OUTI, "MEBT:QP05_PS:Errors PP MSS")
+    # Last interlock
+    field(FTVJ, "STRING")
+    field(OUTJ, "MEBT:QP05_PS:Ilk PP MSS")
+    # Last interlock code
+    field(FTVK, "ULONG")
+    # Last interlock description
+    field(FTVL, "STRING")
+}
+
+#Output current monitor
+record(ai, "MEBT:QP05_PS:IRdbk") {
+    field(DESC ,"Ouput current monitor")
+    field(PREC, "3")
+    field(HOPR, "180")
+    field(HIHI, "179")
+    field(HIGH, "175")
+    field(LOW, "0")
+    field(LOLO, "0")
+    field(LOPR, "0")
+    field(EGU, "A")
+}
+
+#Output voltage monitor
+record(ai, "MEBT:QP05_PS:VRdbk") {
+    field(DESC ,"Ouput voltage monitor")
+    field(PREC, "2")
+    field(HOPR, "20")
+    field(LOPR, "0")
+    field(EGU, "V")
+}
+
+#register 30005
+record(ai, "MEBT:QP05_PS:FanMain") {
+    field(DESC ,"Fan Main")
+    field(HOPR, "6000")
+    field(LOPR, "0")
+    field(EGU, "rpm")
+}
+
+#register 30006
+record(ai, "MEBT:QP05_PS:FanPower") {
+    field(DESC ,"Fan Power")
+    field(HOPR, "2900")
+    field(LOPR, "0")
+    field(EGU, "rpm")
+}
+
+#register 30007
+#record(ai, "MEBT:QP05_PS:TempPowMod") {
+record(ai, "MEBT:QP05_PS:PowerModT") {
+    field(PREC,"1")
+    field(DESC ,"Temperature Power Module")
+    field(HOPR, "125")
+    field(LOPR, "0")
+    field(EGU, "degC")
+}
+
+#register 30008
+record(ai, "MEBT:QP05_PS:HFtrafoT") {
+    field(PREC,"1")
+    field(DESC ,"Temperature HF Trafo")
+    field(HOPR, "125")
+    field(LOPR, "0")
+    field(EGU, "degC")
+}
+
+#register 30009
+record(ai, "MEBT:QP05_PS:ChamberT") {
+    field(PREC,"1")
+    field(DESC ,"Temperature Chamber")
+    field(HOPR, "125")
+    field(LOPR, "0")
+    field(EGU, "degC")
+}
+
+#register 30010
+record(mbbi, "MEBT:QP05_PS:Stat") {
+    field(DESC ,"Power Unit status")
+    field(ZRST, "STARTING")
+    field(ZRVL, "0x0000")
+    field(ONST, "MAKING SOFTSTART")
+    field(ONVL, "0x0001")
+    field(TWST, "IDLE")
+    field(TWVL, "0x0002")
+    field(THST, "OPERATING")
+    field(THVL, "0x0003")
+    field(FRST, "SLOW SHUTDOWN")
+    field(FRVL, "0x0004")
+    field(FVST, "EMERGENCY STOP")
+    field(FVVL, "0x0005")
+}
+
+#registers 30011-2
+record(longin, "MEBT:QP05_PS:Errors") {
+    field(DESC, "Errors")
+}
+
+#interlocks 
+
+#Last (most recent) interlock.
+record(stringin, "MEBT:QP05_PS:Ilk"){
+    field(DESC ,"Most recent interlock")
+}
+
+# HOLDING REGISTERS
+
+# registers 40001-8
+# This record gets the eight holding registers in a single modbus transaction
+# It is not intended for direct use, but only to feed aHoldRegs record
+record(waveform, "MEBT:QP05_PS:HoldRegs"){
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:get40001-8 0 2000)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Modbus holding registers")
+    field(NELM, "8")
+    field(FTVL, "ULONG")
+    field(FLNK, "MEBT:QP05_PS:aHoldRegs")
+}
+
+# This record combines decimal and integer part for limits and setpoint,
+# and also forward values to destination individual records.
+# It is not intended for direct use, but only to feed out records
+# Subroutine CalcHR is located at aSubElytt.c source file.
+record(aSub,"MEBT:QP05_PS:aHoldRegs") {
+    field(DESC ,"Holding registers calcs")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcHR")
+  # Holding registers input
+    field(FTA, "ULONG")
+    field(NOA, "8")
+    field(INPA, "MEBT:QP05_PS:HoldRegs NPP MSS")
+  # Outputs:
+    # Current setpoint
+    field(FTVA, "DOUBLE")
+    field(OUTA, "MEBT:QP05_PS:ISet PP MSS")
+    # Operating state
+    field(FTVB, "ENUM")
+    field(OUTB, "MEBT:QP05_PS:OnCmd PP MSS")
+    # Errors command
+    field(FTVC, "ENUM")
+    field(OUTC, "MEBT:QP05_PS:ErrorReset PP MSS")
+    # Current limit
+    field(FTVD, "DOUBLE")
+    field(OUTD, "MEBT:QP05_PS:ILimit PP MSS")
+    field(FTVE, "DOUBLE")
+    field(OUTE, "MEBT:QP05_PS:ISet.DRVH NPP NMS")
+    # Voltage limit
+    field(FTVF, "DOUBLE")
+    field(OUTF, "MEBT:QP05_PS:VLimit PP MSS")
+}
+
+#IMPORTANT: Integer setting must be preceded by decimal setting
+#register 40001 - I
+record(ao, "MEBT:QP05_PS:IISet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT5:set40001 0 2000)MODBUS_DATA")
+    field(DESC ,"Current integer register")
+    field(EGU, "A")
+    field(PREC,"0")
+    field(DRVH, "180")
+    field(DRVL, "0")
+}
+
+#IMPORTANT: Decimal setting is not applied until further integer setting.
+#register 40002 - D
+record(ao, "MEBT:QP05_PS:IDSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT5:set40002 0 2000)MODBUS_DATA")
+    field(DESC ,"Current decimal register")
+    field(EGU, "mA")
+    field(PREC,"0")
+    field(DRVH, "999")
+    field(DRVL, "0")
+    field(FLNK, "MEBT:QP05_PS:IISet")
+}
+
+#Current setpoint
+record(ao, "MEBT:QP05_PS:ISet")
+{
+	field(DESC, "Current Setpoint")
+	field(PREC, "3")
+	field(SCAN, "Passive")
+    field(EGU, "A")
+	field(DRVH, "180.000")
+# DRVH is linked to ILimit
+	field(DRVL, "0")
+	field(HOPR, "180.000")
+	field(LOPR, "0.000")
+	field(FLNK, "MEBT:QP05_PS:IDSetCalc")
+}
+
+#Calculus of decimal part (mA) of current setpoint
+record(calcout, "MEBT:QP05_PS:IDSetCalc") {
+    field(SCAN, "Passive")
+	field(INPA, "MEBT:QP05_PS:ISet.VAL NPP MS")
+    #dec
+    field(OUT, "MEBT:QP05_PS:IDSet NPP")
+    field(CALC, "(A-FLOOR(A))*1000")
+	field(FLNK, "MEBT:QP05_PS:IISetCalc")
+    field(SDIS, "MEBT:QP05_PS:aHoldRegs.PACT")
+}
+
+#Calculus of integer part (A) of current setpoint
+record(calcout, "MEBT:QP05_PS:IISetCalc") {
+	field(SCAN, "Passive")
+    field(INPA, "MEBT:QP05_PS:ISet.VAL NPP MS")
+    #int
+    field(OUT, "MEBT:QP05_PS:IISet NPP")
+    field(CALC, "FLOOR(A)")
+	field(FLNK, "MEBT:QP05_PS:IDSet")
+}
+
+#register 40003
+record(bo, "MEBT:QP05_PS:MOnCmd") {
+    field(DOL, "MEBT:QP05_PS:OnCmd")
+    field(OMSL, "closed_loop")
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_ELYTT5:set40003 0 2000)MODBUS_DATA")
+    field(DESC ,"Operation state modbus register")
+    field(ZNAM, "IDLE")
+    field(ONAM, "OPERATING")
+    field(SDIS, "MEBT:QP05_PS:aHoldRegs.PACT")
+}
+
+# Operation state
+record(bo, "MEBT:QP05_PS:OnCmd") {
+    field(DESC,"Operation state")
+    field(ZNAM, "IDLE")
+    field(ONAM, "OPERATING")
+    field(FLNK, "MEBT:QP05_PS:MOnCmd")
+}
+
+
+#register 40004
+record(bo, "MEBT:QP05_PS:MErrReset") {
+    field(DOL, "MEBT:QP05_PS:ErrorReset")
+    field(OMSL, "closed_loop")
+    field(DTYP ,"asynInt32")
+    field(OUT,"@asynMask(MODBUS_ELYTT5:set40004 0 2000)MODBUS_DATA")
+    field(DESC ,"Reset errors modbus register")
+    field(ZNAM, "NO RESET")
+    field(ONAM, "RESET")
+    field(SDIS, "MEBT:QP05_PS:aHoldRegs.PACT")
+}
+
+# Error Reset
+record(bo, "MEBT:QP05_PS:ErrorReset") {
+    field(DESC,"Reset errors")
+    field(ZNAM, "NO RESET")
+    field(ONAM, "RESET")
+    field(FLNK, "MEBT:QP05_PS:MErrReset")
+}
+
+#register 40005
+record(ao, "MEBT:QP05_PS:IILimitSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT5:set40005 0 2000)MODBUS_DATA")
+    field(DESC ,"Current limit integer register")
+    field(PREC,"0")
+    field(DRVH, "180")
+    field(DRVL, "0")
+    field(EGU, "A")
+}
+
+#register 40006
+record(ao, "MEBT:QP05_PS:IDLimitSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT5:set40006 0 2000)MODBUS_DATA")
+    field(DESC ,"Current limit decimal register")
+    field(PREC,"0")
+    field(DRVH, "999")
+    field(DRVL, "0")
+    field(EGU, "mA")
+    field(FLNK,"MEBT:QP05_PS:IILimitSet")
+}
+
+# Current Limit
+# ILimit -> ILSetCalc -> ILSetCalc -> ILDSet -> ILISet
+record(ao, "MEBT:QP05_PS:ILimit")
+{
+    field(SCAN, "Passive")
+    field(DESC, "Current Limit")
+    field(PREC, "3")
+    field(EGU, "A")
+    field(DRVH, "180.000")
+    field(DRVL, "0")
+	field(HOPR, "180.000")
+	field(LOPR, "0.000")
+    field(FLNK,"MEBT:QP05_PS:IDLSetCalc")
+}
+
+record(calcout, "MEBT:QP05_PS:IDLSetCalc") {
+   field(SCAN, "Passive")
+   field(INPA, "MEBT:QP05_PS:ILimit.VAL NPP MS")
+   #dec
+   field(OUT, "MEBT:QP05_PS:IDLimitSet NPP")
+   field(CALC, "(A-FLOOR(A))*1000")
+   field(FLNK,"MEBT:QP05_PS:IILSetCalc")
+   field(SDIS, "MEBT:QP05_PS:aHoldRegs.PACT")
+}
+
+record(calcout, "MEBT:QP05_PS:IILSetCalc") {
+    field(SCAN, "Passive")
+     field(INPA, "MEBT:QP05_PS:ILimit.VAL NPP MS")
+     #int
+     field(OUT, "MEBT:QP05_PS:IILimitSet NPP")
+     field(CALC, "FLOOR(A)")
+     field(FLNK,"MEBT:QP05_PS:IDLimitSet")
+}
+
+#register 40007
+record(ao, "MEBT:QP05_PS:VISet") {
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT5:set40007 0 2000)MODBUS_DATA")
+    field(DESC ,"Voltage limit integer register")
+    field(DRVH, "20.000")
+    field(DRVL, "0")
+    field(PREC,"2")
+    field(EGU, "V")
+}
+
+# Current limit readback
+record(ai, "MEBT:QP05_PS:ILimitRdbk") {
+    field(DESC,"Current limit readback")
+    field(PREC,"3")
+    field(SCAN ,"Passive")
+    field(EGU, "A")
+    field(HOPR, "180")
+    field(LOPR, "0")
+}
+
+#register 40008
+record(ao, "MEBT:QP05_PS:VDSet") {
+    field(SCAN, "Passive")
+    field(DTYP,"asynInt32")
+    field(OUT,"@asyn(MODBUS_ELYTT5:set40008 0 2000)MODBUS_DATA")
+    field(DESC ,"Voltage decimal")
+    field(PREC,"2")
+    field(EGU, "mV")
+    field(DRVH, "999")
+    field(DRVL, "0")
+    field(FLNK, "MEBT:QP05_PS:VISet")
+}
+
+#register 40007+4008
+record(ao, "MEBT:QP05_PS:VLimit")
+{
+    field(DESC, "Voltage Limt")
+    field(PREC, "2")
+    field(SCAN, "Passive")
+    field(EGU, "V")
+    field(DRVH, "20.00")
+    field(DRVL, "0")
+	field(HOPR, "20.00")
+	field(LOPR, "0.00")
+    field(FLNK,"MEBT:QP05_PS:VDSetCalc")
+}
+
+record(calcout, "MEBT:QP05_PS:VDSetCalc") {
+    field(SCAN, "Passive")
+    field(INPA, "MEBT:QP05_PS:VLimit.VAL NPP MS")
+    #dec
+    field(OUT, "MEBT:QP05_PS:VDSet NPP")
+    field(CALC, "(A-FLOOR(A))*100")
+    field(FLNK,"MEBT:QP05_PS:VISetCalc")
+    field(SDIS, "MEBT:QP05_PS:aHoldRegs.PACT")
+}
+
+record(calcout, "MEBT:QP05_PS:VISetCalc") {
+    field(SCAN, "Passive")
+     field(INPA, "MEBT:QP05_PS:VLimit.VAL NPP MS")
+     #int
+     field(OUT, "MEBT:QP05_PS:VISet NPP")
+     field(CALC, "FLOOR(A)")
+     field(FLNK,"MEBT:QP05_PS:VDSet")
+}
+
+# INTERLOCK LOG
+
+record(aSub,"MEBT:QP05_PS:IlkLogA") {
+    field(DESC ,"Interlock log, last to 100th")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcIlkLog")
+    field(FTA, "LONG")
+    field(NOA, "100")
+    field(INPA, "MEBT:QP05_PS:IlkBlk01 NPP MS")
+    field(FTB, "LONG")
+    field(NOB, "100")
+    field(INPB, "MEBT:QP05_PS:IlkBlk02 NPP MS")
+    field(FTC, "LONG")
+    field(NOC, "100")
+    field(INPC, "MEBT:QP05_PS:IlkBlk03 NPP MS")
+    field(FTD, "LONG")
+    field(NOD, "100")
+    field(INPD, "MEBT:QP05_PS:IlkBlk04 NPP MS")
+    field(FTE, "LONG")
+    field(NOE, "100")
+    field(INPE, "MEBT:QP05_PS:IlkBlk05 NPP MS")
+    field(FTF, "LONG")
+    field(NOF, "100")
+    field(INPF, "MEBT:QP05_PS:IlkBlk06 NPP MS")
+    field(FTG, "LONG")
+    field(NOG, "100")
+    field(INPG, "MEBT:QP05_PS:IlkBlk07 NPP MS")
+    field(FTH, "LONG")
+    field(NOH, "100")
+    field(INPH, "MEBT:QP05_PS:IlkBlk08 NPP MS")
+    field(FTI, "LONG")
+    field(NOI, "100")
+    field(INPI, "MEBT:QP05_PS:IlkBlk09 NPP MS")
+    field(FTJ, "LONG")
+    field(NOJ, "100")
+    field(INPJ, "MEBT:QP05_PS:IlkBlk10 NPP MS")
+    field(FTK, "LONG")
+    field(NOK, "100")
+    field(INPK, "MEBT:QP05_PS:IlkBlk11 NPP MS")
+    field(FTL, "LONG")
+    field(NOL, "100")
+    field(INPL, "MEBT:QP05_PS:IlkBlk12 NPP MS")
+    field(FTM, "LONG")
+    field(NOM, "100")
+    field(INPM, "MEBT:QP05_PS:IlkBlk13 NPP MS")
+    field(FTN, "LONG")
+    field(NON, "100")
+    field(INPN, "MEBT:QP05_PS:IlkBlk14 NPP MS")
+    field(FTO, "LONG")
+    field(NOO, "100")
+    field(INPO, "MEBT:QP05_PS:IlkBlk15 NPP MS")
+    field(FTP, "LONG")
+    field(NOP, "100")
+    field(INPP, "MEBT:QP05_PS:IlkBlk16 NPP MS")
+    field(FTQ, "LONG")
+    field(NOQ, "100")
+    field(INPQ, "MEBT:QP05_PS:IlkBlk17 NPP MS")
+    field(FTR, "LONG")
+    field(NOR, "100")
+    field(INPR, "MEBT:QP05_PS:IlkBlk18 NPP MS")
+    field(FTS, "LONG")
+    field(NOS, "100")
+    field(INPS, "MEBT:QP05_PS:IlkBlk19 NPP MS")
+    field(FTT, "LONG")
+    field(NOT, "100")
+    field(INPT, "MEBT:QP05_PS:IlkBlk20 NPP MS")
+    field(FTVA, "STRING")
+    field(NOVA, "100")
+    field(FLNK, "MEBT:QP05_PS:IlkLogB PP")
+}
+record(aSub,"MEBT:QP05_PS:IlkLogB") {
+    field(DESC ,"Interlock log, 101st to 200th")
+    field(SCAN ,"Passive")
+    field(SNAM,"CalcIlkLog")
+    field(FTA, "LONG")
+    field(NOA, "100")
+    field(INPA, "MEBT:QP05_PS:IlkBlk21 NPP MS")
+    field(FTB, "LONG")
+    field(NOB, "100")
+    field(INPB, "MEBT:QP05_PS:IlkBlk22 NPP MS")
+    field(FTC, "LONG")
+    field(NOC, "100")
+    field(INPC, "MEBT:QP05_PS:IlkBlk23 NPP MS")
+    field(FTD, "LONG")
+    field(NOD, "100")
+    field(INPD, "MEBT:QP05_PS:IlkBlk24 NPP MS")
+    field(FTE, "LONG")
+    field(NOE, "100")
+    field(INPE, "MEBT:QP05_PS:IlkBlk25 NPP MS")
+    field(FTF, "LONG")
+    field(NOF, "100")
+    field(INPF, "MEBT:QP05_PS:IlkBlk26 NPP MS")
+    field(FTG, "LONG")
+    field(NOG, "100")
+    field(INPG, "MEBT:QP05_PS:IlkBlk27 NPP MS")
+    field(FTH, "LONG")
+    field(NOH, "100")
+    field(INPH, "MEBT:QP05_PS:IlkBlk28 NPP MS")
+    field(FTI, "LONG")
+    field(NOI, "100")
+    field(INPI, "MEBT:QP05_PS:IlkBlk29 NPP MS")
+    field(FTJ, "LONG")
+    field(NOJ, "100")
+    field(INPJ, "MEBT:QP05_PS:IlkBlk30 NPP MS")
+    field(FTK, "LONG")
+    field(NOK, "100")
+    field(INPK, "MEBT:QP05_PS:IlkBlk31 NPP MS")
+    field(FTL, "LONG")
+    field(NOL, "100")
+    field(INPL, "MEBT:QP05_PS:IlkBlk32 NPP MS")
+    field(FTM, "LONG")
+    field(NOM, "100")
+    field(INPM, "MEBT:QP05_PS:IlkBlk33 NPP MS")
+    field(FTN, "LONG")
+    field(NON, "100")
+    field(INPN, "MEBT:QP05_PS:IlkBlk34 NPP MS")
+    field(FTO, "LONG")
+    field(NOO, "100")
+    field(INPO, "MEBT:QP05_PS:IlkBlk35 NPP MS")
+    field(FTP, "LONG")
+    field(NOP, "100")
+    field(INPP, "MEBT:QP05_PS:IlkBlk36 NPP MS")
+    field(FTQ, "LONG")
+    field(NOQ, "100")
+    field(INPQ, "MEBT:QP05_PS:IlkBlk37 NPP MS")
+    field(FTR, "LONG")
+    field(NOR, "100")
+    field(INPR, "MEBT:QP05_PS:IlkBlk38 NPP MS")
+    field(FTS, "LONG")
+    field(NOS, "100")
+    field(INPS, "MEBT:QP05_PS:IlkBlk39 NPP MS")
+    field(FTT, "LONG")
+    field(NOT, "100")
+    field(INPT, "MEBT:QP05_PS:IlkBlk40 NPP MS")
+    field(FTVA, "STRING")
+    field(NOVA, "100")
+    field(FLNK, "MEBT:QP05_PS:IlkLog PP")
+}
+
+record(aSub,"MEBT:QP05_PS:IlkLog") {
+    field(DESC ,"Interlock log")
+    field(SCAN ,"Passive")
+    field(SNAM,"ConcatIlkLog")
+    field(FTA, "STRING")
+    field(NOA, "100")
+    field(INPA, "MEBT:QP05_PS:IlkLogA.VALA NPP MS")
+    field(FTB, "STRING")
+    field(NOB, "100")
+    field(INPB, "MEBT:QP05_PS:IlkLogB.VALA NPP MS")
+    field(FTVA, "STRING")
+    field(NOVA, "200")
+}
+
+# Interlock Block 01, holds 01 to 05
+record(waveform, "MEBT:QP05_PS:IlkBlk01") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk01,0,2000)MODBUS_DATA")
+    field(SCAN ,"I/O Intr")
+    field(DESC ,"Aux Interlocks Block 01")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk02 PP")
+}
+# Interlock Block 02, holds 06 to 10
+record(waveform, "MEBT:QP05_PS:IlkBlk02") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk02,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 02")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk03 PP")
+}
+# Interlock Block 03, holds 11 to 15
+record(waveform, "MEBT:QP05_PS:IlkBlk03") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk03,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 03")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk04 PP")
+}
+# Interlock Block 04, holds 16 to 20
+record(waveform, "MEBT:QP05_PS:IlkBlk04") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk04,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 04")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk05 PP")
+}
+# Interlock Block 05, holds 21 to 25
+record(waveform, "MEBT:QP05_PS:IlkBlk05") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk05 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 05")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk06 PP")
+}
+# Interlock Block 06, holds 26 to 30
+record(waveform, "MEBT:QP05_PS:IlkBlk06") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk06 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 06")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk07 PP")
+}
+# Interlock Block 07, holds 31 to 35
+record(waveform, "MEBT:QP05_PS:IlkBlk07") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk07 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 07")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk08 PP")
+}
+# Interlock Block 08, holds 36 to 40
+record(waveform, "MEBT:QP05_PS:IlkBlk08") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk08 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 08")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk09 PP")
+}
+# Interlock Block 09, holds 41 to 45
+record(waveform, "MEBT:QP05_PS:IlkBlk09") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk09 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 09")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk10 PP")
+}
+# Interlock Block 10, holds 46 to 50
+record(waveform, "MEBT:QP05_PS:IlkBlk10") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk10 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 10")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk11 PP")
+}
+# Interlock Block 11, holds 51 to 55
+record(waveform, "MEBT:QP05_PS:IlkBlk11") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk11 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 11")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk12 PP")
+}
+# Interlock Block 12, holds 56 to 60
+record(waveform, "MEBT:QP05_PS:IlkBlk12") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk12 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 12")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk13 PP")
+}
+# Interlock Block 13, holds 61 to 65
+record(waveform, "MEBT:QP05_PS:IlkBlk13") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk13 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 13")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk14 PP")
+}
+# Interlock Block 14, holds 66 to 70
+record(waveform, "MEBT:QP05_PS:IlkBlk14") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk14 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 14")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk15 PP")
+}
+# Interlock Block 15, holds 71 to 75
+record(waveform, "MEBT:QP05_PS:IlkBlk15") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk15 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 15")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk16 PP")
+}
+# Interlock Block 16, holds 76 to 80
+record(waveform, "MEBT:QP05_PS:IlkBlk16") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk16 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 16")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk17 PP")
+}
+# Interlock Block 17, holds 81 to 85
+record(waveform, "MEBT:QP05_PS:IlkBlk17") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk17 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 17")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk18 PP")
+}
+# Interlock Block 18, holds 86 to 90
+record(waveform, "MEBT:QP05_PS:IlkBlk18") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk18 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 18")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk19 PP")
+}
+# Interlock Block 19, holds 91 to 95
+record(waveform, "MEBT:QP05_PS:IlkBlk19") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk19 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 19")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk20 PP")
+}
+# Interlock Block 20, holds 96 to 100
+record(waveform, "MEBT:QP05_PS:IlkBlk20") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk20 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 20")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk21 PP")
+}
+
+# Interlock Block 21, holds 101 to 105
+record(waveform, "MEBT:QP05_PS:IlkBlk21") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk21,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 21")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk22 PP")
+}
+# Interlock Block 22, holds 106 to 110
+record(waveform, "MEBT:QP05_PS:IlkBlk22") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk22,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 22")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk23 PP")
+}
+# Interlock Block 23, holds 111 to 115
+record(waveform, "MEBT:QP05_PS:IlkBlk23") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk23,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 23")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk24 PP")
+}
+# Interlock Block 24, holds 116 to 120
+record(waveform, "MEBT:QP05_PS:IlkBlk24") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk24,0,2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 24")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk25 PP")
+}
+# Interlock Block 25, holds 121 to 125
+record(waveform, "MEBT:QP05_PS:IlkBlk25") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk25 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 25")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk26 PP")
+}
+# Interlock Block 26, holds 126 to 130
+record(waveform, "MEBT:QP05_PS:IlkBlk26") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk26 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 26")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk27 PP")
+}
+# Interlock Block 27, holds 131 to 135
+record(waveform, "MEBT:QP05_PS:IlkBlk27") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk27 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 27")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk28 PP")
+}
+# Interlock Block 28, holds 136 to 140
+record(waveform, "MEBT:QP05_PS:IlkBlk28") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk28 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 28")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk29 PP")
+}
+# Interlock Block 29, holds 141 to 145
+record(waveform, "MEBT:QP05_PS:IlkBlk29") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk29 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 29")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk30 PP")
+}
+# Interlock Block 30, holds 146 to 150
+record(waveform, "MEBT:QP05_PS:IlkBlk30") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk30 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 30")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk31 PP")
+}
+# Interlock Block 31, holds 151 to 155
+record(waveform, "MEBT:QP05_PS:IlkBlk31") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk31 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 31")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk32 PP")
+}
+# Interlock Block 32, holds 156 to 160
+record(waveform, "MEBT:QP05_PS:IlkBlk32") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk32 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 32")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk33 PP")
+}
+# Interlock Block 33, holds 161 to 165
+record(waveform, "MEBT:QP05_PS:IlkBlk33") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk33 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 33")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk34 PP")
+}
+# Interlock Block 34, holds 166 to 170
+record(waveform, "MEBT:QP05_PS:IlkBlk34") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk34 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 34")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk35 PP")
+}
+# Interlock Block 35, holds 171 to 175
+record(waveform, "MEBT:QP05_PS:IlkBlk35") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk35 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 35")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk36 PP")
+}
+# Interlock Block 36, holds 176 to 180
+record(waveform, "MEBT:QP05_PS:IlkBlk36") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk36 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 36")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk37 PP")
+}
+# Interlock Block 37, holds 181 to 185
+record(waveform, "MEBT:QP05_PS:IlkBlk37") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk37 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 37")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk38 PP")
+}
+# Interlock Block 38, holds 186 to 190
+record(waveform, "MEBT:QP05_PS:IlkBlk38") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk38 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 38")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk39 PP")
+}
+# Interlock Block 39, holds 191 to 195
+record(waveform, "MEBT:QP05_PS:IlkBlk39") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk39 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 39")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkBlk40 PP")
+}
+# Interlock Block 40, holds 196 to 200
+record(waveform, "MEBT:QP05_PS:IlkBlk40") {
+    field(DTYP,"asynInt32ArrayIn")
+    field(INP,"@asyn(MODBUS_ELYTT5:getIlkBlk40 0 2000)MODBUS_DATA")
+    field(SCAN ,"Passive")
+    field(DESC ,"Aux Interlocks Block 40")
+    field(NELM, "100")
+    field(FTVL, "LONG")
+    field(FLNK, "MEBT:QP05_PS:IlkLogA PP")
+}

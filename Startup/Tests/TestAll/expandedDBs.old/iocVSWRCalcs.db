@@ -1,0 +1,192 @@
+record(calc, RF:1A:VSWRCircRdbk) {
+  field (INPA,"RF:LLRF1_CavA:RvCirckWRdbk.VAL CP")
+  field (INPB,"RF:LLRF1_CavA:FwCirckWRdbk.VAL CP")
+  field (CALC,"A>0.1?(1+SQRT(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second")
+}
+  
+record(calc, RF:1A:VSWRLoadRdbk) {
+  field (INPA,"RF:LLRF1_CavA:Spare2kWRdbk.VAL CP")
+  field (INPB,"RF:LLRF1_CavA:FwLoadkWRdbk.VAL CP")
+  field (CALC,"B>0.1?(1+SQRT(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second")
+}
+
+record(calc, RF:1A:VSWRCavRdbk) {
+  field (INPA,"RF:LLRF1_CavA:RvCavkWRdbk.VAL CP")
+  field (INPB,"RF:LLRF1_CavA:FwCavkWRdbk.VAL CP")
+  field (CALC,"A>0.1?(1+SQR(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second") 
+}
+
+record(calc, RF:1B:VSWRCircRdbk) {
+  field (INPA,"RF:LLRF1_CavB:RvCirckWRdbk.VAL CP")
+  field (INPB,"RF:LLRF1_CavB:FwCirckWRdbk.VAL CP")
+  field (CALC,"A>0.1?(1+SQRT(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second")
+}
+  
+record(calc, RF:1B:VSWRLoadRdbk) {
+  field (INPA,"RF:LLRF1_CavB:Spare2kWRdbk.VAL CP")
+  field (INPB,"RF:LLRF1_CavB:FwLoadkWRdbk.VAL CP")
+  field (CALC,"B>0.1?(1+SQRT(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second")
+}
+
+record(calc, RF:1B:VSWRCavRdbk) {
+  field (INPA,"RF:LLRF1_CavB:RvCavkWRdbk.VAL CP")
+  field (INPB,"RF:LLRF1_CavB:FwCavkWRdbk.VAL CP")
+  field (CALC,"A>0.1?(1+SQR(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second") 
+}
+
+record(calc, RF:2A:VSWRCircRdbk) {
+  field (INPA,"RF:LLRF2_CavA:RvCirckWRdbk.VAL CP")
+  field (INPB,"RF:LLRF2_CavA:FwCirckWRdbk.VAL CP")
+  field (CALC,"A>0.1?(1+SQRT(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second")
+}
+  
+record(calc, RF:2A:VSWRLoadRdbk) {
+  field (INPA,"RF:LLRF2_CavA:Spare2kWRdbk.VAL CP")
+  field (INPB,"RF:LLRF2_CavA:FwLoadkWRdbk.VAL CP")
+  field (CALC,"B>0.1?(1+SQRT(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second")
+}
+
+record(calc, RF:2A:VSWRCavRdbk) {
+  field (INPA,"RF:LLRF2_CavA:RvCavkWRdbk.VAL CP")
+  field (INPB,"RF:LLRF2_CavA:FwCavkWRdbk.VAL CP")
+  field (CALC,"A>0.1?(1+SQR(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second") 
+}
+
+record(calc, RF:2B:VSWRCircRdbk) {
+  field (INPA,"RF:LLRF2_CavB:RvCirckWRdbk.VAL CP")
+  field (INPB,"RF:LLRF2_CavB:FwCirckWRdbk.VAL CP")
+  field (CALC,"A>0.1?(1+SQRT(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second")
+}
+  
+record(calc, RF:2B:VSWRLoadRdbk) {
+  field (INPA,"RF:LLRF2_CavB:Spare2kWRdbk.VAL CP")
+  field (INPB,"RF:LLRF2_CavB:FwLoadkWRdbk.VAL CP")
+  field (CALC,"B>0.1?(1+SQRT(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second")
+}
+
+record(calc, RF:2B:VSWRCavRdbk) {
+  field (INPA,"RF:LLRF2_CavB:RvCavkWRdbk.VAL CP")
+  field (INPB,"RF:LLRF2_CavB:FwCavkWRdbk.VAL CP")
+  field (CALC,"A>0.1?(1+SQR(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second") 
+}
+
+record(calc, RF:3A:VSWRCircRdbk) {
+  field (INPA,"RF:LLRF3_CavA:RvCirckWRdbk.VAL CP")
+  field (INPB,"RF:LLRF3_CavA:FwCirckWRdbk.VAL CP")
+  field (CALC,"A>0.1?(1+SQRT(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second")
+}
+  
+record(calc, RF:3A:VSWRLoadRdbk) {
+  field (INPA,"RF:LLRF3_CavA:Spare2kWRdbk.VAL CP")
+  field (INPB,"RF:LLRF3_CavA:FwLoadkWRdbk.VAL CP")
+  field (CALC,"B>0.1?(1+SQRT(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second")
+}
+
+record(calc, RF:3A:VSWRCavRdbk) {
+  field (INPA,"RF:LLRF3_CavA:RvCavkWRdbk.VAL CP")
+  field (INPB,"RF:LLRF3_CavA:FwCavkWRdbk.VAL CP")
+  field (CALC,"A>0.1?(1+SQR(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second") 
+}
+
+record(calc, RF:3B:VSWRCircRdbk) {
+  field (INPA,"RF:LLRF3_CavB:RvCirckWRdbk.VAL CP")
+  field (INPB,"RF:LLRF3_CavB:FwCirckWRdbk.VAL CP")
+  field (CALC,"A>0.1?(1+SQRT(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second")
+}
+  
+record(calc, RF:3B:VSWRLoadRdbk) {
+  field (INPA,"RF:LLRF3_CavB:Spare2kWRdbk.VAL CP")
+  field (INPB,"RF:LLRF3_CavB:FwLoadkWRdbk.VAL CP")
+  field (CALC,"B>0.1?(1+SQRT(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second")
+}
+
+record(calc, RF:3B:VSWRCavRdbk) {
+  field (INPA,"RF:LLRF3_CavB:RvCavkWRdbk.VAL CP")
+  field (INPB,"RF:LLRF3_CavB:FwCavkWRdbk.VAL CP")
+  field (CALC,"A>0.1?(1+SQR(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second") 
+}
+
+record(calc, RF:4A:VSWRCircRdbk) {
+  field (INPA,"RF:LLRF4_CavA:RvCirckWRdbk.VAL CP")
+  field (INPB,"RF:LLRF4_CavA:FwCirckWRdbk.VAL CP")
+  field (CALC,"A>0.1?(1+SQRT(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second")
+}
+  
+record(calc, RF:4A:VSWRLoadRdbk) {
+  field (INPA,"RF:LLRF4_CavA:Spare2kWRdbk.VAL CP")
+  field (INPB,"RF:LLRF4_CavA:FwLoadkWRdbk.VAL CP")
+  field (CALC,"B>0.1?(1+SQRT(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second")
+}
+
+record(calc, RF:4A:VSWRCavRdbk) {
+  field (INPA,"RF:LLRF4_CavA:RvCavkWRdbk.VAL CP")
+  field (INPB,"RF:LLRF4_CavA:FwCavkWRdbk.VAL CP")
+  field (CALC,"A>0.1?(1+SQR(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second") 
+}
+
+record(calc, RF:4B:VSWRCircRdbk) {
+  field (INPA,"RF:LLRF4_CavB:RvCirckWRdbk.VAL CP")
+  field (INPB,"RF:LLRF4_CavB:FwCirckWRdbk.VAL CP")
+  field (CALC,"A>0.1?(1+SQRT(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second")
+}
+  
+record(calc, RF:4B:VSWRLoadRdbk) {
+  field (INPA,"RF:LLRF4_CavB:Spare2kWRdbk.VAL CP")
+  field (INPB,"RF:LLRF4_CavB:FwLoadkWRdbk.VAL CP")
+  field (CALC,"B>0.1?(1+SQRT(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second")
+}
+
+record(calc, RF:4B:VSWRCavRdbk) {
+  field (INPA,"RF:LLRF4_CavB:RvCavkWRdbk.VAL CP")
+  field (INPB,"RF:LLRF4_CavB:FwCavkWRdbk.VAL CP")
+  field (CALC,"A>0.1?(1+SQR(A/B))/(1-SQRT(A/B)):0")
+  field (PREC, "2")
+  field (SCAN, "1 second") 
+}
+

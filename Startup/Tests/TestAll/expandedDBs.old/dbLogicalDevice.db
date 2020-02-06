@@ -1,0 +1,573 @@
+
+
+record(mbbiDirect, "$(mname):DEVNO")
+{
+	field(DESC, "Device Number")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C0")
+}
+
+record(mbbiDirect, "$(mname):DEVTYPE")
+{
+	field(DESC, "Device Type")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C1")
+}
+
+record(mbbiDirect, "$(mname):FUTURE")
+{
+	field(DESC, "Device Future Bits")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C2")
+}
+
+record(bi, "$(mname):REMOTE")
+{
+	field(DESC, "Remote/Local")
+	field(SCAN, "I/O Intr")		
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C3")
+	
+	field(ZNAM, "LOCAL")
+	field(ONAM, "REMOTE")
+}
+
+record(mbbi, "$(mname):MSTAT")
+{
+	field(DESC, "Machine status")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C4")
+	field(NOBT, "16")
+	field(SHFT, "0")
+	
+	field( ZRVL, "0")	
+	field( ONVL, "1")	
+	field( TWVL, "2")	
+	field( THVL, "4")	
+	field( FRVL, "8")	
+	field( FVVL, "16")	
+	field( SXVL, "32")	
+	
+	field( ZRST, "INVALID")
+	field( ONST, "DOWN")
+	field( TWST, "STOP")
+	field( THST, "STANDBY")
+	field( FRST, "RUN")
+	field( FVST, "FAULT")
+	field( SXST, "EMERGENCY")
+}
+
+record(mbbi, "$(mname):MREQ")
+{
+	field(DESC, "Machine request state")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C5")
+	field(NOBT, "16")
+	field(SHFT, "0")
+	
+	field( ZRVL, "0")	
+	field( ONVL, "1")	
+	field( TWVL, "2")	
+	field( THVL, "4")	
+	field( FRVL, "8")	
+	field( FVVL, "16")	
+	field( SXVL, "32")	
+	
+	field( ZRST, "INVALID")
+	field( ONST, "DOWN")
+	field( TWST, "STOP")
+	field( THST, "STANDBY")
+	field( FRST, "RUN")
+	field( FVST, "FAULT")
+	field( SXST, "EMERGENCY")
+}
+
+record(mbbo, "$(mname):CMD")
+{
+	field(DESC, "Command code")
+	field(SCAN, "Passive")
+	field(DTYP, "JAERI PLC2")
+	field(OUT,  "@$(plc)://$(target)/DEV$(devno)C6")
+	field(NOBT, "16")
+	field(SHFT, "0")
+	
+	field( ZRVL, "1")	
+	field( ONVL, "2")	
+	field( TWVL, "4")	
+	field( THVL, "8")	
+	field( FRVL, "16")	
+	field( FVVL, "32")	
+	
+	field( ZRST, "GO-DOWN")
+	field( ONST, "GO-STOP")
+	field( TWST, "GO-STANDBY")
+	field( THST, "GO-RUN")
+	field( FRST, "RESET")
+	field( FVST, "SET-PARAM")
+}
+
+record(bi, "$(mname):CMDFLG")
+{
+	field(DESC, "Command flag")
+	field(SCAN, "I/O Intr")		
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C7")
+	
+	field(ZNAM, "CMD READY")
+	field(ONAM, "CMD BUSY")
+}
+
+record(bi, "$(mname):CSTAT")
+{
+	field(DESC, "Command status")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C8")
+	
+	field(ZNAM, "ACK")
+	field(ONAM, "NACK")
+}
+
+record(bi, "$(mname):BUSY")
+{
+	field(DESC, "Busy flag")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C9")
+	
+	field(ZNAM, "READY")
+	field(ONAM, "BUSY")
+}
+
+record(bi, "$(mname):WSTAT")
+{
+	field(DESC, "Waveform request flag")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)C10:0.1")
+	
+	field(ZNAM, "WAIT")
+	field(ONAM, "REQUEST")
+}
+
+record(bo, "$(mname):WREQ")
+{
+	field(DESC, "Waveform request flag")
+	field(SCAN, "Passive")
+	field(DTYP, "JAERI PLC2")
+	field(OUT,  "@$(plc)://$(target)/DEV$(devno)C10:0.1")
+	
+	field(ZNAM, "WAIT")
+	field(ONAM, "REQUEST")
+}
+
+
+record(longout, "$(mname):LO")
+{
+	field(DESC, "P[0]+P[1] longout")
+	field(SCAN, "Passive")
+	field(DTYP, "JAERI PLC2")
+	field(OUT,  "@$(plc)://$(target)/DEV$(devno)P0")
+}
+
+record(ao, "$(mname):AO_F")
+{
+	field(DESC, "P[0]+P[1] ao float")
+	field(SCAN, "Passive")
+	field(DTYP, "JAERI PLC2")
+	field(OUT,  "@$(plc)://$(target)/DEV$(devno)P0,FLOAT")
+	field(LINR, "LINEAR")
+	field(PREC, "4")
+	field(EGUF, "10.0")
+	field(EGUL, "-10.0")
+}
+
+record(ao, "$(mname):AO_S")
+{
+	field(DESC, "P[0] ao signed")
+	field(SCAN, "Passive")
+	field(DTYP, "JAERI PLC2")
+	field(OUT,  "@$(plc)://$(target)/DEV$(devno)P0,SIGNED=YES")
+	field(LINR, "LINEAR")
+	field(PREC, "4")
+	field(EGUF, "10.0")
+	field(EGUL, "-10.0")
+}
+
+record(ao, "$(mname):AO")
+{
+	field(DESC, "P[0] ao unsigned")
+	field(SCAN, "Passive")
+	field(DTYP, "JAERI PLC2")
+	field(OUT,  "@$(plc)://$(target)/DEV$(devno)P0")
+	field(LINR, "LINEAR")
+	field(PREC, "4")
+	field(EGUF, "10.0")
+	field(EGUL, "-10.0")
+}
+
+record(bo, "$(mname):BO")
+{
+	field(DESC, "P[0] bo")
+	field(SCAN, "Passive")
+	field(DTYP, "JAERI PLC2")
+	field(OUT,  "@$(plc)://$(target)/DEV$(devno)P0")
+	field(ZNAM, "OFF")
+	field(ONAM, "ON")
+}
+
+record(mbbo, "$(mname):MBBO")
+{
+	field(DESC, "P[0] mbbo")
+	field(SCAN, "Passive")
+	field(DTYP, "JAERI PLC2")
+	field(OUT,  "@$(plc)://$(target)/DEV$(devno)P0")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+record(mbboDirect, "$(mname):MBBOD")
+{
+	field(DESC, "P[0] mbboDirect")
+	field(SCAN, "Passive")
+	field(DTYP, "JAERI PLC2")
+	field(OUT,  "@$(plc)://$(target)/DEV$(devno)P0")
+	field(SEVR, "NO_ALARM")		
+}
+
+record(bo, "$(mname):BO2")
+{
+	field(DESC, "P[1] bo")
+	field(SCAN, "Passive")
+	field(DTYP, "JAERI PLC2")
+	field(OUT,  "@$(plc)://$(target)/DEV$(devno)P1")
+	field(ZNAM, "OFF")
+	field(ONAM, "ON")
+}
+
+record(mbbo, "$(mname):MBBO2")
+{
+	field(DESC, "P[1] mbbo")
+	field(SCAN, "Passive")
+	field(DTYP, "JAERI PLC2")
+	field(OUT,  "@$(plc)://$(target)/DEV$(devno)P1")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+
+record(mbboDirect, "$(mname):MBBOD2")
+{
+	field(DESC, "P[1] mbboDirect")
+	field(SCAN, "Passive")
+	field(DTYP, "JAERI PLC2")
+	field(OUT,  "@$(plc)://$(target)/DEV$(devno)P1")
+	field(SEVR, "NO_ALARM")		
+}
+
+record(stringout, "$(mname):SO")
+{
+	field(DESC, "P[0]..[19] stringout")
+	field(SCAN, "Passive")
+	field(DTYP, "JAERI PLC2")
+	field(OUT,  "@$(plc)://$(target)/DEV$(devno)P0")
+}
+
+record(aao, "$(mname):AAO")
+{
+	field(DESC, "P[0]..[n] aao")
+	field(SCAN, "Passive")
+	field(DTYP, "JAERI PLC2")
+	field(OUT , "@$(plc)://$(target)/DEV$(devno)P0")
+	field(PREC, "4")
+	field(EGU , "[XX]")
+	field(HOPR, "65535")
+	field(LOPR, "0")
+	field(NELM, "$(pnelm)")
+	field(FTVL, "SHORT")
+}
+
+record(aao, "$(mname):AAO_U")
+{
+	field(DESC, "P[0]..[n] aao (ushort)")
+	field(SCAN, "Passive")
+	field(DTYP, "JAERI PLC2")
+	field(OUT , "@$(plc)://$(target)/DEV$(devno)P0")
+	field(PREC, "4")
+	field(EGU , "[XX]")
+	field(HOPR, "65535")
+	field(LOPR, "0")
+	field(NELM, "$(pnelm)")
+	field(FTVL, "USHORT")
+}
+
+record(aao, "$(mname):AAO_L")
+{
+	field(DESC, "P[0]..[n] aao (long)")
+	field(SCAN, "Passive")
+	field(DTYP, "JAERI PLC2")
+	field(OUT , "@$(plc)://$(target)/DEV$(devno)P0")
+	field(PREC, "4")
+	field(EGU , "[XX]")
+	field(HOPR, "65535")
+	field(LOPR, "0")
+	field(NELM, "$(pnelm_half)")
+	field(FTVL, "LONG")
+}
+
+record(aao, "$(mname):AAO_F")
+{
+	field(DESC, "P[0]..[n] aao (float)")
+	field(SCAN, "Passive")
+	field(DTYP, "JAERI PLC2")
+	field(OUT , "@$(plc)://$(target)/DEV$(devno)P0")
+	field(PREC, "4")
+	field(EGU , "[XX]")
+	field(HOPR, "65535")
+	field(LOPR, "0")
+	field(NELM, "$(pnelm_half)")
+	field(FTVL, "FLOAT")
+}
+
+
+
+record(longin, "$(mname):LI")
+{
+	field(DESC, "M[0]+M[1] login")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M0")
+}
+
+record(ai, "$(mname):AI_F")
+{
+	field(DESC, "M[0]+M[1] ai float")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M0,FLOAT")
+	field(EGUF, "10.0")
+	field(EGUL, "-10.0")
+	field(LINR, "LINEAR")
+}
+
+record(ai, "$(mname):AI_S")
+{
+	field(DESC, "M[0] ai signed")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M0,SIGNED=YES")
+	field(EGUF, "10.0")
+	field(EGUL, "-10.0")
+	field(LINR, "LINEAR")
+}
+
+record(ai, "$(mname):AI")
+{
+	field(DESC, "M[0] ai unsigned")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M0")
+	field(EGUF, "10.0")
+	field(EGUL, "-10.0")
+	field(LINR, "LINEAR")
+}
+
+record(bi, "$(mname):BI")
+{
+	field(DESC, "M[0] bi")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M0")
+}
+
+record(mbbi, "$(mname):MBBI")
+{
+	field(DESC, "M[0] mbbi")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M0")
+}
+
+record(mbbiDirect, "$(mname):MBBID")
+{
+	field(DESC, "M[0] mbbiDirect")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M0")
+	field(SEVR, "NO_ALARM")		
+}
+
+record(bi, "$(mname):BI2")
+{
+	field(DESC, "M[1] bi")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M1")
+}
+
+record(mbbi, "$(mname):MBBI2")
+{
+	field(DESC, "M[1] mbbi")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M1")
+}
+
+record(mbbiDirect, "$(mname):MBBID2")
+{
+	field(DESC, "M[1] mbbiDirect")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M1")
+	field(SEVR, "NO_ALARM")		
+}
+
+record(stringin, "$(mname):SI")
+{
+	field(DESC, "M[0]..[19] stringin")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M0")
+}
+
+record(waveform, "$(mname):WF")
+{
+	field(DESC, "M[0]..[n] waveform")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M0")
+	field(NELM, "$(mnelm)")
+	field(FTVL, "SHORT")
+}
+
+record(waveform, "$(mname):WF_U")
+{
+	field(DESC, "M[0]..[n] waveform (ushort)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M0")
+	field(NELM, "$(mnelm)")
+	field(FTVL, "USHORT")
+}
+
+record(waveform, "$(mname):WF_L")
+{
+	field(DESC, "M[0]..[n] waveform (long)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M0")
+	field(NELM, "$(mnelm_half)")
+	field(FTVL, "LONG")
+}
+
+record(waveform, "$(mname):WF_F")
+{
+	field(DESC, "M[0]..[n] waveform (float)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)M0")
+	field(NELM, "$(mnelm_half)")
+	field(FTVL, "FLOAT")
+}
+
+record(aai, "$(mname):AAI")
+{
+	field(DESC, "M[0]..[n] aai")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP , "@$(plc)://$(target)/DEV$(devno)M0")
+	field(PREC, "4")
+	field(EGU , "[XX]")
+	field(HOPR, "65535")
+	field(LOPR, "0")
+	field(NELM, "$(mnelm)")
+	field(FTVL, "SHORT")
+}
+
+record(aai, "$(mname):AAI_U")
+{
+	field(DESC, "M[0]..[n] aai (ushort)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP , "@$(plc)://$(target)/DEV$(devno)M0")
+	field(PREC, "4")
+	field(EGU , "[XX]")
+	field(HOPR, "65535")
+	field(LOPR, "0")
+	field(NELM, "$(mnelm)")
+	field(FTVL, "USHORT")
+}
+
+record(aai, "$(mname):AAI_L")
+{
+	field(DESC, "M[0]..[n] aai (long)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP , "@$(plc)://$(target)/DEV$(devno)M0")
+	field(PREC, "4")
+	field(EGU , "[XX]")
+	field(HOPR, "65535")
+	field(LOPR, "0")
+	field(NELM, "$(mnelm_half)")
+	field(FTVL, "LONG")
+}
+
+record(aai, "$(mname):AAI_F")
+{
+	field(DESC, "M[0]..[n] aai (float)")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP , "@$(plc)://$(target)/DEV$(devno)M0")
+	field(PREC, "4")
+	field(EGU , "[XX]")
+	field(HOPR, "65535")
+	field(LOPR, "0")
+	field(NELM, "$(mnelm_half)")
+	field(FTVL, "FLOAT")
+}
+
+
+record(longin, "$(mname):ILK_L")
+{
+	field(DESC, "I[0]+I[1] login")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)I0")
+}
+
+record(mbbiDirect, "$(mname):ILK0")
+{
+	field(DESC, "I[0] mbbiDirect")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)I0")
+	field(SEVR, "NO_ALARM")		
+}
+
+record(mbbiDirect, "$(mname):ILK1")
+{
+	field(DESC, "I[1] mbbiDirect")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP,  "@$(plc)://$(target)/DEV$(devno)I1")
+	field(SEVR, "NO_ALARM")		
+}
+
+record(aai, "$(mname):ILK")
+{
+	field(DESC, "AAI Interlock")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "JAERI PLC2")
+	field(INP , "@$(plc)://$(target)/DEV$(devno)I0")
+	field(PREC, "4")
+	field(EGU , "[XX]")
+	field(HOPR, "65535")
+	field(LOPR, "0")
+	field(NELM, "$(inelm)")
+	field(FTVL, "SHORT")
+}

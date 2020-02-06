@@ -1,0 +1,7011 @@
+###################################################
+# BPM analog frontend board BPM_AFE01 records
+
+# STATUS0
+
+record(bi, "DPLA:BPM_AFE01:FPGAStat") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x0 mask=0x00000001")
+  field(SCAN, "5 second")
+  field(DESC, "FPGA status")
+  field(ZNAM, "ERROR")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Ok")
+}
+
+record(bi, "DPLA:BPM_AFE01:LOSrc") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x0 mask=0x00000002 shift=1 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Local oscillator source")
+# STATUS0 reports source negated: first=1, second=0
+  field(ZNAM, "AO 1")
+  field(ONAM, "AO 0")
+}
+
+record(bi, "DPLA:BPM_AFE01:LOFreqStat") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x0 mask=0x00000004 shift=2 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO frequency counting enable")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Prescaler unused
+#record(longin, "DPLA:BPM_AFE01:Prescaler") {
+#  field(DTYP, "Explore Read32 LSB")
+#  field(INP, "@8:0b.0 bar=2 offset=0x0 mask=0x00000018 shift=3 initread=1")
+#  field(PINI, "YES")
+##  field(SCAN, "5 second")
+#  field(DESC, "Prescaler division ratio")
+#}
+
+#CONTROL
+
+record(bo, "DPLA:BPM_AFE01:TReset") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x08 mask=0x00000001 shift=0 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Temperature readings disable and reset")
+  field(ZNAM, "Enable")
+  field(ONAM, "Disable and reset")
+}
+
+record(bo, "DPLA:BPM_AFE01:LOSrcSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x08 mask=0x00000002 shift=1 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Local oscillator source set")
+  field(ZNAM, "AO 0")
+  field(ONAM, "AO 1")
+  field(FLNK, "DPLA:BPM_AFE01:LOSrc")
+}
+
+record(bo, "DPLA:BPM_AFE01:LOFreqSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x08 mask=0x00000004 shift=2 initread=1")
+  field(PINI, "YES")
+  field(DESC, "LO frequency counting setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "DPLA:BPM_AFE01:LOFreqStat")
+}
+
+# Prescaler unused
+#record(longout, "DPLA:BPM_AFE01:PrescalerS") {
+#  field(DTYP, "Explore Write32 LSB")
+#  field(INP, "@8:0b.0 bar=2 offset=0x08 mask=0x00000018 shift=3 initread=1")
+#  field(PINI, "YES")
+#  field(DESC, "Prescaler division ratio setting")
+#  field(DRVH, "3")
+#  field(DRVL, "0")
+#  field(FLNK, "DPLA:BPM_AFE01:Prescaler")
+#}
+
+# CAL_CONTROL
+
+record(bo, "DPLA:BPM_AFE01:CalEnable") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x0c mask=0x00000001 shift=0 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Enable calibration mode")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+record(mbbo, "DPLA:BPM_AFE01:CalModeSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x0c mask=0x0000000e shift=1 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Calibration mode setting")
+  field(ZRVL, "1")
+  field(ZRST, "Normal mode")
+  field(ONVL, "2")
+  field(ONST, "CAL to AFE")
+  field(TWVL, "4")
+  field(TWST, "CAL to BPM")
+}
+
+record(longout, "DPLA:BPM_AFE01:CalChannel") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x0c mask=0x000000f0 shift=4 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Calibration channel setting")
+  field(DRVL, "1")
+  field(DRVH, "8")
+}
+
+record(longout, "DPLA:BPM_AFE01:CalTiming") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x0c mask=0xffffff00 shift=8 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Calibration timing slot setting")
+  field(DRVL, "0")
+  field(DRVH, "16777215")
+}
+
+# FREQ_CONROL
+
+record(longin, "DPLA:BPM_AFE01:LOFreq") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0xd0")
+  field(SCAN, "2 second")
+  field(DESC, "Measured local oscillator frequency")
+  field(EGU, "Hz")
+}
+
+# IFMIF_ADDR_BOARD_ID
+
+record(mbbi, "DPLA:BPM_AFE01:ID") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0xf0 mask=0xffff0000 shift=16 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Board identification")
+  field(ZRVL, "0x00001000")
+  field(ZRST, "AFE board")
+  field(ONVL, "0x00002000")
+  field(ONST, "CAL board")
+  field(TWVL, "0x00003000")
+  field(TWST, "Timing board")
+}
+
+record(longin, "DPLA:BPM_AFE01:SN") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0xf0 mask=0x0000ffff initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Board serial number")
+}
+
+record(mbbi, "DPLA:BPM_AFE01:Type") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0xf4 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Board type")
+  field(ZRVL, "0x12345678")
+  field(ZRST, "Standard")
+  field(ONVL, "0x00010000")
+  field(ONST, "Trigger")
+  field(TWVL, "0x0020000")
+  field(TWST, "Gate")
+}
+
+record(longin, "DPLA:BPM_AFE01:Version") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0xf8 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Board version")
+}
+
+record(longin, "DPLA:BPM_AFE01:FWVersion") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0xfc initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Firmware version")
+}
+
+
+###################################################
+# BPM analog frontend board BPM_AFE02 records
+
+# STATUS0
+
+record(bi, "DPLA:BPM_AFE02:FPGAStat") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x0 mask=0x00000001")
+  field(SCAN, "5 second")
+  field(DESC, "FPGA status")
+  field(ZNAM, "ERROR")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Ok")
+}
+
+record(bi, "DPLA:BPM_AFE02:LOSrc") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x0 mask=0x00000002 shift=1 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Local oscillator source")
+# STATUS0 reports source negated: first=1, second=0
+  field(ZNAM, "AO 1")
+  field(ONAM, "AO 0")
+}
+
+record(bi, "DPLA:BPM_AFE02:LOFreqStat") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x0 mask=0x00000004 shift=2 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO frequency counting enable")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Prescaler unused
+#record(longin, "DPLA:BPM_AFE02:Prescaler") {
+#  field(DTYP, "Explore Read32 LSB")
+#  field(INP, "@8:0c.0 bar=2 offset=0x0 mask=0x00000018 shift=3 initread=1")
+#  field(PINI, "YES")
+##  field(SCAN, "5 second")
+#  field(DESC, "Prescaler division ratio")
+#}
+
+#CONTROL
+
+record(bo, "DPLA:BPM_AFE02:TReset") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x08 mask=0x00000001 shift=0 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Temperature readings disable and reset")
+  field(ZNAM, "Enable")
+  field(ONAM, "Disable and reset")
+}
+
+record(bo, "DPLA:BPM_AFE02:LOSrcSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x08 mask=0x00000002 shift=1 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Local oscillator source set")
+  field(ZNAM, "AO 0")
+  field(ONAM, "AO 1")
+  field(FLNK, "DPLA:BPM_AFE02:LOSrc")
+}
+
+record(bo, "DPLA:BPM_AFE02:LOFreqSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x08 mask=0x00000004 shift=2 initread=1")
+  field(PINI, "YES")
+  field(DESC, "LO frequency counting setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "DPLA:BPM_AFE02:LOFreqStat")
+}
+
+# Prescaler unused
+#record(longout, "DPLA:BPM_AFE02:PrescalerS") {
+#  field(DTYP, "Explore Write32 LSB")
+#  field(INP, "@8:0c.0 bar=2 offset=0x08 mask=0x00000018 shift=3 initread=1")
+#  field(PINI, "YES")
+#  field(DESC, "Prescaler division ratio setting")
+#  field(DRVH, "3")
+#  field(DRVL, "0")
+#  field(FLNK, "DPLA:BPM_AFE02:Prescaler")
+#}
+
+# CAL_CONTROL
+
+record(bo, "DPLA:BPM_AFE02:CalEnable") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x0c mask=0x00000001 shift=0 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Enable calibration mode")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+record(mbbo, "DPLA:BPM_AFE02:CalModeSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x0c mask=0x0000000e shift=1 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Calibration mode setting")
+  field(ZRVL, "1")
+  field(ZRST, "Normal mode")
+  field(ONVL, "2")
+  field(ONST, "CAL to AFE")
+  field(TWVL, "4")
+  field(TWST, "CAL to BPM")
+}
+
+record(longout, "DPLA:BPM_AFE02:CalChannel") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x0c mask=0x000000f0 shift=4 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Calibration channel setting")
+  field(DRVL, "1")
+  field(DRVH, "8")
+}
+
+record(longout, "DPLA:BPM_AFE02:CalTiming") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x0c mask=0xffffff00 shift=8 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Calibration timing slot setting")
+  field(DRVL, "0")
+  field(DRVH, "16777215")
+}
+
+# FREQ_CONROL
+
+record(longin, "DPLA:BPM_AFE02:LOFreq") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0xd0")
+  field(SCAN, "2 second")
+  field(DESC, "Measured local oscillator frequency")
+  field(EGU, "Hz")
+}
+
+# IFMIF_ADDR_BOARD_ID
+
+record(mbbi, "DPLA:BPM_AFE02:ID") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0xf0 mask=0xffff0000 shift=16 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Board identification")
+  field(ZRVL, "0x00001000")
+  field(ZRST, "AFE board")
+  field(ONVL, "0x00002000")
+  field(ONST, "CAL board")
+  field(TWVL, "0x00003000")
+  field(TWST, "Timing board")
+}
+
+record(longin, "DPLA:BPM_AFE02:SN") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0xf0 mask=0x0000ffff initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Board serial number")
+}
+
+record(mbbi, "DPLA:BPM_AFE02:Type") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0xf4 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Board type")
+  field(ZRVL, "0x12345678")
+  field(ZRST, "Standard")
+  field(ONVL, "0x00010000")
+  field(ONST, "Trigger")
+  field(TWVL, "0x0020000")
+  field(TWST, "Gate")
+}
+
+record(longin, "DPLA:BPM_AFE02:Version") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0xf8 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Board version")
+}
+
+record(longin, "DPLA:BPM_AFE02:FWVersion") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0xfc initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Firmware version")
+}
+
+
+###################################################
+# BPM analog frontend board BPM_AFE06 records
+
+# STATUS0
+
+record(bi, "DPLA:BPM_AFE06:FPGAStat") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x0 mask=0x00000001")
+  field(SCAN, "5 second")
+  field(DESC, "FPGA status")
+  field(ZNAM, "ERROR")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Ok")
+}
+
+record(bi, "DPLA:BPM_AFE06:LOSrc") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x0 mask=0x00000002 shift=1 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Local oscillator source")
+# STATUS0 reports source negated: first=1, second=0
+  field(ZNAM, "AO 1")
+  field(ONAM, "AO 0")
+}
+
+record(bi, "DPLA:BPM_AFE06:LOFreqStat") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x0 mask=0x00000004 shift=2 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO frequency counting enable")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Prescaler unused
+#record(longin, "DPLA:BPM_AFE06:Prescaler") {
+#  field(DTYP, "Explore Read32 LSB")
+#  field(INP, "@8:0d.0 bar=2 offset=0x0 mask=0x00000018 shift=3 initread=1")
+#  field(PINI, "YES")
+##  field(SCAN, "5 second")
+#  field(DESC, "Prescaler division ratio")
+#}
+
+#CONTROL
+
+record(bo, "DPLA:BPM_AFE06:TReset") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x08 mask=0x00000001 shift=0 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Temperature readings disable and reset")
+  field(ZNAM, "Enable")
+  field(ONAM, "Disable and reset")
+}
+
+record(bo, "DPLA:BPM_AFE06:LOSrcSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x08 mask=0x00000002 shift=1 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Local oscillator source set")
+  field(ZNAM, "AO 0")
+  field(ONAM, "AO 1")
+  field(FLNK, "DPLA:BPM_AFE06:LOSrc")
+}
+
+record(bo, "DPLA:BPM_AFE06:LOFreqSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x08 mask=0x00000004 shift=2 initread=1")
+  field(PINI, "YES")
+  field(DESC, "LO frequency counting setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "DPLA:BPM_AFE06:LOFreqStat")
+}
+
+# Prescaler unused
+#record(longout, "DPLA:BPM_AFE06:PrescalerS") {
+#  field(DTYP, "Explore Write32 LSB")
+#  field(INP, "@8:0d.0 bar=2 offset=0x08 mask=0x00000018 shift=3 initread=1")
+#  field(PINI, "YES")
+#  field(DESC, "Prescaler division ratio setting")
+#  field(DRVH, "3")
+#  field(DRVL, "0")
+#  field(FLNK, "DPLA:BPM_AFE06:Prescaler")
+#}
+
+# CAL_CONTROL
+
+record(bo, "DPLA:BPM_AFE06:CalEnable") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x0c mask=0x00000001 shift=0 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Enable calibration mode")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+record(mbbo, "DPLA:BPM_AFE06:CalModeSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x0c mask=0x0000000e shift=1 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Calibration mode setting")
+  field(ZRVL, "1")
+  field(ZRST, "Normal mode")
+  field(ONVL, "2")
+  field(ONST, "CAL to AFE")
+  field(TWVL, "4")
+  field(TWST, "CAL to BPM")
+}
+
+record(longout, "DPLA:BPM_AFE06:CalChannel") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x0c mask=0x000000f0 shift=4 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Calibration channel setting")
+  field(DRVL, "1")
+  field(DRVH, "8")
+}
+
+record(longout, "DPLA:BPM_AFE06:CalTiming") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x0c mask=0xffffff00 shift=8 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Calibration timing slot setting")
+  field(DRVL, "0")
+  field(DRVH, "16777215")
+}
+
+# FREQ_CONROL
+
+record(longin, "DPLA:BPM_AFE06:LOFreq") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0xd0")
+  field(SCAN, "2 second")
+  field(DESC, "Measured local oscillator frequency")
+  field(EGU, "Hz")
+}
+
+# IFMIF_ADDR_BOARD_ID
+
+record(mbbi, "DPLA:BPM_AFE06:ID") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0xf0 mask=0xffff0000 shift=16 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Board identification")
+  field(ZRVL, "0x00001000")
+  field(ZRST, "AFE board")
+  field(ONVL, "0x00002000")
+  field(ONST, "CAL board")
+  field(TWVL, "0x00003000")
+  field(TWST, "Timing board")
+}
+
+record(longin, "DPLA:BPM_AFE06:SN") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0xf0 mask=0x0000ffff initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Board serial number")
+}
+
+record(mbbi, "DPLA:BPM_AFE06:Type") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0xf4 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Board type")
+  field(ZRVL, "0x12345678")
+  field(ZRST, "Standard")
+  field(ONVL, "0x00010000")
+  field(ONST, "Trigger")
+  field(TWVL, "0x0020000")
+  field(TWST, "Gate")
+}
+
+record(longin, "DPLA:BPM_AFE06:Version") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0xf8 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Board version")
+}
+
+record(longin, "DPLA:BPM_AFE06:FWVersion") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0xfc initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Firmware version")
+}
+
+
+###################################################
+# BPM analog frontend board BPM_AFE03 records
+
+# STATUS0
+
+record(bi, "DPLA:BPM_AFE03:FPGAStat") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x0 mask=0x00000001")
+  field(SCAN, "5 second")
+  field(DESC, "FPGA status")
+  field(ZNAM, "ERROR")
+  field(ZSV, "MAJOR")
+  field(ONAM, "Ok")
+}
+
+record(bi, "DPLA:BPM_AFE03:LOSrc") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x0 mask=0x00000002 shift=1 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Local oscillator source")
+# STATUS0 reports source negated: first=1, second=0
+  field(ZNAM, "AO 1")
+  field(ONAM, "AO 0")
+}
+
+record(bi, "DPLA:BPM_AFE03:LOFreqStat") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x0 mask=0x00000004 shift=2 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO frequency counting enable")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Prescaler unused
+#record(longin, "DPLA:BPM_AFE03:Prescaler") {
+#  field(DTYP, "Explore Read32 LSB")
+#  field(INP, "@8:0e.0 bar=2 offset=0x0 mask=0x00000018 shift=3 initread=1")
+#  field(PINI, "YES")
+##  field(SCAN, "5 second")
+#  field(DESC, "Prescaler division ratio")
+#}
+
+#CONTROL
+
+record(bo, "DPLA:BPM_AFE03:TReset") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x08 mask=0x00000001 shift=0 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Temperature readings disable and reset")
+  field(ZNAM, "Enable")
+  field(ONAM, "Disable and reset")
+}
+
+record(bo, "DPLA:BPM_AFE03:LOSrcSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x08 mask=0x00000002 shift=1 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Local oscillator source set")
+  field(ZNAM, "AO 0")
+  field(ONAM, "AO 1")
+  field(FLNK, "DPLA:BPM_AFE03:LOSrc")
+}
+
+record(bo, "DPLA:BPM_AFE03:LOFreqSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x08 mask=0x00000004 shift=2 initread=1")
+  field(PINI, "YES")
+  field(DESC, "LO frequency counting setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "DPLA:BPM_AFE03:LOFreqStat")
+}
+
+# Prescaler unused
+#record(longout, "DPLA:BPM_AFE03:PrescalerS") {
+#  field(DTYP, "Explore Write32 LSB")
+#  field(INP, "@8:0e.0 bar=2 offset=0x08 mask=0x00000018 shift=3 initread=1")
+#  field(PINI, "YES")
+#  field(DESC, "Prescaler division ratio setting")
+#  field(DRVH, "3")
+#  field(DRVL, "0")
+#  field(FLNK, "DPLA:BPM_AFE03:Prescaler")
+#}
+
+# CAL_CONTROL
+
+record(bo, "DPLA:BPM_AFE03:CalEnable") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x0c mask=0x00000001 shift=0 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Enable calibration mode")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+record(mbbo, "DPLA:BPM_AFE03:CalModeSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x0c mask=0x0000000e shift=1 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Calibration mode setting")
+  field(ZRVL, "1")
+  field(ZRST, "Normal mode")
+  field(ONVL, "2")
+  field(ONST, "CAL to AFE")
+  field(TWVL, "4")
+  field(TWST, "CAL to BPM")
+}
+
+record(longout, "DPLA:BPM_AFE03:CalChannel") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x0c mask=0x000000f0 shift=4 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Calibration channel setting")
+  field(DRVL, "1")
+  field(DRVH, "8")
+}
+
+record(longout, "DPLA:BPM_AFE03:CalTiming") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x0c mask=0xffffff00 shift=8 initread=1")
+  field(PINI, "YES")
+  field(DESC, "Calibration timing slot setting")
+  field(DRVL, "0")
+  field(DRVH, "16777215")
+}
+
+# FREQ_CONROL
+
+record(longin, "DPLA:BPM_AFE03:LOFreq") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0xd0")
+  field(SCAN, "2 second")
+  field(DESC, "Measured local oscillator frequency")
+  field(EGU, "Hz")
+}
+
+# IFMIF_ADDR_BOARD_ID
+
+record(mbbi, "DPLA:BPM_AFE03:ID") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0xf0 mask=0xffff0000 shift=16 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Board identification")
+  field(ZRVL, "0x00001000")
+  field(ZRST, "AFE board")
+  field(ONVL, "0x00002000")
+  field(ONST, "CAL board")
+  field(TWVL, "0x00003000")
+  field(TWST, "Timing board")
+}
+
+record(longin, "DPLA:BPM_AFE03:SN") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0xf0 mask=0x0000ffff initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Board serial number")
+}
+
+record(mbbi, "DPLA:BPM_AFE03:Type") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0xf4 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Board type")
+  field(ZRVL, "0x12345678")
+  field(ZRST, "Standard")
+  field(ONVL, "0x00010000")
+  field(ONST, "Trigger")
+  field(TWVL, "0x0020000")
+  field(TWST, "Gate")
+}
+
+record(longin, "DPLA:BPM_AFE03:Version") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0xf8 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Board version")
+}
+
+record(longin, "DPLA:BPM_AFE03:FWVersion") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0xfc initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Firmware version")
+}
+
+
+###################################################
+# BPM frontend registers for BPM01_FER in MEBT
+
+# Channel enable @ STATUS0
+record(bi, "MEBT:BPM01_FER:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x0 mask=0x00000100 shift=7+1 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "MEBT:BPM01_FER:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x08 mask=0x00000100 shift=7+1")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "MEBT:BPM01_FER:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "MEBT:BPM01_FER:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x04 mask=0x0000000f shift=0")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "MEBT:BPM01_FER:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x10 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM01_FER:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x10 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM01_FER:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "MEBT:BPM01_FER:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x14 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM01_FER:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x14 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM01_FER:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "MEBT:BPM01_FER:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x18 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM01_FER:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x18 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM01_FER:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "MEBT:BPM01_FER:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x1c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "MEBT:BPM01_FER:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x1c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "MEBT:BPM01_FER:Att")
+}
+
+record(longin, "MEBT:BPM01_FER:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0xA0+0 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM01_FEL in MEBT
+
+# Channel enable @ STATUS0
+record(bi, "MEBT:BPM01_FEL:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x0 mask=0x00000200 shift=7+2 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "MEBT:BPM01_FEL:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x08 mask=0x00000200 shift=7+2")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "MEBT:BPM01_FEL:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "MEBT:BPM01_FEL:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x04 mask=0x000000f0 shift=4")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "MEBT:BPM01_FEL:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x20 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM01_FEL:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x20 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM01_FEL:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "MEBT:BPM01_FEL:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x24 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM01_FEL:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x24 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM01_FEL:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "MEBT:BPM01_FEL:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x28 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM01_FEL:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x28 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM01_FEL:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "MEBT:BPM01_FEL:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x2c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "MEBT:BPM01_FEL:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x2c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "MEBT:BPM01_FEL:Att")
+}
+
+record(longin, "MEBT:BPM01_FEL:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0xA0+4 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM01_FET in MEBT
+
+# Channel enable @ STATUS0
+record(bi, "MEBT:BPM01_FET:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x0 mask=0x00000400 shift=7+3 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "MEBT:BPM01_FET:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x08 mask=0x00000400 shift=7+3")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "MEBT:BPM01_FET:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "MEBT:BPM01_FET:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x04 mask=0x00000f00 shift=8")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "MEBT:BPM01_FET:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x30 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM01_FET:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x30 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM01_FET:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "MEBT:BPM01_FET:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x34 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM01_FET:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x34 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM01_FET:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "MEBT:BPM01_FET:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x38 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM01_FET:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x38 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM01_FET:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "MEBT:BPM01_FET:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x3c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "MEBT:BPM01_FET:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x3c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "MEBT:BPM01_FET:Att")
+}
+
+record(longin, "MEBT:BPM01_FET:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0xA0+8 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM01_FEB in MEBT
+
+# Channel enable @ STATUS0
+record(bi, "MEBT:BPM01_FEB:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x0 mask=0x00000800 shift=7+4 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "MEBT:BPM01_FEB:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x08 mask=0x00000800 shift=7+4")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "MEBT:BPM01_FEB:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "MEBT:BPM01_FEB:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x04 mask=0x0000f000 shift=12")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "MEBT:BPM01_FEB:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x40 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM01_FEB:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x40 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM01_FEB:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "MEBT:BPM01_FEB:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x44 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM01_FEB:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x44 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM01_FEB:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "MEBT:BPM01_FEB:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x48 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM01_FEB:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x48 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM01_FEB:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "MEBT:BPM01_FEB:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x4c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "MEBT:BPM01_FEB:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x4c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "MEBT:BPM01_FEB:Att")
+}
+
+record(longin, "MEBT:BPM01_FEB:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0xA0+12 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM02_FER in MEBT
+
+# Channel enable @ STATUS0
+record(bi, "MEBT:BPM02_FER:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x0 mask=0x00001000 shift=7+5 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "MEBT:BPM02_FER:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x08 mask=0x00001000 shift=7+5")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "MEBT:BPM02_FER:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "MEBT:BPM02_FER:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x04 mask=0x000f0000 shift=16")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "MEBT:BPM02_FER:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x50 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM02_FER:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x50 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM02_FER:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "MEBT:BPM02_FER:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x54 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM02_FER:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x54 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM02_FER:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "MEBT:BPM02_FER:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x58 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM02_FER:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x58 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM02_FER:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "MEBT:BPM02_FER:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x5c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "MEBT:BPM02_FER:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x5c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "MEBT:BPM02_FER:Att")
+}
+
+record(longin, "MEBT:BPM02_FER:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0xA0+16 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM02_FEL in MEBT
+
+# Channel enable @ STATUS0
+record(bi, "MEBT:BPM02_FEL:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x0 mask=0x00002000 shift=7+6 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "MEBT:BPM02_FEL:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x08 mask=0x00002000 shift=7+6")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "MEBT:BPM02_FEL:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "MEBT:BPM02_FEL:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x04 mask=0x00f00000 shift=20")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "MEBT:BPM02_FEL:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x60 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM02_FEL:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x60 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM02_FEL:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "MEBT:BPM02_FEL:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x64 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM02_FEL:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x64 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM02_FEL:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "MEBT:BPM02_FEL:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x68 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM02_FEL:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x68 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM02_FEL:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "MEBT:BPM02_FEL:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x6c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "MEBT:BPM02_FEL:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x6c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "MEBT:BPM02_FEL:Att")
+}
+
+record(longin, "MEBT:BPM02_FEL:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0xA0+20 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM02_FET in MEBT
+
+# Channel enable @ STATUS0
+record(bi, "MEBT:BPM02_FET:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x0 mask=0x00004000 shift=7+7 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "MEBT:BPM02_FET:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x08 mask=0x00004000 shift=7+7")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "MEBT:BPM02_FET:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "MEBT:BPM02_FET:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x04 mask=0x0f000000 shift=24")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "MEBT:BPM02_FET:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x70 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM02_FET:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x70 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM02_FET:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "MEBT:BPM02_FET:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x74 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM02_FET:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x74 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM02_FET:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "MEBT:BPM02_FET:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x78 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM02_FET:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x78 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM02_FET:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "MEBT:BPM02_FET:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x7c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "MEBT:BPM02_FET:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x7c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "MEBT:BPM02_FET:Att")
+}
+
+record(longin, "MEBT:BPM02_FET:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0xA0+24 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM02_FEB in MEBT
+
+# Channel enable @ STATUS0
+record(bi, "MEBT:BPM02_FEB:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x0 mask=0x00008000 shift=7+8 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "MEBT:BPM02_FEB:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x08 mask=0x00008000 shift=7+8")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "MEBT:BPM02_FEB:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "MEBT:BPM02_FEB:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x04 mask=0xf0000000 shift=28")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "MEBT:BPM02_FEB:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x80 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM02_FEB:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x80 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM02_FEB:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "MEBT:BPM02_FEB:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x84 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM02_FEB:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x84 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM02_FEB:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "MEBT:BPM02_FEB:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x88 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM02_FEB:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x88 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM02_FEB:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "MEBT:BPM02_FEB:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0x8c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "MEBT:BPM02_FEB:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0b.0 bar=2 offset=0x8c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "MEBT:BPM02_FEB:Att")
+}
+
+record(longin, "MEBT:BPM02_FEB:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0b.0 bar=2 offset=0xA0+28 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM03_FER in MEBT
+
+# Channel enable @ STATUS0
+record(bi, "MEBT:BPM03_FER:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x0 mask=0x00000100 shift=7+1 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "MEBT:BPM03_FER:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x08 mask=0x00000100 shift=7+1")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "MEBT:BPM03_FER:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "MEBT:BPM03_FER:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x04 mask=0x0000000f shift=0")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "MEBT:BPM03_FER:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x10 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM03_FER:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x10 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM03_FER:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "MEBT:BPM03_FER:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x14 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM03_FER:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x14 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM03_FER:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "MEBT:BPM03_FER:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x18 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM03_FER:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x18 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM03_FER:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "MEBT:BPM03_FER:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x1c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "MEBT:BPM03_FER:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x1c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "MEBT:BPM03_FER:Att")
+}
+
+record(longin, "MEBT:BPM03_FER:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0xA0+0 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM03_FEL in MEBT
+
+# Channel enable @ STATUS0
+record(bi, "MEBT:BPM03_FEL:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x0 mask=0x00000200 shift=7+2 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "MEBT:BPM03_FEL:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x08 mask=0x00000200 shift=7+2")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "MEBT:BPM03_FEL:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "MEBT:BPM03_FEL:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x04 mask=0x000000f0 shift=4")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "MEBT:BPM03_FEL:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x20 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM03_FEL:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x20 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM03_FEL:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "MEBT:BPM03_FEL:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x24 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM03_FEL:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x24 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM03_FEL:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "MEBT:BPM03_FEL:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x28 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM03_FEL:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x28 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM03_FEL:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "MEBT:BPM03_FEL:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x2c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "MEBT:BPM03_FEL:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x2c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "MEBT:BPM03_FEL:Att")
+}
+
+record(longin, "MEBT:BPM03_FEL:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0xA0+4 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM03_FET in MEBT
+
+# Channel enable @ STATUS0
+record(bi, "MEBT:BPM03_FET:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x0 mask=0x00000400 shift=7+3 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "MEBT:BPM03_FET:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x08 mask=0x00000400 shift=7+3")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "MEBT:BPM03_FET:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "MEBT:BPM03_FET:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x04 mask=0x00000f00 shift=8")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "MEBT:BPM03_FET:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x30 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM03_FET:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x30 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM03_FET:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "MEBT:BPM03_FET:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x34 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM03_FET:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x34 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM03_FET:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "MEBT:BPM03_FET:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x38 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM03_FET:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x38 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM03_FET:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "MEBT:BPM03_FET:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x3c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "MEBT:BPM03_FET:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x3c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "MEBT:BPM03_FET:Att")
+}
+
+record(longin, "MEBT:BPM03_FET:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0xA0+8 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM03_FEB in MEBT
+
+# Channel enable @ STATUS0
+record(bi, "MEBT:BPM03_FEB:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x0 mask=0x00000800 shift=7+4 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "MEBT:BPM03_FEB:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x08 mask=0x00000800 shift=7+4")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "MEBT:BPM03_FEB:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "MEBT:BPM03_FEB:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x04 mask=0x0000f000 shift=12")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "MEBT:BPM03_FEB:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x40 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM03_FEB:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x40 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM03_FEB:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "MEBT:BPM03_FEB:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x44 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM03_FEB:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x44 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM03_FEB:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "MEBT:BPM03_FEB:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x48 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM03_FEB:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x48 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM03_FEB:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "MEBT:BPM03_FEB:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x4c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "MEBT:BPM03_FEB:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x4c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "MEBT:BPM03_FEB:Att")
+}
+
+record(longin, "MEBT:BPM03_FEB:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0xA0+12 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM04_FER in MEBT
+
+# Channel enable @ STATUS0
+record(bi, "MEBT:BPM04_FER:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x0 mask=0x00001000 shift=7+5 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "MEBT:BPM04_FER:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x08 mask=0x00001000 shift=7+5")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "MEBT:BPM04_FER:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "MEBT:BPM04_FER:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x04 mask=0x000f0000 shift=16")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "MEBT:BPM04_FER:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x50 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM04_FER:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x50 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM04_FER:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "MEBT:BPM04_FER:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x54 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM04_FER:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x54 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM04_FER:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "MEBT:BPM04_FER:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x58 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM04_FER:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x58 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM04_FER:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "MEBT:BPM04_FER:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x5c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "MEBT:BPM04_FER:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x5c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "MEBT:BPM04_FER:Att")
+}
+
+record(longin, "MEBT:BPM04_FER:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0xA0+16 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM04_FEL in MEBT
+
+# Channel enable @ STATUS0
+record(bi, "MEBT:BPM04_FEL:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x0 mask=0x00002000 shift=7+6 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "MEBT:BPM04_FEL:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x08 mask=0x00002000 shift=7+6")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "MEBT:BPM04_FEL:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "MEBT:BPM04_FEL:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x04 mask=0x00f00000 shift=20")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "MEBT:BPM04_FEL:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x60 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM04_FEL:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x60 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM04_FEL:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "MEBT:BPM04_FEL:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x64 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM04_FEL:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x64 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM04_FEL:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "MEBT:BPM04_FEL:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x68 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM04_FEL:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x68 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM04_FEL:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "MEBT:BPM04_FEL:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x6c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "MEBT:BPM04_FEL:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x6c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "MEBT:BPM04_FEL:Att")
+}
+
+record(longin, "MEBT:BPM04_FEL:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0xA0+20 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM04_FET in MEBT
+
+# Channel enable @ STATUS0
+record(bi, "MEBT:BPM04_FET:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x0 mask=0x00004000 shift=7+7 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "MEBT:BPM04_FET:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x08 mask=0x00004000 shift=7+7")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "MEBT:BPM04_FET:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "MEBT:BPM04_FET:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x04 mask=0x0f000000 shift=24")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "MEBT:BPM04_FET:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x70 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM04_FET:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x70 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM04_FET:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "MEBT:BPM04_FET:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x74 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM04_FET:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x74 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM04_FET:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "MEBT:BPM04_FET:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x78 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM04_FET:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x78 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM04_FET:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "MEBT:BPM04_FET:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x7c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "MEBT:BPM04_FET:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x7c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "MEBT:BPM04_FET:Att")
+}
+
+record(longin, "MEBT:BPM04_FET:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0xA0+24 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM04_FEB in MEBT
+
+# Channel enable @ STATUS0
+record(bi, "MEBT:BPM04_FEB:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x0 mask=0x00008000 shift=7+8 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "MEBT:BPM04_FEB:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x08 mask=0x00008000 shift=7+8")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "MEBT:BPM04_FEB:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "MEBT:BPM04_FEB:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x04 mask=0xf0000000 shift=28")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "MEBT:BPM04_FEB:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x80 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM04_FEB:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x80 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM04_FEB:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "MEBT:BPM04_FEB:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x84 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM04_FEB:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x84 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM04_FEB:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "MEBT:BPM04_FEB:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x88 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "MEBT:BPM04_FEB:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x88 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "MEBT:BPM04_FEB:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "MEBT:BPM04_FEB:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0x8c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "MEBT:BPM04_FEB:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0c.0 bar=2 offset=0x8c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "MEBT:BPM04_FEB:Att")
+}
+
+record(longin, "MEBT:BPM04_FEB:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0c.0 bar=2 offset=0xA0+28 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM01_FER in DPLA
+
+# Channel enable @ STATUS0
+record(bi, "DPLA:BPM01_FER:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x0 mask=0x00000100 shift=7+1 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "DPLA:BPM01_FER:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x08 mask=0x00000100 shift=7+1")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "DPLA:BPM01_FER:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "DPLA:BPM01_FER:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x04 mask=0x0000000f shift=0")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "DPLA:BPM01_FER:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x10 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM01_FER:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x10 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM01_FER:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "DPLA:BPM01_FER:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x14 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM01_FER:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x14 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM01_FER:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "DPLA:BPM01_FER:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x18 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM01_FER:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x18 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM01_FER:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "DPLA:BPM01_FER:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x1c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "DPLA:BPM01_FER:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x1c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "DPLA:BPM01_FER:Att")
+}
+
+record(longin, "DPLA:BPM01_FER:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0xA0+0 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM01_FEL in DPLA
+
+# Channel enable @ STATUS0
+record(bi, "DPLA:BPM01_FEL:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x0 mask=0x00000200 shift=7+2 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "DPLA:BPM01_FEL:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x08 mask=0x00000200 shift=7+2")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "DPLA:BPM01_FEL:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "DPLA:BPM01_FEL:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x04 mask=0x000000f0 shift=4")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "DPLA:BPM01_FEL:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x20 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM01_FEL:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x20 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM01_FEL:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "DPLA:BPM01_FEL:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x24 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM01_FEL:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x24 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM01_FEL:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "DPLA:BPM01_FEL:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x28 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM01_FEL:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x28 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM01_FEL:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "DPLA:BPM01_FEL:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x2c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "DPLA:BPM01_FEL:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x2c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "DPLA:BPM01_FEL:Att")
+}
+
+record(longin, "DPLA:BPM01_FEL:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0xA0+4 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM01_FET in DPLA
+
+# Channel enable @ STATUS0
+record(bi, "DPLA:BPM01_FET:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x0 mask=0x00000400 shift=7+3 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "DPLA:BPM01_FET:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x08 mask=0x00000400 shift=7+3")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "DPLA:BPM01_FET:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "DPLA:BPM01_FET:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x04 mask=0x00000f00 shift=8")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "DPLA:BPM01_FET:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x30 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM01_FET:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x30 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM01_FET:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "DPLA:BPM01_FET:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x34 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM01_FET:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x34 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM01_FET:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "DPLA:BPM01_FET:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x38 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM01_FET:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x38 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM01_FET:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "DPLA:BPM01_FET:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x3c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "DPLA:BPM01_FET:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x3c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "DPLA:BPM01_FET:Att")
+}
+
+record(longin, "DPLA:BPM01_FET:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0xA0+8 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM01_FEB in DPLA
+
+# Channel enable @ STATUS0
+record(bi, "DPLA:BPM01_FEB:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x0 mask=0x00000800 shift=7+4 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "DPLA:BPM01_FEB:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x08 mask=0x00000800 shift=7+4")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "DPLA:BPM01_FEB:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "DPLA:BPM01_FEB:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x04 mask=0x0000f000 shift=12")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "DPLA:BPM01_FEB:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x40 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM01_FEB:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x40 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM01_FEB:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "DPLA:BPM01_FEB:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x44 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM01_FEB:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x44 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM01_FEB:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "DPLA:BPM01_FEB:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x48 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM01_FEB:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x48 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM01_FEB:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "DPLA:BPM01_FEB:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x4c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "DPLA:BPM01_FEB:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x4c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "DPLA:BPM01_FEB:Att")
+}
+
+record(longin, "DPLA:BPM01_FEB:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0xA0+12 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM02_FER in DPLA
+
+# Channel enable @ STATUS0
+record(bi, "DPLA:BPM02_FER:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x0 mask=0x00001000 shift=7+5 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "DPLA:BPM02_FER:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x08 mask=0x00001000 shift=7+5")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "DPLA:BPM02_FER:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "DPLA:BPM02_FER:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x04 mask=0x000f0000 shift=16")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "DPLA:BPM02_FER:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x50 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM02_FER:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x50 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM02_FER:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "DPLA:BPM02_FER:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x54 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM02_FER:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x54 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM02_FER:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "DPLA:BPM02_FER:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x58 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM02_FER:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x58 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM02_FER:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "DPLA:BPM02_FER:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x5c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "DPLA:BPM02_FER:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x5c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "DPLA:BPM02_FER:Att")
+}
+
+record(longin, "DPLA:BPM02_FER:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0xA0+16 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM02_FEL in DPLA
+
+# Channel enable @ STATUS0
+record(bi, "DPLA:BPM02_FEL:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x0 mask=0x00002000 shift=7+6 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "DPLA:BPM02_FEL:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x08 mask=0x00002000 shift=7+6")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "DPLA:BPM02_FEL:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "DPLA:BPM02_FEL:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x04 mask=0x00f00000 shift=20")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "DPLA:BPM02_FEL:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x60 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM02_FEL:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x60 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM02_FEL:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "DPLA:BPM02_FEL:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x64 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM02_FEL:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x64 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM02_FEL:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "DPLA:BPM02_FEL:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x68 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM02_FEL:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x68 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM02_FEL:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "DPLA:BPM02_FEL:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x6c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "DPLA:BPM02_FEL:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x6c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "DPLA:BPM02_FEL:Att")
+}
+
+record(longin, "DPLA:BPM02_FEL:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0xA0+20 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM02_FET in DPLA
+
+# Channel enable @ STATUS0
+record(bi, "DPLA:BPM02_FET:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x0 mask=0x00004000 shift=7+7 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "DPLA:BPM02_FET:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x08 mask=0x00004000 shift=7+7")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "DPLA:BPM02_FET:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "DPLA:BPM02_FET:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x04 mask=0x0f000000 shift=24")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "DPLA:BPM02_FET:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x70 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM02_FET:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x70 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM02_FET:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "DPLA:BPM02_FET:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x74 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM02_FET:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x74 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM02_FET:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "DPLA:BPM02_FET:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x78 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM02_FET:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x78 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM02_FET:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "DPLA:BPM02_FET:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x7c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "DPLA:BPM02_FET:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x7c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "DPLA:BPM02_FET:Att")
+}
+
+record(longin, "DPLA:BPM02_FET:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0xA0+24 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM02_FEB in DPLA
+
+# Channel enable @ STATUS0
+record(bi, "DPLA:BPM02_FEB:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x0 mask=0x00008000 shift=7+8 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "DPLA:BPM02_FEB:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x08 mask=0x00008000 shift=7+8")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "DPLA:BPM02_FEB:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "DPLA:BPM02_FEB:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x04 mask=0xf0000000 shift=28")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "DPLA:BPM02_FEB:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x80 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM02_FEB:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x80 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM02_FEB:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "DPLA:BPM02_FEB:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x84 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM02_FEB:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x84 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM02_FEB:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "DPLA:BPM02_FEB:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x88 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM02_FEB:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x88 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM02_FEB:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "DPLA:BPM02_FEB:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0x8c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "DPLA:BPM02_FEB:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0d.0 bar=2 offset=0x8c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "DPLA:BPM02_FEB:Att")
+}
+
+record(longin, "DPLA:BPM02_FEB:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0d.0 bar=2 offset=0xA0+28 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM01_FEL in SRF
+
+# Channel enable @ STATUS0
+record(bi, "SRF:BPM01_FEL:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e. bar=2 offset=0x0 mask=0x00000100 shift=7+1 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "SRF:BPM01_FEL:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e. bar=2 offset=0x08 mask=0x00000100 shift=7+1")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "SRF:BPM01_FEL:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "SRF:BPM01_FEL:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e. bar=2 offset=0x04 mask=0x0000000f shift=0")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "SRF:BPM01_FEL:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e. bar=2 offset=0x10 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "SRF:BPM01_FEL:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e. bar=2 offset=0x10 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "SRF:BPM01_FEL:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "SRF:BPM01_FEL:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e. bar=2 offset=0x14 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "SRF:BPM01_FEL:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e. bar=2 offset=0x14 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "SRF:BPM01_FEL:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "SRF:BPM01_FEL:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e. bar=2 offset=0x18 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "SRF:BPM01_FEL:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e. bar=2 offset=0x18 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "SRF:BPM01_FEL:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "SRF:BPM01_FEL:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e. bar=2 offset=0x1c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "SRF:BPM01_FEL:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e. bar=2 offset=0x1c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "SRF:BPM01_FEL:Att")
+}
+
+record(longin, "SRF:BPM01_FEL:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e. bar=2 offset=0xA0+0 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM03_FER in DPLA
+
+# Channel enable @ STATUS0
+record(bi, "DPLA:BPM03_FER:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x0 mask=0x00000400 shift=7+3 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "DPLA:BPM03_FER:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x08 mask=0x00000400 shift=7+3")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "DPLA:BPM03_FER:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "DPLA:BPM03_FER:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x04 mask=0x00000f00 shift=8")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "DPLA:BPM03_FER:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x30 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM03_FER:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x30 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM03_FER:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "DPLA:BPM03_FER:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x34 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM03_FER:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x34 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM03_FER:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "DPLA:BPM03_FER:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x38 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM03_FER:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x38 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM03_FER:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "DPLA:BPM03_FER:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x3c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "DPLA:BPM03_FER:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x3c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "DPLA:BPM03_FER:Att")
+}
+
+record(longin, "DPLA:BPM03_FER:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0xA0+8 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM03_FEL in DPLA
+
+# Channel enable @ STATUS0
+record(bi, "DPLA:BPM03_FEL:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x0 mask=0x00000800 shift=7+4 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "DPLA:BPM03_FEL:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x08 mask=0x00000800 shift=7+4")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "DPLA:BPM03_FEL:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "DPLA:BPM03_FEL:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x04 mask=0x0000f000 shift=12")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "DPLA:BPM03_FEL:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x40 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM03_FEL:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x40 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM03_FEL:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "DPLA:BPM03_FEL:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x44 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM03_FEL:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x44 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM03_FEL:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "DPLA:BPM03_FEL:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x48 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM03_FEL:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x48 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM03_FEL:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "DPLA:BPM03_FEL:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x4c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "DPLA:BPM03_FEL:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x4c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "DPLA:BPM03_FEL:Att")
+}
+
+record(longin, "DPLA:BPM03_FEL:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0xA0+12 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM03_FET in DPLA
+
+# Channel enable @ STATUS0
+record(bi, "DPLA:BPM03_FET:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x0 mask=0x00001000 shift=7+5 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "DPLA:BPM03_FET:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x08 mask=0x00001000 shift=7+5")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "DPLA:BPM03_FET:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "DPLA:BPM03_FET:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x04 mask=0x000f0000 shift=16")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "DPLA:BPM03_FET:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x50 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM03_FET:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x50 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM03_FET:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "DPLA:BPM03_FET:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x54 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM03_FET:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x54 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM03_FET:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "DPLA:BPM03_FET:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x58 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM03_FET:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x58 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM03_FET:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "DPLA:BPM03_FET:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x5c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "DPLA:BPM03_FET:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x5c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "DPLA:BPM03_FET:Att")
+}
+
+record(longin, "DPLA:BPM03_FET:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0xA0+16 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+
+###################################################
+# BPM frontend registers for BPM03_FEB in DPLA
+
+# Channel enable @ STATUS0
+record(bi, "DPLA:BPM03_FEB:Enable") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x0 mask=0x00002000 shift=7+6 initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Analog frontend channel enabled")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+
+# Channel enable @ CONTROL
+record(bo, "DPLA:BPM03_FEB:EnableSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x08 mask=0x00002000 shift=7+6")
+  field(PINI, "YES")
+  field(DESC, "Analog frontend channel enabled setting")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(FLNK, "DPLA:BPM03_FEB:Enable")
+}
+
+# Signal path switch configuration @ STATUS1
+record(mbbi, "DPLA:BPM03_FEB:ChConfig") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x04 mask=0x00f00000 shift=20")
+  field(SCAN, "2 second")
+  field(DESC, "Signal path switch configuration")
+  field(ZRVL, "0x3")
+  field(ZRST, "Normal")
+  field(ONVL, "0xA")
+  field(ONST, "Disabled")
+  field(TWVL, "1")
+  field(TWST, "CAL>AFE")
+  field(THVL, "4")
+  field(THST, "CAL>BPM")
+}
+
+
+# Gains with chip AD8368
+# 0 code -> 0V -> -13.75dB (actually compressed to -12dB)
+# 0x2000 -> 0.5V -> +5dB
+# 0x3333 code -> 1V -> +23.75dB (actually compressed to +22dB)
+# 0xFFFF code -> 5V
+
+####################
+# Preamplifier gain
+
+record(ai, "DPLA:BPM03_FEB:PGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x60 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Preamplifier gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM03_FEB:PGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x60 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "Preamplifier gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM03_FEB:PGain")
+}
+
+####################
+# IF gain
+
+record(ai, "DPLA:BPM03_FEB:IFGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x64 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "IF gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM03_FEB:IFGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x64 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "IF gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM03_FEB:IFGain")
+}
+
+####################
+# LO gain
+
+record(ai, "DPLA:BPM03_FEB:LOGain") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x68 mask=0xFFFF initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "LO gain readback")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(LOPR, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.3851")
+  field(LOPR, "-10.7718")
+}
+
+record(ao, "DPLA:BPM03_FEB:LOGainSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x68 mask=0xFFFF")
+  field(PINI, "YES")
+  field(DESC, "LO gain setting")
+  field(EGU, "dB")
+  field(PREC, "3")
+#  field(AOFF, "-13.75")
+#  field(ASLO, "0.0028610666")
+#  field(HOPR, "23.75")
+#  field(DRVH, "23.75")
+#  field(LOPR, "-13.75")
+#  field(DRVL, "-13.75")
+  field(LINR, "typeAD8368Gain70_25")
+  field(HOPR, "22.38515")
+  field(DRVH, "22.3851")
+  field(LOPR, "-10.7718")
+  field(DRVL, "-10.7718")
+  field(FLNK, "DPLA:BPM03_FEB:LOGain")
+}
+
+####################
+# Attenuation
+# Chip HMC542ALP4
+# 0 code -> 31.5dB
+# 0x3F code -> 0dB
+
+record(ai, "DPLA:BPM03_FEB:Att") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0x6c mask=0x3F initread=1")
+  field(PINI, "YES")
+#  field(SCAN, "5 second")
+  field(DESC, "Attenuation readback")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(LOPR, "0")
+}
+
+record(ao, "DPLA:BPM03_FEB:AttSet") {
+  field(DTYP, "Explore Write32 LSB")
+  field(OUT, "@8:0e.0 bar=2 offset=0x6c mask=0x3F")
+  field(PINI, "YES")
+  field(DESC, "Attenuation setting")
+  field(EGU, "dB")
+  field(PREC, "1")
+  field(AOFF, "31.5")
+  field(ASLO, "-0.5")
+  field(HOPR, "31.5")
+  field(DRVH, "31.5")
+  field(LOPR, "0")
+  field(DRVL, "0")
+  field(FLNK, "DPLA:BPM03_FEB:Att")
+}
+
+record(longin, "DPLA:BPM03_FEB:T") {
+  field(DTYP, "Explore Read32 LSB")
+  field(INP, "@8:0e.0 bar=2 offset=0xA0+20 initread=1")
+  field(SCAN, "5 second")
+  field(DESC, "Temperature monitoring for channel")
+}
+
+

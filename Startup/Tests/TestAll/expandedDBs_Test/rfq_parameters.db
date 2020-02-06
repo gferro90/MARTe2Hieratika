@@ -1,0 +1,31 @@
+# RF Voltage Normalization - Costants
+# Developed by Maurizio Montis - INFN-LNL
+# mail: maurizio.montis@lnl.infn.it
+
+# Paramters related to RFQ linear dimensions
+# Supposed as constants in calculation due to its time-invariant properties
+
+
+# - Linear Parametes - 
+record(seq, "RFQ:RF:DltDim") {
+		field(DESC, "Pickup distances [m]")
+        field(DO1, "0.545")
+        field(DO2, "1.092")
+        field(DO3, "1.092")
+        field(DO4, "1.092")
+        field(DO5, "1.092")
+        field(DO6, "0.766")
+        field(DO7, "0.871")
+        field(DO8, "1.086")
+        field(DO9, "1.086")
+        field(DOA, "0.764")
+        field(PINI, "YES")
+}
+
+# - Max Pickup distance --> Zmax-Z0 = Z1817 - z21
+record(ai, "RFQ:RF:ZDim") {
+		field(DESC, "Z dimension [m]")
+		field(INP, "9.488")
+		field(PINI, "YES")
+}	
+

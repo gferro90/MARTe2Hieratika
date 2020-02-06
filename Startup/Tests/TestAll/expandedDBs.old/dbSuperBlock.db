@@ -1,0 +1,158 @@
+
+
+record(mbbi, "$(mname):SB:ID")
+{
+	field(DESC, "ID")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/D0001")
+	field(NOBT, "16")
+	field(SHFT, "0")
+	
+	field( ZRVL, "19009")	
+	field( ONVL, "19010")	
+	field( TWVL, "19011")	
+	
+	field( ZRST, "JAEA PLC(OLD)")
+	field( ONST, "JAEA PLC")
+	field( TWST, "IFMIF PLC")
+}
+
+record(mbbiDirect, "$(mname):SB:VER")
+{
+	field(DESC, "Version")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/D0002")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+record(longin, "$(mname):SB:CREATE")
+{
+	field(DESC, "Create Date/Year")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/D0003")
+}
+record(mbbiDirect, "$(mname):SB:YEAR")
+{
+	field(DESC, "Create Year")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/D0003")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+record(mbbiDirect, "$(mname):SB:DATE")
+{
+	field(DESC, "Create Date")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/D0004")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+
+record(mbbiDirect, "$(mname):SB:ACTIVE")
+{
+	field(DESC, "Active counter")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/D0005")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+record(mbbiDirect, "$(mname):SB:NUMDEV")
+{
+	field(DESC, "number of LDEV")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/D0006")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+record(longin, "$(mname):SB:IPADDR")
+{
+	field(DESC, "IP Address")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/D0007")
+}
+
+record(mbbiDirect, "$(mname):SB:RSV1")
+{
+	field(DESC, "System Reserved 1")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/D0009")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+record(mbbiDirect, "$(mname):SB:RSV2")
+{
+	field(DESC, "System Reserved 2")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/D0010")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+record(ai, "$(mname):SB:INTERVAL")
+{
+	field(DESC, "Polling Interval")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP , "@$(plc)://$(target)/D0011")
+	field(PREC, "5")
+	field(LINR, "LINEAR")
+	field(EGUF, "655.35")
+	field(EGUL, "0")
+	field(EGU, "Volts")
+	field(HOPR, "65535")
+	field(LOPR, "0")
+	field(PREC, "2")
+}
+
+record(mbbiDirect, "$(mname):SB:CFG")
+{
+	field(DESC, "LDEV Configuration")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/D0012")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+record(mbbiDirect, "$(mname):SB:COMMAREA")
+{
+	field(DESC, "Size of COMM. Area")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/D0013")
+	field(NOBT, "16")
+	field(SHFT, "0")
+}
+
+record(mbbi, "$(mname):SB:SYNC")
+{
+	field(DESC, "Sync Flag")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "IFMIF PLC")
+	field(INP,  "@$(plc)://$(target)/D0033")
+	field(NOBT, "16")
+	field(SHFT, "0")
+	
+	field( ZRVL, "0")	
+	field( ONVL, "19007")	
+	field( TWVL, "64156")	
+	
+	field( ZRST, "INVALID")
+	field( ONST, "RESET")
+	field( TWST, "OK")
+}

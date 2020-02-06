@@ -1,0 +1,95 @@
+# Parameters for RF closed loop
+# developed by Maurizio Montis - INFN Italy
+# maurizio.montis@lnl.infn.it
+
+
+# Disable Frequency closed loop estimation
+record(bi, "RFQ:RF:ClosLoopEn") {
+	field(SCAN, "Passive")
+	field(PINI, "YES")
+	field(ZNAM, "Disabled")
+	field(ONAM, "Enabled")
+	field(VAL, "0")
+}
+
+# Q Load parameter
+record(ai, "RFQ:RF:Qload") {
+	field(SCAN, "Passive")
+	field(PINI, "YES")
+	field(VAL, "13100")
+}
+
+# Beam Delta Frequency [kHz]
+record(ai, "RFQ:RF:BeamDFreq") {
+        field(SCAN, "Passive")
+        field(PINI, "YES")
+        field(VAL, "0")
+	field(PREC, "3")
+	field(EGU, "kHz")
+}
+
+# redirect Delta Frequency to Cooling System
+record(calcout, "RFQ:RF:DFreq") {
+	field(SCAN, "Passive")
+	field(PINI, "YES")
+	field(VAL, "0")
+	field(INPA, "RFQ:RF:T1AvgDFreq")
+	field(CALC, "A")
+	field(OOPT, "Every Time")
+	field(DOPT, "Use CALC")
+	field(OUT, "RFQ:COOL_RF:DFreq") 
+
+}
+# DO NOT ENABLE
+# calculate the number of element for the average
+#record(calcout, "RFQ:RF:AvgElem") {
+	#field(SCAN, ".1 second")
+	#field(PHAS, "0")
+#	field(INPA, "RFQ:LLRF:SimTpulse")
+#	field(INPB, "1000")  # experssed in [ms]
+#	field(CALC, "C:=B/A; D:=2*floor(A/250); max(C,D)")
+	#field(CALC, "max(B*1000/A, 2*B*ceil(A/250))")
+#	field(OOPT, "On Change")
+#	field(DOPT, "Use CALC")
+#	field(FLNK, "RFQ:RF:FwdAvgElem")	
+#}
+
+# forward data to average records
+#record(dfanout, "RFQ:RF:FwdAvgElem") {
+#	field(SCAN, "Passive")
+#	field(OMSL, "closed_loop")	
+#	field(DOL, "RFQ:RF:AvgElem")
+	#field(OUTA, "RFQ:RF:T1AvgDFreq.N")
+	#field(OUTB, "RFQ:RF:T2AvgDFreq.N")
+#}
+
+
+
+
+### TEMP RECORD FOR LLRF SIMULATION ###
+#record(ai, "RF:LLRF1_CavA:TunBfT1MeasFreqOffsetRdbk") {
+#	field(PINI, "YES")
+#	field(VAL, "0")
+#}
+
+#record(ai, "RF:LLRF1_CavA:TunDiphasCentralT1Rdbk") {
+#        field(PINI, "YES")
+#        field(VAL, "0")
+#}
+
+#record(ai, "RF:LLRF1_CavA:TunBfT2MeasFreqOffsetRdbk") {
+#        field(PINI, "YES")
+#        field(VAL, "0")
+#}
+
+#record(ai, "RF:LLRF1_CavA:TunDiphasCentralT2Rdbk") {
+#        field(PINI, "YES")
+#        field(VAL, "0")
+#}
+
+record(ai, "RFQ:LLRF:SimTpulse") {
+        field(PINI, "YES")
+        field(VAL, "10")
+	field(EGU, "ms")
+}
+

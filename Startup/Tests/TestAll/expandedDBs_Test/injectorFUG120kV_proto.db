@@ -1,0 +1,84 @@
+OutTerminator = CR LF;
+InTerminator = LF;
+ReadTimeout = 1000;
+PollPeriod = 100;
+ReplyTimeout = 1000;
+ExtraInput = Ignore;
+WriteTimeout = 1000;
+
+#--------------------------------------------------------------------#
+# Connect a stringout record to this to get
+# a generic command interface.
+# After processing finishes, the record contains the reply.
+#--------------------------------------------------------------------#
+debug {
+    ExtraInput = Ignore;
+    out "%s"; in "%39c";
+}
+
+
+#-----------------Alimentation FUG 120 kV IFMIF --------------#
+
+
+AD_rate {
+    out "S6";
+}
+
+Reset {
+   out "R1";
+}
+
+ON_Aux {
+   out "F1";
+}
+
+OFF_Aux {
+   out "F0";
+}
+
+OFF_HT {
+   out "R0";
+}
+
+ON_HT {
+   out "R2";
+}
+
+set_I {
+   out "I%f";
+}
+
+set_V {
+   out "U%f";
+}
+
+IDN {
+   out "*IDN?";
+   in "%39c";
+}
+
+Mesure_V {
+     out "M0";
+}
+
+Integr {
+     out "S6";
+}
+
+Mesure_I {
+     out "M1";
+}
+
+lecture_Vht {
+    ExtraInput = Ignore;
+    out ">M0?";
+    in "%*3c%f";
+}
+
+lecture_Iht {
+    ExtraInput = Ignore;
+    out ">M1?";
+    in "%*3c%f";
+}
+
+#--------------------------------------------------------------------#

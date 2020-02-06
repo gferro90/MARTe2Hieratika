@@ -1,0 +1,851 @@
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp1FwdCnst") {
+    	field(DO1, "70.3")
+	field(DO2, "35.425")
+    	field(DO3, "0.347333917")
+	field(DO4, "10.798665007593")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp1FwdPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl1 Fwd - RDC11")
+	field(PHAS, "1")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL1_CH00:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp1FwdCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp1FwdCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp1FwdCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp1FwdCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp1FwdCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp1RevCnst") {
+    	field(DO1, "70.0")
+	field(DO2, "35.423")
+    	field(DO3, "0.34683391587906")
+	field(DO4, "10.497558643393")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp1RevPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl1 Rev - RDC12")
+	field(PHAS, "1")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL1_CH01:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp1RevCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp1RevCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp1RevCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp1RevCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp1RevCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp2FwdCnst") {
+    	field(DO1, "69.8")
+	field(DO2, "35.385")
+    	field(DO3, "0.34500057946644")
+	field(DO4, "10.696839593862")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp2FwdPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl2 Fwd - RDC21")
+	field(PHAS, "1")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL1_CH04:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp2FwdCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp2FwdCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp2FwdCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp2FwdCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp2FwdCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp2RevCnst") {
+    	field(DO1, "70")
+	field(DO2, "35.376")
+    	field(DO3, "0.33950057022857")
+	field(DO4, "10.390666470120")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp2RevPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl2 Rev - RDC22")
+	field(PHAS, "1")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL1_CH05:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp2RevCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp2RevCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp2RevCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp2RevCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp2RevCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp3FwdCnst") {
+    	field(DO1, "70")
+	field(DO2, "35.48")
+    	field(DO3, "0.3355005635101")
+	field(DO4, "10.243054358237")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp3FwdPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl3 Fwd - RDC31")
+	field(PHAS, "1")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL1_CH06:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp3FwdCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp3FwdCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp3FwdCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp3FwdCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp3FwdCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp3RevCnst") {
+    	field(DO1, "69.9")
+	field(DO2, "35.374")
+    	field(DO3, "0.36166727412665")
+	field(DO4, "10.894278686277")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp3RevPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl3 Rev - RDC32")
+	field(PHAS, "1")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL1_CH07:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp3RevCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp3RevCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp3RevCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp3RevCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp3RevCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp4FwdCnst") {
+    	field(DO1, "70.1")
+	field(DO2, "35.533")
+    	field(DO3, "0.3401672380149")
+	field(DO4, "10.381310156798")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp4FwdPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl4 Fwd - RDC41")
+	field(PHAS, "1")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH00:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp4FwdCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp4FwdCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp4FwdCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp4FwdCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp4FwdCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp4RevCnst") {
+    	field(DO1, "69.9")
+	field(DO2, "35.533")
+    	field(DO3, "0.35533393015577")
+	field(DO4, "10.860207845651")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp4RevPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl4 Rev - RDC42")
+	field(PHAS, "1")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH01:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp4RevCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp4RevCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp4RevCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp4RevCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp4RevCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp5FwdCnst") {
+    	field(DO1, "69.9")
+	field(DO2, "35.88")
+    	field(DO3, "0.3448339125198")
+	field(DO4, "10.198318264761")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp5FwdPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl5 Fwd - RDC51")
+	field(PHAS, "1")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH04:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp5FwdCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp5FwdCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp5FwdCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp5FwdCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp5FwdCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp5RevCnst") {
+    	field(DO1, "69.8")
+	field(DO2, "35.824")
+    	field(DO3, "0.3433339100004")
+	field(DO4, "10.63408810985")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp5RevPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl5 Rev - RDC52")
+	field(PHAS, "1")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH05:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp5RevCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp5RevCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp5RevCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp5RevCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp5RevCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp6FwdCnst") {
+    	field(DO1, "69.7")
+	field(DO2, "35.815")
+    	field(DO3, "0.34850058534508")
+	field(DO4, "10.718492435079")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp6FwdPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl6 Fwd - RDC61")
+	field(PHAS, "1")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH06:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp6FwdCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp6FwdCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp6FwdCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp6FwdCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp6FwdCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp6RevCnst") {
+    	field(DO1, "70")
+	field(DO2, "35.814")
+    	field(DO3, "0.34733391671887")
+	field(DO4, "10.64407772618")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp6RevPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl6 Rev - RDC61")
+	field(PHAS, "1")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH07:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp6RevCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp6RevCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp6RevCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp6RevCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp6RevCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp7FwdCnst") {
+    	field(DO1, "69.3")
+	field(DO2, "35.985")
+    	field(DO3, "0.34783391755867")
+	field(DO4, "10.947480605471")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp7FwdPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl7 Fwd - RDC71")
+	field(PHAS, "1")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH08:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp7FwdCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp7FwdCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp7FwdCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp7FwdCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp7FwdCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp7RevCnst") {
+    	field(DO1, "69.6")
+	field(DO2, "35.744")
+    	field(DO3, "0.34083390580138")
+	field(DO4, "10.704094508630")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp7RevPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl7 Rev - RDC72")
+	field(PHAS, "1")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH09:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp7RevCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp7RevCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp7RevCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp7RevCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp7RevCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp8FwdCnst") {
+    	field(DO1, "70.2")
+	field(DO2, "35.800")
+    	field(DO3, "0.34786725094799")
+	field(DO4, "10.61844852464")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp8FwdPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl8 Fwd - RDC82")
+	field(PHAS, "1")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH10:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp8FwdCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp8FwdCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp8FwdCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp8FwdCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp8FwdCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+# RF POWER MEASURED BY PICKUP
+#  developed by Maurizio Montis - INFN Italy
+#  mail: maurizio.montis@lnl.infn.it
+
+# - Cnstants used to calculate RF Power - 
+record(seq, "RFQ:RF:Cp8RevCnst") {
+    	field(DO1, "70")
+	field(DO2, "35.813")
+    	field(DO3, "0.35033392175771")
+	field(DO4, "10.612169522331")
+	field(DO5, "0")
+	field(PINI, "YES")
+}
+
+
+# - RF Power measured by single pickup -
+record(calcout, "RFQ:RF:Cp8RevPwr") {
+	field(SCAN, ".1 second")
+	field(DESC, "coupl8 Rev - RDC82")
+	field(PHAS, "1")
+	field(CALC, "(F*10^((B+C+(A-E)/D)/10))*(1+G/100)")
+	field(INPA, "RFQ:RFSL2_CH11:V.VAL CP")
+	field(INPB, "RFQ:RF:Cp8RevCnst.DO1 CP")
+	field(INPC, "RFQ:RF:Cp8RevCnst.DO2 CP")
+	field(INPD, "RFQ:RF:Cp8RevCnst.DO3 CP")
+	field(INPE, "RFQ:RF:Cp8RevCnst.DO4 CP")
+	field(INPF, "1.00E-6")
+	field(INPG, "RFQ:RF:Cp8RevCnst.DO5 CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(HOPR, "250")
+	field(LOPR, "0")
+}
+## Delta Power Measured in Coupler 
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+# - Delta Power - 
+# Amplifier_FWD_Power - Amplifier_REV_Powewr - Cavity_REV_Power
+record(calcout, "RFQ:RF:Coup1DPwr") {
+        field(CALC, "A-B")
+        field(INPA, "RFQ:RF:Cp1FwdPwr.VAL CP")
+        field(INPB, "RFQ:RF:Cp1RevPwr.VAL CP")
+        field(PREC, "2")
+        field(EGU, "kW")
+        field(LOPR, "0")
+        field(HOPR, "250")
+}
+## Delta Power Measured in Coupler 
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+# - Delta Power - 
+# Amplifier_FWD_Power - Amplifier_REV_Powewr - Cavity_REV_Power
+record(calcout, "RFQ:RF:Coup2DPwr") {
+        field(CALC, "A-B")
+        field(INPA, "RFQ:RF:Cp2FwdPwr.VAL CP")
+        field(INPB, "RFQ:RF:Cp2RevPwr.VAL CP")
+        field(PREC, "2")
+        field(EGU, "kW")
+        field(LOPR, "0")
+        field(HOPR, "250")
+}
+## Delta Power Measured in Coupler 
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+# - Delta Power - 
+# Amplifier_FWD_Power - Amplifier_REV_Powewr - Cavity_REV_Power
+record(calcout, "RFQ:RF:Coup3DPwr") {
+        field(CALC, "A-B")
+        field(INPA, "RFQ:RF:Cp3FwdPwr.VAL CP")
+        field(INPB, "RFQ:RF:Cp3RevPwr.VAL CP")
+        field(PREC, "2")
+        field(EGU, "kW")
+        field(LOPR, "0")
+        field(HOPR, "250")
+}
+## Delta Power Measured in Coupler 
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+# - Delta Power - 
+# Amplifier_FWD_Power - Amplifier_REV_Powewr - Cavity_REV_Power
+record(calcout, "RFQ:RF:Coup4DPwr") {
+        field(CALC, "A-B")
+        field(INPA, "RFQ:RF:Cp4FwdPwr.VAL CP")
+        field(INPB, "RFQ:RF:Cp4RevPwr.VAL CP")
+        field(PREC, "2")
+        field(EGU, "kW")
+        field(LOPR, "0")
+        field(HOPR, "250")
+}
+## Delta Power Measured in Coupler 
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+# - Delta Power - 
+# Amplifier_FWD_Power - Amplifier_REV_Powewr - Cavity_REV_Power
+record(calcout, "RFQ:RF:Coup5DPwr") {
+        field(CALC, "A-B")
+        field(INPA, "RFQ:RF:Cp5FwdPwr.VAL CP")
+        field(INPB, "RFQ:RF:Cp5RevPwr.VAL CP")
+        field(PREC, "2")
+        field(EGU, "kW")
+        field(LOPR, "0")
+        field(HOPR, "250")
+}
+## Delta Power Measured in Coupler 
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+# - Delta Power - 
+# Amplifier_FWD_Power - Amplifier_REV_Powewr - Cavity_REV_Power
+record(calcout, "RFQ:RF:Coup6DPwr") {
+        field(CALC, "A-B")
+        field(INPA, "RFQ:RF:Cp6FwdPwr.VAL CP")
+        field(INPB, "RFQ:RF:Cp6RevPwr.VAL CP")
+        field(PREC, "2")
+        field(EGU, "kW")
+        field(LOPR, "0")
+        field(HOPR, "250")
+}
+## Delta Power Measured in Coupler 
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+# - Delta Power - 
+# Amplifier_FWD_Power - Amplifier_REV_Powewr - Cavity_REV_Power
+record(calcout, "RFQ:RF:Coup7DPwr") {
+        field(CALC, "A-B")
+        field(INPA, "RFQ:RF:Cp7FwdPwr.VAL CP")
+        field(INPB, "RFQ:RF:Cp7RevPwr.VAL CP")
+        field(PREC, "2")
+        field(EGU, "kW")
+        field(LOPR, "0")
+        field(HOPR, "250")
+}
+## Delta Power Measured in Coupler 
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+# - Delta Power - 
+# Amplifier_FWD_Power - Amplifier_REV_Powewr - Cavity_REV_Power
+record(calcout, "RFQ:RF:Coup8DPwr") {
+        field(CALC, "A-B")
+        field(INPA, "RFQ:RF:Cp8FwdPwr.VAL CP")
+        field(INPB, "RFQ:RF:Cp8RevPwr.VAL CP")
+        field(PREC, "2")
+        field(EGU, "kW")
+        field(LOPR, "0")
+        field(HOPR, "250")
+}
+## Cavity Power Measured and Calculated
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+
+# - Costants used for Measured Cavity Power - 
+record(seq, "RFQ:RF:CavCnst") {
+	field(DO1, "-0.220411")
+	field(DO2, "1.951002") 
+	field(DO3, "0")
+	field(DO4, "0.948")
+	field(DO5, "70.3")
+	field(DO6, "35.425")
+	field(PINI, "YES")
+}
+
+# - Measured Cavity Power -
+record(calcout, "RFQ:RF:CavMeasPwr") {
+	field(SCAN, ".1 second")
+	field(PHAS, "0")
+	field(CALC, "H*10^(((A-C)/B-D-E+F)/10)")
+	field(INPA, "RFQ:RFSL1_CH02:V.VAL CP")
+	field(INPB, "RFQ:RF:CavCnst.DO1 CP")
+	field(INPC, "RFQ:RF:CavCnst.DO2 CP")
+	field(INPD, "RFQ:RF:CavCnst.DO3 CP")
+	field(INPE, "RFQ:RF:CavCnst.DO4 CP")
+	field(INPF, "RFQ:RF:CavCnst.DO5 CP")
+	#field(INPG, "RFQ:RF:CavCnst.DO6 CP")
+	#field(INPH, "RFQ:RF:Cp1Fwd.VAL CP")
+	field(INPH, "RFQ:RF:Cp1FwdPwr.VAL CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(LOPR, "0")
+	field(HOPR, "1600")	
+}
+
+
+# - Total Cavity Power - 
+# Difference between Forward Powers and Reflected Powers injected into the RFQ
+# considering the presence of 8 couplers
+record(calcout, "RFQ:RF:CavCalcPwr") {
+	field(CALC, "A+B+C+D+E+F+G+H")
+	field(INPA, "RFQ:RF:Coup1DPwr.VAL CP")
+	field(INPB, "RFQ:RF:Coup2DPwr.VAL CP")
+	field(INPC, "RFQ:RF:Coup3DPwr.VAL CP")
+	field(INPD, "RFQ:RF:Coup4DPwr.VAL CP")
+	field(INPE, "RFQ:RF:Coup5DPwr.VAL CP")
+	field(INPF, "RFQ:RF:Coup6DPwr.VAL CP")
+	field(INPG, "RFQ:RF:Coup7DPwr.VAL CP")
+	field(INPH, "RFQ:RF:Coup8DPwr.VAL CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(LOPR, "0")
+	field(HOPR, "1600")	
+}
+
+
+
+
+# - Calculated Cavity Power - 
+# Amplifier_FWD_Power - Amplifier_REV_Power - Cavity_REV_Power
+#record(calcout, "RFQ:RF:LnPwr") {
+#        field(CALC, "A-B-C")
+#        field(INPA, "RFQ:RF:Cp2Fwd.VAL CP")
+#        field(INPB, "RFQ:RF:Cp2Rev.VAL CP")
+#        field(INPC, "RFQ:RF:Cp1Fwd.VAL CP")
+#        field(PREC, "2")
+#        field(EGU, "kW")
+#        field(LOPR, "0")
+#        field(HOPR, "1600")
+#}
+# AVERAGE RF POWER MEASURED IN A SINGLE PICKUP
+# developed by Maurizio Montis - INFN Italy
+# mail: maurizio.montis@lnl.infn.it
+
+
+record(calcout, "RFQ:RF:FwdAvgPwr") {
+	field(SCAN, "1 second")
+	field(PHAS, "3")
+	field(CALC, "A*B/100")
+	field(INPA, "RFQ:RF:FwdPwr.VAL CP")
+	field(INPB, "  CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(LOPR, "0")
+	field(HOPR, "250")
+}
+
+# AVERAGE RF POWER MEASURED IN A SINGLE PICKUP
+# developed by Maurizio Montis - INFN Italy
+# mail: maurizio.montis@lnl.infn.it
+
+
+record(calcout, "RFQ:RF:RevAvgPwr") {
+	field(SCAN, "1 second")
+	field(PHAS, "3")
+	field(CALC, "A*B/100")
+	field(INPA, "RFQ:RF:RevPwr.VAL CP")
+	field(INPB, "  CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(LOPR, "0")
+	field(HOPR, "250")
+}
+
+# AVERAGE RF POWER MEASURED IN A SINGLE PICKUP
+# developed by Maurizio Montis - INFN Italy
+# mail: maurizio.montis@lnl.infn.it
+
+
+record(calcout, "RFQ:RF:CavAvgPwr") {
+	field(SCAN, "1 second")
+	field(PHAS, "3")
+	field(CALC, "A*B/100")
+	field(INPA, "RFQ:RF:CavPwr.VAL CP")
+	field(INPB, "  CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(LOPR, "0")
+	field(HOPR, "1600")
+}
+
+# AVERAGE RF POWER MEASURED IN A SINGLE PICKUP
+# developed by Maurizio Montis - INFN Italy
+# mail: maurizio.montis@lnl.infn.it
+
+
+record(calcout, "RFQ:RF:CCavAvgPwr") {
+	field(SCAN, "1 second")
+	field(PHAS, "3")
+	field(CALC, "A*B/100")
+	field(INPA, "RFQ:RF:CCavPwr.VAL CP")
+	field(INPB, "  CP")
+	field(PREC, "2")
+	field(EGU, "kW")
+	field(LOPR, "0")
+	field(HOPR, "1600")
+}
+
+# RFQ Cavity Frequency 
+# developed by Maurizio Montis - INFN Italy
+# mail: maurizio.montis@lnl.infn.it
+
+
+# - OUTPUT Frequency provided by the Amplifier considering modulations (Power Tests) - 
+#record(calcout, "RS100A:RfFreq") {
+#	field(SCAN, "1 second")
+#	field(PHAS, "5")
+#	field(CALC, "(abs(B)>1)?(A+(B/abs(B))*C*D*1.00E-6):(A+B*C*D*1.00E-6)")
+#	field(INPA, "RS100A:inFrq.VAL CP")
+#	field(INPB, "RFQ:empty.VAL CP")
+#	field(INPC, "RS100A:fmDev.VAL CP")
+#	field(INPD, "RS100A:fmStat.VAL CP")
+#	field(PREC, "6")
+#	field(EGU, "MHz")
+#	field(FLNK, "RFQ:RF:CavFreq")
+#}
+
+
+# - RFQ Qload - 
+record(ai, "RFQ:RF:CavQl") {
+    	field(VAL, "6250")
+	field(PINI, "YES")
+}
+
+# - RFQ Cavity Frequency -
+record(calcout, "RFQ:RF:CavFreq") {
+	field(SCAN, "Passive")
+	field(CALC, "B/(1+(tan(A*D2R)/(2*C)))")
+	field(INPA, ".VAL CP")
+	field(INPB, ".VAL CP")
+	field(INPC, "RFQ:RF:CavQl.VAL CP")
+	field(PREC, "6")
+	field(EGU, "MHz")
+	field(FLNK, "RFQ:RF:CavNDFreq")
+}
+
+# - RFQ Cavity Frequecy Difference - 
+record(calcout, "RFQ:RF:CavNDFreq") {
+	field(SCAN, "Passive")
+	field(CALC, "(A-B)*1000")
+	field(INPA, "RFQ:RF:CavFreq.VAL CP")
+	field(INPB, "..VAL CP")
+	field(PREC, "3")
+	field(EGU, "kHz")
+}
+
+
+record(calcout, "RFQ:RF:CavDFreq") {
+	field(SCAN, "Passive")
+	field(CALC, "(A-B)*1000")
+	field(INPA, "RFQ:RF:CavFreq.VAL CP")
+	field(INPB, ".VAL CP")
+	field(PREC, "3")
+	field(EGU, "kHz")

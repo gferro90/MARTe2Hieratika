@@ -1,0 +1,31 @@
+record(calc, "CCS:$(mdev):HeartBeatCalc")
+#record(calcout, "CCS:$(mdev):HeartBeatCalc")
+{
+##	field(DESC, "")
+#	field(SCAN, "1 second")
+#	field(CALC, "A>100?0:A+B")
+#	field(INPA, "CCS:$(mdev):HeartBeatCalc")
+#	field(INPB, "1")
+#	field(OUT, "CCS:$(pdev):PairHBChkCalc PP")
+#	field(DESC, "")
+	field(SCAN, "1 second")
+	field(CALC, "A>100?0:A+B")
+	field(INPA, "CCS:$(mdev):HeartBeatCalc")
+	field(INPB, "1")
+}
+# ‘Šè‚©‚ç’¼Úcaget‚µ‚Ä‚«‚½•û‚ªŠmÀ‚È–Í—l‚È‚Ì‚Å‚¢‚ç‚È‚¢
+#record(ai, "CCS:$(mdev):PairHBChkCalc")
+#{
+#	field(DTYP, "Soft Channel")
+##	field(DESC, "")
+#	field(SCAN, "Passive")
+#	field(INP, "0")
+#}
+record(ai, "CCS:$(mdev):IocMovedRdbk")
+{
+	field(DTYP, "Soft Channel")
+	field(DESC, "1=IOC Moved.")
+	field(SCAN, "Passive")
+	field(INP, "0")
+}
+

@@ -1,0 +1,2296 @@
+##################################
+# Records VACUUM STATE MACHINE   #
+##################################
+
+# Change to Initial state
+record(bo, "DPLA:VAC01:InitialCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/0 T=UINT16 B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "To Initial state")
+  field(DESC, "Command to go to Initial state")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Change to Stand-by state
+record(bo, "DPLA:VAC01:StandbyCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/0 T=UINT16 B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "To Standby state")
+  field(DESC, "Command to go to Standby state")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Change to Manual state
+record(bo, "DPLA:VAC01:ManualCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/0 T=UINT16 B=2")
+  field(ZNAM, "No command")
+  field(ONAM, "To Manual state")
+  field(DESC, "Command to go to Manual state")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Change to Roughing state
+record(bo, "DPLA:VAC01:RoughCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/0 T=UINT16 B=3")
+  field(ZNAM, "No command")
+  field(ONAM, "To Roughing state")
+  field(DESC, "Command to go to Roughing state")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Change to High Vacuum state
+record(bo, "DPLA:VAC01:HVacuumCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/0 T=UINT16 B=4")
+  field(ZNAM, "No command")
+  field(ONAM, "To H. Vacuum state")
+  field(DESC, "Command to go to High Vacuum state")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Change to Ultra High Vacuum state
+record(bo, "DPLA:VAC01:UHVCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/0 T=UINT16 B=5")
+  field(ZNAM, "No command")
+  field(ONAM, "To UHV state")
+  field(DESC, "Command to go to Ultra High Vacuum state")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Change to Regeneration state
+record(bo, "DPLA:VAC01:RegenCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/0 T=UINT16 B=6")
+  field(ZNAM, "No command")
+  field(ONAM, "To Regeneration state")
+  field(DESC, "Command to go to Regeneration state")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Change to Venting state
+record(bo, "DPLA:VAC01:VentingCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/0 T=UINT16 B=7")
+  field(ZNAM, "No command")
+  field(ONAM, "Go to Venting state")
+  field(DESC, "Command to go to Venting state")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Comand to Rearm Vacuum machines States general Alarm Ack 
+record(bo, "DPLA:VAC01:AlarmAck") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/0+2 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Reset")
+  field(DESC, "Vacuum machine states general Alarm Ack")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Reset TimeOut valves: Rearm from EPICS screen (DPLA_Vaccum.opi) the TimeOut Red color alarm
+record(bo, "DPLA:VV:ResetTO") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/0+3 T=BYTE B=7")
+  field(ZNAM, "No command")
+  field(ONAM, "Reset")
+  field(DESC, "Command to Rearm ALL TimeOut alarms")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##################################
+# Records for valve GV01 in DPLA #
+##################################
+
+# Open command
+record(bo, "DPLA:GV01:OpenCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/3 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to open DPLA->GV01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Close command
+record(bo, "DPLA:GV01:CloseCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/3+1 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Close")
+  field(DESC, "Command to close DPLA->GV01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##################################
+# Records for valve VV01 in DPLA #
+##################################
+
+# Open command
+record(bo, "DPLA:VV01:OpenCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/3 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to open DPLA->VV01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Close command
+record(bo, "DPLA:VV01:CloseCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/3+1 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "Close")
+  field(DESC, "Command to close DPLA->VV01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##################################
+# Records for valve VV02 in DPLA #
+##################################
+
+# Open command
+record(bo, "DPLA:VV02:OpenCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/3 T=BYTE B=2")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to open DPLA->VV02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Close command
+record(bo, "DPLA:VV02:CloseCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/3+1 T=BYTE B=2")
+  field(ZNAM, "No command")
+  field(ONAM, "Close")
+  field(DESC, "Command to close DPLA->VV02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##################################
+# Records for valve VV03 in DPLA #
+##################################
+
+# Open command
+record(bo, "DPLA:VV03:OpenCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/3 T=BYTE B=3")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to open DPLA->VV03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Close command
+record(bo, "DPLA:VV03:CloseCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/3+1 T=BYTE B=3")
+  field(ZNAM, "No command")
+  field(ONAM, "Close")
+  field(DESC, "Command to close DPLA->VV03")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##################################
+# Records for valve VV04 in DPLA #
+##################################
+
+# Open command
+record(bo, "DPLA:VV04:OpenCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/3 T=BYTE B=4")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to open DPLA->VV04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Close command
+record(bo, "DPLA:VV04:CloseCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/3+1 T=BYTE B=4")
+  field(ZNAM, "No command")
+  field(ONAM, "Close")
+  field(DESC, "Command to close DPLA->VV04")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##################################
+# Records for valve VV05 in DPLA #
+##################################
+
+# Open command
+record(bo, "DPLA:VV05:OpenCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/3 T=BYTE B=5")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to open DPLA->VV05")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Close command
+record(bo, "DPLA:VV05:CloseCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/3+1 T=BYTE B=5")
+  field(ZNAM, "No command")
+  field(ONAM, "Close")
+  field(DESC, "Command to close DPLA->VV05")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##################################
+# Records for valve VV06 in DPLA #
+##################################
+
+# Open command
+record(bo, "DPLA:VV06:OpenCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/3 T=BYTE B=6")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to open DPLA->VV06")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Close command
+record(bo, "DPLA:VV06:CloseCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/3+1 T=BYTE B=6")
+  field(ZNAM, "No command")
+  field(ONAM, "Close")
+  field(DESC, "Command to close DPLA->VV06")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+#####################################
+# Records for vacuum controller     #
+# Suited for Pfeiffer Vacuum TPG300 #
+#####################################
+
+# Reference gauges pair (pirani & penning)
+
+# Command to select DVG01 & DVG02 as reference
+record(bo, "DPLA:VAC01:Ref12Cmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/5 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "DVG01 & DVG02")
+  field(DESC, "Selects DVG01 & DVG02 as reference")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Command to select DVG03 & DVG04 as reference
+record(bo, "DPLA:VAC01:Ref34Cmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/5 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "DVG03 & DVG04")
+  field(DESC, "Selects DVG03 & DVG04 as reference")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+#################################
+# Records for vacuum gauge VG01 #
+# Suited for Balzers TPG300     #
+#################################
+
+# Filter time constant
+# setting
+record(mbbo, "DPLA:VG01:FilterSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/6+1 T=BYTE")
+  field(PINI, "YES")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Filter time constant setting")
+  field(ZRVL, "0")
+  field(ZRST, "No change")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Fast")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Medium")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Slow")
+  field(THSV, "NO_ALARM")
+}
+
+record(bo, "DPLA:VG01:FilterCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/6 T=BYTE B=2")
+  field(ZNAM, "No command")
+  field(ONAM, "Filter set")
+  field(DESC, "Command to set filter time constant")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Switching thresholds
+# Upper threshold setting
+# SP1, SP2, SP3, SP4 mnemonic, 0 value should be ignored
+record (ao, "DPLA:VG01:UpperTHSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/6+2 T=FLOAT32")
+  field(DESC, "Upper threshold setting")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+record(bo, "DPLA:VG01:UpperTHCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/6 T=BYTE B=3")
+  field(ZNAM, "No command")
+  field(ONAM, "Upper TH set")
+  field(DESC, "Command to set upper threshold")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Lower threshold setting
+# SP1, SP2, SP3, SP4 mnemonic, 0 value should be ignored
+record (ao, "DPLA:VG01:LowerTHSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/6+6 T=FLOAT32")
+  field(DESC, "Lower threshold setting")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+record(bo, "DPLA:VG01:LowerTHCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/6 T=BYTE B=4")
+  field(ZNAM, "No command")
+  field(ONAM, "Lower TH set")
+  field(DESC, "Command to set lower threshold")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Gas correction factor
+# Calibration factor relative to N2. It depends on gas and sensor type
+# TPG300 does not accounts for it, it is PLC that has to divide reading by factor.
+record(ao, "DPLA:VG01:GasCFSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/6+10 T=FLOAT32")
+  field(DESC, "Gas Correction Factor setting")
+  field(PREC, "2")
+  field(EGU, "")
+  field(DRVH, "10")
+  field(DRVL, "0.01")  
+}
+record(bo, "DPLA:VG01:GasCFCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/6 T=BYTE B=5")
+  field(ZNAM, "No command")
+  field(ONAM, "Gas CF set")
+  field(DESC, "Command to set Gas Correction Factor")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+#################################
+# Records for vacuum gauge VG02 #
+# Suited for Balzers TPG300     #
+#################################
+
+# Filter time constant
+# setting
+record(mbbo, "DPLA:VG02:FilterSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/20+1 T=BYTE")
+  field(PINI, "YES")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Filter time constant setting")
+  field(ZRVL, "0")
+  field(ZRST, "No change")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Fast")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Medium")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Slow")
+  field(THSV, "NO_ALARM")
+}
+
+record(bo, "DPLA:VG02:FilterCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/20 T=BYTE B=2")
+  field(ZNAM, "No command")
+  field(ONAM, "Filter set")
+  field(DESC, "Command to set filter time constant")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Switching thresholds
+# Upper threshold setting
+# SP1, SP2, SP3, SP4 mnemonic, 0 value should be ignored
+record (ao, "DPLA:VG02:UpperTHSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/20+2 T=FLOAT32")
+  field(DESC, "Upper threshold setting")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+record(bo, "DPLA:VG02:UpperTHCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/20 T=BYTE B=3")
+  field(ZNAM, "No command")
+  field(ONAM, "Upper TH set")
+  field(DESC, "Command to set upper threshold")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Lower threshold setting
+# SP1, SP2, SP3, SP4 mnemonic, 0 value should be ignored
+record (ao, "DPLA:VG02:LowerTHSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/20+6 T=FLOAT32")
+  field(DESC, "Lower threshold setting")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+record(bo, "DPLA:VG02:LowerTHCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/20 T=BYTE B=4")
+  field(ZNAM, "No command")
+  field(ONAM, "Lower TH set")
+  field(DESC, "Command to set lower threshold")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Gas correction factor
+# Calibration factor relative to N2. It depends on gas and sensor type
+# TPG300 does not accounts for it, it is PLC that has to divide reading by factor.
+record(ao, "DPLA:VG02:GasCFSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/20+10 T=FLOAT32")
+  field(DESC, "Gas Correction Factor setting")
+  field(PREC, "2")
+  field(EGU, "")
+  field(DRVH, "10")
+  field(DRVL, "0.01")  
+}
+record(bo, "DPLA:VG02:GasCFCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/20 T=BYTE B=5")
+  field(ZNAM, "No command")
+  field(ONAM, "Gas CF set")
+  field(DESC, "Command to set Gas Correction Factor")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+#################################
+# Records for vacuum gauge VG03 #
+# Suited for Balzers TPG300     #
+#################################
+
+# Filter time constant
+# setting
+record(mbbo, "DPLA:VG03:FilterSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/34+1 T=BYTE")
+  field(PINI, "YES")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Filter time constant setting")
+  field(ZRVL, "0")
+  field(ZRST, "No change")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Fast")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Medium")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Slow")
+  field(THSV, "NO_ALARM")
+}
+
+record(bo, "DPLA:VG03:FilterCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/34 T=BYTE B=2")
+  field(ZNAM, "No command")
+  field(ONAM, "Filter set")
+  field(DESC, "Command to set filter time constant")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Switching thresholds
+# Upper threshold setting
+# SP1, SP2, SP3, SP4 mnemonic, 0 value should be ignored
+record (ao, "DPLA:VG03:UpperTHSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/34+2 T=FLOAT32")
+  field(DESC, "Upper threshold setting")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+record(bo, "DPLA:VG03:UpperTHCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/34 T=BYTE B=3")
+  field(ZNAM, "No command")
+  field(ONAM, "Upper TH set")
+  field(DESC, "Command to set upper threshold")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Lower threshold setting
+# SP1, SP2, SP3, SP4 mnemonic, 0 value should be ignored
+record (ao, "DPLA:VG03:LowerTHSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/34+6 T=FLOAT32")
+  field(DESC, "Lower threshold setting")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+record(bo, "DPLA:VG03:LowerTHCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/34 T=BYTE B=4")
+  field(ZNAM, "No command")
+  field(ONAM, "Lower TH set")
+  field(DESC, "Command to set lower threshold")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Gas correction factor
+# Calibration factor relative to N2. It depends on gas and sensor type
+# TPG300 does not accounts for it, it is PLC that has to divide reading by factor.
+record(ao, "DPLA:VG03:GasCFSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/34+10 T=FLOAT32")
+  field(DESC, "Gas Correction Factor setting")
+  field(PREC, "2")
+  field(EGU, "")
+  field(DRVH, "10")
+  field(DRVL, "0.01")  
+}
+record(bo, "DPLA:VG03:GasCFCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/34 T=BYTE B=5")
+  field(ZNAM, "No command")
+  field(ONAM, "Gas CF set")
+  field(DESC, "Command to set Gas Correction Factor")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+#################################
+# Records for vacuum gauge VG04 #
+# Suited for Balzers TPG300     #
+#################################
+
+# Filter time constant
+# setting
+record(mbbo, "DPLA:VG04:FilterSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/48+1 T=BYTE")
+  field(PINI, "YES")
+  field(NOBT, "2")
+  field(SHFT, "0")
+  field(DESC, "Filter time constant setting")
+  field(ZRVL, "0")
+  field(ZRST, "No change")
+  field(ZRSV, "NO_ALARM")
+  field(ONVL, "1")
+  field(ONST, "Fast")
+  field(ONSV, "NO_ALARM")
+  field(TWVL, "2")
+  field(TWST, "Medium")
+  field(TWSV, "NO_ALARM")
+  field(THVL, "3")
+  field(THST, "Slow")
+  field(THSV, "NO_ALARM")
+}
+
+record(bo, "DPLA:VG04:FilterCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/48 T=BYTE B=2")
+  field(ZNAM, "No command")
+  field(ONAM, "Filter set")
+  field(DESC, "Command to set filter time constant")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Switching thresholds
+# Upper threshold setting
+# SP1, SP2, SP3, SP4 mnemonic, 0 value should be ignored
+record (ao, "DPLA:VG04:UpperTHSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/48+2 T=FLOAT32")
+  field(DESC, "Upper threshold setting")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+record(bo, "DPLA:VG04:UpperTHCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/48 T=BYTE B=3")
+  field(ZNAM, "No command")
+  field(ONAM, "Upper TH set")
+  field(DESC, "Command to set upper threshold")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Lower threshold setting
+# SP1, SP2, SP3, SP4 mnemonic, 0 value should be ignored
+record (ao, "DPLA:VG04:LowerTHSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/48+6 T=FLOAT32")
+  field(DESC, "Lower threshold setting")
+  field(PREC, "2")
+  field(EGU, "mbar")
+}
+record(bo, "DPLA:VG04:LowerTHCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/48 T=BYTE B=4")
+  field(ZNAM, "No command")
+  field(ONAM, "Lower TH set")
+  field(DESC, "Command to set lower threshold")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Gas correction factor
+# Calibration factor relative to N2. It depends on gas and sensor type
+# TPG300 does not accounts for it, it is PLC that has to divide reading by factor.
+record(ao, "DPLA:VG04:GasCFSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/48+10 T=FLOAT32")
+  field(DESC, "Gas Correction Factor setting")
+  field(PREC, "2")
+  field(EGU, "")
+  field(DRVH, "10")
+  field(DRVL, "0.01")  
+}
+record(bo, "DPLA:VG04:GasCFCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/48 T=BYTE B=5")
+  field(ZNAM, "No command")
+  field(ONAM, "Gas CF set")
+  field(DESC, "Command to set Gas Correction Factor")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+#########################################
+# Records for interceptives diagnostics #
+#                                       #
+#########################################
+
+# D-Plate SEM grid
+# DSG01 Open command
+record(bo, "DPLA:SEM01:OpenCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62 T=UINT32 B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to open (remove) DSG01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+# DSG01 Close command
+record(bo, "DPLA:SEM01:CloseCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62 T=UINT32 B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "Close")
+  field(DESC, "Command to close (insert) DSG01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# SEM Grid insertion permit signal, without slit
+record(bo, "DPLA:SEM:Alone") {
+  field(DESC, "SEM (HSG or DSG) operation alone permit")
+  field(DTYP, "S7plc")
+  field(OUT,  "@dpla_plc/62+2 T=BYTE B=0")
+  field(PINI, "YES")
+  field(ONAM, "Permit")
+  field(ZNAM, "Non-Permit")
+ }
+
+# HEBT SEM grid
+# HSG01 Open command
+record(bo, "HEBT:SEM01:OpenCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+36 T=UINT32 B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Open")
+  field(DESC, "Command to open (remove) HSG01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+# HSG01 Close command
+record(bo, "HEBT:SEM01:CloseCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+36 T=UINT32 B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "Close")
+  field(DESC, "Command to close (insert) HSG01")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# ROI: Region Of Interest (protection area from nominal beam center)
+record(ao, "DPLA:SL:ROISet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+4 T=REAL32")
+  field(PINI, "YES")
+  field(DESC, "Region of interest for slits")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(DRVL, "0.0")
+  field(DRVH, "55.0")
+}
+
+# Start delay for scan movements
+record(longout, "DPLA:SL:DelaySet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+8 T=UINT32")
+  field(PINI, "YES")
+  field(DESC, "Start delay for slits scan movements")
+  field(EGU, "s")
+  field(DRVL, "0")
+  field(DRVH, "300")
+}
+
+# Step delay for scan movements
+record(longout, "DPLA:SL:StepTime") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+32 T=UINT32")
+  field(PINI, "YES")
+  field(DESC, "Time per step in semi automatic scan")
+  field(EGU, "s")
+  field(DRVL, "0")
+  field(DRVH, "300")
+}
+
+# Stop (emergency)
+record(bo, "DPLA:SL:Stop") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+140 T=UINT32 B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Stop")
+  field(DESC, "Command to stop scan DSL01 and DSL02")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Slit permit (MPS901 override)
+record(bo, "DPLA:SL:Permit") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+140 T=UINT32 B=1")
+  field(ZNAM, "No permit")
+  field(ONAM, "Permit")
+  field(DESC, "MPS901 override: permit slit insertion")
+  field(PINI, "YES")
+}
+
+# SEM grid permit (MPS902 override)
+record(bo, "DPLA:SEM:Permit") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+140 T=UINT32 B=2")
+  field(ZNAM, "No permit")
+  field(ONAM, "Permit")
+  field(DESC, "MPS902 override: permit SEM grid insert")
+  field(PINI, "YES")
+}
+
+# Override DSL01 and DSL02
+record(bo, "DPLA:SL:Override") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+140 T=UINT32 B=3")
+  field(ZNAM, "No override")
+  field(ONAM, "Override")
+  field(OSV, "MAJOR")
+  field(DESC, "Override DSL01 and DSL02")
+  field(PINI, "YES")
+}
+
+# SEM Grid timeout alarm acknowledgement
+record(bo, "DPLA:SEM:TimeOutAck") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+140 T=UINT32 B=4")
+  field(ZNAM, "No command")
+  field(ONAM, "AlarmAck")
+  field(OSV, "MAJOR")
+  field(DESC, "DSG01&HSG01 SEM Grids timeout alarm ack")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Slit selection
+record(bo, "DPLA:SL:Selection") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+144 T=UINT32 B=10")
+  field(ZNAM, "DSL01")
+  field(ONAM, "DSL02")
+  field(DESC, "Slit selection DSL01 or DSL02")
+  field(PINI, "YES")
+}
+
+# OpMode
+record(mbbo, "DPLA:SL:OpModeSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+144 T=UINT32")
+  field(PINI, "YES")
+  field(DESC, "Slits operation mode selection")
+  field(NOBT, "7")
+  field(SHFT, "0")
+  field(ZRVL, "0")
+  field(ZRST, "No mode selected")
+  field(ONVL, "1")
+  field(ONST, "DSG01")
+  field(TWVL, "2")
+  field(TWST, "DSLxx")
+  field(THVL, "4")
+  field(THST, "DSLxx + DSG01")
+  field(FRVL, "8")
+  field(FRST, "DSLxx + HSL01")
+  field(FVVL, "16")
+  field(FVST, "DSLx+HSL01+HFC01")
+  field(SXVL, "32")
+  field(SXST, "DSLx+HSL01+HSG01")
+  field(SVVL, "64")
+  field(SVST, "HSG01")
+}  
+
+# SEM grid acquisition in progress
+record(bo, "DPLA:SEM:Acq") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+144 T=UINT32 B=7")
+  field(ZNAM, "No acquisition")
+  field(ONAM, "Acquisition")
+  field(DESC, "SEM grid acquisition in progress")
+  field(PINI, "YES")
+}
+
+#######################################
+# Records for interceptive diagnostic #
+# SL01 in DPLA                        #
+#######################################
+
+# Commands
+record(mbbo, "DPLA:SL01:Cmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62 T=UINT32")
+  field(PINI, "YES")
+  field(FLNK, "DPLA:SL01:ResetCmd PP")
+  field(DESC, "SL01 movement command")
+  field(NOBT, "6")
+  field(SHFT, "2")
+  field(ZRVL, "0")
+  field(ZRST, "Command...")
+  field(ONVL, "1")
+  field(ONST, "Homing")
+  field(TWVL, "2")
+  field(TWST, "Manual position")
+  field(THVL, "4")
+  field(THST, "Center")
+  field(FRVL, "8")
+  field(FRST, "Scan mode")
+  field(FVVL, "16")
+  field(FVST, "Homing & calib.")
+  field(SXVL, "32")
+  field(SXST, "Reset")
+} 
+
+# Aux record to reset previous Cmd to 'No command' after one second
+record(seq, "DPLA:SL01:ResetCmd") {
+  field(DESC, "Auxiliary record to reset DPLA:SL01:Cmd")
+  field(DO1, "0")
+  field(LNK1, "DPLA:SL01:Cmd PP")
+  field(SELM, "All")
+  field(DLY1, "1.0")
+}
+
+# Manual next step command
+record(bo, "DPLA:SL01:ManStepCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62 T=UINT32 B=11")
+  field(ZNAM, "No command")
+  field(ONAM, "Next step")
+  field(DESC, "SL01 manual next step command")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Mode
+record(mbbo, "DPLA:SL01:ScanMode") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62 T=UINT32")
+  field(PINI, "YES")
+  field(DESC, "SL01 movement mode")
+  field(NOBT, "2")
+  field(SHFT, "12")
+  field(ZRVL, "0")
+  field(ZRST, "Manual")
+  field(ONVL, "1")
+  field(ONST, "Timed")
+  field(TWVL, "2")
+  field(TWST, "Automatic")
+}  
+
+# Reset alarm
+record(bo, "DPLA:SL01:AlarmAck") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62 T=UINT32 B=14")
+  field(ZNAM, "No command")
+  field(ONAM, "Alarm ack")
+  field(DESC, "SL01 alarm acknowledgement")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Manual target position
+record(ao, "DPLA:SL01:PosSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+12 T=REAL32")
+  field(PINI, "YES")
+  field(DESC, "SL01 manual target position")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(DRVL, "-200.0")
+  field(DRVH, "200.0")
+}
+
+# Final scan position
+record(ao, "DPLA:SL01:YbPosSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+16 T=REAL32")
+  field(PINI, "YES")
+  field(DESC, "SL01 final Yb scan position setting")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(DRVL, "-200.0")
+  field(DRVH, "200.0")
+}
+
+# Initial scan position
+record(ao, "DPLA:SL01:YaPosSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+20 T=REAL32")
+  field(PINI, "YES")
+  field(DESC, "SL01 initial Ya scan position setting")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(DRVL, "-200.0")
+  field(DRVH, "200.0")
+}
+
+# Number of steps
+record(longout, "DPLA:SL01:NStepsSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+24 T=UINT32")
+  field(PINI, "YES")
+  field(DESC, "SL01 scan number of steps")
+  field(EGU, "steps")
+  field(DRVL, "1")
+  field(DRVH, "10000")
+}
+
+# Center position
+record(ao, "DPLA:SL01:CenterSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/62+28 T=REAL32")
+  field(PINI, "YES")
+  field(DESC, "SL01 center position setting")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(DRVL, "-200.0")
+  field(DRVH, "200.0")
+}
+
+#######################################
+# Records for interceptive diagnostic #
+# SL02 in DPLA                        #
+#######################################
+
+# Commands
+record(mbbo, "DPLA:SL02:Cmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/98 T=UINT32")
+  field(PINI, "YES")
+  field(FLNK, "DPLA:SL02:ResetCmd PP")
+  field(DESC, "SL02 movement command")
+  field(NOBT, "6")
+  field(SHFT, "2")
+  field(ZRVL, "0")
+  field(ZRST, "Command...")
+  field(ONVL, "1")
+  field(ONST, "Homing")
+  field(TWVL, "2")
+  field(TWST, "Manual position")
+  field(THVL, "4")
+  field(THST, "Center")
+  field(FRVL, "8")
+  field(FRST, "Scan mode")
+  field(FVVL, "16")
+  field(FVST, "Homing & calib.")
+  field(SXVL, "32")
+  field(SXST, "Reset")
+} 
+
+# Aux record to reset previous Cmd to 'No command' after one second
+record(seq, "DPLA:SL02:ResetCmd") {
+  field(DESC, "Auxiliary record to reset DPLA:SL02:Cmd")
+  field(DO1, "0")
+  field(LNK1, "DPLA:SL02:Cmd PP")
+  field(SELM, "All")
+  field(DLY1, "1.0")
+}
+
+# Manual next step command
+record(bo, "DPLA:SL02:ManStepCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/98 T=UINT32 B=11")
+  field(ZNAM, "No command")
+  field(ONAM, "Next step")
+  field(DESC, "SL02 manual next step command")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Mode
+record(mbbo, "DPLA:SL02:ScanMode") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/98 T=UINT32")
+  field(PINI, "YES")
+  field(DESC, "SL02 movement mode")
+  field(NOBT, "2")
+  field(SHFT, "12")
+  field(ZRVL, "0")
+  field(ZRST, "Manual")
+  field(ONVL, "1")
+  field(ONST, "Timed")
+  field(TWVL, "2")
+  field(TWST, "Automatic")
+}  
+
+# Reset alarm
+record(bo, "DPLA:SL02:AlarmAck") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/98 T=UINT32 B=14")
+  field(ZNAM, "No command")
+  field(ONAM, "Alarm ack")
+  field(DESC, "SL02 alarm acknowledgement")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Manual target position
+record(ao, "DPLA:SL02:PosSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/98+12 T=REAL32")
+  field(PINI, "YES")
+  field(DESC, "SL02 manual target position")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(DRVL, "-200.0")
+  field(DRVH, "200.0")
+}
+
+# Final scan position
+record(ao, "DPLA:SL02:XbPosSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/98+16 T=REAL32")
+  field(PINI, "YES")
+  field(DESC, "SL02 final Xb scan position setting")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(DRVL, "-200.0")
+  field(DRVH, "200.0")
+}
+
+# Initial scan position
+record(ao, "DPLA:SL02:XaPosSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/98+20 T=REAL32")
+  field(PINI, "YES")
+  field(DESC, "SL02 initial Xa scan position setting")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(DRVL, "-200.0")
+  field(DRVH, "200.0")
+}
+
+# Number of steps
+record(longout, "DPLA:SL02:NStepsSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/98+24 T=UINT32")
+  field(PINI, "YES")
+  field(DESC, "SL02 scan number of steps")
+  field(EGU, "steps")
+  field(DRVL, "1")
+  field(DRVH, "10000")
+}
+
+# Center position
+record(ao, "DPLA:SL02:CenterSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/98+28 T=REAL32")
+  field(PINI, "YES")
+  field(DESC, "SL02 center position setting")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(DRVL, "-200.0")
+  field(DRVH, "200.0")
+}
+
+#######################################
+# Records for interceptive diagnostic #
+# SL01 in HEBT                        #
+#######################################
+
+# Commands
+record(mbbo, "HEBT:SL01:Cmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/134 T=UINT32")
+  field(PINI, "YES")
+  field(FLNK, "HEBT:SL01:ResetCmd PP")
+  field(DESC, "SL01 movement command")
+  field(NOBT, "6")
+  field(SHFT, "2")
+  field(ZRVL, "0")
+  field(ZRST, "Command...")
+  field(ONVL, "1")
+  field(ONST, "Homing")
+  field(TWVL, "2")
+  field(TWST, "Manual position")
+  field(THVL, "4")
+  field(THST, "Center")
+  field(FRVL, "8")
+  field(FRST, "Scan mode")
+  field(FVVL, "16")
+  field(FVST, "Homing & calib.")
+  field(SXVL, "32")
+  field(SXST, "Reset")
+} 
+
+# Aux record to reset previous Cmd to 'No command' after one second
+record(seq, "HEBT:SL01:ResetCmd") {
+  field(DESC, "Auxiliary record to reset HEBT:SL01:Cmd")
+  field(DO1, "0")
+  field(LNK1, "HEBT:SL01:Cmd PP")
+  field(SELM, "All")
+  field(DLY1, "1.0")
+}
+
+# Manual next step command
+record(bo, "HEBT:SL01:ManStepCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/134 T=UINT32 B=11")
+  field(ZNAM, "No command")
+  field(ONAM, "Next step")
+  field(DESC, "SL01 manual next step command")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Mode
+record(mbbo, "HEBT:SL01:ScanMode") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/134 T=UINT32")
+  field(PINI, "YES")
+  field(DESC, "SL01 movement mode")
+  field(NOBT, "2")
+  field(SHFT, "12")
+  field(ZRVL, "0")
+  field(ZRST, "Manual")
+  field(ONVL, "1")
+  field(ONST, "Timed")
+  field(TWVL, "2")
+  field(TWST, "Automatic")
+}  
+
+# Reset alarm
+record(bo, "HEBT:SL01:AlarmAck") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/134 T=UINT32 B=14")
+  field(ZNAM, "No command")
+  field(ONAM, "Alarm ack")
+  field(DESC, "SL01 alarm acknowledgement")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Manual target position
+record(ao, "HEBT:SL01:PosSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/134+12 T=REAL32")
+  field(PINI, "YES")
+  field(DESC, "SL01 manual target position")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(DRVL, "-200.0")
+  field(DRVH, "200.0")
+}
+
+# Final scan position
+record(ao, "HEBT:SL01:YbPosSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/134+16 T=REAL32")
+  field(PINI, "YES")
+  field(DESC, "SL01 final Yb scan position setting")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(DRVL, "-200.0")
+  field(DRVH, "200.0")
+}
+
+# Initial scan position
+record(ao, "HEBT:SL01:YaPosSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/134+20 T=REAL32")
+  field(PINI, "YES")
+  field(DESC, "SL01 initial Ya scan position setting")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(DRVL, "-200.0")
+  field(DRVH, "200.0")
+}
+
+# Number of steps
+record(longout, "HEBT:SL01:NStepsSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/134+24 T=UINT32")
+  field(PINI, "YES")
+  field(DESC, "SL01 scan number of steps")
+  field(EGU, "steps")
+  field(DRVL, "1")
+  field(DRVH, "10000")
+}
+
+# Center position
+record(ao, "HEBT:SL01:CenterSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/134+28 T=REAL32")
+  field(PINI, "YES")
+  field(DESC, "SL01 center position setting")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(DRVL, "-200.0")
+  field(DRVH, "200.0")
+}
+
+#######################################
+# Records for interceptive diagnostic #
+# FC01 in HEBT                        #
+#######################################
+
+# Commands
+record(mbbo, "HEBT:FC01:Cmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/170 T=UINT32")
+  field(PINI, "YES")
+  field(FLNK, "HEBT:FC01:ResetCmd PP")
+  field(DESC, "FC01 movement command")
+  field(NOBT, "6")
+  field(SHFT, "2")
+  field(ZRVL, "0")
+  field(ZRST, "Command...")
+  field(ONVL, "1")
+  field(ONST, "Homing")
+  field(TWVL, "2")
+  field(TWST, "Manual position")
+  field(THVL, "4")
+  field(THST, "Center")
+  field(FRVL, "8")
+  field(FRST, "Scan mode")
+  field(FVVL, "16")
+  field(FVST, "Homing & calib.")
+  field(SXVL, "32")
+  field(SXST, "Reset")
+} 
+
+# Aux record to reset previous Cmd to 'No command' after one second
+record(seq, "HEBT:FC01:ResetCmd") {
+  field(DESC, "Auxiliary record to reset HEBT:FC01:Cmd")
+  field(DO1, "0")
+  field(LNK1, "HEBT:FC01:Cmd PP")
+  field(SELM, "All")
+  field(DLY1, "1.0")
+}
+
+# Manual next step command
+record(bo, "HEBT:FC01:ManStepCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/170 T=UINT32 B=11")
+  field(ZNAM, "No command")
+  field(ONAM, "Next step")
+  field(DESC, "FC01 manual next step command")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Mode
+record(mbbo, "HEBT:FC01:ScanMode") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/170 T=UINT32")
+  field(PINI, "YES")
+  field(DESC, "FC01 movement mode")
+  field(NOBT, "2")
+  field(SHFT, "12")
+  field(ZRVL, "0")
+  field(ZRST, "Manual")
+  field(ONVL, "1")
+  field(ONST, "Timed")
+  field(TWVL, "2")
+  field(TWST, "Automatic")
+}  
+
+# Reset alarm
+record(bo, "HEBT:FC01:AlarmAck") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/170 T=UINT32 B=14")
+  field(ZNAM, "No command")
+  field(ONAM, "Alarm ack")
+  field(DESC, "FC01 alarm acknowledgement")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Manual target position
+record(ao, "HEBT:FC01:PosSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/170+12 T=REAL32")
+  field(PINI, "YES")
+  field(DESC, "FC01 manual target position")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(DRVL, "-200.0")
+  field(DRVH, "200.0")
+}
+
+# Final scan position
+record(ao, "HEBT:FC01:YbPosSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/170+16 T=REAL32")
+  field(PINI, "YES")
+  field(DESC, "FC01 final Yb scan position setting")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(DRVL, "-200.0")
+  field(DRVH, "200.0")
+}
+
+# Initial scan position
+record(ao, "HEBT:FC01:YaPosSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/170+20 T=REAL32")
+  field(PINI, "YES")
+  field(DESC, "FC01 initial Ya scan position setting")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(DRVL, "-200.0")
+  field(DRVH, "200.0")
+}
+
+# Number of steps
+record(longout, "HEBT:FC01:NStepsSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/170+24 T=UINT32")
+  field(PINI, "YES")
+  field(DESC, "FC01 scan number of steps")
+  field(EGU, "steps")
+  field(DRVL, "1")
+  field(DRVH, "10000")
+}
+
+# Center position
+record(ao, "HEBT:FC01:CenterSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/170+28 T=REAL32")
+  field(PINI, "YES")
+  field(DESC, "FC01 center position setting")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(DRVL, "-200.0")
+  field(DRVH, "200.0")
+}
+
+#############################
+# Record for flow switch FS #
+#############################
+
+# Rearm from EPICS screen (DPLA_cooling.opi) the TimeOut Red color alarm of flow switch 
+record(bo, "DPLA:FS:ResetTO") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/210 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Reset")
+  field(DESC, "Command to Rearm ALL FS timeOut status")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##############################
+# Records for tsp pump TSP01 #
+##############################
+
+# Programmed mode
+# [0x27] XXX
+record(longout, "DPLA:TSP01:PeriodSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/212 T=UINT16")
+  field(DESC, "Cycle period in programmed mode")
+  field(PINI, "YES")
+  field(DRVL, "0")
+  field(DRVH, "999")
+  field(EGU, "min")
+}
+
+# [0x27] YYY
+record(longout, "DPLA:TSP01:CyclesSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/212+2 T=UINT16")
+  field(DESC, "Number of cycles in programmed mode")
+  field(PINI, "YES")
+  field(DRVL, "0")
+  field(DRVH, "999")
+  field(EGU, "cycles")
+}
+
+# [0x27] Z.ZE-ZZ
+record(ao, "DPLA:TSP01:PSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/212+4 T=FLOAT32")
+  field(DESC, "Pressure in programmed mode")
+  field(PINI, "YES")
+  field(DRVL, "0")
+  field(DRVH, "1")
+  field(EGU, "mbar")
+}
+
+# [0x27] DDD
+record(longout, "DPLA:TSP01:OnTimeSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/212+8 T=UINT16")
+  field(DESC, "Duration of each firing in prog. mode")
+  field(PINI, "YES")
+  field(DRVL, "0")
+  field(DRVH, "999")
+  field(EGU, "s")
+}
+
+record(bo, "DPLA:TSP01:TimedCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/212+10 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Set Timed Params")
+  field(DESC, "Set programmed mode parameters")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# SUBLIMATION LEVEL 1 [0x78]
+record(longout, "DPLA:TSP01:SublLSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/212+14 T=UINT16")
+  field(DESC, "Sets sublimation level in Amps")
+  field(DRVH, "50")
+  field(DRVL, "0")
+  field(EGU, "A")
+}
+
+record(bo, "DPLA:TSP01:SublLCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/212+10 T=BYTE B=2")
+  field(ZNAM, "No command")
+  field(ONAM, "Set subl. level")
+  field(DESC, "Command to set sublimation level")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# TSP CONTINUOUS [0x2D]
+record(bo, "DPLA:TSP01:ManualCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/212+10 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "Manual")
+  field(DESC, "Sets the TSP mode of operation to manual")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##############################
+# Records for tsp pump TSP02 #
+##############################
+
+# Programmed mode
+# [0x27] XXX
+record(longout, "DPLA:TSP02:PeriodSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/228 T=UINT16")
+  field(DESC, "Cycle period in programmed mode")
+  field(PINI, "YES")
+  field(DRVL, "0")
+  field(DRVH, "999")
+  field(EGU, "min")
+}
+
+# [0x27] YYY
+record(longout, "DPLA:TSP02:CyclesSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/228+2 T=UINT16")
+  field(DESC, "Number of cycles in programmed mode")
+  field(PINI, "YES")
+  field(DRVL, "0")
+  field(DRVH, "999")
+  field(EGU, "cycles")
+}
+
+# [0x27] Z.ZE-ZZ
+record(ao, "DPLA:TSP02:PSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/228+4 T=FLOAT32")
+  field(DESC, "Pressure in programmed mode")
+  field(PINI, "YES")
+  field(DRVL, "0")
+  field(DRVH, "1")
+  field(EGU, "mbar")
+}
+
+# [0x27] DDD
+record(longout, "DPLA:TSP02:OnTimeSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/228+8 T=UINT16")
+  field(DESC, "Duration of each firing in prog. mode")
+  field(PINI, "YES")
+  field(DRVL, "0")
+  field(DRVH, "999")
+  field(EGU, "s")
+}
+
+record(bo, "DPLA:TSP02:TimedCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/228+10 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Set Timed Params")
+  field(DESC, "Set programmed mode parameters")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# SUBLIMATION LEVEL 1 [0x78]
+record(longout, "DPLA:TSP02:SublLSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/228+14 T=UINT16")
+  field(DESC, "Sets sublimation level in Amps")
+  field(DRVH, "50")
+  field(DRVL, "0")
+  field(EGU, "A")
+}
+
+record(bo, "DPLA:TSP02:SublLCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/228+10 T=BYTE B=2")
+  field(ZNAM, "No command")
+  field(ONAM, "Set subl. level")
+  field(DESC, "Command to set sublimation level")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# TSP CONTINUOUS [0x2D]
+record(bo, "DPLA:TSP02:ManualCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/228+10 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "Manual")
+  field(DESC, "Sets the TSP mode of operation to manual")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##############################
+# Records for tsp pump TSP03 #
+##############################
+
+# Programmed mode
+# [0x27] XXX
+record(longout, "DPLA:TSP03:PeriodSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/244 T=UINT16")
+  field(DESC, "Cycle period in programmed mode")
+  field(PINI, "YES")
+  field(DRVL, "0")
+  field(DRVH, "999")
+  field(EGU, "min")
+}
+
+# [0x27] YYY
+record(longout, "DPLA:TSP03:CyclesSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/244+2 T=UINT16")
+  field(DESC, "Number of cycles in programmed mode")
+  field(PINI, "YES")
+  field(DRVL, "0")
+  field(DRVH, "999")
+  field(EGU, "cycles")
+}
+
+# [0x27] Z.ZE-ZZ
+record(ao, "DPLA:TSP03:PSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/244+4 T=FLOAT32")
+  field(DESC, "Pressure in programmed mode")
+  field(PINI, "YES")
+  field(DRVL, "0")
+  field(DRVH, "1")
+  field(EGU, "mbar")
+}
+
+# [0x27] DDD
+record(longout, "DPLA:TSP03:OnTimeSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/244+8 T=UINT16")
+  field(DESC, "Duration of each firing in prog. mode")
+  field(PINI, "YES")
+  field(DRVL, "0")
+  field(DRVH, "999")
+  field(EGU, "s")
+}
+
+record(bo, "DPLA:TSP03:TimedCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/244+10 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Set Timed Params")
+  field(DESC, "Set programmed mode parameters")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# SUBLIMATION LEVEL 1 [0x78]
+record(longout, "DPLA:TSP03:SublLSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/244+14 T=UINT16")
+  field(DESC, "Sets sublimation level in Amps")
+  field(DRVH, "50")
+  field(DRVL, "0")
+  field(EGU, "A")
+}
+
+record(bo, "DPLA:TSP03:SublLCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/244+10 T=BYTE B=2")
+  field(ZNAM, "No command")
+  field(ONAM, "Set subl. level")
+  field(DESC, "Command to set sublimation level")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# TSP CONTINUOUS [0x2D]
+record(bo, "DPLA:TSP03:ManualCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/244+10 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "Manual")
+  field(DESC, "Sets the TSP mode of operation to manual")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+##############################
+# Records for tsp pump TSP04 #
+##############################
+
+# Programmed mode
+# [0x27] XXX
+record(longout, "DPLA:TSP04:PeriodSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/260 T=UINT16")
+  field(DESC, "Cycle period in programmed mode")
+  field(PINI, "YES")
+  field(DRVL, "0")
+  field(DRVH, "999")
+  field(EGU, "min")
+}
+
+# [0x27] YYY
+record(longout, "DPLA:TSP04:CyclesSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/260+2 T=UINT16")
+  field(DESC, "Number of cycles in programmed mode")
+  field(PINI, "YES")
+  field(DRVL, "0")
+  field(DRVH, "999")
+  field(EGU, "cycles")
+}
+
+# [0x27] Z.ZE-ZZ
+record(ao, "DPLA:TSP04:PSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/260+4 T=FLOAT32")
+  field(DESC, "Pressure in programmed mode")
+  field(PINI, "YES")
+  field(DRVL, "0")
+  field(DRVH, "1")
+  field(EGU, "mbar")
+}
+
+# [0x27] DDD
+record(longout, "DPLA:TSP04:OnTimeSet") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/260+8 T=UINT16")
+  field(DESC, "Duration of each firing in prog. mode")
+  field(PINI, "YES")
+  field(DRVL, "0")
+  field(DRVH, "999")
+  field(EGU, "s")
+}
+
+record(bo, "DPLA:TSP04:TimedCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/260+10 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "Set Timed Params")
+  field(DESC, "Set programmed mode parameters")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# SUBLIMATION LEVEL 1 [0x78]
+record(longout, "DPLA:TSP04:SublLSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/260+14 T=UINT16")
+  field(DESC, "Sets sublimation level in Amps")
+  field(DRVH, "50")
+  field(DRVL, "0")
+  field(EGU, "A")
+}
+
+record(bo, "DPLA:TSP04:SublLCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/260+10 T=BYTE B=2")
+  field(ZNAM, "No command")
+  field(ONAM, "Set subl. level")
+  field(DESC, "Command to set sublimation level")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# TSP CONTINUOUS [0x2D]
+record(bo, "DPLA:TSP04:ManualCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/260+10 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "Manual")
+  field(DESC, "Sets the TSP mode of operation to manual")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+################################################
+# Records shared for tsp pumps TSP01 and TSP03 #
+################################################
+
+# TSP OFF [0x28]
+record(bo, "DPLA:TSP01:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/212+10 T=BYTE B=4")
+  field(ZNAM, "No command")
+  field(ONAM, "Stop")
+  field(DESC, "Disables TSP01&TSP03 firing in all modes")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# DEGAS [0x2F]
+record(bo, "DPLA:TSP01:DegasCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/212+10 T=BYTE B=3")
+  field(ZNAM, "No command")
+  field(ONAM, "Degas")
+  field(DESC, "Runs the degas feature (all filaments)")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# AUTO SCAN [0x8A]
+record(bo, "DPLA:TSP01:AScanCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/212+10 T=BYTE B=6")
+  field(ZNAM, "No command")
+  field(ONAM, "Auto scan")
+  field(DESC, "Rescans filaments to determine config.")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+################################################
+# Records shared for tsp pumps TSP02 and TSP04 #
+################################################
+
+# TSP OFF [0x28]
+record(bo, "DPLA:TSP02:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/228+10 T=BYTE B=4")
+  field(ZNAM, "No command")
+  field(ONAM, "Stop")
+  field(DESC, "Disables TSP02&TSP04 firing in all modes")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# DEGAS [0x2F]
+record(bo, "DPLA:TSP02:DegasCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/228+10 T=BYTE B=3")
+  field(ZNAM, "No command")
+  field(ONAM, "Degas")
+  field(DESC, "Runs the degas feature (all filaments)")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# AUTO SCAN [0x8A]
+record(bo, "DPLA:TSP02:AScanCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/228+10 T=BYTE B=6")
+  field(ZNAM, "No command")
+  field(ONAM, "Auto scan")
+  field(DESC, "Rescans filaments to determine config.")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+###############################
+# Records for ionic pump IP01 #
+###############################
+
+# START PUMP [0x37]
+record(bo, "DPLA:IP01:StartCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/276 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "ON")
+  field(DESC, "Command to switch on ionic pump")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# STOP PUMP [0x38]
+record(bo, "DPLA:IP01:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/276 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "OFF")
+  field(DESC, "Command to switch off ionic pump")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# SET AUTO-RESTART YES [0x33]
+record(bo, "DPLA:IP01:AR_OnCmd") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(OUT, "@dpla_plc/276 T=BYTE B=2")
+  field(DESC, "Enable HV auto restart on power up")
+  field(ZNAM, "No command")
+  field(ONAM, "Set Auto-restart")
+}
+
+# SET AUTO-RESTART NO [0x33]
+record(bo, "DPLA:IP01:AR_OffCmd") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(OUT, "@dpla_plc/276 T=BYTE B=3")
+  field(DESC, "Disable HV auto restart on power up")
+  field(ZNAM, "No command")
+  field(ONAM, "Reset Auto-restart")
+}
+
+# SET CALIBRATION [0x1E]
+record(ao, "DPLA:IP01:CalSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/276+2 T=FLOAT32")
+  field(DESC, "Pressure calibration factor setting")
+  field(PREC, "2")
+  field(DRVH, "9.99")
+  field(DRVL, "0.00")
+}
+record(bo, "DPLA:IP01:CalCmd") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(OUT, "@dpla_plc/276 T=BYTE B=4")
+  field(DESC, "Command to set pressure calib. factor")
+  field(ZNAM, "No command")
+  field(ONAM, "Set Cal. factor")
+}
+
+# SET CALIBRATION [0x1E]
+record(longout, "DPLA:IP01:SizeSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/276+6 T=UINT16")
+  field(DESC, "Pump size setting")
+  field(DRVH, "600")
+  field(DRVL, "150")
+}
+record(bo, "DPLA:IP01:SizeCmd") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(OUT, "@dpla_plc/276 T=BYTE B=5")
+  field(DESC, "Command to set pump size")
+  field(ZNAM, "No command")
+  field(ONAM, "Set pump size")
+}
+
+###############################
+# Records for ionic pump IP02 #
+###############################
+
+# START PUMP [0x37]
+record(bo, "DPLA:IP02:StartCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/284 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "ON")
+  field(DESC, "Command to switch on ionic pump")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# STOP PUMP [0x38]
+record(bo, "DPLA:IP02:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/284 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "OFF")
+  field(DESC, "Command to switch off ionic pump")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# SET AUTO-RESTART YES [0x33]
+record(bo, "DPLA:IP02:AR_OnCmd") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(OUT, "@dpla_plc/284 T=BYTE B=2")
+  field(DESC, "Enable HV auto restart on power up")
+  field(ZNAM, "No command")
+  field(ONAM, "Set Auto-restart")
+}
+
+# SET AUTO-RESTART NO [0x33]
+record(bo, "DPLA:IP02:AR_OffCmd") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(OUT, "@dpla_plc/284 T=BYTE B=3")
+  field(DESC, "Disable HV auto restart on power up")
+  field(ZNAM, "No command")
+  field(ONAM, "Reset Auto-restart")
+}
+
+# SET CALIBRATION [0x1E]
+record(ao, "DPLA:IP02:CalSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/284+2 T=FLOAT32")
+  field(DESC, "Pressure calibration factor setting")
+  field(PREC, "2")
+  field(DRVH, "9.99")
+  field(DRVL, "0.00")
+}
+record(bo, "DPLA:IP02:CalCmd") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(OUT, "@dpla_plc/284 T=BYTE B=4")
+  field(DESC, "Command to set pressure calib. factor")
+  field(ZNAM, "No command")
+  field(ONAM, "Set Cal. factor")
+}
+
+# SET CALIBRATION [0x1E]
+record(longout, "DPLA:IP02:SizeSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/284+6 T=UINT16")
+  field(DESC, "Pump size setting")
+  field(DRVH, "600")
+  field(DRVL, "150")
+}
+record(bo, "DPLA:IP02:SizeCmd") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(OUT, "@dpla_plc/284 T=BYTE B=5")
+  field(DESC, "Command to set pump size")
+  field(ZNAM, "No command")
+  field(ONAM, "Set pump size")
+}
+
+###############################
+# Records for ionic pump IP03 #
+###############################
+
+# START PUMP [0x37]
+record(bo, "DPLA:IP03:StartCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/292 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "ON")
+  field(DESC, "Command to switch on ionic pump")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# STOP PUMP [0x38]
+record(bo, "DPLA:IP03:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/292 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "OFF")
+  field(DESC, "Command to switch off ionic pump")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# SET AUTO-RESTART YES [0x33]
+record(bo, "DPLA:IP03:AR_OnCmd") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(OUT, "@dpla_plc/292 T=BYTE B=2")
+  field(DESC, "Enable HV auto restart on power up")
+  field(ZNAM, "No command")
+  field(ONAM, "Set Auto-restart")
+}
+
+# SET AUTO-RESTART NO [0x33]
+record(bo, "DPLA:IP03:AR_OffCmd") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(OUT, "@dpla_plc/292 T=BYTE B=3")
+  field(DESC, "Disable HV auto restart on power up")
+  field(ZNAM, "No command")
+  field(ONAM, "Reset Auto-restart")
+}
+
+# SET CALIBRATION [0x1E]
+record(ao, "DPLA:IP03:CalSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/292+2 T=FLOAT32")
+  field(DESC, "Pressure calibration factor setting")
+  field(PREC, "2")
+  field(DRVH, "9.99")
+  field(DRVL, "0.00")
+}
+record(bo, "DPLA:IP03:CalCmd") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(OUT, "@dpla_plc/292 T=BYTE B=4")
+  field(DESC, "Command to set pressure calib. factor")
+  field(ZNAM, "No command")
+  field(ONAM, "Set Cal. factor")
+}
+
+# SET CALIBRATION [0x1E]
+record(longout, "DPLA:IP03:SizeSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/292+6 T=UINT16")
+  field(DESC, "Pump size setting")
+  field(DRVH, "600")
+  field(DRVL, "150")
+}
+record(bo, "DPLA:IP03:SizeCmd") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(OUT, "@dpla_plc/292 T=BYTE B=5")
+  field(DESC, "Command to set pump size")
+  field(ZNAM, "No command")
+  field(ONAM, "Set pump size")
+}
+
+###############################
+# Records for ionic pump IP04 #
+###############################
+
+# START PUMP [0x37]
+record(bo, "DPLA:IP04:StartCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/300 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "ON")
+  field(DESC, "Command to switch on ionic pump")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# STOP PUMP [0x38]
+record(bo, "DPLA:IP04:StopCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/300 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "OFF")
+  field(DESC, "Command to switch off ionic pump")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# SET AUTO-RESTART YES [0x33]
+record(bo, "DPLA:IP04:AR_OnCmd") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(OUT, "@dpla_plc/300 T=BYTE B=2")
+  field(DESC, "Enable HV auto restart on power up")
+  field(ZNAM, "No command")
+  field(ONAM, "Set Auto-restart")
+}
+
+# SET AUTO-RESTART NO [0x33]
+record(bo, "DPLA:IP04:AR_OffCmd") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(OUT, "@dpla_plc/300 T=BYTE B=3")
+  field(DESC, "Disable HV auto restart on power up")
+  field(ZNAM, "No command")
+  field(ONAM, "Reset Auto-restart")
+}
+
+# SET CALIBRATION [0x1E]
+record(ao, "DPLA:IP04:CalSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/300+2 T=FLOAT32")
+  field(DESC, "Pressure calibration factor setting")
+  field(PREC, "2")
+  field(DRVH, "9.99")
+  field(DRVL, "0.00")
+}
+record(bo, "DPLA:IP04:CalCmd") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(OUT, "@dpla_plc/300 T=BYTE B=4")
+  field(DESC, "Command to set pressure calib. factor")
+  field(ZNAM, "No command")
+  field(ONAM, "Set Cal. factor")
+}
+
+# SET CALIBRATION [0x1E]
+record(longout, "DPLA:IP04:SizeSet") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(OUT, "@dpla_plc/300+6 T=UINT16")
+  field(DESC, "Pump size setting")
+  field(DRVH, "600")
+  field(DRVL, "150")
+}
+record(bo, "DPLA:IP04:SizeCmd") {
+  field(DTYP, "S7plc")
+  field(PINI, "YES")
+  field(HIGH, "1")
+  field(OUT, "@dpla_plc/300 T=BYTE B=5")
+  field(DESC, "Command to set pump size")
+  field(ZNAM, "No command")
+  field(ONAM, "Set pump size")
+}
+
+#######################################
+# Records for farday cup FC01 in HEBT #
+#######################################
+
+# Switch on power supply
+record(bo, "HEBT:FC01_PS:OnCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/308 T=BYTE B=0")
+  field(ZNAM, "No command")
+  field(ONAM, "ON")
+  field(DESC, "Switch on faraday cup power supply")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}
+
+# Switch off power supply
+record(bo, "HEBT:FC01_PS:OffCmd") {
+  field(DTYP, "S7plc")
+  field(OUT, "@dpla_plc/308 T=BYTE B=1")
+  field(ZNAM, "No command")
+  field(ONAM, "OFF")
+  field(DESC, "Switch off faraday cup power supply")
+  field(PINI, "YES")
+  field(HIGH, "1")
+}

@@ -1,0 +1,38 @@
+## RFQ Frequency calculated 
+## developed by Maurizio Montis - INFN Italy
+## mail: maurizio.montis@lnl.infn.it
+
+# RFQ frequency is calculated considering 2 different working states:
+#		1. with Beam
+#		2. without Beam
+#
+# LLRF provides 2 couples of parameters <DeltaF, DeltaPhi> with DeltaF in [MHz] and DeltaPhi in [Deg] 
+# MPS should provide a signal related to presence of Beam
+
+record(seq, "RFQ:RF:CavFreqCnst") {
+	# DO1 -> Offset
+	field(DO1, "0")
+	# DO2 -> Ql
+	field(DO2, "4281")
+	field(PINI, "YES")
+}
+
+
+# - RFQ Cavity Frequency -
+record(calcout, "RFQ:RF:CavFreq") {
+	field(SCAN, ".1 second")
+	field(PHAS, "3")
+	field(CALC, "A=0?B/(tan(C*D2R-F)/G-1):D/(tan(E*D2R-F)/G-1)")
+	field(INPA, "BeamPresence.VAL CP")
+	field(INPB, "DeltaF1.VAL CP")
+	field(INPC, "DeltaPhi1.VAL CP")
+	field(INPD, "DeltaF2.VAL CP")
+	field(INPE, "DeltaPhi2.VAL CP")
+	field(INPF, "RFQ:RF:CavFreqCnst.DO1 CP")
+	field(INPG, "RFQ:RF:CavFreqCnst.DO2 CP")
+	field(PREC, "6")
+	field(EGU, "MHz")
+}
+
+
+

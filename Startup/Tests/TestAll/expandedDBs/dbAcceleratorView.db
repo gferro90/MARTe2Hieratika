@@ -1,0 +1,473 @@
+record(calc, "ACCELERATORVIEW:COMMON:HeartBeatCalc")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INPA, "ACCELERATORVIEW:COMMON:HeartBeatCalc")
+	field(CALC, "A<65535?A+1:0")
+}
+
+record(bi, "ACCELERATORVIEW:PPS:ERROR")
+{
+	field(INP, "0")
+}
+
+record(bi, "ACCELERATORVIEW:MPS:ERROR")
+{
+	field(INP, "0")
+}
+
+record(calc, "ACCELERATORVIEW:PPS:PERMIT:WAIT:COUNTER")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INPA, "PPS:INFOSHARE:MONDATA:1_1.BE")
+	field(INPB, "ACCELERATORVIEW:PPS:PERMIT:WAIT:COUNTER")
+	field(CALC, "A!=1?180:(B>0?B-1:0)")
+	field(FLNK, "ACCELERATORVIEW:PPS:PERMIT:WAIT:COUNTER:FANOUT")
+}
+
+record(calc, "ACCELERATORVIEW:PPS:PERMIT:WAIT:COUNTER:MINUTE")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "Soft Channel")
+	field(INPA, "ACCELERATORVIEW:PPS:PERMIT:WAIT:COUNTER")
+	field(CALC, "(A/60)%(A/60+1)")
+	field(PREC, "0")
+}
+
+record(calc, "ACCELERATORVIEW:PPS:PERMIT:WAIT:COUNTER:SECOND")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "Soft Channel")
+	field(INPA, "ACCELERATORVIEW:PPS:PERMIT:WAIT:COUNTER")
+	field(CALC, "A%60")
+	field(PREC, "0")
+}
+
+record(fanout, "ACCELERATORVIEW:PPS:PERMIT:WAIT:COUNTER:FANOUT")
+{
+	field(LNK1, "ACCELERATORVIEW:PPS:PERMIT:WAIT:COUNTER:MINUTE")
+	field(LNK2, "ACCELERATORVIEW:PPS:PERMIT:WAIT:COUNTER:SECOND")
+}
+
+record(calc, "ACCELERATORVIEW:PPS:BEAM:ON:COUNTER")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INPA, "SRC:RF_GENE:MarcheRF")
+	field(INPB, "ACCELERATORVIEW:PPS:BEAM:ON:COUNTER")
+	field(CALC, "A==0?0:B+1")
+	field(FLNK, "ACCELERATORVIEW:PPS:BEAM:ON:COUNTER:FANOUT")
+}
+
+record(calc, "ACCELERATORVIEW:PPS:BEAM:ON:COUNTER:HOUR")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "Soft Channel")
+	field(INPA, "ACCELERATORVIEW:PPS:BEAM:ON:COUNTER")
+	field(CALC, "(A/3600)%(A/3600+1)")
+	field(PREC, "0")
+}
+
+record(calc, "ACCELERATORVIEW:PPS:BEAM:ON:COUNTER:MINUTE")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "Soft Channel")
+	field(INPA, "ACCELERATORVIEW:PPS:BEAM:ON:COUNTER")
+	field(CALC, "(A/60)%(A/60+1)")
+	field(PREC, "0")
+}
+
+record(calc, "ACCELERATORVIEW:PPS:BEAM:ON:COUNTER:SECOND")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "Soft Channel")
+	field(INPA, "ACCELERATORVIEW:PPS:BEAM:ON:COUNTER")
+	field(CALC, "A%60")
+	field(PREC, "0")
+}
+
+record(fanout, "ACCELERATORVIEW:PPS:BEAM:ON:COUNTER:FANOUT")
+{
+	field(LNK1, "ACCELERATORVIEW:PPS:BEAM:ON:COUNTER:HOUR")
+	field(LNK2, "ACCELERATORVIEW:PPS:BEAM:ON:COUNTER:MINUTE")
+	field(LNK3, "ACCELERATORVIEW:PPS:BEAM:ON:COUNTER:SECOND")
+}
+
+record(calc, "ACCELERATORVIEW:INJ:DUTY")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INPA, "SRC:TIM:TPulse")
+	field(INPB, "SRC:TIM:Trep")
+	field(CALC, "(A/B)*100")
+}
+
+record(calc, "CCS:RF:FwdTotalRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INPA, "RF:LLRF1_CavA:FwCavkWRdbk")
+	field(INPB, "RF:LLRF1_CavB:FwCavkWRdbk")
+	field(CALC, "A+B+C+D+E+F+G+H")
+	field(INPC, "RF:LLRF2_CavA:FwCavkWRdbk")
+	field(INPD, "RF:LLRF2_CavB:FwCavkWRdbk")
+	field(INPE, "RF:LLRF3_CavA:FwCavkWRdbk")
+	field(INPF, "RF:LLRF3_CavB:FwCavkWRdbk")
+	field(INPG, "RF:LLRF4_CavA:FwCavkWRdbk")
+	field(INPH, "RF:LLRF4_CavB:FwCavkWRdbk")
+}
+
+record(calc, "CCS:RF:RefTotalRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INPA, "RF:LLRF1_CavA:RvCavkWRdbk")
+	field(INPB, "RF:LLRF1_CavB:RvCavkWRdbk")
+	field(CALC, "A+B+C+D+E+F+G+H")
+	field(INPC, "RF:LLRF2_CavA:RvCavkWRdbk")
+	field(INPD, "RF:LLRF2_CavB:RvCavkWRdbk")
+	field(INPE, "RF:LLRF3_CavA:RvCavkWRdbk")
+	field(INPF, "RF:LLRF3_CavB:RvCavkWRdbk")
+	field(INPG, "RF:LLRF4_CavA:RvCavkWRdbk")
+	field(INPH, "RF:LLRF4_CavB:RvCavkWRdbk")
+}
+
+record(calc, "CCS:RF:Cav1APwrByDutyRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INPA, "RF:LLRF1_CavA:VCavkWRdbk")
+	field(INPB, "RF:LLRF_RFQ:WidthUsecSet")
+	field(CALC, "A*B/C")
+	field(INPC, "RF:LLRF_RFQ:PeriodUsecSet")
+}
+
+record(ai, "ACCELERATORVIEW:TS:REP")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(FLNK, "ACCELERATORVIEW:TS:REP:MS")
+	field(INP, "0")
+}
+
+record(ai, "ACCELERATORVIEW:TS:PULSE")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(FLNK, "ACCELERATORVIEW:TS:PULSE:MS")
+	field(INP, "0")
+}
+
+record(ai, "ACCELERATORVIEW:TS:DUTY")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(calc, "ACCELERATORVIEW:TS:REP:MS")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "Soft Channel")
+	field(INPA, "ACCELERATORVIEW:TS:REP")
+	field(INPB, "1000")
+	field(CALC, "A/B")
+}
+
+record(calc, "ACCELERATORVIEW:TS:PULSE:MS")
+{
+	field(SCAN, "Passive")
+	field(DTYP, "Soft Channel")
+	field(INPA, "ACCELERATORVIEW:TS:PULSE")
+	field(INPB, "1000")
+	field(CALC, "A/B")
+}
+
+record(ai, "CCS:TSAPP:BeamRepTrigDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:RfPulseDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:RfPulseWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:TrigforAcqDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:ChopGateDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:ChopGateWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:Rfq01FfceDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:Rfq01FfceWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:Rfq01RfOnGateDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:Rfq01RfOnGateWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:Rfq02FfceDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:Rfq02FfceWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:Rfq02RfOnGateDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:Rfq02RfOnGateWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:Rfq03FfceDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:Rfq03FfceWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:Rfq03RfOnGateDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:Rfq03RfOnGateWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:Rfq04FfceDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:Rfq04FfceWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:Rfq04RfOnGateDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:Rfq04RfOnGateWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:MebtFfceDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:MebtFfceWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:MebtRfOnGateDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:MebtRfOnGateWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:SemDplateAcqTrigDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:SemHebtAcqTrigDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:CeaBlomAcqGateDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:CeaBlomAcqGateWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:CeaIpmXAcqGateDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:CeaIpmXAcqGateWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:CeaIpmYAcqGateDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:CeaIpmYAcqGateWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:CeaIpmXYAcqGateDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:CeaIpmXYAcqGateWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:CeaCtsAcqTrigDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:BpmCiematAcqGateDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:BpmCiematAcqGateWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:FpmCiematAcqGateDelayRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+
+record(ai, "CCS:TSAPP:FpmCiematAcqGateWidthRdbk")
+{
+	field(SCAN, "1 second")
+	field(DTYP, "Soft Channel")
+	field(INP, "0")
+}
+

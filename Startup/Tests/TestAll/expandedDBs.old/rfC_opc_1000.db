@@ -1,0 +1,5265 @@
+record (bi, "RFCOOL:FWP01:OALARM")
+{
+  field(DESC, "DB_Motor_FWP01:O_ALARM")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.O_ALARM")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FWP01:ORUNNING")
+{
+  field(DESC, "DB_Motor_FWP01:O_running")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.O_running")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FWP01:selectorremote")
+{
+  field(DESC, "DB_Motor_FWP01:selector_remote")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.selector_remote")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bi, "RFCOOL:DB_Motor_FWP01:selector_local")
+{
+  field(DESC, "DB_Motor_FWP01:selector_llrocal")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.selector_local")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FWP01:OA")
+{
+  field(DESC, "DB_Motor_FWP01:O_AUTO")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.O_AUTO")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FWP01:OM")
+{
+  field(DESC, "DB_Motor_FWP01:O_MAN")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.O_MAN")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FWP01:OHCNTT")
+{
+  field(DESC, "DB_Motor_FWP01:O_H_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.O_H_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FWP01:OHCNTP")
+{
+  field(DESC, "DB_Motor_FWP01:O_H_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.O_H_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(longin, "RFCOOL:FWP01:OOCNTT")
+{
+  field(DESC, "DB_Motor_FWP01:O_O_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.O_O_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(longin, "RFCOOL:FWP01:OOCNTP")
+{
+  field(DESC, "DB_Motor_FWP01:O_O_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.O_O_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FWP01:ICMDAM")
+{
+  field(DESC, "DB_Motor_FWP01:I_CMD_AUTO_MAN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.I_CMD_AUTO_MAN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FWP01:ICMDMRUN")
+{
+  field(DESC, "DB_Motor_FWP01:I_CMD_MAN_RUN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.I_CMD_MAN_RUN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FWP01:ICMDMS")
+{
+  field(DESC, "DB_Motor_FWP01:I_CMD_MAN_STOP")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.I_CMD_MAN_STOP")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FWP01:ICMDR")
+{
+  field(DESC, "DB_Motor_FWP01:I_CMD_RESET")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.I_CMD_RESET")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FWP01:ICMDRHRP")
+{
+  field(DESC, "DB_Motor_FWP01:I_CMD_RESET_HR_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.I_CMD_RESET_HR_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FWP01:ICMDROPP")
+{
+  field(DESC, "DB_Motor_FWP01:I_CMD_RESET_OP_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.I_CMD_RESET_OP_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bi, "RFCOOL:FWP02:OALARM")
+{
+  field(DESC, "DB_Motor_FWP02:O_ALARM")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.O_ALARM")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FWP02:ORUNNING")
+{
+  field(DESC, "DB_Motor_FWP02:O_running")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.O_running")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FWP02:selectorremote")
+{
+	field(DESC, "DB_Motor_FWP02:selector_remote")
+	field(DTYP, "opc")
+	field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.selector_remote")
+	field(ZNAM, "OFF")
+	field(ONAM, "ON")
+}
+record(bi, "RFCOOL:DB_Motor_FWP02:selector_local")
+{
+  field(DESC, "DB_Motor_FWP02:selector_local")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.selector_local")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FWP02:OA")
+{
+  field(DESC, "DB_Motor_FWP02:O_AUTO")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.O_AUTO")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FWP02:OM")
+{
+  field(DESC, "DB_Motor_FWP02:O_MAN")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.O_MAN")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FWP02:OHCNTT")
+{
+  field(DESC, "DB_Motor_FWP02:O_H_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.O_H_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FWP02:OHCNTP")
+{
+  field(DESC, "DB_Motor_FWP02:O_H_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.O_H_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(longin, "RFCOOL:FWP02:OOCNTT")
+{
+  field(DESC, "DB_Motor_FWP02:O_O_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.O_O_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(longin, "RFCOOL:FWP02:OOCNTP")
+{
+  field(DESC, "DB_Motor_FWP02:O_O_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.O_O_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FWP02:ICMDAM")
+{
+  field(DESC, "DB_Motor_FWP02:I_CMD_AUTO_MAN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.I_CMD_AUTO_MAN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FWP02:ICMDMRUN")
+{
+  field(DESC, "DB_Motor_FWP02:I_CMD_MAN_RUN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.I_CMD_MAN_RUN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FWP02:ICMDMS")
+{
+  field(DESC, "DB_Motor_FWP02:I_CMD_MAN_STOP")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.I_CMD_MAN_STOP")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FWP02:ICMDR")
+{
+  field(DESC, "DB_Motor_FWP02:I_CMD_RESET")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.I_CMD_RESET")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FWP02:ICMDRHRP")
+{
+  field(DESC, "DB_Motor_FWP02:I_CMD_RESET_HR_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.I_CMD_RESET_HR_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FWP02:ICMDROPP")
+{
+  field(DESC, "DB_Motor_FWP02:I_CMD_RESET_OP_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.I_CMD_RESET_OP_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bi, "RFCOOL:FWP03:OALARM")
+{
+  field(DESC, "DB_Motor_FWP03:O_ALARM")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.O_ALARM")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FWP03:ORUNNING")
+{
+  field(DESC, "DB_Motor_FWP03:O_running")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.O_running")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FWP03:selectorremote")
+{
+  field(DESC, "DB_Motor_FWP03:selector_remote")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.selector_remote")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bi, "RFCOOL:DB_Motor_FWP03:selector_local")
+{
+  field(DESC, "DB_Motor_FWP03:selector_local")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.selector_local")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FWP03:OA")
+{
+  field(DESC, "DB_Motor_FWP03:O_AUTO")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.O_AUTO")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FWP03:OM")
+{
+  field(DESC, "DB_Motor_FWP03:O_MAN")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.O_MAN")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FWP03:OHCNTT")
+{
+  field(DESC, "DB_Motor_FWP03:O_H_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.O_H_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FWP03:OHCNTP")
+{
+  field(DESC, "DB_Motor_FWP03:O_H_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.O_H_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(longin, "RFCOOL:FWP03:OOCNTT")
+{
+  field(DESC, "DB_Motor_FWP03:O_O_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.O_O_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(longin, "RFCOOL:FWP03:OOCNTP")
+{
+  field(DESC, "DB_Motor_FWP03:O_O_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.O_O_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FWP03:ICMDAM")
+{
+  field(DESC, "DB_Motor_FWP03:I_CMD_AUTO_MAN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.I_CMD_AUTO_MAN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FWP03:ICMDMRUN")
+{
+  field(DESC, "DB_Motor_FWP03:I_CMD_MAN_RUN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.I_CMD_MAN_RUN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FWP03:ICMDMS")
+{
+  field(DESC, "DB_Motor_FWP03:I_CMD_MAN_STOP")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.I_CMD_MAN_STOP")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FWP03:ICMDR")
+{
+  field(DESC, "DB_Motor_FWP03:I_CMD_RESET")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.I_CMD_RESET")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FWP03:ICMDRHRP")
+{
+  field(DESC, "DB_Motor_FWP03:I_CMD_RESET_HR_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.I_CMD_RESET_HR_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FWP03:ICMDROPP")
+{
+  field(DESC, "DB_Motor_FWP03:I_CMD_RESET_OP_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.I_CMD_RESET_OP_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCO01:OALARM")
+{
+  field(DESC, "DB_DEVICE_FCO01:O_ALARM")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.O_ALARM")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCO01:ORUNNING")
+{
+  field(DESC, "DB_DEVICE_FCO01:O_running")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.O_running")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FCO01:selectorremote")
+{
+  field(DESC, "DB_DEVICE_FCO01:selector_remote")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.selector_remote")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bi, "RFCOOL:DB_DEVICE_FCO01:selector_local")
+{
+  field(DESC, "DB_DEVICE_FCO01:selector_local")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.selector_local")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCO01:OA")
+{
+  field(DESC, "DB_DEVICE_FCO01:O_AUTO")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.O_AUTO")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCO01:OM")
+{
+  field(DESC, "DB_DEVICE_FCO01:O_MAN")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.O_MAN")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FCO01:OHCNTT")
+{
+  field(DESC, "DB_DEVICE_FCO01:O_H_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.O_H_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FCO01:OHCNTP")
+{
+  field(DESC, "DB_DEVICE_FCO01:O_H_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.O_H_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(longin, "RFCOOL:FCO01:OOCNTT")
+{
+  field(DESC, "RFCOOL:DB_DEVICE_FCO01:O_O_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.O_O_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(longin, "RFCOOL:FCO01:OOCNTP")
+{
+  field(DESC, "DB_DEVICE_FCO01:O_O_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.O_O_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FCO01:ICMDAM")
+{
+  field(DESC, "DB_DEVICE_FCO01:I_CMD_AUTO_MAN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.I_CMD_AUTO_MAN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCO01:ICMDMRUN")
+{
+  field(DESC, "DB_DEVICE_FCO01:I_CMD_MAN_RUN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.I_CMD_MAN_RUN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCO01:ICMDMS")
+{
+  field(DESC, "DB_DEVICE_FCO01:I_CMD_MAN_STOP")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.I_CMD_MAN_STOP")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCO01:ICMDR")
+{
+  field(DESC, "DB_DEVICE_FCO01:I_CMD_RESET")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.I_CMD_RESET")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCO01:ICMDRHRP")
+{
+  field(DESC, "DB_DEVICE_FCO01:I_CMD_RESET_HR_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.I_CMD_RESET_HR_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCO01:ICMDROPP")
+{
+  field(DESC, "DB_DEVICE_FCO01:I_CMD_RESET_OP_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.I_CMD_RESET_OP_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bi, "RFCOOL:FHR12:OALARM")
+{
+  field(DESC, "DB_HEATING_R_FHR01&FHR02:O_ALARM")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.O_ALARM")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FHR12:ORUNNING")
+{
+  field(DESC, "DB_HEATING_R_FHR01&FHR02:O_running")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.O_running")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FHR12:selectorremote")
+{
+  field(DESC, "DB_HEATING_R_FHR01&FHR02:selector_remote")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.selector_remote")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bi, "RFCOOL:DB_HEATING_R_FHR01&FHR02:selector_local")
+{
+  field(DESC, "DB_HEATING_R_FHR01&FHR02:selector_local")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.selector_local")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FHR12:OA")
+{
+  field(DESC, "DB_HEATING_R_FHR01&FHR02:O_AUTO")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.O_AUTO")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FHR12:OM")
+{
+  field(DESC, "DB_HEATING_R_FHR01&FHR02:O_MAN")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.O_MAN")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FHR12:OHCNTT")
+{
+  field(DESC, "DB_HEATING_R_FHR01&FHR02:O_H_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.O_H_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FHR12:OHCNTP")
+{
+  field(DESC, "DB_HEATING_R_FHR01&FHR02:O_H_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.O_H_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(longin, "RFCOOL:FHR12:OOCNTT")
+{
+  field(DESC, "DB_HEATING_R_FHR01&FHR02:O_O_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.O_O_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(longin, "RFCOOL:FHR12:OOCNTP")
+{
+  field(DESC, "DB_HEATING_R_FHR01&FHR02:O_O_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.O_O_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FHR12:ICMDMRUN")
+{
+  field(DESC, "DB_HEATING_R_FHR01&FHR02:I_CMD_MAN_RUN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.I_CMD_MAN_RUN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FHR12:ICMDMS")
+{
+  field(DESC, "DB_HEATING_R_FHR01&FHR02:I_CMD_MAN_STOP")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.I_CMD_MAN_STOP")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FHR12:ICMDR")
+{
+  field(DESC, "DB_HEATING_R_FHR01&FHR02:I_CMD_RESET")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.I_CMD_RESET")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FHR12:ICMDRHRP")
+{
+  field(DESC, "FHR01&FHR02:I_CMD_RESET_HR_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.I_CMD_RESET_HR_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FHR12:ICMDROPP")
+{
+  field(DESC, "FHR01&FHR02:I_CMD_RESET_OP_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.I_CMD_RESET_OP_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bi, "RFCOOL:FHR34:OALARM")
+{
+  field(DESC, "DB_HEATING_R_FHR03&FHR04:O_ALARM")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.O_ALARM")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FHR34:ORUNNING")
+{
+  field(DESC, "DB_HEATING_R_FHR03&FHR04:O_running")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.O_running")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FHR34:selectorremote")
+{
+  field(DESC, "DB_HEATING_R_FHR03&FHR04:selector_remote")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.selector_remote")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bi, "RFCOOL:DB_HEATING_R_FHR03&FHR04:selector_local")
+{
+  field(DESC, "DB_HEATING_R_FHR03&FHR04:selector_local")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.selector_local")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FHR34:OA")
+{
+  field(DESC, "DB_HEATING_R_FHR03&FHR04:O_AUTO")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.O_AUTO")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FHR34:OM")
+{
+  field(DESC, "DB_HEATING_R_FHR03&FHR04:O_MAN")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.O_MAN")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FHR34:OHCNTT")
+{
+  field(DESC, "DB_HEATING_R_FHR03&FHR04:O_H_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.O_H_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FHR34:OHCNTP")
+{
+  field(DESC, "DB_HEATING_R_FHR03&FHR04:O_H_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.O_H_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(longin, "RFCOOL:FHR34:OOCNTT")
+{
+  field(DESC, "DB_HEATING_R_FHR03&FHR04:O_O_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.O_O_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(longin, "RFCOOL:FHR34:OOCNTP")
+{
+  field(DESC, "DB_HEATING_R_FHR03&FHR04:O_O_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.O_O_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FHR34:ICMDAM")
+{
+  field(DESC, "DB_HEATING_R_FHR03&FHR04:I_CMD_AUTO_MAN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.I_CMD_AUTO_MAN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FHR34:ICMDMRUN")
+{
+  field(DESC, "DB_HEATING_R_FHR03&FHR04:I_CMD_MAN_RUN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.I_CMD_MAN_RUN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FHR34:ICMDMS")
+{
+  field(DESC, "DB_HEATING_R_FHR03&FHR04:I_CMD_MAN_STOP")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.I_CMD_MAN_STOP")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FHR34:ICMDR")
+{
+  field(DESC, "DB_HEATING_R_FHR03&FHR04:I_CMD_RESET")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.I_CMD_RESET")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FHR34:ICMDRHRP")
+{
+  field(DESC, "FHR03&FHR04:I_CMD_RESET_HR_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.I_CMD_RESET_HR_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FHR34:ICMDROPP")
+{
+  field(DESC, "FHR03&FHR04:I_CMD_RESET_OP_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.I_CMD_RESET_OP_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bi, "RFCOOL:FHR05:OALARM")
+{
+  field(DESC, "DB_HEATING_R_FHR05:O_ALARM")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.O_ALARM")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FHR05:ORUNNING")
+{
+  field(DESC, "DB_HEATING_R_FHR05:O_running")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.O_running")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FHR05:selectorremote")
+{
+  field(DESC, "DB_HEATING_R_FHR05:selector_remote")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.selector_remote")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bi, "RFCOOL:DB_HEATING_R_FHR05:selector_local")
+{
+  field(DESC, "DB_HEATING_R_FHR05:selector_local")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.selector_local")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FHR05:OA")
+{
+  field(DESC, "DB_HEATING_R_FHR05:O_AUTO")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.O_AUTO")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FHR05:OM")
+{
+  field(DESC, "DB_HEATING_R_FHR05:O_MAN")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.O_MAN")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FHR05:OHCNTT")
+{
+  field(DESC, "DB_HEATING_R_FHR05:O_H_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.O_H_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FHR05:OHCNTP")
+{
+  field(DESC, "DB_HEATING_R_FHR05:O_H_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.O_H_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(longin, "RFCOOL:FHR05:OOCNTT")
+{
+  field(DESC, "DB_HEATING_R_FHR05:O_O_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.O_O_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(longin, "RFCOOL:FHR05:OOCNTP")
+{
+  field(DESC, "DB_HEATING_R_FHR05:O_O_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.O_O_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FHR05:ICMDAM")
+{
+  field(DESC, "DB_HEATING_R_FHR05:I_CMD_AUTO_MAN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.I_CMD_AUTO_MAN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FHR05:ICMDMRUN")
+{
+  field(DESC, "DB_HEATING_R_FHR05:I_CMD_MAN_RUN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.I_CMD_MAN_RUN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FHR05:ICMDMS")
+{
+  field(DESC, "DB_HEATING_R_FHR05:I_CMD_MAN_STOP")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.I_CMD_MAN_STOP")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FHR05:ICMDR")
+{
+  field(DESC, "DB_HEATING_R_FHR05:I_CMD_RESET")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.I_CMD_RESET")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FHR05:ICMDRHRP")
+{
+  field(DESC, "DB_HEATING_R_FHR05:I_CMD_RESET_HR_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.I_CMD_RESET_HR_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FHR05:ICMDROPP")
+{
+  field(DESC, "DB_HEATING_R_FHR05:I_CMD_RESET_OP_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.I_CMD_RESET_OP_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(ai, "RFCOOL:IB1:OSpeedhz")
+{
+  field(DESC, "DB_Drive_ABB_interface_B1:O_Speed_hz")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Drive_ABB_interface_B1.O_Speed_hz")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:IB1:Ospeedrpm")
+{
+  field(DESC, "DB_Drive_ABB_interface_B1:O_speed_rpm")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Drive_ABB_interface_B1.O_speed_rpm")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:IB1:Otorque")
+{
+  field(DESC, "DB_Drive_ABB_interface_B1:O_torque")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Drive_ABB_interface_B1.O_torque")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:IB1:Ocurrent")
+{
+  field(DESC, "DB_Drive_ABB_interface_B1:O_current")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Drive_ABB_interface_B1.O_current")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:IB1:Opower")
+{
+  field(DESC, "DB_Drive_ABB_interface_B1:O_power")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Drive_ABB_interface_B1.O_power")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:IB1:Otempunit")
+{
+  field(DESC, "DB_Drive_ABB_interface_B1:O_temp_unit")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Drive_ABB_interface_B1.O_temp_unit")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:IB1:IcmdRefspeed")
+{
+  field(DESC, "IB1:I_cmd_Ref_speed_hz")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Drive_ABB_interface_B1.I_cmd_Ref_speed")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:IB2:OSpeedhz")
+{
+  field(DESC, "DB_Drive_ABB_interface_B2:O_Speed_hz")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Drive_ABB_interface_B2.O_Speed_hz")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:IB2:Ospeedrpm")
+{
+  field(DESC, "DB_Drive_ABB_interface_B2:O_speed_rpm")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Drive_ABB_interface_B2.O_speed_rpm")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:IB2:Otorque")
+{
+  field(DESC, "DB_Drive_ABB_interface_B2:O_torque")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Drive_ABB_interface_B2.O_torque")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:IB2:Ocurrent")
+{
+  field(DESC, "DB_Drive_ABB_interface_B2:O_current")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Drive_ABB_interface_B2.O_current")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:IB2:Opower")
+{
+  field(DESC, "DB_Drive_ABB_interface_B2:O_power")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Drive_ABB_interface_B2.O_power")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:IB2:Otempunit")
+{
+  field(DESC, "DB_Drive_ABB_interface_B2:O_temp_unit")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Drive_ABB_interface_B2.O_temp_unit")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:IB2:IcmdRefspeed")
+{
+  field(DESC, "IB2:I_cmd_Ref_speed_hz")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Drive_ABB_interface_B2.I_cmd_Ref_speed")
+  field(PREC,"2")
+}
+
+record(bi, "RFCOOL:FCV02:OALARM")
+{
+  field(DESC, "DB_FCV02:O_ALARM")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV02.O_ALARM")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:DB_FCV02:O_OPENED")
+{
+  field(DESC, "DB_FCV02:O_OPENED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV02.O_OPENED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:DB_FCV02:O_CLOSED")
+{
+  field(DESC, "DB_FCV02:O_CLOSED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV02.O_CLOSED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCV02:OA")
+{
+  field(DESC, "DB_FCV02:O_AUTO")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV02.O_AUTO")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCV02:OM")
+{
+  field(DESC, "DB_FCV02:O_MAN")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV02.O_MAN")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FCV02:ICMDAM")
+{
+  field(DESC, "DB_FCV02:I_CMD_AUTO_MAN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV02.I_CMD_AUTO_MAN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCV02:ICMDMOPEN")
+{
+  field(DESC, "DB_FCV02:I_CMD_MAN_OPEN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV02.I_CMD_MAN_OPEN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCV02:ICMDMCLOSE")
+{
+  field(DESC, "DB_FCV02:I_CMD_MAN_CLOSE")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV02.I_CMD_MAN_CLOSE")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCV02:ICMDR")
+{
+  field(DESC, "DB_FCV02:I_CMD_RESET")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV02.I_CMD_RESET")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCV02:ICMDROPP")
+{
+  field(DESC, "DB_FCV02:I_CMD_RESET_OP_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV02.I_CMD_RESET_OP_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bi, "RFCOOL:FCV03:OALARM")
+{
+  field(DESC, "DB_FCV03:O_ALARM")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV03.O_ALARM")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:DB_FCV03:O_OPENED")
+{
+  field(DESC, "DB_FCV03:O_OPENED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV03.O_OPENED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:DB_FCV03:O_CLOSED")
+{
+  field(DESC, "DB_FCV03:O_CLOSED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV03.O_CLOSED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCV03:OA")
+{
+  field(DESC, "DB_FCV03:O_AUTO")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV03.O_AUTO")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCV03:OM")
+{
+  field(DESC, "DB_FCV03:O_MAN")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV03.O_MAN")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FCV03:ICMDAM")
+{
+  field(DESC, "DB_FCV03:I_CMD_AUTO_MAN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV03.I_CMD_AUTO_MAN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCV03:ICMDMOPEN")
+{
+  field(DESC, "DB_FCV03:I_CMD_MAN_OPEN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV03.I_CMD_MAN_OPEN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCV03:ICMDMCLOSE")
+{
+  field(DESC, "DB_FCV03:I_CMD_MAN_CLOSE")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV03.I_CMD_MAN_CLOSE")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCV03:ICMDR")
+{
+  field(DESC, "DB_FCV03:I_CMD_RESET")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV03.I_CMD_RESET")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCV03:ICMDROPP")
+{
+  field(DESC, "DB_FCV03:I_CMD_RESET_OP_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV03.I_CMD_RESET_OP_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bi, "RFCOOL:FCV04:OALARM")
+{
+  field(DESC, "DB_FCV04:O_ALARM")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV04.O_ALARM")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:DB_FCV04:O_OPENED")
+{
+  field(DESC, "DB_FCV04:O_OPENED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV04.O_OPENED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:DB_FCV04:O_CLOSED")
+{
+  field(DESC, "DB_FCV04:O_CLOSED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV04.O_CLOSED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCV04:OA")
+{
+  field(DESC, "DB_FCV04:O_AUTO")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV04.O_AUTO")
+  field(SCAN, "I/O Intr")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCV04:OM")
+{
+  field(DESC, "DB_FCV04:O_MAN")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV04.O_MAN")
+  field(SCAN, "I/O Intr")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FCV04:ICMDMOPEN")
+{
+  field(DESC, "DB_FCV04:I_CMD_MAN_OPEN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV04.I_CMD_MAN_OPEN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCV04:ICMDMCLOSE")
+{
+  field(DESC, "DB_FCV04:I_CMD_MAN_CLOSE")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV04.I_CMD_MAN_CLOSE")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCV04:ICMDR")
+{
+  field(DESC, "DB_FCV04:I_CMD_RESET")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV04.I_CMD_RESET")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCV04:ICMDROPP")
+{
+  field(DESC, "DB_FCV04:I_CMD_RESET_OP_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV04.I_CMD_RESET_OP_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bi, "RFCOOL:FCV05:OALARM")
+{
+  field(DESC, "DB_FCV05:O_ALARM")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV05.O_ALARM")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:DB_FCV05:O_OPENED")
+{
+  field(DESC, "DB_FCV05:O_OPENED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV05.O_OPENED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:DB_FCV05:O_CLOSED")
+{
+  field(DESC, "DB_FCV05:O_CLOSED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV05.O_CLOSED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCV05:OA")
+{
+  field(DESC, "DB_FCV05:O_AUTO")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV05.O_AUTO")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCV05:OM")
+{
+  field(DESC, "DB_FCV05:O_MAN")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV05.O_MAN")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FCV05:ICMDAM")
+{
+  field(DESC, "DB_FCV05:I_CMD_AUTO_MAN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV05.I_CMD_AUTO_MAN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCV05:ICMDMOPEN")
+{
+  field(DESC, "DB_FCV05:I_CMD_MAN_OPEN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV05.I_CMD_MAN_OPEN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCV05:ICMDMCLOSE")
+{
+  field(DESC, "DB_FCV05:I_CMD_MAN_CLOSE")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV05.I_CMD_MAN_CLOSE")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCV05:ICMDR")
+{
+  field(DESC, "DB_FCV05:I_CMD_RESET")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV05.I_CMD_RESET")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FCV05:ICMDROPP")
+{
+  field(DESC, "DB_FCV05:I_CMD_RESET_OP_P")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV05.I_CMD_RESET_OP_P")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bi, "RFCOOL:FWV01:OALARM")
+{
+  field(DESC, "DB_FWV01:O_ALARM")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FWV01.O_ALARM")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FWV01:OOPENED")
+{
+  field(DESC, "DB_FWV01:O_OPENED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FWV01.O_OPENED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FWV01:OCLOSED")
+{
+  field(DESC, "DB_FWV01:O_CLOSED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FWV01.O_CLOSED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FWV01:OA")
+{
+  field(DESC, "DB_FWV01:O_AUTO")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FWV01.O_AUTO")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FWV01:OM")
+{
+  field(DESC, "DB_FWV01:O_MAN")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FWV01.O_MAN")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bo, "RFCOOL:FWV01:ICMDAM")
+{
+  field(DESC, "DB_FWV01:I_CMD_AUTO_MAN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FWV01.I_CMD_AUTO_MAN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:FWV01:ICMDR")
+{
+  field(DESC, "DB_FWV01:I_CMD_RESET")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FWV01.I_CMD_RESET")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(ao, "RFCOOL:FWV01:ICMDREFERENCE")
+{
+  field(DESC, "DB_FWV01:I_CMD_REFERENCE")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FWV01.I_CMD_REFERENCE")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FHV18:O_OPENED")
+{
+  field(DESC, "DB_limit_switch_FHV18:O_OPENED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_limit_switch_FHV18.O_OPENED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FHV18:O_CLOSED")
+{
+  field(DESC, "DB_limit_switch_FHV18:O_CLOSED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_limit_switch_FHV18.O_CLOSED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FHV17:O_OPENED")
+{
+  field(DESC, "DB_limit_switch_FHV17:O_OPENED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_limit_switch_FHV17.O_OPENED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FHV17:O_CLOSED")
+{
+  field(DESC, "DB_limit_switch_FHV17:O_CLOSED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_limit_switch_FHV17.O_CLOSED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT01:OALRHH")
+{
+  field(DESC, "DB_FTT01:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT01.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT01:OALRH")
+{
+  field(DESC, "DB_FTT01:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT01.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT01:OALRL")
+{
+  field(DESC, "DB_FTT01:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT01.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT01:OALRLL")
+{
+  field(DESC, "DB_FTT01:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT01.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT01:OALRAI")
+{
+  field(DESC, "DB_FTT01:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT01.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FTT01:OEU")
+{
+  field(DESC, "DB_FTT01:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT01.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FTT01:OmA")
+{
+  field(DESC, "DB_FTT01:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT01.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FTT01:SPALRHH")
+{
+  field(DESC, "DB_FTT01:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT01.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT01:SPALRH")
+{
+  field(DESC, "DB_FTT01:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT01.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT01:SPALRL")
+{
+  field(DESC, "DB_FTT01:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT01.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT01:SPALRLL")
+{
+  field(DESC, "DB_FTT01:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT01.SP_ALR_LL")
+  field(PREC,"3")
+}
+
+record(bi, "RFCOOL:FTT02:OALRHH")
+{
+  field(DESC, "DB_FTT02:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT02.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT02:OALRH")
+{
+  field(DESC, "DB_FTT02:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT02.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT02:OALRL")
+{
+  field(DESC, "DB_FTT02:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT02.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT02:OALRLL")
+{
+  field(DESC, "DB_FTT02:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT02.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT02:OALRAI")
+{
+  field(DESC, "DB_FTT02:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT02.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FTT02:OEU")
+{
+  field(DESC, "DB_FTT02:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT02.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FTT02:OmA")
+{
+  field(DESC, "DB_FTT02:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT02.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FTT02:SPALRHH")
+{
+  field(DESC, "DB_FTT02:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT02.SP_ALR_HH")
+  field(PREC,"3")
+} 
+record(ao, "RFCOOL:FTT02:SPALRH")
+{
+  field(DESC, "DB_FTT02:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT02.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT02:SPALRL")
+{
+  field(DESC, "DB_FTT02:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT02.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT02:SPALRLL")
+{
+  field(DESC, "DB_FTT02:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT02.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FTT03:OALRHH")
+{
+  field(DESC, "DB_FTT03:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT03.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT03:OALRH")
+{
+  field(DESC, "DB_FTT03:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT03.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT03:OALRL")
+{
+  field(DESC, "DB_FTT03:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT03.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT03:OALRLL")
+{
+  field(DESC, "DB_FTT03:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT03.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT03:OALRAI")
+{
+  field(DESC, "DB_FTT03:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT03.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FTT03:OEU")
+{
+  field(DESC, "DB_FTT03:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT03.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FTT03:OmA")
+{
+  field(DESC, "DB_FTT03:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT03.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FTT03:SPALRHH")
+{
+  field(DESC, "DB_FTT03:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT03.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT03:SPALRH")
+{
+  field(DESC, "DB_FTT03:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT03.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT03:SPALRL")
+{
+  field(DESC, "DB_FTT03:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT03.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT03:SPALRLL")
+{
+  field(DESC, "DB_FTT03:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT03.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FTT06:OALRHH")
+{
+  field(DESC, "DB_FTT06:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT06.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT06:OALRH")
+{
+  field(DESC, "DB_FTT06:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT06.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT06:OALRL")
+{
+  field(DESC, "DB_FTT06:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT06.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT06:OALRLL")
+{
+  field(DESC, "DB_FTT06:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT06.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT06:OALRAI")
+{
+  field(DESC, "DB_FTT06:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT06.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FTT06:OEU")
+{
+  field(DESC, "DB_FTT06:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT06.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FTT06:OmA")
+{
+  field(DESC, "DB_FTT06:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT06.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FTT06:SPALRHH")
+{
+  field(DESC, "DB_FTT06:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT06.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT06:SPALRH")
+{
+  field(DESC, "DB_FTT06:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT06.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT06:SPALRL")
+{
+  field(DESC, "DB_FTT06:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT06.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT06:SPALRLL")
+{
+  field(DESC, "DB_FTT06:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT06.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FTT07:OALRHH")
+{
+  field(DESC, "DB_FTT07:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT07.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT07:OALRH")
+{
+  field(DESC, "DB_FTT07:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT07.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT07:OALRL")
+{
+  field(DESC, "DB_FTT07:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT07.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT07:OALRLL")
+{
+  field(DESC, "DB_FTT07:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT07.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT07:OALRAI")
+{
+  field(DESC, "DB_FTT07:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT07.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FTT07:OEU")
+{
+  field(DESC, "DB_FTT07:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT07.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FTT07:OmA")
+{
+  field(DESC, "DB_FTT07:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT07.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FTT07:SPALRHH")
+{
+  field(DESC, "DB_FTT07:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT07.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT07:SPALRH")
+{
+  field(DESC, "DB_FTT07:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT07.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT07:SPALRL")
+{
+  field(DESC, "DB_FTT07:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT07.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT07:SPALRLL")
+{
+  field(DESC, "DB_FTT07:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT07.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FTT08:OALRHH")
+{
+  field(DESC, "DB_FTT08:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT08.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(ZNAM,"OFF")
+  field(ONAM,"ON")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT08:OALRH")
+{
+  field(DESC, "DB_FTT08:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT08.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT08:OALRL")
+{
+  field(DESC, "DB_FTT08:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT08.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT08:OALRLL")
+{
+  field(DESC, "DB_FTT08:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT08.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT08:OALRAI")
+{
+  field(DESC, "DB_FTT08:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT08.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FTT08:OEU")
+{
+  field(DESC, "DB_FTT08:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT08.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FTT08:OmA")
+{
+  field(DESC, "DB_FTT08:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT08.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FTT08:SPALRHH")
+{
+  field(DESC, "DB_FTT08:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT08.SP_ALR_HH")
+  field(PREC, "3")
+}
+record(ao, "RFCOOL:FTT08:SPALRH")
+{
+  field(DESC, "DB_FTT08:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT08.SP_ALR_H")
+  field(PREC, "3")
+}
+record(ao, "RFCOOL:FTT08:SPALRL")
+{
+  field(DESC, "DB_FTT08:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT08.SP_ALR_L")
+  field(PREC, "3")
+}
+record(ao, "RFCOOL:FTT08:SPALRLL")
+{
+  field(DESC, "DB_FTT08:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT08.SP_ALR_LL")
+  field(PREC, "3")
+}
+record(bi, "RFCOOL:FTT10:OALRHH")
+{
+  field(DESC, "DB_FTT10:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT10.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT10:OALRH")
+{
+  field(DESC, "DB_FTT10:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT10.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT10:OALRL")
+{
+  field(DESC, "DB_FTT10:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT10.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT10:OALRLL")
+{
+  field(DESC, "DB_FTT10:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT10.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT10:OALRAI")
+{
+  field(DESC, "DB_FTT10:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT10.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FTT10:OEU")
+{
+  field(DESC, "DB_FTT10:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT10.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PREC, "2")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FTT10:OmA")
+{
+  field(DESC, "DB_FTT10:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT10.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PREC, "2")
+  field(PINI, "YES")
+}
+record(ao, "RFCOOL:FTT10:SPALRHH")
+{
+  field(DESC, "DB_FTT10:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT10.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT10:SPALRH")
+{
+  field(DESC, "DB_FTT10:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT10.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT10:SPALRL")
+{
+  field(DESC, "DB_FTT10:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT10.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT10:SPALRLL")
+{
+  field(DESC, "DB_FTT10:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT10.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FTT09:OALRHH")
+{
+  field(DESC, "DB_FTT09:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT09.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT09:OALRH")
+{
+  field(DESC, "DB_FTT09:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT09.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT09:OALRL")
+{
+  field(DESC, "DB_FTT09:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT09.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT09:OALRLL")
+{
+  field(DESC, "DB_FTT09:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT09.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT09:OALRAI")
+{
+  field(DESC, "DB_FTT09:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT09.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FTT09:OEU")
+{
+  field(DESC, "DB_FTT09:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT09.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FTT09:OmA")
+{
+  field(DESC, "DB_FTT09:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT09.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FTT09:SPALRHH")
+{
+  field(DESC, "DB_FTT09:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT09.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT09:SPALRH")
+{
+  field(DESC, "DB_FTT09:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT09.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT09:SPALRL")
+{
+  field(DESC, "DB_FTT09:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT09.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT09:SPALRLL")
+{
+  field(DESC, "DB_FTT09:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT09.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FTT11:OALRHH")
+{
+  field(DESC, "DB_FTT11:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT11.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT11:OALRH")
+{
+  field(DESC, "DB_FTT11:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT11.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bi, "RFCOOL:FTT11:OALRL")
+{
+  field(DESC, "DB_FTT11:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT11.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT11:OALRLL")
+{
+  field(DESC, "DB_FTT11:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT11.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FTT11:OALRAI")
+{
+  field(DESC, "DB_FTT11:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT11.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FTT11:OEU")
+{
+  field(DESC, "DB_FTT11:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT11.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FTT11:OmA")
+{
+  field(DESC, "DB_FTT11:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT11.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FTT11:SPALRHH")
+{
+  field(DESC, "DB_FTT11:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT11.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT11:SPALRH")
+{
+  field(DESC, "DB_FTT11:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT11.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT11:SPALRL")
+{
+  field(DESC, "DB_FTT11:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT11.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FTT11:SPALRLL")
+{
+  field(DESC, "DB_FTT11:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FTT11.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FPT01:OALRHH")
+{
+  field(DESC, "DB_FPT01:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT01.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FPT01:OALRH")
+{
+  field(DESC, "DB_FPT01:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT01.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FPT01:OALRL")
+{
+  field(DESC, "DB_FPT01:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT01.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FPT01:OALRLL")
+{
+  field(DESC, "DB_FPT01:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT01.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FPT01:OALRAI")
+{
+  field(DESC, "DB_FPT01:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT01.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FPT01:OEU")
+{
+  field(DESC, "DB_FPT01:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT01.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FPT01:OmA")
+{
+  field(DESC, "DB_FPT01:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT01.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FPT01:SPALRHH")
+{
+  field(DESC, "DB_FPT01:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FPT01.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FPT01:SPALRH")
+{
+  field(DESC, "DB_FPT01:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FPT01.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FPT01:SPALRL")
+{
+  field(DESC, "DB_FPT01:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FPT01.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FPT01:SPALRLL")
+{
+  field(DESC, "DB_FPT01:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FPT01.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FPT02:OALRHH")
+{
+  field(DESC, "DB_FPT02:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT02.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FPT02:OALRH")
+{
+  field(DESC, "DB_FPT02:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT02.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FPT02:OALRL")
+{
+  field(DESC, "DB_FPT02:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT02.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FPT02:OALRLL")
+{
+  field(DESC, "DB_FPT02:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT02.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FPT02:OALRAI")
+{
+  field(DESC, "DB_FPT02:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT02.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FPT02:OEU")
+{
+  field(DESC, "DB_FPT02:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT02.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FPT02:OmA")
+{
+  field(DESC, "DB_FPT02:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT02.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FPT02:SPALRHH")
+{
+  field(DESC, "DB_FPT02:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FPT02.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FPT02:SPALRH")
+{
+  field(DESC, "DB_FPT02:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FPT02.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FPT02:SPALRL")
+{
+  field(DESC, "DB_FPT02:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FPT02.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FPT02:SPALRLL")
+{
+  field(DESC, "DB_FPT02:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FPT02.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FPT03:OALRHH")
+{
+  field(DESC, "DB_FPT03:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT03.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FPT03:OALRH")
+{
+  field(DESC, "DB_FPT03:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT03.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FPT03:OALRL")
+{
+  field(DESC, "DB_FPT03:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT03.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FPT03:OALRLL")
+{
+  field(DESC, "DB_FPT03:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT03.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FPT03:OALRAI")
+{
+  field(DESC, "DB_FPT03:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT03.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FPT03:OEU")
+{
+  field(DESC, "DB_FPT03:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT03.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FPT03:OmA")
+{
+  field(DESC, "DB_FPT03:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT03.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FPT03:SPALRHH")
+{
+  field(DESC, "DB_FPT03:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FPT03.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FPT03:SPALRH")
+{
+  field(DESC, "DB_FPT03:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FPT03.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FPT03:SPALRL")
+{
+  field(DESC, "DB_FPT03:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FPT03.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FPT03:SPALRLL")
+{
+  field(DESC, "DB_FPT03:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FPT03.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FPT04:OALRHH")
+{
+  field(DESC, "DB_FPT04:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT04.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FPT04:OALRH")
+{
+  field(DESC, "DB_FPT04:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT04.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FPT04:OALRL")
+{
+  field(DESC, "DB_FPT04:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT04.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FPT04:OALRLL")
+{
+  field(DESC, "DB_FPT04:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT04.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FPT04:OALRAI")
+{
+  field(DESC, "DB_FPT04:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT04.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FPT04:OEU")
+{
+  field(DESC, "DB_FPT04:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT04.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FPT04:OmA")
+{
+  field(DESC, "DB_FPT04:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT04.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FPT04:SPALRHH")
+{
+  field(DESC, "DB_FPT04:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FPT04.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FPT04:SPALRH")
+{
+  field(DESC, "DB_FPT04:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FPT04.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FPT04:SPALRL")
+{
+  field(DESC, "DB_FPT04:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FPT04.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FPT04:SPALRLL")
+{
+  field(DESC, "DB_FPT04:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FPT04.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FDP05:OALRHH")
+{
+  field(DESC, "DB_FDP05:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FDP05.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FDP05:OALRH")
+{
+  field(DESC, "DB_FDP05:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FDP05.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FDP05:OALRL")
+{
+  field(DESC, "DB_FDP05:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FDP05.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FDP05:OALRLL")
+{
+  field(DESC, "DB_FDP05:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FDP05.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FDP05:OALRAI")
+{
+  field(DESC, "DB_FDP05:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FDP05.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FDP05:OEU")
+{
+  field(DESC, "DB_FDP05:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FDP05.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FDP05:OmA")
+{
+  field(DESC, "DB_FDP05:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FDP05.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FDP05:SPALRHH")
+{
+  field(DESC, "DB_FDP05:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FDP05.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FDP05:SPALRH")
+{
+  field(DESC, "DB_FDP05:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FDP05.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FDP05:SPALRL")
+{
+  field(DESC, "DB_FDP05:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FDP05.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FDP05:SPALRLL")
+{
+  field(DESC, "DB_FDP05:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FDP05.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FFM04:OALRHH")
+{
+  field(DESC, "DB_FFM04:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM04.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FFM04:OALRH")
+{
+  field(DESC, "DB_FFM04:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM04.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FFM04:OALRL")
+{
+  field(DESC, "DB_FFM04:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM04.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FFM04:OALRLL")
+{
+  field(DESC, "DB_FFM04:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM04.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FFM04:OALRAI")
+{
+  field(DESC, "DB_FFM04:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM04.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FFM04:OEU")
+{
+  field(DESC, "DB_FFM04:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM04.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FFM04:OmA")
+{
+  field(DESC, "DB_FFM04:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM04.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FFM04:SPALRHH")
+{
+  field(DESC, "DB_FFM04:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FFM04.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FFM04:SPALRH")
+{
+  field(DESC, "DB_FFM04:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FFM04.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FFM04:SPALRL")
+{
+  field(DESC, "DB_FFM04:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FFM04.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FFM04:SPALRLL")
+{
+  field(DESC, "DB_FFM04:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FFM04.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FFM05:OALRHH")
+{
+  field(DESC, "DB_FFM05:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM05.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FFM05:OALRH")
+{
+  field(DESC, "DB_FFM05:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM05.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FFM05:OALRL")
+{
+  field(DESC, "DB_FFM05:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM05.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FFM05:OALRLL")
+{
+  field(DESC, "DB_FFM05:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM05.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FFM05:OALRAI")
+{
+  field(DESC, "DB_FFM05:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM05.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FFM05:OEU")
+{
+  field(DESC, "DB_FFM05:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM05.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FFM05:OmA")
+{
+  field(DESC, "DB_FFM05:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM05.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FFM05:SPALRHH")
+{
+  field(DESC, "DB_FFM05:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FFM05.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FFM05:SPALRH")
+{
+  field(DESC, "DB_FFM05:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FFM05.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FFM05:SPALRL")
+{
+  field(DESC, "DB_FFM05:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FFM05.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FFM05:SPALRLL")
+{
+  field(DESC, "DB_FFM05:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FFM05.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FFM06:OALRHH")
+{
+  field(DESC, "DB_FFM06:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM06.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FFM06:OALRH")
+{
+  field(DESC, "DB_FFM06:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM06.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FFM06:OALRL")
+{
+  field(DESC, "DB_FFM06:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM06.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FFM06:OALRLL")
+{
+  field(DESC, "DB_FFM06:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM06.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FFM06:OALRAI")
+{
+  field(DESC, "DB_FFM06:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM06.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FFM06:OEU")
+{
+  field(DESC, "DB_FFM06:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM06.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FFM06:OmA")
+{
+  field(DESC, "DB_FFM06:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM06.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FFM06:SPALRHH")
+{
+  field(DESC, "DB_FFM06:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FFM06.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FFM06:SPALRH")
+{
+  field(DESC, "DB_FFM06:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FFM06.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FFM06:SPALRL")
+{
+  field(DESC, "DB_FFM06:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FFM06.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FFM06:SPALRLL")
+{
+  field(DESC, "DB_FFM06:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FFM06.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FFM07:OALRHH")
+{
+  field(DESC, "DB_FFM07:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM07.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FFM07:OALRH")
+{
+  field(DESC, "DB_FFM07:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM07.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FFM07:OALRL")
+{
+  field(DESC, "DB_FFM07:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM07.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FFM07:OALRLL")
+{
+  field(DESC, "DB_FFM07:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM07.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FFM07:OALRAI")
+{
+  field(DESC, "DB_FFM07:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM07.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FFM07:OEU")
+{
+  field(DESC, "DB_FFM07:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM07.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FFM07:OmA")
+{
+  field(DESC, "DB_FFM07:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM07.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FFM07:SPALRHH")
+{
+  field(DESC, "DB_FFM07:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FFM07.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FFM07:SPALRH")
+{
+  field(DESC, "DB_FFM07:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FFM07.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FFM07:SPALRL")
+{
+  field(DESC, "DB_FFM07:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FFM07.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FFM07:SPALRLL")
+{
+  field(DESC, "DB_FFM07:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FFM07.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FCM01:OALRHH")
+{
+  field(DESC, "DB_FCM01:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM01.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCM01:OALRH")
+{
+  field(DESC, "DB_FCM01:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM01.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCM01:OALRL")
+{
+  field(DESC, "DB_FCM01:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM01.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCM01:OALRLL")
+{
+  field(DESC, "DB_FCM01:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM01.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCM01:OALRAI")
+{
+  field(DESC, "DB_FCM01:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM01.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FCM01:OEU")
+{
+  field(DESC, "DB_FCM01:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM01.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FCM01:OmA")
+{
+  field(DESC, "DB_FCM01:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM01.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FCM01:SPALRHH")
+{
+  field(DESC, "DB_FCM01:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCM01.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FCM01:SPALRH")
+{
+  field(DESC, "DB_FCM01:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCM01.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FCM01:SPALRL")
+{
+  field(DESC, "DB_FCM01:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCM01.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FCM01:SPALRLL")
+{
+  field(DESC, "DB_FCM01:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCM01.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FCM02:OALRHH")
+{
+  field(DESC, "DB_FCM02:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM02.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCM02:OALRH")
+{
+  field(DESC, "DB_FCM02:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM02.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCM02:OALRL")
+{
+  field(DESC, "DB_FCM02:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM02.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCM02:OALRLL")
+{
+  field(DESC, "DB_FCM02:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM02.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FCM02:OALRAI")
+{
+  field(DESC, "DB_FCM02:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM02.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FCM02:OEU")
+{
+  field(DESC, "DB_FCM02:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM02.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FCM02:OmA")
+{
+  field(DESC, "DB_FCM02:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM02.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ao, "RFCOOL:FCM02:SPALRHH")
+{
+  field(DESC, "DB_FCM02:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCM02.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FCM02:SPALRH")
+{
+  field(DESC, "DB_FCM02:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCM02.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FCM02:SPALRL")
+{
+  field(DESC, "DB_FCM02:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCM02.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FCM02:SPALRLL")
+{
+  field(DESC, "DB_FCM02:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCM02.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:FW01:OALRHH")
+{
+  field(DESC, "DB_FW01:O_ALR_HH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FW01.O_ALR_HH")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FW01:OALRH")
+{
+  field(DESC, "DB_FW01:O_ALR_H")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FW01.O_ALR_H")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FW01:OALRL")
+{
+  field(DESC, "DB_FW01:O_ALR_L")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FW01.O_ALR_L")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FW01:OALRLL")
+{
+  field(DESC, "DB_FW01:O_ALR_LL")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FW01.O_ALR_LL")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:FW01:OALRAI")
+{
+  field(DESC, "DB_FW01:O_ALR_AI")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FW01.O_ALR_AI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:FW01:OEU")
+{
+  field(DESC, "DB_FW01:O_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FW01.O_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(ai, "RFCOOL:FW01:OmA")
+{
+  field(DESC, "DB_FW01:O_mA")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FW01.O_mA")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FW01:SPALRHH")
+{
+  field(DESC, "DB_FW01:SP_ALR_HH")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FW01.SP_ALR_HH")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FW01:SPALRH")
+{
+  field(DESC, "DB_FW01:SP_ALR_H")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FW01.SP_ALR_H")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FW01:SPALRL")
+{
+  field(DESC, "DB_FW01:SP_ALR_L")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FW01.SP_ALR_L")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:FW01:SPALRLL")
+{
+  field(DESC, "DB_FW01:SP_ALR_LL")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FW01.SP_ALR_LL")
+  field(PREC,"3")
+}
+record(bo, "RFCOOL:SP:enableFHR05")
+{
+  field(DESC, "FHR05:CMD_ENABLE")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.enable_FHR05")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:SP:enableFHR01234")
+{
+  field(DESC, "FHR01_2_3_4:CMD_ENABLE")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.enable_FHR01_2_3_4")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:SP:startstopsystem")
+{
+  field(DESC, "START_STOP_SYSTEM")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.start_stop_system")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:SP:emergreset")
+{
+  field(DESC, "EMERGENCY_RESET")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.emerg_reset")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(ao, "RFCOOL:SP:TorqueFactorc")
+{
+  field(DESC, "TORQUE_FACTOR")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.Torque_Factor_c")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:SP:Torquemin")
+{
+  field(DESC, "TORQUE_MIN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.Torque_min")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:SP:Torquemax")
+{
+  field(DESC, "TORQUE_MAX")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.Torque_max")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:SP:Minheatingmode")
+{
+  field(DESC, "MIN_SP_HEATING")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.Min_sp_heating_mode")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:SP:Maxheatingmode")
+{
+  field(DESC, "MAX_SP_HEATING")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.Max_sp_heating_mode")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:SP:FWP02minspeed")
+{
+  field(DESC, "FWP02:MIN_SPEED")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.FWP02_min_speed")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:SP:FWP02maxspeed")
+{
+  field(DESC, "FWP02:MAX_SPEED")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.FWP02_max_speed")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:SP:FWP01minspeed")
+{
+  field(DESC, "FWP01:MIN_SPEED")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.FWP01_min_speed")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:SP:FWP01maxspeed")
+{
+  field(DESC, "FWP01:MAX_SPEED")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.FWP01_max_speed")
+  field(PREC,"3")
+}
+record(bi, "RFCOOL:modeAntifreeze")
+{
+  field(DESC, "ANTIFREEZE_MODE")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.Antifreeze_mode")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:modeHeating")
+{
+  field(DESC, "HEATING_MODE")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.Heating_mode")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:systemrunning")
+{
+  field(DESC, "SYSTEM_RUNNING")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.system_running")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:ES")
+{
+  field(DESC, "EMERGENCY_STOP_ACTIVATED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.emergency_stop")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(longin, "RFCOOL:ESfaultword")
+{
+  field(DESC, "EMERGENCY_STOP_FAULT_WORD")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.emergency_stop_fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(bi, "RFCOOL:onholidays")
+{
+  field(DESC, "HOLIDAYS_ON")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.Holiday")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(ai, "RFCOOL:datetime:hourr")
+{
+  field(DESC, "DB_DATE_TIME:PLC_HOUR")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_date_time.hour_r")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record(longin, "RFCOOL:datetime:second")
+{
+  field(DESC, "DB_DATE_TIME:PLC_SECOND")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_date_time.second")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(longin, "RFCOOL:datetime:dayofweek")
+{
+  field(DESC, "DB_DATE_TIME:PLC_DAY_OF_WEEK")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_date_time.day_of_week")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(longin, "RFCOOL:datetime:day")
+{
+  field(DESC, "DB_DATE_TIME:PLC_DAY")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_date_time.day")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(longin, "RFCOOL:datetime:month")
+{
+  field(DESC, "DB_DATE_TIME:PLC_MONTH")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_date_time.month")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(longin, "RFCOOL:datetime:year")
+{
+  field(DESC, "DB_DATE_TIME:PLC_YEAR")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_date_time.year")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record(longout, "RFCOOL:SP:H[1]:dayon")
+{
+  field(DESC, "HOUR_SETPOINT[1]:DAY_ON")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[1].day_on")
+}
+record(longout, "RFCOOL:SP:H[1]:dayoff")
+{
+  field(DESC, "HOUR_SETPOINT[1]:DAY_OFF")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[1].day_off")
+}
+record(ao, "RFCOOL:SP:H[1]:houron")
+{
+  field(DESC, "HOUR_SETPOINT[1]:HOUR_ON")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[1].hour_on")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:SP:H[1]:houroff")
+{
+  field(DESC, "HOUR_SETPOINT[1]:HOUR_OFF")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[1].hour_off")
+  field(PREC,"3")
+}
+
+record(longout, "RFCOOL:SP:H[2]:dayon")
+{
+  field(DESC, "HOUR_SETPOINT[2]:DAY_ON")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[2].day_on")
+}
+record(longout, "RFCOOL:SP:H[2]:dayoff")
+{
+  field(DESC, "HOUR_SETPOINT[2]:DAY_OFF")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[2].day_off")
+}
+record(ao, "RFCOOL:SP:H[2]:houron")
+{
+  field(DESC, "HOUR_SETPOINT[2]:HOUR_ON")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[2].hour_on")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:SP:H[2]:houroff")
+{
+  field(DESC, "HOUR_SETPOINT[2]:HOUR_OFF")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[2].hour_off")
+  field(PREC,"3")
+}
+
+record(longout, "RFCOOL:SP:H[3]:dayon")
+{
+  field(DESC, "HOUR_SETPOINT[3]:DAY_ON")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[3].day_on")
+}
+record(longout, "RFCOOL:SP:H[3]:dayoff")
+{
+  field(DESC, "HOUR_SETPOINT[3]:DAY_OFF")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[3].day_off")
+}
+record(ao, "RFCOOL:SP:H[3]:houron")
+{
+  field(DESC, "HOUR_SETPOINT[3]:HOUR_ON")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[3].hour_on")
+  field(PREC,"3")
+}
+record(ao, "RFCOOL:SP:H[3]:houroff")
+{
+  field(DESC, "HOUR_SETPOINT[3]:HOUR_OFF")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[3].hour_off")
+  field(PREC,"3")
+}
+record(longout, "RFCOOL:SP:H[4]:dayon")
+{
+  field(DESC, "HOUR_SETPOINT[4]:DAY_ON")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[4].day_on")
+}
+record(longout, "RFCOOL:SP:H[4]:dayoff")
+{
+  field(DESC, "HOUR_SETPOINT[4]:DAY_OFF")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[4].day_off")
+}
+record(ao, "RFCOOL:SP:H[4]:houron")
+{
+  field(DESC, "HOUR_SETPOINT[4]:HOUR_ON")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[4].hour_on")
+}
+record(ao, "RFCOOL:SP:H[4]:houroff")
+{
+  field(DESC, "HOUR_SETPOINT[4]:HOUR_OFF")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[4].hour_off")
+}
+record(longout, "RFCOOL:SP:HD[1]:hi")
+{
+  field(DESC, "HOOLIDAY_SETPOINT[1]:INIT_DAY")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.holydays_setpoints[1].holiday_init")
+  #field(OUT, "@DB1600,DBW56")
+}
+record(longout, "RFCOOL:SP:HD[1]:he")
+{
+  field(DESC, "HOOLIDAY_SETPOINT[1]:END_DAY")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.holydays_setpoints[1].holiday_end")
+}
+record(longout, "RFCOOL:SP:HD[1]:monthhi")
+{
+  field(DESC, "HOOLIDAY_SETPOINT[1]:MONTH_INIT")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.holydays_setpoints[1].month_holiday_init")
+  #field(OUT, "@DB1600,DBW60")
+}
+record(longout, "RFCOOL:SP:HD[1]:monthhe")
+{
+  field(DESC, "HOOLIDAY_SETPOINT[1]:MONTH_END")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.holydays_setpoints[1].month_holiday_end")
+  #field(OUT, "@DB1600,DBW62")
+}
+record(longout, "RFCOOL:SP:HD[2]:hi")
+{
+  field(DESC, "HOOLIDAY_SETPOINT[2]:INIT_DAY")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.holydays_setpoints[2].holiday_init")
+  #field(OUT, "@DB1600,DBW64")
+}
+record(longout, "RFCOOL:SP:HD[2]:he")
+{
+  field(DESC, "HOOLIDAY_SETPOINT[2]:END_DAY")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.holydays_setpoints[2].holiday_end")
+}
+record(longout, "RFCOOL:SP:HD[2]:monthhi")
+{
+  field(DESC, "HOOLIDAY_SETPOINT[2]:MONTH_INIT")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.holydays_setpoints[2].month_holiday_init")
+  #field(OUT, "@DB1600,DBW68")
+}
+record(longout, "RFCOOL:SP:HD[2]:monthhe")
+{
+  field(DESC, "HOOLIDAY_SETPOINT[2]:MONTH_END")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.holydays_setpoints[2].month_holiday_end")
+  #field(OUT, "@DB1600,DBW70")
+}
+record(longout, "RFCOOL:SP:HD[3]:hi")
+{
+  field(DESC, "HOOLIDAY_SETPOINT[3]:INIT_DAY")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.holydays_setpoints[3].holiday_init")
+  #field(OUT, "@DB1600,DBW72")
+}
+record(longout, "RFCOOL:SP:HD[3]:he")
+{
+  field(DESC, "HOOLIDAY_SETPOINT[3]:END_DAY")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.holydays_setpoints[3].holiday_end")
+}
+record(longout, "RFCOOL:SP:HD[3]:monthhi")
+{
+  field(DESC, "HOOLIDAY_SETPOINT[3]:MONTH_INIT")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.holydays_setpoints[3].month_holiday_init")
+  #field(OUT, "@DB1600,DBW76")
+}
+record(longout, "RFCOOL:SP:HD[3]:monthhe")
+{
+  field(DESC, "HOOLIDAY_SETPOINT[3]:MONTH_END")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.holydays_setpoints[3].month_holiday_end")
+  #field(OUT, "@DB1600,DBW78")
+}
+record(longout, "RFCOOL:SP:HD[4]:hi")
+{
+  field(DESC, "HOOLIDAY_SETPOINT[4]:INIT_DAY")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.holydays_setpoints[4].holiday_init")
+  #field(OUT, "@DB1600,DBW80")
+}
+record(longout, "RFCOOL:SP:HD[4]:he")
+{
+  field(DESC, "HOOLIDAY_SETPOINT[4]:END_DAY")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.holydays_setpoints[4].holiday_end")
+}
+record(longout, "RFCOOL:SP:HD[4]:monthhi")
+{
+  field(DESC, "HOOLIDAY_SETPOINT[4]:MONTH_INIT")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.holydays_setpoints[4].month_holiday_init")
+  #field(OUT, "@DB1600,DBW84")
+}
+record(longout, "RFCOOL:SP:HD[4]:monthhe")
+{
+  field(DESC, "HOOLIDAY_SETPOINT[4]:MONTH_END")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.holydays_setpoints[4].month_holiday_end")
+  #field(OUT, "@DB1600,DBW86")
+}
+record(bo, "RFCOOL:SP:H[1]:Hourenable")
+{
+  field(DESC, "HOUR_SETPOINT[1]:HOUR_ENABLE")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[1].Hour_enable")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:SP:H[2]:Hourenable")
+{
+  field(DESC, "HOUR_SETPOINT[2]:HOUR_ENABLE")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[2].Hour_enable")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:SP:H[3]:Hourenable")
+{
+  field(DESC, "HOUR_SETPOINT[3]:HOUR_ENABLE")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[3].Hour_enable")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record(bo, "RFCOOL:SP:H[4]:Hourenable")
+{
+  field(DESC, "HOUR_SETPOINT[4]:HOUR_ENABLE")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.hour_setponits[4].Hour_enable")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record (stringin, "RFCOOL:FCM01:DESCRIPTION")
+{
+  field(DESC, "DB_FCM01.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM01.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FCM01:Faultword")
+{
+  field(DESC, "DB_FCM01.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM01.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FCM01:MNEU")
+{
+  field(DESC, "DB_FCM01.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM01.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FCM01:MXEU")
+{
+  field(DESC, "DB_FCM01.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM01.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FCM01:TAG")
+{
+  field(DESC, "DB_FCM01.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM01.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FCM01")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FCM01:UNITS")
+{
+  field(DESC, "DB_FCM01.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM01.UNITS")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FCM02:DESCRIPTION")
+{
+  field(DESC, "DB_FCM02.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM02.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FCM02:Faultword")
+{
+  field(DESC, "DB_FCM02.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM02.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FCM02:MNEU")
+{
+  field(DESC, "DB_FCM02.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM02.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FCM02:MXEU")
+{
+  field(DESC, "DB_FCM02.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM02.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FCM02:TAG")
+{
+  field(DESC, "DB_FCM02.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM02.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FCM02")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FCM02:UNITS")
+{
+  field(DESC, "DB_FCM02.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCM02.UNITS")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (bo, "RFCOOL:FDP05:auxalrl")
+{
+  field(DESC, "DB_FDP05.aux_alr_l")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FDP05.aux_alr_l")
+}
+record (stringin, "RFCOOL:FDP05:DESCRIPTION")
+{
+  field(DESC, "DB_FDP05.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FDP05.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FDP05:Faultword")
+{
+  field(DESC, "DB_FDP05.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FDP05.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FDP05:MNEU")
+{
+  field(DESC, "DB_FDP05.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FDP05.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FDP05:MXEU")
+{
+  field(DESC, "DB_FDP05.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FDP05.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FDP05:TAG")
+{
+  field(DESC, "DB_FDP05.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FDP05.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FDP05")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FDP05:UNITS")
+{
+  field(DESC, "DB_FDP05.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FDP05.UNITS")
+  field(SCAN, "I/O Intr")
+  field(VAL, "bar")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FFM04:DESCRIPTION")
+{
+  field(DESC, "DB_FFM04.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM04.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FFM04:Faultword")
+{
+  field(DESC, "DB_FFM04.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM04.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FFM04:MNEU")
+{
+  field(DESC, "DB_FFM04.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM04.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FFM04:MXEU")
+{
+  field(DESC, "DB_FFM04.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM04.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FFM04:TAG")
+{
+  field(DESC, "DB_FFM04.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM04.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FFM04")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FFM04:UNITS")
+{
+  field(DESC, "DB_FFM04.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM04.UNITS")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FFM05:DESCRIPTION")
+{
+  field(DESC, "DB_FFM05.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM05.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FFM05:Faultword")
+{
+  field(DESC, "DB_FFM05.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM05.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FFM05:MNEU")
+{
+  field(DESC, "DB_FFM05.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM05.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FFM05:MXEU")
+{
+  field(DESC, "DB_FFM05.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM05.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FFM05:TAG")
+{
+  field(DESC, "DB_FFM05.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM05.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FFM05")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FFM05:UNITS")
+{
+  field(DESC, "DB_FFM05.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM05.UNITS")
+  field(SCAN, "I/O Intr")
+  field(VAL, "m3/h")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FFM06:DESCRIPTION")
+{
+  field(DESC, "DB_FFM06.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM06.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:RFFM06:Faultword")
+{
+  field(DESC, "DB_FFM06.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM06.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FFM06:MNEU")
+{
+  field(DESC, "DB_FFM06.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM06.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FFM06:MXEU")
+{
+  field(DESC, "DB_FFM06.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM06.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+
+record (stringin, "RFCOOL:FFM06:TAG")
+{
+  field(DESC, "DB_FFM06.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM06.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FFM06")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FFM06:UNITS")
+{
+  field(DESC, "DB_FFM06.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM06.UNITS")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FFM07:DESCRIPTION")
+{
+  field(DESC, "DB_FFM07.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM07.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FFM07:Faultword")
+{
+  field(DESC, "DB_FFM07.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM07.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FFM07:MNEU")
+{
+  field(DESC, "DB_FFM07.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM07.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FFM07:MXEU")
+{
+  field(DESC, "DB_FFM07.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM07.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FFM07:TAG")
+{
+  field(DESC, "DB_FFM07.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM07.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FFM07")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FFM07:UNITS")
+{
+  field(DESC, "DB_FFM07.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FFM07.UNITS")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FPT01:DESCRIPTION")
+{
+  field(DESC, "DB_FPT01.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT01.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FPT01:Faultword")
+{
+  field(DESC, "DB_FPT01.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT01.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FPT01:MNEU")
+{
+  field(DESC, "DB_FPT01.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT01.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FPT01:MXEU")
+{
+  field(DESC, "DB_FPT01.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT01.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FPT01:TAG")
+{
+  field(DESC, "DB_FPT01.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT01.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FPT01")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FPT01:UNITS")
+{
+  field(DESC, "DB_FPT01.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT01.UNITS")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FPT02:DESCRIPTION")
+{
+  field(DESC, "DB_FPT02.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT02.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FPT02:Faultword")
+{
+  field(DESC, "DB_FPT02.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT02.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FPT02:MNEU")
+{
+  field(DESC, "DB_FPT02.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT02.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FPT02:MXEU")
+{
+  field(DESC, "DB_FPT02.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT02.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FPT02:TAG")
+{
+  field(DESC, "DB_FPT02.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT02.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FPT02")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FPT02:UNITS")
+{
+  field(DESC, "DB_FPT02.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT02.UNITS")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FPT03:DESCRIPTION")
+{
+  field(DESC, "DB_FPT03.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT03.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FPT03:Faultword")
+{
+  field(DESC, "DB_FPT03.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT03.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FPT03:MNEU")
+{
+  field(DESC, "DB_FPT03.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT03.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FPT03:MXEU")
+{
+  field(DESC, "DB_FPT03.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT03.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FPT03:TAG")
+{
+  field(DESC, "DB_FPT03.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT03.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FPT03")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FPT03:UNITS")
+{
+  field(DESC, "DB_FPT03.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT03.UNITS")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FPT04:DESCRIPTION")
+{
+  field(DESC, "DB_FPT04.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT04.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FPT04:Faultword")
+{
+  field(DESC, "DB_FPT04.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT04.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FPT04:MNEU")
+{
+  field(DESC, "DB_FPT04.MN_EU")
+  field(DTYP, "opc")
+  field(INP,  "@S7300ET200M station_1.PLC_1.DB_FPT04.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FPT04:MXEU")
+{
+  field(DESC, "DB_FPT04.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT04.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FPT04:TAG")
+{
+  field(DESC, "DB_FPT04.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT04.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FPT04")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FPT04:UNITS")
+{
+  field(DESC, "DB_FPT04.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FPT04.UNITS")
+  field(SCAN, "I/O Intr")
+  field(VAL, "bar")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FTT01:DESCRIPTION")
+{
+  field(DESC, "DB_FTT01.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT01.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FTT01:Faultword")
+{
+  field(DESC, "DB_FTT01.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT01.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FTT01:MNEU")
+{
+  field(DESC, "DB_FTT01.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT01.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FTT01:MXEU")
+{
+  field(DESC, "DB_FTT01.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT01.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FTT01:TAG")
+{
+  field(DESC, "DB_FTT01.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT01.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FTT01")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FTT01:UNITS")
+{
+  field(DESC, "DB_FTT01.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT01.UNITS")
+  field(SCAN, "I/O Intr")
+  field(VAL, "C")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FTT02:DESCRIPTION")
+{
+  field(DESC, "DB_FTT02.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT02.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FTT02:Faultword")
+{
+  field(DESC, "DB_FTT02.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT02.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FTT02:MNEU")
+{
+  field(DESC, "DB_FTT02.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT02.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FTT02:MXEU")
+{
+  field(DESC, "DB_FTT02.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT02.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FTT02:TAG")
+{
+  field(DESC, "DB_FTT02.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT02.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FTT02")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FTT02:UNITS")
+{
+  field(DESC, "DB_FTT02.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT02.UNITS")
+  field(SCAN, "I/O Intr")
+  field(VAL, "C")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FTT03:DESCRIPTION")
+{
+  field(DESC, "DB_FTT03.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT03.DESCRIPTION")
+  field(SCAN, "I/O Intr")	
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FTT03:Faultword")
+{
+  field(DESC, "DB_FTT03.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT03.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FTT03:MNEU")
+{
+  field(DESC, "DB_FTT03.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT03.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FTT03:MXEU")
+{
+  field(DESC, "DB_FTT03.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT03.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FTT03:TAG")
+{
+  field(DESC, "DB_FTT03.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT03.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FTT03")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FTT03:UNITS")
+{
+  field(DESC, "DB_FTT03.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT03.UNITS")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FTT06:DESCRIPTION")
+{
+  field(DESC, "DB_FTT06.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT06.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FTT06:Faultword")
+{
+  field(DESC, "DB_FTT06.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT06.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FTT06:MNEU")
+{
+  field(DESC, "DB_FTT06.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT06.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FTT06:MXEU")
+{
+  field(DESC, "DB_FTT06.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT06.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FTT06:TAG")
+{
+  field(DESC, "DB_FTT06.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT06.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FTT06")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FTT06:UNITS")
+{
+  field(DESC, "DB_FTT06.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT06.UNITS")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FTT07:DESCRIPTION")
+{
+  field(DESC, "DB_FTT07.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT07.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FTT07:Faultword")
+{
+  field(DESC, "DB_FTT07.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT07.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FTT07:MNEU")
+{
+  field(DESC, "DB_FTT07.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT07.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FTT07:MXEU")
+{
+  field(DESC, "DB_FTT07.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT07.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FTT07:TAG")
+{
+  field(DESC, "DB_FTT07.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT07.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FTT07")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FTT07:UNITS")
+{
+  field(DESC, "DB_FTT07.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT07.UNITS")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FTT08:DESCRIPTION")
+{
+  field(DESC, "DB_FTT08.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT08.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FTT08:Faultword")
+{
+  field(DESC, "DB_FTT08.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT08.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FTT08:MNEU")
+{
+  field(DESC, "DB_FTT08.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT08.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FTT08:MXEU")
+{
+  field(DESC, "DB_FTT08.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT08.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FTT08:TAG")
+{
+  field(DESC, "DB_FTT08.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT08.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FTT08")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FTT08:UNITS")
+{
+  field(DESC, "DB_FTT08.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT08.UNITS")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FTT09:DESCRIPTION")
+{
+  field(DESC, "DB_FTT09.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT09.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FTT09:Faultword")
+{
+  field(DESC, "DB_FTT09.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT09.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FTT09:MNEU")
+{
+  field(DESC, "DB_FTT09.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT09.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FTT09:MXEU")
+{
+  field(DESC, "DB_FTT09.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT09.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FTT09:TAG")
+{
+  field(DESC, "DB_FTT09.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT09.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FTT09")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FTT09:UNITS")
+{
+  field(DESC, "DB_FTT09.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT09.UNITS")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FTT10:DESCRIPTION")
+{
+  field(DESC, "DB_FTT10.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT10.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FTT10:Faultword")
+{
+  field(DESC, "DB_FTT10.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT10.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FTT10:MNEU")
+{
+  field(DESC, "DB_FTT10.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT10.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FTT10:MXEU")
+{
+  field(DESC, "DB_FTT10.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT10.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FTT10:TAG")
+{
+  field(DESC, "DB_FTT10.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT10.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FTT10")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FTT10:UNITS")
+{
+  field(DESC, "DB_FTT10.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT10.UNITS")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FTT11:DESCRIPTION")
+{
+  field(DESC, "DB_FTT11.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT11.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FTT11:Faultword")
+{
+  field(DESC, "DB_FTT11.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT11.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FTT11:MNEU")
+{
+  field(DESC, "DB_FTT11.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT11.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FTT11:MXEU")
+{
+  field(DESC, "DB_FTT11.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT11.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FTT11:TAG")
+{
+  field(DESC, "DB_FTT11.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT11.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FTT11")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FTT11:UNITS")
+{
+  field(DESC, "DB_FTT11.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FTT11.UNITS")
+  field(SCAN, "I/O Intr")
+  field(VAL, "C")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FW01:DESCRIPTION")
+{
+  field(DESC, "DB_FW01.DESCRIPTION")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FW01.DESCRIPTION")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FW01:Faultword")
+{
+  field(DESC, "DB_FW01.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FW01.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (ai, "RFCOOL:FW01:MNEU")
+{
+  field(DESC, "DB_FW01.MN_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FW01.MN_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (ai, "RFCOOL:FW01:MXEU")
+{
+  field(DESC, "DB_FW01.MX_EU")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FW01.MX_EU")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+  field(PREC,"2")
+}
+record (stringin, "RFCOOL:FW01:TAG")
+{
+  field(DESC, "DB_FW01.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FW01.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FW01")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FW01:UNITS")
+{
+  field(DESC, "DB_FW01.UNITS")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FW01.UNITS")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longout, "RFCOOL:SP:timetorque")
+{
+  field(DESC, "DB_Setpoints.Sp_time_torque")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.Sp_time_torque")
+}
+record (longin, "RFCOOL:FCO01:Faultword")
+{
+  field(DESC, "DB_DEVICE_FCO01.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.Fault_word") 
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FCO01:TAG")
+{
+  field(DESC, "DB_DEVICE_FCO01.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_DEVICE_FCO01.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FCO01")
+  field(PINI, "YES")
+}
+record (bo, "RFCOOL:FHR12:ICMDAM")
+{
+  field(DESC, "DB_HEAT_FHR01&FHR02.I_CMD_A_M")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.I_CMD_AUTO_MAN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record (longin, "RFCOOL:FHR12:Faultword")
+{
+  field(DESC, "DB_HEAT_FHR01&FHR02.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FHR12:TAG")
+{
+  field(DESC, "DB_HEAT_FHR01&FHR02.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR01&FHR02.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FHR12")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FHR34:Faultword")
+{
+  field(DESC, "DB_HEAT_FHR03&FHR04.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FHR34:TAG")
+{
+  field(DESC, "DB_HEAT_FHR03&FHR04.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR03&FHR04.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FHR34")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FHR05:Faultword")
+{
+  field(DESC, "DB_HEAT_FHR05.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FHR05:TAG")
+{
+  field(DESC, "DB_HEAT_FHR05.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_HEATING_R_FHR05.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FHR05")
+  field(PINI, "YES")
+}
+record (bi, "RFCOOL:FCV02:OCLOSED")
+{
+  field(DESC, "DB_limit_switch_FCV02.O_CLOSED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_limit_switch_FCV02.O_CLOSED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (bi, "RFCOOL:FCV03:OCLOSED")
+{
+  field(DESC, "DB_limit_switch_FCV03.O_CLOSED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_limit_switch_FCV03.O_CLOSED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (bi, "RFCOOL:FCV04:OCLOSED")
+{
+  field(DESC, "DB_limit_switch_FCV04.O_CLOSED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_limit_switch_FCV04.O_CLOSED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (bi, "RFCOOL:FCV05:OCLOSED")
+{
+  field(DESC, "DB_limit_switch_FCV05.O_CLOSED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_limit_switch_FCV05.O_CLOSED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (bi, "RFCOOL:FCV02:OOPENED")
+{
+  field(DESC, "DB_limit_switch_FCV02.O_OPENED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_limit_switch_FCV02.O_OPENED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (bi, "RFCOOL:FCV03:OOPENED")
+{
+  field(DESC, "DB_limit_switch_FCV03.O_OPENED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_limit_switch_FCV03.O_OPENED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (bi, "RFCOOL:FCV04:OOPENED")
+{
+  field(DESC, "DB_limit_switch_FCV04.O_OPENED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_limit_switch_FCV04.O_OPENED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (bi, "RFCOOL:FCV05:OOPENED")
+{
+  field(DESC, "DB_limit_switch_FCV05.O_OPENED")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_limit_switch_FCV05.O_OPENED")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (bi, "RFCOOL:FWP01:OALARM")
+{
+  field(DESC, "DB_Motor_FWP01.O_ALARM")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.O_ALARM")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FWP01:Faultword")
+{
+  field(DESC, "DB_Motor_FWP01.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FWP01:TAG")
+{
+  field(DESC, "DB_Motor_FWP01.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP01.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FWP01")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FWP02:Faultword")
+{
+  field(DESC, "DB_Motor_FWP02.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FWP02:TAG")
+{
+  field(DESC, "DB_Motor_FWP02.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP02.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FWP02")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FWP03:Faultword")
+{
+  field(DESC, "DB_Motor_FWP03.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FWP03:TAG")
+{
+  field(DESC, "DB_Motor_FWP03.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_Motor_FWP03.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FWP03")
+  field(PINI, "YES")
+}
+record (ao, "RFCOOL:SP:pi[6]:Kc")
+{
+  field(DESC, "DB_Setpoints.pi[6].Kc")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.pi[6].Kc")
+  field(PREC,"2")
+}
+record (ao, "RFCOOL:SP:pi[6]:Setpoint")
+{
+  field(DESC, "DB_Setpoints.pi[6].Setpoint")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.pi[6].Setpoint")
+  field(PREC,"2")
+}
+record (ao, "RFCOOL:SP:pi[6]:Ti")
+{
+  field(DESC, "DB_Setpoints.pi[6].Ti")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.pi[6].Ti")
+  field(PREC,"3")
+}
+record (ao, "RFCOOL:SP:pi[4]:Kc")
+{
+  field(DESC, "DB_Setpoints.pi[4].Kc")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.pi[4].Kc")
+  field(PREC,"2")
+}
+record (ao, "RFCOOL:SP:pi[4]:Setpoint")
+{
+  field(DESC, "DB_Setpoints.pi[4].Setpoint")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.pi[4].Setpoint")
+  field(PREC,"2")
+}
+record (ao, "RFCOOL:SP:pi[4]:Ti")
+{
+  field(DESC, "DB_Setpoints.pi[4].Ti")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.pi[4].Ti")
+  field(PREC,"2")
+}
+record (ao, "RFCOOL:SP:pi[1]:Kc")
+{
+  field(DESC, "DB_Setpoints.pi[1].Kc")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.pi[1].Kc")
+  field(PREC,"2")
+}
+record (ao, "RFCOOL:SP:pi[1]:Setpoint")
+{
+  field(DESC, "DB_Setpoints.pi[1].Setpoint")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.pi[1].Setpoint")
+  field(PREC,"2")
+}
+record (ao, "RFCOOL:SP:pi[1]:Ti")
+{
+  field(DESC, "DB_Setpoints.pi[1].Ti")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.pi[1].Ti")
+  field(PREC,"2")
+}
+record (ao, "RFCOOL:SP:pi[3]:Kc")
+{
+  field(DESC, "DB_Setpoints.pi[3].Kc")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.pi[3].Kc")
+  field(PREC,"2")
+}
+record (ao, "RFCOOL:SP:pi[3]:Setpoint")
+{
+  field(DESC, "DB_Setpoints.pi[3].Setpoint")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.pi[3].Setpoint")
+  field(PREC,"2")
+}
+record (ao, "RFCOOL:SP:pi[3]:Ti")
+{
+  field(DESC, "DB_Setpoints.pi[3].Ti")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_Setpoints.pi[3].Ti")
+  field(PREC,"2")
+}
+record (bi, "RFCOOL:PIpressflow")
+{
+  field(DESC, "PI_press_flow")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.Press_Flow_PI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (bi, "RFCOOL:PIsecurrun")
+{
+  field(DESC, "PI_secur_run")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.Secur_pressure_PI")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (bi, "RFCOOL:Readactiveusergroup")
+{
+  field(DESC, "Read_active_usergroup")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.Read_active_usergroup")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (bo, "RFCOOL:datetime:SETPLCCLK")
+{
+  field(DESC, "DB_date_time.SET_PLC_CLK")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_date_time.SET_PLC_CLK")
+}
+record (longout, "RFCOOL:datetime:HMISETDATE")
+{
+  field(DESC, "DB_date_time.HMI_SET_DATE")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_date_time.HMI_SET_DATE")
+}
+record (longout, "RFCOOL:datetime:HMISETCLOCK")
+{
+  field(DESC, "DB_date_time.HMI_SET_CLOCK")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_date_time.HMI_SET_CLOCK")
+}
+record (longout, "RFCOOL:Trends")
+{
+  field(DESC, "Trends")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.Trends")
+}
+record (longin, "RFCOOL:FCV02:Faultword")
+{
+  field(DESC, "DB_FCV02.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV02.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FCV02:OOCNTP")
+{
+  field(DESC, "DB_FCV02.O_O_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV02.O_O_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FCV02:OOCNTT")
+{
+  field(DESC, "DB_FCV02.O_O_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV02.O_O_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FCV02:TAG")
+{
+  field(DESC, "DB_FCV02.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV02.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FCV02")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FCV03:Faultword")
+{
+  field(DESC, "DB_FCV03.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV03.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FCV03:OOCNTP")
+{
+  field(DESC, "DB_FCV03.O_O_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV03.O_O_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FCV03:OOCNTT")
+{
+  field(DESC, "DB_FCV03.O_O_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV03.O_O_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FCV03:TAG")
+{
+  field(DESC, "DB_FCV03.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV03.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FCV03")
+  field(PINI, "YES")
+}
+record (bo, "RFCOOL:FCV04:ICMDAM")
+{
+  field(DESC, "DB_FCV04.I_CMD_AUTO_MAN")
+  field(DTYP, "opc")
+  field(OUT, "@S7300ET200M station_1.PLC_1.DB_FCV04.I_CMD_AUTO_MAN")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+record (longin, "RFCOOL:FCV04:Faultword")
+{
+  field(DESC, "DB_FCV04.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV04.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FCV04:OOCNTP")
+{
+  field(DESC, "DB_FCV04.O_O_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV04.O_O_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FCV04:OOCNTT")
+{
+  field(DESC, "DB_FCV04.O_O_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV04.O_O_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FCV04:TAG")
+{
+  field(DESC, "DB_FCV04.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV04.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FCV04")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FCV05:Faultword")
+{
+  field(DESC, "DB_FCV05.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV05.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FCV05:OOCNTP")
+{
+  field(DESC, "DB_FCV05.O_O_CNT_P")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV05.O_O_CNT_P")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FCV05:OOCNTT")
+{
+  field(DESC, "DB_FCV05.O_O_CNT_T")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV05.O_O_CNT_T")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FCV05:TAG")
+{
+  field(DESC, "DB_FCV05.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FCV05.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FCV05")
+  field(PINI, "YES")
+}
+record (longin, "RFCOOL:FWV01:Faultword")
+{
+  field(DESC, "DB_FWV01.Fault_word")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FWV01.Fault_word")
+  field(SCAN, "I/O Intr")
+  field(PINI, "YES")
+}
+record (stringin, "RFCOOL:FWV01:TAG")
+{
+  field(DESC, "DB_FWV01.TAG")
+  field(DTYP, "opc")
+  field(INP, "@S7300ET200M station_1.PLC_1.DB_FWV01.TAG")
+  field(SCAN, "I/O Intr")
+  field(VAL, "FWV01")
+  field(PINI, "YES")
+}

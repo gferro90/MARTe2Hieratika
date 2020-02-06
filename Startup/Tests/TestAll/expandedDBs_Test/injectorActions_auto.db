@@ -1,0 +1,274 @@
+record(bo,"LEBT:AUTO:UptoHT1") {
+	field(DESC,"montee HT")
+	field(DTYP,"Soft Channel")
+	field(ZNAM,"OFF")
+	field(ONAM,"ON ")
+}
+
+record(bo,"LEBT:AUTO:UptoHT") {
+	field(DESC,"montee alims + HT")
+	field(DTYP,"Soft Channel")
+	field(ZNAM,"OFF")
+	field(ONAM,"ON ")
+}
+
+record(bo,"LEBT:AUTO:StopHT") {
+	field(DESC,"arret HT")
+	field(DTYP,"Soft Channel")
+	field(ZNAM,"OFF")
+	field(ONAM,"ON ")
+}
+
+record(bo,"LEBT:AUTO:Stop") {
+	field(DESC,"arret complet")
+	field(DTYP,"Soft Channel")
+	field(ZNAM,"OFF")
+	field(ONAM,"ON ")
+}
+
+
+
+record(bo,"LEBT:AUTO:OKforHTON") {
+	field(DESC,"Aut.montee HT")
+	field(DTYP,"Soft Channel")
+	field(ZNAM,"OFF")
+	field(ONAM,"ON ")
+}
+
+record(bo,"LEBT:AUTO:OKforHTOFF") {
+	field(DESC,"Aut.arret HT")
+	field(DTYP,"Soft Channel")
+	field(ZNAM,"OFF")
+	field(ONAM,"ON ")
+}
+
+record(bo,"LEBT:AUTO:EndActHT") {
+	field(DESC,"fin action")
+	field(DTYP,"Soft Channel")
+	field(ZNAM,"marche")
+	field(ONAM,"arret")
+}
+
+record(stringin,"LEBT:AUTO:DialSecu") {
+	field(DESC,"secuvanne")
+	field(DTYP,"Soft Channel")
+	field(VAL,"attente action")
+}
+record(bo,"LEBT:AUTO:ActSecu") {
+	field(DESC,"secuvanne")
+	field(DTYP,"Soft Channel")
+	field(ZNAM,"OFF")
+	field(ONAM,"ON ")
+}
+
+
+record(ao,"SRC:AUTO:HFPwr") {
+	field(DESC,"cons")
+	field(DTYP,"Soft Channel")
+	field(FLNK,"LEBT:AUTO:StepPF")
+	field(EGUF,"1200")
+	field(EGU,"W")
+	field(DRVH,"1200")
+	field(HOPR,"1200")
+	field(ASLO,"1")
+}
+record(ao,"SRC:AUTO:DebitH") {
+	field(DESC,"cons")
+	field(DTYP,"Soft Channel")
+	field(FLNK,"LEBT:AUTO:StepPF")
+	field(EGUF,"5")
+	field(EGU,"sccm")
+	field(DRVH,"5")
+	field(HOPR,"5")
+	field(ASLO,"1")
+	field(PREC,"2")
+}
+record(ao,"LEBT:HV_PS:HTpas") {
+	field(DESC,"ht pas")
+	field(DTYP,"Soft Channel")
+	field(PINI,"YES")
+	field(FLNK,"LEBT:HV_PS:HTpas0")
+	field(EGUF,"10")
+	field(EGUL,"1")
+	field(DRVH,"10")
+	field(DRVL,"1")
+	field(HOPR,"10")
+	field(LOPR,"1")
+	field(ASLO,"1")
+}
+record(ao,"LEBT:HV_PS:HTinitauto") {
+	field(DESC,"ht init")
+	field(DTYP,"Soft Channel")
+	field(FLNK,"LEBT:HV_PS:HTpas0")
+	field(EGU,"kV")
+	field(DRVH,"120")
+	field(HOPR,"120")
+	field(DRVL,"0")
+	field(LOPR,"0")
+	field(ASLO,"1")
+}
+record(calc,"LEBT:HV_PS:HTpas0") {
+	field(DESC,"pas kV")
+	field(CALC,"B#0?(A/B):C")
+	field(FLNK,"SRC:IE_PS:calc_pas_init")
+	field(INPA,"LEBT:HV_PS:HTinitauto.VAL NPP NMS")
+	field(INPB,"LEBT:HV_PS:HTpas.VAL NPP NMS")
+	field(INPC,"0")
+	field(PREC,"2")
+}
+record(ao,"SRC:AUTO:VSetIEPS") {
+	field(DESC,"htei init")
+	field(DTYP,"Soft Channel")
+	field(FLNK,"SRC:AUTO:StepIEPS")
+	field(EGUF,"50")
+	field(EGU,"kV")
+	field(DRVH,"50")
+	field(HOPR,"50")
+	field(ASLO,"1")
+}
+record(calc,"SRC:AUTO:StepIEPS") {
+	field(DESC,"pas kV")
+	field(CALC,"B#0?(A/B):C")
+	field(FLNK,"LEBT:HV_PS:HTpas1")
+	field(INPA,"SRC:AUTO:VSetIEPS.VAL NPP NMS")
+	field(INPB,"LEBT:HV_PS:HTpas.VAL NPP NMS")
+	field(INPC,"0")
+	field(PREC,"2")
+}
+record(ao,"LEBT:HV_PS:HTfin1") {
+	field(DESC,"ht final 1")
+	field(DTYP,"Soft Channel")
+	field(FLNK,"LEBT:HV_PS:HTpas1")
+	field(EGUF,"80")
+	field(EGU,"kV")
+	field(DRVH,"80")
+	field(HOPR,"80")
+	field(ASLO,"1")
+}
+record(calc,"LEBT:HV_PS:HTpas1") {
+	field(DESC,"pas kV")
+	field(CALC,"B#0?(A-B)/C:D")
+	field(FLNK,"LEBT:AUTO:StepPF")
+	field(INPA,"LEBT:HV_PS:HTfin1.VAL NPP NMS")
+	field(INPB,"LEBT:HV_PS:HTinitauto.VAL NPP NMS")
+	field(INPC,"LEBT:HV_PS:HTpas.VAL NPP NMS")
+	field(INPD,"0")
+	field(PREC,"2")
+}
+
+record(stringin,"LEBT:AUTO:Dialog") {
+	field(DESC,"HT ON")
+	field(DTYP,"Soft Channel")
+	field(VAL,"attente action")
+}
+record(calc,"SRC:IE_PS:Vcalcpas") {
+	field(DESC,"pas htei")
+	field(CALC,"C#0?(A-B)/C:D")
+	field(INPA,"SRC:IE_PS:Vfinal_auto.VAL NPP NMS")
+	field(INPB,"SRC:IE_PS:VSet_auto.VAL NPP NMS")
+	field(INPC,"LEBT:AUTO:StepPF.VAL NPP NMS")
+	field(INPD,"0")
+	field(PREC,"2")
+}
+
+record(stringin,"LEBT:AUTO:Diag1HV") {
+	field(DESC,"HT ON")
+	field(DTYP,"Soft Channel")
+	field(VAL,"attente action")
+}
+record(stringin,"LEBT:AUTO:Dialog2") {
+	field(DESC,"dialog2")
+	field(DTYP,"Soft Channel")
+	field(VAL,"attente action")
+}
+record(stringin,"LEBT:AUTO:Dialog3") {
+	field(DESC,"dialog3")
+	field(DTYP,"Soft Channel")
+	field(VAL,"attente action")
+}
+record(bo,"LEBT:AUTO:OKforBeam") {
+	field(DESC,"permission faisceau")
+	field(DTYP,"Soft Channel")
+	field(ZNAM,"NON")
+	field(ONAM,"OUI")
+}
+record(bo,"LEBT:AUTO:OKforStart") {
+	field(DESC,"permission autostart")
+	field(DTYP,"Soft Channel")
+	field(ZNAM,"NON")
+	field(ONAM,"OUI")
+}
+
+record(bo,"LEBT:AUTO:PSUP") {
+	field(DESC,"Montee_alims")
+	field(DTYP,"Soft Channel")
+	field(ZNAM,"NON")
+	field(ONAM,"OUI")
+}
+
+record(ao,"LEBT:AUTO:StepPF") {
+	field(DESC,"pas point final")
+	field(DTYP,"Soft Channel")
+	field(FLNK,"LEBT:AUTO:FlnkPF")
+	field(EGUF,"10")
+	field(EGUL,"1")
+	field(DRVH,"10")
+	field(DRVL,"1")
+	field(HOPR,"10")
+	field(LOPR,"1")
+	field(ASLO,"1")
+}
+record(fanout,"LEBT:AUTO:FlnkPF") {
+        field(DESC,"FLNK etats")
+        field(LNK1,"LEBT:AUTO:StepHT2")
+        field(LNK2,"LEBT:AUTO:StepIEPS")
+        field(LNK3,"LEBT:AUTO:StepDebit")
+        field(LNK4,"LEBT:AUTO:StepRF")
+}
+
+record(ao,"LEBT:AUTO:Imontee") {
+	field(DESC,"imontee")
+	field(DTYP,"Soft Channel")
+	field(EGUF,"100")
+	field(EGUL,"5")
+	field(EGU,"mA")
+	field(DRVH,"100")
+	field(DRVL,"5")
+	field(HOPR,"100")
+	field(LOPR,"5")
+}
+record(ao,"LEBT:AUTO:Ifinal") {
+	field(DESC,"ifinal")
+	field(DTYP,"Soft Channel")
+	field(EGUF,"100")
+	field(EGUL,"5")
+	field(EGU,"mA")
+	field(DRVH,"100")
+	field(DRVL,"5")
+	field(HOPR,"100")
+	field(LOPR,"5")
+}
+record(ao,"LEBT:AUTO:Isurv") {
+	field(DESC,"isurv")
+	field(DTYP,"Soft Channel")
+	field(EGUF,"100")
+	field(EGUL,"5")
+	field(EGU,"mA")
+	field(DRVH,"100")
+	field(DRVL,"5")
+	field(HOPR,"100")
+	field(LOPR,"5")
+}
+record(ao,"LEBT:AUTO:Irapide") {
+	field(DESC,"irapide")
+	field(DTYP,"Soft Channel")
+	field(EGUF,"100")
+	field(EGUL,"5")
+	field(EGU,"mA")
+	field(DRVH,"100")
+	field(DRVL,"5")
+	field(HOPR,"100")
+	field(LOPR,"5")
+}
+
+
