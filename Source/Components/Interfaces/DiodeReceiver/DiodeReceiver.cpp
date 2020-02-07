@@ -124,7 +124,7 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
 
                 arg.pvs[n].totalSize = 0;
                 arg.pvs[n].at = voidAnyType;
-                if (arg.pvs[n].numberOfElements > maxArraySize) {
+                if (arg.pvs[n].numberOfElements > arg.maxArraySize) {
                     arg.pvs[n].numberOfElements = 0u;
                 }
                 if (arg.pvs[n].numberOfElements > 0u) {
