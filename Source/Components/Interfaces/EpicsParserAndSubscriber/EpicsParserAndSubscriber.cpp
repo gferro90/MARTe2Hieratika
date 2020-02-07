@@ -81,7 +81,8 @@ static int cainfo(chid &pvChid,
                   chtype &type,
                   uint32 &numberOfElements,
                   uint32 &memorySize,
-                  TypeDescriptor &td, uint8 &typeId) {
+                  TypeDescriptor &td,
+                  uint8 &typeId) {
     int32 dbfType;
     uint32 nElems = 0u;
     enum channel_state state;
@@ -103,42 +104,42 @@ static int cainfo(chid &pvChid,
     if (StringHelper::Compare(epicsTypeName, "DBF_DOUBLE") == 0u) {
         memorySize = 8u;
         td = Float64Bit;
-        typeId=9u;
+        typeId = 9u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_FLOAT") == 0u) {
         memorySize = 4u;
         td = Float32Bit;
-        typeId=8u;
+        typeId = 8u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_LONG") == 0u) {
         memorySize = 4u;
         td = SignedInteger32Bit;
-        typeId=4u;
+        typeId = 4u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_ULONG") == 0u) {
         memorySize = 4u;
         td = UnsignedInteger32Bit;
-        typeId=5u;
+        typeId = 5u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_SHORT") == 0u) {
         memorySize = 2u;
         td = SignedInteger16Bit;
-        typeId=2u;
+        typeId = 2u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_USHORT") == 0u) {
         memorySize = 2u;
         td = UnsignedInteger16Bit;
-        typeId=3u;
+        typeId = 3u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_CHAR") == 0u) {
         memorySize = 1u;
         td = SignedInteger8Bit;
-        typeId=0u;
+        typeId = 0u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_UCHAR") == 0u) {
         memorySize = 1u;
         td = UnsignedInteger8Bit;
-        typeId=1u;
+        typeId = 1u;
     }
     else if (StringHelper::Compare(epicsTypeName, "DBF_STRING") == 0) {
         memorySize = MAX_STRING_SIZE;
@@ -146,22 +147,22 @@ static int cainfo(chid &pvChid,
         td.isStructuredData = false;
         td.type = CArray;
         td.isConstant = false;
-        typeId=10u;
+        typeId = 10u;
     }
     else {
         memorySize = 8u;
         td = Float64Bit;
-        typeId=9u;
+        typeId = 9u;
         type = DBF_DOUBLE;
 
-/*        memorySize = MAX_STRING_SIZE;
-        td.numberOfBits = MAX_STRING_SIZE * 8u;
-        td.isStructuredData = false;
-        td.type = CArray;
-        td.isConstant = false;
-        type = DBF_STRING;
-        typeId=10u;
-        */
+        /*        memorySize = MAX_STRING_SIZE;
+         td.numberOfBits = MAX_STRING_SIZE * 8u;
+         td.isStructuredData = false;
+         td.type = CArray;
+         td.isConstant = false;
+         type = DBF_STRING;
+         typeId=10u;
+         */
     }
 
     return 0;
@@ -186,6 +187,7 @@ EpicsParserAndSubscriber::EpicsParserAndSubscriber() :
     maxNumberOfVariables = 0xFFFFFFFFu;
     eventSem.Create();
     eventSem.Reset();
+    maxArraySize = MAX_ARR_LEN;
 
 }
 
@@ -236,6 +238,9 @@ bool EpicsParserAndSubscriber::Initialise(StructuredDataI &data) {
                 maxNumberOfVariables = 0xFFFFFFFFu;
             }
 
+            if (!data.Read("MaxArraySize", maxArraySize)) {
+                maxArraySize = MAX_ARR_LEN;
+            }
 
             uint32 numberOfCpus = 4u;
             if (!data.Read("NumberOfCpus", numberOfCpus)) {
@@ -365,60 +370,60 @@ bool EpicsParserAndSubscriber::ParseAndSubscribe() {
 
 ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info) {
     ErrorManagement::ErrorType err = ErrorManagement::NoError;
-       if (info.GetStage() == ExecutionInfo::StartupStage) {
-           uint32 threadId = 0u;
-           if (fmutex.FastLock()) {
-               threadId = threatCnt;
-               threatCnt++;
-               fmutex.FastUnLock();
-           }
+    if (info.GetStage() == ExecutionInfo::StartupStage) {
+        uint32 threadId = 0u;
+        if (fmutex.FastLock()) {
+            threadId = threatCnt;
+            threatCnt++;
+            fmutex.FastUnLock();
+        }
 
-           info.SetThreadSpecificContext(reinterpret_cast<void*>(&threadId));
-           //initialise the context
-           err = (ca_context_create(ca_enable_preemptive_callback) != ECA_NORMAL);
+        info.SetThreadSpecificContext(reinterpret_cast<void*>(&threadId));
+        //initialise the context
+        err = (ca_context_create(ca_enable_preemptive_callback) != ECA_NORMAL);
 
-           uint32 beg = 0u;
-           uint32 end = 0u;
-           if (err.ErrorsCleared()) {
+        uint32 beg = 0u;
+        uint32 end = 0u;
+        if (err.ErrorsCleared()) {
 
-               beg = (threadId) * nVarsPerChunk;
-               end = (threadId + 1u) * nVarsPerChunk;
+            beg = (threadId) * nVarsPerChunk;
+            end = (threadId + 1u) * nVarsPerChunk;
 
-               REPORT_ERROR(ErrorManagement::Information, "Starting Thread from %d to %d", beg, end);
+            REPORT_ERROR(ErrorManagement::Information, "Starting Thread from %d to %d", beg, end);
 
-               if ((numberOfVariables - end) < numberOfPoolThreads) {
-                   end = numberOfVariables;
-               }
+            if ((numberOfVariables - end) < numberOfPoolThreads) {
+                end = numberOfVariables;
+            }
 
-               err = !FillMemorySizes(beg, end, threadId);
-           }
-           else {
-               REPORT_ERROR(ErrorManagement::FatalError, "Failed creating CA context");
-           }
+            err = !FillMemorySizes(beg, end, threadId);
+        }
+        else {
+            REPORT_ERROR(ErrorManagement::FatalError, "Failed creating CA context");
+        }
 
-           if (err.ErrorsCleared()) {
-               CreateSubscriptions(beg, end);
-           }
-           else {
-               REPORT_ERROR(ErrorManagement::FatalError, "Failed FillMemorySizes");
-           }
+        if (err.ErrorsCleared()) {
+            CreateSubscriptions(beg, end);
+        }
+        else {
+            REPORT_ERROR(ErrorManagement::FatalError, "Failed FillMemorySizes");
+        }
 
-       }
-       else if (info.GetStage() != ExecutionInfo::BadTerminationStage) {
-           uint32 *threadId = reinterpret_cast<uint32 *>(info.GetThreadSpecificContext());
-           if (threadId != NULL) {
-               eventSem.Wait(TTInfiniteWait);
-               CleanContext(*threadId);
-           }
-       }
-       else {
-           uint32 *threadId = reinterpret_cast<uint32 *>(info.GetThreadSpecificContext());
-           if (threadId != NULL) {
-               CleanContext(*threadId);
-           }
-       }
+    }
+    else if (info.GetStage() != ExecutionInfo::BadTerminationStage) {
+        uint32 *threadId = reinterpret_cast<uint32 *>(info.GetThreadSpecificContext());
+        if (threadId != NULL) {
+            eventSem.Wait(TTInfiniteWait);
+            CleanContext(*threadId);
+        }
+    }
+    else {
+        uint32 *threadId = reinterpret_cast<uint32 *>(info.GetThreadSpecificContext());
+        if (threadId != NULL) {
+            CleanContext(*threadId);
+        }
+    }
 
-       return err;
+    return err;
 }
 
 bool EpicsParserAndSubscriber::Synchronise(uint8 *memoryOut,
@@ -465,8 +470,8 @@ ErrorManagement::ErrorType EpicsParserAndSubscriber::Stop() {
 }
 
 bool EpicsParserAndSubscriber::FillMemorySizes(uint32 beg,
-        uint32 end,
-        uint32 threadId) {
+                                               uint32 end,
+                                               uint32 threadId) {
 
     bool ret = true;
     for (uint32 i = beg; (i < end); i++) {
@@ -474,9 +479,9 @@ bool EpicsParserAndSubscriber::FillMemorySizes(uint32 beg,
         ca_create_channel(pvDescriptor[i].pvName, NULL, NULL, 20u, &pvDescriptor[i].pvChid);
         ca_pend_io(0.1);
         cainfo(pvDescriptor[i].pvChid, pvDescriptor[i].pvName, pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].memorySize,
-                pvDescriptor[i].td, pvDescriptor[i].typeId);
+               pvDescriptor[i].td, pvDescriptor[i].typeId);
         ca_pend_io(1);
-        if (pvDescriptor[i].numberOfElements > MAX_ARR_LEN) {
+        if (pvDescriptor[i].numberOfElements > maxArraySize) {
             pvDescriptor[i].numberOfElements = 0u;
         }
         else {
@@ -503,7 +508,7 @@ bool EpicsParserAndSubscriber::FillMemorySizes(uint32 beg,
 }
 
 void EpicsParserAndSubscriber::CreateSubscriptions(uint32 beg,
-        uint32 end) {
+                                                   uint32 end) {
 
     for (uint32 i = beg; i < end; i++) {
 
@@ -516,13 +521,13 @@ void EpicsParserAndSubscriber::CreateSubscriptions(uint32 beg,
             ca_pend_io(0.1);
 
             if (ca_create_subscription(pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].pvChid, DBE_VALUE, &GetValueCallback,
-                            &pvDescriptor[i], &pvDescriptor[i].pvEvid) != ECA_NORMAL) {
+                                       &pvDescriptor[i], &pvDescriptor[i].pvEvid) != ECA_NORMAL) {
                 REPORT_ERROR(ErrorManagement::Warning, "FAILED create subscription %s", pvDescriptor[i].pvName);
             }
             ca_pend_io(0.1);
 
             if (ca_create_subscription(DBR_TIME_STRING, pvDescriptor[i].numberOfElements, pvDescriptor[i].pvChid, DBE_VALUE, &GetTimeoutCallback,
-                            &pvDescriptor[i], &pvDescriptor[i].pvEvid) != ECA_NORMAL) {
+                                       &pvDescriptor[i], &pvDescriptor[i].pvEvid) != ECA_NORMAL) {
                 REPORT_ERROR(ErrorManagement::Warning, "FAILED create subscription %s", pvDescriptor[i].pvName);
             }
             ca_pend_io(0.01);
@@ -538,8 +543,8 @@ void EpicsParserAndSubscriber::CreateSubscriptions(uint32 beg,
                 if (((i % nVarsPerChunk) == 0u) && (i > 0u)) {
                     memCnt++;
                 }
-                if(memCnt>(numberOfPoolThreads - 1u)){
-                    memCnt=(numberOfPoolThreads - 1u);
+                if (memCnt > (numberOfPoolThreads - 1u)) {
+                    memCnt = (numberOfPoolThreads - 1u);
                 }
                 for (uint32 k = 0u; k < memCnt; k++) {
                     pvDescriptor[i].offset += memorySize[k];
@@ -556,7 +561,6 @@ void EpicsParserAndSubscriber::CleanContext(uint32 threadId) {
 
     uint32 beg = (threadId) * nVarsPerChunk;
     uint32 end = (threadId + 1u) * nVarsPerChunk;
-
 
     if ((numberOfVariables - end) < numberOfPoolThreads) {
         end = numberOfVariables;
@@ -580,5 +584,4 @@ void EpicsParserAndSubscriber::CleanContext(uint32 threadId) {
 CLASS_REGISTER(EpicsParserAndSubscriber, "1.0")
 
 }
-
 

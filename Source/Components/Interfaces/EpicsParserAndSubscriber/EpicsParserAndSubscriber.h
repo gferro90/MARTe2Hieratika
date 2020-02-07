@@ -324,6 +324,10 @@ private:
     uint32 maxNumberOfVariables;
 
 
+    /**
+     * The maximum number of elements in the array
+     */
+    uint32 maxArraySize;
 };
 }
 

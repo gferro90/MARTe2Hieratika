@@ -124,7 +124,7 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
 
                 arg.pvs[n].totalSize = 0;
                 arg.pvs[n].at = voidAnyType;
-                if (arg.pvs[n].numberOfElements > MAX_ARR_LEN) {
+                if (arg.pvs[n].numberOfElements > maxArraySize) {
                     arg.pvs[n].numberOfElements = 0u;
                 }
                 if (arg.pvs[n].numberOfElements > 0u) {
@@ -262,6 +262,7 @@ DiodeReceiver::DiodeReceiver() :
     lastTickCounter = NULL;
     msecPeriod = 0u;
     currentCpuMask = 1u;
+    maxArraySize = MAX_ARR_LEN;
 }
 
 DiodeReceiver::~DiodeReceiver() {
@@ -414,6 +415,11 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
             }
         }
 
+        if (ret) {
+            if (!data.Read("MaxArraySize", maxArraySize)) {
+                maxArraySize = MAX_ARR_LEN;
+            }
+        }
     }
     return ret;
 }
@@ -422,8 +428,7 @@ ErrorManagement::ErrorType DiodeReceiver::Start() {
     uint32 cpuMask = ((1 << numberOfCpus) - 1u);
 
     for (uint32 i = 0u; i < numberOfInitThreads; i++) {
-        Threads::BeginThread((ThreadFunctionType) DiodeReceiverCycleLoop, this, THREADS_DEFAULT_STACKSIZE, NULL,
-                                                    ExceptionHandler::NotHandled, cpuMask);
+        Threads::BeginThread((ThreadFunctionType) DiodeReceiverCycleLoop, this, THREADS_DEFAULT_STACKSIZE, NULL, ExceptionHandler::NotHandled, cpuMask);
         //Threads::SetPriority(tid, Threads::RealTimePriorityClass, 15);
     }
     while ((uint32) threadSetContext < numberOfInitThreads) {

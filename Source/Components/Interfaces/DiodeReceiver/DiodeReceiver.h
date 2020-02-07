@@ -403,6 +403,11 @@ protected:
      */
     TimeoutType readTimeout;
 
+
+    /**
+     * The maximum array size
+     */
+    uint32 maxArraySize;
 };
 
 }
