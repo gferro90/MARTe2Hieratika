@@ -747,8 +747,13 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
     if (isChunked) {
         //get the line
         err = !(commClient->GetLine(line, false));
-        //remove the \r
-        line.SetSize(line.Size() - 1);
+        if (line.Size() > 0ull) {
+            char8 lastChar = line[line.Size() - 1];
+            if (lastChar == '\r') {
+                //remove the \r
+                line.SetSize(line.Size() - 1);
+            }
+        }
         //get the chunk size
         StreamString toConv = "0x";
         toConv += line;
@@ -1006,6 +1011,10 @@ void DiodeReceiver::ReadVarValueAndSkip(StreamString &payload,
             }
             syncSem.FastUnLock();
         }
+    }
+    if (processedSize > payload.Size()) {
+        //something wrong... adjust
+        processedSize = payload.Size();
     }
     uint32 currentSize = (payload.Size() - processedSize);
     payload.Seek(0);
