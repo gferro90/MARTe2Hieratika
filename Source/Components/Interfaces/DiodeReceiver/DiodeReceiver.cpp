@@ -40,7 +40,6 @@ namespace MARTe {
 #define MAX_ARR_LEN 20000
 #define INDEX_INIT_ID 0xFFFFFFFFu
 #define INDEX_NOT_FOUND_ID 0xFFFFFFFEu
-#define MAX_ALLOWED_PROC_SIZE 800000u
 #define NUMBER_OF_TYPES 11u
 static TypeDescriptor descriptors[NUMBER_OF_TYPES] = { SignedInteger8Bit, UnsignedInteger8Bit, SignedInteger16Bit, UnsignedInteger16Bit, SignedInteger32Bit,
         UnsignedInteger32Bit, SignedInteger64Bit, UnsignedInteger64Bit, Float32Bit, Float64Bit, TypeDescriptor(false, CArray, MAX_STRING_SIZE * 8u) };
@@ -920,7 +919,7 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
                 MemoryOperationsHelper::Copy(&receivedTypeId, dataPtr, sizeof(uint8));
                 dataPtr += sizeof(uint8);
                 MemoryOperationsHelper::Copy(&receivedSize, dataPtr, sizeof(uint32));
-                if ((receivedIndex >= numberOfVariables) || (receivedSize >= MAX_ALLOWED_PROC_SIZE)) {
+                if ((receivedIndex >= numberOfVariables) || (receivedSize >= (8u*maxArraySize))) {
                     payload.Seek(0ull);
                     payload.SetSize(0ull);
                     payload += "";
