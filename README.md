@@ -46,4 +46,12 @@ Build/x86-linux/GTest/TestEpicsWriter.ex Startup/Tests/TestReal/PV_List_sorted.x
 
 #Configuration folders
 DiodeSender contains configuration of the diode sender 
-DiodeReceiver contains configuration of the diode receiver 
+DiodeReceiver contains configuration of the diode receiver
+
+#System services
+cp ~/MARTE2Hieratika/DiodeServices/diode_receiver.service /etc/systemd/system/
+cp ~/MARTE2Hieratika/DiodeServices/diode_receiver.service /etc/systemd/system/
+service diode_receiver start/stop/restart/enable/disable
+service diode_sender start/stop/restart/enable/disable
+
+
