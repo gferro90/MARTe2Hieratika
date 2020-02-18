@@ -607,7 +607,10 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                     err = !hprotocol.ReadHeader();
                 }
                 if (err.ErrorsCleared()) {
-                    hprotocol.CompleteReadOperation(NULL, 0u);
+                    StreamString hstream;
+                    hprotocol.CompleteReadOperation(&hstream, 1000u);
+                }
+                if (err.ErrorsCleared()) {
                     if (!hprotocol.KeepAlive()) {
                         REPORT_ERROR(ErrorManagement::FatalError, "Connection complete!");
                         err = ErrorManagement::Completed;
