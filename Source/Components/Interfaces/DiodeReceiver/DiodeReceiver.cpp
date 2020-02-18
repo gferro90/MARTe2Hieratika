@@ -641,12 +641,7 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
         }
         if (information.GetStageSpecific() == MARTe::ExecutionInfo::ServiceRequestStageSpecific) {
             TCPSocket *newClient = reinterpret_cast<TCPSocket *>(information.GetThreadSpecificContext());
-            if (newClient != NULL) {
-                err = ClientService(newClient);
-            }
-            else{
-                REPORT_ERROR(ErrorManagement::FatalError, "Main Stage with NULL socket!");
-            }
+            err = ClientService(newClient);
         }
     }
     else {
@@ -754,7 +749,7 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
                 //remove the \r
                 line.SetSize(line.Size() - 1);
             }
-            else{
+            else {
                 REPORT_ERROR(ErrorManagement::Information, "last char %c", lastChar);
             }
         }
