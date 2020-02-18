@@ -642,6 +642,9 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
         if (information.GetStageSpecific() == MARTe::ExecutionInfo::ServiceRequestStageSpecific) {
             TCPSocket *newClient = reinterpret_cast<TCPSocket *>(information.GetThreadSpecificContext());
             err = ClientService(newClient);
+            if(!err.ErrorsCleared()){
+                information.SetThreadSpecificContext(reinterpret_cast<void*>(NULL));
+            }
         }
     }
     else {
