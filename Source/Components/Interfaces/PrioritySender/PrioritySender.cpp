@@ -226,6 +226,7 @@ PrioritySender::PrioritySender() :
     threadIndex = 0u;
     numberOfChangedVariables = 0u;
     maxBytesPerCycle = 0xFFFFFFFFu;
+    readTimeout = 10000u;
 }
 
 PrioritySender::~PrioritySender() {
@@ -313,6 +314,11 @@ bool PrioritySender::Initialise(StructuredDataI &data) {
             }
         }
         if (ret) {
+            if (!data.Read("ReadTimeout", readTimeout)) {
+                readTimeout = 10000u;
+            }
+        }
+        if (ret) {
             if (!data.Read("NumberOfDestinations", numberOfDestinations)) {
                 numberOfDestinations = 1u;
             }
@@ -393,7 +399,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
         eventSem.Wait(TTInfiniteWait);
 
         HttpChunkedStream *newClient = new HttpChunkedStream();
-        while(!newClient->Open()){
+        while (!newClient->Open()) {
             Sleep::MSec(connectionTimeout.GetTimeoutMSec());
             REPORT_ERROR(ErrorManagement::Information, "Failed socket Open ...");
         }
@@ -410,7 +416,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
                 //never use the buffer
                 newClient->SetCalibReadParam(0xFFFFFFFFu);
 
-                newClient->SetTimeout(connectionTimeout);
+                newClient->SetTimeout(readTimeout);
                 info.SetThreadSpecificContext(reinterpret_cast<void*>(newClient));
                 if (syncSem.FastLock()) {
                     if (info.GetThreadNumber() == 0xFFFFu) {
@@ -464,7 +470,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
                 //send a connection-close message
                 SendCloseConnectionMessage(*client, destinationName.Buffer());
                 delete client;
-                client=NULL;
+                client = NULL;
                 info.SetThreadSpecificContext(reinterpret_cast<void*>(NULL));
             }
         }
@@ -565,7 +571,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                                 err = !(client.Write((const char8*) (&signalIndex), indexSize));
                             }
                             if (err.ErrorsCleared()) {
-                                uint32 typeIdSize=sizeof(uint8);
+                                uint32 typeIdSize = sizeof(uint8);
                                 err = !(client.Write((const char8*) (&pvDes[signalIndex].typeId), typeIdSize));
                             }
                             uint32 totalSize = (pvDes[signalIndex].memorySize * pvDes[signalIndex].numberOfElements);
@@ -640,6 +646,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
             }
         }
     }
+    Sleep::MSec(10);
     return err;
 }
 

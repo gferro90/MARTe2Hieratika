@@ -319,6 +319,10 @@ private:
      */
     uint32 maxBytesPerCycle;
 
+    /**
+     * The read timeout in millisecs
+     */
+    uint32 readTimeout;
 };
 
 }
