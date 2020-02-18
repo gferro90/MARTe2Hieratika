@@ -864,7 +864,7 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
                     found = (StringHelper::CompareN(payload.Buffer() + i, pattern, patternSize) == 0);
                     if (!found) {
                         //cannot find a " in the name... resync
-                        REPORT_ERROR(ErrorManagement::Information, "The var name cannot contain \": resync %d %d\n", i, currentSize);
+                        //REPORT_ERROR(ErrorManagement::Information, "The var name cannot contain \": resync %d %d\n", i, currentSize);
                         payload.Seek(0ull);
                         MemoryOperationsHelper::Copy((void*) payload.Buffer(), payload.Buffer() + i, currentSize);
                         payload.SetSize(currentSize);
