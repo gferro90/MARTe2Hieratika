@@ -608,7 +608,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                 }
                 if (err.ErrorsCleared()) {
                     StreamString hstream;
-                    hprotocol.CompleteReadOperation(&hstream, 100u);
+                    hprotocol.CompleteReadOperation(&hstream, 0u);
                 }
                 if (err.ErrorsCleared()) {
                     if (!hprotocol.KeepAlive()) {
