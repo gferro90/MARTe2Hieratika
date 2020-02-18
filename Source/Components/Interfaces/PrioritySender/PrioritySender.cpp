@@ -607,10 +607,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                     err = !hprotocol.ReadHeader();
                 }
                 if (err.ErrorsCleared()) {
-                    StreamString hstream;
-                    hprotocol.CompleteReadOperation(&hstream, 0u);
-                }
-                if (err.ErrorsCleared()) {
+                    hprotocol.CompleteReadOperation(NULL, 0u);
                     if (!hprotocol.KeepAlive()) {
                         REPORT_ERROR(ErrorManagement::FatalError, "Connection complete!");
                         err = ErrorManagement::Completed;
@@ -645,8 +642,8 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                 destinationsMask[threadId] |= (1u << destinationId);
             }
         }
+        Sleep::MSec(10);
     }
-    Sleep::MSec(10);
     return err;
 }
 
