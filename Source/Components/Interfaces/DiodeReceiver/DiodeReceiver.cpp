@@ -754,6 +754,9 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
                 //remove the \r
                 line.SetSize(line.Size() - 1);
             }
+            else{
+                REPORT_ERROR(ErrorManagement::Information, "last char %c", lastChar);
+            }
         }
         //get the chunk size
         StreamString toConv = "0x";
