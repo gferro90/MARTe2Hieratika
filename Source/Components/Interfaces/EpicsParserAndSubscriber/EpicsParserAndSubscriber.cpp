@@ -587,12 +587,12 @@ void EpicsParserAndSubscriber::CleanContext(uint32 threadId) {
             for (uint32 n = beg; (n < end); n++) {
                 REPORT_ERROR(ErrorManagement::Information, "Cazz 2 %d %d", n, numberOfVariables);
 
-                (void) ca_clear_subscription(pvDescriptor[n].pvEvid);
-                (void) ca_clear_event(pvDescriptor[n].pvEvid);
+                //(void) ca_clear_subscription(pvDescriptor[n].pvEvid);
+                //(void) ca_clear_event(pvDescriptor[n].pvEvid);
                 (void) ca_clear_channel(pvDescriptor[n].pvChid);
             }
-            //ca_detach_context();
-            //ca_context_destroy();
+            ca_detach_context();
+            ca_context_destroy();
         }
         fmutex.FastUnLock();
     }
