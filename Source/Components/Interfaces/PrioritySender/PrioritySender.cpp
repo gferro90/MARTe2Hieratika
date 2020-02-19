@@ -610,11 +610,13 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                                     if (err.ErrorsCleared()) {
                                         err = !(client.Write("\n\r", termSize));
                                     }
-                                    varOffset += maxVarSize;
                                     i++;
                                     condition = (i < nVarsPerThread) && (err.ErrorsCleared());
+                                    if (condition) {
+                                        varOffset += maxVarSize;
+                                    }
                                 }
-                                if (condition) {
+                                if (varOffset >= totalSize) {
                                     //reset if everything ok
                                     varOffset = 0u;
                                 }
