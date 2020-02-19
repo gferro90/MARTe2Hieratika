@@ -79,7 +79,6 @@ static void StopApp(int sig) {
         subscriber->Stop();
     }
     printf("Application successfully stopped.\n");
-    Sleep::Sec(10);
     MARTe::ObjectRegistryDatabase::Instance()->Purge();
     keepRunning = false;
     _exit(0);
