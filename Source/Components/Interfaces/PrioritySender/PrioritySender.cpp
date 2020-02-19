@@ -633,10 +633,6 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
 
                     }
 
-                    if (cntVariables < nVarsPerThread) {
-                        REPORT_ERROR(ErrorManagement::Information, "Need to send more times");
-                    }
-
                     if (err.ErrorsCleared()) {
                         err = !client.Flush();
                     }
@@ -678,6 +674,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                         break;
                     }
                 }
+                Sleep::MSec(10);
             }
         }
         else {
@@ -687,7 +684,6 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                 destinationsMask[threadId] |= (1u << destinationId);
             }
         }
-        Sleep::MSec(10);
     }
     return err;
 }
