@@ -517,31 +517,31 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
 
     for (uint8 destinationId = 0u; (destinationId < numberOfDestinations) && (err.ErrorsCleared()); destinationId++) {
         listIndex = preListIndex;
-        uint32 cntVariables = 0u;
-        while (cntVariables < nVarsPerThread) {
+        if ((destinationsMask[threadId] & (1 << destinationId)) != 0u) {
+            (reconnectionCycleCounter[threadId])[destinationId] = 0u;
+            StreamString destinationName = "/receiver";
+            destinationName.Printf("%d", destinationId);
+            uint32 cntVariables = 0u;
+            uint32 varOffset = 0u;
+            while (cntVariables < nVarsPerThread) {
 
-            client.SetChunkMode(false);
+                client.SetChunkMode(false);
 
-            HttpProtocol hprotocol(client);
-            if (!hprotocol.MoveAbsolute("OutputOptions")) {
-                hprotocol.CreateAbsolute("OutputOptions");
-            }
+                HttpProtocol hprotocol(client);
+                if (!hprotocol.MoveAbsolute("OutputOptions")) {
+                    hprotocol.CreateAbsolute("OutputOptions");
+                }
 
-            StreamString param;
-            param.Printf("%s:%d", serverIpAddress.Buffer(), serverPort);
-            hprotocol.Write("Host", param.Buffer());
-            hprotocol.Write("Connection", "keep-alive");
-            hprotocol.Write("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-            hprotocol.Write("Accept-Encoding", "gzip, deflate, br");
-            hprotocol.Write("Cache-Control", "no-cache");
+                StreamString param;
+                param.Printf("%s:%d", serverIpAddress.Buffer(), serverPort);
+                hprotocol.Write("Host", param.Buffer());
+                hprotocol.Write("Connection", "keep-alive");
+                hprotocol.Write("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                hprotocol.Write("Accept-Encoding", "gzip, deflate, br");
+                hprotocol.Write("Cache-Control", "no-cache");
 
-            hprotocol.Write("Transfer-Encoding", "chunked");
-            hprotocol.Write("Content-Type", "text/html");
-
-            if ((destinationsMask[threadId] & (1 << destinationId)) != 0u) {
-                (reconnectionCycleCounter[threadId])[destinationId] = 0u;
-                StreamString destinationName = "/receiver";
-                destinationName.Printf("%d", destinationId);
+                hprotocol.Write("Transfer-Encoding", "chunked");
+                hprotocol.Write("Content-Type", "text/html");
 
                 StreamString hstream;
                 err = !hprotocol.WriteHeader(false, HttpDefinition::HSHCPut, &hstream, destinationName.Buffer());
@@ -554,20 +554,20 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                     PvDescriptor *pvDes = dataSource->GetPvDescriptors();
                     if (pvDes != NULL) {
                         uint32 i = 0u;
-                        while ((i < nVarsPerThread) && (err.ErrorsCleared())) {
+                        bool condition = (i < nVarsPerThread) && (err.ErrorsCleared());
+                        while (condition && (cntVariables < nVarsPerThread)) {
                             uint32 signalIndex = indexListThreads[listIndex];
                             if ((pvDes[signalIndex].numberOfElements > 0u) && (pvDes[signalIndex].memorySize > 0u)) {
                                 uint32 totalSize = (pvDes[signalIndex].memorySize * pvDes[signalIndex].numberOfElements);
 
-                                uint32 varOffset = 0u;
-                                while (varOffset < totalSize) {
+                                while ((varOffset < totalSize) && (condition)) {
 
                                     uint32 actualSize = ((totalSize - varOffset) < maxVarSize) ? (totalSize - varOffset) : (maxVarSize);
                                     uint64 offset = (pvDes[signalIndex]).offset + varOffset;
 
                                     StreamString signalName = pvDes[signalIndex].pvName;
                                     //REPORT_ERROR(ErrorManagement::Information, "Send %s", signalName.Buffer());
-                                    void*signalPtr = &memoryThreads[offset];
+                                    void *signalPtr = &memoryThreads[offset];
 
                                     AnyType signalAt(pvDes[signalIndex].td, 0u, signalPtr);
                                     if (pvDes[signalIndex].numberOfElements > 1u) {
@@ -598,7 +598,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                                         err = !(client.Write((const char8*) (&varOffset), indexSize));
                                     }
                                     if (err.ErrorsCleared()) {
-                                        err = !(client.Write((const char8*) signalPtr + varOffset, actualSize));
+                                        err = !(client.Write((const char8*) signalPtr, actualSize));
                                     }
                                     uint32 timestampSize = sizeof(uint64);
                                     uint32 tsIndex = (pvDes[signalIndex].numberOfElements * pvDes[signalIndex].memorySize);
@@ -612,12 +612,23 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                                     }
                                     varOffset += maxVarSize;
                                     i++;
+                                    condition = (i < nVarsPerThread) && (err.ErrorsCleared());
+                                }
+                                if (condition) {
+                                    //reset if everything ok
+                                    varOffset = 0u;
                                 }
                             }
+                            else {
+                                i++;
+                                condition = (i < nVarsPerThread);
+                            }
 
-                            listIndex++;
-                            listIndex %= numberOfVariables;
-                            cntVariables++;
+                            if (condition) {
+                                listIndex++;
+                                listIndex %= numberOfVariables;
+                                cntVariables++;
+                            }
                         }
 
                     }
@@ -662,20 +673,21 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                             REPORT_ERROR(ErrorManagement::FatalError, "Send final message");
                             //send a connection-close message
                             SendCloseConnectionMessage(client, destinationName.Buffer());
-                            Sleep::MSec(connectionTimeout.GetTimeoutMSec());
+                            //Sleep::MSec(connectionTimeout.GetTimeoutMSec());
                         }
+                        break;
                     }
                 }
             }
-            else {
-                //retry to send the message
-                (reconnectionCycleCounter[threadId])[destinationId]++;
-                if ((reconnectionCycleCounter[threadId])[destinationId] >= numberOfCyclesPerTimeout) {
-                    destinationsMask[threadId] |= (1u << destinationId);
-                }
-            }
-            Sleep::MSec(10);
         }
+        else {
+            //retry to send the message
+            (reconnectionCycleCounter[threadId])[destinationId]++;
+            if ((reconnectionCycleCounter[threadId])[destinationId] >= numberOfCyclesPerTimeout) {
+                destinationsMask[threadId] |= (1u << destinationId);
+            }
+        }
+        Sleep::MSec(10);
     }
     return err;
 }
