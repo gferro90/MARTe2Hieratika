@@ -591,8 +591,8 @@ void EpicsParserAndSubscriber::CleanContext(uint32 threadId) {
                 (void) ca_clear_event(pvDescriptor[n].pvEvid);
                 (void) ca_clear_channel(pvDescriptor[n].pvChid);
             }
-            ca_detach_context();
-            ca_context_destroy();
+            //ca_detach_context();
+            //ca_context_destroy();
         }
         fmutex.FastUnLock();
     }
