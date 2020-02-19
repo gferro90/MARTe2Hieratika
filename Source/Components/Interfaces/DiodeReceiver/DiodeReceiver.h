@@ -225,6 +225,7 @@ protected:
                              uint32 &receivedIndex,
                              uint8 &receivedTypeId,
                              uint32 &receivedSize,
+                             uint32 &receivedOffset,
                              uint32 &processedSize,
                              const char8 * &dataPtr);
 
@@ -235,6 +236,7 @@ protected:
                        StreamString &varName,
                        uint32 receivedIndex,
                        uint32 receivedSize,
+                       uint32 receivedOffset,
                        uint32 &index,
                        uint32 &processedSize,
                        bool &controlOk);
@@ -247,6 +249,7 @@ protected:
                              uint32 index,
                              uint32 processedSize,
                              uint8 receivedTypeId,
+                             uint32 varOffset,
                              bool controlOk);
 
     /**

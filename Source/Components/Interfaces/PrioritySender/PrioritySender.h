@@ -323,6 +323,12 @@ private:
      * The read timeout in millisecs
      */
     uint32 readTimeout;
+
+
+    /**
+     * The maximum array size
+     */
+    uint32 maxVarSize;
 };
 
 }

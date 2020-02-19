@@ -227,6 +227,7 @@ PrioritySender::PrioritySender() :
     numberOfChangedVariables = 0u;
     maxBytesPerCycle = 0xFFFFFFFFu;
     readTimeout = 10000u;
+    maxVarSize = 0xFFFFFFFFu;
 }
 
 PrioritySender::~PrioritySender() {
@@ -299,6 +300,11 @@ bool PrioritySender::Initialise(StructuredDataI &data) {
         if (ret) {
             if (!data.Read("MaxBytesPerCycle", maxBytesPerCycle)) {
                 maxBytesPerCycle = 0xFFFFFFFFu;
+            }
+        }
+        if (ret) {
+            if (!data.Read("MaxVarSize", maxVarSize)) {
+                maxVarSize = 0xFFFFFFFFu;
             }
         }
         if (ret) {
@@ -547,51 +553,60 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                     for (uint32 i = 0u; (i < nVarsPerThread) && (err.ErrorsCleared()); i++) {
                         uint32 signalIndex = indexListThreads[listIndex];
                         if ((pvDes[signalIndex].numberOfElements > 0u) && (pvDes[signalIndex].memorySize > 0u)) {
-
-                            uint64 offset = (pvDes[signalIndex]).offset;
-
-                            StreamString signalName = pvDes[signalIndex].pvName;
-                            REPORT_ERROR(ErrorManagement::Information, "Send %s", signalName.Buffer());
-                            void*signalPtr = &memoryThreads[offset];
-
-                            AnyType signalAt(pvDes[signalIndex].td, 0u, signalPtr);
-                            if (pvDes[signalIndex].numberOfElements > 1u) {
-                                signalAt.SetNumberOfDimensions(1u);
-                                signalAt.SetNumberOfElements(0u, pvDes[signalIndex].numberOfElements);
-                            }
-
-                            // err = !(sdata.CreateRelative(signalName.Buffer()));
-                            StreamString var = "\"";
-                            var += signalName.Buffer();
-                            var += "\": ";
-                            uint32 varSize = var.Size();
-                            if (err.ErrorsCleared()) {
-                                err = !(client.Write(var.Buffer(), varSize));
-                            }
-                            uint32 indexSize = sizeof(uint32);
-                            if (err.ErrorsCleared()) {
-                                err = !(client.Write((const char8*) (&signalIndex), indexSize));
-                            }
-                            if (err.ErrorsCleared()) {
-                                uint32 typeIdSize = sizeof(uint8);
-                                err = !(client.Write((const char8*) (&pvDes[signalIndex].typeId), typeIdSize));
-                            }
                             uint32 totalSize = (pvDes[signalIndex].memorySize * pvDes[signalIndex].numberOfElements);
-                            if (err.ErrorsCleared()) {
-                                err = !(client.Write((const char8*) (&totalSize), indexSize));
-                            }
-                            if (err.ErrorsCleared()) {
-                                err = !(client.Write((const char8*) signalPtr, totalSize));
-                            }
-                            uint32 timestampSize = sizeof(uint64);
-                            uint32 tsIndex = (pvDes[signalIndex].numberOfElements * pvDes[signalIndex].memorySize);
-                            uint8* timeStampPtr = (uint8*) (&memoryThreads[offset + tsIndex]);
-                            if (err.ErrorsCleared()) {
-                                err = !(client.Write((const char8*) timeStampPtr, timestampSize));
-                            }
-                            uint32 termSize = 2u;
-                            if (err.ErrorsCleared()) {
-                                err = !(client.Write("\n\r", termSize));
+
+                            uint32 varOffset = 0u;
+                            while (varOffset < totalSize) {
+
+                                uint32 actualSize=((totalSize-varOffset)<maxVarSize)?(totalSize-varOffset):(maxVarSize));
+                                uint64 offset = (pvDes[signalIndex]).offset+varOffset;
+
+                                StreamString signalName = pvDes[signalIndex].pvName;
+                                REPORT_ERROR(ErrorManagement::Information, "Send %s", signalName.Buffer());
+                                void*signalPtr = &memoryThreads[offset];
+
+                                AnyType signalAt(pvDes[signalIndex].td, 0u, signalPtr);
+                                if (pvDes[signalIndex].numberOfElements > 1u) {
+                                    signalAt.SetNumberOfDimensions(1u);
+                                    signalAt.SetNumberOfElements(0u, pvDes[signalIndex].numberOfElements);
+                                }
+
+                                // err = !(sdata.CreateRelative(signalName.Buffer()));
+                                StreamString var = "\"";
+                                var += signalName.Buffer();
+                                var += "\": ";
+                                uint32 varSize = var.Size();
+                                if (err.ErrorsCleared()) {
+                                    err = !(client.Write(var.Buffer(), varSize));
+                                }
+                                uint32 indexSize = sizeof(uint32);
+                                if (err.ErrorsCleared()) {
+                                    err = !(client.Write((const char8*) (&signalIndex), indexSize));
+                                }
+                                if (err.ErrorsCleared()) {
+                                    uint32 typeIdSize = sizeof(uint8);
+                                    err = !(client.Write((const char8*) (&pvDes[signalIndex].typeId), typeIdSize));
+                                }
+                                if (err.ErrorsCleared()) {
+                                    err = !(client.Write((const char8*) (&actualSize), indexSize));
+                                }
+                                if (err.ErrorsCleared()) {
+                                    err = !(client.Write((const char8*) (&varOffset), indexSize));
+                                }
+                                if (err.ErrorsCleared()) {
+                                    err = !(client.Write((const char8*) signalPtr+varOffset, actualSize));
+                                }
+                                uint32 timestampSize = sizeof(uint64);
+                                uint32 tsIndex = (pvDes[signalIndex].numberOfElements * pvDes[signalIndex].memorySize);
+                                uint8* timeStampPtr = (uint8*) (&memoryThreads[offset + tsIndex]);
+                                if (err.ErrorsCleared()) {
+                                    err = !(client.Write((const char8*) timeStampPtr, timestampSize));
+                                }
+                                uint32 termSize = 2u;
+                                if (err.ErrorsCleared()) {
+                                    err = !(client.Write("\n\r", termSize));
+                                }
+                                varOffset += maxVarSize;
                             }
                         }
                         listIndex++;

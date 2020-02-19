@@ -540,6 +540,7 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
         uint32 receivedSize = 0u;
         uint8 receivedTypeId = 0u;
         uint32 index = INDEX_INIT_ID;
+        uint32 receivedOffset = 0u;
 
         bool isChunked = true;
         uint32 contentLength = 0u;
@@ -580,14 +581,14 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
                             uint32 processedSize = 0u;
                             const char8 *dataPtr = NULL;
                             bool controlOk = true;
-                            ok = ReadVarNameAndIndex(payload, varName, receivedIndex, receivedTypeId, receivedSize, processedSize, dataPtr);
+                            ok = ReadVarNameAndIndex(payload, varName, receivedIndex, receivedTypeId, receivedSize, receivedOffset, processedSize, dataPtr);
 
                             if (ok) {
-                                ok = GetLocalIndex(payload, varName, receivedIndex, receivedSize, index, processedSize, controlOk);
+                                ok = GetLocalIndex(payload, varName, receivedIndex, receivedSize, receivedOffset, index, processedSize, controlOk);
                             }
 
                             if (ok) {
-                                ReadVarValueAndSkip(payload, dataPtr, index, processedSize, receivedTypeId, controlOk);
+                                ReadVarValueAndSkip(payload, dataPtr, index, processedSize, receivedTypeId, receivedOffset, controlOk);
                             }
                         }
                     }
@@ -798,6 +799,7 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
                                         uint32 &receivedIndex,
                                         uint8 &receivedTypeId,
                                         uint32 &receivedSize,
+                                        uint32 &receivedOffset,
                                         uint32 &processedSize,
                                         const char8 * &dataPtr) {
 
@@ -916,13 +918,15 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
             dataPtr += patternSize;
             processedSize += (nameSize + patternSize);
 
-            ok = ((payload.Size() - processedSize) >= (2 * sizeof(uint32)) + sizeof(uint8));
+            ok = ((payload.Size() - processedSize) >= (3 * sizeof(uint32)) + sizeof(uint8));
             if (ok) {
                 MemoryOperationsHelper::Copy(&receivedIndex, dataPtr, sizeof(uint32));
                 dataPtr += sizeof(uint32);
                 MemoryOperationsHelper::Copy(&receivedTypeId, dataPtr, sizeof(uint8));
                 dataPtr += sizeof(uint8);
                 MemoryOperationsHelper::Copy(&receivedSize, dataPtr, sizeof(uint32));
+                dataPtr += sizeof(uint32);
+                MemoryOperationsHelper::Copy(&receivedOffset, dataPtr, sizeof(uint32));
                 if ((receivedIndex >= numberOfVariables) || (receivedSize >= (8u * maxArraySize))) {
                     REPORT_ERROR(ErrorManagement::Information, "receivedIndex %d, receivedSize %d\n", receivedIndex, receivedSize);
 
@@ -955,6 +959,7 @@ bool DiodeReceiver::GetLocalIndex(StreamString &payload,
                                   StreamString &varName,
                                   uint32 receivedIndex,
                                   uint32 receivedSize,
+                                  uint32 receivedOffset,
                                   uint32 &index,
                                   uint32 &processedSize,
                                   bool &controlOk) {
@@ -977,10 +982,10 @@ bool DiodeReceiver::GetLocalIndex(StreamString &payload,
         }
     }
     if (index < numberOfVariables) {
-        controlOk = ((pvs[index].totalSize > 0u) && (pvs[index].totalSize == receivedSize));
+        controlOk = ((pvs[index].totalSize > 0u) && ((receivedSize + receivedOffset) <= pvs[index].totalSize));
     }
 
-    processedSize += (2 * (sizeof(uint32)) + receivedSize + sizeof(uint64) + 4u);
+    processedSize += (3 * (sizeof(uint32)) + receivedSize + sizeof(uint64) + 4u);
     ok = (payload.Size() >= processedSize);
 
     return ok;
@@ -991,23 +996,26 @@ void DiodeReceiver::ReadVarValueAndSkip(StreamString &payload,
                                         uint32 index,
                                         uint32 processedSize,
                                         uint8 receivedTypeId,
+                                        uint32 varOffset,
                                         bool controlOk) {
 
     if (index < numberOfVariables) {
         dataPtr += sizeof(uint32);
         if (syncSem.FastLock()) {
 
-            void *ptr = (void*) (memory + pvs[index].offset);
-            void *ptr_1 = (void*) (memoryPrec + pvs[index].offset);
+            void *ptr = (void*) (memory + pvs[index].offset + varOffset);
+            void *ptr_1 = (void*) (memoryPrec + pvs[index].offset + varOffset);
             if (controlOk) {
                 MemoryOperationsHelper::Copy(ptr, dataPtr, (pvs[index].totalSize + sizeof(uint64)));
             }
             else {
-
-                //convert!!
-                if (receivedTypeId < NUMBER_OF_TYPES) {
-                    AnyType temp = AnyType(descriptors[receivedTypeId], 0u, (void*) dataPtr);
-                    TypeConvert(pvs[index].at, temp);
+                if (varOffset == 0u) {
+                    //convert!!
+                    if (receivedTypeId < NUMBER_OF_TYPES) {
+                        REPORT_ERROR(ErrorManagement::Warning, "Attempting to convert");
+                        AnyType temp = AnyType(descriptors[receivedTypeId], 0u, (void*) dataPtr);
+                        TypeConvert(pvs[index].at, temp);
+                    }
                 }
             }
             if (MemoryOperationsHelper::Compare(ptr, ptr_1, pvs[index].totalSize) != 0) {
