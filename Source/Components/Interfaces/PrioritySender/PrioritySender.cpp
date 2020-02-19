@@ -517,153 +517,160 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
 
     for (uint8 destinationId = 0u; (destinationId < numberOfDestinations) && (err.ErrorsCleared()); destinationId++) {
         listIndex = preListIndex;
-        client.SetChunkMode(false);
+        uint32 cntVariables = 0u;
+        while (cntVariables < nVarsPerThread) {
 
-        HttpProtocol hprotocol(client);
-        if (!hprotocol.MoveAbsolute("OutputOptions")) {
-            hprotocol.CreateAbsolute("OutputOptions");
-        }
+            client.SetChunkMode(false);
 
-        StreamString param;
-        param.Printf("%s:%d", serverIpAddress.Buffer(), serverPort);
-        hprotocol.Write("Host", param.Buffer());
-        hprotocol.Write("Connection", "keep-alive");
-        hprotocol.Write("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-        hprotocol.Write("Accept-Encoding", "gzip, deflate, br");
-        hprotocol.Write("Cache-Control", "no-cache");
-
-        hprotocol.Write("Transfer-Encoding", "chunked");
-        hprotocol.Write("Content-Type", "text/html");
-
-        if ((destinationsMask[threadId] & (1 << destinationId)) != 0u) {
-            (reconnectionCycleCounter[threadId])[destinationId] = 0u;
-            StreamString destinationName = "/receiver";
-            destinationName.Printf("%d", destinationId);
-
-            StreamString hstream;
-            err = !hprotocol.WriteHeader(false, HttpDefinition::HSHCPut, &hstream, destinationName.Buffer());
-            if (err.ErrorsCleared()) {
-                client.Flush();
+            HttpProtocol hprotocol(client);
+            if (!hprotocol.MoveAbsolute("OutputOptions")) {
+                hprotocol.CreateAbsolute("OutputOptions");
             }
-            if (err.ErrorsCleared()) {
 
-                client.SetChunkMode(true);
-                PvDescriptor *pvDes = dataSource->GetPvDescriptors();
-                if (pvDes != NULL) {
-                    for (uint32 i = 0u; (i < nVarsPerThread) && (err.ErrorsCleared()); i++) {
-                        uint32 signalIndex = indexListThreads[listIndex];
-                        if ((pvDes[signalIndex].numberOfElements > 0u) && (pvDes[signalIndex].memorySize > 0u)) {
-                            uint32 totalSize = (pvDes[signalIndex].memorySize * pvDes[signalIndex].numberOfElements);
+            StreamString param;
+            param.Printf("%s:%d", serverIpAddress.Buffer(), serverPort);
+            hprotocol.Write("Host", param.Buffer());
+            hprotocol.Write("Connection", "keep-alive");
+            hprotocol.Write("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            hprotocol.Write("Accept-Encoding", "gzip, deflate, br");
+            hprotocol.Write("Cache-Control", "no-cache");
 
-                            uint32 varOffset = 0u;
-                            while (varOffset < totalSize) {
+            hprotocol.Write("Transfer-Encoding", "chunked");
+            hprotocol.Write("Content-Type", "text/html");
 
-                                uint32 actualSize=((totalSize-varOffset)<maxVarSize)?(totalSize-varOffset):(maxVarSize);
-                                uint64 offset = (pvDes[signalIndex]).offset+varOffset;
+            if ((destinationsMask[threadId] & (1 << destinationId)) != 0u) {
+                (reconnectionCycleCounter[threadId])[destinationId] = 0u;
+                StreamString destinationName = "/receiver";
+                destinationName.Printf("%d", destinationId);
 
-                                StreamString signalName = pvDes[signalIndex].pvName;
-                                REPORT_ERROR(ErrorManagement::Information, "Send %s", signalName.Buffer());
-                                void*signalPtr = &memoryThreads[offset];
+                StreamString hstream;
+                err = !hprotocol.WriteHeader(false, HttpDefinition::HSHCPut, &hstream, destinationName.Buffer());
+                if (err.ErrorsCleared()) {
+                    client.Flush();
+                }
+                if (err.ErrorsCleared()) {
 
-                                AnyType signalAt(pvDes[signalIndex].td, 0u, signalPtr);
-                                if (pvDes[signalIndex].numberOfElements > 1u) {
-                                    signalAt.SetNumberOfDimensions(1u);
-                                    signalAt.SetNumberOfElements(0u, pvDes[signalIndex].numberOfElements);
-                                }
+                    client.SetChunkMode(true);
+                    PvDescriptor *pvDes = dataSource->GetPvDescriptors();
+                    if (pvDes != NULL) {
+                        uint32 i = 0u;
+                        while ((i < nVarsPerThread) && (err.ErrorsCleared())) {
+                            uint32 signalIndex = indexListThreads[listIndex];
+                            if ((pvDes[signalIndex].numberOfElements > 0u) && (pvDes[signalIndex].memorySize > 0u)) {
+                                uint32 totalSize = (pvDes[signalIndex].memorySize * pvDes[signalIndex].numberOfElements);
 
-                                // err = !(sdata.CreateRelative(signalName.Buffer()));
-                                StreamString var = "\"";
-                                var += signalName.Buffer();
-                                var += "\": ";
-                                uint32 varSize = var.Size();
-                                if (err.ErrorsCleared()) {
-                                    err = !(client.Write(var.Buffer(), varSize));
+                                uint32 varOffset = 0u;
+                                while (varOffset < totalSize) {
+
+                                    uint32 actualSize = ((totalSize - varOffset) < maxVarSize) ? (totalSize - varOffset) : (maxVarSize);
+                                    uint64 offset = (pvDes[signalIndex]).offset + varOffset;
+
+                                    StreamString signalName = pvDes[signalIndex].pvName;
+                                    REPORT_ERROR(ErrorManagement::Information, "Send %s", signalName.Buffer());
+                                    void*signalPtr = &memoryThreads[offset];
+
+                                    AnyType signalAt(pvDes[signalIndex].td, 0u, signalPtr);
+                                    if (pvDes[signalIndex].numberOfElements > 1u) {
+                                        signalAt.SetNumberOfDimensions(1u);
+                                        signalAt.SetNumberOfElements(0u, pvDes[signalIndex].numberOfElements);
+                                    }
+
+                                    // err = !(sdata.CreateRelative(signalName.Buffer()));
+                                    StreamString var = "\"";
+                                    var += signalName.Buffer();
+                                    var += "\": ";
+                                    uint32 varSize = var.Size();
+                                    if (err.ErrorsCleared()) {
+                                        err = !(client.Write(var.Buffer(), varSize));
+                                    }
+                                    uint32 indexSize = sizeof(uint32);
+                                    if (err.ErrorsCleared()) {
+                                        err = !(client.Write((const char8*) (&signalIndex), indexSize));
+                                    }
+                                    if (err.ErrorsCleared()) {
+                                        uint32 typeIdSize = sizeof(uint8);
+                                        err = !(client.Write((const char8*) (&pvDes[signalIndex].typeId), typeIdSize));
+                                    }
+                                    if (err.ErrorsCleared()) {
+                                        err = !(client.Write((const char8*) (&actualSize), indexSize));
+                                    }
+                                    if (err.ErrorsCleared()) {
+                                        err = !(client.Write((const char8*) (&varOffset), indexSize));
+                                    }
+                                    if (err.ErrorsCleared()) {
+                                        err = !(client.Write((const char8*) signalPtr + varOffset, actualSize));
+                                    }
+                                    uint32 timestampSize = sizeof(uint64);
+                                    uint32 tsIndex = (pvDes[signalIndex].numberOfElements * pvDes[signalIndex].memorySize);
+                                    uint8* timeStampPtr = (uint8*) (&memoryThreads[offset + tsIndex]);
+                                    if (err.ErrorsCleared()) {
+                                        err = !(client.Write((const char8*) timeStampPtr, timestampSize));
+                                    }
+                                    uint32 termSize = 2u;
+                                    if (err.ErrorsCleared()) {
+                                        err = !(client.Write("\n\r", termSize));
+                                    }
+                                    varOffset += maxVarSize;
+                                    i++;
                                 }
-                                uint32 indexSize = sizeof(uint32);
-                                if (err.ErrorsCleared()) {
-                                    err = !(client.Write((const char8*) (&signalIndex), indexSize));
-                                }
-                                if (err.ErrorsCleared()) {
-                                    uint32 typeIdSize = sizeof(uint8);
-                                    err = !(client.Write((const char8*) (&pvDes[signalIndex].typeId), typeIdSize));
-                                }
-                                if (err.ErrorsCleared()) {
-                                    err = !(client.Write((const char8*) (&actualSize), indexSize));
-                                }
-                                if (err.ErrorsCleared()) {
-                                    err = !(client.Write((const char8*) (&varOffset), indexSize));
-                                }
-                                if (err.ErrorsCleared()) {
-                                    err = !(client.Write((const char8*) signalPtr+varOffset, actualSize));
-                                }
-                                uint32 timestampSize = sizeof(uint64);
-                                uint32 tsIndex = (pvDes[signalIndex].numberOfElements * pvDes[signalIndex].memorySize);
-                                uint8* timeStampPtr = (uint8*) (&memoryThreads[offset + tsIndex]);
-                                if (err.ErrorsCleared()) {
-                                    err = !(client.Write((const char8*) timeStampPtr, timestampSize));
-                                }
-                                uint32 termSize = 2u;
-                                if (err.ErrorsCleared()) {
-                                    err = !(client.Write("\n\r", termSize));
-                                }
-                                varOffset += maxVarSize;
+                            }
+                            listIndex++;
+                            listIndex %= numberOfVariables;
+                            cntVariables++;
+                        }
+
+                    }
+
+                    if (err.ErrorsCleared()) {
+                        err = !client.Flush();
+                    }
+                    if (err.ErrorsCleared()) {
+                        err = !client.FinalChunk();
+                    }
+                    if (err.ErrorsCleared()) {
+                        err = !hprotocol.ReadHeader();
+                    }
+                    if (err.ErrorsCleared()) {
+                        StreamString hstream;
+                        hprotocol.CompleteReadOperation(&hstream, 1000u);
+                    }
+                    if (err.ErrorsCleared()) {
+                        if (!hprotocol.KeepAlive()) {
+                            REPORT_ERROR(ErrorManagement::FatalError, "Connection complete!");
+                            err = ErrorManagement::Completed;
+                        }
+                    }
+
+                    if (!err.ErrorsCleared()) {
+                        destinationsMask[threadId] &= ~(1u << destinationId);
+                        //if the server has closed the connection, then nothing to do...
+                        //since the connection is one we have to retry again
+                        if (err != ErrorManagement::Completed) {
+                            if (destinationsMask[threadId] != 0u) {
+                                REPORT_ERROR(ErrorManagement::Information, "Error but connections %d still alive: resend in %d ms\n", destinationId,
+                                             connectionTimeout.GetTimeoutMSec());
+                                err = ErrorManagement::NoError;
                             }
                         }
-                        listIndex++;
-                        listIndex %= numberOfVariables;
-                    }
-
-                }
-
-                if (err.ErrorsCleared()) {
-                    err = !client.Flush();
-                }
-                if (err.ErrorsCleared()) {
-                    err = !client.FinalChunk();
-                }
-                if (err.ErrorsCleared()) {
-                    err = !hprotocol.ReadHeader();
-                }
-                if (err.ErrorsCleared()) {
-                    StreamString hstream;
-                    hprotocol.CompleteReadOperation(&hstream, 1000u);
-                }
-                if (err.ErrorsCleared()) {
-                    if (!hprotocol.KeepAlive()) {
-                        REPORT_ERROR(ErrorManagement::FatalError, "Connection complete!");
-                        err = ErrorManagement::Completed;
-                    }
-                }
-
-                if (!err.ErrorsCleared()) {
-                    destinationsMask[threadId] &= ~(1u << destinationId);
-                    //if the server has closed the connection, then nothing to do...
-                    //since the connection is one we have to retry again
-                    if (err != ErrorManagement::Completed) {
-                        if (destinationsMask[threadId] != 0u) {
-                            REPORT_ERROR(ErrorManagement::Information, "Error but connections %d still alive: resend in %d ms\n", destinationId,
-                                         connectionTimeout.GetTimeoutMSec());
-                            err = ErrorManagement::NoError;
+                        else {
+                            REPORT_ERROR(ErrorManagement::Information, "Receiver %d closes connection: reconnect without sending to it\n", destinationId);
+                            REPORT_ERROR(ErrorManagement::FatalError, "Send final message");
+                            //send a connection-close message
+                            SendCloseConnectionMessage(client, destinationName.Buffer());
+                            Sleep::MSec(connectionTimeout.GetTimeoutMSec());
                         }
                     }
-                    else {
-                        REPORT_ERROR(ErrorManagement::Information, "Receiver %d closes connection: reconnect without sending to it\n", destinationId);
-                        REPORT_ERROR(ErrorManagement::FatalError, "Send final message");
-                        //send a connection-close message
-                        SendCloseConnectionMessage(client, destinationName.Buffer());
-                        Sleep::MSec(connectionTimeout.GetTimeoutMSec());
-                    }
                 }
             }
-        }
-        else {
-            //retry to send the message
-            (reconnectionCycleCounter[threadId])[destinationId]++;
-            if ((reconnectionCycleCounter[threadId])[destinationId] >= numberOfCyclesPerTimeout) {
-                destinationsMask[threadId] |= (1u << destinationId);
+            else {
+                //retry to send the message
+                (reconnectionCycleCounter[threadId])[destinationId]++;
+                if ((reconnectionCycleCounter[threadId])[destinationId] >= numberOfCyclesPerTimeout) {
+                    destinationsMask[threadId] |= (1u << destinationId);
+                }
             }
+            Sleep::MSec(10);
         }
-        Sleep::MSec(10);
     }
     return err;
 }
