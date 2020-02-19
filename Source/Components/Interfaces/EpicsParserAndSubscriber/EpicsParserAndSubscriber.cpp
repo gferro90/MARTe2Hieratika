@@ -242,19 +242,21 @@ bool EpicsParserAndSubscriber::Initialise(StructuredDataI &data) {
                 maxArraySize = MAX_ARR_LEN;
             }
 
-            uint32 numberOfCpus = 4u;
-            if (!data.Read("NumberOfCpus", numberOfCpus)) {
-                numberOfCpus = 4u;
+            ret = data.Read("NumberOfCpus", numberOfCpus)
+            if (!ret) {
+                REPORT_ERROR(ErrorManagement::InitialisationError, "Please specify the NumberOfCpus");
             }
 
-            //distribute equally the threads on the cpus
-            uint32 currentCpuMask = 1u;
-            for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
-                if (currentCpuMask == (1u << numberOfCpus)) {
-                    currentCpuMask = 1u;
+            if (ret) {
+                //distribute equally the threads on the cpus
+                uint32 currentCpuMask = 1u;
+                for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
+                    if (currentCpuMask == (1u << numberOfCpus)) {
+                        currentCpuMask = 1u;
+                    }
+                    MultiThreadService::SetCPUMaskThreadPool(currentCpuMask, i);
+                    currentCpuMask <<= 1u;
                 }
-                MultiThreadService::SetCPUMaskThreadPool(currentCpuMask, i);
-                currentCpuMask <<= 1u;
             }
 
         }

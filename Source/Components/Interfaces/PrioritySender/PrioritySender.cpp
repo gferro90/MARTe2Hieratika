@@ -233,23 +233,29 @@ PrioritySender::PrioritySender() :
 PrioritySender::~PrioritySender() {
     // Auto-generated destructor stub for PrioritySender
     // TODO Verify if manual additions are needed
+    REPORT_ERROR(ErrorMangement::Information, "Here 1");
     if (memory != NULL) {
         HeapManager::Free((void*&) memory);
     }
+    REPORT_ERROR(ErrorMangement::Information, "Here 2");
     if (changeFlag != NULL) {
         HeapManager::Free((void*&) changeFlag);
     }
+    REPORT_ERROR(ErrorMangement::Information, "Here 3");
     if (memoryThreads != NULL) {
         HeapManager::Free((void*&) memoryThreads);
     }
 
+    REPORT_ERROR(ErrorMangement::Information, "Here 4");
     if (indexList != NULL) {
         HeapManager::Free((void*&) indexList);
     }
+    REPORT_ERROR(ErrorMangement::Information, "Here 5");
     if (indexListThreads != NULL) {
         HeapManager::Free((void*&) indexListThreads);
     }
 
+    REPORT_ERROR(ErrorMangement::Information, "Here 6");
     if (reconnectionCycleCounter != NULL) {
         for (uint32 i = 0u; i < numberOfDestinations; i++) {
             if (reconnectionCycleCounter[i] != NULL) {
@@ -259,6 +265,7 @@ PrioritySender::~PrioritySender() {
         delete[] reconnectionCycleCounter;
     }
 
+    REPORT_ERROR(ErrorMangement::Information, "Here 7");
     if (destinationsMask != NULL) {
         delete[] destinationsMask;
     }
@@ -328,8 +335,9 @@ bool PrioritySender::Initialise(StructuredDataI &data) {
             if (!data.Read("NumberOfDestinations", numberOfDestinations)) {
                 numberOfDestinations = 1u;
             }
-            if (numberOfDestinations > 8u) {
-                numberOfDestinations = 8u;
+            if (numberOfDestinations == 0u) {
+                REPORT_ERROR(ErrorManagement::Information, "NumberOfDestinations cannot be 0, set to 1");
+                numberOfDestinations = 1u;
             }
         }
     }

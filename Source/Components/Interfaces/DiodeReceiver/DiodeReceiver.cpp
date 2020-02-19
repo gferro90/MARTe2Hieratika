@@ -317,10 +317,16 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
             else {
                 REPORT_ERROR(ErrorManagement::InitialisationError, "Please define InputFilePath");
             }
-            if (ret) {
-                if (!data.Read("NumberOfCpus", numberOfCpus)) {
-                    numberOfCpus = 4u;
+
+            if(ret){
+                ret=data.Read("NumberOfCpus", numberOfCpus);
+                if (!ret) {
+                    REPORT_ERROR(ErrorManagement::InitialisationError, "Please define NumberOfCpus");
                 }
+            }
+
+            if (ret) {
+
                 if (!data.Read("NumberOfInitThreads", numberOfInitThreads)) {
                     numberOfInitThreads = 1u;
                 }
