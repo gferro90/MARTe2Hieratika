@@ -78,8 +78,8 @@ static void StopApp(int sig) {
         sender->Stop();
         subscriber->Stop();
     }
-    MARTe::ObjectRegistryDatabase::Instance()->Purge();
     printf("Application successfully stopped.\n");
+    MARTe::ObjectRegistryDatabase::Instance()->Purge();
     keepRunning = false;
     _exit(0);
 }

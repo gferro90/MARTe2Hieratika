@@ -192,24 +192,31 @@ EpicsParserAndSubscriber::EpicsParserAndSubscriber() :
 }
 
 EpicsParserAndSubscriber::~EpicsParserAndSubscriber() {
+    REPORT_ERROR(ErrorManagement::Information, "Here 1");
 
     if (!Stop()) {
         if (!Stop()) {
             REPORT_ERROR(ErrorManagement::FatalError, "Could not stop SingleThreadService.");
         }
     }
+    REPORT_ERROR(ErrorManagement::Information, "Here 2");
 
     if (changedFlagMem != NULL) {
         HeapManager::Free((void*&) changedFlagMem);
     }
+    REPORT_ERROR(ErrorManagement::Information, "Here 3");
 
     if (memorySize != NULL) {
         delete[] memorySize;
     }
+    REPORT_ERROR(ErrorManagement::Information, "Here 4");
+
     if (pvDescriptor != NULL) {
 
         delete[] pvDescriptor;
     }
+
+    REPORT_ERROR(ErrorManagement::Information, "Here 5");
 
     if (memory != NULL) {
         for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
@@ -219,6 +226,7 @@ EpicsParserAndSubscriber::~EpicsParserAndSubscriber() {
         }
         delete[] memory;
     }
+    REPORT_ERROR(ErrorManagement::Information, "Here 6");
 
 }
 
@@ -417,6 +425,7 @@ ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info
         if (threadId != NULL) {
             eventSem.Wait(TTInfiniteWait);
             CleanContext(*threadId);
+            REPORT_ERROR(ErrorManagement::Information, "Cleaned context");
         }
     }
     else {
