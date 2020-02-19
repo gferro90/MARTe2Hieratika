@@ -588,7 +588,7 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
                             }
 
                             if (ok) {
-                                ReadVarValueAndSkip(payload, dataPtr, index, processedSize, receivedTypeId, receivedOffset, controlOk);
+                                ReadVarValueAndSkip(payload, dataPtr, index, processedSize, receivedTypeId, receivedOffset, receivedSize, controlOk);
                             }
                         }
                     }
