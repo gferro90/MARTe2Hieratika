@@ -544,7 +544,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                 client.SetChunkMode(true);
                 PvDescriptor *pvDes = dataSource->GetPvDescriptors();
                 if (pvDes != NULL) {
-                    for (uint32 i = 0u; (i < numberOfSignalToBeSent) && (err.ErrorsCleared()); i++) {
+                    for (uint32 i = 0u; (i < nVarsPerThread) && (err.ErrorsCleared()); i++) {
                         uint32 signalIndex = indexListThreads[listIndex];
                         if ((pvDes[signalIndex].numberOfElements > 0u) && (pvDes[signalIndex].memorySize > 0u)) {
 
