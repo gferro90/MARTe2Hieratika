@@ -566,7 +566,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                                     uint64 offset = (pvDes[signalIndex]).offset + varOffset;
 
                                     StreamString signalName = pvDes[signalIndex].pvName;
-                                    REPORT_ERROR(ErrorManagement::Information, "Send %s", signalName.Buffer());
+                                    //REPORT_ERROR(ErrorManagement::Information, "Send %s", signalName.Buffer());
                                     void*signalPtr = &memoryThreads[offset];
 
                                     AnyType signalAt(pvDes[signalIndex].td, 0u, signalPtr);
@@ -614,11 +614,16 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                                     i++;
                                 }
                             }
+
                             listIndex++;
                             listIndex %= numberOfVariables;
                             cntVariables++;
                         }
 
+                    }
+
+                    if (cntVariables < nVarsPerThread) {
+                        REPORT_ERROR(ErrorManagement::Information, "Need to send more times");
                     }
 
                     if (err.ErrorsCleared()) {
