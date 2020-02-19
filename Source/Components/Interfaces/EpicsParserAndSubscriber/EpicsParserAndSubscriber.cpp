@@ -596,6 +596,7 @@ void EpicsParserAndSubscriber::CleanContext(uint32 threadId) {
         }
         fmutex.FastUnLock();
     }
+    REPORT_ERROR(ErrorManagement::Information, "Cazz 3");
 
 }
 
