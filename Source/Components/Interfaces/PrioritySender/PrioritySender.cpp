@@ -484,7 +484,9 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
                 //send a connection-close message
                 SendCloseConnectionMessage(*client, destinationName.Buffer());
             }
+
             delete client;
+            REPORT_ERROR(ErrorManagement::Information, "Client deleted");
             client = NULL;
             info.SetThreadSpecificContext(reinterpret_cast<void*>(NULL));
         }
