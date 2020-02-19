@@ -997,16 +997,18 @@ void DiodeReceiver::ReadVarValueAndSkip(StreamString &payload,
                                         uint32 processedSize,
                                         uint8 receivedTypeId,
                                         uint32 varOffset,
+                                        uint32 receivedSize,
                                         bool controlOk) {
 
     if (index < numberOfVariables) {
         dataPtr += sizeof(uint32);
         if (syncSem.FastLock()) {
 
-            void *ptr = (void*) (memory + pvs[index].offset + varOffset);
-            void *ptr_1 = (void*) (memoryPrec + pvs[index].offset + varOffset);
+            void *ptr = (void*) (memory + pvs[index].offset);
+            void *ptr_1 = (void*) (memoryPrec + pvs[index].offset);
             if (controlOk) {
-                MemoryOperationsHelper::Copy(ptr, dataPtr, (pvs[index].totalSize + sizeof(uint64)));
+                MemoryOperationsHelper::Copy(ptr + varOffset, dataPtr, receivedSize);
+                MemoryOperationsHelper::Copy(ptr + pvs[index].totalSize, dataPtr + receivedSize, sizeof(uint64));
             }
             else {
                 if (varOffset == 0u) {

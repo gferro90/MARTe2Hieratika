@@ -250,6 +250,7 @@ protected:
                              uint32 processedSize,
                              uint8 receivedTypeId,
                              uint32 varOffset,
+                             uint32 receivedSize,
                              bool controlOk);
 
     /**
