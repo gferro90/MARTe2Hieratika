@@ -558,7 +558,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                             uint32 varOffset = 0u;
                             while (varOffset < totalSize) {
 
-                                uint32 actualSize=((totalSize-varOffset)<maxVarSize)?(totalSize-varOffset):(maxVarSize));
+                                uint32 actualSize=((totalSize-varOffset)<maxVarSize)?(totalSize-varOffset):(maxVarSize);
                                 uint64 offset = (pvDes[signalIndex]).offset+varOffset;
 
                                 StreamString signalName = pvDes[signalIndex].pvName;
