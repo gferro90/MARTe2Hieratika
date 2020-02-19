@@ -507,8 +507,10 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
         currentIdxThreads %= numberOfVariables;
         syncSem.FastUnLock();
     }
+    uint32 preListIndex = listIndex;
 
     for (uint8 destinationId = 0u; (destinationId < numberOfDestinations) && (err.ErrorsCleared()); destinationId++) {
+        listIndex = preListIndex;
         client.SetChunkMode(false);
 
         HttpProtocol hprotocol(client);
@@ -597,7 +599,6 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                     }
 
                 }
-
 
                 if (err.ErrorsCleared()) {
                     err = !client.Flush();
