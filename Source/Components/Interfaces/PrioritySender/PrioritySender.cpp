@@ -233,29 +233,29 @@ PrioritySender::PrioritySender() :
 PrioritySender::~PrioritySender() {
     // Auto-generated destructor stub for PrioritySender
     // TODO Verify if manual additions are needed
-    REPORT_ERROR(ErrorMangement::Information, "Here 1");
+    REPORT_ERROR(ErrorManagement::Information, "Here 1");
     if (memory != NULL) {
         HeapManager::Free((void*&) memory);
     }
-    REPORT_ERROR(ErrorMangement::Information, "Here 2");
+    REPORT_ERROR(ErrorManagement::Information, "Here 2");
     if (changeFlag != NULL) {
         HeapManager::Free((void*&) changeFlag);
     }
-    REPORT_ERROR(ErrorMangement::Information, "Here 3");
+    REPORT_ERROR(ErrorManagement::Information, "Here 3");
     if (memoryThreads != NULL) {
         HeapManager::Free((void*&) memoryThreads);
     }
 
-    REPORT_ERROR(ErrorMangement::Information, "Here 4");
+    REPORT_ERROR(ErrorManagement::Information, "Here 4");
     if (indexList != NULL) {
         HeapManager::Free((void*&) indexList);
     }
-    REPORT_ERROR(ErrorMangement::Information, "Here 5");
+    REPORT_ERROR(ErrorManagement::Information, "Here 5");
     if (indexListThreads != NULL) {
         HeapManager::Free((void*&) indexListThreads);
     }
 
-    REPORT_ERROR(ErrorMangement::Information, "Here 6");
+    REPORT_ERROR(ErrorManagement::Information, "Here 6");
     if (reconnectionCycleCounter != NULL) {
         for (uint32 i = 0u; i < numberOfDestinations; i++) {
             if (reconnectionCycleCounter[i] != NULL) {
@@ -265,7 +265,7 @@ PrioritySender::~PrioritySender() {
         delete[] reconnectionCycleCounter;
     }
 
-    REPORT_ERROR(ErrorMangement::Information, "Here 7");
+    REPORT_ERROR(ErrorManagement::Information, "Here 7");
     if (destinationsMask != NULL) {
         delete[] destinationsMask;
     }
