@@ -192,31 +192,26 @@ EpicsParserAndSubscriber::EpicsParserAndSubscriber() :
 }
 
 EpicsParserAndSubscriber::~EpicsParserAndSubscriber() {
-    REPORT_ERROR(ErrorManagement::Information, "Here 1");
 
     if (!Stop()) {
         if (!Stop()) {
             REPORT_ERROR(ErrorManagement::FatalError, "Could not stop SingleThreadService.");
         }
     }
-    REPORT_ERROR(ErrorManagement::Information, "Here 2");
 
     if (changedFlagMem != NULL) {
         HeapManager::Free((void*&) changedFlagMem);
     }
-    REPORT_ERROR(ErrorManagement::Information, "Here 3");
 
     if (memorySize != NULL) {
         delete[] memorySize;
     }
-    REPORT_ERROR(ErrorManagement::Information, "Here 4");
 
     if (pvDescriptor != NULL) {
 
         delete[] pvDescriptor;
     }
 
-    REPORT_ERROR(ErrorManagement::Information, "Here 5");
 
     if (memory != NULL) {
         for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
@@ -226,7 +221,6 @@ EpicsParserAndSubscriber::~EpicsParserAndSubscriber() {
         }
         delete[] memory;
     }
-    REPORT_ERROR(ErrorManagement::Information, "Here 6");
 
 }
 
@@ -424,10 +418,7 @@ ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info
         uint32 *threadId = reinterpret_cast<uint32 *>(info.GetThreadSpecificContext());
         if (threadId != NULL) {
             eventSem.Wait(TTInfiniteWait);
-            REPORT_ERROR(ErrorManagement::Information, "Cleaning context");
-
             CleanContext(*threadId);
-            REPORT_ERROR(ErrorManagement::Information, "Cleaned context");
         }
     }
     else {
@@ -582,21 +573,18 @@ void EpicsParserAndSubscriber::CleanContext(uint32 threadId) {
 
     if (fmutex.FastLock()) {
         if (pvDescriptor != NULL) {
-            REPORT_ERROR(ErrorManagement::Information, "Cazz 1");
 
             for (uint32 n = beg; (n < end); n++) {
-                REPORT_ERROR(ErrorManagement::Information, "Cazz 2 %d %d", n, numberOfVariables);
 
-                //(void) ca_clear_subscription(pvDescriptor[n].pvEvid);
-                //(void) ca_clear_event(pvDescriptor[n].pvEvid);
-                //(void) ca_clear_channel(pvDescriptor[n].pvChid);
+                (void) ca_clear_subscription(pvDescriptor[n].pvEvid);
+                (void) ca_clear_event(pvDescriptor[n].pvEvid);
+                (void) ca_clear_channel(pvDescriptor[n].pvChid);
             }
             ca_detach_context();
             ca_context_destroy();
         }
         fmutex.FastUnLock();
     }
-    REPORT_ERROR(ErrorManagement::Information, "Cazz 3");
 
 }
 
