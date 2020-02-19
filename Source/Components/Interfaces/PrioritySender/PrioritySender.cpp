@@ -475,10 +475,10 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
                 destinationName.Printf("%d", i);
                 //send a connection-close message
                 SendCloseConnectionMessage(*client, destinationName.Buffer());
-                delete client;
-                client = NULL;
-                info.SetThreadSpecificContext(reinterpret_cast<void*>(NULL));
             }
+            delete client;
+            client = NULL;
+            info.SetThreadSpecificContext(reinterpret_cast<void*>(NULL));
         }
 
         if (syncSem.FastLock()) {
@@ -563,7 +563,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                                 while ((varOffset < totalSize) && (condition)) {
 
                                     uint32 actualSize = ((totalSize - varOffset) < maxVarSize) ? (totalSize - varOffset) : (maxVarSize);
-                                    uint64 offset = (pvDes[signalIndex]).offset + varOffset;
+                                    uint64 offset = (pvDes[signalIndex]).offset;
 
                                     StreamString signalName = pvDes[signalIndex].pvName;
                                     //REPORT_ERROR(ErrorManagement::Information, "Send %s", signalName.Buffer());
@@ -598,7 +598,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                                         err = !(client.Write((const char8*) (&varOffset), indexSize));
                                     }
                                     if (err.ErrorsCleared()) {
-                                        err = !(client.Write((const char8*) signalPtr, actualSize));
+                                        err = !(client.Write(((const char8*) signalPtr)+varOffset, actualSize));
                                     }
                                     uint32 timestampSize = sizeof(uint64);
                                     uint32 tsIndex = (pvDes[signalIndex].numberOfElements * pvDes[signalIndex].memorySize);
