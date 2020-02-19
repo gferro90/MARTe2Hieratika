@@ -549,7 +549,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                             uint64 offset = (pvDes[signalIndex]).offset;
 
                             StreamString signalName = pvDes[signalIndex].pvName;
-
+                            REPORT_ERROR(ErrorManagement::Information, "Send %s", signalName.Buffer());
                             void*signalPtr = &memoryThreads[offset];
 
                             AnyType signalAt(pvDes[signalIndex].td, 0u, signalPtr);
@@ -597,6 +597,8 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                     }
 
                 }
+
+
                 if (err.ErrorsCleared()) {
                     err = !client.Flush();
                 }
