@@ -248,8 +248,7 @@ private:
      * of errors.
      * @param[in] threadId the thread identifier.
      */
-    void CleanContext(uint32 beg,
-                      uint32 end);
+    void CleanContext(uint32 threadId);
 
     /**
      * The first variable name
@@ -323,6 +322,7 @@ private:
      * The maximum number of variables
      */
     uint32 maxNumberOfVariables;
+
 
     /**
      * The maximum number of elements in the array
