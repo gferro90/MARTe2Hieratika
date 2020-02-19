@@ -242,7 +242,7 @@ bool EpicsParserAndSubscriber::Initialise(StructuredDataI &data) {
                 maxArraySize = MAX_ARR_LEN;
             }
 
-            uint8 numberofCpus;
+            uint8 numberOfCpus;
             ret = data.Read("NumberOfCpus", numberOfCpus);
             if (!ret) {
                 REPORT_ERROR(ErrorManagement::InitialisationError, "Please specify the NumberOfCpus");
