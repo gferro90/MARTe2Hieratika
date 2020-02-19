@@ -424,6 +424,8 @@ ErrorManagement::ErrorType EpicsParserAndSubscriber::Execute(ExecutionInfo& info
         uint32 *threadId = reinterpret_cast<uint32 *>(info.GetThreadSpecificContext());
         if (threadId != NULL) {
             eventSem.Wait(TTInfiniteWait);
+            REPORT_ERROR(ErrorManagement::Information, "Cleaning context");
+
             CleanContext(*threadId);
             REPORT_ERROR(ErrorManagement::Information, "Cleaned context");
         }
@@ -580,7 +582,11 @@ void EpicsParserAndSubscriber::CleanContext(uint32 threadId) {
 
     if (fmutex.FastLock()) {
         if (pvDescriptor != NULL) {
+            REPORT_ERROR(ErrorManagement::Information, "Cazz 1");
+
             for (uint32 n = beg; (n < end); n++) {
+                REPORT_ERROR(ErrorManagement::Information, "Cazz 2");
+
                 (void) ca_clear_subscription(pvDescriptor[n].pvEvid);
                 (void) ca_clear_event(pvDescriptor[n].pvEvid);
                 (void) ca_clear_channel(pvDescriptor[n].pvChid);
