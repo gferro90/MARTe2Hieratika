@@ -561,7 +561,7 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
             uint32 chunkSize = (isChunked) ? (0u) : (32u);
             do {
                 err = ReadNewChunk(commClient, payload, isChunked, chunkSize, contentLength);
-
+                REPORT_ERROR(ErrorManagement::Information, "Chunked %d %d", (uint32) isChunked, contentLength);
                 if (err.ErrorsCleared()) {
                     if (chunkSize > 0) {
                         if (isChunked) {
@@ -642,7 +642,7 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
         if (information.GetStageSpecific() == MARTe::ExecutionInfo::ServiceRequestStageSpecific) {
             TCPSocket *newClient = reinterpret_cast<TCPSocket *>(information.GetThreadSpecificContext());
             err = ClientService(newClient);
-            if(!err.ErrorsCleared()){
+            if (!err.ErrorsCleared()) {
                 information.SetThreadSpecificContext(reinterpret_cast<void*>(NULL));
             }
         }
