@@ -521,6 +521,8 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
 
     for (uint8 destinationId = 0u; (destinationId < numberOfDestinations) && (err.ErrorsCleared()); destinationId++) {
         listIndex = preListIndex;
+        REPORT_ERROR(ErrorManagement::Information, "CazzoBubbo_1");
+
         if ((destinationsMask[threadId] & (1 << destinationId)) != 0u) {
             (reconnectionCycleCounter[threadId])[destinationId] = 0u;
             StreamString destinationName = "/receiver";
@@ -528,6 +530,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
             uint32 cntVariables = 0u;
             uint32 varOffset = 0u;
             while (cntVariables < nVarsPerThread) {
+                REPORT_ERROR(ErrorManagement::Information, "CazzoBubbo0");
 
                 client.SetChunkMode(false);
 
@@ -700,6 +703,7 @@ ErrorManagement::ErrorType PrioritySender::SendCloseConnectionMessage(HttpChunke
                                                                       const char8 *destination) {
 
     ErrorManagement::ErrorType err;
+    REPORT_ERROR(ErrorManagement::Information, "DIOBOBBO");
 
     client.SetChunkMode(false);
     HttpProtocol hprotocol(client);
