@@ -782,8 +782,6 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
         if (contentLength == 0u) {
             //get the line
             err = !(commClient->GetLine(line, false));
-            REPORT_ERROR(ErrorManagement::Information, "Chunk = |%s| %d", line.Buffer(), line.Size());
-
             if (err.ErrorsCleared()) {
 
                 if (line.Size() > 0ull) {
@@ -807,7 +805,7 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
             chunkSize = contentLength;
         }
         if (chunkSize > 1023u) {
-            //REPORT_ERROR(ErrorManagement::Information, "Chunk size = %d", chunkSize);
+            REPORT_ERROR(ErrorManagement::Information, "Chunk size = %d", chunkSize);
             chunkSize = 1023u;
         }
         contentLength -= chunkSize;
@@ -868,7 +866,7 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
                     uint32 currentSize = (payload.Size() - i);
                     //consume until the "
                     payload.Seek(0ull);
-                    REPORT_ERROR(ErrorManagement::Information, "Payload not in sync: resync %d %d\n", i, currentSize);
+                    //EPORT_ERROR(ErrorManagement::Information, "Payload not in sync: resync %d %d\n", i, currentSize);
                     MemoryOperationsHelper::Copy((void*) payload.Buffer(), payload.Buffer() + i, currentSize);
                     payload.SetSize(currentSize);
                     payload += "";
