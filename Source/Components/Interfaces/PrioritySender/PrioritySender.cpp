@@ -399,7 +399,6 @@ ErrorManagement::ErrorType PrioritySender::Start() {
 
 ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
     ErrorManagement::ErrorType err;
-    REPORT_ERROR(ErrorManagement::Information, "Thread Cycle ...");
 
     if (info.GetStage() == MARTe::ExecutionInfo::StartupStage) {
 
