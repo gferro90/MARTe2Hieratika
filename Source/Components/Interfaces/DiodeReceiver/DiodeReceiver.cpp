@@ -582,10 +582,14 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
                     if (chunkSize > 0) {
                         if (isChunked) {
                             //read the \r\n
+
                             uint32 size = 2;
                             char8 buff[2];
-                            err = !(commClient->Read(buff, size));
-                            REPORT_ERROR(ErrorManagement::Information, "WTF |%s|",buff);
+                            StreamString line;
+                            err = !(commClient->GetLine(line, false));
+
+                            //err = !(commClient->Read(buff, size));
+                            REPORT_ERROR(ErrorManagement::Information, "WTF |%s|",line.Buffer());
                         }
                         bool ok = err.ErrorsCleared();
 
@@ -802,9 +806,9 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
         else {
             chunkSize = contentLength;
         }
-        if (chunkSize > 32) {
+        if (chunkSize > 1023u) {
             //REPORT_ERROR(ErrorManagement::Information, "Chunk size = %d", chunkSize);
-            chunkSize = 32;
+            chunkSize = 1023u;
         }
         contentLength -= chunkSize;
     }
