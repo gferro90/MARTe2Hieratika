@@ -493,7 +493,7 @@ ErrorManagement::ErrorType DiodeReceiver::Stop() {
     eventSem.Post();
     REPORT_ERROR(ErrorManagement::Information, "called DiodeReceiver::Stop");
     //Sleep::Sec(readTimeout.GetTimeoutMSec()+5);
-    ErrorManagement::ErrorType err= MultiClientService::Stop();
+    ErrorManagement::ErrorType err = MultiClientService::Stop();
     REPORT_ERROR(ErrorManagement::Information, "Stopped MultiClientService");
     return err;
 }
@@ -542,7 +542,9 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
         HttpProtocol protocol(*commClient);
 
         //discard the header
+        REPORT_ERROR(ErrorManagement::Information, "Before ReadHeader");
         err = !(protocol.ReadHeader());
+        REPORT_ERROR(ErrorManagement::Information, "Before ReadHeader");
 
         StreamString payload;
         StreamString varName;
@@ -561,6 +563,7 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
 
         if (err.ErrorsCleared()) {
             if (protocol.MoveAbsolute("InputOptions")) {
+
                 if (protocol.Read("Content-Length", contentLength)) {
                     isChunked = false;
                     if (contentLength == 0u) {
@@ -577,14 +580,18 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
             //REPORT_ERROR(ErrorManagement::Information, "Chunked %d %d", (uint32) isChunked, contentLength);
 
             do {
+                REPORT_ERROR(ErrorManagement::Information, "Before ReadNewChunk");
                 err = ReadNewChunk(commClient, payload, isChunked, chunkSize, contentLength);
+                REPORT_ERROR(ErrorManagement::Information, "After ReadNewChunk");
                 if (err.ErrorsCleared()) {
                     if (chunkSize > 0) {
                         if (isChunked) {
                             //read the \r\n
                             uint32 size = 2;
                             char8 buff[2];
+                            REPORT_ERROR(ErrorManagement::Information, "Before Read");
                             err = !(commClient->Read(buff, size));
+                            REPORT_ERROR(ErrorManagement::Information, "After Read");
                         }
                         bool ok = err.ErrorsCleared();
 
@@ -612,7 +619,9 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
             if (err.ErrorsCleared()) {
                 if (isChunked) {
                     StreamString line;
+                    REPORT_ERROR(ErrorManagement::Information, "Before GetLine");
                     err = !(commClient->GetLine(line, false));
+                    REPORT_ERROR(ErrorManagement::Information, "After GetLine");
                 }
             }
         }
