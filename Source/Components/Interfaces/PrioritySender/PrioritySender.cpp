@@ -34,6 +34,7 @@
 #include "JsonPrinter.h"
 #include "AdvancedErrorManagement.h"
 #include "HttpProtocol.h"
+#include "File.h"
 
 /*---------------------------------------------------------------------------*/
 /*                           Static definitions                              */
