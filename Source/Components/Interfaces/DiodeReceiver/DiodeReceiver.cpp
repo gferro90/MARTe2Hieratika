@@ -280,7 +280,7 @@ DiodeReceiver::~DiodeReceiver() {
         HeapManager::Free((void*&) memory2);
     }
     if (memoryPrec != NULL) {
-        HeapManager::Free((void*&) memory);
+        HeapManager::Free((void*&) memoryPrec);
     }
 
     if (changeFlag != NULL) {

@@ -559,6 +559,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                         uint32 i = 0u;
                         bool condition = (i < nVarsPerThread) && (err.ErrorsCleared());
                         while (condition && (cntVariables < nVarsPerThread)) {
+                            REPORT_ERROR(ErrorManagement::Information, "CazzoBubbo");
                             uint32 signalIndex = indexListThreads[listIndex];
                             if ((pvDes[signalIndex].numberOfElements > 0u) && (pvDes[signalIndex].memorySize > 0u)) {
                                 uint32 totalSize = (pvDes[signalIndex].memorySize * pvDes[signalIndex].numberOfElements);
