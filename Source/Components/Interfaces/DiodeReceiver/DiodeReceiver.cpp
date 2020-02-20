@@ -221,7 +221,6 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
         arg.lastTickCounter[threadId] = HighResolutionTimer::Counter();
     }
 
-    Sleep::Sec(1);
     for (uint32 n = beg; (n < end); n++) {
         (void) ca_clear_channel(arg.pvs[n].pvChid);
     }
@@ -490,6 +489,8 @@ ErrorManagement::ErrorType DiodeReceiver::Start() {
 
 ErrorManagement::ErrorType DiodeReceiver::Stop() {
     Atomic::Increment(&quit);
+    eventSem.Post();
+    REPORT_ERROR(ErrorManagement::Information, "called DiodeReceiver::Stop");
     Sleep::Sec(readTimeout.GetTimeoutMSec()+5);
     ErrorManagement::ErrorType err= MultiClientService::Stop();
     REPORT_ERROR(ErrorManagement::Information, "Stopped MultiClientService");
