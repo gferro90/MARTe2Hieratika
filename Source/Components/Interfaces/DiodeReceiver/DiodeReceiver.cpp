@@ -631,29 +631,31 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
 
     }
     else if (information.GetStage() == MARTe::ExecutionInfo::MainStage) {
-
-        if (information.GetStageSpecific() == MARTe::ExecutionInfo::WaitRequestStageSpecific) {
-            TCPSocket *newClient = new TCPSocket();
-            if (err.ErrorsCleared()) {
-                REPORT_ERROR(ErrorManagement::Information, "Waiting new connection");
-                if (server.WaitConnection(acceptTimeout, newClient) == NULL) {
-                    err = MARTe::ErrorManagement::Timeout;
-                    delete newClient;
-                }
-                else {
-                    REPORT_ERROR(ErrorManagement::Information, "Connection established!");
-                    newClient->SetCalibReadParam(0xFFFFFFFFu);
-                    newClient->SetTimeout(readTimeout);
-                    information.SetThreadSpecificContext(reinterpret_cast<void*>(newClient));
-                    err = MARTe::ErrorManagement::NoError;
+        if (quit == 0) {
+            if (information.GetStageSpecific() == MARTe::ExecutionInfo::WaitRequestStageSpecific) {
+                TCPSocket *newClient = new TCPSocket();
+                if (err.ErrorsCleared()) {
+                    REPORT_ERROR(ErrorManagement::Information, "Waiting new connection");
+                    if (server.WaitConnection(acceptTimeout, newClient) == NULL) {
+                        err = MARTe::ErrorManagement::Timeout;
+                        delete newClient;
+                    }
+                    else {
+                        REPORT_ERROR(ErrorManagement::Information, "Connection established!");
+                        newClient->SetCalibReadParam(0xFFFFFFFFu);
+                        newClient->SetTimeout(readTimeout);
+                        information.SetThreadSpecificContext(reinterpret_cast<void*>(newClient));
+                        err = MARTe::ErrorManagement::NoError;
+                    }
                 }
             }
-        }
-        if (information.GetStageSpecific() == MARTe::ExecutionInfo::ServiceRequestStageSpecific) {
-            TCPSocket *newClient = reinterpret_cast<TCPSocket *>(information.GetThreadSpecificContext());
-            err = ClientService(newClient);
-            if (!err.ErrorsCleared()) {
-                information.SetThreadSpecificContext(reinterpret_cast<void*>(NULL));
+            if (information.GetStageSpecific() == MARTe::ExecutionInfo::ServiceRequestStageSpecific) {
+                TCPSocket *newClient = reinterpret_cast<TCPSocket *>(information.GetThreadSpecificContext());
+                err = ClientService(newClient);
+                //if error the client is deleted here
+                if (!err.ErrorsCleared()) {
+                    information.SetThreadSpecificContext(reinterpret_cast<void*>(NULL));
+                }
             }
         }
     }
