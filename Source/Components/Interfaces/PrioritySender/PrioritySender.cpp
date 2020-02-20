@@ -399,6 +399,7 @@ ErrorManagement::ErrorType PrioritySender::Start() {
 
 ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
     ErrorManagement::ErrorType err;
+    REPORT_ERROR(ErrorManagement::Information, "Thread Cycle ...");
 
     if (info.GetStage() == MARTe::ExecutionInfo::StartupStage) {
 
@@ -565,6 +566,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                                 uint32 totalSize = (pvDes[signalIndex].memorySize * pvDes[signalIndex].numberOfElements);
 
                                 while ((varOffset < totalSize) && (condition)) {
+                                    REPORT_ERROR(ErrorManagement::Information, "CazzoBubbo2");
 
                                     uint32 actualSize = ((totalSize - varOffset) < maxVarSize) ? (totalSize - varOffset) : (maxVarSize);
                                     uint64 offset = (pvDes[signalIndex]).offset;
