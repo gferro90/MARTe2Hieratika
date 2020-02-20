@@ -24,7 +24,7 @@
 /*---------------------------------------------------------------------------*/
 /*                         Standard header includes                          */
 /*---------------------------------------------------------------------------*/
-
+#include <stdio.h>
 /*---------------------------------------------------------------------------*/
 /*                         Project header includes                           */
 /*---------------------------------------------------------------------------*/
@@ -229,7 +229,7 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
     ca_detach_context();
     ca_context_destroy();
 
-    REPORT_ERROR(ErrorManagement::Information, "Init thread terminated");
+    printf("Init thread terminated\n");
 
 }
 
