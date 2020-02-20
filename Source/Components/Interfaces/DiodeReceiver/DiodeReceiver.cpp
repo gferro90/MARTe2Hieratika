@@ -670,6 +670,7 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
                 HttpProtocol protocol(*newClient);
                 protocol.SetKeepAlive(false);
                 err = SendOkReplyMessage(protocol, newClient);
+                information.SetThreadSpecificContext(NULL);
             }
             err = ErrorManagement::Completed;
         }
@@ -680,6 +681,7 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
             HttpProtocol protocol(*newClient);
             protocol.SetKeepAlive(false);
             err = SendOkReplyMessage(protocol, newClient);
+            information.SetThreadSpecificContext(NULL);
         }
         err = ErrorManagement::Completed;
     }
