@@ -566,7 +566,7 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
         if (err.ErrorsCleared()) {
 
             uint32 chunkSize = (isChunked) ? (0u) : (32u);
-            REPORT_ERROR(ErrorManagement::Information, "Chunked %d %d", (uint32) isChunked, contentLength);
+            //REPORT_ERROR(ErrorManagement::Information, "Chunked %d %d", (uint32) isChunked, contentLength);
 
             do {
                 err = ReadNewChunk(commClient, payload, isChunked, chunkSize, contentLength);
