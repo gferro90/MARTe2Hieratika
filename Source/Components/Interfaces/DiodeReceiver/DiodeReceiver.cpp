@@ -229,6 +229,8 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
     ca_detach_context();
     ca_context_destroy();
 
+    REPORT_ERROR(ErrorManagement::Information, "Init thread terminated");
+
 }
 
 /*---------------------------------------------------------------------------*/
@@ -489,7 +491,9 @@ ErrorManagement::ErrorType DiodeReceiver::Start() {
 ErrorManagement::ErrorType DiodeReceiver::Stop() {
     Atomic::Increment(&quit);
     Sleep::Sec(readTimeout.GetTimeoutMSec()+5);
-    return MultiClientService::Stop();
+    ErrorManagement::ErrorType err= MultiClientService::Stop();
+    REPORT_ERROR(ErrorManagement::Information, "Stopped MultiClientService");
+    return err;
 }
 
 ErrorManagement::ErrorType DiodeReceiver::AddThread() {
