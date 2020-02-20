@@ -782,14 +782,13 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
 
                 if (line.Size() > 0ull) {
                     char8 lastChar = line[line.Size() - 1];
-                    if (lastChar == '\r') {
+                    while ((lastChar == '\r') || (lastChar == '\n')) {
                         //remove the \r
                         line.SetSize(line.Size() - 1);
-                    }
-                    else {
-                        REPORT_ERROR(ErrorManagement::Information, "last char %c", lastChar);
+                        lastChar = line[line.Size() - 1];
                     }
                 }
+                REPORT_ERROR(ErrorManagement::Information, "Chunk2 = |%s| %d", line.Buffer(), line.Size());
                 //get the chunk size
                 StreamString toConv = "0x";
                 toConv += line;
