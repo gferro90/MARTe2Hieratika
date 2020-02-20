@@ -79,6 +79,9 @@ static void StopApp(int sig) {
         subscriber->Stop();
     }
     printf("Application successfully stopped.\n");
+    Sleep::Sec(5);
+    subscriber.RemoveReference();
+    sender.RemoveReference();
     MARTe::ObjectRegistryDatabase::Instance()->Purge();
     keepRunning = false;
     _exit(0);
@@ -116,7 +119,7 @@ int main(int argc,
         sender->Start();
         signal(SIGTERM, StopApp);
         signal(SIGINT, StopApp);
-        while(1){
+        while(keepRunning){
             Sleep::Sec(10u);
         }
     }
