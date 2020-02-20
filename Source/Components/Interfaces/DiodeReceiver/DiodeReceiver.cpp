@@ -199,7 +199,6 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
     while (arg.quit == 0) {
         //sync here
         if (threadId == 0u) {
-            printf("Synchronizing\n");
             arg.Synchronise(arg.memory2, arg.changeFlag2);
         }
         for (uint32 index = beg; index < end; index++) {
@@ -542,9 +541,7 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
         HttpProtocol protocol(*commClient);
 
         //discard the header
-        REPORT_ERROR(ErrorManagement::Information, "Before ReadHeader");
         err = !(protocol.ReadHeader());
-        REPORT_ERROR(ErrorManagement::Information, "Before ReadHeader");
 
         StreamString payload;
         StreamString varName;
@@ -580,18 +577,14 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
             //REPORT_ERROR(ErrorManagement::Information, "Chunked %d %d", (uint32) isChunked, contentLength);
 
             do {
-                REPORT_ERROR(ErrorManagement::Information, "Before ReadNewChunk");
                 err = ReadNewChunk(commClient, payload, isChunked, chunkSize, contentLength);
-                REPORT_ERROR(ErrorManagement::Information, "After ReadNewChunk");
                 if (err.ErrorsCleared()) {
                     if (chunkSize > 0) {
                         if (isChunked) {
                             //read the \r\n
                             uint32 size = 2;
                             char8 buff[2];
-                            REPORT_ERROR(ErrorManagement::Information, "Before Read");
                             err = !(commClient->Read(buff, size));
-                            REPORT_ERROR(ErrorManagement::Information, "After Read");
                         }
                         bool ok = err.ErrorsCleared();
 
@@ -619,9 +612,7 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
             if (err.ErrorsCleared()) {
                 if (isChunked) {
                     StreamString line;
-                    REPORT_ERROR(ErrorManagement::Information, "Before GetLine");
                     err = !(commClient->GetLine(line, false));
-                    REPORT_ERROR(ErrorManagement::Information, "After GetLine");
                 }
             }
         }
@@ -674,11 +665,16 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
             }
         }
         else{
+            TCPSocket *newClient = reinterpret_cast<TCPSocket *>(information.GetThreadSpecificContext());
+            if (newClient != NULL) {
+                HttpProtocol protocol(*newClient);
+                protocol.SetKeepAlive(false);
+                err = SendOkReplyMessage(protocol, newClient);
+            }
             err = ErrorManagement::Completed;
         }
     }
     else {
-        REPORT_ERROR(ErrorManagement::Information, "MultiClientService Stopped");
         TCPSocket *newClient = reinterpret_cast<TCPSocket *>(information.GetThreadSpecificContext());
         if (newClient != NULL) {
             HttpProtocol protocol(*newClient);

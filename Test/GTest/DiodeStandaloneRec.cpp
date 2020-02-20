@@ -74,6 +74,8 @@ static void StopApp(int sig) {
     if (receiver.IsValid()) {
         receiver->Stop();
     }
+    Sleep::Sec(5);
+    receiver->RemoveReference();
     MARTe::ObjectRegistryDatabase::Instance()->Purge();
     printf("Application successfully stopped.\n");
     keepRunning = false;
