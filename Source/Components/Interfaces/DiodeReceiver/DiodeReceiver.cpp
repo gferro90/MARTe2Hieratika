@@ -613,11 +613,6 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
                 if (isChunked) {
                     StreamString line;
                     err = !(commClient->GetLine(line, false));
-                    REPORT_ERROR(ErrorManagement::Information, "last line is |%s| %d", line.Buffer(), line.Size());
-                    line="";
-                    err = !(commClient->GetLine(line, false));
-                    REPORT_ERROR(ErrorManagement::Information, "last line 2 is |%s| %d", line.Buffer(), line.Size());
-
                 }
             }
         }
