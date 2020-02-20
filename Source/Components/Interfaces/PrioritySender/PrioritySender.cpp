@@ -529,7 +529,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
             destinationName.Printf("%d", destinationId);
             uint32 cntVariables = 0u;
             uint32 varOffset = 0u;
-            while (cntVariables < nVarsPerThread) {
+            while ((cntVariables < nVarsPerThread) && (err.ErrorsCleared())) {
                 REPORT_ERROR(ErrorManagement::Information, "CazzoBubbo0");
 
                 client.SetChunkMode(false);
@@ -703,7 +703,6 @@ ErrorManagement::ErrorType PrioritySender::SendCloseConnectionMessage(HttpChunke
                                                                       const char8 *destination) {
 
     ErrorManagement::ErrorType err;
-    REPORT_ERROR(ErrorManagement::Information, "DIOBOBBO");
 
     client.SetChunkMode(false);
     HttpProtocol hprotocol(client);
