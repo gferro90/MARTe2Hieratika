@@ -492,7 +492,7 @@ ErrorManagement::ErrorType DiodeReceiver::Stop() {
     Atomic::Increment(&quit);
     eventSem.Post();
     REPORT_ERROR(ErrorManagement::Information, "called DiodeReceiver::Stop");
-    Sleep::Sec(readTimeout.GetTimeoutMSec()+5);
+    //Sleep::Sec(readTimeout.GetTimeoutMSec()+5);
     ErrorManagement::ErrorType err= MultiClientService::Stop();
     REPORT_ERROR(ErrorManagement::Information, "Stopped MultiClientService");
     return err;
@@ -666,6 +666,7 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
         }
     }
     else {
+        REPORT_ERROR(ErrorManagement::Information, "MultiClientService Stopped");
         TCPSocket *newClient = reinterpret_cast<TCPSocket *>(information.GetThreadSpecificContext());
         if (newClient != NULL) {
             HttpProtocol protocol(*newClient);
