@@ -673,6 +673,9 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
                 }
             }
         }
+        else{
+            err = ErrorManagement::Completed;
+        }
     }
     else {
         REPORT_ERROR(ErrorManagement::Information, "MultiClientService Stopped");
