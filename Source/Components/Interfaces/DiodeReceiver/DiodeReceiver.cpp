@@ -582,14 +582,10 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
                     if (chunkSize > 0) {
                         if (isChunked) {
                             //read the \r\n
-
-                            uint32 size = 2;
-                            char8 buff[2];
                             StreamString line;
                             err = !(commClient->GetLine(line, false));
 
                             //err = !(commClient->Read(buff, size));
-                            //REPORT_ERROR(ErrorManagement::Information, "WTF |%s| %d",line.Buffer(), line.Size());
                         }
                         bool ok = err.ErrorsCleared();
 
@@ -618,7 +614,7 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
                 if (isChunked) {
                     StreamString line;
                     err = !(commClient->GetLine(line, false));
-                    REPORT_ERROR(ErrorManagement::Information, "last line is |%s| %d", line.Buffer(), line.Size());
+                    //REPORT_ERROR(ErrorManagement::Information, "last line is |%s| %d", line.Buffer(), line.Size());
                 }
             }
         }
@@ -804,7 +800,7 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
             chunkSize = contentLength;
         }
         if (chunkSize > 1023u) {
-            REPORT_ERROR(ErrorManagement::Information, "Chunk size = %d", chunkSize);
+            //REPORT_ERROR(ErrorManagement::Information, "Chunk size = %d", chunkSize);
             chunkSize = 1023u;
         }
         contentLength -= chunkSize;
@@ -856,7 +852,7 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
         //error... resync
         if ((payload.Buffer())[0] != '\"') {
             //this case we have to find a " that is not a pattern
-            //REPORT_ERROR(ErrorManagement::Information, "Payload not in sync: resync %d |%s|\n", payload.Size(), payload.Buffer());
+            REPORT_ERROR(ErrorManagement::Information, "Payload not in sync: resync %d |%s|\n", payload.Size(), payload.Buffer());
             bool found = false;
             uint32 i = 0u;
             while ((i < payload.Size()) && (!found)) {
@@ -912,7 +908,7 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
                     found = (StringHelper::CompareN(payload.Buffer() + i, pattern, patternSize) == 0);
                     if (!found) {
                         //cannot find a " in the name... resync
-                        //REPORT_ERROR(ErrorManagement::Information, "The var name cannot contain \": resync %d %d\n", i, currentSize);
+                        REPORT_ERROR(ErrorManagement::Information, "The var name cannot contain \": resync %d %d\n", i, currentSize);
                         payload.Seek(0ull);
                         MemoryOperationsHelper::Copy((void*) payload.Buffer(), payload.Buffer() + i, currentSize);
                         payload.SetSize(currentSize);
