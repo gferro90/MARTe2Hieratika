@@ -793,7 +793,6 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
                 toConv += line;
                 TypeConvert(chunkSize, toConv);
                 contentLength = chunkSize;
-                REPORT_ERROR(ErrorManagement::Information, "Chunk Size %d, line=%s", chunkSize, toConv.Buffer());
                 line.SetSize(0ull);
             }
         }
@@ -801,7 +800,6 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
             chunkSize = 1023;
         }
         contentLength -= chunkSize;
-
     }
     else {
         if (contentLength < chunkSize) {
