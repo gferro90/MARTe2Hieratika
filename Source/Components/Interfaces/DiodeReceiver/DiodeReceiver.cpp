@@ -488,7 +488,7 @@ ErrorManagement::ErrorType DiodeReceiver::Start() {
 
 ErrorManagement::ErrorType DiodeReceiver::Stop() {
     Atomic::Increment(&quit);
-    Sleep::Sec(5);
+    Sleep::Sec(readTimeout+5);
     return MultiClientService::Stop();
 }
 
