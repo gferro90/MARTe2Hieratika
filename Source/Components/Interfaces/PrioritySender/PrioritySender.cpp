@@ -49,7 +49,7 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
     uint32 nVariables = 0u;
 
     File debugFile;
-    if (!debugFile.Open("test", File::ACCESS_MODE_W)) {
+    if (!debugFile.Open("test", File::ACCESS_MODE_W | FLAG_CREAT)) {
         printf("Failed opening file\n");
     }
 
