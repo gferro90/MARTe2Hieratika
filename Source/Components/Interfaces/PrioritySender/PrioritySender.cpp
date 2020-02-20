@@ -175,7 +175,8 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
                 Sleep::MSec(arg.msecPeriod - elapsed);
             }
 
-            printf("%d\n", (HighResolutionTimer::Counter()-arg.lastTickCounter)*1000u * HighResolutionTimer::Period());
+            elapsed = (uint32)((float32)((HighResolutionTimer::Counter() - arg.lastTickCounter) * 1000u * HighResolutionTimer::Period()));
+            printf("%d\n", elapsed);
 
             arg.lastTickCounter = HighResolutionTimer::Counter();
         }
