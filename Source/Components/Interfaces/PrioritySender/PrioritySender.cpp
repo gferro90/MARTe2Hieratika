@@ -521,7 +521,6 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
 
     for (uint8 destinationId = 0u; (destinationId < numberOfDestinations) && (err.ErrorsCleared()); destinationId++) {
         listIndex = preListIndex;
-        REPORT_ERROR(ErrorManagement::Information, "CazzoBubbo_1");
 
         if ((destinationsMask[threadId] & (1 << destinationId)) != 0u) {
             (reconnectionCycleCounter[threadId])[destinationId] = 0u;
@@ -530,7 +529,6 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
             uint32 cntVariables = 0u;
             uint32 varOffset = 0u;
             while ((cntVariables < nVarsPerThread) && (err.ErrorsCleared())) {
-                REPORT_ERROR(ErrorManagement::Information, "CazzoBubbo0");
 
                 client.SetChunkMode(false);
 
@@ -563,13 +561,11 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                         uint32 i = 0u;
                         bool condition = (i < nVarsPerThread) && (err.ErrorsCleared());
                         while (condition && (cntVariables < nVarsPerThread)) {
-                            REPORT_ERROR(ErrorManagement::Information, "CazzoBubbo");
                             uint32 signalIndex = indexListThreads[listIndex];
                             if ((pvDes[signalIndex].numberOfElements > 0u) && (pvDes[signalIndex].memorySize > 0u)) {
                                 uint32 totalSize = (pvDes[signalIndex].memorySize * pvDes[signalIndex].numberOfElements);
 
                                 while ((varOffset < totalSize) && (condition)) {
-                                    REPORT_ERROR(ErrorManagement::Information, "CazzoBubbo2");
 
                                     uint32 actualSize = ((totalSize - varOffset) < maxVarSize) ? (totalSize - varOffset) : (maxVarSize);
                                     uint64 offset = (pvDes[signalIndex]).offset;
