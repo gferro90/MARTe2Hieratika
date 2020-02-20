@@ -791,7 +791,7 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
             StreamString toConv = "0x";
             toConv += line;
             TypeConvert(chunkSize, toConv);
-            REPORT_ERROR(ErrorManagement::Information, "Chunk Size %d", chunkSize);
+            REPORT_ERROR(ErrorManagement::Information, "Chunk Size %d, line=%s", chunkSize, toConv.Buffer());
             line.SetSize(0ull);
         }
     }
