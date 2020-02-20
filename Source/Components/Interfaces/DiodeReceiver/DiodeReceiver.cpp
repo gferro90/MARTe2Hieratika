@@ -776,6 +776,8 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
         if (contentLength == 0u) {
             //get the line
             err = !(commClient->GetLine(line, false));
+            REPORT_ERROR(ErrorManagement::Information, "Chunk = |%s| %d", line.Buffer(), line.Size());
+
             if (err.ErrorsCleared()) {
 
                 if (line.Size() > 0ull) {
@@ -799,9 +801,9 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
         else {
             chunkSize = contentLength;
         }
-        if (chunkSize > 1023) {
+        if (chunkSize > 32) {
             REPORT_ERROR(ErrorManagement::Information, "Chunk size = %d", chunkSize);
-            chunkSize = 1023;
+            chunkSize = 32;
         }
         contentLength -= chunkSize;
     }
