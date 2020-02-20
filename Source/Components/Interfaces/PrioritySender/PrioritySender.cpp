@@ -46,6 +46,12 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
     bool changed = false;
     PvDescriptor *pvDes = arg.dataSource->GetPvDescriptors();
     uint32 nVariables = 0u;
+
+    File debugFile;
+    if (!debugFile.Open("test", File::ACCESS_MODE_W)) {
+        printf("Failed opening file\n");
+    }
+
     while (arg.quit == 0) {
         uint32 nThreadsFinishedTmp;
         uint32 chunkCounterRead = 0u;
@@ -176,7 +182,7 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             }
 
             elapsed = (uint32)((float32)((HighResolutionTimer::Counter() - arg.lastTickCounter) * 1000u * HighResolutionTimer::Period()));
-            printf("%d\n", elapsed);
+            debugFile.Printf("%d\n", elapsed);
 
             arg.lastTickCounter = HighResolutionTimer::Counter();
         }
