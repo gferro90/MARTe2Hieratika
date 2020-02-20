@@ -221,6 +221,7 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
         arg.lastTickCounter[threadId] = HighResolutionTimer::Counter();
     }
 
+    Sleep::Sec(1);
     for (uint32 n = beg; (n < end); n++) {
         (void) ca_clear_channel(arg.pvs[n].pvChid);
     }
@@ -318,8 +319,8 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
                 REPORT_ERROR(ErrorManagement::InitialisationError, "Please define InputFilePath");
             }
 
-            if(ret){
-                ret=data.Read("NumberOfCpus", numberOfCpus);
+            if (ret) {
+                ret = data.Read("NumberOfCpus", numberOfCpus);
                 if (!ret) {
                     REPORT_ERROR(ErrorManagement::InitialisationError, "Please define NumberOfCpus");
                 }
@@ -487,6 +488,7 @@ ErrorManagement::ErrorType DiodeReceiver::Start() {
 
 ErrorManagement::ErrorType DiodeReceiver::Stop() {
     Atomic::Increment(&quit);
+    Sleep::Sec(5);
     return MultiClientService::Stop();
 }
 
@@ -754,21 +756,24 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
     if (isChunked) {
         //get the line
         err = !(commClient->GetLine(line, false));
-        if (line.Size() > 0ull) {
-            char8 lastChar = line[line.Size() - 1];
-            if (lastChar == '\r') {
-                //remove the \r
-                line.SetSize(line.Size() - 1);
+        if (err.ErrorsCleared()) {
+
+            if (line.Size() > 0ull) {
+                char8 lastChar = line[line.Size() - 1];
+                if (lastChar == '\r') {
+                    //remove the \r
+                    line.SetSize(line.Size() - 1);
+                }
+                else {
+                    REPORT_ERROR(ErrorManagement::Information, "last char %c", lastChar);
+                }
             }
-            else {
-                REPORT_ERROR(ErrorManagement::Information, "last char %c", lastChar);
-            }
+            //get the chunk size
+            StreamString toConv = "0x";
+            toConv += line;
+            TypeConvert(chunkSize, toConv);
+            line.SetSize(0ull);
         }
-        //get the chunk size
-        StreamString toConv = "0x";
-        toConv += line;
-        TypeConvert(chunkSize, toConv);
-        line.SetSize(0ull);
     }
     else {
         if (contentLength < chunkSize) {
