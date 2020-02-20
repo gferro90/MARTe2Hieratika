@@ -199,6 +199,7 @@ void DiodeReceiverCycleLoop(DiodeReceiver &arg) {
     while (arg.quit == 0) {
         //sync here
         if (threadId == 0u) {
+            printf("Synchronizing\n");
             arg.Synchronise(arg.memory2, arg.changeFlag2);
         }
         for (uint32 index = beg; index < end; index++) {
