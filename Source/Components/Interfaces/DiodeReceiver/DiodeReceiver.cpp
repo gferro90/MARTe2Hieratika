@@ -664,7 +664,7 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
                 }
             }
         }
-        else{
+        else {
             TCPSocket *newClient = reinterpret_cast<TCPSocket *>(information.GetThreadSpecificContext());
             if (newClient != NULL) {
                 HttpProtocol protocol(*newClient);
@@ -773,27 +773,35 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
     ErrorManagement::ErrorType err;
 
     if (isChunked) {
-        //get the line
-        err = !(commClient->GetLine(line, false));
-        if (err.ErrorsCleared()) {
+        if (contentLength == 0u) {
+            //get the line
+            err = !(commClient->GetLine(line, false));
+            if (err.ErrorsCleared()) {
 
-            if (line.Size() > 0ull) {
-                char8 lastChar = line[line.Size() - 1];
-                if (lastChar == '\r') {
-                    //remove the \r
-                    line.SetSize(line.Size() - 1);
+                if (line.Size() > 0ull) {
+                    char8 lastChar = line[line.Size() - 1];
+                    if (lastChar == '\r') {
+                        //remove the \r
+                        line.SetSize(line.Size() - 1);
+                    }
+                    else {
+                        REPORT_ERROR(ErrorManagement::Information, "last char %c", lastChar);
+                    }
                 }
-                else {
-                    REPORT_ERROR(ErrorManagement::Information, "last char %c", lastChar);
-                }
+                //get the chunk size
+                StreamString toConv = "0x";
+                toConv += line;
+                TypeConvert(chunkSize, toConv);
+                contentLength = chunkSize;
+                REPORT_ERROR(ErrorManagement::Information, "Chunk Size %d, line=%s", chunkSize, toConv.Buffer());
+                line.SetSize(0ull);
             }
-            //get the chunk size
-            StreamString toConv = "0x";
-            toConv += line;
-            TypeConvert(chunkSize, toConv);
-            REPORT_ERROR(ErrorManagement::Information, "Chunk Size %d, line=%s", chunkSize, toConv.Buffer());
-            line.SetSize(0ull);
         }
+        if (chunkSize > 1023) {
+            chunkSize = 1023;
+        }
+        contentLength -= chunkSize;
+
     }
     else {
         if (contentLength < chunkSize) {
