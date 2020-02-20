@@ -585,6 +585,7 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
                             uint32 size = 2;
                             char8 buff[2];
                             err = !(commClient->Read(buff, size));
+                            REPORT_ERROR(ErrorManagement::Information, "WTF |%s|",buff);
                         }
                         bool ok = err.ErrorsCleared();
 
@@ -613,6 +614,7 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
                 if (isChunked) {
                     StreamString line;
                     err = !(commClient->GetLine(line, false));
+                    REPORT_ERROR(ErrorManagement::Information, "last line is |%s|", line.Buffer());
                 }
             }
         }
