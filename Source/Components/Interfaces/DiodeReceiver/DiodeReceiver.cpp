@@ -797,7 +797,7 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
         else {
             chunkSize = contentLength;
         }
-        REPORT_ERROR(ErrorManagement::Information, "Chunk size = %d", chunkSize);
+        //REPORT_ERROR(ErrorManagement::Information, "Chunk size = %d", chunkSize);
 
         /*if (chunkSize > 1023u) {
             //REPORT_ERROR(ErrorManagement::Information, "Chunk size = %d", chunkSize);
