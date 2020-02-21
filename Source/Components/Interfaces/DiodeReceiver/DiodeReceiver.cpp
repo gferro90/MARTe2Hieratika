@@ -861,7 +861,7 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
         //error... resync
         if ((payload.Buffer())[0] != '\"') {
             //this case we have to find a " that is not a pattern
-            REPORT_ERROR(ErrorManagement::Information, "Payload not in sync: resync %d |%s|\n", payload.Size(), payload.Buffer());
+            //REPORT_ERROR(ErrorManagement::Information, "Payload not in sync: resync %d |%s|\n", payload.Size(), payload.Buffer());
             bool found = false;
             uint32 i = 0u;
             while ((i < payload.Size()) && (!found)) {
@@ -917,7 +917,7 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
                     found = (StringHelper::CompareN(payload.Buffer() + i, pattern, patternSize) == 0);
                     if (!found) {
                         //cannot find a " in the name... resync
-                        REPORT_ERROR(ErrorManagement::Information, "The var name cannot contain \": resync %d %d\n", i, currentSize);
+                        //REPORT_ERROR(ErrorManagement::Information, "The var name cannot contain \": resync %d %d\n", i, currentSize);
                         payload.Seek(0ull);
                         MemoryOperationsHelper::Copy((void*) payload.Buffer(), payload.Buffer() + i, currentSize);
                         payload.SetSize(currentSize);
@@ -978,7 +978,7 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
                 dataPtr += sizeof(uint32);
                 MemoryOperationsHelper::Copy(&receivedOffset, dataPtr, sizeof(uint32));
                 if ((receivedIndex >= numberOfVariables) || (receivedSize >= (8u * maxArraySize))) {
-                    REPORT_ERROR(ErrorManagement::Information, "receivedIndex %d, receivedSize %d\n", receivedIndex, receivedSize);
+                    //REPORT_ERROR(ErrorManagement::Information, "receivedIndex %d, receivedSize %d\n", receivedIndex, receivedSize);
 
                     payload.Seek(0ull);
                     payload.SetSize(0ull);
@@ -1028,7 +1028,7 @@ bool DiodeReceiver::GetLocalIndex(StreamString &payload,
         }
         else {
             index = INDEX_NOT_FOUND_ID;
-            REPORT_ERROR(ErrorManagement::Information, "variable %s not found", varName.Buffer());
+            //REPORT_ERROR(ErrorManagement::Information, "variable %s not found", varName.Buffer());
         }
     }
     if (index < numberOfVariables) {
@@ -1064,7 +1064,7 @@ void DiodeReceiver::ReadVarValueAndSkip(StreamString &payload,
                 if (varOffset == 0u) {
                     //convert!!
                     if (receivedTypeId < NUMBER_OF_TYPES) {
-                        REPORT_ERROR(ErrorManagement::Warning, "Attempting to convert");
+                        //REPORT_ERROR(ErrorManagement::Warning, "Attempting to convert");
                         AnyType temp = AnyType(descriptors[receivedTypeId], 0u, (void*) dataPtr);
                         TypeConvert(pvs[index].at, temp);
                     }
@@ -1078,7 +1078,7 @@ void DiodeReceiver::ReadVarValueAndSkip(StreamString &payload,
         }
     }
     if (processedSize > payload.Size()) {
-        REPORT_ERROR(ErrorManagement::Information, "processedSize %! payloadSize %!", processedSize, payload.Size());
+        //REPORT_ERROR(ErrorManagement::Information, "processedSize %! payloadSize %!", processedSize, payload.Size());
 
         //something wrong... adjust
         processedSize = payload.Size();
