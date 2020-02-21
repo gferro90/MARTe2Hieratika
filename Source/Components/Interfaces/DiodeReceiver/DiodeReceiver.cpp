@@ -828,6 +828,8 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
             }
 
         }
+
+        printf("\n\n|%s|\n\n", payload.Buffer());
     }
     return err;
 
