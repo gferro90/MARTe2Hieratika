@@ -801,10 +801,10 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
         }
         //REPORT_ERROR(ErrorManagement::Information, "Chunk size = %d", chunkSize);
 
-        if (chunkSize > 1023u) {
+        //if (chunkSize > 1023u) {
             //REPORT_ERROR(ErrorManagement::Information, "Chunk size = %d", chunkSize);
-            chunkSize = 1023u;
-        }
+            //chunkSize = 1023u;
+        //}
         contentLength -= chunkSize;
     }
     else {
