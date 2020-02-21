@@ -797,7 +797,7 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
         else {
             chunkSize = contentLength;
         }
-        REPORT_ERROR(ErrorManagement::Information, "Chunk size = %d", chunkSize);
+        //REPORT_ERROR(ErrorManagement::Information, "Chunk size = %d", chunkSize);
 
         /*if (chunkSize > 1023u) {
             //REPORT_ERROR(ErrorManagement::Information, "Chunk size = %d", chunkSize);
@@ -830,12 +830,12 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
             }
 
         }
-        printf("\n\n|");
+        //printf("\n\n|");
 
         for (uint32 i = 0u; i < payload.Size(); i++) {
-            printf("%c", payload[i]);
+            //printf("%c", payload[i]);
         }
-        printf("| %llu\n\n", payload.Size());
+        //printf("| %llu\n\n", payload.Size());
     }
     return err;
 
