@@ -486,8 +486,10 @@ bool EpicsParserAndSubscriber::FillMemorySizes(uint32 beg,
         cainfo(pvDescriptor[i].pvChid, pvDescriptor[i].pvName, pvDescriptor[i].pvType, pvDescriptor[i].numberOfElements, pvDescriptor[i].memorySize,
                pvDescriptor[i].td, pvDescriptor[i].typeId);
         ca_pend_io(1);
+
         if (pvDescriptor[i].numberOfElements > maxArraySize) {
             pvDescriptor[i].numberOfElements = 0u;
+            REPORT_ERROR(ErrorManagement::Information, "Discarded %s with #elements = %d", pvDescriptor[i].pvName, pvDescriptor[i].numberOfElements);
         }
         else {
             memorySize[threadId] += (pvDescriptor[i].numberOfElements * pvDescriptor[i].memorySize) + sizeof(epicsTimeStamp);
