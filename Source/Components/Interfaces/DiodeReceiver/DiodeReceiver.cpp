@@ -858,6 +858,7 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
         //error... resync
         if ((payload.Buffer())[0] != '\"') {
             //this case we have to find a " that is not a pattern
+            REPORT_ERROR(ErrorManagement::Information, "Payload not in sync\n");
             //REPORT_ERROR(ErrorManagement::Information, "Payload not in sync: resync %d |%s|\n", payload.Size(), payload.Buffer());
             bool found = false;
             uint32 i = 0u;
