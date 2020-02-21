@@ -454,16 +454,18 @@ ErrorManagement::ErrorType DiodeReceiver::Start() {
     memoryPrec = (uint8*) HeapManager::Malloc(totalMemorySize);
     changeFlag = (uint8*) HeapManager::Malloc(numberOfVariables);
     changeFlag2 = (uint8*) HeapManager::Malloc(numberOfVariables);
-    pvMapping = new uint32[numberOfVariables];
+    pvMapping = new uint32[2*numberOfVariables];
 
     MemoryOperationsHelper::Set(memory, 0, totalMemorySize);
     MemoryOperationsHelper::Set(memory2, 0, totalMemorySize);
     MemoryOperationsHelper::Set(memoryPrec, 0, totalMemorySize);
     MemoryOperationsHelper::Set(changeFlag, 0, numberOfVariables);
     MemoryOperationsHelper::Set(changeFlag2, 0, numberOfVariables);
-    for (uint32 n = 0u; (n < numberOfVariables); n++) {
+    for (uint32 n = 0u; (n < (2*numberOfVariables)); n++) {
         pvMapping[n] = INDEX_INIT_ID;
-        pvs[n].at.SetDataPointer(memory + pvs[n].offset);
+        if(n<numberOfVariables){
+            pvs[n].at.SetDataPointer(memory + pvs[n].offset);
+        }
 
     }
 
@@ -868,7 +870,7 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
                     uint32 currentSize = (payload.Size() - i);
                     //consume until the "
                     payload.Seek(0ull);
-                    REPORT_ERROR(ErrorManagement::Information, "Payload not in sync: resync %d %d\n", i, currentSize);
+                    //REPORT_ERROR(ErrorManagement::Information, "Payload not in sync: resync %d %d\n", i, currentSize);
                     MemoryOperationsHelper::Copy((void*) payload.Buffer(), payload.Buffer() + i, currentSize);
                     payload.SetSize(currentSize);
                     payload += "";
