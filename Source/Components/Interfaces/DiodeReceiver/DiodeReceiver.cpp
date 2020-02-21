@@ -835,7 +835,7 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
         for (uint32 i = 0u; i < payload.Size(); i++) {
             printf("%c", payload[i]);
         }
-        printf("| %d\n\n", payload.Buffer(), payload.Size());
+        printf("| %llu\n\n", payload.Buffer(), payload.Size());
     }
     return err;
 
