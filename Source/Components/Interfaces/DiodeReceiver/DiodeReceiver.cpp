@@ -856,7 +856,7 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
         //error... resync
         if ((payload.Buffer())[0] != '\"') {
             //this case we have to find a " that is not a pattern
-            REPORT_ERROR(ErrorManagement::Information, "Payload not in sync: resync %d |%s|\n", payload.Size(), payload.Buffer());
+            //REPORT_ERROR(ErrorManagement::Information, "Payload not in sync: resync %d |%s|\n", payload.Size(), payload.Buffer());
             bool found = false;
             uint32 i = 0u;
             while ((i < payload.Size()) && (!found)) {
@@ -912,7 +912,7 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
                     found = (StringHelper::CompareN(payload.Buffer() + i, pattern, patternSize) == 0);
                     if (!found) {
                         //cannot find a " in the name... resync
-                        REPORT_ERROR(ErrorManagement::Information, "The var name cannot contain \": resync %d %d\n", i, currentSize);
+                        //REPORT_ERROR(ErrorManagement::Information, "The var name cannot contain \": resync %d %d\n", i, currentSize);
                         payload.Seek(0ull);
                         MemoryOperationsHelper::Copy((void*) payload.Buffer(), payload.Buffer() + i, currentSize);
                         payload.SetSize(currentSize);
@@ -973,7 +973,7 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
                 dataPtr += sizeof(uint32);
                 MemoryOperationsHelper::Copy(&receivedOffset, dataPtr, sizeof(uint32));
                 if ((receivedIndex >= numberOfVariables) || (receivedSize >= (8u * maxArraySize))) {
-                    REPORT_ERROR(ErrorManagement::Information, "receivedIndex %d, receivedSize %d\n", receivedIndex, receivedSize);
+                    //REPORT_ERROR(ErrorManagement::Information, "receivedIndex %d, receivedSize %d\n", receivedIndex, receivedSize);
 
                     payload.Seek(0ull);
                     payload.SetSize(0ull);
@@ -989,8 +989,8 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
                 nameSize = payload.Size();
             }
             uint32 curSize = (payload.Size() - nameSize);
-            REPORT_ERROR(ErrorManagement::Information, "variable name size greater than PV_NAME_MAX_SIZE_REC: skip and resync %d %d\n", nameSize,
-                         payload.Size());
+            //REPORT_ERROR(ErrorManagement::Information, "variable name size greater than PV_NAME_MAX_SIZE_REC: skip and resync %d %d\n", nameSize,
+              //           payload.Size());
             payload.Seek(0);
             MemoryOperationsHelper::Copy((void*) payload.Buffer(), payload.Buffer() + nameSize, curSize);
             payload.SetSize(curSize);
