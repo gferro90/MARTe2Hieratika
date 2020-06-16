@@ -644,7 +644,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                                     i++;
                                     condition = (i < nVarsPerThread) && (err.ErrorsCleared());
                                     if (condition) {
-                                        varOffset += maxVarSize;
+                                        varOffset += actualSize;
                                     }
                                 }
                                 if (varOffset >= totalSize) {
@@ -657,11 +657,9 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                                 condition = (i < nVarsPerThread);
                             }
 
-                            if (condition) {
-                                listIndex++;
-                                listIndex %= numberOfVariables;
-                                cntVariables++;
-                            }
+                            listIndex++;
+                            listIndex %= numberOfVariables;
+                            cntVariables++;
                         }
 
                     }
@@ -673,7 +671,6 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                         if (err.ErrorsCleared()) {
                             client.Flush();
                         }
-
                         client.Write(myBuffer.Buffer(), conLen);
                     }
 
