@@ -329,6 +329,8 @@ private:
      * The maximum array size
      */
     uint32 maxVarSize;
+
+    uint8 chunked;
 };
 
 }

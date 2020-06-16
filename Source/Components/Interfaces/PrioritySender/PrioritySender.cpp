@@ -47,12 +47,12 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
     bool changed = false;
     PvDescriptor *pvDes = arg.dataSource->GetPvDescriptors();
     uint32 nVariables = 0u;
-/*
-    File debugFile;
-    if (!debugFile.Open("test", File::ACCESS_MODE_W | File::FLAG_CREAT | File::FLAG_TRUNC)) {
-        printf("Failed opening file\n");
-    }
-*/
+    /*
+     File debugFile;
+     if (!debugFile.Open("test", File::ACCESS_MODE_W | File::FLAG_CREAT | File::FLAG_TRUNC)) {
+     printf("Failed opening file\n");
+     }
+     */
     while (arg.quit == 0) {
         uint32 nThreadsFinishedTmp;
         uint32 chunkCounterRead = 0u;
@@ -176,15 +176,13 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             //wait the cycle time
             uint32 elapsed = (uint32)((float32)((HighResolutionTimer::Counter() - arg.lastTickCounter) * 1000u * HighResolutionTimer::Period()));
 
-
-
             if (elapsed < arg.msecPeriod) {
                 Sleep::MSec(arg.msecPeriod - elapsed);
             }
-/*
-            elapsed = (uint32)((float32)((HighResolutionTimer::Counter() - arg.lastTickCounter) * 1000u * HighResolutionTimer::Period()));
-            debugFile.Printf("%d\n", elapsed);
-*/
+            /*
+             elapsed = (uint32)((float32)((HighResolutionTimer::Counter() - arg.lastTickCounter) * 1000u * HighResolutionTimer::Period()));
+             debugFile.Printf("%d\n", elapsed);
+             */
             arg.lastTickCounter = HighResolutionTimer::Counter();
         }
         else {
@@ -241,6 +239,7 @@ PrioritySender::PrioritySender() :
     maxBytesPerCycle = 0xFFFFFFFFu;
     readTimeout = 10000u;
     maxVarSize = 0xFFFFFFFFu;
+    chunked = 1u;
 }
 
 PrioritySender::~PrioritySender() {
@@ -335,6 +334,11 @@ bool PrioritySender::Initialise(StructuredDataI &data) {
         if (ret) {
             if (!data.Read("ReadTimeout", readTimeout)) {
                 readTimeout = 10000u;
+            }
+        }
+        if (ret) {
+            if (!data.Read("Chunked", chunked)) {
+                chunked = 1u;
             }
         }
         if (ret) {
@@ -556,18 +560,28 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                 hprotocol.Write("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
                 hprotocol.Write("Accept-Encoding", "gzip, deflate, br");
                 hprotocol.Write("Cache-Control", "no-cache");
-
-                hprotocol.Write("Transfer-Encoding", "chunked");
+                if (chunked > 0u) {
+                    hprotocol.Write("Transfer-Encoding", "chunked");
+                }
                 hprotocol.Write("Content-Type", "text/html");
 
                 StreamString hstream;
-                err = !hprotocol.WriteHeader(false, HttpDefinition::HSHCPut, &hstream, destinationName.Buffer());
-                if (err.ErrorsCleared()) {
-                    client.Flush();
+
+                BufferedStreamI *bufferT;
+                StreamString myBuffer = "";
+                if (chunked > 0u) {
+                    err = !hprotocol.WriteHeader(false, HttpDefinition::HSHCPut, &hstream, destinationName.Buffer());
+                    if (err.ErrorsCleared()) {
+                        client.Flush();
+                    }
+                    bufferT = &client;
+                }
+                else {
+                    bufferT = &myBuffer;
                 }
                 if (err.ErrorsCleared()) {
 
-                    client.SetChunkMode(true);
+                    client.SetChunkMode(chunked > 0u);
                     PvDescriptor *pvDes = dataSource->GetPvDescriptors();
                     if (pvDes != NULL) {
                         uint32 i = 0u;
@@ -598,34 +612,34 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                                     var += "\": ";
                                     uint32 varSize = var.Size();
                                     if (err.ErrorsCleared()) {
-                                        err = !(client.Write(var.Buffer(), varSize));
+                                        err = !(bufferT->Write(var.Buffer(), varSize));
                                     }
                                     uint32 indexSize = sizeof(uint32);
                                     if (err.ErrorsCleared()) {
-                                        err = !(client.Write((const char8*) (&signalIndex), indexSize));
+                                        err = !(bufferT->Write((const char8*) (&signalIndex), indexSize));
                                     }
                                     if (err.ErrorsCleared()) {
                                         uint32 typeIdSize = sizeof(uint8);
-                                        err = !(client.Write((const char8*) (&pvDes[signalIndex].typeId), typeIdSize));
+                                        err = !(bufferT->Write((const char8*) (&pvDes[signalIndex].typeId), typeIdSize));
                                     }
                                     if (err.ErrorsCleared()) {
-                                        err = !(client.Write((const char8*) (&actualSize), indexSize));
+                                        err = !(bufferT->Write((const char8*) (&actualSize), indexSize));
                                     }
                                     if (err.ErrorsCleared()) {
-                                        err = !(client.Write((const char8*) (&varOffset), indexSize));
+                                        err = !(bufferT->Write((const char8*) (&varOffset), indexSize));
                                     }
                                     if (err.ErrorsCleared()) {
-                                        err = !(client.Write(((const char8*) signalPtr)+varOffset, actualSize));
+                                        err = !(bufferT->Write(((const char8*) signalPtr) + varOffset, actualSize));
                                     }
                                     uint32 timestampSize = sizeof(uint64);
                                     uint32 tsIndex = (pvDes[signalIndex].numberOfElements * pvDes[signalIndex].memorySize);
                                     uint8* timeStampPtr = (uint8*) (&memoryThreads[offset + tsIndex]);
                                     if (err.ErrorsCleared()) {
-                                        err = !(client.Write((const char8*) timeStampPtr, timestampSize));
+                                        err = !(bufferT->Write((const char8*) timeStampPtr, timestampSize));
                                     }
                                     uint32 termSize = 2u;
                                     if (err.ErrorsCleared()) {
-                                        err = !(client.Write("\n\r", termSize));
+                                        err = !(bufferT->Write("\n\r", termSize));
                                     }
                                     i++;
                                     condition = (i < nVarsPerThread) && (err.ErrorsCleared());
@@ -652,12 +666,27 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
 
                     }
 
+                    if (chunked == 0u) {
+                        uint32 conLen = myBuffer.Size();
+                        hprotocol.Write("Content-Length", conLen);
+                        err = !hprotocol.WriteHeader(false, HttpDefinition::HSHCPut, &hstream, destinationName.Buffer());
+                        if (err.ErrorsCleared()) {
+                            client.Flush();
+                        }
+
+                        client.Write(myBuffer.Buffer(), conLen);
+                    }
+
                     if (err.ErrorsCleared()) {
                         err = !client.Flush();
                     }
-                    if (err.ErrorsCleared()) {
-                        err = !client.FinalChunk();
+
+                    if (chunked > 0u) {
+                        if (err.ErrorsCleared()) {
+                            err = !client.FinalChunk();
+                        }
                     }
+
                     if (err.ErrorsCleared()) {
                         err = !hprotocol.ReadHeader();
                     }
