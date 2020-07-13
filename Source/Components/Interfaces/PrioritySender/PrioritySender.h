@@ -331,6 +331,8 @@ private:
     uint32 maxVarSize;
 
     uint8 chunked;
+
+    uint32 resetCounter;
 };
 
 }

@@ -47,6 +47,7 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
     bool changed = false;
     PvDescriptor *pvDes = arg.dataSource->GetPvDescriptors();
     uint32 nVariables = 0u;
+    uint32 sendCounter=0u;
     /*
      File debugFile;
      if (!debugFile.Open("test", File::ACCESS_MODE_W | File::FLAG_CREAT | File::FLAG_TRUNC)) {
@@ -141,7 +142,9 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             }
 
             //too many variable have changed...just make another FIFO trip
-            if (arg.currentChangePos > (arg.numberOfVariables - (arg.numberOfSignalToBeSent * arg.numberOfPoolThreads))) {
+            bool tooManyChanged=arg.currentChangePos > (arg.numberOfVariables - (arg.numberOfSignalToBeSent * arg.numberOfPoolThreads));
+
+            if (tooManyChanged || (sendCounter>=arg.resetCounter)) {
                 //if almost all the signal are changing do a cycle of FIFO again
                 arg.currentChangePos = 0u;
                 if (arg.syncSem.FastLock()) {
@@ -184,6 +187,7 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
              debugFile.Printf("%d\n", elapsed);
              */
             arg.lastTickCounter = HighResolutionTimer::Counter();
+            sendCounter++;
         }
         else {
             Sleep::MSec(10);
@@ -240,6 +244,7 @@ PrioritySender::PrioritySender() :
     readTimeout = 10000u;
     maxVarSize = 0xFFFFFFFFu;
     chunked = 1u;
+    resetCounter=120;
 }
 
 PrioritySender::~PrioritySender() {
@@ -339,6 +344,11 @@ bool PrioritySender::Initialise(StructuredDataI &data) {
         if (ret) {
             if (!data.Read("Chunked", chunked)) {
                 chunked = 1u;
+            }
+        }
+        if (ret) {
+            if (!data.Read("ResetCounter", resetCounter)) {
+                resetCounter = 120u;
             }
         }
         if (ret) {
