@@ -47,7 +47,14 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
     bool changed = false;
     PvDescriptor *pvDes = arg.dataSource->GetPvDescriptors();
     uint32 nVariables = 0u;
-    uint32 sendCounter=0u;
+    uint32 sendCounter = 0u;
+
+    int64 *diagnostics = NULL;
+    uint32 numberOfDiagnostics = 0u;
+    if (arg.logger != NULL) {
+        numberOfDiagnostics = arg.logger->GetNumberOfSignals();
+        diagnostics = new int64[numberOfDiagnostics];
+    }
     /*
      File debugFile;
      if (!debugFile.Open("test", File::ACCESS_MODE_W | File::FLAG_CREAT | File::FLAG_TRUNC)) {
@@ -142,9 +149,9 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             }
 
             //too many variable have changed...just make another FIFO trip
-            bool tooManyChanged=arg.currentChangePos > (arg.numberOfVariables - (arg.numberOfSignalToBeSent * arg.numberOfPoolThreads));
+            bool tooManyChanged = arg.currentChangePos > (arg.numberOfVariables - (arg.numberOfSignalToBeSent * arg.numberOfPoolThreads));
 
-            if (tooManyChanged || (sendCounter>=arg.resetCounter)) {
+            if (tooManyChanged || (sendCounter >= arg.resetCounter)) {
                 //if almost all the signal are changing do a cycle of FIFO again
                 arg.currentChangePos = 0u;
                 if (arg.syncSem.FastLock()) {
@@ -182,10 +189,17 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             if (elapsed < arg.msecPeriod) {
                 Sleep::MSec(arg.msecPeriod - elapsed);
             }
-            /*
-             elapsed = (uint32)((float32)((HighResolutionTimer::Counter() - arg.lastTickCounter) * 1000u * HighResolutionTimer::Period()));
-             debugFile.Printf("%d\n", elapsed);
-             */
+
+            if (arg.logger != NULL) {
+                if (numberOfDiagnostics >= 0u) {
+                    diagnostics[0] = (int64)(elapsed);
+                }
+                if (numberOfDiagnostics >= 1u) {
+                    diagnostics[1] = (int64)(arg.numberOfChangedVariables);
+                }
+                arg.logger->AddSample(diagnostics);
+            }
+
             arg.lastTickCounter = HighResolutionTimer::Counter();
             sendCounter++;
         }
@@ -198,6 +212,11 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
     while (arg.nThreadsFinished < arg.numberOfPoolThreads) {
         Sleep::Sec(1u);
     }
+
+    if (diagnostics != NULL) {
+        delete[] diagnostics;
+    }
+
     printf("Init thread terminated\n");
     arg.eventSem.Post();
 }
@@ -244,7 +263,8 @@ PrioritySender::PrioritySender() :
     readTimeout = 10000u;
     maxVarSize = 0xFFFFFFFFu;
     chunked = 1u;
-    resetCounter=120;
+    resetCounter = 120;
+    logger = NULL;
 }
 
 PrioritySender::~PrioritySender() {
@@ -408,6 +428,10 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
         }
     }
     return ret;
+}
+
+bool PrioritySender::SetLogger(DiodeLogger &loggerIn) {
+    logger = &loggerIn;
 }
 
 ErrorManagement::ErrorType PrioritySender::Start() {

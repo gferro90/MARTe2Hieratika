@@ -22,7 +22,7 @@
 #
 #############################################################
 
-SPB=MARTe2HieratikaInterface.x MARTe2HieratikaMessageDispatcher.x EpicsParserAndSubscriber.x PrioritySender.x DiodeReceiver.x EpicsDiodePublisher.x
+SPB=EpicsParserAndSubscriber.x PrioritySender.x DiodeReceiver.x DiodeLogger.x
 
 PACKAGE=Components
 ROOT_DIR=../../..
@@ -37,6 +37,7 @@ LIBRARIES_STATIC+=$(BUILD_DIR)/EpicsParserAndSubscriber/EpicsParserAndSubscriber
 LIBRARIES_STATIC+=$(BUILD_DIR)/PrioritySender/PrioritySender$(LIBEXT)
 LIBRARIES_STATIC+=$(BUILD_DIR)/DiodeReceiver/DiodeReceiver$(LIBEXT)
 LIBRARIES_STATIC+=$(BUILD_DIR)/EpicsDiodePublisher/EpicsDiodePublisher$(LIBEXT)
+LIBRARIES_STATIC+=$(BUILD_DIR)/DiodeLogger/DiodeLogger$(LIBEXT)
 
 
 all: $(OBJS)  $(SUBPROJ)  \

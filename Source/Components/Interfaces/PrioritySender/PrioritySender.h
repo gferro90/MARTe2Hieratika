@@ -37,7 +37,7 @@
 #include "EventSem.h"
 #include "FastPollingMutexSem.h"
 #include "HttpChunkedStream.h"
-
+#include "DiodeLogger.h"
 /*---------------------------------------------------------------------------*/
 /*                           Class declaration                               */
 /*---------------------------------------------------------------------------*/
@@ -106,6 +106,13 @@ public:
     bool SetDataSource(EpicsParserAndSubscriber &dataSourceIn);
 
     /**
+     * @brief Connects the logger
+     * param[in] loggerIn the logger
+     */
+    bool SetLogger(DiodeLogger &loggerIn);
+
+
+    /**
      * @brief The routine to be executed by the threads in the pool.
      * @details The pool threads wait that the main threads posts the semaphore
      * after the queue sorting, then each one of them manages to send its number
@@ -166,6 +173,8 @@ private:
      * Link to the PVs provider
      */
     EpicsParserAndSubscriber *dataSource;
+
+    DiodeLogger *logger;
 
     /**
      * The allocated memory to store the PVs

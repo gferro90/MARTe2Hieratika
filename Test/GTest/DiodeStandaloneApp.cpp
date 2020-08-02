@@ -49,20 +49,23 @@
 #include "StandardParser.h"
 #include "EpicsParserAndSubscriber.h"
 #include "PrioritySender.h"
+#include "DiodeLogger.h"
 
 /*---------------------------------------------------------------------------*/
 /*                           Static definitions                              */
 /*---------------------------------------------------------------------------*/
 using namespace MARTe;
-void MainErrorProcessFunction(const MARTe::ErrorManagement::ErrorInformation &errorInfo, const char * const errorDescription) {
+void MainErrorProcessFunction(const MARTe::ErrorManagement::ErrorInformation &errorInfo,
+                              const char * const errorDescription) {
     MARTe::StreamString errorCodeStr;
     MARTe::ErrorManagement::ErrorCodeToStream(errorInfo.header.errorType, errorCodeStr);
     printf("[%s - %s:%d]: %s\n", errorCodeStr.Buffer(), errorInfo.fileName, errorInfo.header.lineNumber, errorDescription);
 }
 static bool keepRunning = true;
 static bool killApp = false;
-ReferenceT < PrioritySender > sender;
-ReferenceT < EpicsParserAndSubscriber > subscriber;
+ReferenceT<PrioritySender> sender;
+ReferenceT<EpicsParserAndSubscriber> subscriber;
+ReferenceT<DiodeLogger> logger;
 
 static void StopApp(int sig) {
     //Second time this is called? Kill the application.
@@ -111,19 +114,23 @@ int main(int argc,
 
     subscriber = god->Find("Subscriber");
     sender = god->Find("Sender");
+    logger = god->Find("Logger");
 
     if (subscriber.IsValid() && sender.IsValid()) {
         subscriber->ParseAndSubscribe();
         Sleep::Sec(1);
         sender->SetDataSource(*subscriber.operator->());
+        //attach the logger
+        if (logger.IsValid()) {
+            sender->SetLogger(*logger.operator->());
+        }
         sender->Start();
         signal(SIGTERM, StopApp);
         signal(SIGINT, StopApp);
-        while(keepRunning){
+        while (keepRunning) {
             Sleep::Sec(10u);
         }
     }
-
 
     return 0;
 }
