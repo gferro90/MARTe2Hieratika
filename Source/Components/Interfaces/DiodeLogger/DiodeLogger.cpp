@@ -62,6 +62,8 @@ DiodeLogger::~DiodeLogger() {
         }
         delete[] windows;
     }
+
+    debugFile.Close();
 }
 
 bool DiodeLogger::Initialise(StructuredDataI &data) {
@@ -70,8 +72,8 @@ bool DiodeLogger::Initialise(StructuredDataI &data) {
     if (ret) {
         StreamString loggerFilePath;
         ret = data.Read("LoggerFile", loggerFilePath);
-        if (!ret) {
-            if (!debugFile.Open("test", File::ACCESS_MODE_W | File::FLAG_CREAT | File::FLAG_TRUNC)) {
+        if (ret) {
+            if (!debugFile.Open(loggerFilePath.Buffer(), File::ACCESS_MODE_W | File::FLAG_CREAT | File::FLAG_TRUNC)) {
                 REPORT_ERROR(ErrorManagement::FatalError, "Failed opening file");
             }
         }
