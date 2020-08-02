@@ -510,7 +510,6 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
         uint32 elapsedUs = (uint32)((float32)((HighResolutionTimer::Counter() - tickAfterPost[threadId]) * 1000000u * HighResolutionTimer::Period()));
         if (logger != NULL) {
             if (logger->GetNumberOfSignals() >= threadId) {
-                REPORT_ERROR(ErrorManagement::Information, "threadId=%d %u", threadId, elapsedUs);
                 diagnostics[threadId] = (int64)(elapsedUs);
             }
         }

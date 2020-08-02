@@ -114,7 +114,6 @@ void DiodeLogger::AddSample(int64 *samples) {
 
     for (uint32 i = 0u; i < numberOfSignals; i++) {
         windows[i][index] = samples[i];
-        REPORT_ERROR(ErrorManagement::InitialisationError, "Samples %d %d", i, samples[i]);
 
     }
     index++;
