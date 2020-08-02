@@ -55,12 +55,8 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
         numberOfDiagnostics = arg.logger->GetNumberOfSignals();
         diagnostics = new int64[numberOfDiagnostics];
     }
-    /*
-     File debugFile;
-     if (!debugFile.Open("test", File::ACCESS_MODE_W | File::FLAG_CREAT | File::FLAG_TRUNC)) {
-     printf("Failed opening file\n");
-     }
-     */
+    uint64 tickBeforePost=HighResolutionTimer::Counter();
+
     while (arg.quit == 0) {
         uint32 nThreadsFinishedTmp;
         uint32 chunkCounterRead = 0u;
@@ -170,6 +166,12 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
 
         //all the threads sent the variables
         if (nThreadsFinishedTmp == arg.numberOfPoolThreads) {
+            uint32 elapsedUs = (uint32)((float32)((HighResolutionTimer::Counter() - tickBeforePost) * 1000000u * HighResolutionTimer::Period()));
+            if (arg.logger != NULL) {
+                if (numberOfDiagnostics >= 0u) {
+                    diagnostics[0] = (int64)(elapsedUs);
+                }
+            }
 
             arg.nThreadsFinished = 0u;
 
@@ -183,6 +185,7 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             arg.numberOfChangedVariables = nVariables;
 
             changed = false;
+            tickBeforePost=HighResolutionTimer::Counter();
             arg.eventSem.Post();
         }
 
@@ -197,9 +200,6 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             }
 
             if (arg.logger != NULL) {
-                if (numberOfDiagnostics >= 0u) {
-                    diagnostics[0] = (int64)(elapsedUs);
-                }
                 if (numberOfDiagnostics >= 1u) {
                     diagnostics[1] = (int64)(arg.numberOfChangedVariables);
                 }
