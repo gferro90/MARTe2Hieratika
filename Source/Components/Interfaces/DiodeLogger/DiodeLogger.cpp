@@ -58,7 +58,7 @@ DiodeLogger::~DiodeLogger() {
 
     if (windows != NULL) {
         for (uint32 i = 0u; i < numberOfSignals; i++) {
-            delete windows[i];
+            delete[] windows[i];
         }
         delete[] windows;
     }

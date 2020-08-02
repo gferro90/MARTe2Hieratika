@@ -398,10 +398,12 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
         reconnectionCycleCounter = new uint32*[numberOfPoolThreads];
         destinationsMask = new uint8[numberOfPoolThreads];
         diagnostics = new int64[numberOfPoolThreads];
-        tickAfterPost =new uint64[numberOfPoolThreads];
+        tickAfterPost = new uint64[numberOfPoolThreads];
         for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
             reconnectionCycleCounter[i] = new uint32[numberOfDestinations];
             destinationsMask[i] = (1u << numberOfDestinations) - 1u;
+            diagnostics[i] = 0;
+            tickAfterPost[i] = 0ull;
         }
         uint32 sentPerCycle = (numberOfPoolThreads * numberOfSignalToBeSent);
         ret = (numberOfVariables >= sentPerCycle);
