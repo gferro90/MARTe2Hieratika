@@ -101,6 +101,9 @@ bool DiodeLogger::Initialise(StructuredDataI &data) {
 
         for (uint32 i = 0u; i < numberOfSignals; i++) {
             windows[i] = new int64[windowSize];
+            for (uint32 j = 0u; j < windowSize; j++) {
+                windows[i][j] = 0;
+            }
         }
     }
 
@@ -133,7 +136,7 @@ void DiodeLogger::AddSample(int64 *samples) {
             }
             float64 mean = ((float64) sum) / windowSize;
 
-            debugFile.Printf("Signal[%d]: max=%d, min=%d, mean=%f\n", max, min, mean);
+            debugFile.Printf("Signal[%d]: max=%d, min=%d, mean=%f\n", i, max, min, mean);
         }
         counter = 0u;
     }
