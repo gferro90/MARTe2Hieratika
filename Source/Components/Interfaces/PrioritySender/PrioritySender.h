@@ -342,6 +342,8 @@ private:
     uint8 chunked;
 
     uint32 resetCounter;
+
+    uint8 sendOnlyChanged;
 };
 
 }

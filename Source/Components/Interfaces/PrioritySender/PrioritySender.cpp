@@ -121,6 +121,11 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
                     arg.syncSem.FastUnLock();
                 }
             }
+
+            if (arg.sendOnlyChanged == 0u) {
+                nVariables = maxSignalPerThread;
+            }
+
             if (nVariables > maxSignalPerThread) {
                 nVariables = maxSignalPerThread;
             }
@@ -265,6 +270,7 @@ PrioritySender::PrioritySender() :
     chunked = 1u;
     resetCounter = 120;
     logger = NULL;
+    sendOnlyChanged = 0u;
 }
 
 PrioritySender::~PrioritySender() {
@@ -369,6 +375,11 @@ bool PrioritySender::Initialise(StructuredDataI &data) {
         if (ret) {
             if (!data.Read("ResetCounter", resetCounter)) {
                 resetCounter = 120u;
+            }
+        }
+        if (ret) {
+            if (data.Read("SendOnlyChanged", sendOnlyChanged)) {
+                sendOnlyChanged = 0u;
             }
         }
         if (ret) {
