@@ -186,7 +186,7 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
 
             if (arg.logger != NULL) {
                 for(uint32 i=0u; i<arg.logger->GetNumberOfSignals(); i++){
-                    printf("WTF %d\n", arg.diagnostics[i]);
+                    printf("WTF %lld\n", arg.diagnostics[i]);
                 }
                 arg.logger->AddSample(arg.diagnostics);
             }
@@ -405,8 +405,9 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
         for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
             reconnectionCycleCounter[i] = new uint32[numberOfDestinations];
             destinationsMask[i] = (1u << numberOfDestinations) - 1u;
-            diagnostics[i] = 0;
+            diagnostics[i] = 0ll;
             tickAfterPost[i] = 0ull;
+            REPORT_ERROR(ErrorManagement::InitialisationError, "diagnostics[%d]=%lld", i, diagnostics[i]);
         }
         uint32 sentPerCycle = (numberOfPoolThreads * numberOfSignalToBeSent);
         ret = (numberOfVariables >= sentPerCycle);
