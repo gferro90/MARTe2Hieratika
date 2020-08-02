@@ -185,9 +185,6 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             }
 
             if (arg.logger != NULL) {
-                for(uint32 i=0u; i<arg.logger->GetNumberOfSignals(); i++){
-                    printf("WTF %lld\n", arg.diagnostics[i]);
-                }
                 arg.logger->AddSample(arg.diagnostics);
             }
 
@@ -400,14 +397,11 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
         changeFlag = (uint8*) HeapManager::Malloc(numberOfVariables);
         reconnectionCycleCounter = new uint32*[numberOfPoolThreads];
         destinationsMask = new uint8[numberOfPoolThreads];
-        diagnostics = new int64[numberOfPoolThreads];
         tickAfterPost = new uint64[numberOfPoolThreads];
         for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
             reconnectionCycleCounter[i] = new uint32[numberOfDestinations];
             destinationsMask[i] = (1u << numberOfDestinations) - 1u;
-            diagnostics[i] = 0ll;
             tickAfterPost[i] = 0ull;
-            REPORT_ERROR(ErrorManagement::InitialisationError, "diagnostics[%d]=%lld", i, diagnostics[i]);
         }
         uint32 sentPerCycle = (numberOfPoolThreads * numberOfSignalToBeSent);
         ret = (numberOfVariables >= sentPerCycle);
@@ -438,6 +432,13 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
 
 bool PrioritySender::SetLogger(DiodeLogger &loggerIn) {
     logger = &loggerIn;
+    if (logger != NULL) {
+        uint32 nSignals = logger->GetNumberOfSignals();
+        diagnostics = new int64[];
+        for (uint32 i = 0u; i < nSignals; i++) {
+            diagnostics[i] = 0ll;
+        }
+    }
 }
 
 ErrorManagement::ErrorType PrioritySender::Start() {
