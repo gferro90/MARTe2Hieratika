@@ -114,9 +114,9 @@ void DiodeLogger::AddSample(int64 *samples) {
 
     for (uint32 i = 0u; i < numberOfSignals; i++) {
         windows[i][index] = samples[i];
-        index++;
-        index %= numberOfSignals;
     }
+    index++;
+    index %= numberOfSignals;
 
     counter++;
     if ((counter % printCycles) == 0u) {
