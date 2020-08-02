@@ -434,7 +434,7 @@ bool PrioritySender::SetLogger(DiodeLogger &loggerIn) {
     logger = &loggerIn;
     if (logger != NULL) {
         uint32 nSignals = logger->GetNumberOfSignals();
-        diagnostics = new int64[];
+        diagnostics = new int64[nSignals];
         for (uint32 i = 0u; i < nSignals; i++) {
             diagnostics[i] = 0ll;
         }
