@@ -344,6 +344,10 @@ private:
     uint32 resetCounter;
 
     uint8 sendOnlyChanged;
+
+    int64 *diagnostics;
+
+    uint64 *tickAfterPost;
 };
 
 }

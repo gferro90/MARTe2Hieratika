@@ -55,7 +55,6 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
         numberOfDiagnostics = arg.logger->GetNumberOfSignals();
         diagnostics = new int64[numberOfDiagnostics];
     }
-    uint64 tickBeforePost=HighResolutionTimer::Counter();
 
     while (arg.quit == 0) {
         uint32 nThreadsFinishedTmp;
@@ -166,12 +165,6 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
 
         //all the threads sent the variables
         if (nThreadsFinishedTmp == arg.numberOfPoolThreads) {
-            uint32 elapsedUs = (uint32)((float32)((HighResolutionTimer::Counter() - tickBeforePost) * 1000000u * HighResolutionTimer::Period()));
-            if (arg.logger != NULL) {
-                if (numberOfDiagnostics >= 0u) {
-                    diagnostics[0] = (int64)(elapsedUs);
-                }
-            }
 
             arg.nThreadsFinished = 0u;
 
@@ -185,7 +178,6 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             arg.numberOfChangedVariables = nVariables;
 
             changed = false;
-            tickBeforePost=HighResolutionTimer::Counter();
             arg.eventSem.Post();
         }
 
@@ -200,10 +192,7 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             }
 
             if (arg.logger != NULL) {
-                if (numberOfDiagnostics >= 1u) {
-                    diagnostics[1] = (int64)(arg.numberOfChangedVariables);
-                }
-                arg.logger->AddSample(diagnostics);
+                arg.logger->AddSample(arg.diagnostics);
             }
 
             arg.lastTickCounter = HighResolutionTimer::Counter();
@@ -272,6 +261,8 @@ PrioritySender::PrioritySender() :
     resetCounter = 120;
     logger = NULL;
     sendOnlyChanged = 0u;
+    diagnostics = NULL;
+    tickAfterPost = NULL;
 }
 
 PrioritySender::~PrioritySender() {
@@ -305,6 +296,12 @@ PrioritySender::~PrioritySender() {
 
     if (destinationsMask != NULL) {
         delete[] destinationsMask;
+    }
+    if (diagnostics != NULL) {
+        delete[] diagnostics;
+    }
+    if (tickAfterPost != NULL) {
+        delete[] tickAfterPost;
     }
 
     eventSem.Close();
@@ -411,6 +408,8 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
         changeFlag = (uint8*) HeapManager::Malloc(numberOfVariables);
         reconnectionCycleCounter = new uint32*[numberOfPoolThreads];
         destinationsMask = new uint8[numberOfPoolThreads];
+        diagnostics = new int64[numberOfPoolThreads];
+        tickAfterPost =new uint64[numberOfPoolThreads];
         for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
             reconnectionCycleCounter[i] = new uint32[numberOfDestinations];
             destinationsMask[i] = (1u << numberOfDestinations) - 1u;
@@ -511,14 +510,22 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
             nThreadsFinished++;
             syncSem.FastUnLock();
         }
+        uint32 threadId = info.GetThreadNumber();
+        uint32 elapsedUs = (uint32)((float32)((HighResolutionTimer::Counter() - tickAfterPost[threadId]) * 1000000u * HighResolutionTimer::Period()));
+        if (logger != NULL) {
+            if (logger->GetNumberOfDiagnostics() >= threadId) {
+                diagnostics[threadId] = (int64)(elapsedUs);
+            }
+        }
+
         if (quit == 0) {
             //lock on the index list
             eventSem.Wait(TTInfiniteWait);
+            tickAfterPost[threadId] = HighResolutionTimer::Counter();
 
             HttpChunkedStream *client = reinterpret_cast<HttpChunkedStream *>(info.GetThreadSpecificContext());
 
             if (client != NULL) {
-                uint32 threadId = info.GetThreadNumber();
                 err = SendVariables(*client, threadId);
                 Sleep::MSec(10);
             }
