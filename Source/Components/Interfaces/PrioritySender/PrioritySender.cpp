@@ -513,7 +513,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
         uint32 threadId = info.GetThreadNumber();
         uint32 elapsedUs = (uint32)((float32)((HighResolutionTimer::Counter() - tickAfterPost[threadId]) * 1000000u * HighResolutionTimer::Period()));
         if (logger != NULL) {
-            if (logger->GetNumberOfDiagnostics() >= threadId) {
+            if (logger->GetNumberOfSignals() >= threadId) {
                 diagnostics[threadId] = (int64)(elapsedUs);
             }
         }
