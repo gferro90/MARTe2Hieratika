@@ -49,6 +49,7 @@ DiodeLogger::DiodeLogger() {
     printCycles = 1u;
     windows = NULL;
     counter = 0u;
+    index = 0u;
 }
 
 DiodeLogger::~DiodeLogger() {
@@ -107,7 +108,7 @@ bool DiodeLogger::Initialise(StructuredDataI &data) {
 void DiodeLogger::AddSample(int64 *samples) {
 
     for (uint32 i = 0u; i < numberOfSignals; i++) {
-        windows[index] = samples[i];
+        windows[i][index] = samples[i];
         index++;
         index %= numberOfSignals;
     }
@@ -120,10 +121,10 @@ void DiodeLogger::AddSample(int64 *samples) {
             int64 min = 0x7FFFFFFFFFFFFFFF;
             int64 sum = 0;
             for (uint32 j = 0u; j < windowSize; j++) {
-                if (windows[i] < min) {
+                if (windows[i][j] < min) {
                     min = windows[i][j];
                 }
-                if (windows[i] > max) {
+                if (windows[i][j] > max) {
                     max = windows[i][j];
                 }
                 sum += windows[i][j];
