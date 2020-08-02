@@ -189,18 +189,16 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
         //sleep the cycle time once
         if (!changed) {
             //wait the cycle time
-            uint32 elapsed = (uint32)((float32)((HighResolutionTimer::Counter() - arg.lastTickCounter) * 1000u * HighResolutionTimer::Period()));
+            uint32 elapsedUs = (uint32)((float32)((HighResolutionTimer::Counter() - arg.lastTickCounter) * 1000000u * HighResolutionTimer::Period()));
+            uint32 elapsed = (elapsedUs / 1000u);
 
-
-            uint32 elapsed2 = (uint32)((float32)((HighResolutionTimer::Counter() - arg.lastTickCounter) * 1000000u * HighResolutionTimer::Period()));
-            printf("elapsed=%d ticks=%d freq=%llu period=%f\n", elapsed2, (HighResolutionTimer::Counter() - arg.lastTickCounter), HighResolutionTimer::Frequency(), HighResolutionTimer::Period());
             if (elapsed < arg.msecPeriod) {
                 Sleep::MSec(arg.msecPeriod - elapsed);
             }
 
             if (arg.logger != NULL) {
                 if (numberOfDiagnostics >= 0u) {
-                    diagnostics[0] = (int64)(elapsed2);
+                    diagnostics[0] = (int64)(elapsedUs);
                 }
                 if (numberOfDiagnostics >= 1u) {
                     diagnostics[1] = (int64)(arg.numberOfChangedVariables);
