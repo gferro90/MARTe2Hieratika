@@ -49,13 +49,6 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
     uint32 nVariables = 0u;
     uint32 sendCounter = 0u;
 
-    int64 *diagnostics = NULL;
-    uint32 numberOfDiagnostics = 0u;
-    if (arg.logger != NULL) {
-        numberOfDiagnostics = arg.logger->GetNumberOfSignals();
-        diagnostics = new int64[numberOfDiagnostics];
-    }
-
     while (arg.quit == 0) {
         uint32 nThreadsFinishedTmp;
         uint32 chunkCounterRead = 0u;
@@ -206,10 +199,6 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
 
     while (arg.nThreadsFinished < arg.numberOfPoolThreads) {
         Sleep::Sec(1u);
-    }
-
-    if (diagnostics != NULL) {
-        delete[] diagnostics;
     }
 
     printf("Init thread terminated\n");
