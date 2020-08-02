@@ -185,6 +185,9 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             }
 
             if (arg.logger != NULL) {
+                for(uint32 i=0u; i<arg.logger->GetNumberOfSignals(); i++){
+                    printf("WTF %d\n", arg.diagnostics[i]);
+                }
                 arg.logger->AddSample(arg.diagnostics);
             }
 
@@ -505,6 +508,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
         uint32 elapsedUs = (uint32)((float32)((HighResolutionTimer::Counter() - tickAfterPost[threadId]) * 1000000u * HighResolutionTimer::Period()));
         if (logger != NULL) {
             if (logger->GetNumberOfSignals() >= threadId) {
+                REPORT_ERROR(ErrorManagement::Information, "threadId=%d %u, threadId, elapsedUs");
                 diagnostics[threadId] = (int64)(elapsedUs);
             }
         }
