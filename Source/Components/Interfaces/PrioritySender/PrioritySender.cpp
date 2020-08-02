@@ -191,7 +191,7 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             //wait the cycle time
             uint32 elapsed = (uint32)((float32)((HighResolutionTimer::Counter() - arg.lastTickCounter) * 1000u * HighResolutionTimer::Period()));
 
-            printf("elapsed=%d ticks=%d freq=%f\n", elapsed, (HighResolutionTimer::Counter() - arg.lastTickCounter), HighResolutionTimer::Frequency());
+            printf("elapsed=%d ticks=%d freq=%d period=%f\n", elapsed, (HighResolutionTimer::Counter() - arg.lastTickCounter), HighResolutionTimer::Frequency(), HighResolutionTimer::Period());
             if (elapsed < arg.msecPeriod) {
                 Sleep::MSec(arg.msecPeriod - elapsed);
             }
