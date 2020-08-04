@@ -405,11 +405,12 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
         changeFlag = (uint8*) HeapManager::Malloc(numberOfVariables);
         reconnectionCycleCounter = new uint32*[numberOfPoolThreads];
         destinationsMask = new uint8[numberOfPoolThreads];
-        tickAfterPost = new uint64[numberOfPoolThreads];
+        tickAfterPost = new uint64[2*numberOfPoolThreads];
         for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
             reconnectionCycleCounter[i] = new uint32[numberOfDestinations];
             destinationsMask[i] = (1u << numberOfDestinations) - 1u;
             tickAfterPost[i] = 0ull;
+            tickAfterPost[numberOfPoolThreads+i] = 0ull;
         }
         uint32 sentPerCycle = (numberOfPoolThreads * numberOfSignalToBeSent);
         ret = (numberOfVariables >= sentPerCycle);
@@ -515,27 +516,30 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
             syncSem.FastUnLock();
         }
         uint32 threadId = info.GetThreadNumber();
-        //uint32 elapsedUs = (uint32)((float32)((HighResolutionTimer::Counter() - tickAfterPost[threadId]) * 1000000u * HighResolutionTimer::Period()));
+        uint32 elapsedUs = (uint32)((float32)((HighResolutionTimer::Counter() - tickAfterPost[numberOfPoolThreads+threadId]) * 1000000u * HighResolutionTimer::Period()));
         pthread_t tid=pthread_self();
         clockid_t cid;
         pthread_getcpuclockid(tid, &cid);
 
         struct timespec ts;
         clock_gettime(cid, &ts);
-        uint32 elapsedUs=(ts.tv_sec*1000000u+(ts.tv_nsec/1000))-tickAfterPost[threadId];
+        uint64 counter=(ts.tv_sec*1000000u+(ts.tv_nsec/1000));
+        uint32 elapsedUsT=counter-tickAfterPost[threadId];
+        tickAfterPost[threadId] = counter;
 
         if (logger != NULL) {
-            if (logger->GetNumberOfSignals() >= threadId) {
+            if (threadId<logger->GetNumberOfSignals()) {
                 diagnostics[threadId] = (int64)(elapsedUs);
+            }
+            if ((threadId+numberOfPoolThreads)< logger->GetNumberOfSignals()) {
+                diagnostics[numberOfPoolThreads+threadId] = (int64)(elapsedUs);
             }
         }
 
         if (quit == 0) {
             //lock on the index list
             eventSem.Wait(TTInfiniteWait);
-            //tickAfterPost[threadId] = HighResolutionTimer::Counter();
-            clock_gettime(cid, &ts);
-            tickAfterPost[threadId] = ts.tv_sec*1000000u+(ts.tv_nsec/1000);
+            tickAfterPost[numberOfPoolThreads+threadId] = HighResolutionTimer::Counter();
 
             HttpChunkedStream *client = reinterpret_cast<HttpChunkedStream *>(info.GetThreadSpecificContext());
 
