@@ -529,7 +529,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
 
         if (logger != NULL) {
             if (threadId<logger->GetNumberOfSignals()) {
-                diagnostics[threadId] = (int64)(elapsedUs);
+                diagnostics[threadId] = (int64)(elapsedUsT);
             }
             if ((threadId+numberOfPoolThreads)< logger->GetNumberOfSignals()) {
                 diagnostics[numberOfPoolThreads+threadId] = (int64)(elapsedUs);
