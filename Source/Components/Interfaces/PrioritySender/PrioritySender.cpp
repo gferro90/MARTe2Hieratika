@@ -522,7 +522,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
 
         struct timespec ts;
         clock_gettime(cid, &ts);
-        uint32 elapsedUs=(ts.tv_sec*1000000u+(ts.tv_sec/1000))-tickAfterPost[threadId];
+        uint32 elapsedUs=(ts.tv_sec*1000000u+(ts.tv_nsec/1000))-tickAfterPost[threadId];
 
         if (logger != NULL) {
             if (logger->GetNumberOfSignals() >= threadId) {
@@ -535,7 +535,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
             eventSem.Wait(TTInfiniteWait);
             //tickAfterPost[threadId] = HighResolutionTimer::Counter();
             clock_gettime(cid, &ts);
-            tickAfterPost[threadId] = ts.tv_sec*1000000u+(ts.tv_sec/1000);
+            tickAfterPost[threadId] = ts.tv_sec*1000000u+(ts.tv_nsec/1000);
 
             HttpChunkedStream *client = reinterpret_cast<HttpChunkedStream *>(info.GetThreadSpecificContext());
 
