@@ -36,6 +36,14 @@
 #include "HttpProtocol.h"
 #include "File.h"
 
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <pthread.h>
+#include <string.h>
+#include <errno.h>
+
 /*---------------------------------------------------------------------------*/
 /*                           Static definitions                              */
 /*---------------------------------------------------------------------------*/
@@ -507,7 +515,15 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
             syncSem.FastUnLock();
         }
         uint32 threadId = info.GetThreadNumber();
-        uint32 elapsedUs = (uint32)((float32)((HighResolutionTimer::Counter() - tickAfterPost[threadId]) * 1000000u * HighResolutionTimer::Period()));
+        //uint32 elapsedUs = (uint32)((float32)((HighResolutionTimer::Counter() - tickAfterPost[threadId]) * 1000000u * HighResolutionTimer::Period()));
+        pthread_t tid=pthread_self();
+        clockid_t cid;
+        pthread_getcpuclockid(tid, &cid);
+
+        struct timespec ts;
+        clock_gettime(cid, &ts);
+        uint32 elapsedUs=(ts.tv_sec*1000000u+(ts.tv_sec/1000))-tickAfterPost[threadId];
+
         if (logger != NULL) {
             if (logger->GetNumberOfSignals() >= threadId) {
                 diagnostics[threadId] = (int64)(elapsedUs);
@@ -517,7 +533,9 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
         if (quit == 0) {
             //lock on the index list
             eventSem.Wait(TTInfiniteWait);
-            tickAfterPost[threadId] = HighResolutionTimer::Counter();
+            //tickAfterPost[threadId] = HighResolutionTimer::Counter();
+            clock_gettime(cid, &ts);
+            tickAfterPost[threadId] = ts.tv_sec*1000000u+(ts.tv_sec/1000);
 
             HttpChunkedStream *client = reinterpret_cast<HttpChunkedStream *>(info.GetThreadSpecificContext());
 
