@@ -339,8 +339,6 @@ private:
      */
     uint32 maxVarSize;
 
-    uint8 chunked;
-
     uint32 resetCounter;
 
     uint8 sendOnlyChanged;
@@ -348,6 +346,10 @@ private:
     int64 *diagnostics;
 
     uint64 *tickAfterPost;
+
+    StreamString myBuffer;
+
+    uint32 chunkSize;
 };
 
 }

@@ -254,7 +254,7 @@ PrioritySender::PrioritySender() :
     maxBytesPerCycle = 0xFFFFFFFFu;
     readTimeout = 10000u;
     maxVarSize = 0xFFFFFFFFu;
-    chunked = 1u;
+    chunkSize = 1u;
     resetCounter = 120;
     logger = NULL;
     sendOnlyChanged = 0u;
@@ -363,8 +363,8 @@ bool PrioritySender::Initialise(StructuredDataI &data) {
             }
         }
         if (ret) {
-            if (!data.Read("Chunked", chunked)) {
-                chunked = 1u;
+            if (!data.Read("ChunkSize", chunkSize)) {
+                chunkSize = 1u;
             }
         }
         if (ret) {
@@ -405,12 +405,12 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
         changeFlag = (uint8*) HeapManager::Malloc(numberOfVariables);
         reconnectionCycleCounter = new uint32*[numberOfPoolThreads];
         destinationsMask = new uint8[numberOfPoolThreads];
-        tickAfterPost = new uint64[2*numberOfPoolThreads];
+        tickAfterPost = new uint64[2 * numberOfPoolThreads];
         for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
             reconnectionCycleCounter[i] = new uint32[numberOfDestinations];
             destinationsMask[i] = (1u << numberOfDestinations) - 1u;
             tickAfterPost[i] = 0ull;
-            tickAfterPost[numberOfPoolThreads+i] = 0ull;
+            tickAfterPost[numberOfPoolThreads + i] = 0ull;
         }
         uint32 sentPerCycle = (numberOfPoolThreads * numberOfSignalToBeSent);
         ret = (numberOfVariables >= sentPerCycle);
@@ -490,6 +490,9 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
                 //never use the buffer
                 newClient->SetCalibReadParam(0xFFFFFFFFu);
 
+                if (chunkSize > 32u) {
+                    newClient->SetBufferSize(chunkSize, chunkSize);
+                }
                 newClient->SetTimeout(readTimeout);
                 info.SetThreadSpecificContext(reinterpret_cast<void*>(newClient));
                 if (syncSem.FastLock()) {
@@ -516,36 +519,36 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
             syncSem.FastUnLock();
         }
         uint32 threadId = info.GetThreadNumber();
-        uint32 elapsedUs = (uint32)((float32)((HighResolutionTimer::Counter() - tickAfterPost[numberOfPoolThreads+threadId]) * 1000000u * HighResolutionTimer::Period()));
-        pthread_t tid=pthread_self();
+        uint32 elapsedUs = (uint32)(
+                (float32)((HighResolutionTimer::Counter() - tickAfterPost[numberOfPoolThreads + threadId]) * 1000000u * HighResolutionTimer::Period()));
+        pthread_t tid = pthread_self();
         clockid_t cid;
         pthread_getcpuclockid(tid, &cid);
 
         struct timespec ts;
         clock_gettime(cid, &ts);
-        uint64 counter=(ts.tv_sec*1000000u+(ts.tv_nsec/1000));
-        uint32 elapsedUsT=counter-tickAfterPost[threadId];
+        uint64 counter = (ts.tv_sec * 1000000u + (ts.tv_nsec / 1000));
+        uint32 elapsedUsT = counter - tickAfterPost[threadId];
         tickAfterPost[threadId] = counter;
 
         if (logger != NULL) {
-            if (threadId<logger->GetNumberOfSignals()) {
+            if (threadId < logger->GetNumberOfSignals()) {
                 diagnostics[threadId] = (int64)(elapsedUsT);
             }
-            if ((threadId+numberOfPoolThreads)< logger->GetNumberOfSignals()) {
-                diagnostics[numberOfPoolThreads+threadId] = (int64)(elapsedUs);
+            if ((threadId + numberOfPoolThreads) < logger->GetNumberOfSignals()) {
+                diagnostics[numberOfPoolThreads + threadId] = (int64)(elapsedUs);
             }
         }
 
         if (quit == 0) {
             //lock on the index list
             eventSem.Wait(TTInfiniteWait);
-            tickAfterPost[numberOfPoolThreads+threadId] = HighResolutionTimer::Counter();
+            tickAfterPost[numberOfPoolThreads + threadId] = HighResolutionTimer::Counter();
 
             HttpChunkedStream *client = reinterpret_cast<HttpChunkedStream *>(info.GetThreadSpecificContext());
 
             if (client != NULL) {
                 err = SendVariables(*client, threadId);
-                Sleep::MSec(10);
             }
         }
 
@@ -631,7 +634,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                 hprotocol.Write("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
                 hprotocol.Write("Accept-Encoding", "gzip, deflate, br");
                 hprotocol.Write("Cache-Control", "no-cache");
-                if (chunked > 0u) {
+                if (chunkSize > 0u) {
                     hprotocol.Write("Transfer-Encoding", "chunked");
                 }
                 hprotocol.Write("Content-Type", "text/html");
@@ -639,8 +642,8 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                 StreamString hstream;
 
                 BufferedStreamI *bufferT;
-                StreamString myBuffer = "";
-                if (chunked > 0u) {
+                myBuffer = "";
+                if (chunkSize > 0u) {
                     err = !hprotocol.WriteHeader(false, HttpDefinition::HSHCPut, &hstream, destinationName.Buffer());
                     if (err.ErrorsCleared()) {
                         client.Flush();
@@ -652,7 +655,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                 }
                 if (err.ErrorsCleared()) {
 
-                    client.SetChunkMode(chunked > 0u);
+                    client.SetChunkMode(chunkSize > 0u);
                     PvDescriptor *pvDes = dataSource->GetPvDescriptors();
                     if (pvDes != NULL) {
                         uint32 i = 0u;
@@ -735,7 +738,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
 
                     }
 
-                    if (chunked == 0u) {
+                    if (chunkSize == 0u) {
                         uint32 conLen = myBuffer.Size();
                         hprotocol.Write("Content-Length", conLen);
                         err = !hprotocol.WriteHeader(false, HttpDefinition::HSHCPut, &hstream, destinationName.Buffer());
@@ -749,7 +752,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                         err = !client.Flush();
                     }
 
-                    if (chunked > 0u) {
+                    if (chunkSize > 0u) {
                         if (err.ErrorsCleared()) {
                             err = !client.FinalChunk();
                         }
@@ -790,7 +793,6 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                         break;
                     }
                 }
-                Sleep::MSec(10);
             }
         }
         else {
