@@ -439,7 +439,7 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
     return ret;
 }
 
-bool PrioritySender::SetLogger(DiodeLogger &loggerIn) {
+void PrioritySender::SetLogger(DiodeLogger &loggerIn) {
     logger = &loggerIn;
     if (logger != NULL) {
         uint32 nSignals = logger->GetNumberOfSignals();
@@ -621,7 +621,6 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
             while ((cntVariables < nVarsPerThread) && (err.ErrorsCleared())) {
 
                 client.SetChunkMode(false);
-
                 HttpProtocol hprotocol(client);
                 if (!hprotocol.MoveAbsolute("OutputOptions")) {
                     hprotocol.CreateAbsolute("OutputOptions");
@@ -642,7 +641,8 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                 StreamString hstream;
 
                 BufferedStreamI *bufferT;
-                myBuffer = "";
+                StreamString myBuffer = "";
+
                 if (chunkSize > 0u) {
                     err = !hprotocol.WriteHeader(false, HttpDefinition::HSHCPut, &hstream, destinationName.Buffer());
                     if (err.ErrorsCleared()) {
@@ -653,6 +653,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                 else {
                     bufferT = &myBuffer;
                 }
+
                 if (err.ErrorsCleared()) {
 
                     client.SetChunkMode(chunkSize > 0u);
@@ -737,7 +738,6 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                         }
 
                     }
-
                     if (chunkSize == 0u) {
                         uint32 conLen = myBuffer.Size();
                         hprotocol.Write("Content-Length", conLen);
@@ -793,6 +793,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                         break;
                     }
                 }
+                hprotocol.Purge();
             }
         }
         else {

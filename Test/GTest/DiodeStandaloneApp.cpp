@@ -117,18 +117,20 @@ int main(int argc,
     logger = god->Find("Logger");
 
     if (subscriber.IsValid() && sender.IsValid()) {
-        subscriber->ParseAndSubscribe();
-        Sleep::Sec(1);
-        sender->SetDataSource(*subscriber.operator->());
-        //attach the logger
-        if (logger.IsValid()) {
-            sender->SetLogger(*logger.operator->());
-        }
-        sender->Start();
-        signal(SIGTERM, StopApp);
-        signal(SIGINT, StopApp);
-        while (keepRunning) {
-            Sleep::Sec(10u);
+        if (subscriber->ParseAndSubscribe()) {
+            Sleep::Sec(1);
+            if (sender->SetDataSource(*subscriber.operator->())) {
+                //attach the logger
+                if (logger.IsValid()) {
+                    sender->SetLogger(*logger.operator->());
+                }
+                sender->Start();
+                signal(SIGTERM, StopApp);
+                signal(SIGINT, StopApp);
+                while (keepRunning) {
+                    Sleep::Sec(10u);
+                }
+            }
         }
     }
 

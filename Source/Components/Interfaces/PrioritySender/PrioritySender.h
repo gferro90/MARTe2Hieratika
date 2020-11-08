@@ -109,7 +109,7 @@ public:
      * @brief Connects the logger
      * param[in] loggerIn the logger
      */
-    bool SetLogger(DiodeLogger &loggerIn);
+    void SetLogger(DiodeLogger &loggerIn);
 
 
     /**
@@ -346,8 +346,6 @@ private:
     int64 *diagnostics;
 
     uint64 *tickAfterPost;
-
-    StreamString myBuffer;
 
     uint32 chunkSize;
 };

@@ -625,6 +625,7 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
         else {
             SendErrorReplyMessage(protocol, commClient);
         }
+        protocol.Purge();
         Sleep::MSec(10);
     }
 
@@ -673,6 +674,7 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
                 protocol.SetKeepAlive(false);
                 err = SendOkReplyMessage(protocol, newClient);
                 information.SetThreadSpecificContext(NULL);
+                protocol.Purge();
             }
             err = ErrorManagement::Completed;
         }
@@ -684,6 +686,7 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
             protocol.SetKeepAlive(false);
             err = SendOkReplyMessage(protocol, newClient);
             information.SetThreadSpecificContext(NULL);
+            protocol.Purge();
         }
         err = ErrorManagement::Completed;
     }
