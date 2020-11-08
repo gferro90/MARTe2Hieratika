@@ -24,13 +24,8 @@
 #
 #############################################################
 SPB    = Source/Components/Interfaces.x
-#Source/Components/GAMs.x Source/Components/DataSources.x
-
-#SPB += Test/Components/Interfaces.x Test/Components/GAMs.x
 
 SPB += Test/GTest.x
-
-#SPB += Startup.x
 
 MAKEDEFAULTDIR=$(MARTe2_DIR)/MakeDefaults
 

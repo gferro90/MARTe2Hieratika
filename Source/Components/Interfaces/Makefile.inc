@@ -31,12 +31,9 @@ MAKEDEFAULTDIR=$(MARTe2_DIR)/MakeDefaults
 include $(MAKEDEFAULTDIR)/MakeStdLibDefs.$(TARGET)
 
 
-LIBRARIES_STATIC=$(BUILD_DIR)/MARTe2HieratikaInterface/MARTe2HieratikaInterface$(LIBEXT)
-LIBRARIES_STATIC+=$(BUILD_DIR)/MARTe2HieratikaMessageDispatcher/MARTe2HieratikaMessageDispatcher$(LIBEXT)
 LIBRARIES_STATIC+=$(BUILD_DIR)/EpicsParserAndSubscriber/EpicsParserAndSubscriber$(LIBEXT)
 LIBRARIES_STATIC+=$(BUILD_DIR)/PrioritySender/PrioritySender$(LIBEXT)
 LIBRARIES_STATIC+=$(BUILD_DIR)/DiodeReceiver/DiodeReceiver$(LIBEXT)
-LIBRARIES_STATIC+=$(BUILD_DIR)/EpicsDiodePublisher/EpicsDiodePublisher$(LIBEXT)
 LIBRARIES_STATIC+=$(BUILD_DIR)/DiodeLogger/DiodeLogger$(LIBEXT)
 
 
