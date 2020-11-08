@@ -537,7 +537,7 @@ void EpicsParserAndSubscriber::CreateSubscriptions(uint32 beg,
                                        &pvDescriptor[i], &pvDescriptor[i].pvEvid) != ECA_NORMAL) {
                 REPORT_ERROR(ErrorManagement::Warning, "FAILED create subscription %s", pvDescriptor[i].pvName);
             }
-            ca_pend_io(0.01);
+            ca_pend_io(0.1);
         }
 
     }
