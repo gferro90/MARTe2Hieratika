@@ -764,7 +764,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                         bool keepReading = true;
                         while (keepReading) {
                             uint32 peekSize=1u;
-                            keepReading = (client->Peek(&controlChar, peekSize));
+                            keepReading = (client.Peek(&controlChar, peekSize));
                             if (keepReading) {
 
                                 if (err.ErrorsCleared()) {
