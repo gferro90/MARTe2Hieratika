@@ -750,7 +750,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                             uint32 peekSize=1u;
                             client.SetBlocking(false);
                             keepReading = (client.Peek(&controlChar, peekSize));
-                            newClient->SetBlocking(true);
+                            client.SetBlocking(true);
 
                             if (keepReading) {
 
