@@ -665,7 +665,7 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
                 if (!err.ErrorsCleared()) {
                     information.SetThreadSpecificContext(reinterpret_cast<void*>(NULL));
                 }
-                Sleep::Sec(4.);
+            }
         }
         else {
             TCPSocket *newClient = reinterpret_cast<TCPSocket *>(information.GetThreadSpecificContext());
