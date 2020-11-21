@@ -136,6 +136,8 @@ public:
     virtual ErrorManagement::ErrorType Stop();
 
 
+    void PrintDiagnostics();
+
 private:
 
     /**

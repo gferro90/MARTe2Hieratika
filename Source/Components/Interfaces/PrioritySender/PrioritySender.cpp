@@ -178,11 +178,6 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
 
             arg.numberOfChangedVariables = nVariables;
 
-            //REPORT_ERROR_STATIC("Sending %d PVs", arg.numberOfChangedVariables);
-            for(uint32 n=0u; n<arg.numberOfPoolThreads; n++){
-                //REPORT_ERROR_STATIC(ErrorManagement::Information, "PendingPackets[%d]=%d", n, arg.packetsNotAck[n]);
-            }
-
             changed = false;
             arg.eventSem.Post();
         }
@@ -196,6 +191,8 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             if (elapsed < arg.msecPeriod) {
                 Sleep::MSec(arg.msecPeriod - elapsed);
             }
+
+            arg.PrintDiagnostics();
 
             arg.lastTickCounter = HighResolutionTimer::Counter();
             sendCounter++;
@@ -835,6 +832,13 @@ ErrorManagement::ErrorType PrioritySender::SendCloseConnectionMessage(HttpChunke
         err = !client.FinalChunk();
     }
     return err;
+}
+
+void PrioritySender::PrintDiagnostics(){
+    REPORT_ERROR_STATIC("Sending %d PVs", numberOfChangedVariables);
+    for(uint32 n=0u; n<numberOfPoolThreads; n++){
+        REPORT_ERROR_STATIC(ErrorManagement::Information, "PendingPackets[%d]=%d", n, packetsNotAck[n]);
+    }
 }
 
 CLASS_REGISTER(PrioritySender, "1.0")
