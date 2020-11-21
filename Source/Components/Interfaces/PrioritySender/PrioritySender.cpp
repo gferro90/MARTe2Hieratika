@@ -179,8 +179,8 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             arg.numberOfChangedVariables = nVariables;
 
             REPORT_ERROR_STATIC("Sending %d PVs", arg.numberOfChangedVariables);
-            for(uint32 i=0u; i<arg.numberOfPoolThreads; i++){
-                REPORT_ERROR_STATIC(ErrorManagement::Information, "PendingPackets[%d]=%d", i, arg.packetsNotAck[i]);
+            for(uint32 n=0u; n<arg.numberOfPoolThreads; n++){
+                //REPORT_ERROR_STATIC(ErrorManagement::Information, "PendingPackets[%d]=%d", n, arg.packetsNotAck[n]);
             }
 
             changed = false;
@@ -405,7 +405,6 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
         changeFlag = (uint8*) HeapManager::Malloc(numberOfVariables);
         reconnectionCycleCounter = new uint32*[numberOfPoolThreads];
         destinationsMask = new uint8[numberOfPoolThreads];
-
         packetsNotAck = new uint32[numberOfPoolThreads];
         tickAfterPost = new uint64[2 * numberOfPoolThreads];
         for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
@@ -743,7 +742,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                     }
 
                     if (err.ErrorsCleared()) {
-                        packetsNotAck[threadId]++;
+                        //packetsNotAck[threadId]++;
                         char8 controlChar;
 
                         bool keepReading = true;
@@ -761,7 +760,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                                     hprotocol.CompleteReadOperation(&hstream, 1000u);
                                 }
                                 if (err.ErrorsCleared()) {
-                                    packetsNotAck[threadId]--;
+                                    //packetsNotAck[threadId]--;
                                     if (!hprotocol.KeepAlive()) {
                                         REPORT_ERROR(ErrorManagement::FatalError, "Connection complete!");
                                         err = ErrorManagement::Completed;
