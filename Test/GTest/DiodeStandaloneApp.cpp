@@ -58,9 +58,13 @@ void MainErrorProcessFunction(const MARTe::ErrorManagement::ErrorInformation &er
                               const char * const errorDescription) {
     MARTe::StreamString errorCodeStr;
     MARTe::ErrorManagement::ErrorCodeToStream(errorInfo.header.errorType, errorCodeStr);
-    printf("[%s - %s:%d]: %s\n", errorCodeStr.Buffer(), errorInfo.fileName, errorInfo.header.lineNumber, errorDescription);
+    File logFile;
+    StreamString loggerFilePath = "Diode.log";
+    if (!logFile.Open(loggerFilePath.Buffer(), File::ACCESS_MODE_W | File::FLAG_CREAT | File::FLAG_TRUNC)) {
+        printf("Failed opening file\n");
+    }
 
-    //logFile.Printf("[%s - %s:%d]: %s\n", errorCodeStr.Buffer(), errorInfo.fileName, errorInfo.header.lineNumber, errorDescription);
+    logFile.Printf("[%s - %s:%d]: %s\n", errorCodeStr.Buffer(), errorInfo.fileName, errorInfo.header.lineNumber, errorDescription);
 }
 static bool keepRunning = true;
 static bool killApp = false;

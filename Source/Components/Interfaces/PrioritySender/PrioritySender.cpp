@@ -178,7 +178,7 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
 
             arg.numberOfChangedVariables = nVariables;
 
-            REPORT_ERROR_STATIC("Sending %d PVs", arg.numberOfChangedVariables);
+            //REPORT_ERROR_STATIC("Sending %d PVs", arg.numberOfChangedVariables);
             for(uint32 n=0u; n<arg.numberOfPoolThreads; n++){
                 //REPORT_ERROR_STATIC(ErrorManagement::Information, "PendingPackets[%d]=%d", n, arg.packetsNotAck[n]);
             }
@@ -297,7 +297,7 @@ PrioritySender::~PrioritySender() {
     if (tickAfterPost != NULL) {
         delete[] tickAfterPost;
     }
-    if(packetsNotAck!=NULL){
+    if(packetsNotAck != NULL){
         delete[] packetsNotAck;
     }
 
