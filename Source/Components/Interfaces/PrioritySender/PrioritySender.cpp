@@ -192,7 +192,10 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
                 Sleep::MSec(arg.msecPeriod - elapsed);
             }
 
-            arg.PrintDiagnostics();
+            REPORT_ERROR_STATIC(ErrorManagement::Information, "Sending %d PVs", arg.numberOfChangedVariables);
+            for(uint32 n=0u; n<arg.numberOfPoolThreads; n++){
+                REPORT_ERROR_STATIC(ErrorManagement::Information, "PendingPackets[%d]=%d", n, arg.packetsNotAck[n]);
+            }
 
             arg.lastTickCounter = HighResolutionTimer::Counter();
             sendCounter++;
@@ -739,7 +742,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                     }
 
                     if (err.ErrorsCleared()) {
-                        //packetsNotAck[threadId]++;
+                        packetsNotAck[threadId]++;
                         char8 controlChar;
 
                         bool keepReading = true;
@@ -757,7 +760,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                                     hprotocol.CompleteReadOperation(&hstream, 1000u);
                                 }
                                 if (err.ErrorsCleared()) {
-                                    //packetsNotAck[threadId]--;
+                                    packetsNotAck[threadId]--;
                                     if (!hprotocol.KeepAlive()) {
                                         REPORT_ERROR(ErrorManagement::FatalError, "Connection complete!");
                                         err = ErrorManagement::Completed;
@@ -834,13 +837,6 @@ ErrorManagement::ErrorType PrioritySender::SendCloseConnectionMessage(HttpChunke
     return err;
 }
 
-void PrioritySender::PrintDiagnostics(){
-    REPORT_ERROR("Ciaone");
-    //REPORT_ERROR("Sending %d PVs", numberOfChangedVariables);
-    //for(uint32 n=0u; n<numberOfPoolThreads; n++){
-    //    REPORT_ERROR(ErrorManagement::Information, "PendingPackets[%d]=%d", n, packetsNotAck[n]);
-    //}
-}
 
 CLASS_REGISTER(PrioritySender, "1.0")
 }
