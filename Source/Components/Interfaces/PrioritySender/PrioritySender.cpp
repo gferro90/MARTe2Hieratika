@@ -309,30 +309,30 @@ bool PrioritySender::Initialise(StructuredDataI &data) {
     if (ret) {
         ret = data.Read("NumberOfSignalPerThread", numberOfSignalToBeSent);
         if (!ret) {
-            REPORT_ERROR(ErrorManagement::InitialisationError, "Please define NumberOfSignalPerThread");
+            printf("Please define NumberOfSignalPerThread\n");
         }
         if (ret) {
             ret = data.Read("ServerIp", serverIpAddress);
             if (!ret) {
-                REPORT_ERROR(ErrorManagement::InitialisationError, "Please define ServerIp");
+                printf("Please define ServerIp\n");
             }
         }
         if (ret) {
             ret = data.Read("ServerPort", serverPort);
             if (!ret) {
-                REPORT_ERROR(ErrorManagement::InitialisationError, "Please define ServerPort");
+                printf("Please define ServerPort\n");
             }
         }
         if (ret) {
             ret = data.Read("NumberOfCpus", numberOfCpus);
             if (!ret) {
-                REPORT_ERROR(ErrorManagement::InitialisationError, "Please define NumberOfCpus");
+                printf("Please define NumberOfCpus\n");
             }
         }
         if (ret) {
             ret = data.Read("MsecPeriod", msecPeriod);
             if (!ret) {
-                REPORT_ERROR(ErrorManagement::InitialisationError, "Please define MsecPeriod");
+                printf("Please define MsecPeriod\n");
             }
         }
         if (ret) {
@@ -382,7 +382,7 @@ bool PrioritySender::Initialise(StructuredDataI &data) {
                 numberOfDestinations = 1u;
             }
             if (numberOfDestinations == 0u) {
-                REPORT_ERROR(ErrorManagement::Information, "NumberOfDestinations cannot be 0, set to 1");
+                printf("NumberOfDestinations cannot be 0, set to 1\n");
                 numberOfDestinations = 1u;
             }
         }
@@ -434,7 +434,7 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
             nThreadsFinished = 0u;
         }
         else {
-            REPORT_ERROR(ErrorManagement::InitialisationError, "The number of variables (%d) must be > than the variables sent per cycle (%d)",
+            printf("The number of variables (%d) must be > than the variables sent per cycle (%d)\n",
                          numberOfVariables, sentPerCycle);
         }
     }
@@ -467,14 +467,14 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
         HttpChunkedStream *newClient = new HttpChunkedStream();
         while (!newClient->Open()) {
             Sleep::MSec(connectionTimeout.GetTimeoutMSec());
-            REPORT_ERROR(ErrorManagement::Information, "Failed socket Open ...");
+            printf("Failed socket Open ...\n");
         }
-        REPORT_ERROR(ErrorManagement::Information, "Client connecting...");
+        printf("Client connecting...\n");
         while (!(newClient->Connect(serverIpAddress.Buffer(), serverPort, connectionTimeout)) && (quit == 0)) {
             Sleep::MSec(connectionTimeout.GetTimeoutMSec());
-            REPORT_ERROR(ErrorManagement::Information, "Failed socket Connect ...");
+            printf("Failed socket Connect ...\n");
         }
-        REPORT_ERROR(ErrorManagement::Information, "Connection established!");
+        printf("Connection established!\n");
 
         if (quit == 0) {
             if (err.ErrorsCleared()) {
@@ -537,13 +537,13 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
 
     }
     else {
-        REPORT_ERROR(ErrorManagement::FatalError, "Error: close the connection");
+        printf("Error: close the connection\n");
         HttpChunkedStream *client = reinterpret_cast<HttpChunkedStream *>(info.GetThreadSpecificContext());
 
         if (client != NULL) {
             uint32 threadId = info.GetThreadNumber();
-            REPORT_ERROR(ErrorManagement::Information, "Thread terminated\n", threadId);
-            REPORT_ERROR(ErrorManagement::FatalError, "Send final message");
+            printf("Thread terminated\n", threadId);
+            printf("Send final message\n");
             //send a connection-close message
             for (uint32 i = 0u; i < numberOfDestinations; i++) {
                 StreamString destinationName = "/receiver";
@@ -553,7 +553,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
             }
 
             delete client;
-            REPORT_ERROR(ErrorManagement::Information, "Client deleted");
+            printf("Client deleted\n");
             client = NULL;
             info.SetThreadSpecificContext(reinterpret_cast<void*>(NULL));
         }
@@ -762,7 +762,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                                 if (err.ErrorsCleared()) {
                                     packetsNotAck[threadId]--;
                                     if (!hprotocol.KeepAlive()) {
-                                        REPORT_ERROR(ErrorManagement::FatalError, "Connection complete!");
+                                        printf("Connection complete!\n");
                                         err = ErrorManagement::Completed;
                                         keepReading = false;
                                     }
@@ -777,14 +777,14 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                         //since the connection is one we have to retry again
                         if (err != ErrorManagement::Completed) {
                             if (destinationsMask[threadId] != 0u) {
-                                REPORT_ERROR(ErrorManagement::Information, "Error but connections %d still alive: resend in %d ms\n", destinationId,
+                                printf("Error but connections %d still alive: resend in %d ms\n", destinationId,
                                              connectionTimeout.GetTimeoutMSec());
                                 err = ErrorManagement::NoError;
                             }
                         }
                         else {
-                            REPORT_ERROR(ErrorManagement::Information, "Receiver %d closes connection: reconnect without sending to it\n", destinationId);
-                            REPORT_ERROR(ErrorManagement::FatalError, "Send final message");
+                            printf("Receiver %d closes connection: reconnect without sending to it\n", destinationId);
+                            printf("Send final message\n");
                             //send a connection-close message
                             SendCloseConnectionMessage(client, destinationName.Buffer());
                             //Sleep::MSec(connectionTimeout.GetTimeoutMSec());
