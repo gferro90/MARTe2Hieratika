@@ -49,7 +49,6 @@
 #include "StandardParser.h"
 #include "EpicsParserAndSubscriber.h"
 #include "PrioritySender.h"
-#include "DiodeLogger.h"
 
 /*---------------------------------------------------------------------------*/
 /*                           Static definitions                              */
@@ -59,13 +58,18 @@ void MainErrorProcessFunction(const MARTe::ErrorManagement::ErrorInformation &er
                               const char * const errorDescription) {
     MARTe::StreamString errorCodeStr;
     MARTe::ErrorManagement::ErrorCodeToStream(errorInfo.header.errorType, errorCodeStr);
-    printf("[%s - %s:%d]: %s\n", errorCodeStr.Buffer(), errorInfo.fileName, errorInfo.header.lineNumber, errorDescription);
+    File logFile;
+    StreamString loggerFilePath = "Diode.log";
+    if (!logFile.Open(loggerFilePath.Buffer(), File::ACCESS_MODE_W | File::FLAG_CREAT | File::FLAG_TRUNC)) {
+        REPORT_ERROR(ErrorManagement::FatalError, "Failed opening file");
+    }
+
+    logFile.Printf("[%s - %s:%d]: %s\n", errorCodeStr.Buffer(), errorInfo.fileName, errorInfo.header.lineNumber, errorDescription);
 }
 static bool keepRunning = true;
 static bool killApp = false;
 ReferenceT<PrioritySender> sender;
 ReferenceT<EpicsParserAndSubscriber> subscriber;
-ReferenceT<DiodeLogger> logger;
 
 static void StopApp(int sig) {
     //Second time this is called? Kill the application.
@@ -114,16 +118,12 @@ int main(int argc,
 
     subscriber = god->Find("Subscriber");
     sender = god->Find("Sender");
-    logger = god->Find("Logger");
 
     if (subscriber.IsValid() && sender.IsValid()) {
         if (subscriber->ParseAndSubscribe()) {
             Sleep::Sec(1);
             if (sender->SetDataSource(*subscriber.operator->())) {
                 //attach the logger
-                if (logger.IsValid()) {
-                    sender->SetLogger(*logger.operator->());
-                }
                 sender->Start();
                 signal(SIGTERM, StopApp);
                 signal(SIGINT, StopApp);

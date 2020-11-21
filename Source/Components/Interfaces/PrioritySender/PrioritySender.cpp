@@ -178,6 +178,11 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
 
             arg.numberOfChangedVariables = nVariables;
 
+            REPORT_ERROR("Sending %d PVs", arg.numberOfChangedVariables);
+            for(uint32 i=0u; i<arg.numberOfPoolThreads; i++){
+                REPORT_ERROR(ErrorManagement::Information, "PendingPackets[%d]=%d", i, arg.packetsNotAck[i]);
+            }
+
             changed = false;
             arg.eventSem.Post();
         }
@@ -190,10 +195,6 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
 
             if (elapsed < arg.msecPeriod) {
                 Sleep::MSec(arg.msecPeriod - elapsed);
-            }
-
-            if (arg.logger != NULL) {
-                arg.logger->AddSample(arg.diagnostics);
             }
 
             arg.lastTickCounter = HighResolutionTimer::Counter();
@@ -256,10 +257,9 @@ PrioritySender::PrioritySender() :
     maxVarSize = 0xFFFFFFFFu;
     chunkSize = 1u;
     resetCounter = 120;
-    logger = NULL;
     sendOnlyChanged = 0u;
-    diagnostics = NULL;
     tickAfterPost = NULL;
+    packetsNotAck = NULL;
 }
 
 PrioritySender::~PrioritySender() {
@@ -294,11 +294,11 @@ PrioritySender::~PrioritySender() {
     if (destinationsMask != NULL) {
         delete[] destinationsMask;
     }
-    if (diagnostics != NULL) {
-        delete[] diagnostics;
-    }
     if (tickAfterPost != NULL) {
         delete[] tickAfterPost;
+    }
+    if(packetsNotAck!=NULL){
+        delete[] packetsNotAck;
     }
 
     eventSem.Close();
@@ -405,11 +405,13 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
         changeFlag = (uint8*) HeapManager::Malloc(numberOfVariables);
         reconnectionCycleCounter = new uint32*[numberOfPoolThreads];
         destinationsMask = new uint8[numberOfPoolThreads];
+        packetsNotAck = new uint8[numberOfPoolThreads];
         tickAfterPost = new uint64[2 * numberOfPoolThreads];
         for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
             reconnectionCycleCounter[i] = new uint32[numberOfDestinations];
             destinationsMask[i] = (1u << numberOfDestinations) - 1u;
             tickAfterPost[i] = 0ull;
+            packetsNotAck[i] = 0u;
             tickAfterPost[numberOfPoolThreads + i] = 0ull;
         }
         uint32 sentPerCycle = (numberOfPoolThreads * numberOfSignalToBeSent);
@@ -439,16 +441,6 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
     return ret;
 }
 
-void PrioritySender::SetLogger(DiodeLogger &loggerIn) {
-    logger = &loggerIn;
-    if (logger != NULL) {
-        uint32 nSignals = logger->GetNumberOfSignals();
-        diagnostics = new int64[nSignals];
-        for (uint32 i = 0u; i < nSignals; i++) {
-            diagnostics[i] = 0ll;
-        }
-    }
-}
 
 ErrorManagement::ErrorType PrioritySender::Start() {
     uint32 cpuMask = (1u << numberOfCpus) - 1u;
@@ -530,15 +522,6 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
         uint64 counter = (ts.tv_sec * 1000000u + (ts.tv_nsec / 1000));
         uint32 elapsedUsT = counter - tickAfterPost[threadId];
         tickAfterPost[threadId] = counter;
-
-        if (logger != NULL) {
-            if (threadId < logger->GetNumberOfSignals()) {
-                diagnostics[threadId] = (int64)(elapsedUsT);
-            }
-            if ((threadId + numberOfPoolThreads) < logger->GetNumberOfSignals()) {
-                diagnostics[numberOfPoolThreads + threadId] = (int64)(elapsedUs);
-            }
-        }
 
         if (quit == 0) {
             //lock on the index list
@@ -759,6 +742,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                     }
 
                     if (err.ErrorsCleared()) {
+                        packetsNotAck[threadId]++;
                         char8 controlChar;
 
                         bool keepReading = true;
@@ -776,6 +760,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                                     hprotocol.CompleteReadOperation(&hstream, 1000u);
                                 }
                                 if (err.ErrorsCleared()) {
+                                    packetsNotAck[threadId]--;
                                     if (!hprotocol.KeepAlive()) {
                                         REPORT_ERROR(ErrorManagement::FatalError, "Connection complete!");
                                         err = ErrorManagement::Completed;

@@ -37,7 +37,6 @@
 #include "EventSem.h"
 #include "FastPollingMutexSem.h"
 #include "HttpChunkedStream.h"
-#include "DiodeLogger.h"
 /*---------------------------------------------------------------------------*/
 /*                           Class declaration                               */
 /*---------------------------------------------------------------------------*/
@@ -105,12 +104,6 @@ public:
      */
     bool SetDataSource(EpicsParserAndSubscriber &dataSourceIn);
 
-    /**
-     * @brief Connects the logger
-     * param[in] loggerIn the logger
-     */
-    void SetLogger(DiodeLogger &loggerIn);
-
 
     /**
      * @brief The routine to be executed by the threads in the pool.
@@ -173,8 +166,6 @@ private:
      * Link to the PVs provider
      */
     EpicsParserAndSubscriber *dataSource;
-
-    DiodeLogger *logger;
 
     /**
      * The allocated memory to store the PVs
@@ -343,11 +334,12 @@ private:
 
     uint8 sendOnlyChanged;
 
-    int64 *diagnostics;
-
     uint64 *tickAfterPost;
 
     uint32 chunkSize;
+
+    uint32 *packetsNotAck;
+
 };
 
 }
