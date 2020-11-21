@@ -835,10 +835,11 @@ ErrorManagement::ErrorType PrioritySender::SendCloseConnectionMessage(HttpChunke
 }
 
 void PrioritySender::PrintDiagnostics(){
-    REPORT_ERROR("Sending %d PVs", numberOfChangedVariables);
-    for(uint32 n=0u; n<numberOfPoolThreads; n++){
-        REPORT_ERROR(ErrorManagement::Information, "PendingPackets[%d]=%d", n, packetsNotAck[n]);
-    }
+    REPORT_ERROR("Ciaone");
+    //REPORT_ERROR("Sending %d PVs", numberOfChangedVariables);
+    //for(uint32 n=0u; n<numberOfPoolThreads; n++){
+    //    REPORT_ERROR(ErrorManagement::Information, "PendingPackets[%d]=%d", n, packetsNotAck[n]);
+    //}
 }
 
 CLASS_REGISTER(PrioritySender, "1.0")
