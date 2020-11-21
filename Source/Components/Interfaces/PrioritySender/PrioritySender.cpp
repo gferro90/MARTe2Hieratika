@@ -478,7 +478,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
 
         if (quit == 0) {
             if (err.ErrorsCleared()) {
-                newClient->SetBlocking(false);
+                newClient->SetBlocking(true);
                 //never use the buffer
                 newClient->SetCalibReadParam(0xFFFFFFFFu);
 
@@ -748,9 +748,9 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                         bool keepReading = true;
                         while (keepReading) {
                             uint32 peekSize=1u;
-                            //client.SetBlocking(false);
+                            client.SetBlocking(false);
                             keepReading = (client.Peek(&controlChar, peekSize));
-                            //client.SetBlocking(true);
+                            newClient->SetBlocking(true);
 
                             if (keepReading) {
 
