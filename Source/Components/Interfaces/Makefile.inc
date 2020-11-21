@@ -22,7 +22,7 @@
 #
 #############################################################
 
-SPB=EpicsParserAndSubscriber.x PrioritySender.x DiodeReceiver.x DiodeLogger.x
+SPB=EpicsParserAndSubscriber.x PrioritySender.x DiodeReceiver.x
 
 PACKAGE=Components
 ROOT_DIR=../../..
@@ -34,7 +34,6 @@ include $(MAKEDEFAULTDIR)/MakeStdLibDefs.$(TARGET)
 LIBRARIES_STATIC+=$(BUILD_DIR)/EpicsParserAndSubscriber/EpicsParserAndSubscriber$(LIBEXT)
 LIBRARIES_STATIC+=$(BUILD_DIR)/PrioritySender/PrioritySender$(LIBEXT)
 LIBRARIES_STATIC+=$(BUILD_DIR)/DiodeReceiver/DiodeReceiver$(LIBEXT)
-LIBRARIES_STATIC+=$(BUILD_DIR)/DiodeLogger/DiodeLogger$(LIBEXT)
 
 
 all: $(OBJS)  $(SUBPROJ)  \
