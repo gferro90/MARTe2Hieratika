@@ -61,7 +61,7 @@ void MainErrorProcessFunction(const MARTe::ErrorManagement::ErrorInformation &er
     File logFile;
     StreamString loggerFilePath = "Diode.log";
     if (!logFile.Open(loggerFilePath.Buffer(), File::ACCESS_MODE_W | File::FLAG_CREAT | File::FLAG_TRUNC)) {
-        REPORT_ERROR(ErrorManagement::FatalError, "Failed opening file");
+        printf("Failed opening file\n");
     }
 
     logFile.Printf("[%s - %s:%d]: %s\n", errorCodeStr.Buffer(), errorInfo.fileName, errorInfo.header.lineNumber, errorDescription);
