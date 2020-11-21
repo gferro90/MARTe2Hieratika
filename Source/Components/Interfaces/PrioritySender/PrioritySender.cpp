@@ -486,7 +486,7 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
 
         if (quit == 0) {
             if (err.ErrorsCleared()) {
-                newClient->SetBlocking(true);
+                newClient->SetBlocking(false);
                 //never use the buffer
                 newClient->SetCalibReadParam(0xFFFFFFFFu);
 
@@ -759,16 +759,30 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                     }
 
                     if (err.ErrorsCleared()) {
-                        err = !hprotocol.ReadHeader();
-                    }
-                    if (err.ErrorsCleared()) {
-                        StreamString hstream;
-                        hprotocol.CompleteReadOperation(&hstream, 1000u);
-                    }
-                    if (err.ErrorsCleared()) {
-                        if (!hprotocol.KeepAlive()) {
-                            REPORT_ERROR(ErrorManagement::FatalError, "Connection complete!");
-                            err = ErrorManagement::Completed;
+                        char8 controlChar;
+
+                        bool keepReading = true;
+                        while (keepReading) {
+                            uint32 peekSize=1u;
+                            keepReading = (client->Peek(&controlChar, peekSize));
+                            if (keepReading) {
+
+                                if (err.ErrorsCleared()) {
+                                    err = !hprotocol.ReadHeader();
+                                }
+
+                                if (err.ErrorsCleared()) {
+                                    StreamString hstream;
+                                    hprotocol.CompleteReadOperation(&hstream, 1000u);
+                                }
+                                if (err.ErrorsCleared()) {
+                                    if (!hprotocol.KeepAlive()) {
+                                        REPORT_ERROR(ErrorManagement::FatalError, "Connection complete!");
+                                        err = ErrorManagement::Completed;
+                                        keepReading = false;
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -793,7 +807,6 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                         break;
                     }
                 }
-                hprotocol.Purge();
             }
         }
         else {
