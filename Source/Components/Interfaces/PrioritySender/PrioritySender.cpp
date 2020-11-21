@@ -180,7 +180,7 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
 
             REPORT_ERROR("Sending %d PVs", arg.numberOfChangedVariables);
             for(uint32 i=0u; i<arg.numberOfPoolThreads; i++){
-                REPORT_ERROR(ErrorManagement::Information, "PendingPackets[%d]=%d", i, arg.packetsNotAck[i]);
+                REPORT_ERROR_STATIC(ErrorManagement::Information, "PendingPackets[%d]=%d", i, arg.packetsNotAck[i]);
             }
 
             changed = false;
