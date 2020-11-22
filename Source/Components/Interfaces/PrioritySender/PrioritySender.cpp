@@ -193,7 +193,9 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
             }
 
             REPORT_ERROR_STATIC(ErrorManagement::Debug, "Sending %d PVs", arg.numberOfChangedVariables);
-            for(uint32 n=0u; n<arg.numberOfPoolThreads; n++){
+            for (uint32 n = 0u; n < arg.numberOfPoolThreads; n++) {
+                REPORT_ERROR_STATIC(ErrorManagement::Debug, "CpuConsumingUs[%d]=%d", n, arg.diagnostics[n]);
+                REPORT_ERROR_STATIC(ErrorManagement::Debug, "ExecutionUs[%d]=%d", n, arg.diagnostics[arg.numberOfPoolThreads+n]);
                 REPORT_ERROR_STATIC(ErrorManagement::Debug, "PendingPackets[%d]=%d", n, arg.packetsNotAck[n]);
             }
 
@@ -260,6 +262,7 @@ PrioritySender::PrioritySender() :
     sendOnlyChanged = 0u;
     tickAfterPost = NULL;
     packetsNotAck = NULL;
+    diagnostics = NULL;
 }
 
 PrioritySender::~PrioritySender() {
@@ -297,8 +300,11 @@ PrioritySender::~PrioritySender() {
     if (tickAfterPost != NULL) {
         delete[] tickAfterPost;
     }
-    if(packetsNotAck != NULL){
+    if (packetsNotAck != NULL) {
         delete[] packetsNotAck;
+    }
+    if (diagnostics != NULL) {
+        delete[] diagnostics;
     }
 
     eventSem.Close();
@@ -405,6 +411,7 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
         changeFlag = (uint8*) HeapManager::Malloc(numberOfVariables);
         reconnectionCycleCounter = new uint32*[numberOfPoolThreads];
         destinationsMask = new uint8[numberOfPoolThreads];
+        diagnostics = new uint32[2*numberOfPoolThreads];
         packetsNotAck = new uint32[numberOfPoolThreads];
         tickAfterPost = new uint64[2 * numberOfPoolThreads];
         for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
@@ -412,6 +419,7 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
             destinationsMask[i] = (1u << numberOfDestinations) - 1u;
             tickAfterPost[i] = 0ull;
             packetsNotAck[i] = 0u;
+            diagnostics = 0;
             tickAfterPost[numberOfPoolThreads + i] = 0ull;
         }
         uint32 sentPerCycle = (numberOfPoolThreads * numberOfSignalToBeSent);
@@ -440,7 +448,6 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
     }
     return ret;
 }
-
 
 ErrorManagement::ErrorType PrioritySender::Start() {
     uint32 cpuMask = (1u << numberOfCpus) - 1u;
@@ -522,6 +529,9 @@ ErrorManagement::ErrorType PrioritySender::ThreadCycle(ExecutionInfo & info) {
         uint64 counter = (ts.tv_sec * 1000000u + (ts.tv_nsec / 1000));
         uint32 elapsedUsT = counter - tickAfterPost[threadId];
         tickAfterPost[threadId] = counter;
+
+        diagnostics[threadId] = (int64)(elapsedUsT);
+        diagnostics[numberOfPoolThreads + threadId] = (int64)(elapsedUs);
 
         if (quit == 0) {
             //lock on the index list
@@ -747,7 +757,7 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
 
                         bool keepReading = true;
                         while (keepReading) {
-                            uint32 peekSize=1u;
+                            uint32 peekSize = 1u;
                             client.SetBlocking(false);
                             keepReading = (client.Peek(&controlChar, peekSize));
                             client.SetBlocking(true);
@@ -839,7 +849,6 @@ ErrorManagement::ErrorType PrioritySender::SendCloseConnectionMessage(HttpChunke
     }
     return err;
 }
-
 
 CLASS_REGISTER(PrioritySender, "1.0")
 }

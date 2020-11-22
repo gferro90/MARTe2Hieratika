@@ -340,6 +340,7 @@ private:
 
     uint32 *packetsNotAck;
 
+    int64 *diagnostics;
 };
 
 }
