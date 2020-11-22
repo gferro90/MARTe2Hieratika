@@ -419,7 +419,8 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
             destinationsMask[i] = (1u << numberOfDestinations) - 1u;
             tickAfterPost[i] = 0ull;
             packetsNotAck[i] = 0u;
-            diagnostics = 0;
+            diagnostics[i] = 0;
+            diagnostics[numberOfPoolThreads+i] = 0;
             tickAfterPost[numberOfPoolThreads + i] = 0ull;
         }
         uint32 sentPerCycle = (numberOfPoolThreads * numberOfSignalToBeSent);
