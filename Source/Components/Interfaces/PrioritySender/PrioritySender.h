@@ -341,6 +341,8 @@ private:
     uint32 *packetsNotAck;
 
     int64 *diagnostics;
+
+    uint8 debug;
 };
 
 }

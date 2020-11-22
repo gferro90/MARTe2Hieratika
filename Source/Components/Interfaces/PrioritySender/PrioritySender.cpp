@@ -192,11 +192,13 @@ void PrioritySenderCycleLoop(PrioritySender &arg) {
                 Sleep::MSec(arg.msecPeriod - elapsed);
             }
 
-            REPORT_ERROR_STATIC(ErrorManagement::Debug, "Sending %d PVs", arg.numberOfChangedVariables);
-            for (uint32 n = 0u; n < arg.numberOfPoolThreads; n++) {
-                REPORT_ERROR_STATIC(ErrorManagement::Debug, "CpuConsumingUs[%d]=%d", n, arg.diagnostics[n]);
-                REPORT_ERROR_STATIC(ErrorManagement::Debug, "ExecutionUs[%d]=%d", n, arg.diagnostics[arg.numberOfPoolThreads+n]);
-                REPORT_ERROR_STATIC(ErrorManagement::Debug, "PendingPackets[%d]=%d", n, arg.packetsNotAck[n]);
+            if (arg.debug > 0u) {
+                REPORT_ERROR_STATIC(ErrorManagement::Debug, "Sending %d PVs", arg.numberOfChangedVariables);
+                for (uint32 n = 0u; n < arg.numberOfPoolThreads; n++) {
+                    REPORT_ERROR_STATIC(ErrorManagement::Debug, "CpuConsumingUs[%d]=%d", n, arg.diagnostics[n]);
+                    REPORT_ERROR_STATIC(ErrorManagement::Debug, "ExecutionUs[%d]=%d", n, arg.diagnostics[arg.numberOfPoolThreads + n]);
+                    REPORT_ERROR_STATIC(ErrorManagement::Debug, "PendingPackets[%d]=%d", n, arg.packetsNotAck[n]);
+                }
             }
 
             arg.lastTickCounter = HighResolutionTimer::Counter();
@@ -263,6 +265,7 @@ PrioritySender::PrioritySender() :
     tickAfterPost = NULL;
     packetsNotAck = NULL;
     diagnostics = NULL;
+    debug = 0u;
 }
 
 PrioritySender::~PrioritySender() {
@@ -391,6 +394,9 @@ bool PrioritySender::Initialise(StructuredDataI &data) {
                 REPORT_ERROR(ErrorManagement::InitialisationError, "NumberOfDestinations cannot be 0, set to 1");
                 numberOfDestinations = 1u;
             }
+            if (!data.Read("Debug", debug)) {
+                debug = 0u;
+            }
         }
     }
     return ret;
@@ -411,7 +417,7 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
         changeFlag = (uint8*) HeapManager::Malloc(numberOfVariables);
         reconnectionCycleCounter = new uint32*[numberOfPoolThreads];
         destinationsMask = new uint8[numberOfPoolThreads];
-        diagnostics = new int64[2*numberOfPoolThreads];
+        diagnostics = new int64[2 * numberOfPoolThreads];
         packetsNotAck = new uint32[numberOfPoolThreads];
         tickAfterPost = new uint64[2 * numberOfPoolThreads];
         for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
@@ -419,7 +425,7 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
             destinationsMask[i] = (1u << numberOfDestinations) - 1u;
             packetsNotAck[i] = 0u;
             diagnostics[i] = 0ll;
-            diagnostics[numberOfPoolThreads+i] = 0ll;
+            diagnostics[numberOfPoolThreads + i] = 0ll;
             tickAfterPost[i] = 0ull;
             tickAfterPost[numberOfPoolThreads + i] = 0ull;
         }

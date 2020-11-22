@@ -263,6 +263,9 @@ DiodeReceiver::DiodeReceiver() :
     lastTickCounter = NULL;
     msecPeriod = 0u;
     currentCpuMask = 1u;
+    threadIndex = 0u;
+    debug = 0u;
+    numberOfReceivedPVs = NULL;
     maxArraySize = MAX_ARR_LEN;
 }
 
@@ -294,6 +297,9 @@ DiodeReceiver::~DiodeReceiver() {
     }
     if (lastTickCounter != NULL) {
         delete[] lastTickCounter;
+    }
+    if (numberOfReceivedPVs != NULL) {
+        delete[] numberOfReceivedPVs;
     }
 }
 
@@ -329,6 +335,9 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
 
             if (ret) {
 
+                if (!data.Read("Debug", debug)) {
+                    debug = 0u;
+                }
                 if (!data.Read("NumberOfInitThreads", numberOfInitThreads)) {
                     numberOfInitThreads = 1u;
                 }
@@ -454,21 +463,24 @@ ErrorManagement::ErrorType DiodeReceiver::Start() {
     memoryPrec = (uint8*) HeapManager::Malloc(totalMemorySize);
     changeFlag = (uint8*) HeapManager::Malloc(numberOfVariables);
     changeFlag2 = (uint8*) HeapManager::Malloc(numberOfVariables);
-    pvMapping = new uint32[2*numberOfVariables];
-
+    pvMapping = new uint32[2 * numberOfVariables];
+    numberOfReceivedPVs = new uint32[maxNumberOfThreads];
     MemoryOperationsHelper::Set(memory, 0, totalMemorySize);
     MemoryOperationsHelper::Set(memory2, 0, totalMemorySize);
     MemoryOperationsHelper::Set(memoryPrec, 0, totalMemorySize);
     MemoryOperationsHelper::Set(changeFlag, 0, numberOfVariables);
     MemoryOperationsHelper::Set(changeFlag2, 0, numberOfVariables);
-    for (uint32 n = 0u; (n < (2*numberOfVariables)); n++) {
+    for (uint32 n = 0u; (n < (2 * numberOfVariables)); n++) {
         pvMapping[n] = INDEX_INIT_ID;
-        if(n<numberOfVariables){
+        if (n < numberOfVariables) {
             pvs[n].at.SetDataPointer(memory + pvs[n].offset);
         }
 
     }
 
+    for (uint32 n = 0u; n < maxNumberOfThreads; n++) {
+        numberOfReceivedPVs[n] = 0u;
+    }
     ErrorManagement::ErrorType err;
     server.Open();
 
@@ -534,7 +546,8 @@ ErrorManagement::ErrorType DiodeReceiver::AddThread() {
     return err;
 }
 
-ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commClient) {
+ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commClient,
+                                                        uint32 threadId) {
 
     ErrorManagement::ErrorType err;
     if (quit == 0) {
@@ -577,7 +590,6 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
 
             uint32 chunkSize = (isChunked) ? (0u) : (32u);
             //REPORT_ERROR(ErrorManagement::Information, "Chunked %d %d", (uint32) isChunked, contentLength);
-
             do {
                 err = ReadNewChunk(commClient, payload, isChunked, chunkSize, contentLength);
                 if (err.ErrorsCleared()) {
@@ -604,7 +616,7 @@ ErrorManagement::ErrorType DiodeReceiver::ClientService(TCPSocket * const commCl
                             }
 
                             if (ok) {
-                                ReadVarValueAndSkip(payload, dataPtr, index, processedSize, receivedTypeId, receivedOffset, receivedSize, controlOk);
+                                ReadVarValueAndSkip(payload, dataPtr, index, processedSize, receivedTypeId, receivedOffset, receivedSize, threadId, controlOk);
                             }
                         }
                     }
@@ -654,13 +666,22 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
                         newClient->SetCalibReadParam(0xFFFFFFFFu);
                         newClient->SetTimeout(readTimeout);
                         information.SetThreadSpecificContext(reinterpret_cast<void*>(newClient));
+                        if (syncSem.FastLock()) {
+                            if (information.GetThreadNumber() == 0xFFFFu) {
+                                information.SetThreadNumber(threadIndex);
+                                threadIndex++;
+                            }
+                            chunckCounter = 0u;
+                            syncSem.FastUnLock();
+                        }
                         err = MARTe::ErrorManagement::NoError;
                     }
                 }
             }
             if (information.GetStageSpecific() == MARTe::ExecutionInfo::ServiceRequestStageSpecific) {
                 TCPSocket *newClient = reinterpret_cast<TCPSocket *>(information.GetThreadSpecificContext());
-                err = ClientService(newClient);
+                uint32 threadId = information.GetThreadNumber();
+                err = ClientService(newClient, threadId);
                 //if error the client is deleted here
                 if (!err.ErrorsCleared()) {
                     information.SetThreadSpecificContext(reinterpret_cast<void*>(NULL));
@@ -700,6 +721,13 @@ bool DiodeReceiver::Synchronise(uint8 *memoryOut,
         MemoryOperationsHelper::Copy(memoryOut, memory, totalMemorySize);
         MemoryOperationsHelper::Copy(changedFlags, changeFlag, numberOfVariables);
         MemoryOperationsHelper::Set(changeFlag, 0, numberOfVariables);
+        if (debug > 0u) {
+            for (uint32 i = 0u; i < threadIndex; i++) {
+                REPORT_ERROR(ErrorManagement::Debug, "NumberOfReceivedPVs[%d]=%d", i, numberOfReceivedPVs[i]);
+                numberOfReceivedPVs[i] = 0u;
+            }
+        }
+
         syncSem.FastUnLock();
     }
     return true;
@@ -805,8 +833,8 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
         //REPORT_ERROR(ErrorManagement::Information, "Chunk size = %d", chunkSize);
 
         //if (chunkSize > 1023u) {
-            //REPORT_ERROR(ErrorManagement::Information, "Chunk size = %d", chunkSize);
-            //chunkSize = 1023u;
+        //REPORT_ERROR(ErrorManagement::Information, "Chunk size = %d", chunkSize);
+        //chunkSize = 1023u;
         //}
         contentLength -= chunkSize;
     }
@@ -835,13 +863,13 @@ ErrorManagement::ErrorType DiodeReceiver::ReadNewChunk(TCPSocket * const commCli
             }
 
         }
-/*
-        printf("\n\n|");
-        for (uint32 i = 0u; i < payload.Size(); i++) {
-            printf("%c", payload[i]);
-        }
-        printf("| %llu\n\n", payload.Size());
-*/
+        /*
+         printf("\n\n|");
+         for (uint32 i = 0u; i < payload.Size(); i++) {
+         printf("%c", payload[i]);
+         }
+         printf("| %llu\n\n", payload.Size());
+         */
     }
     return err;
 
@@ -998,7 +1026,7 @@ bool DiodeReceiver::ReadVarNameAndIndex(StreamString &payload,
             }
             uint32 curSize = (payload.Size() - nameSize);
             //REPORT_ERROR(ErrorManagement::Information, "variable name size greater than PV_NAME_MAX_SIZE_REC: skip and resync %d %d\n", nameSize,
-              //           payload.Size());
+            //           payload.Size());
             payload.Seek(0);
             MemoryOperationsHelper::Copy((void*) payload.Buffer(), payload.Buffer() + nameSize, curSize);
             payload.SetSize(curSize);
@@ -1051,6 +1079,7 @@ void DiodeReceiver::ReadVarValueAndSkip(StreamString &payload,
                                         uint8 receivedTypeId,
                                         uint32 varOffset,
                                         uint32 receivedSize,
+                                        uint32 threadId,
                                         bool controlOk) {
 
     if (index < numberOfVariables) {
@@ -1073,6 +1102,7 @@ void DiodeReceiver::ReadVarValueAndSkip(StreamString &payload,
                     }
                 }
             }
+            numberOfReceivedPVs[threadId]++;
             if (MemoryOperationsHelper::Compare(ptr, ptr_1, pvs[index].totalSize) != 0) {
                 (changeFlag)[index] = 1;
                 MemoryOperationsHelper::Copy(ptr_1, ptr, pvs[index].totalSize);

@@ -161,7 +161,7 @@ public:
      * updates its value and timestamp in the buffer. Sets also a flag if the received variable has changed such
      * that the DiodeReceiverCycleLoop thread can ca_put it in the next cycle.
      */
-    ErrorManagement::ErrorType ClientService(TCPSocket * const commClient);
+    ErrorManagement::ErrorType ClientService(TCPSocket * const commClient, uint32 threadId);
 
     /**
      * @brief Stops the threads
@@ -251,6 +251,7 @@ protected:
                              uint8 receivedTypeId,
                              uint32 varOffset,
                              uint32 receivedSize,
+                             uint32 threadId,
                              bool controlOk);
 
     /**
@@ -412,6 +413,12 @@ protected:
      * The maximum array size
      */
     uint32 maxArraySize;
+
+    uint32 threadIndex;
+
+    uint32 *numberOfReceivedPVs;
+
+    uint8 debug;
 };
 
 }

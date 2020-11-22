@@ -52,14 +52,22 @@
 /*                           Static definitions                              */
 /*---------------------------------------------------------------------------*/
 using namespace MARTe;
-void MainErrorProcessFunction(const MARTe::ErrorManagement::ErrorInformation &errorInfo, const char * const errorDescription) {
-    MARTe::StreamString errorCodeStr;
-    MARTe::ErrorManagement::ErrorCodeToStream(errorInfo.header.errorType, errorCodeStr);
-    printf("[%s - %s:%d]: %s\n", errorCodeStr.Buffer(), errorInfo.fileName, errorInfo.header.lineNumber, errorDescription);
-}
 static bool keepRunning = true;
 static bool killApp = false;
 ReferenceT < DiodeReceiver > receiver;
+File logFile;
+
+void MainErrorProcessFunction(const MARTe::ErrorManagement::ErrorInformation &errorInfo, const char * const errorDescription) {
+    MARTe::StreamString errorCodeStr;
+    MARTe::ErrorManagement::ErrorCodeToStream(errorInfo.header.errorType, errorCodeStr);
+    if(errorInfo.header.errorType == MARTe::ErrorManagement::Debug){
+        logFile.Printf("[%s - %s:%d]: %s\n", errorCodeStr.Buffer(), errorInfo.fileName, errorInfo.header.lineNumber, errorDescription);
+    }
+    else{
+        printf("[%s - %s:%d]: %s\n", errorCodeStr.Buffer(), errorInfo.fileName, errorInfo.header.lineNumber, errorDescription);
+    }
+}
+
 
 static void StopApp(int sig) {
     //Second time this is called? Kill the application.
@@ -87,6 +95,12 @@ static void StopApp(int sig) {
 
 int main(int argc,
          const char **argv) {
+
+    StreamString loggerFilePath = "Diode.log";
+    if (!logFile.Open(loggerFilePath.Buffer(), File::ACCESS_MODE_W | File::FLAG_CREAT | File::FLAG_TRUNC)) {
+        printf("Failed opening log file\n");
+    }
+
     ProcessorType::SetDefaultCPUs(0x1);
     SetErrorProcessFunction(&MainErrorProcessFunction);
     BasicFile configFile;
