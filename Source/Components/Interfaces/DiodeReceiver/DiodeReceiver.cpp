@@ -671,7 +671,6 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
                                 information.SetThreadNumber(threadIndex);
                                 threadIndex++;
                             }
-                            chunckCounter = 0u;
                             syncSem.FastUnLock();
                         }
                         err = MARTe::ErrorManagement::NoError;
