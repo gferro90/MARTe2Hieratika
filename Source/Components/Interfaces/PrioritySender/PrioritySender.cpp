@@ -411,7 +411,7 @@ bool PrioritySender::SetDataSource(EpicsParserAndSubscriber &dataSourceIn) {
         changeFlag = (uint8*) HeapManager::Malloc(numberOfVariables);
         reconnectionCycleCounter = new uint32*[numberOfPoolThreads];
         destinationsMask = new uint8[numberOfPoolThreads];
-        diagnostics = new uint32[2*numberOfPoolThreads];
+        diagnostics = new int64[2*numberOfPoolThreads];
         packetsNotAck = new uint32[numberOfPoolThreads];
         tickAfterPost = new uint64[2 * numberOfPoolThreads];
         for (uint32 i = 0u; i < numberOfPoolThreads; i++) {
