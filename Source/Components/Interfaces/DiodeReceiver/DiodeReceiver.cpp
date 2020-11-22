@@ -442,7 +442,10 @@ bool DiodeReceiver::Initialise(StructuredDataI &data) {
 
 ErrorManagement::ErrorType DiodeReceiver::Start() {
     uint32 cpuMask = ((1 << numberOfCpus) - 1u);
-
+    numberOfReceivedPVs = new uint32[maxNumberOfThreads];
+    for (uint32 n = 0u; n < maxNumberOfThreads; n++) {
+        numberOfReceivedPVs[n] = 0u;
+    }
     for (uint32 i = 0u; i < numberOfInitThreads; i++) {
         Threads::BeginThread((ThreadFunctionType) DiodeReceiverCycleLoop, this, THREADS_DEFAULT_STACKSIZE, NULL, ExceptionHandler::NotHandled, cpuMask);
         //Threads::SetPriority(tid, Threads::RealTimePriorityClass, 15);
@@ -464,7 +467,6 @@ ErrorManagement::ErrorType DiodeReceiver::Start() {
     changeFlag = (uint8*) HeapManager::Malloc(numberOfVariables);
     changeFlag2 = (uint8*) HeapManager::Malloc(numberOfVariables);
     pvMapping = new uint32[2 * numberOfVariables];
-    numberOfReceivedPVs = new uint32[maxNumberOfThreads];
     MemoryOperationsHelper::Set(memory, 0, totalMemorySize);
     MemoryOperationsHelper::Set(memory2, 0, totalMemorySize);
     MemoryOperationsHelper::Set(memoryPrec, 0, totalMemorySize);
@@ -478,9 +480,6 @@ ErrorManagement::ErrorType DiodeReceiver::Start() {
 
     }
 
-    for (uint32 n = 0u; n < maxNumberOfThreads; n++) {
-        numberOfReceivedPVs[n] = 0u;
-    }
     ErrorManagement::ErrorType err;
     server.Open();
 
@@ -649,7 +648,16 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
     ErrorManagement::ErrorType err;
 
     if (information.GetStage() == MARTe::ExecutionInfo::StartupStage) {
-
+        uint32 threadId = information.GetThreadNumber();
+        uint32 assigned = static_cast<uint32>(Threads::Id());
+        if (syncSem.FastLock()) {
+            if (threadId == assigned) {
+                information.SetThreadNumber(threadIndex);
+                threadId = threadIndex;
+                threadIndex++;
+            }
+            syncSem.FastUnLock();
+        }
     }
     else if (information.GetStage() == MARTe::ExecutionInfo::MainStage) {
         if (quit == 0) {
@@ -666,13 +674,7 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
                         newClient->SetCalibReadParam(0xFFFFFFFFu);
                         newClient->SetTimeout(readTimeout);
                         information.SetThreadSpecificContext(reinterpret_cast<void*>(newClient));
-                        if (syncSem.FastLock()) {
-                            if (information.GetThreadNumber() == 0xFFFFu) {
-                                information.SetThreadNumber(threadIndex);
-                                threadIndex++;
-                            }
-                            syncSem.FastUnLock();
-                        }
+
                         err = MARTe::ErrorManagement::NoError;
                     }
                 }
@@ -680,6 +682,7 @@ ErrorManagement::ErrorType DiodeReceiver::ServerCycle(MARTe::ExecutionInfo & inf
             if (information.GetStageSpecific() == MARTe::ExecutionInfo::ServiceRequestStageSpecific) {
                 TCPSocket *newClient = reinterpret_cast<TCPSocket *>(information.GetThreadSpecificContext());
                 uint32 threadId = information.GetThreadNumber();
+
                 err = ClientService(newClient, threadId);
                 //if error the client is deleted here
                 if (!err.ErrorsCleared()) {
@@ -721,9 +724,12 @@ bool DiodeReceiver::Synchronise(uint8 *memoryOut,
         MemoryOperationsHelper::Copy(changedFlags, changeFlag, numberOfVariables);
         MemoryOperationsHelper::Set(changeFlag, 0, numberOfVariables);
         if (debug > 0u) {
-            for (uint32 i = 0u; i < threadIndex; i++) {
-                REPORT_ERROR(ErrorManagement::Debug, "NumberOfReceivedPVs[%d]=%d", i, numberOfReceivedPVs[i]);
-                numberOfReceivedPVs[i] = 0u;
+            if (threadIndex > 0u) {
+                uint32 nThreadsExec=(threadIndex-1u);
+                for (uint32 i = 0u; i < nThreadsExec; i++) {
+                    REPORT_ERROR(ErrorManagement::Debug, "NumberOfReceivedPVs[%d]=%d", i, numberOfReceivedPVs[i]);
+                    numberOfReceivedPVs[i] = 0u;
+                }
             }
         }
 
