@@ -64,7 +64,7 @@ void MainErrorProcessFunction(const MARTe::ErrorManagement::ErrorInformation &er
                               const char * const errorDescription) {
     MARTe::StreamString errorCodeStr;
     MARTe::ErrorManagement::ErrorCodeToStream(errorInfo.header.errorType, errorCodeStr);
-    if(errorCodeStr == "Debug"){
+    if(errorInfo.header.errorType == MARTe::ErrorManagement::Debug){
         logFile.Printf("[%s - %s:%d]: %s\n", errorCodeStr.Buffer(), errorInfo.fileName, errorInfo.header.lineNumber, errorDescription);
     }
     else{
