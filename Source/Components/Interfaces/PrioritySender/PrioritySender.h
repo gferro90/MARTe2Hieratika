@@ -282,26 +282,10 @@ private:
 
 
     /**
-     * The number of destinations
-     */
-    uint8 numberOfDestinations;
-
-
-    /**
-     * The destination mask
-     */
-    uint8 *destinationsMask;
-
-    /**
      * Computes the number of cycles per connection timeout
      */
     uint32 numberOfCyclesPerTimeout;
 
-
-    /**
-     * Counters for reconnection counters
-     */
-    uint32 **reconnectionCycleCounter;
 
     /**
      * The thread index
