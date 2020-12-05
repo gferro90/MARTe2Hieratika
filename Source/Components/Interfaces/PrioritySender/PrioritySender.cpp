@@ -755,7 +755,6 @@ ErrorManagement::ErrorType PrioritySender::SendVariables(HttpChunkedStream &clie
                 //if the server has closed the connection, then nothing to do...
                 //since the connection is one we have to retry again
                 if (err == ErrorManagement::Completed) {
-                    REPORT_ERROR(ErrorManagement::Information, "Receiver %d closes connection: reconnect without sending to it", destinationId);
                     REPORT_ERROR(ErrorManagement::Information, "Send final message");
                     //send a connection-close message
                     SendCloseConnectionMessage(client, destinationName.Buffer());
