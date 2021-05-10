@@ -724,12 +724,9 @@ bool DiodeReceiver::Synchronise(uint8 *memoryOut,
         MemoryOperationsHelper::Copy(changedFlags, changeFlag, numberOfVariables);
         MemoryOperationsHelper::Set(changeFlag, 0, numberOfVariables);
         if (debug > 0u) {
-            if (threadIndex > 0u) {
-                uint32 nThreadsExec=(threadIndex-1u);
-                for (uint32 i = 0u; i < nThreadsExec; i++) {
-                    REPORT_ERROR(ErrorManagement::Debug, "NumberOfReceivedPVs[%d]=%d", i, numberOfReceivedPVs[i]);
-                    numberOfReceivedPVs[i] = 0u;
-                }
+            for (uint32 i = 0u; i < maxNumberOfThreads; i++) {
+                REPORT_ERROR(ErrorManagement::Debug, "NumberOfReceivedPVs[%d]=%d", i, numberOfReceivedPVs[i]);
+                numberOfReceivedPVs[i] = 0u;
             }
         }
 
