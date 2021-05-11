@@ -1104,7 +1104,9 @@ void DiodeReceiver::ReadVarValueAndSkip(StreamString &payload,
                     }
                 }
             }
-            numberOfReceivedPVs[threadId]++;
+            if (threadId < maxNumberOfThreads) {
+                numberOfReceivedPVs[threadId]++;
+            }
             if (MemoryOperationsHelper::Compare(ptr, ptr_1, pvs[index].totalSize) != 0) {
                 (changeFlag)[index] = 1;
                 MemoryOperationsHelper::Copy(ptr_1, ptr, pvs[index].totalSize);
